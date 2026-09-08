@@ -1,0 +1,17 @@
+{
+  "agent": "head-agent",
+  "task": "Start V0. Determine whether publicly available data is sufficient to validate a fishing-conditions prediction. Do not build the application yet.",
+  "objective": "Research public fishing/catch/effort observation datasets, historical weather/environmental datasets, and whether they can be joined spatially and temporally. Create docs/research/fishing-data-availability.md. Answer the questions in the company objective, cite sources, document limitations, and do not build application or model code.",
+  "started": "2026-09-08T18:21:15.827511+00:00",
+  "finished": "2026-09-08T18:21:15.827511+00:00",
+  "status": "blocked",
+  "result": "Missing required LLM configuration: LLM_MODEL, LLM_API_KEY. Copy .env.example to .env, set environment variables, then retry.",
+  "files_changed": [],
+  "tests": [],
+  "evidence": [],
+  "limitations": [
+    "Live worker requires an LLM model and API key."
+  ],
+  "recommendation": "Review the recorded result and proceed only with evidence.",
+  "next_action": "Run the V0 data-availability workflow after LLM credentials are configured."
+}

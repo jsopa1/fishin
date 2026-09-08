@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fishing Forecast Agent Run Report",
+  "type": "object",
+  "required": ["agent", "task", "objective", "started", "finished", "status", "result", "files_changed", "tests", "evidence", "limitations", "recommendation", "next_action"],
+  "properties": {
+    "agent": {"type": "string"}, "task": {"type": "string"}, "objective": {"type": "string"},
+    "started": {"type": "string"}, "finished": {"type": "string"}, "status": {"enum": ["success", "failed", "blocked", "skipped"]},
+    "result": {"type": "string"}, "files_changed": {"type": "array", "items": {"type": "string"}},
+    "tests": {"type": "array", "items": {"type": "string"}}, "evidence": {"type": "array", "items": {"type": "string"}},
+    "limitations": {"type": "array", "items": {"type": "string"}}, "recommendation": {"type": "string"}, "next_action": {"type": "string"}
+  }
+}
