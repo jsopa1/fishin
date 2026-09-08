@@ -26,4 +26,4 @@ python -m pip install -e ".[dev]"
 python -m pytest
 ```
 
-Copy `.env.example` to `.env` (or set the variables in your shell) before a live run. Never commit `.env`.
+Use `.env.example` as a reference, then set `LLM_MODEL`, `LLM_API_KEY`, and, when required by the provider, `LLM_BASE_URL` in your shell before a live run. Never commit `.env`.
