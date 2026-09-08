@@ -19,3 +19,15 @@ Agents may research, implement, test, and document. The CEO approves major produ
 ## 005 — Evidence over appearances
 
 The system must never represent an arbitrary score as scientifically validated.
+
+## 006 — GitHub/Copilot as operating model instead of autonomous agents
+
+The company operates via GitHub as the durable source of truth, with CEO setting objectives and Copilot executing disciplined work through GitHub Issues and PRs.
+
+**Rationale:**
+- GitHub is widely understood and provides version control, audit trail, and durable memory
+- Human-in-the-loop model (CEO → Issues → Copilot → PRs → Approval → Merge) reduces risk of autonomous mistakes
+- PR review and CEO approval gates ensure major decisions are visible and approved
+- Moving away from OpenHands SDK simplifies dependencies and reduces framework lock-in
+- Copilot executes focused, evidence-based work following lightweight role definitions (RESEARCH.md, DATA_SCIENCE.md, ENGINEERING.md, QA.md, DOCUMENTATION.md)
+- No separate autonomous agent orchestration framework—Copilot is the single execution engine

@@ -1,1 +1,0 @@
-"""OpenHands-powered research worker."""

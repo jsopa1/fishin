@@ -3,14 +3,11 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fishing-forecast-agent-system"
+name = "fishing-forecast"
 version = "0.1.0"
-description = "Minimal local autonomous-agent infrastructure for Fishing Forecast"
+description = "Evidence-based fishing intelligence project"
 requires-python = ">=3.12"
-dependencies = [
-  "openhands-sdk",
-  "openhands-tools",
-]
+dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
