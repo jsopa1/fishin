@@ -1,0 +1,17 @@
+{
+  "agent": "head-agent",
+  "task": "Why are we blocked?",
+  "objective": "Review the CEO instruction against current company context. Create only a focused, evidence-based research artifact if appropriate; otherwise explain the blocker in the run report. CEO instruction: Why are we blocked?",
+  "started": "2026-09-08T18:21:57.988214+00:00",
+  "finished": "2026-09-08T18:21:57.988214+00:00",
+  "status": "blocked",
+  "result": "Missing required LLM configuration: LLM_MODEL, LLM_API_KEY. Copy .env.example to .env, set environment variables, then retry.",
+  "files_changed": [],
+  "tests": [],
+  "evidence": [],
+  "limitations": [
+    "Live worker requires an LLM model and API key."
+  ],
+  "recommendation": "Review the recorded result and proceed only with evidence.",
+  "next_action": "Run the V0 data-availability workflow after LLM credentials are configured."
+}
