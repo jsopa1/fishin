@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}V1 Conditions & Biology Reference{% endblock %} — fishin</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ url_for('home') }}">🎣 fishin — V1 Conditions &amp; Biology Reference</a>
+      <nav>
+        <a href="{{ url_for('browse') }}">Browse</a>
+        <a href="{{ url_for('failures') }}">Failures</a>
+        <a href="{{ url_for('summary') }}">Summary</a>
+        <a href="{{ url_for('home') }}#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="banner {{ 'stale' if is_stale else 'fresh' }}">
+    <div class="wrap">
+      {% if run_row is none %}
+        ⚠ No completed data run found. This site has nothing to show yet.
+      {% elif is_stale %}
+        ⚠ Data may be stale — generated {{ age_text }} (finished {{ finished_at_text }}), more than {{ stale_hours }}h ago.
+      {% else %}
+        Data current — generated {{ age_text }} (finished {{ finished_at_text }}).
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="disclaimer wrap">
+    <strong>This is general, science-based seasonal context — not a catch prediction.</strong>
+    It does not estimate catch rate or the likelihood of catching any fish. See <a href="{{ url_for('home') }}#about">About</a>.
+  </div>
+
+  <main class="wrap">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p><strong>Data sources &amp; attribution:</strong></p>
+      <ul>
+        <li>Fish species presence, stocking records, and fisheries survey data: courtesy of the <a href="https://dnr.wisconsin.gov/" target="_blank" rel="noopener">Wisconsin Department of Natural Resources (WDNR)</a>. Reused here for non-commercial, informational purposes; not an official WDNR product, not endorsed by WDNR.</li>
+        <li>Live and historical water-temperature gauge data: courtesy of the <a href="https://www.usgs.gov/" target="_blank" rel="noopener">U.S. Geological Survey (USGS)</a>, a public-domain source.</li>
+        <li>Current weather / air-temperature proxy data: courtesy of the <a href="https://www.weather.gov/" target="_blank" rel="noopener">National Weather Service (NWS)</a>, a public-domain source. This site is not affiliated with or endorsed by NOAA/NWS.</li>
+        <li>Fish physiology/behavior reference thresholds: compiled from peer-reviewed literature and Wismer &amp; Christie 1987 (Great Lakes Fishery Commission Special Publication 87-3) — see <a href="https://github.com/jsopa1/fishin/blob/main/docs/v1_physiology_research_candidates.md" target="_blank" rel="noopener">docs/v1_physiology_research_candidates.md</a>.</li>
+      </ul>
+      <p>Project source and full documentation: <a href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">github.com/jsopa1/fishin</a></p>
+    </div>
+  </footer>
+</body>
+</html>

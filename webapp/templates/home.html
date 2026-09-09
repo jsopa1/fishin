@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="hero">
+  <h1>Wisconsin Conditions &amp; Biology Reference</h1>
+  <p>
+    This tool combines <strong>real, current water-temperature readings</strong> (live USGS gauges,
+    recent WDNR Citizen Lake Monitoring Network readings, or a clearly-labeled NWS air-temperature
+    proxy) with <strong>real, cited fish physiology and behavior thresholds</strong>
+    (spawning triggers, feeding-activity temperature windows) for species with
+    <strong>confirmed presence</strong> at a given Wisconsin lake, pond, river, or stream — either
+    from a real WDNR fisheries survey, or from real WDNR stocking records.
+  </p>
+  <p><a href="{{ url_for('browse') }}"><strong>&rarr; Browse the results</strong></a></p>
+</div>
+
+<h2 id="about">What this is — and isn't</h2>
+<p>
+  <strong>This is NOT a validated catch-rate prediction tool.</strong> It does not tell you whether
+  you will catch a fish, how many fish are in a given waterbody, or estimate a "fishing score" of
+  any kind. Every statement it generates is a factual comparison — is the current water temperature
+  inside a documented physiological window for a species known to be present here — never a forecast
+  of angler success.
+</p>
+<p>
+  This distinction is deliberate and load-bearing. An earlier phase of this project (V0) tested
+  whether real catch-rate data from Wisconsin lakes could be statistically predicted from weather,
+  water conditions, and fish physiology. The honest answer, after several independent research
+  cycles, was <strong>no</strong> — not with the public data available today. Rather than force a
+  predictive claim the evidence doesn't support, this tool reports a different, honestly-scoped
+  kind of information: real conditions, compared against real biology, for a real, sourced list of
+  species — nothing more.
+</p>
+<p>
+  Every prediction record shown here also honestly discloses its evidentiary tier: whether a
+  species' presence at a waterbody is <span class="tag survey_confirmed">survey-confirmed</span>
+  (an actual WDNR fisheries survey observed it there) or only
+  <span class="tag stocking_only">stocking-only</span> (WDNR has stocked it there, which is
+  positive evidence but not proof of a complete species list — a species can be genuinely present
+  without ever having been stocked). Temperature readings are labeled
+  <span class="tag real">real</span> when they come from an actual sensor, or
+  <span class="tag proxy">proxy</span> when they're an approximate regional air-temperature
+  stand-in. Where sources genuinely disagree on a physiological threshold (for example,
+  Muskellunge's documented thermal optimum), that disagreement is shown in full, not resolved to a
+  single convenient number.
+</p>
+<p>
+  Full technical documentation, source data, and every research report behind this tool are public
+  in the project repository: <a href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">github.com/jsopa1/fishin</a>.
+</p>
+{% endblock %}

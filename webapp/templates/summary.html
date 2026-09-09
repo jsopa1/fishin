@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Summary{% endblock %}
+{% block content %}
+<h1>Summary</h1>
+<p>Live counts from the database — cross-check these against
+   <a href="https://github.com/jsopa1/fishin/blob/main/docs/v1_full_run_report.md" target="_blank" rel="noopener">docs/v1_full_run_report.md</a>.</p>
+
+<div class="summary-grid">
+  <div class="summary-card">
+    <h3>Total waterbody results</h3>
+    <div class="big">{{ counts.total_waterbodies }}</div>
+  </div>
+  <div class="summary-card">
+    <h3>Total species predictions</h3>
+    <div class="big">{{ counts.total_species_predictions }}</div>
+  </div>
+  <div class="summary-card">
+    <h3>Total logged failures</h3>
+    <div class="big">{{ counts.total_failures }}</div>
+  </div>
+
+  <div class="summary-card">
+    <h3>By presence tier</h3>
+    <table>{% for k, v in counts.by_tier.items() %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="summary-card">
+    <h3>By waterbody type</h3>
+    <table>{% for k, v in counts.by_type.items() %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="summary-card">
+    <h3>Species predictions by match outcome</h3>
+    <table>{% for k, v in counts.species_any_match.items() %}<tr><th>any_match={{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="summary-card">
+    <h3>Temperature source method</h3>
+    <table>{% for k, v in counts.by_temp_method.items() %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</table>
+  </div>
+  <div class="summary-card">
+    <h3>Failures by type</h3>
+    <table>{% for k, v in counts.by_failure_type.items() %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</table>
+  </div>
+</div>
+{% endblock %}

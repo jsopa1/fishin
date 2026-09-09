@@ -14,3 +14,6 @@ Thumbs.db
 # PyInstaller intermediate build cache for ui/v1_review_app.py -- the
 # packaged dist/V1ResultsReview.exe is tracked; these are regeneratable.
 build/
+
+# Third-party downloaded tools (e.g. cloudflared.exe for local tunnel demos)
+.tools/

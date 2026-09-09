@@ -1,0 +1,80 @@
+:root {
+  --ink: #1a1a1a;
+  --muted: #5a5a5a;
+  --border: #ddd;
+  --bg: #fafafa;
+  --accent: #1a5f3f;
+  --fresh: #1a6b1a;
+  --stale: #b00020;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+.site-header { background: white; border-bottom: 1px solid var(--border); }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.brand { font-weight: 700; color: var(--accent); text-decoration: none; font-size: 1.1rem; }
+.site-header nav a { margin-left: 16px; text-decoration: none; color: var(--ink); }
+.site-header nav a:hover { text-decoration: underline; }
+
+.banner { padding: 8px 0; color: white; font-size: 0.92rem; }
+.banner.fresh { background: var(--fresh); }
+.banner.stale { background: var(--stale); }
+
+.disclaimer { padding: 10px 16px; background: #fff7e0; border-bottom: 1px solid #f0e0a0; font-size: 0.92rem; }
+
+main { padding: 24px 16px 48px; min-height: 60vh; }
+
+h1 { font-size: 1.6rem; margin-top: 0; }
+h2 { font-size: 1.25rem; margin-top: 1.6em; }
+
+.hero { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; }
+
+form.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 18px; }
+form.filters label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 3px; }
+form.filters input, form.filters select { padding: 6px 8px; border: 1px solid var(--border); border-radius: 4px; min-width: 150px; font-size: 0.95rem; }
+form.filters button { padding: 7px 16px; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.95rem; }
+form.filters button:hover { opacity: 0.9; }
+
+table { border-collapse: collapse; width: 100%; background: white; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+table th, table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+table th { background: #f0f0f0; }
+table tr:last-child td { border-bottom: none; }
+table tr:hover { background: #f5f9f5; }
+.tag { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; }
+.tag.survey_confirmed { background: #d4edda; color: #1a6b1a; }
+.tag.stocking_only { background: #fff3cd; color: #8a6d00; }
+.tag.real { background: #d4edda; color: #1a6b1a; }
+.tag.proxy { background: #eee; color: #555; }
+.tag.no_data { background: #f8d7da; color: #a00; }
+
+.result-count { color: var(--muted); font-size: 0.9rem; margin-bottom: 8px; }
+
+.detail-box { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 18px 22px; margin-top: 12px; }
+.detail-box dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; font-size: 0.92rem; }
+.detail-box dt { color: var(--muted); }
+
+.narrative { white-space: pre-wrap; font-family: ui-monospace, Consolas, monospace; font-size: 0.88rem; background: #f7f7f7; border: 1px solid var(--border); border-radius: 6px; padding: 14px; margin-top: 10px; }
+
+.species-card { border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 10px 0; }
+.species-card h4 { margin: 0 0 6px; }
+.species-card .caveat { color: #8a6d00; font-weight: 600; }
+
+.site-footer { background: #f0f0f0; border-top: 1px solid var(--border); padding: 20px 0 30px; font-size: 0.85rem; color: var(--muted); margin-top: 40px; }
+.site-footer a { color: var(--accent); }
+.site-footer ul { padding-left: 18px; }
+
+.empty-state { color: var(--muted); font-style: italic; padding: 20px 0; }
+
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 16px; }
+.summary-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; }
+.summary-card h3 { margin: 0 0 8px; font-size: 0.95rem; color: var(--muted); }
+.summary-card .big { font-size: 1.8rem; font-weight: 700; }
+.summary-card table { border: none; }
+.summary-card table th, .summary-card table td { padding: 3px 0; font-size: 0.88rem; border: none; background: none; }

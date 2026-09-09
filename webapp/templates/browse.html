@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Browse Results{% endblock %}
+{% block content %}
+<h1>Browse Results</h1>
+
+<form class="filters" method="get" action="{{ url_for('browse') }}">
+  <div>
+    <label for="name">Waterbody name</label>
+    <input type="text" id="name" name="name" value="{{ filters.name or '' }}" placeholder="e.g. Devils Lake">
+  </div>
+  <div>
+    <label for="county">County</label>
+    <input type="text" id="county" name="county" value="{{ filters.county or '' }}" placeholder="e.g. Sauk">
+  </div>
+  <div>
+    <label for="species">Species</label>
+    <select id="species" name="species">
+      <option value="">(any)</option>
+      {% for sp in species_list %}
+        <option value="{{ sp }}" {{ 'selected' if filters.species == sp else '' }}>{{ sp.title() }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="tier">Presence tier</label>
+    <select id="tier" name="tier">
+      {% for t in tier_choices %}
+        <option value="{{ t }}" {{ 'selected' if filters.tier == t else '' }}>{{ t }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit">Search</button>
+</form>
+
+<p class="result-count">{{ results|length }} result{{ '' if results|length == 1 else 's' }} shown (max 500).</p>
+
+{% if results %}
+<table>
+  <thead>
+    <tr><th>Waterbody</th><th>County</th><th>Type</th><th>Presence tier</th><th>Temp (°F)</th><th>Temp source</th></tr>
+  </thead>
+  <tbody>
+    {% for r in results %}
+    <tr>
+      <td><a href="{{ url_for('waterbody_detail', name=r.waterbody_name, county=r.county) }}">{{ r.waterbody_name }}</a></td>
+      <td>{{ r.county }}</td>
+      <td>{{ r.waterbody_type }}</td>
+      <td><span class="tag {{ r.presence_tier }}">{{ r.presence_tier }}</span></td>
+      <td>{% if r.temp_value_c is not none %}{{ "%.1f"|format(r.temp_value_c * 9/5 + 32) }}{% else %}—{% endif %}</td>
+      <td>
+        {% if r.temp_method == 'no_data' %}<span class="tag no_data">no data</span>
+        {% elif r.temp_is_real %}<span class="tag real">real</span>
+        {% else %}<span class="tag proxy">proxy</span>{% endif %}
+        {{ r.temp_method }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty-state">No results match these filters.</p>
+{% endif %}
+{% endblock %}

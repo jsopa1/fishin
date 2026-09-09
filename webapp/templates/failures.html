@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Failures{% endblock %}
+{% block content %}
+<h1>Failures</h1>
+<p>Every waterbody or species where the model could not produce a result, logged honestly with
+   the real reason — nothing here was silently dropped from the run.</p>
+
+<form class="filters" method="get" action="{{ url_for('failures') }}">
+  <div>
+    <label for="waterbody">Waterbody</label>
+    <input type="text" id="waterbody" name="waterbody" value="{{ filters.waterbody or '' }}">
+  </div>
+  <div>
+    <label for="species">Species</label>
+    <input type="text" id="species" name="species" value="{{ filters.species or '' }}">
+  </div>
+  <div>
+    <label for="failure_type">Failure type</label>
+    <select id="failure_type" name="failure_type">
+      {% for t in failure_types %}
+        <option value="{{ t }}" {{ 'selected' if filters.failure_type == t else '' }}>{{ t }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit">Search</button>
+</form>
+
+<p class="result-count">{{ results|length }} result{{ '' if results|length == 1 else 's' }} shown (max 500).</p>
+
+{% if results %}
+<table>
+  <thead><tr><th>Waterbody</th><th>County</th><th>Species</th><th>Failure type</th><th>Message</th></tr></thead>
+  <tbody>
+    {% for r in results %}
+    <tr>
+      <td>{{ r.waterbody_name }}</td>
+      <td>{{ r.county }}</td>
+      <td>{{ r.species or '—' }}</td>
+      <td>{{ r.failure_type }}</td>
+      <td>{{ r.error_message }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="empty-state">No failures match these filters.</p>
+{% endif %}
+{% endblock %}

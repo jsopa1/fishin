@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ wb.waterbody_name if wb else "Not found" }} — Detail{% endblock %}
+{% block content %}
+<p><a href="{{ url_for('browse') }}">&larr; Back to Browse</a></p>
+{% if not wb %}
+<h1>Not found</h1>
+<p class="empty-state">No stored result for this waterbody/county combination. It may have been
+   removed by a data-quality fix, or the name/county in the link doesn't exactly match a stored
+   record. Try <a href="{{ url_for('browse') }}">searching again</a>.</p>
+{% else %}
+<h1>{{ wb.waterbody_name }} <small style="color:#888; font-weight:400;">({{ wb.county }})</small></h1>
+
+<div class="detail-box">
+  <dl>
+    <dt>Waterbody type</dt><dd>{{ wb.waterbody_type }}</dd>
+    <dt>Presence tier</dt><dd><span class="tag {{ wb.presence_tier }}">{{ wb.presence_tier }}</span></dd>
+    <dt>Species count</dt><dd>{{ wb.species_count }}</dd>
+    <dt>Temperature</dt>
+    <dd>
+      {% if wb.temp_value_c is not none %}
+        {{ "%.1f"|format(wb.temp_value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(wb.temp_value_c) }}°C
+        ({% if wb.temp_is_real %}<span class="tag real">real measurement</span>{% else %}<span class="tag proxy">air-temperature proxy</span>{% endif %})
+      {% else %}
+        <span class="tag no_data">no real or proxy temperature data available</span>
+      {% endif %}
+    </dd>
+    <dt>Temp method</dt><dd>{{ wb.temp_method }}</dd>
+    <dt>Temp source</dt><dd>{{ wb.temp_source or '—' }}</dd>
+    <dt>Temp observed at</dt><dd>{{ wb.temp_observed_at or '—' }}</dd>
+    <dt>Generated / last updated</dt><dd>{{ wb.run_timestamp }}</dd>
+  </dl>
+
+  <h3>Full narrative (exactly as generated)</h3>
+  <div class="narrative">{{ wb.narrative_text }}</div>
+</div>
+
+<h2>Species predictions (exactly as stored)</h2>
+{% if species_predictions %}
+  {% for sp in species_predictions %}
+  <div class="species-card">
+    <h4>{{ sp.species.title() }}</h4>
+    <p>has_threshold_data={{ sp.has_threshold_data }} &middot; any_match={{ sp.any_match }}
+       &middot; river_caveat_applied={{ sp.river_caveat_applied }} &middot; diel_active={{ sp.diel_active }}</p>
+    {% if sp.match_description %}
+      <p>{{ sp.match_description }}</p>
+      <p><em>Evidence quality: {{ sp.evidence_quality }}</em></p>
+    {% endif %}
+  </div>
+  {% endfor %}
+{% else %}
+  <p class="empty-state">No species prediction records for this waterbody.</p>
+{% endif %}
+{% endif %}
+{% endblock %}
