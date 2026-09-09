@@ -1,0 +1,1099 @@
+PAGES: 28
+--- PAGE 1 ---
+ 
+ 
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Comprehensive Fishery Survey of Big Muskego Lake,  
+Waukesha County, Wisconsin 2021 
+Waterbody Identification Code 762400 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Benjamin Heussner - Fisheries Biologist, Eagle 
+Steven Gospodarek – Fisheries Technician, Eagle 
+Joshua Fluur – Fisheries Technician, Eagle 
+Parker Wyngaard – Fisheries Technician, Eagle 
+Wisconsin Department of Natural Resources 
+2022 
+ 
+ 
+ 
+ 
+--- PAGE 2 ---
+ 
+2 
+ 
+Table of Contents 
+Executive Summary .............................................................................................................. 3 
+Introduction ........................................................................................................................... 5 
+Methods ............................................................................................................................ 5 
+Results and Discussion ....................................................................................................... 8 
+Northern Pike ................................................................................................................... .8 
+Largemouth Bass ............................................................................................................. .9 
+Bluegill ............................................................................................................................... .9 
+Yellow Perch…. ............................................................................................................... .10 
+Black Crappie .................................................................................................................. .10 
+Common Carp ................................................................................................................. .10 
+Other Species ................................................................................................................. .10 
+Management Recommendations ..................................................................................... 11 
+Tables and Figures ....................................................................................................... 14-28 
+  Acknowledgments ............................................................................................................. .29 
+References .................................................................................................................. ..…...29 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 3 ---
+ 
+3 
+ 
+Executive Summary 
+In 2019, the Wisconsin Department of Natural Resources (DNR) conducted a 
+comprehensive fishery survey on Big Muskego Lake in Waukesha County, Wisconsin, 
+using a variety of sampling methods throughout the open water period to sample the 
+major components of the fishery. Due to late ice out conditions and subsequent 
+delayed deployment of nets, the peak of northern pike spawning was missed in the 
+2019 spring fyke netting (SNI) survey. This resulted in suboptimal size structure and 
+abundance estimates from the 2019 northern pike sample and an additional SNI 
+survey was conducted in the spring of 2020 to collect more representative data. The 
+objectives of the surveys were to 1) assess the status of the northern pike (Esox 
+lucius), largemouth bass (Micropterus salmoides) and panfish populations, 2) attain 
+population estimates for northern pike, 3) evaluate the protective size and bag limits 
+implemented as part of the 1996 Big Muskego Rehabilitation Project conducted on 
+the lake, and 4) update fisheries management recommendations for Big Muskego 
+Lake. The results of the 2019 and 2020 surveys were compared to lakes with similar 
+characteristics and lake classifications (Latzka, 2016) and the prior comprehensive 
+fisheries surveys conducted by the DNR on Big Muskego Lake in 2008 and 2015. 
+ 
+Five hundred sixty-six northern pike were sampled in the 2019 SNI for a catch rate of 
+9.9 northern pike/net night (Table 2). This catch rate is well above average (90th 
+percentile) when compared to lakes with similar characteristics (complex-warm-
+dark). Males comprised 50% of the sample, females 34% and 16% unknown gender. 
+Northern pike ranged from 10.2 to 36 inches. The mean length was 19.3 inches for 
+males, 23.2 inches for females and 20.3 inches for northern pike of unknown sex. 
+Approximately 3% of the northern pike sampled were above the 34-inch memorable 
+proportional size distribution (PSD34). 
+ 
+One thousand fifty-six northern pike were sampled during the 2020 SNI survey for a 
+catch rate of 20.3 northern pike/net night. This catch rate is well above average (95th 
+percentile) when compared to lakes across the state with similar characteristics.  
+Males comprised 47% of the sample and females 53%. Northern pike ranged from 10.3 
+to 38.7 inches. Mean length was 19.3 inches for males, 25.2 inches for females and 10.6 
+inches for northern pike of unknown sex. The Schumacher-Eschmeyer multi-census 
+adult population estimate for northern pike in Big Muskego Lake in 2020 was 5,267 
+(95% CI [3,970-7,893]), equaling a density of 2.4 adults/acre.   
+ 
+A total of 41 largemouth bass were sampled in the 2019 spring electrofishing (SEII), 
+for a catch rate of 8.2 largemouth bass/mile. This catch rate is below average (25th 
+percentile) when compared to lakes with similar characteristics. Largemouth bass 
+ranged from 7.4 to 19.9 inches with a mean length of 13.4 inches. Largemouth bass in 
+Big Muskego Lake show quality size structure with 4.4% (2019) and 10.7% (2020) of the 
+largemouth bass sampled above the current 18-inch minimum length limit.  
+ 
+--- PAGE 4 ---
+ 
+4 
+ 
+A total of 18 bluegills (Lepomis macrochirus) were sampled in the 2019 SEII for a catch 
+rate of 36 bluegills/mile, which is below average (below the 25th percentile) when 
+compared to lakes across the state with similar characteristics. Bluegills ranged from 
+3.2 to 8.8 inches, with a mean length of 6.7 inches. Both the 2019 SNI and SEII surveys 
+show that the bluegill population in Big Muskego Lake is represented by a high 
+proportion of quality-size (equal to or greater than 6 inches) and preferred size 
+(equal to or greater than 8 inches) fish.     
+ 
+Management recommendations include: 
+1. Monitor the fishery for summer and winter fish mortality and implement re-
+stocking efforts if warranted. 
+2. Protect the northern pike fishery from overharvest by maintaining the 
+current protected slot limit regulation of no minimum size limit, protected no 
+harvest slot for fish between 25 to 35 inches and a two fish daily bag limit.  
+3. Monitor the northern pike population to evaluate the effectiveness of the 
+protected slot regulation for maintaining abundance of greater than two 
+adults per acre and implement a more restrictive harvest regulations if the 
+desired density is not maintained.  
+4. Maintain the current special, restrictive panfish regulation of an 8-inch 
+minimum length limit and 15 fish daily bag limit.  
+5. Maintain the current, special, restrictive largemouth bass regulation of an 18-
+inch minimum length limit and one fish daily bag limit.  
+6. Monitor the Emerald Park tributary for presence and concentrations of 
+common carp and implement partial chemical treatment with rotenone if 
+warranted. 
+7. Work with local stakeholders and the Big Muskego Lake partnership to 
+discuss the status of emergent and submergent aquatic plants, water quality 
+and water level management. Collectively consider implementation of a 
+seasonal drawdown to re-establish emergent vegetation, reduce wind fetch 
+and internal nutrient loading. 
+8. Work with local stakeholders and the Big Muskego Lake partnership to begin 
+feasibility planning for a potential full-lake restoration project including 
+water level drawdown and rotenone treatment to eradicate common carp, if 
+warranted. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 5 ---
+ 
+5 
+ 
+Introduction 
+Big Muskego Lake is a 2,260-acre shallow lake with a maximum depth of 23 feet 
+located in Waukesha County, Wisconsin (Figure 1). A major shallow lake rehabilitation 
+project was conducted on Big Muskego Lake in 1996. The project included an 
+extended water level drawdown for two summer growing seasons, installation of 
+habitat structures including islands and chemical treatment with rotenone to remove 
+the common carp-dominated fishery. A suite of protective fishing regulations was 
+implemented following the 1996 project to protect the developing fishery from 
+overharvest. In addition, the DNR restocked Big Muskego Lake and Bass Bay with a 
+combined 1.5 million fingerlings and adult fish and 4 million fry (Table 1). A total of 
+twenty species of fish were stocked in the two lakes and their tributaries.  The 
+stocking was very successful in re-establishing thirteen of the twenty species 
+stocked.  
+ 
+Populations of black bullhead (Ictalurus melas), brown bullhead (Ictalurus nebulosus) 
+and yellow bullhead (Ictalurus natalis) have re-established themselves in the lake 
+either by immigration from the watershed or by illegal stocking by the public (Beyler, 
+2000). Naturally reproducing populations of beneficial predatory fish species 
+including northern pike and largemouth bass, as well as panfish and non-game 
+species, including bowfin (Amia calva), have also been established.   
+ 
+Common carp (Cyprinus carpio) were able to re-establish in the system during the 
+statewide flood events that occurred during the summer of 2008. Electrofishing for 
+common carp on Big Muskego Lake has shown to be a minimally effective sampling 
+method, as the carp are often observed, but are unable to be sampled due to gear 
+avoidance. A partial chemical treatment of the connected Emerald Park wetland 
+complex was successfully completed in 2012, removing thousands of young of the 
+year and adult common carp.   
+ 
+Methods 
+In 2019, eleven white nylon fyke nets (0.75-inch bar mesh, 3-foot, single-funnel, 75-
+foot-lead) were set to specifically target spawning northern pike as part of spring 
+fyke netting (SNI). Open water conditions arrived late in the spring of 2019, and fyke 
+nets were deployed after ice melt on March 28. Seven nets were initially set in Big 
+Muskego Lake, with four more nets added throughout the seven-day survey. Nets 
+were checked daily from March 30 to April 4 for a total of six nights and 70 net nights 
+of effort.   
+ 
+All gamefish netted were measured to the nearest 0.1 inches. Northern pike were also 
+weighed to the nearest 0.1 pounds. Northern pike were given differential fin clips to 
+identify recaptures and facilitate the calculation of a population estimate. Females 
+were marked with a right ventral fin clip, males received a left ventral fin clip and 
+--- PAGE 6 ---
+ 
+6 
+ 
+unknown sex fish received a top caudal fin clip. Additionally, all largemouth bass 
+were marked with a top caudal fin clip to eliminate duplicate counts. All northern 
+pike and largemouth bass netted were observed for fin clips from previous surveys. 
+Additionally, age structures were removed from northern pike according to standard 
+sampling protocols, including removing an anal fin ray. Aging structures were 
+collected until five structures were collected for each species and each sex for every 
+half-inch increment. A subsample of bluegill, black crappie (Pomoxis 
+nigromaculatus), yellow perch (Perca flavescens) and pumpkinseed (Lepomis 
+gibbosus) were measured to the nearest 0.1 inches. Other fish species encountered 
+were identified to species and tallied.   
+ 
+Due to late ice-out conditions and subsequent delayed deployment of SNI nets, the 
+peak of northern pike spawning was missed in 2019. As a result, catch rate, size 
+structure and abundance estimate from 2019 are limited. SNI was repeated in 2020 to 
+obtain additional northern pike data, to better assess population metrics and 
+conduct a
+ continuous mark and recapture population estimate. Open water 
+conditions occurred early in the spring of 2020, with fyke nets set on March 13. Eight 
+white nylon fyke nets (0.75-inch bar, three-foot, single-funnel, 75-foot lead) were set 
+to specifically target spawning northern pike (Figure 12). Nets were checked daily 
+from March 14 to March 19 for a total of six days and 56 net nights of effort.  Sampling 
+methods for the 2020 SNI were identical to those used in the 2019 SNI.   
+ 
+Spring electrofishing (SEI) using a DNR standard pulsed direct current (PDC) boom 
+shocker boat was conducted at night on May 2. The SEI sampling included a total of 
+one mile of shoreline effort targeting all fish species (catch all runs). An additional 6 
+miles of shoreline and three hours of sampling effort were completed, targeting only 
+gamefish species.   
+ 
+The objective of SEI was to count, measure and record marks for adult northern pike 
+marked with fin clips during the SNI to facilitate the calculation of a population 
+estimate. All northern pike sampled were measured to the nearest 0.1 inches weighed 
+to the nearest 0.1 pounds and newly sampled northern pike were given a top caudal 
+clip. Aging structures were collected until five structures were collected for each 
+species and each sex for every half-inch increment. 
+ 
+The objective of SEII was to estimate catch per unit effort (CPUE). During gamefish 
+only sampling, northern pike, walleye and largemouth bass were measured to the 
+nearest 0.1 inch. Largemouth bass were observed for fin clips, and newly sampled 
+fish were given a top caudal fin clip for completing a mark and recapture population 
+estimate. Panfish, to the nearest 0.1 inches and catch rate was calculated to estimate 
+abundance.  
+ 
+Spring electrofishing II (SEII) using a DNR standard PDC boom shocker boat was 
+conducted at night on May 23, targeting largemouth bass and panfish species. The 
+SEII sampling effort included a total of 0.5 miles of shoreline sampling effort 
+--- PAGE 7 ---
+ 
+7 
+ 
+targeting all fish species and 5 miles of shoreline sampling effort targeting only 
+gamefish species. Largemouth bass were observed for fin clips from the SNI and SEI 
+surveys, and newly sampled largemouth bass were given a top caudal fin clip for 
+calculation of a population estimate. Gamefish were observed for fin clips received 
+during previous sampling and lengths were measured to the nearest 0.1 inches. 
+Panfish, including bluegill, black crappie, yellow perch, pumpkinseed and warmouth 
+(Lepomis gulosus), were collected and measured to the nearest 0.1 inches. Other fish 
+species sampled were identified and tallied. Fall electrofishing (FE) was not 
+conducted on Big Muskego Lake in 2019. 
+ 
+Fyke net total catch, and CPUE (number/net night) were calculated for northern pike 
+to estimate relative abundance. Northern pike population size was estimated by 
+continuous mark and recapture using the Schumacher-Eschmeyer formula with 95% 
+confidence intervals. The formula for the Schumacher-Eschmeyer formula is shown 
+here: 
+ 
+ 
+ 
+ 
+ 
+ 
+where N is the population size, C
+t is the number sampled on day t, Mt is the number 
+marked on day t and Rt is the total number of recaptures from the survey (Ricker 
+1975).  
+ 
+Electrofishing total catch and CPUE (number/mile) were calculated for largemouth 
+bass, bluegill and yellow perch. Mean length calculations and length frequency 
+histograms were constructed for northern pike, largemouth bass, bluegill and yellow 
+perch to assess size structure.  
+ 
+Proportional size distribution (PSD) was calculated for northern pike, largemouth 
+bass and bluegill to assess population size structure. Stock lengths are based on 
+standardized lengths for each species: northern pike (14 inches), largemouth bass (8 
+inches) and bluegill (3 inches), and quality lengths used were: northern pike (21 
+inches), largemouth bass (12 inches) and bluegill (6 inches). Proportional size 
+distribution-preferred (PSD-P) was also calculated for northern pike, largemouth 
+bass and bluegill to assess the proportion of fish in the population that are a length 
+preferred by anglers. These are based on standardized lengths for each species: 
+northern pike (28 inches), largemouth bass (15 inches) and bluegill (8 inches). 
+Proportional size distribution-memorable (PSD-M) was also calculated for northern 
+pike to assess the proportion of fish in the population that are a length considered 
+memorable (34 inches) by anglers (Anderson, R.O. 1980). 
+ 
+
+--- PAGE 8 ---
+ 
+8 
+ 
+Age and growth data were obtained from structures taken from northern pike (anal 
+fin rays) collected throughout the comprehensive fishery survey. Anal fin rays were 
+sectioned using a Buehler Isomet low-speed sectioning saw. Sectioned wafers were 
+mounted on a slide with mineral oil, imaged and interpreted by independent readers 
+using an Olympus SZX7 Microscope. Growth data from Big Muskego Lake was 
+compared to statewide and regional mean growth rates utilized in the DNR Fisheries 
+Management Information System (FMIS) database. 
+ 
+Results and Discussion 
+NORTHERN PIKE 
+Five hundred sixty-six northern pike were sampled in the 2019 SNI for a catch rate of 
+9.9 northern pike/net night (Table 2). This catch rate is well above average (90th 
+percentile) compared to lakes with similar characteristics. The sex ratio was 1.5 male 
+northern pike to every female northern pike sampled. Northern pike ranged from 10.2 
+to 36 inches. The mean length was 19.5 inches for males, 23.5 inches for females and 
+20.6 inches for northern pike of unknown sex. The length-frequency histogram shows 
+a good size structure (Figure 3). 
+ 
+One thousand fifty-six northern pike were sampled in the 2020 SNI for a catch rate of 
+20.3 northern pike/net night (Table 2). This catch rate is well above average (99th 
+percentile) when compared to lakes with similar characteristics across the state. 
+Males comprised 47% of the sample and females 53%, nearly a 1:1 ratio (Table 3). 
+Northern pike ranged from 10.3 to 38.7 inches. The mean length was 19.3 inches for 
+males, 25.2 inches for females and 10.6 inches for northern pike of unknown sex 
+(Figure 4). The 2020 catch rate of northern pike has increased from 7.9/net night in 
+2008 and 16.9/net night in 2015 SNI surveys (Table 4). In 2020 SNI, PSD was 57, PSD-P 
+was 14 and PSD-M was 2. In 2015, PSD was 65, PSD-P was 17 and PSD-M was 1. In 2008, 
+PSD was 44, PSD-P was 5 and PSD-M was 0.4 (Table 5). 
+ 
+Thirty-eight northern pike were sampled in the 2019 SEI for a catch rate of 6.3 
+northern pike/mile (Table 6). Northern pike ranged from 12.8 to 35.4 inches and the 
+average length was 20.6 inches.  
+ 
+The Schumacher Eschmeyer population estimate for adult northern pike in Big 
+Muskego Lake was 5,267 (95% CI [3,970-7,893]), equaling a density of 2.4 adults/acre.  
+Gender-specific population estimates were calculated; the male northern pike 
+population estimate was 3,043 (95% CI [2215-4859]), and the female population 
+estimate was 2,224 (95% CI [1755-3034]).  
+ 
+Mean length at age data from 2019 indicates that the growth rate of northern pike in 
+Big Muskego Lake is slightly higher than the statewide average (Figure 5). Female 
+northern pike reach the lower end of the current protected slot regulation (25 inches) 
+at age-6 and males by age-8.   
+--- PAGE 9 ---
+ 
+9 
+ 
+LARGEMOUTH BASS  
+Forty-three largemouth bass were sampled in the 2019 SNI for a catch rate of 0.75 
+largemouth bass/net night (Table 2). Largemouth bass ranged from 5.7 to 19.2 inches, 
+with a mean length of 13.8 inches (Figure 6). Twenty-eight largemouth bass were 
+sampled in the 2020 SNI for a catch rate of 0.54/net night (Table 2). Largemouth bass 
+ranged from 8.3 to 20.3 inches, with a mean length of 15.2 inches (Figure 7). Seventeen 
+largemouth bass were sampled in the 2015 SNI for a catch rate of 0.33 largemouth 
+bass/net night. Largemouth bass ranged from 13.1 to 17.9 inches, with a mean length 
+of 16.0 inches. One hundred fifty-four largemouth bass were sampled in the 2008 SNI 
+for a catch rate of 1.0 largemouth bass/net night. Largemouth bass ranged from 8.1 to 
+20.3 inches, with a mean length of 15.2 inches. Largemouth bass sampled in SNI are 
+considered incidental catch, and catch rates are not considered a good estimate of 
+abundance. However, largemouth bass length data is useful in describing size 
+structure with limited data. 
+ 
+Ninety-five largemouth bass were sampled during the 2019 SEI for a catch rate of 15.8 
+largemouth bass/mile (Table 6). This catch rate is average (50th percentile) compared 
+to lakes with similar characteristics across the state. Largemouth bass ranged from 
+2.0 to 19.9 inches, with a mean length of 14.0 inches. A total of 41 largemouth bass 
+were sampled during the 2019 SEII for a catch rate of 8.2 largemouth bass/mile (Table 
+7). This catch rate is below average (25th percentile) compared to lakes with similar 
+characteristics. Largemouth bass ranged from 7.4 inches to 19.9 inches, with a mean 
+length of 13.4 inches (Figure 8). In the 2019 SEI and SEII, 2.4% and 5.3% of the 
+largemouth bass sampled were over the current 18-inch minimum length limit, 
+respectively.   
+ 
+A balanced largemouth bass population typically displays PSD values between 40-60 
+(Anderson and Neuman, 1996). The PSD of largemouth bass sampled during the 2019 
+SEI and SEII was 77, indicating good recruitment of juvenile bass into the population 
+and a desirable proportion of quality-size bass (greater than or equal to 12 inches) 
+present. The PSD-P was 46, indicating a large proportion of preferred-size bass 
+(greater than or equal to 15 inches) present in Big Muskego Lake. A population 
+estimate for largemouth bass was not calculated due to insufficient sample size. 
+ 
+BLUEGILL 
+A total of 65 bluegills were sampled in the 2019 SNI for a catch rate of 1.1 
+bluegills/net night (Table 2). Bluegill lengths ranged from 5.2 to 8.6 inches, with a 
+mean length of 7.5 inches (Table 10). The 2019 SNI bluegill length frequency 
+distribution shows an excellent size structure with a PSD of 95 and PSD-P of 29 
+(Figure 9). A subsample of 49 bluegills were measured during the 2020 SNI, ranging 
+from 4.2 to 8.6 inches with a mean length of 6.6 inches. The 2020 SNI length frequency 
+distribution shows a good size structure; however, PSD and PSD-P values were lower 
+at 71 and 10, respectively (Figure 10).    
+    
+--- PAGE 10 ---
+ 
+10 
+ 
+A total of 19 bluegills were sampled during the 2019 SEI for a catch rate of 19 
+bluegills/mile (Table 6). Bluegill lengths ranged from 3.3 to 7.5 inches, with a mean 
+length of 5.2 inches. A total of 18 bluegills were sampled in the 2019 SEII for a catch 
+rate of 36 bluegills/mile (Table 7). Bluegill lengths ranged from 3.2 to 8.8 inches, with 
+a mean length of 6.7 inches. The catch rates for both the SEI and SEII were below 
+average (10th percentile) compared to lakes with similar characteristics. Bluegill 
+ranged from 3.2 to 8.8 inches, with a mean length of 3.8 inches (Figure 11). 
+ 
+YELLOW PERCH 
+A total of 30 yellow perch were sampled during the 2019 SNI for a catch rate of 0.53 
+yellow perch/net night (Table 2). This catch rate is below average (10th percentile) for 
+lakes with similar characteristics. Yellow perch ranged from 3.1 to 8.0 inches, with a 
+mean length of 4.6 inches (Figure 12). Two yellow perch were sampled in the 2020 SNI, 
+demonstrating very low abundance and below-average size structure. The low catch 
+rate of yellow perch is consistent with past SNI surveys of 0.38/net night in 2008 and 
+0.63/net night in 2015 (Table 5). 
+ 
+A total of eight yellow perch were sampled during the 2019 SEI for a catch rate of 8.0 
+yellow perch/mile (Table 6). Yellow perch ranged from 2.9 to 7.1 inches, with a mean 
+length of 4.5 inches. A total of five yellow perch were sampled in the 2019 SEII for a 
+catch rate of 10.0 yellow perch/mile (Table 7). Yellow perch ranged from 6.4 to 9.3 
+inches, with a mean length of 7.9 inches.    
+ 
+BLACK CRAPPIE 
+A total of 10 black crappies were sampled in the 2019 SNI for a catch rate of 0.18 black 
+crappies/net night (Table 2). Black crappies ranged from 6.2 inches to 16.0 inches 
+with a mean length of 9.3 inches. Seven black crappies were sampled in the 2020 SNI 
+for a catch rate of 0.13 black crappies/net night. Black crappies ranged from 7.0 to 9.0 
+inches, with a mean length of 7.9 inches. The catch rates in both SNI survey years are 
+below average (1st percentile) for lakes with similar characteristics. Black crappie 
+catch rates were also below average in the 2015 SNI (0.90/net night) and 2008 SNI 
+(0.29/net night). Black crappie catch rates were also low in the 2019 SEI (3/mile) and 
+SEII (2/mile) surveys (Table 6, 7). While the overall abundance of black crappies are 
+low, the species is an important panfish species in Big Muskego Lake as they provide 
+additional angling opportunities and are more tolerant of poor water quality and 
+winterkill conditions.  
+ 
+COMMON CARP 
+Four common carp were collected throughout the combined 2019 and 2020 sampling 
+efforts on Big Muskego Lake. However, many common carp were observed while 
+electrofishing but evaded capture due to gear avoidance in shallow water. The 
+morphometry of Big Muskego Lake makes effectively sampling common carp very 
+difficult.   
+--- PAGE 11 ---
+ 
+11 
+ 
+OTHER SPECIES 
+Additional species sampled during the 2019 comprehensive fishery survey included 
+muskellunge (Esox masquinongy), walleye (Sander vitreus), golden shiner 
+(Notemigonus crysoleucas), lake chubsucker (Erimyzon sucetta), a special concern 
+(SC) fish species in Wisconsin, pumpkinseed, warmouth, black bullhead, brown 
+bullhead, yellow bullhead and bowfin (Table 6 and 8). 
+  
+A diverse fishery assemblage is important in maintaining a balanced fishery. For 
+example, bowfin are a native predator species that is thriving in Big Muskego Lake 
+with excellent natural reproduction, survival and growth. While bowfin are 
+considered a rough fish species that can tolerate poor water quality and habitat, they 
+are an excellent predator of common carp and are therefore considered a beneficial 
+part of this shallow-lake ecosystem. 
+ 
+Management Recommendations 
+Big Muskego Lake is a high-profile waterbody with above-average fishing pressure. 
+Since the 1996-1997 complete restoration project, anglers and outdoor enthusiasts 
+have benefited from the clear water aquatic plant-dominated state. Current water 
+quality, submergent aquatic plant communities and fisheries remain primarily intact.  
+However, there has been a considerable reduction in emergent vegetation, as shown 
+in Figure 13 (Wyngaard 2020). If emergent vegetation continues to decrease, the need 
+for a lake-wide water level reduction over the summer growing season becomes 
+increasingly important. Natural drought cycles or an induced drawdown can provide 
+the necessary environmental conditions to stimulate emergent aquatic plant growth. 
+The effects of a sustained water level reduction during the growing season can result 
+in high water temperatures that could result in thermally induced mortality for 
+northern pike, a cool water species. Continued monitoring of the lake’s emergent and 
+submergent vegetation is critical to making informed management decisions.   
+Emergent vegetation loss on Big Muskego Lake has likely resulted from a 
+combination of factors, including sustained high-water levels (Figure 14), increased 
+wind fetch resulting from the loss of emergent vegetation (Wyngaard, 2020) and 
+increased presence of common carp. The negative effects of common carp on 
+submergent vegetation are well documented as they uproot native aquatic plants, 
+increase turbidity, contribute to internal nutrient loading and increased algae-
+dominated state (Sorensen Lab Group, Figure 19).  
+Maintaining a healthy gamefish population is critical to continued lake health. To 
+provide maximum protection for the northern pike population, a 40-inch minimum 
+length limit and daily bag limit of one fish regulation was implemented from 2010 
+through 2021. In 2022, the northern pike regulation was changed to a no minimum 
+length limit with a protected slot size of 25 to 35 inches and a two fish daily bag limit. 
+The main objective of the protected slot regulation is to protect larger spawning 
+--- PAGE 12 ---
+ 
+12 
+ 
+females while also providing angler harvest opportunities, focusing harvest on 
+northern pike less than 25 inches in length. The DNR has suspended the stocking of 
+northern pike in Big Muskego Lake as research is needed to identify proper genetic 
+strains for stocking this species in this connected waterbody. In addition, northern 
+pike have shown considerable natural reproductive potential, as indicated by the 
+2014-2017 northern pike stocking evaluation (Heussner 2019, DNR Draft). Future 
+survey work will determine the effectiveness of the slot size in maintaining pike 
+abundance and population size structure. As a cool water species, northern pike are 
+more tolerant of winterkills, but often succumb to summer mortality as water 
+temperature approaches sustained temperatures above 80 degrees Fahrenheit. The 
+most recent significant summer northern pike mortality was observed in 2012 and 
+was attributed to summer drought conditions and high water temperatures 
+experienced statewide (Figure 17). Winter mortality most commonly affects bluegills 
+on Big Muskego Lake, which is often observed during spring thaw (Figure 18).  
+The current fishing regulation for largemouth bass on Big Muskego Lake is an 18-inch 
+minimum length limit and a one fish daily bag limit. Natural recruitment remains 
+consistent, supporting good abundance and multiple year classes. Largemouth bass 
+are a warmwater species making them more prone to winterkill than northern pike. 
+Largemouth bass winterkill in Big Muskego Lake has likely been sporadic due to the 
+decrease in the severity of recent winters.  
+Panfish regulations currently include a reduced combined bag limit of 15 fish with a 
+minimum size limit of 8 inches. This restrictive regulation provides adequate 
+protection from angler over harvest and subsequent reduced size structure. Above 
+average size structure of panfish in Big Muskego Lake potentially contributes to 
+predation on juvenile benthivores, including the eggs, fry and fingerling common 
+carp.  
+ 
+In summary, the Big Muskego Lake fishery continues to thrive and provide quality 
+angling opportunities. Maintaining a relatively high-density gamefish population with 
+a large size structure and a diverse, abundant panfish community is needed to prey 
+on common carp eggs, fry and fingerlings. Maintaining a balanced fishery is also 
+essential to reducing the risk of common carp re-establishing dominance in the lake.  
+ 
+Management recommendations include: 
+1. Monitor the fishery for summer and winter fish mortality and implement re-
+stocking efforts if warranted. 
+2. Protect the northern pike fishery from overharvest by maintaining the 
+current protected slot limit regulation of no minimum size limit, protected no 
+harvest slot for fish between 25 to 35 inches and a two fish daily bag limit.  
+3. Monitor the northern pike population to evaluate the effectiveness of the 
+protected slot regulation for maintaining abundance of greater than two 
+adults per acre and implement a more restrictive harvest regulations if the 
+--- PAGE 13 ---
+ 
+13 
+ 
+desired density is not maintained.  
+4. Maintain the current special, restrictive panfish regulation of an 8-inch 
+minimum length limit and 15 fish daily bag limit.  
+5. Maintain the current, special, restrictive largemouth bass regulation of an 18-
+inch minimum length limit and one fish daily bag limit.  
+6. Monitor the Emerald Park tributary for the presence and concentrations of 
+common carp and implement partial chemical treatment with rotenone if 
+warranted. 
+7. Work with local stakeholders and the Big Muskego Lake partnership to 
+discuss the status of emergent and submergent aquatic plants, water quality 
+and water level management. Collectively consider implementing a seasonal 
+drawdown to re-establish emergent vegetation, reduce wind fetch and 
+internal nutrient loading. 
+8. Work with local stakeholders and the Big Muskego Lake partnership to begin 
+feasibility planning for a potential full-lake restoration project, including 
+water level drawdown and rotenone treatment to eradicate common carp, if 
+warranted. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 14 ---
+ 
+14 
+ 
+Tables 
+Table 1. Fish stocked in Big Muskego Lake since 1997 including year stocked, species, age 
+class, number of fish stocked and average length.   
+ 
+ 
+ 
+ 
+ 
+Year Species Age Class Number of Fish Stocked Average Length (Inches) 
+1997 Northern pike Large fingerling 1,975 18.0 
+1997 Northern pike Small fingerling 34,063 3.6 
+1997 Panfish Adult (Field transfer) 16,858 3.5 
+1997 Northern pike Small fingerling 1,980 3.7 
+1997 Northern pike Fry 388,555 0.2 
+1997 Yellow perch Adult (Field transfer) 26,094 6.5 
+1997 Walleye Fry 1,700,000 0.3 
+1997 Largemouth bass Large fingerling 69,517 1.7 
+1997 Northern pike Fry 198,000 0.8 
+1997 Northern pike Fry 500,000 0.5 
+1997 Golden shiner Adult (Broodstock) 23,400 3.5 
+1998 Largemouth bass Small fingerling 49,982 2.0 
+1998 Northern pike Fry 800,000 0.3 
+1998 Northern pike Small fingerling 9,902 3.3 
+1998 Panfish Adult (Field transfer) 34,521 3.0 
+1999 Largemouth bass Small fingerling 68,160 1.2 
+1999 Northern pike Large fingerling 2,500 7.2 
+2000 Northern pike  Small fingerling 3,710 3.7 
+2001 Largemouth bass Large fingerling 39,250 3.4 
+2001 Northern pike  Small fingerling 28,332 1.9 
+2006 Northern pike  Large fingerling 2,500 7.7 
+2008 Northern pike  Large fingerling 1,761 9.3 
+2009 Northern pike  Large fingerling 2,500 7.6 
+2010 Northern pike  Large fingerling 9,516 7.7 
+2011 Northern pike  Large fingerling 11,554 8.0 
+2012 Northern pike  Large fingerling 4,389 8.2 
+2013 Northern pike  Large fingerling 10,717 10.0 
+2014 Northern pike  Large fingerling 2,500 9.1 
+2015 Northern pike  Large fingerling 4,519 8.8 
+2016 Northern pike  Large fingerling 4,828 8.9 
+2017 Northern pike  Large fingerling 3,950 8.8 
+2018 Northern pike  Large fingerling 4,389 9.3 
+2019 Northern pike  Large fingerling 4,828 8.4 
+--- PAGE 15 ---
+ 
+15 
+ 
+ 
+Table 2. Catch summary of the 2019 and 2020 spring netting surveys (SNI) of Big Muskego 
+Lake, Waukesha County, WI.  
+ 2019 2020 
+Species Number 
+Sampled 
+Mean Length 
+(Inches) 
+Number 
+Sampled 
+Mean Length 
+(Inches) 
+Black crappie 10 9.3 7 7.9 
+Bluegill 65 7.5 49 6.6 
+Lake chubsucker 4    
+Largemouth bass 43 13.8 28 15.2 
+Muskellunge 1 18.2   
+Northern pike 566 21.0 1056 22.4 
+Pumpkinseed 27 7.6 20 7.2 
+Walleye 6 21.8   
+Warmouth   4 5.7 
+Yellow perch 30 4.6 2 6.2 
+ 
+ 
+Table 3. Northern pike catch statistics from the 2019 and 2020 spring netting surveys (SNI) of 
+Big Muskego Lake, Waukesha County, WI.   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Table 4. Northern pike catch rates from 2008, 2015 and 2020 spring fyke netting surveys (SNI) 
+of Big Muskego Lake, Waukesha County, WI.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 2019 2020 
+Sex Number 
+Sampled 
+Catch/Net 
+Night 
+Mean 
+Length 
+(Inches) 
+Number 
+Sampled 
+Catch/Net 
+Night 
+Mean 
+Length 
+(Inches) 
+Female 184 3.2 23.5 557 10.0 25.2 
+Male 291 5.1 19.5 493 8.8 19.3 
+Unknown 91 1.6 20.6 6 0.1 10.6 
+Total 566 9.9 21.2 1056 18.9 18.4 
+ 2008 2015 2020 
+ Catch/Net Night Catch/Net Night Catch/Net Night 
+Female 1.9 6.9 10.0 
+Male 5.7 8.7 8.8 
+Unknown 0.3 1.3  
+Total 7.9 16.9 18.8 
+--- PAGE 16 ---
+ 
+16 
+ 
+ 
+Table 5. Number of individual northern pike of “stock” and “quality” size and resulting 
+proportional size distribution (PSD), proportional size distribution of “preferred” fish (PSD-P) 
+and proportional size distribution of “memorable” fish (PSD-M). Fish were sampled by fyke net 
+(SNI) in spring 2020. 
+ Stock Quality Preferred Memorable  PSD PSD-P PSD-M 
+Length 
+(inches) 
+14 
+21 28 34 
+   
+Year        
+2008 1095 479 59 4 44 5 0.4 
+2015 752 491 128 8 65 17 1 
+2020 957 550 136 17 57 14 2 
+ 
+Table 6. Catch summary for the 2019 spring electrofishing survey (SEI) of Big Muskego Lake, 
+Waukesha County, WI.  
+Species Number Sampled Average Length Number/Mile 
+Black crappie 3 7.4 3.0 
+Bluegill 19 5.2 19.0 
+Bowfin 3  3.0 
+Brown bullhead 5  5.0 
+Common carp 4  4.0 
+Golden shiner 2  2.0 
+Lake chubsucker 7  7.0 
+Largemouth bass 95 13.6 15.8 
+Northern pike 38 23.7 6.3 
+Pumpkinseed 4 6.9 4.0 
+Warmouth 3 7.7 3.0 
+Yellow perch 8 4.5 8.0 
+ 
+Table 7. Catch summary of the 2019 spring electrofishing survey (SEII) of Big Muskego Lake, 
+Waukesha County, WI.  
+Species Number Sampled Average Length Number/Mile 
+Black crappie 1 9.2 2.0 
+Bluegill 18 6.7 36.0 
+Bowfin 2  4.0 
+Brown bullhead 6  12.0 
+Golden shiner 2  4.0 
+Lake chubsucker 6  12.0 
+Largemouth bass 41 13.7 8.2 
+Northern pike 9 22.5 1.8 
+Pumpkinseed 9 7.6 18.0 
+--- PAGE 17 ---
+ 
+17 
+ 
+Walleye 1 22.6 0.2 
+Warmouth 1 9.7 2.0 
+Yellow perch 5 7.9 10 
+Figures 
+Figure 1. Bathymetric Map of Big Muskego Lake, Waukesha County, Wisconsin. 
+ 
+Photo Credit: Nauticalcharts.com 
+ 
+ 
+ 
+
+--- PAGE 18 ---
+ 
+18 
+ 
+Figure 2. Locations of Fyke nets used in the 2020 spring fyke netting survey (SNI) of Big 
+Muskego Lake, Waukesha County, Wisconsin.  
+ Photo credit: Waukesha County GIS 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 19 ---
+ 
+19 
+ 
+Figure 3. Length frequency histogram of male and female northern pike sampled during the 
+2019 spring fyke netting (SNI) survey of Big Muskego Lake, Waukesha County, WI. 
+ 
+ 
+ 
+Figure 4. Length frequency histogram of male and female northern pike sampled during the 
+2020 spring fyke netting (SNI) survey of Big Muskego Lake, Waukesha County, WI. 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+80
+85
+90
+95
+10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
+Number of Fish 
+Length (inches) 
+Male (n = 334)
+Female (n = 229)
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+80
+85
+90
+95
+100
+105
+110
+115
+10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
+Number of Fish
+Length (inches) 
+Male and Female Northern Pike Length Frequency
+Big Muskego Lake, 2020 
+Males (n=457)
+Females (n=521)
+--- PAGE 20 ---
+ 
+20 
+ 
+Figure 5. Northern pike length at age determined using anal fin rays collected during the 2019 
+spring fyke netting survey (SNI) of Big Muskego Lake, Waukesha County, WI.    
+Figure 6. Length-frequency histogram of largemouth bass sampled during the 2019 spring fyke 
+netting survey (SNI) of Big Muskego Lake, Waukesha County, WI.  
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Number of Fish
+Length (Inches)
+N = 61
+0
+5
+10
+15
+20
+25
+30
+35
+40
+0 1 2 3 4 5 6 7 8 9 10
+Length (inches)
+Age (years)
+Statewide Big Muskego Lake 2019
+--- PAGE 21 ---
+ 
+21 
+ 
+Figure 7: Length-frequency histogram largemouth bass sampled during the 2020 spring fyke 
+netting survey (SNI) of Big Muskego Lake, Waukesha County, WI.  
+ 
+ 
+Figure 8: Length-frequency histogram of largemouth bass sampled during the 2019 spring 
+electrofishing survey (SEII) of Big Muskego Lake, Waukesha County, WI.   
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Number of Fish
+Length Group ( 1" ) 
+N = 28
+0
+5
+10
+15
+20
+25
+30
+35
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Number of Fish
+Length (inches) 
+N = 179
+--- PAGE 22 ---
+ 
+22 
+ 
+Figure 9. Length-frequency histogram of bluegill sampled during the 2019 spring fyke netting 
+(SNI) survey of Big Muskego Lake, Waukesha County, WI. 
+ 
+ 
+ 
+Figure 10. Length-frequency histogram of bluegill sampled during the 2020 spring fyke netting 
+(SNI) survey of Big Muskego Lake, Waukesha County, WI.  
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+3 4 5 6 7 8
+Number Fish Captured
+Length (Inches) 
+N = 65
+0
+5
+10
+15
+20
+25
+30
+35
+40
+3 4 5 6 7 8
+Number of Fish 
+Length Group ( 1" ) 
+N = 49
+--- PAGE 23 ---
+ 
+23 
+ 
+Figure 11.  Length-frequency histogram of bluegill sampled during the 2019 spring 
+electrofishing survey (SEII) of Big Muskego Lake, Waukesha County, WI. 
+ 
+ 
+Figure 12. Length-frequency histogram of yellow perch sampled during the 2019 spring fyke 
+netting (SNI) survey of Big Muskego Lake, Waukesha County, WI. 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+3 4 5 6 7 8
+Number of Fish
+Length (Inches) 
+N = 37
+0
+5
+10
+15
+20
+25
+30
+35
+40
+3 4 5 6 7 8
+Number Fish Captured
+Length (Inches) 
+N = 30
+--- PAGE 24 ---
+ 
+24 
+ 
+Figure 13. Air photos showing emergent vegetation coverage of Big Muskego Lake during 1990, 
+2008 and 2022. (Historical air photos provided by WC Land Information Office, WLIP, SEWRPC, 
+Ayres Associates). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+1990 
+2022 
+2008 
+--- PAGE 25 ---
+ 
+25 
+ 
+Figure 14. 2020 Hydrograph of Big Muskego Lake, Waukesha County, WI.  
+ 
+Figure 15. Illuminated and magnified northern pike anal fin cross section used for age 
+estimation. 
+ 
+Photo Credit: Wisconsin DNR 
+
+--- PAGE 26 ---
+ 
+26 
+ 
+Figure 16. Northern pike summer mortality, 2012.  
+ 
+Photo Credit: Wisconsin DNR 
+Figure 17. Panfish winterkill, evident during 2014 spring thaw, Big Muskego Lake, Waukesha 
+County, WI.  
+ 
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Photo Credit: Wisconsin DNR  
+
+--- PAGE 27 ---
+ 
+27 
+ 
+Figure 18. Algae bloom in the summer of 2020, Big Muskego Lake, Waukesha County, WI.  
+ 
+Photo Credit: Greg Burmeister 
+Figure 19. Negative impacts of common carp on water clarity, aquatic plants, resuspension of 
+solids and internal nutrient loading.  
+Graphic Courtesy of University of Minnesota – Sorensen Lab Group 
+
+--- PAGE 28 ---
+ 
+28 
+ 
+Acknowledgments  
+The field work, data collection, data entry and structure aging required for this report 
+was conducted by DNR Advanced Fisheries Technicians Steven Gospodarek and Tanya 
+Meives and DNR Limited Term Employee Fisheries Technicians Joshua Fluur and 
+Parker Wyngaard. Report reviews and editing was provided by DNR Fisheries 
+Management staff, including Laura Stremick and Tim Simonson.  
+ 
+References 
+Anderson, R. O.  1980.  Proportional stock density (PSD) and relative weight (Wr): 
+interpretive indices for fish populations and communities.  Pages 27-33 in S. Gloss 
+and B. Shupp, editors.  Practical fisheries management: more with less in the 1980’s.  
+Proceedings of the 1
+st Annual Workshop of the New York Chapter American Fisheries 
+Society 
+ 
+Anderson, R. O. and A. S. Weithman.  1978.  The concept of balance for coolwater fish 
+populations.  American Fisheries Society Special Publication 11:371-381. 
+ 
+Big Muskego/Bass Bay Protection and Rehabilitation District, City of Muskego, 
+Southeastern Wisconsin Regional Planning Commission, DNR. 2004. Big Muskego Lake 
+and Bass Bay Management Plan  
+ 
+Latzka, A., DNR Fisheries Management Information System (CPUE by Lake 
+Classifications). 
+ 
+Heussner, B.M. 2008. DNR Big Muskego Fisheries Survey Report  
+ 

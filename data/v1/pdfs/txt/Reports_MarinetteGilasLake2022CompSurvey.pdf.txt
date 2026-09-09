@@ -1,0 +1,289 @@
+PAGES: 7
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Gilas Lake – 2022 Fish Management Report 
+WBIC 523300 
+ 
+ 
+                                                                                                                      Photo Credit: WDNR 
+ 
+ 
+ 
+ 
+Christopher C. Long 
+Fisheries Biologist 
+2023 
+
+--- PAGE 2 ---
+2 
+ 
+Table Of Contents 
+Introduction ........................................................................................................................................ 3 
+Survey Effort ................................................................................................................................... 3 
+Methods ............................................................................................................................................... 3 
+Data Collection ............................................................................................................................... 3 
+Data Analysis .................................................................................................................................. 4 
+Results .................................................................................................................................................. 4 
+Bluegill ............................................................................................................................................. 5 
+Largemouth Bass ........................................................................................................................... 6 
+Discussion ........................................................................................................................................... 7 
+Recommendations ............................................................................................................................ 7 
+References........................................................................................................................................... 7 
+ 
+  
+--- PAGE 3 ---
+3 
+ 
+Introduction 
+ 
+Gilas Lake is a 136-acre drainage lake located in southwestern Marinette County. An 
+intermittent outlet in the northeast corner of the lake drains to Little Nelligan Lake 
+approximately 1 mile away. Gilas Lake has clear water and has a maximum depth of 
+88 feet making it the deepest lake in Marinette County. The littoral zone is composed 
+of 80% sand, 10% silt, 9% gravel and 1% muck.   
+ 
+Public access to Gilas Lake was acquired by the Department of Natural Resources 
+(DNR) in 1990. The first fisheries survey of Gilas Lake was completed in 1995. This 
+survey revealed a good bluegill population in addition to good fishing opportunities 
+for a variety of other species. Limited stocking has occurred in Gilas Lake (Table 1).  
+ 
+Table 1. Gilas Lake stocking history, Marinette County, WI. 
+ 
+ 
+ 
+The last fisheries survey of Gilas Lake was completed in 2012 and consisted of a 
+single night of electrofishing to evaluate gamefish and panfish populations. The 
+primary objective of the 2022 survey was to characterize fish populations based on 
+relative abundance, proportional stock density (PSD), relative stock density (RSD), 
+catch per unit effort (CPUE) and mean length at capture (age and growth).   
+ 
+SURVEY EFFORT 
+ 
+A single night of electrofishing was conducted on May 26
+th, 2022. Five fyke nets were 
+set for 2 nights (June 1 and June 2, 2022).   
+ 
+Methods 
+ 
+DATA COLLECTION 
+ 
+Standard fyke nets (spring & summer; 3-foot hoop, 3/4-bar, 1.5-inch stretch) and a 
+standard DNR electrofishing boat were used to collect fish. All fish collected were 
+measured to the nearest 0.1-inch (in) total length (TL). A sub-sample of scales or 
+dorsal spines were collected for age and growth analysis from all gamefish. Aging 
+structures were collected from 5 fish per half inch group in the stock, quality and 
+Year Species Number 
+Stocked
+Average Length 
+(inches) Source
+1997 YELLOW PERCH 500 4.0 PRIVATE HATCHERY
+1999 BLACK CRAPPIE 1000 4.5 PRIVATE HATCHERY
+--- PAGE 4 ---
+4 
+ 
+preferred length groups. Ages were assigned to each fish using standard WDNR 
+procedures.   
+ 
+DATA ANALYSIS 
+ 
+Catch per unit effort (CPUE) was calculated as catch by gear divided by sampling 
+effort for each species collected. Length frequency distributions were tabulated from 
+fish measured during the electrofishing and fyke net samples; not all panfish were 
+measured. Proportional stock density (PSD) and relative stock density for preferred 
+length fish (RSD
+P) were calculated for dominant gamefish (Anderson and Neumann 
+1996). Preferred lengths of various gamefish have a minimum length between 45 and 
+55% of the world record length for that species (Anderson and Neumann 1996). Stock, 
+quality, and preferred lengths were used as proposed by Gabelhouse (1984). Mean 
+length at capture data was calculated for dominant gamefish and compared to the 
+average of mean length at age for northern Wisconsin.   
+ 
+Results 
+ 
+Overall, 1,281 fish representing 8 species and hybrid sunfish were collected during 
+the 2022 sampling season (Table 2). The five most abundant species collected by 
+number were Bluegill Lepomis macrochirus (55%), Yellow Bullhead Ameiurus natalis 
+(32%) Largemouth Bass Micropterus salmoides (5%), Pumpkinseed Lepomis gibbosus 
+(3%) and Black Crappie Pomoxis nigromaculatus (2%).   
+ 
+Table 2. Species composition of fishes collected during the 2022 survey of Gilas Lake, 
+Marinette County, WI. 
+ 
+*COMMON NAME 
+TOTAL 
+NUMBER 
+COLLECTED
+PERCENT
+NUMBER 
+COLLECTED 
+(SE2 - EF)
+NUMBER 
+COLLECTED  
+(FN PANFISH)
+AVERAGE 
+LENGTH 
+(inches)
+LENGTH 
+RANGE
+(inches)
+Bluegill 701 54.7% 82 619 6.3 1.8-8.9
+Yellow Bullhead 405 31.6% 5 400 11.6 10.2-12.4
+Largemouth Bass 59 4.6% 56 3 9.7 3.5-18.9
+Pumpkinseed 41 3.2% 8 33 6.3 3.9-7.2
+Black Crappie 27 2.1% 1 26 9.2 5.5-14.9
+Yellow Perch 22 1.7% 22 4.8 3.1-7.7
+Northern Pike 10 0.8% 2 8 23.4 19.0-26.4
+Warmouth 10 0.8% 2 8 5.3 5.0-7.0
+Sunfish Hybrids^ 6 0.5% 3 3 7.5 6.0-8.9
+TOTALS 1,281 181 1,100
+^Hybrids may include: Bluegill X Unknown & Pumpkinseed X Bluegill.
+2022
+SPECIES COMPOSITION OF FISHES COLLECTED
+* Common names of fishes recognized by the American Fisheries Society.
+--- PAGE 5 ---
+5 
+ 
+BLUEGILL 
+ 
+A total of 701 Bluegill was collected which accounted for 55% of the fish collected 
+(Table 2). Bluegill ranged in length from 1.8 to 8.9 inches and averaged 6.3 inches 
+(Figure 1). Electrofishing CPUE increased from 134.0 to 164.0 Bluegill/mile between 
+2012 and 2022. Bluegill PSD decreased from 40 to 31 but RSDP increased from 3 to 7 
+between the 2012 and 2022 electrofishing samples.   
+ 
+ 
+Figure 1. Length frequency of Bluegill from Gilas Lake, Marinette County, WI. 
+ 
+A subsample of 30 Bluegill was aged from 2 to 10 years old. In 2022, growth was 
+average at all ages 4 compared to the mean length at age of Bluegill in northern 
+Wisconsin (Figure 2).   
+ 
+ 
+Figure 2. Mean length at age of Bluegill from Gilas Lake, Marinette County, WI. 
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+1 2 3 4 5 6 7 8
+Number of fish
+Total length (inches)
+Bluegill length frequency
+2022 EF (N = 82)
+2022 FN (N = 180)
+2012 EF (N = 67)
+0
+2
+4
+6
+8
+10
+12
+0 1 2 3 4 5 6 7 8 9 10
+Length (inches)
+Age (years)
+Bluegill - Mean Length at Age (+/- 1 SD)
+Northern WI
+2012
+2022
+
+--- PAGE 6 ---
+6 
+ 
+LARGEMOUTH BASS 
+ 
+Largemouth Bass only accounted for 5% of the fish collected during the 2022 survey 
+(Table 2). Overall, 59 Largemouth ranged in length from 3.5 to 18.9 inches and 
+averaged 9.7 inches (Figure 3). Electrofishing CPUE decreased between 2012 and 2022 
+from 47.0/mile to 
+28.0/mile. PSD increased 
+from 62 to 81 between 2012 
+and 2022. RSDP improved 
+from 11 to 46 between 
+surveys. RSDP increased 
+because few fish between 
+8 and 12 inches were 
+collected between survey 
+years (Figure 3).    
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 3. Length frequency of Largemouth Bass from Gilas Lake, Marinette County, WI. 
+ 
+A subsample of 10 Largemouth Bass was aged using scales (<12”) and dorsal spines 
+(>12”). Ages ranged from 3 to 8 years old (Figure 4). In 2022 Largemouth Bass growth 
+was average compared to the mean length at age of Largemouth in northern 
+Wisconsin (Figure 8). Largemouth were reaching 14 inches by age 5.   
+ 
+ 
+Figure 4. Mean length at age of Largemouth Bass from Gilas Lake, Marinette County, 
+WI. 
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19
+Number of fish
+Total length (inches)
+Largemouth Bass length frequency
+2022 (N = 55)
+2012 (N = 94)
+
+--- PAGE 7 ---
+7 
+ 
+Discussion 
+ 
+Gilas Lake supports a quality and diverse fishery. Largemouth Bass and Bluegill are 
+the main species anglers should target however, crappie, bullheads and other 
+panfish are present in good numbers. Northern Pike have never been a dominant 
+predator in Gilas Lake. The amount of shallow, weedy habitat that Pike favor is 
+limited. Therefore, the lack of Pike observed during the survey should not be 
+alarming.  
+ 
+Zebra mussels were first detected in Gilas Lake in 2020. The zebra mussel (Dreissena 
+polymorpha) is a tiny (1/8-inch to 2-inch) bottom-dwelling clam native to Europe and 
+Asia. Zebra mussels were introduced into the Great Lakes in 1985. Zebra mussels look 
+like small clams with a yellowish or brownish D-shaped shell, usually with alternating 
+dark- and light-colored stripes. Zebra mussels usually grow in clusters containing 
+numerous individuals. 
+ 
+Boaters are reminded to remove all vegetation from their boat and trailer before 
+leaving to limit the spread of this and other invasive species.  A map  
+of Gilas Lake can be found at: https://dnr.wi.gov/lakes/maps/DNR/0523300a.pdf
+  
+ 
+Recommendations 
+ 
+The current fishing regulations are adequate to provide quality fishing opportunities 
+for a variety of species. The next survey (summer electrofishing and panfish fyke 
+netting) of Gilas Lake is scheduled for 2032 and will focus on the age, growth, 
+abundance and recruitment of Largemouth Bass and Bluegill.  
+ 
+References 
+ 
+Anderson, R. O. and R. M. Neumann.  1996.  Length, weight, and associated structural 
+indices.  Pages 447-481 in B. R. Murphy and D. W. Willis, editors.  Fisheries 
+techniques, 2
+nd edition.  American Fisheries Society, Bethesda, Maryland. 
+ 
+Gabelhouse, D.W. Jr.  1984.  A length-categorization system to assess fish stocks. 
+North American Journal of Fisheries Management4: 273-285. 
+ 
+ 

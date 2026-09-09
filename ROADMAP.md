@@ -40,12 +40,19 @@ Location + species + date/time → forecast. Per DECISIONS.md #010-#012, this
 phase pivoted away from GLATOS telemetry (deferred, see #011) to a
 **conditions & biology narrative**: real current water temperature +
 established fish physiology + real species-presence data, combined into a
-per-lake output labeled clearly as **general biology-based seasonal
+per-waterbody output labeled clearly as **general biology-based seasonal
 context — never a validated catch-rate prediction.**
 
-**Status: In progress.** See [DECISIONS.md](DECISIONS.md) #010-#012 and
-[CLAUDE.md](CLAUDE.md) for current scope; [mvp/](mvp/) for the shipped
-script.
+Per DECISIONS.md #013/#014, coverage expanded from a single-lake demo to
+lakes, ponds, rivers, and streams statewide — every waterbody in the real
+WDNR stocking pull (~2,338, including 690 streams/rivers) surfaces a
+stocking-only result, a growing set of lakes has real survey-confirmed
+data, and a real 185-site USGS network provides live water temperature
+(the primary real-time source for streams specifically).
+
+**Status: In progress.** See [DECISIONS.md](DECISIONS.md) #010-#014 and
+[CLAUDE.md](CLAUDE.md) for current scope; `analysis/v1_conditions_biology_forecast.py`
+for the working implementation (supersedes the earlier `mvp/` script).
 
 ## V2 — Where Should I Fish?
 

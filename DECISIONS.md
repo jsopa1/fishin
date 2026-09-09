@@ -307,3 +307,54 @@ current phase status at a glance.
   (`docs/V0_FEASIBILITY_REPORT.md` and its three follow-on reports) or the
   GLATOS deferral (Decision #011) — it is scoped entirely to deepening
   V1's already-approved conditions-and-biology scope (Decision #012)
+
+## 014 — V1 expanded to the full stocking-only tier and to rivers/streams
+
+Following a CEO-directed follow-on cycle, V1's coverage is expanded along
+two axes without lowering the evidentiary bar Decision #005 requires:
+
+- **Every waterbody in the statewide stocking pull now surfaces a
+  stocking-only result**, not just the original 22 survey-confirmed lakes
+  — ~2,338 Wisconsin waterbodies (lakes and streams together), each
+  carrying the same explicit "POSITIVE evidence only, NOT a complete
+  species inventory" caveat already established in Decision #012/#013.
+  Survey-confirmed data remains the authoritative tier where it exists;
+  this decision does not relax that, it only stops excluding waterbodies
+  that only have the weaker (but still real, still honestly labeled)
+  stocking-only evidence.
+- **Rivers and streams are now in scope alongside lakes/ponds.** WDNR's
+  stocking pull already contained 690 real stream/river waterbodies
+  (8,005 stocking records) — previously present in the data but not
+  surfaced by the tool. A real, generic USGS water-temperature source was
+  added (`data/v1/usgs_wi_water_temp_sites.csv`, 185 sites: 177 streams +
+  8 lakes) and confirmed to have live current data for at least some
+  stream gauges — see `docs/v1_river_stream_coverage_report.md` for the
+  honest spot-check result (roughly half of dv-listed sites checked had
+  no live iv reading; this is disclosed, not smoothed over).
+- **Lake-derived physiology thresholds are explicitly flagged, not
+  silently applied, when matched against a stream/river entry** — per
+  the river/stream research pass, most of this project's feeding/growth
+  temperature thresholds trace to lake studies (Lake Michigan, Lake
+  Monona, etc.), and physiological preference does not automatically
+  transfer to flowing-water habitat. Spawning-trigger data is not flagged
+  the same way, since many species' spawning behavior is directly
+  stream-relevant in the literature already gathered.
+- **Additional survey-confirmed waterbodies** were sought via a real
+  search of WDNR's fisheries-survey report index beyond the original 22
+  lakes — see `docs/v1_survey_expansion_report.md` for the honest count
+  found (search effort and outcome disclosed, not padded).
+- **A generic, honest no_data path replaces the prior hard error**: a
+  waterbody with neither real nor proxy temperature data now reports that
+  fact plainly in its narrative rather than aborting the whole request —
+  species presence (if any) is still shown. Never a fabricated value.
+
+**Rationale:**
+- Per Decision #005, expanding coverage was done exactly the way #013
+  required: real sources only, gaps disclosed honestly, no waterbody's
+  evidentiary tier inflated beyond what its actual data supports
+- The stream/river expansion surfaced a genuinely richer real-time water-
+  temperature source (177 live-capable USGS stream gauges) than the lake
+  side of this project has ever had access to — a real asset for future
+  work, not just a scope-completeness exercise
+- `ROADMAP.md` and `CLAUDE.md` are updated to reflect this scope; this
+  decisions log remains the detailed rationale trail

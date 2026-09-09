@@ -1,0 +1,511 @@
+PAGES: 20
+--- PAGE 1 ---
+2025 FRANKLIN LAKE COMPREHENSIVE SURVEY REPORT
+ FOREST COUNTY 
+INTRODUCTION AND SURVEY OBJECTIVES 
+The Wisconsin Department of Natural Resources, in collaboration with the U.S. Forest 
+Service and Mole Lake Fisheries, conducted a comprehensive survey of Franklin Lake, 
+Forest County, to analyze the health of its fishery. A comprehensive survey includes 
+surveys designed to assess all major fish populations within the lake; for species-
+specific survey details, see table 1 below. The summary that follows will detail the 
+current state of the fishery, as well as changes observed in the fishery since previous 
+assessments. Franklin Lake is located approximately 10 miles East of Eagle River. 
+There is a public boat launch provided for a small fee by the U.S. Forest Service off of 
+Butternut Lake Road. 
+Franklin Lake is an 839-acre lake with a maximum depth of 46 feet and 6.6 miles of 
+shoreline not including islands. Wisconsin DNR considers Franklin Lake a drainage 
+lake within the Complex-Two Story lake class. Franklin Lake has two special 
+regulations, only largemouth or smallmouth bass less than 14 inches may be kept, 
+except one fish may be over 18 inches, and walleye must be at least 18 inches. All 
+other regulations are standard. Franklin Lake is within the ceded territory. 
+ 
+Picture 1. An ariel view of Franklin Lake. 
+ 
+
+--- PAGE 2 ---
+Table 1. A summary of all effort conducted on Franklin Lake in 2025 during the comprehensive 
+survey. 
+Survey Information 
+Species Survey Date(s) Gear Used Effort Water Temp. (°F) 
+Walleye, Northern 
+Pike, Yellow 
+Perch, White 
+Sucker 
+ 
+4/24-4/29/2025 
+ 
+Fyke Net 
+ 
+49 Net-Nights 
+ 
+39-44 
+Walleye 
+(Recapture) 
+4/29/2025 Boomshocker 9.65 Miles 44-46 
+Smallmouth Bass 5/7, 5/15, 5/20, 
+5/21 and 
+5/27/2025 
+Boomshocker 47.43 Miles 53-65 
+Bluegill, 
+Pumpkinseed, 
+Lepomis Hybrids, 
+Rock Bass 
+ 
+6/16-6/18/2025 
+ 
+Fyke Net 
+ 
+12 Net-Nights 
+ 
+69-71 
+ Lake Whitefish 8/4-8/5/2025 Vertical Gill Net 2 Net-Nights Unknown 
+Juvenile Gamefish 9/18/2025 Boomshocker 7.52 Miles 67 
+Lake Whitefish 11/17/2025 Boomshocker 4.2 Miles 36-40 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 3 ---
+Fish Metric Descriptions 
+Population estimate (PE) is estimated by marking a portion of the population, then 
+capturing another sample of fish and using the ratio of new fish to previously marked 
+fish to estimate the number of fish in the population. 
+Catch per unit effort (CPUE) is the number of fish per mile (electrofishing) or per net-
+night (netting) and is used to index abundance when we are unable to get a PE. 
+Relative stock density (RSD) is an index used to describe the size structure of fish 
+populations. It is calculated by dividing the number of fish larger than a certain 
+length by the number of stock size fish for a given species. Stock size is a length set 
+for each species and is used to offset potential large year classes of juvenile fish. 
+Length frequency distribution (LFD) is a graphical representation of the number of 
+fish captured by inch group. Smaller fish (or younger age classes) may not always be 
+represented in the length frequency due to different habitat usage or sampling gear 
+limitations. 
+Survey Methods 
+Surveys are designed to evaluate each species when they are particularly vulnerable 
+to our gear.  
+Standard fyke nets and electrofishing gear is used to capture fish. 
+Data is collected from the target species of each survey to gather population metrics. 
+Fish metrics are compared to previous surveys of this water and the mean/median 
+values for waters in this “area” (Florence and Forest Counties), as well as the DNR 
+lake classification. 
+Data collected is used to monitor the fishery, determine if stocking is necessary, 
+evaluate fishing regulations, and determine how to improve the fishery. 
+Gear Used During This Survey 
+Fyke Nets are set in areas where we anticipate fish to congregate. Fish traveling along 
+the shoreline will be met by a “lead,” which is similar to a fence. The lead directs the 
+fish toward the trap end of the net. Fish travel through a series of funnels and 
+eventually become trapped. Fish are then removed from the net and placed in 
+holding tanks to gather data before being returned to the lake. 
+--- PAGE 4 ---
+ 
+Picture 2. A picture of two DNR employees in a work boat with the employee on the bow securing 
+the back of a round hooped net being lifted out of the water to the bow with ropes. The front of the 
+net is squared and the top sticks slightly out of the water. A line of buoys from the lead can be seen 
+running from the shoreline to the front of the net. 
+ 
+A boomshocker is a specially designed boat that creates an electric current in the 
+water immediately in front of the boat. The boat is driven along the shoreline and 
+shallow areas of the lake. When the boat encounters fish, they are momentarily 
+stunned. Once the fish is stunned, they can be netted out of the lake and placed in a 
+holding tank. After data is collected, the fish are returned to the lake. 
+ 
+Picture 3. A picture of three DNR employees in a work boat with railings on the gunnels and bow. A 
+metal tub can be seen in front of the console at which the driver is standing. Two employees stand 
+on the front of the boat holding long dip nets. Two orange booms extend in front of the boat with 
+anodes dropping in to the water. Lights shine off the front of the boat pointed toward the water. 
+
+--- PAGE 5 ---
+WALLEYE 
+In 2025 a mark-recapture survey was conducted to estimate the abundance of adult 
+walleye in Franklin Lake. Fyke nets were set on 4/23/2025 as ice was receding from 
+the lake and fished until 4/29/2025, capturing a total of 331 different adult walleye 
+which were marked with an identifiable fin clip. On the night of 4/29/2025, an 
+electrofishing survey was conducted along the entire shoreline of the lake capturing 
+50 adult walleye. Of these fish, 38 had been previously captured in the netting survey. 
+Based on this data, we estimate the adult walleye population of Franklin Lake to be 
+414 fish (0.46/acre). Adult walleye abundance has decreased since the last WDNR 
+comprehensive survey in 2014 (0.77/acre). Historical adult walleye abundance can be 
+seen in the figure below (Figure 1). Franklin Lake is considered to have a low density 
+walleye population and is well below the area average of 1.57 adults/acre. During the 
+survey walleye were captured at a rate of 9.78 fish/net-night, which is well above the 
+median for its lake class (6.59 fish/net-night) indicating high relative abundance. 
+Catch rates may be higher due to concentrations of fish in spawning areas where nets 
+were set at this time, as the population estimate suggests low density. Nets 
+specifically targeting walleye captured walleye at a rate of 20.09 fish/net-night, which 
+is above the 90th percentile for complex-two story lakes. 
+ 
+Figure 1. A plot of adult walleye abundance over time in Franklin Lake, Forest County, Wisconsin. 
+ 
+All walleye captured during the mark-recapture survey, a total of 380 fish, were 
+measured and used for size structure analysis. After removing all fish less than 10 
+inches from analysis, 78.7% of the sample was larger than the minimum size limit of ≥ 
+
+--- PAGE 6 ---
+18 inches, and 22.5% were ≥ 24 inches. Walleye size structure has increased since 
+2014, when 30.4% of the walleye were ≥ 18 inches and 7.6% were ≥ 24 inches. The 
+walleye population in Franklin Lake has well above average size structure for the 
+area, with area averages of 58.7% and 10.5% being ≥ 18 and 24 inches, respectively.  A 
+length frequency figure of the walleye caught in 2025 can be seen below (Figure 2). 
+ 
+Figure 2. A length frequency plot of the walleye measured on Franklin Lake, Forest County, 
+Wisconsin during the 2025 spring netting survey. 
+ 
+Walleye recruitment is assessed using the number of age-0 walleye captured per mile 
+during the fall electrofishing survey. Franklin Lake has been monitored for walleye 
+recruitment since 1979, and historically had very strong walleye recruitment (Figure 
+3). Typically, a fishery needs at least 1 strong year class, which we consider to be ≥ 20 
+age-0 walleye per mile, every 5 years to maintain a healthy population. Between 1978 
+and 2002, 19 walleye recruitment surveys were conducted, with 12 of them capturing ≥ 
+20 age-0 walleye per mile, and an average relative abundance of 43.8 age-0 
+walleye/mile. This is very strong and steady walleye recruitment. However, walleye 
+recruitment has been much different since. Between 2003 and 2024, walleye 
+recruitment surveys were conducted in 14 of the 22 years with only 1 year capturing ≥ 
+20 age-0 walleye/mile, and an average relative abundance of 9.9 age-0 walleye/mile. 
+The 2019 (19.7/mile) and 2024 (19.4/mile) surveys had year classes just below the goal 
+for walleye recruitment. During the 2025 survey, 27.3 age-0 walleye were caught per 
+mile, indicating a strong year class for the first time since 2008.  
+
+--- PAGE 7 ---
+We also collect age-1 walleye during these surveys designed for age-0 walleye. Age-1 
+relative abundance was first noted in 1983 at 38.7 age-1 walleye/mile, and started 
+being tracked annually during the fall walleye recruitment surveys in 1987. It has 
+been assessed in most years since then. This indexes the survival from age-0 to age-
+1. Generally if age-1 relative abundance is ≥ 3/mile we consider that to be acceptable, 
+≥ 5/mile to be good, and ≥ 10/mile to be an excellent class of age-1 walleye. We have 
+not documented an “Excellent” age-1 class since 1992, and “good” age-1 recruitment 
+has not been seen since 2010. Between 2003 and 2024, of the 19 surveys conducted, 
+only 4 have had age-1 relative abundance ≥ 3/mile, with the most recent being the 
+product of stocking. No acceptable year class has been seen without stocking since 
+the 2009 year class. Furthermore, 4 of the 6 surveys prior to 2025 observed 0 age-1 
+walleye, with the other 2 being the product of stocking. Age-1 relative abundance 
+during the walleye recruitment survey was 0.93 age-1 walleye/mile in 2025, another 
+year corresponding to be the product of stocking. Walleye recruitment will continue 
+to be assessed in the future.  
+Walleye stocking has occurred regularly in the last 20 years since the decline of 
+natural reproduction was observed. Fry were stocked in 2005, 2006, and 2007, and 
+small fingerling walleye were stocked in 2010 and 2012. Since 2014, large fingerling 
+walleye have been stocked during even numbered years at a rate of approximately 
+10/acre. 
+ 
+Figure 3. A bar graph showing the number of age-0 walleye caught per mile historically during fall 
+electrofishing surveys on Franklin Lake, Forest County, Wisconsin. Years without bars indicate no 
+survey, as no year recorded 0 age-0 walleye per mile. 
+ 
+
+--- PAGE 8 ---
+ 
+Figure 4. A line graph showing the number of age-1 walleye caught per mile since 1983 during 
+fall electrofishing surveys on Franklin Lake, Forest County, Wisconsin. Age-1 recruitment indexes 
+survival of both stocked and naturally recruited fish. No survey occurred in 2009, 2020, or 2021. 
+ 
+ 
+Picture 4. Ethan Burns (Fisheries Technician) holding a walleye captured during a netting survey on 
+Franklin Lake, Forest County, Wisconsin. Photo credit Wisconsin DNR. 
+ 
+
+--- PAGE 9 ---
+NORTHERN PIKE 
+The Franklin Lake northern pike population was also assessed in the 2025 
+comprehensive survey, concurrent with the walleye survey. Nets were set both 
+targeting walleye and northern pike. During the marking portion of the survey, 303 
+adult northern pike were captured and given an identifiable mark. Another sample of 
+259 adult northern was collected from 4/27 to 4/29/2025, and 72 of those fish had 
+been captured during the initial marking period. From these results, we estimate the 
+population of adult northern pike in Franklin Lake to be 1,121 fish, a density of 1.26 
+adult northern pike/acre. The last population estimates of northern pike in Franklin 
+Lake occurred in 2002 and 2001, where the abundance was estimated to be 1.22 and 
+1.4 adults/acre respectively. The northern pike abundance of Franklin Lake appears 
+to be relatively stable. Relative abundance of northern pike was measured at 12.51 
+fish/net-night during this survey. This relative abundance is above the 95th percentile 
+for the lake class. Relative abundance for nets specifically targeting northern pike 
+was 19.22 fish/net-night, substantially higher than nets set targeting walleye (4.27 
+fish/net-night). 
+ 
+ 
+Picture 5. Levi Feucht (Fisheries Biologist) holding a northern pike captured during a netting survey 
+on Franklin Lake, Forest County, Wisconsin. Photo credit Wisconsin DNR. 
+ 
+All northern pike captured during the spring netting survey were measured to assess 
+the size structure of the population. Excluding fish less than 14 inches, 92.2% of the 
+fish captured were ≥ 21 inches, while 9.7% were ≥ 28 inches. Size structure has shifted 
+since 2014, when 65.4% of the northern pike measured were ≥ 21 inches and 21.2% 
+were ≥ 28 inches. The current size structure of the Franklin Lake northern pike 
+population is above the area average (46.9% ≥ 21 inches and 9.7% ≥ 28 inches). The 
+
+--- PAGE 10 ---
+largest pike captured in the 2025 spring netting survey measured 44.3 inches. A 
+length frequency of northern pike captured during 2025 can be seen below (Figure 4). 
+ 
+Figure 5. A length frequency plot of the northern pike captured during the spring netting survey on 
+Franklin Lake, Forest County, Wisconsin. 
+ 
+ 
+SMALLMOUTH BASS 
+A smallmouth bass population estimate was conducted on Franklin Lake as a part of 
+the comprehensive survey. Smallmouth bass were captured during the spring fyke 
+net survey, walleye electrofishing survey, and 4 nights of targeted bass electrofishing 
+surveys (5/7, 5/15, 5/20, and 5/21/2025) to estimate the adult population. During 
+these surveys we captured 676 different adult smallmouth bass and marked them 
+with an identifiable fin clip. On the night of 5/27/2025 the entire shoreline of Franklin 
+Lake was electrofished capturing 160 adult smallmouth bass, with 65 fish previously 
+captured during the marking survey. From this data, we estimate there to be 1,663 
+adult smallmouth bass in Franklin Lake, a density of 1.86 adults/acre. This is an 
+increase from the previous population estimates in 2002 (0.87 adults/acre) and 1997 
+(1.35 adults/acre). Smallmouth bass density is slightly below the area average (2.04 
+adults/acre). Smallmouth bass were captured at a rate of 30.0 adults/mile on 
+5/15/2025, and a rate of 17.6 adults/mile during the recapture survey on 5/27/2025. 
+Relative abundance in 2014 was 16.0 adults/mile, suggesting the population is 
+
+--- PAGE 11 ---
+continuing to increase. Smallmouth bass relative abundance combined from the 5/15 
+and 5/27/2025 standardized surveys was 23.79 fish/mile, which is greater than the 95th 
+percentile for the lake class (20.01 fish/mile) indicating very high relative abundance. 
+ 
+Picture 6. Levi Feucht (Fisheries Biologist) holding a smallmouth bass netted during a nighttime 
+electrofishing survey on Franklin Lake, Forest County, Wisconsin. Photo credit Wisconsin DNR. 
+ 
+Every smallmouth bass captured during the spring surveys was measured for size 
+structure analysis. After removing all fish less than 7 inches, we found that 74.7% of 
+the smallmouth bass captured were ≥ 14 inches and 38.2% were ≥ 17 inches. 
+Additionally, 1.5% were ≥ 20 inches. Size structure has increased significantly since 
+2014, when 29.4% were ≥ 14 inches, 12.5% were ≥ 17 inches, and no fish were ≥ 20 
+inches, as well as since 2002 when 50.5%, 16.4%, and 0.5% were ≥ 14, 17, and 20 inches, 
+respectively. The Franklin Lake smallmouth bass population has very high size 
+structure for the area, which averages 41.7% ≥ 14 inches, 12.2% ≥ 17 inches, and 0.4% ≥ 
+20 inches. A length frequency of the smallmouth bass captured during the 2025 
+survey can be seen below (Figure 5). The largest smallmouth bass captured was 21.0 
+inches.  
+
+--- PAGE 12 ---
+ 
+Figure 6. A length frequency plot of the smallmouth bass measured during the 2025 bass survey on 
+Franklin Lake, Forest County, Wisconsin. 
+ 
+ 
+Picture 7. Greg Matzke (Senior Fisheries Biologist) holding a smallmouth bass netted during a 
+nighttime electrofishing survey on Franklin Lake, Forest County, Wisconsin. Photo credit Wisconsin 
+DNR. 
+ 
+ 
+
+--- PAGE 13 ---
+YELLOW PERCH 
+Yellow perch were assessed during the 4/24-4/29/2025 netting survey. Yellow perch 
+relative abundance was measured at 1.69 fish/net-night. This is well below the 2014 
+relative abundance of 8.00 fish/net-night. Yellow perch median relative abundance 
+for this area of the state is 0.81 fish/net-night, making this a moderately abundant 
+population, despite the decreased abundance. Current yellow perch relative 
+abundance is below the median for this lake class (4.80 fish/net-night). Yellow perch 
+are likely of higher abundance than these results indicate, as standard surveys do 
+not always accurately portray yellow perch populations. 
+A total of 93 yellow perch were measured for size structure analysis. After removing 
+all fish less than 5 inches, 9.8% of the yellow perch were ≥ 8 inches and 1.1% were ≥ 10 
+inches. Size structure has increased since the 2014 survey when only 5.3% were ≥ 8 
+inches and no fish were ≥ 10 inches. Yellow perch size structure is below the area 
+average of 15.5% of yellow perch being ≥ 8 inches and 2.8% ≥ 10 inches. A length 
+frequency figure of the yellow perch captured during the 2025 survey can be seen 
+below (Figure 6).  
+ 
+ 
+Figure 7. A length frequency plot of the yellow perch measured during the 2025 comprehensive 
+survey on Franklin Lake, Forest County, Wisconsin. 
+ 
+
+--- PAGE 14 ---
+BLUEGILL 
+Bluegill were assessed during a late spring fyke netting survey targeting summer 
+spawning panfish from 6/16 – 6/18/2025. Bluegill relative abundance was 41.83 
+fish/net-night and were the most abundant panfish species in 2025. This is 
+considered to be a below average abundance of bluegill, as the area average is 65.57 
+fish/net-night. There has been a significant increase in bluegill relative abundance 
+since the last bluegill assessment in 1997, when relative abundance was 1.16 fish/net-
+night.  
+Every bluegill was measured during the late spring fyke netting survey. Those ≥ 3 
+inches were used to assess size structure. Of these, 18.5% were ≥ 6 inches and 1.2% 
+were ≥ 8 inches. This is a decrease from the 1997 survey when 70.3% were ≥ 6 inches 
+and 13.5% were ≥ 8 inches. The bluegill population in Franklin Lake has very low size 
+structure, well below the area average of 61.6% ≥ 6 inches and 9.4% ≥ 8 inches. The 
+bluegill length frequency from 2025 can be seen below (Figure 7). 
+ 
+ 
+Figure 8. A length frequency plot of the bluegill measured during the 2025 comprehensive survey on 
+Franklin Lake, Forest County, Wisconsin. 
+ 
+ 
+
+--- PAGE 15 ---
+ROCK BASS 
+Rock bass were surveyed during the same netting survey as bluegill. Rock bass 
+relative abundance was 21.33 fish/net-night. Like bluegill, this is a significant increase 
+since 1997 when rock bass relative abundance was 3.03 fish/net-night. 
+All rock bass caught during the late spring netting survey were measured to assess 
+size structure. Excluding fish less than 4 inches long, 22.3% were ≥ 7 inches and 1.2% 
+were ≥ 9 inches. This is considered to be a moderate to low size structure. Size 
+structure has decreased since 1997, when 43.2% were ≥ 7 inches and 9.5% were ≥ 9 
+inches. The decrease in size structure is expected with the increase in abundance.  A 
+length frequency of rock bass captured during 2025 can be seen below (Figure 8). 
+ 
+ 
+Figure 9. A length frequency plot of the rock bass measured during the 2025 comprehensive survey 
+on Franklin Lake, Forest County, Wisconsin. 
+ 
+ 
+ 
+ 
+
+--- PAGE 16 ---
+WHITE SUCKER 
+The Franklin Lake white sucker population was assessed during the early spring 
+walleye netting survey. White sucker relative abundance was 6.61 fish/net-night, 
+which is well above the area average of 1.03 fish/net-night. White sucker relative 
+abundance has increased since they were last assessed in 2014 when their relative 
+abundance was 1.25 fish/net-night. White sucker are considered abundant in Franklin 
+Lake.  
+All white sucker captured from 4/24 – 4/27/2025 and a random subsample from 
+4/28/2025 were measured for size structure analysis. Of the white sucker measured, 
+97.4% were ≥ 10 inches, 56.8% were ≥ 16 inches, and 41.0% of the white sucker were ≥ 
+20 inches (which is considered “trophy” size). Size structure of the Franklin Lake white 
+sucker population is exceptionally high. The largest white sucker measured was 25.3 
+inches. A length frequency of white sucker measured during 2025 can be seen below 
+(Figure 9). 
+ 
+Figure 10. A length frequency plot of the white sucker measured during the 2025 comprehensive 
+survey on Franklin Lake, Forest County, Wisconsin. 
+ 
+ 
+ 
+ 
+
+--- PAGE 17 ---
+LAKE WHITEFISH 
+Lake whitefish were surveyed through both summer vertical gill netting and fall 
+electrofishing. Lake whitefish captured ranged from 3.8 to 22.7 inches, suggesting that 
+natural reproduction is still occurring in Franklin Lake. The presence of a lake 
+whitefish population is noteworthy as inland lake whitefish populations are declining 
+across their historical range as habitat becomes less suitable. Franklin Lake is one of 
+nine inland lakes/systems reported to have lake whitefish in Wisconsin, although the 
+number of remaining populations may be lower as only 6 lakes/systems were 
+confirmed to still have lake whitefish in the 2011-2014 statewide assessment. Effort 
+targeting lake whitefish was relatively low in the 2025 assessment, and future surveys 
+will be needed to properly evaluate abundance.  
+ 
+OTHER SPECIES 
+During the 2025 comprehensive survey, 5 other fish species were captured which 
+were not detailed in this summary. None of these species were caught in high 
+abundance. The table below shows the relative abundance (catch/net-night) of these 
+species across the two netting surveys. Species included in the table are largemouth 
+bass (LMB), pumpkinseed (PKS), bluegill x pumpkinseed hybrid (B x P), golden shiner 
+(GSH), and common shiner (CSH). No other species were captured. 
+Table 2. A table detailing relative abundance of species captured during the 2025 comprehensive 
+survey on Franklin Lake, Forest County, Wisconsin, which were not detailed in this summary. 
+ 
+ 
+RELATIVE ABUNDANCE OF OTHER SPECIES (FISH/NET-NIGHT) 
+Survey LMB PKS B x P GSH CSH 
+Spring Netting #1 
+(4/24—4/29/2025) 
+0.12 0.14 0 0.02 0.20 
+Spring Netting #3 
+(6/16—6/18/2025) 
+0.75 1.33 0.58 0 0.33 
+--- PAGE 18 ---
+FUTURE HABITAT IMPROVEMENT PROJECT 
+A habitat improvement project on Franklin Lake has been approved, pending funding. 
+If funding is secured, a walleye spawning reef would be installed along a portion of 
+the US Forest Service campground. The site location is where the overwhelming 
+majority of walleye attempt to spawn, however this area is a vast sand flat. We 
+believe that rock from this area has been removed by spring ice push during variable 
+water levels. By re-establishing a rocky substrate in this location, we hope to 
+increase natural walleye recruitment.  
+ 
+ 
+ 
+ 
+Picture 8. Map of walleye utilization of Franklin Lake shoreline during the walleye spawn, as well as 
+the proposed and approved location for the rock reef installation. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 19 ---
+ 
+SUMMARY 
+Franklin Lake is a lightly developed lake within the Chequamegon-Nicolet National 
+Forest with adequate lake access provided through the U.S. Forest Service. This lake 
+provides quality recreational opportunity. This comprehensive survey details all 
+major fish species within the system and should provide an adequate picture to the 
+shape and status of the fishery in its current state. 
+The Franklin Lake walleye population exhibits significant recruitment issues. Poor 
+age-0 relative abundance for over 20 years, with no strong natural year classes from 
+2009 to 2024, has created a low-density population of above average size structure. 
+Franklin Lake has a restrictive harvest regulation to promote recruitment and protect 
+juvenile fish until maturity. Even with the restrictive regulation, nearly 79% of the 
+adult walleye population is of a harvestable size. Despite the restrictive regulation 
+and consistent stocking, the Franklin Lake walleye population is still in decline. 
+Future habitat improvement hopes to promote spawning success to create a more 
+desirable walleye population. The current walleye regulation is the most appropriate 
+regulation for this population. 
+Overall, gamefish in Franklin Lake are of low abundance and high size structure. This 
+may create a desirable population for some anglers. Total gamefish density in 
+Franklin Lake is approximately 3.6 adult gamefish/acre, which is very low, with more 
+than half of the adult gamefish being smallmouth bass. Franklin Lake has a liberal 
+harvest regulation to promote the harvest of smaller smallmouth bass. This 
+regulation promotes quality sized fish while also keeping the population size from 
+becoming overabundant. All gamefish regulations on Franklin Lake are appropriate. 
+Centrarchid panfish are increasing in abundance and bluegill are likely the dominant 
+panfish species in Franklin Lake. This is a notable change from previous surveys, as 
+centrarchid panfish species (bluegill, pumpkinseed, and rock bass) were nearly 
+absent prior to the 1997 survey. Yellow perch are likely of higher abundance than 
+recorded, as standard surveys do not always accurately portray yellow perch 
+populations. Panfish size structure is low across all species. Current panfish 
+regulations are appropriate. 
+Franklin Lake is a unique system as it has one of the few remaining native lake 
+whitefish populations in inland Wisconsin. Multiple year classes were observed in 
+2025 surveys, including the presence of juvenile fish indicating recent spawning 
+--- PAGE 20 ---
+success. This is a population that will continue to be monitored in the future. Further 
+investigation into the lake whitefish population are needed to assess the 
+appropriateness of the current regulations. 
+Franklin Lake is a great candidate for habitat improvement. Recent introductions of 
+course woody habitat to Franklin Lake may have had an influence in increasing 
+centrarchid panfish populations, as has been observed following habitat 
+improvement projects in other systems. The proposed walleye spawning reef project 
+would provide quality spawning habitat promoting not only walleye spawning, but 
+may have a positive influence on other species’ success as well. This habitat 
+improvement project is supported by the Wisconsin DNR, the U.S. Forest Service, and 
+Mole Lake Fisheries. Should funding be secured and conditions be acceptable, this 
+project would be implemented in early 2027. 
+Franklin Lake is on a 12-year sampling rotation, however it will likely receive 
+attention prior to the next scheduled survey to properly assess changes in the lake 
+should the rock reef be installed. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Prepared by: 
+LEVI FEUCHT 
+Fisheries Biologist  
+5631 Forestry Drive 
+Florence, WI 54121 
+Levi.Feucht@wisconsin.gov 
+715-528-4400 x 7 

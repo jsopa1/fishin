@@ -1,0 +1,651 @@
+PAGES: 6
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Page 1 
+ 
+2024 Comprehensive Summary Report 
+Pigeon Lake, Manitowoc County 
+WBIC: 64000 
+Introduction And Objectives 
+In 2024, the Wisconsin Department of Natural Resources (DNR) conducted a comprehensive 
+fish survey of Pigeon Lake in order to assess the current status of the fishery and provide 
+direction for future fisheries management of this lake. Comprehensive fish surveys include both 
+spring fyke netting and spring electrofishing surveys, with each gear targeting different species 
+in the lake. Primary sampling objectives of these surveys were to characterize species 
+composition, relative abundance, growth and size structure. The following report is a brief 
+summary of the activities conducted, general status of fish populations, and future management 
+options for Pigeon Lake.  
+DNR Contact 
+Jason Breeggemann 
+Senior Fisheries Biologist 
+2984 Shawano Ave 
+Green Bay, WI 54313 
+Phone: 920-420-4619 
+Email: 
+jason.breeggemann@wisconsin.gov 
+SURVEY INFORMATION 
+Site Location Survey Dates 
+Water 
+Temperature 
+(°F) 
+Target 
+Species Gear Number 
+of Nets Effort 
+Pigeon Lake 3/5/2024 - 
+3/17/2024 38 - 42 Northern Pike/ 
+Walleye Fyke Net 5 60 net 
+nights 
+Pigeon Lake 5/23/2024 67 Bass/Panfish Boomshocker NA 0.7 miles 
+Survey Method 
+• Pigeon Lake was sampled according to spring netting I (SNI) and spring electrofishing II (SEII) protocols as outlined in DNR Fisheries 
+Monitoring Protocols. The primary objective for the SNI survey is to count and measure adult northern pike, walleye and panfish. The 
+primary objective of the SEII survey is to count and measure adult largemouth bass and panfish. Other gamefish and/or panfish may be 
+sampled in each survey but are not the primary focus.   
+• Fyke nets were deployed shortly after ice-out in areas of the lake that contained spawning habitat or were likely travel areas for northern 
+pike and walleye. All newly captured gamefish were given a partial fin clip. Length was measured for all gamefish and panfish species. 
+Age structures (i.e., otoliths, fin rays) were collected from a subsample of northern pike and bluegill for age and growth analyses. 
+• Spring electrofishing took place in late spring when water temperatures reached 60-70⁰F when largemouth bass and panfish moved 
+shallow to spawn. All species encountered were collected and enumerated and all gamefish and panfish species were measured for 
+length. Fin spines were removed from a subsample of largemouth bass for age and growth analyses. 
+Metric Descriptions 
+• Catch per unit effort (CPUE) is an index used to measure fish population relative 
+abundance, which simply refers to the number of fish captured per unit of distance or 
+time. For netting surveys, we typically quantify CPUE by the number and size of fish 
+per net night. For electrofishing, we quantify CPUE as the number and size of fish 
+caught per mile of water electrofished. CPUE indexes are compared to statewide data 
+by percentiles and within lake trends. For example, if a CPUE is in the 90th percentile, 
+it is higher than 90% of the other CPUEs in the state. 
+• Proportional Stock Density (PSD) is an index used to describe the size structure 
+of fish populations. It is calculated by dividing the number of quality size fish by the 
+number of stock size fish for a given species. PSD values between 40 - 60 generally 
+describe a balanced fish population. 
+• Length frequency distribution (LFD) is a graphical representation of the number 
+or percentage of fish captured by half-inch or one-inch size intervals. Smaller fish 
+(or younger age classes) may not always be represented in the length frequency due 
+to different habitat usage or sampling gear limitations. 
+• Mean age at length is an index used to assess fish growth. Calcified structures 
+(e.g., otoliths, spines or fin rays) are collected from a specified length bin of interest 
+(e.g., 7.0 - 7.5 inches for bluegill). Mean age is compared to statewide data by 
+percentile with growth characterized by the following benchmarks: slow (<33rd 
+percentile); moderate (33rd to 66th percentile); and fast (>66th percentile). 
+• Mean Length at Age is another index used to assess fish growth. Calcified 
+structures (e.g., otoliths, spines, or fin rays) are collected from fish of all sizes that are 
+present in the sample. Mean lengths at ages are calculated as the average length of all 
+fish of a given age.  
+Regulations 
+Statewide regulations, except 25 panfish in 
+total may be kept, but no more than 10 of any 
+one species. 
+Lake Information 
+Lake Type: Seepage 
+Acres: 77 
+Max Depth: 67 feet 
+Mean Depth: 20 feet 
+Shoreline Miles: 1.6 
+Public Access: 1 Public Boat Launch 
+Lake Class: Complex Cool Clear 
+Figure 1. Northern pike captured in DNR 
+survey of Pigeon Lake. Photo credit DNR. 
+--- PAGE 2 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Page 2 
+ 
+Northern Pike  
+• Northern pike spawn in shallow vegetated areas shortly after ice out when water temperatures are 35 - 40⁰F. Fyke netting is the preferred gear 
+for sampling northern pike. All results presented for northern pike are from spring fyke netting surveys.   
+2024 SIZE STRUCTURE METRICS 
+Total Number 
+Measured 
+Average Length 
+(inches) 
+Length Range  
+(inches) 
+Stock and Quality Size 
+(inches) Stock Number Quality Number PSD  Percentile 
+Rank Size Rating 
+22 22.2 14.6 - 30.9 14 and 21 24 14 58 69th High 
+RELATIVE ABUNDANCE (CPUE = NUMBER PER NET NIGHT)  
+  2024 Total 
+Sampled  2014 2024 Historical 
+Median 
+2024 
+Statewide 
+Percentile 
+Rank 
+2024 
+Abundance Rating 
+24 0.5 0.4 0.45 16th Low 
+SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year Historical Median 2014 2024 
+52 58 55 
+Species Summary 
+• Catch rates of northern pike were low during the 2024 survey with a CPUE of 
+0.4 fish/net night. This catch rate ranks in the 16th percentile when compared 
+to lakes statewide and the 25th percentile when compared to complex cool 
+clear lakes. Catch rates of northern pike in 2024 were nearly identical to 
+catch rates from the 2014 survey when catch rates were 0.5 pike/net night. 
+• Size structure of northern pike was moderate - high, with a PSD of 58. This 
+ranks in the 69th percentile for lakes across the state. The size structure 
+increased slightly from the 2014 survey, which had a PSD of 52. 
+• Almost all of the northern pike that were captured were female (i.e., 18), with 
+only one male and three immature northern pike also being captured.   
+• Given that only one male northern pike was captured, only female pike were 
+included in the growth analysis. Growth rates for female northern pike in 
+Pigeon Lake are below the statewide average. 
+Walleye 
+• Walleye spawn in shallow areas with rocky substrates typically dominated by cobble and gravel when water temperatures are 40 - 50⁰F. Fyke 
+netting is the preferred gear for sampling walleye. All results presented for walleye are from spring fyke netting surveys.   
+2024 SIZE STRUCTURE METRICS 
+Total Number 
+Measured 
+Average Length 
+(inches) 
+Length Range  
+(inches) 
+Stock and Quality Size 
+(inches) Stock Number Quality Number PSD  Percentile 
+Rank Size Rating 
+4 23.2 19.5 - 25.2 10 and 15 4 4 100 100th High 
+SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year 
+Historical Median 2014 2024 
+93 100 97 
+RELATIVE ABUNDANCE (CPUE = NUMBER PER NET NIGHT)  
+ 2024 Total 
+Sampled  2014  2024  Historical 
+Median 
+2024 Statewide       
+Percentile Rank 
+2024 
+Abundance Rating 
+5 0.91 0.08 0.5 5th Low 
+Species Summary 
+• Catch rates of walleye were very low in 2024 at 0.08 walleye/net night. A catch 
+rate 0f 0.08 walleye/net night ranks out in the 5th percentile for lakes in Wisconsin 
+and the 1st percentile for complex cool clear lakes. The catch rate of walleye in 
+2024 was lower than the catch rate from the 2014 fyke netting survey, which had a 
+catch rate of 0.91 walleye/net night. 
+• The size structure of walleye 
+captured in 2024 was very high, with 
+a PSD of 100. Size structure has 
+increased slightly in 2024 compared 
+to 2014, when walleye PSD was 93. 
+The lack of smaller and adult walleye 
+in the 2024 survey likely indicates 
+poor survival of stocked walleye. 
+ Figure 2. Walleye captured in DNR fyke 
+netting survey. Photo credit DNR. 
+2024 Comprehensive Summary Report 
+Pigeon Lake, Manitowoc County 
+WBIC: 64000 
+--- PAGE 3 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Page 3 
+ 
+Largemouth Bass 
+• Largemouth bass typically spawn in nearshore areas with sand or gravel substrate when water temperatures are 60 - 70⁰F. Electrofishing is the 
+preferred gear for sampling largemouth bass. All results presented for largemouth bass are from the spring electrofishing survey.  
+2024 SIZE STRUCTURE METRICS 
+Total Number 
+Measured 
+Average Length 
+(inches) 
+Length Range  
+(inches) 
+Stock and Quality Size 
+(inches) Stock Number Quality Number PSD  Percentile 
+Rank Size Rating 
+24 11.5 7.1-15.2 8 and 12 22 10 46 29th Low - Moderate 
+LARGEMOUTH BASS GROWTH METRICS  
+Total Number Length Bin Mean Age Range Percentile Growth Rating 
+4 12.0-12.9 5.25 5 - 6 36th Slow - Moderate 
+SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year Historical Median 2014 2024 
+82 46 64 
+Species Summary 
+• Catch rates of largemouth bass in 2024 were moderate - high at 34.3 bass/mile of 
+electrofishing. This catch rate ranks out in the 76th percentile compared to lakes 
+statewide and the 91st percentile for complex cool clear lakes. Catch rates of 
+largemouth bass in 2024 were lower than catch rates in 2014 when catch rates 
+were 47.8 bass/mile of electrofishing.  
+• Size structure of largemouth bass in 2024 was low - moderate with a PSD of 46. 
+This PSD ranks in the 29th percentile when compared to lakes in Wisconsin. 
+Additionally, the mean age of largemouth bass that were 12.0 - 12.9 inches long 
+was 5.25, indicating slow - moderate growth among bass in Pigeon Lake.  
+• It should be noted that 11 largemouth bass between 13.9 - 19.9 inches long (mean 
+length = 17.2 inches) were captured in the 2024 spring fyke netting survey 
+indicating largemouth bass do have the potential to reach larger sizes than what 
+was observed in the spring electrofishing survey.   
+Black Crappie 
+• Black crappie typically spawn in nearshore areas with sand or gravel substrate, often near emergent vegetation when water temperatures are 
+58 - 68⁰F. Fyke netting is the preferred gear for sampling black crappie. All results presented for black crappie are from the spring fyke netting 
+survey.  
+2024 SIZE STRUCTURE METRICS 
+Total Number 
+Measured 
+Average Length 
+(inches) 
+Length Range  
+(inches) 
+Stock and Quality Size 
+(inches) Stock Number Quality Number PSD  Percentile 
+Rank Size Rating 
+4 12.9 8.7 - 14.5 3 and 6 4 4 100 100 Very High 
+RELATIVE ABUNDANCE (CPUE = NUMBER PER NET NIGHT)  
+2024 Total 
+Sampled 2014  2024 Historical 
+Median 
+2024 Statewide       
+Percentile Rank 
+2024 
+Abundance 
+Rating 
+4 0.2 0.1 0.125 8th Low 
+FYKE NETTING SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year Historical Median 2014 2024 
+70 100 85 
+Species Summary 
+ 
+• Catch rates of black crappie in 2024  
+were low at just 0.1 crappies/net 
+night. This catch rate ranks out in 
+the 8th percentile compared to 
+lakes statewide and the 5th 
+percentile for complex cool clear 
+lakes. Catch rates of black crappie 
+in 2024 were similar to catch rates 
+from the 2014 survey when catch 
+rates were 0.2 crappies/net night. 
+• Despite crappies being found in low 
+densities, they can grow to large 
+sizes in Pigeon lake as the average 
+size crappie that was captured was 
+12.9 inches and three crappies ≥14 
+inches were captured. Results from 
+the 2014 survey also showed that 
+crappies can grow to larger sizes in 
+Pigeon Lake as the PSD from the 
+2014 survey was 70.   
+2024 Comprehensive Summary Report 
+Pigeon Lake, Manitowoc County 
+WBIC: 64000 
+2024 RELATIVE ABUNDANCE (CPUE = NUMBER PER MILE)  
+CPUE 
+Total     
+Percentile 
+Rank 
+Overall Abundance 
+Rating 
+Length 
+Index 
+Length 
+Index CPUE 
+Length Index 
+Percentile Rank 
+Length Index 
+Abundance Rating 
+34.3 76th Moderate - High ≥ 14.0 inches 2.9 50th Moderate 
+Figure 3. Black crappie captured in DNR 
+fyke netting survey of Pigeon Lake. Photo 
+credit DNR. 
+ELECTROFISHING CPUE (NUMBER PER MILE) TRENDS  
+  2024 Total 
+Sampled  2014 2024 Historical 
+Median 
+2024 Statewide       
+Percentile Rank 
+2024 
+Abundance Rating 
+24 47.8 34.3 41.1 76th Moderate - High 
+--- PAGE 4 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Page 4 
+ 
+Species Summary 
+• Catch rates of bluegill in the spring 2024 
+electrofishing were moderate, whereas, size 
+structure was low in this survey. Catch rates 
+of bluegill in the electrofishing survey were 
+114.3 bluegill/mile of electrofishing, which 
+ranks out in the 60th percentile for all lakes 
+in Wisconsin and the 60th percentile for 
+complex cool clear lakes. Bluegill PSD in 
+the 2024 electrofishing survey was just 9. 
+Despite a small decline in bluegill PSD in 
+the 2024 electrofishing survey compared to 
+the 2014 survey, it should be noted that the 
+maximum size of bluegill captured in the 
+2014 electrofishing survey was just 7.1 
+inches compared to 8.2 inches in the 2024 
+electrofishing survey. Also, four bluegill ≥7 
+inches were captured in the 2024 
+electrofishing survey compared to just one 
+in the 2014 electrofishing survey. 
+Furthermore, the catch rate of bluegill ≥7.0 
+inches in the 2024 electrofishing survey was 
+5.7 per mile of electrofishing, which ranks 
+out in the 48th percentile for lakes in 
+Wisconsin.  
+• Catch rates of bluegill in the 2024 fyke 
+netting survey were low at just 1.1 bluegill/
+net night, which ranks out in the 21st 
+percentile for lakes in Wisconsin. Catch 
+rates in the 2024 fyke netting survey were 
+only about 30% of the catch rates observed 
+in the 2014 fyke netting survey. Bluegill size 
+structure in the 2024 fyke netting survey 
+was moderate with a PSD of 59, which 
+ranks out in the 51st percentile for lakes in 
+Wisconsin.  
+• Bluegill growth in 2024 was slow - moderate 
+with it taking bluegill an average of 5.2 
+years to reach 6.0 - 6.9 inches.   
+Bluegill 
+• Bluegill typically spawn in nearshore areas with sand or gravel substrate when water temperatures are 67 - 80⁰F. Electrofishing is the preferred 
+gear for sampling bluegill, but fyke nets can also be a useful gear for sampling bluegill, especially larger bluegill. Therefore, results from both 
+electrofishing and fyke netting will be presented for bluegill.  
+2024 SIZE STRUCTURE METRICS 
+Total Number 
+Measured 
+Average Length 
+(inches) 
+Length Range  
+(inches) 
+Stock and Quality Size 
+(inches) Stock Number Quality Number PSD  Percentile 
+Rank Size Rating Gear 
+66 6.6 4.0-8.6 3 and 6 66 39 59 51st Moderate Fyke Netting 
+80 4.6 2.9-8.2 3 and 6 79 7 9 11th Low Electrofishing 
+FYKE NETTING CPUE (NUMBER PER NET NIGHT) TRENDS  
+  2024 Total 
+Sampled  2014  2024 Historical 
+Median 
+2024 Statewide       
+Percentile Rank 
+2024 
+Abundance Rating 
+66 3.9 1.1 2.5 21st Low 
+FYKE NETTING SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year 
+Historical Median 2014 2024 
+45 59 52 
+ELECTROFISHING CPUE (NUMBER PER MILE) TRENDS  
+  2024 Total 
+Sampled  2014 2024 Historical 
+Median 
+2024 Statewide       
+Percentile Rank 
+2024 
+Abundance Rating 
+80 85.5 114.3 99.9 60th Moderate 
+ELECTROFISHING SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year 
+Historical Median 2014 2024 
+16 9 12.5 
+2024 BLUEGILL GROWTH METRICS  
+Total 
+Number 
+Sampled 
+Length 
+Bin 
+(inches)  
+Mean 
+Age 
+Age 
+Range 
+Percentile 
+Rank 
+Growth   
+Rating 
+7 6.0 - 6.9 5.2 4 - 7 38th Slow - 
+Moderate  
+2024 Comprehensive Summary Report 
+Pigeon Lake, Manitowoc County 
+WBIC: 64000 
+2024 ELECTROFISHING CPUE  (NUMBER PER MILE)  
+CPUE 
+Total     
+Percentile 
+Rank 
+Overall            
+Abundance 
+Rating 
+Length 
+Index 
+Length 
+Index 
+CPUE 
+Length 
+Index 
+Percentile 
+Rank 
+Length Index    
+Abundance 
+Rating 
+114.3 60th Moderate ≥ 7.0 inches 5.7 48th Moderate 
+Figure 4. Bluegill captured in a DNR survey. Photo credit 
+DNR. 
+Figure 5. Bluegill captured in a DNR survey. 
+Photo credit DNR. 
+--- PAGE 5 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Page 5 
+ 
+Species Summary 
+• Catch rates of yellow perch in 2024 were low - moderate 
+at 0.8 perch/net night. This catch rate ranks out in the 
+34th percentile compared to lakes statewide and the 20th 
+percentile for complex cool clear lakes. Catch rates of 
+yellow perch in 2024 declined compared to catch rates 
+from the 2014 survey when catch rates were 2.6 perch/
+net night. 
+• Results from the 2024 survey indicated that yellow perch 
+size structure was high with a PSD of 65, which ranks out 
+in the 91st percentile for lakes in Wisconsin. Yellow perch 
+PSD increased significantly compared to the 2014 survey 
+when the PSD was just 23. Furthermore, the maximum 
+size of yellow perch captured in the 2014 fyke netting 
+survey was 10.3 inches compared to 11.8 inches in the 
+2024 fyke netting survey. Only two yellow perch ≥10 
+inches were captured in the 2014 fyke netting survey 
+compared to seven in the 2024 fyke netting survey. 
+Yellow Perch 
+• Yellow perch typically spawn in nearshore areas with abundant vegetation or coarse woody habitat when water temperatures are 45 - 50⁰F. 
+Fyke netting is the preferred gear for sampling yellow perch. All results presented for yellow perch are from the spring fyke netting survey.  
+2024 SIZE STRUCTURE METRICS 
+Total Number 
+Measured 
+Average Length 
+(inches) 
+Length Range  
+(inches) 
+Stock and Quality Size 
+(inches) Stock Number Quality Number PSD  Percentile 
+Rank Size Rating 
+46 8.7 6.3-11.8 5 and 8 46 30 65 91st High 
+RELATIVE ABUNDANCE (CPUE = NUMBER PER NET NIGHT)  
+  2024 Total 
+Sampled  2014 2024 Historical Median 2024 Statewide 
+Percentile Rank 
+2024 
+Abundance Rating 
+46 2.6 0.8 1.7 34th Low - Moderate 
+SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year 
+Historical Median 2014 2024 
+23 65 44 
+Rock Bass 
+• Rock bass typically spawn in nearshore areas with sand or gravel substrates when water temperatures are 55 - 60⁰F. Fyke netting is the 
+preferred gear for sampling rock bass. All results presented for rock bass are from the spring fyke netting survey.  
+2024 SIZE STRUCTURE METRICS 
+Total Number 
+Measured 
+Average Length 
+(inches) 
+Length Range  
+(inches) 
+Stock and Quality Size 
+(inches) Stock Number Quality Number PSD  Percentile 
+Rank Size Rating 
+44 7.1 4.9 - 10.1 4 and 7 44 26 59 62nd Moderate 
+RELATIVE ABUNDANCE (CPUE = NUMBER PER NETNIGHT)  
+2024 Total 
+Sampled  2014 2024 Historical Median 2024 Statewide Percentile 
+Rank 
+2024 
+Abundance Rating 
+44 4.9 0.7 2.8 39th Low - Moderate 
+SIZE STRUCTURE (PSD) TRENDS 
+PSD by Year 
+Historical Median 2014 2024 
+40 59 50 
+Species Summary 
+• Catch rates of rock bass in 2024 were low - moderate at 0.7 rock 
+bass/net night. This catch rate ranks out in the 39th percentile 
+compared to lakes statewide. Catch rates of rock bass in 2024 
+declined compared to catch rates from the 2014 survey when catch 
+rates were 4.9 rock bass/net night. 
+• Results from the 2024 survey indicated that rock bass size structure 
+was moderate with a PSD of 59, which ranks out in the 62nd 
+percentile for lakes in Wisconsin. Rock bass PSD increased 
+compared to the 2014 survey when the PSD was just 40.    
+2024 Comprehensive Summary Report 
+Pigeon Lake, Manitowoc County 
+WBIC: 64000 
+--- PAGE 6 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Page 6 
+ 
+Full Summary 
+Northern Pike: 
+• Catch rates of northern pike in the 2024 fyke netting survey were low when compared to lakes 
+throughout Wisconsin including Complex Cool Clear lakes, but similar to catch rates in previous surveys.  
+• Interestingly, very few male northern pike were captured in the 2024 or 2014 fyke netting surveys. It is 
+hypothesized that the male northern pike may be moving into Little Pigeon Lake to spawn before the ice 
+has melted enough to set nets on Pigeon Lake since there is much more high quality spawning and 
+nursery habitat in Little Pigeon Lake compared to Pigeon Lake.  
+• Northern pike showed good size structure with a PSD of 58 and nearly 20% of the northern pike 
+captured being ≥26 inches. However, the dominance of female northern pike in the sample may be 
+skewing the size structure since female northern pike grow faster and reach larger sizes than male pike.  
+• Growth rates of female northern pike were below the statewide average.  
+• Anglers have noted the high number of sub-legal northern pike that are caught while fishing, especially 
+during winter. While preparing for the spring electrofishing survey, DNR staff watched anglers catch 
+several small northern pike from the dock at the boat launch in a short amount of time. This provides 
+additional evidence that the fyke nets may have missed some of the spawning population, particularly 
+spawning males.  
+• Consider changing the northern pike regulation to the 25 - 35 inch protected slot limit with a bag limit of 
+2 to protect the fastest growing, largest northern pike in the lake. Alternatively, a bag limit of 5 northern 
+pike with no size limit may also be considered as the slot limit may not be highly effective in a lake like 
+Pigeon lake where growth rates of northern pike are slower because few northern pike would grow into 
+the protected slot limit.   
+Walleye: 
+• Catch rates of walleye in the 2024 fyke netting survey were low when compared to lakes throughout 
+Wisconsin and dropped compared to catch rates in the 2014 fyke netting survey. Several factors likely 
+contributed to the low number of walleye captured in 2024 including fewer large fingerling walleye 
+stocked in recent years and a very early ice out in 2024 which resulted in the fyke netting survey being 
+conducted before the walleye spawn. The 2024 fyke netting survey occurred approximately 1 month 
+earlier in the year than the 2014 fyke netting survey.  
+• Walleye are able to attain large sizes in Pigeon Lake as all walleye captured were >19 inches long.  
+• Starting in 2023, the DNR began stocking large fingerling walleye instead of small fingerling walleye. 
+Continue to monitor the walleye population in the future to evaluate survival of stocked walleye.  
+Largemouth Bass: 
+• Catch rates of largemouth bass in 2024 were moderate - high when compared to lakes throughout 
+Wisconsin but lower than catch rates in the 2014 electrofishing survey .  
+• Size structure of largemouth bass was low - moderate with the majority of the largemouth bass captured 
+in the spring electrofishing survey being between 9 - 14 inches. Some larger bass were captured in the 
+spring fyke netting survey indicating bass have the potential to reach larger sizes in Pigeon Lake.  
+• Growth rates of largemouth bass were slow - moderate compared to lakes throughout Wisconsin.  
+• Consider changing the largemouth bass regulation to a 14 - 18 inch protected slot limit or a no size limit 
+regulation to allow for harvest of the overabundant, smaller largemouth bass and protect the larger bass 
+in the population.  
+Bluegill: 
+• Catch rates of bluegill were low - moderate in the electrofishing and fyke netting survey and remained 
+similar to catch rates from the 2014 survey.  
+• Size structure of bluegill increased in the 2024 fyke netting survey compared to the 2014 survey and the 
+maximum size of bluegill captured increased in both the 2024 electrofishing and fyke netting surveys 
+compared to the 2014 surveys. This indicates the more restrictive panfish regulation that went into effect 
+in 2016 may have resulted in increases in the quality of the bluegill fishery.  
+• A 10 aggregate panfish regulation was proposed and supported at the 2025 spring hearings and should 
+go into effect on April 1, 2026. By keeping a more restrictive panfish regulation such as a 10 aggregate 
+bag limit for panfish, the quality of the panfish population will hopefully continue to increase in the future  
+Black Crappie: 
+• Catch rates of black crappie in the 2024 fyke netting survey were low compared to lakes throughout 
+Wisconsin, but similar to catch rates in the 2014 fyke netting survey.   
+• Size structure of the crappies that were captured in 2024 was impressive with all crappies captured 
+being >8 inches including three that were >14 inches.  
+Yellow Perch: 
+• Pigeon Lake supports a quality yellow perch fishery with low - moderate densities of yellow perch that 
+show good size structure.   
+• The average size yellow perch captured in the 2024 fyke netting survey was just under nine inches 
+including seven that were ≥10 inches long.  
+Rock Bass: 
+• Rock bass provide an additional opportunity for anglers fishing Pigeon Lake as this lake supports a low - 
+moderate density rock bass population with good size structure.  
+Habitat: 
+• Pigeon Lake has a highly developed shoreline throughout most of the lake with limited coarse woody 
+habitat. Additions of woody habitat may benefit fish populations by providing cover for small fish to 
+escape predation, ambush locations for predators and spawning habitat for species like yellow perch.  
+• It is also recommended to continue to monitor for invasive plants such as Eurasian water milfoil and 
+manage invasive plants as necessary. High densities of invasive plants can inhibit the ability of 
+predators to forage effectively and can allow panfish to become overabundant and stunted. A diverse 
+mix of native plants found in moderate densities is most desirable.   
+2024 Comprehensive Summary Report 
+Pigeon Lake, Manitowoc County (WBIC 64000) 
+Stocking History, Final Summary, and Management Recommendations  
+Stocking History 2001 - Present 
+Species Year Age 
+Mean 
+Length 
+(inches) 
+Number 
+Stocked 
+WALLEYE 2023 LARGE 
+FINGERLING 6 2000 
+WALLEYE 2023 LARGE 
+FINGERLING 7.95 398 
+WALLEYE 2021 LARGE 
+FINGERLING 6 1000 
+WALLEYE 2019 SMALL 
+FINGERLING 1.8 5033 
+WALLEYE 2018 LARGE 
+FINGERLING 6 2000 
+WALLEYE 2017 SMALL 
+FINGERLING 1.7 2788 
+WALLEYE 2016 LARGE 
+FINGERLING 6 1998 
+WALLEYE 2015 SMALL 
+FINGERLING 1.7 3333 
+WALLEYE 2013 SMALL 
+FINGERLING 2 2995 
+WALLEYE 2012 LARGE 
+FINGERLING 6 997 
+WALLEYE 2011 SMALL 
+FINGERLING 1.9 3306 
+WALLEYE 2010 LARGE 
+FINGERLING 7 1400 
+WALLEYE 2009 SMALL 
+FINGERLING 1.8 3000 
+WALLEYE 2008 LARGE 
+FINGERLING 6 2015 
+WALLEYE 2006 LARGE 
+FINGERLING 6 2010 
+WALLEYE 2005 SMALL 
+FINGERLING 1.4 3835 
+WALLEYE 2004 LARGE 
+FINGERLING 6 2000 
+LARGEMOUTH 
+BASS 2003 SMALL 
+FINGERLING 2.2 1925 
+WALLEYE 2003 SMALL 
+FINGERLING 1.5 7700 
+WALLEYE 2002 SMALL 
+FINGERLING 2.2 7550 
+LARGEMOUTH 
+BASS 2002 LARGE 
+FINGERLING 5 882 
+WALLEYE 2001 SMALL 
+FINGERLING 1.6 7700 
+LARGEMOUTH 
+BASS 2001 LARGE 
+FINGERLING 1.3 3850 
+ 

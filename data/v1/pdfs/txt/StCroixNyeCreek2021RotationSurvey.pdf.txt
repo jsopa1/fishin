@@ -1,0 +1,214 @@
+PAGES: 6
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Fisheries Survey Report for Nye Creek, St. Croix County, Wisconsin 2021 
+WATERBODY IDENTIFICATION CODE 2604500 
+ 
+ 
+ 
+ 
+ 
+KASEY YALLALY 
+DNR Fisheries Biologist 
+Baldwin, Wisconsin 
+February 2022 
+
+--- PAGE 2 ---
+Introduction 
+Nye Creek is a small Class II coldwater tributary to the Kinnickinnic River located in south-
+central St. Croix County. Currently, there are 3.35 miles of classified trout water. The 
+watershed is largely composed of agricultural land with some grassland and forested land to 
+a lesser extent. While the stream is not classified as impaired, non-point source pollution 
+and bank erosion from overgrazing are prevalent within the watershed. The trout population 
+within the stream is fully supported by natural reproduction. No stocking records exist for 
+the stream.  
+ 
+Methods 
+A total of two stations were sampled on Nye Creek in 2021. Sampling was conducted between 
+June 15 and Sept. 15 using a backpack stream shocking unit with a single electrode. The 
+length of stations was determined by multiplying the mean stream width by 35. Stations were 
+located upstream of Oak Drive and downstream of County Road JJ. All species were collected 
+at both stations. All trout were identified to species and measured to the nearest 10th of an 
+inch.  
+ 
+The Index of Biotic Integrity (IBI) was used to measure biological attributes that are 
+influenced by human activities to assess the overall health of the stream. The index uses the 
+species assemblage present to assess water quality and thermal regimes within a waterbody. 
+Coldwater IBI scores range from 0 to 100, with a high score (90-100) interpreted as an 
+Excellent Integrity rating and 10-20 interpreted as a Poor Integrity rating.  
+ 
+Study Site 
+Station 1 was located upstream of Station 2 in a heavily wooded corridor. Habitat was not 
+evaluated during the surveys. Anecdotally, the stream was composed of riffle-pool 
+sequences and featured substrates dominated by gravel, coarse sand and some cobble. 
+Station 2 flowed through an abandoned cattle pasture. The stream corridor was mostly 
+wooded with box elder and tag alder with openings to the pasture. Bank erosion was heavy, 
+and the substrate was largely composed of gravel and coarse sand with small, deep pools, 
+riffles and runs.  
+ 
+ 
+Results 
+A total of four species were captured among all stations, including Brook Trout, Brown Trout, 
+Mottled Sculpin and Central Mudminnow. Brook Trout were the dominant salmonid at both 
+stations and ranged in relative abundance from 1449 total fish per mile to 1481 total/mile, 
+which is in the 95th percentile for Class II Brook Trout streams statewide (Table 1, Figures 2 
+and 3). Natural reproduction of Brook Trout was documented at both sites, and young-of-
+year (YOY) or juvenile trout (less than 4.5 inches) ranged in relative abundance from 338/mile 
+(75th percentile) at Station 1 to 1079/mile at Station 2 (95th percentile). The abundance of adult 
+Brook Trout at Station 1 was 1111/mile and 402/mile at Station 2, which resulted in the 95th 
+and 85th percentiles for adult abundances in Class II Brook Trout streams statewide (Table 1). 
+The maximum size of Brook Trout at Station 1 was 10 inches, but only 7 inches long at Station 
+2 (Figure 1). Only 8% of adult Brook Trout at Station 1 were larger than 8 inches in length.  
+--- PAGE 3 ---
+ 
+Brown Trout were less abundant than Brook Trout at both stations and ranged in total 
+relative abundance from 322/mile (60th percentile) at Station 2 and 628/mile (80th percentile) 
+at Station 1 (Table 2, Figures 2 and 3). Brown Trout natural reproduction, as evidenced by the 
+presence of young-of-year (YOY) or juvenile Brown Trout (less than 5.5 inches), was also 
+documented at both stations, with 145 YOY/mile (80th percentile) at Station 1 and 97 
+YOY/mile (75th percentile) at Station 2 (Table 2). Adult (fish larger than 5.5 inches) relative 
+abundance ranged from 225/mile (55th percentile) at Station 2 to 483/mile (75th percentile) at 
+Station 1. Only four Brown Trout larger than 10 inches were collected between both stations, 
+and no Brown Trout larger than 12 inches were collected.  
+ 
+The coldwater IBI rating for both stations on Nye Creek resulted in a score of 90, or Excellent, 
+with only four species collected between the stations and Brook Trout as the dominant 
+salmonid species. Tolerant species were present but in very low abundance.  
+ 
+Discussion 
+The trout population within Nye Creek features a mixed fishery of Brook Trout and Brown 
+Trout, with Brook Trout as the dominant species. Historically at Station 2, Brown Trout were 
+the dominant species in the 2009 survey. Brook Trout then increased in abundance and 
+surpassed Brown Trout abundances in the 2020 survey and then experienced a dramatic 
+increase in the present survey. Abiotic conditions in 2020 were optimal for trout spawning, 
+survival and subsequent recruitment, hence the increase in adult Brook Trout abundances in 
+2021. The spring of 2021 also featured stable spring conditions with very limited high-water 
+events, which was likely the driving factor in trout hatch success and survival this year with 
+the high abundance of juvenile trout. Adult Brook Trout abundance and size structure was 
+higher at Station 1, with fewer juvenile trout present. This was potentially due to more larger 
+pools present within the station that provided more preferred adult fish habitat.  
+ 
+Brown Trout have remained in relatively stable abundances throughout the years at both 
+stations, with the exception of the 2009 survey at Station 1, when Brown Trout densities 
+increased from 48/mile in 2004 to 1207/mile in 2009. Causes for this increase are unknown 
+but are likely influenced by abiotic factors or disturbances in the stream or watershed. 
+According to historical data from a trout trend site on the Kinnickinnic River at County Road 
+JJ, Brown Trout abundances and natural reproduction remained stable during the 2004-2009 
+period indicating that the increase in Brown Trout in Nye Creek during that time was 
+somewhat localized. However, Brown Trout abundances declined to 627/mile in the present 
+survey. 
+ 
+The surveys of both stations resulted in Excellent coldwater IBI scores indicating excellent 
+water quality and thermal regimes for trout and little evidence of human impacts on the 
+watershed. The current trout stream classification for Nye Creek is Class II. Based on the 
+results of this survey, the stream could be reclassified to a Class I status because of the 
+strong natural reproduction of both Brook and Brown Trout and the presence of multiple 
+year-classes of trout with enough trout to fully occupy available habitat with Brook Trout 
+total abundances in the 95th percentile and YOY abundances in the 75th to 95th percentiles.  
+ 
+ 
+ 
+--- PAGE 4 ---
+Table 1. Relative abundance (catch per effort; number per mile) of Brook Trout at two stations on Nye 
+Creek, summer 2021. ( . Indicates no survey) 
+ 
+  ST. 1   ST. 2   
+Year Juv. Adult Juv.   Adult 
+1996 510 246 . . 
+2004 2254 386 . . 
+2009 1240 1240 182 64 
+2020 . . 386 48 
+2021 338 1111 1079 402 
+ 
+ 
+Table 2. Relative abundance (catch per effort; number per mile) of Brown Trout at two stations on Nye 
+Creek, summer 2021. ( . Indicates no survey) 
+ 
+  ST. 1  ST. 2   
+Year Juv. Adult Juv.   Adult 
+1996 0 0 . . 
+2004 48 48 . . 
+2009 1207 676 405 35 
+2020 . . 290 64 
+2021 145 482 97 225 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 5 ---
+ 
+ 
+ 
+ 
+Figure 1. Length frequency distribution of Brook Trout at two stations on Nye Creek, summer 2021.  
+ 
+ 
+ 
+ 
+ 
+Figure 2. Relative abundance (Catch per effort) of Brook Trout and Brown Trout at Station 1 (Oak Drive) 
+on Nye Creek from 1996 to 2021.  
+ 
+ 
+ 
+ 
+ 
+ 
+0
+10
+20
+30
+40
+50
+60
+70
+1 2 3 4 5 6 7 8 9 10 11
+Frequency
+Length (in)
+St. 1 St. 2
+0
+500
+1000
+1500
+2000
+2500
+3000
+1996 2004 2009 2021
+Number Per Mile
+Brook Trout Brown Trout
+--- PAGE 6 ---
+ 
+ 
+ 
+Figure 3. Relative abundance (Catch per effort) of Brook Trout and Brown Trout at Station 2 (County Road 
+JJ) on Nye Creek from 1996 to 2021.  
+ 
+ 
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+2009 2020 2021
+Number Per Mile
+Brook Trout Brown Trout

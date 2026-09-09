@@ -1,0 +1,267 @@
+PAGES: 6
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Fisheries Survey Report for Vance Creek, Dunn and Barron Counties, 
+Wisconsin 2021 
+WATERBODY IDENTIFICATION CODE 2077100 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+KASEY YALLALY 
+DNR Fisheries Biologist 
+Baldwin, Wisconsin 
+March 2022 
+
+--- PAGE 2 ---
+Introduction 
+Vance Creek is a medium sized coldwater tributary to the Hay River flowing south from 
+Barron County into Dunn County. Vance Creek enters the Hay River just west of the Village of 
+Ridgeland. The stream consists of 4.3 miles of Class I trout water in Barron County and 3.2 
+miles of Class II trout water in Dunn County. As part of the Hay River watershed, Vance Creek 
+drains mostly forested and agricultural land and to a lesser extent, grassland and wetlands. 
+During a 2018 assessment of the stream, Vance Creek in Dunn County was listed as Impaired 
+due to high phosphorus levels. Vance Creek also ranked High for nonpoint source 
+characteristics of runoff impacts on groundwater.  
+ 
+The fishery in the Dunn County portion of the stream has been historically dominated by 
+Brook Trout. No stocking has occurred in Dunn County and the fishery has been fully 
+supported by natural reproduction. Annual stocking of Brown Trout yearlings occurred from 
+1972 to 2002 with no stocking since then. Tributaries to Vance Creek include Little Vance 
+Creek (Class I), Quarter Creek (Class II) along with several unnamed and unclassified streams. 
+Vance Creek, Little Vance Creek and Quarter Creek are included as candidate streams within 
+the Brook Trout Reserves program with a classification of Vulnerable with an opportunity for 
+rehabilitation. Fishing pressure is likely low throughout the stream and access is limited to 
+road bridge crossings other than a recently acquired streambank easement located north of 
+1430th Avenue in Dunn County. The following survey focuses on the Class II, Dunn County 
+portion of the stream. 
+ 
+Methods 
+A total of 3 stations were sampled on Vance Creek in 2021. Sampling was conducted between 
+June 15th and September 15th using a backpack stream shocking unit with a single electrode 
+and a stream barge electrofishing unit with 2 electrodes. Length of stations was determined 
+by multiplying the mean stream width by 35. Stations were located upstream of 290th St 
+(Station 1), upstream of 1430th Avenue (Station 2) and upstream of the Barron/Dunn County 
+Line Road (Station 3). All fish species were collected at all stations and were counted and 
+identified to species. All trout were identified to species and measured to the nearest 10th of 
+an inch. Catch rates of Brook Trout were compared to other Class II Brook Trout streams in 
+the North Central Hardwoods ecoregion and percentiles were determined.  
+ 
+The Index of Biotic Integrity (IBI) was used as a measure of biological attributes that are 
+influenced by human activities to assess the overall health of the stream. The index uses the 
+species assemblage present to assess water quality and thermal regimes within a waterbody. 
+Coldwater IBI’s range in score from 0 to 100 with a high score (90-100) interpreted as an 
+Excellent Integrity rating and 10-20 interpreted as a Poor Integrity rating.  
+ 
+Study Sites 
+Station 2 was the furthest downstream station sampled on Vance Creek. Habitat was not 
+quantitatively evaluated during the surveys; however, anecdotally, the stream flowed through 
+a heavily wooded corridor at this station with the majority of instream habitat existing in the 
+form tag alders and small amount of large woody debris. Vance Creek has a relatively low 
+gradient which made pools and riffles limited. The substrate was largely composed of sand 
+and silt. Station 1 was located upstream of Station 2. It also ran through a heavily wooded 
+--- PAGE 3 ---
+corridor with similar habitat characteristics and substrates. Station 3 was the furthest 
+upstream station sampled. The stream at this location ran through a heavily grazed pasture 
+with no canopy cover. Substrate contained sand, silt and some small gravel. Bank erosion 
+was moderate and aquatic macrophytes were abundant.  
+ 
+Results 
+Brook Trout were the dominant and only trout species found at all stations other than a 
+single 6.3-inch Brown Trout captured at Station 1. Brook Trout were in high densities at all 
+stations when compared with other Class II trout streams in the North Central Hardwoods 
+ecoregion. Relative abundance of Brook Trout at all stations ranged from 854-1690 total trout 
+per mile which resulted in the 85th and 95th percentiles, respectively (Table 1; Figure 1). The 
+maximum size of Brook Trout captured was 11 inches between all stations (Figure 2). Average 
+length of adult Brook Trout was 6.2 inches, 7.1 inches and 6.4 inches at Station 1, 2, and 3, 
+respectively (Figure 2). Adult Brook Trout (≥4.5 inches) ranged in relative abundance from 474 
+adults/mile (80th percentile) at Station 1 to 977 adults/mile (90th percentile) at Station 2. The 
+number of adults larger than 8 inches was greatest at Station 2 as well, with 279 fish larger 
+than 8 inches per mile (90th percentile).  
+ 
+Natural reproduction of Brook Trout was high at all stations. Relative abundance of young-
+of-year Brook Trout ranged from 268 young-of-year/mile (85th percentile) at Station 2 to 998 
+young-of-year per mile (95th percentile) at Station 3 (Figure 2). No natural reproduction of 
+Brown Trout was documented.  
+ 
+Coldwater IBI ratings resulted in a score of 90 with a rank of Excellent for Station 1 and 70 for 
+Station 2 which ranked as Good, and a score of 100 or Excellent for Station 3. The lower score 
+at Station 2 was due to several more tolerant species present at this station, including White 
+Sucker and Creek Chub. Pearl Dace, Longnose Dace, Blacknose Dace and Mottled Sculpin 
+were also collected at this station (Table 2). The high scores at the remaining 2 stations were 
+due to very few non-salmonid species and very few tolerant species collected. Non-salmonid 
+species collected at these stations included Mottled Sculpin and Longnose Dace (Table 2).  
+ 
+ 
+Discussion 
+The Dunn County portion of Vance Creek contains a strong and naturally reproducing Brook 
+Trout population. Trout abundance at all stations has remained relatively stable throughout 
+the years according to past surveys. While only 2 surveys have been completed at Station 2, 
+Brook Trout abundance at this station was much improved since the 2008 survey, when only 
+290 total fish/mile were captured, and very little natural reproduction (43 young-of-
+year/mile) was found. Brook Trout abundance at Station 1 was similar to the long-term 
+average for this site of 907 total trout/mile. Trout populations within Vance Creek likely 
+experience low angling pressure due to limited access and difficulty of fishing in densely 
+wooded stream corridors. Habitat within most of the stream has also likely remained fairly 
+stable throughout the years with much of the stream flowing though low gradient forested 
+and wetland areas that are difficult to farm or develop. Impacted areas also occur 
+throughout the stream due to overgrazing and poor farming practices which have led to 
+significant bank erosion and sedimentation. Brook Trout abundances at Station 1 were the 
+--- PAGE 4 ---
+lowest between all three stations sampled. This station was also the most degraded in terms 
+of bank erosion, siltation and lack of habitat. Natural reproduction was high at all stations in 
+terms of relative abundance of young-of-year Brook Trout and was highest at Station 3. This 
+station contained the highest amount of aquatic vegetation because of the lack of canopy 
+cover at this site. The station also included the most optimal spawning substrates between 
+all the sites. Abundance of Brook Trout larger than 8 inches has remained relatively stable 
+through the years as well and was higher than the average for 2 of the 3 stations sampled 
+with densities in the 90th percentiles for similar streams. Because of low angling pressure, 
+excellent habitat and subsequent natural reproduction, size structures have remained stable 
+throughout the years and the potential for trophy Brook is present.  
+ 
+The Coldwater IBI ranking for each site resulted in good and excellent scores indicating 
+minimal negative impacts to water quality and excellent thermal regimes within the 
+watershed. The Excellent ranking for Stations 2 and 3 were due to the abundance of Brook 
+Trout at these sites in addition to very few non-game fish species present. Non-game fish 
+species that were present at these sites included a single Brown Trout, Mottled Sculpin and 
+Longnose Dace, all of which are relatively intolerant species. More tolerant species including 
+Creek Chub and White Sucker were collected at Station 2 which resulted in the rank of Good. 
+This was likely due to the more degraded habitat at this site. Contrarily, Brook Trout 
+abundance was also highest at this site which was likely due to the presence of deeper pool 
+habitat and an abundance of large woody debris within the station.  
+ 
+The Dunn County portion of Vance Creek is currently classified as Class II trout stream and 
+the Barron County portion of the stream as Class I. The Dunn County classification is incorrect 
+based on the results of this survey. It should be reclassified as Class I trout stream to the 
+confluence with the Hay River. Natural reproduction of Brook Trout was strong at all stations 
+sampled and multiple year classes of trout were present. Young-of-year catch rates were in 
+the 85th to 95th percentiles compared to other Class II trout streams in the North Central 
+Hardwoods ecoregion. Total relative abundance of Brook Trout ranged in the 85th to 95th 
+percentiles as well, indicating more than enough trout present to occupy available habitat. 
+Trout populations have remained stable throughout the years according to previous surveys. 
+Streambank Easement acquisition is a high priority within the watershed to enhance 
+protections to the stream and improve habitat where possible.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 5 ---
+ 
+ 
+ 
+ 
+Table 1. Relative abundance (catch per effort; number per mile) of Brook Trout at 3 stations on Vance 
+Creek, summer 2021. ( . Indicates no survey) 
+ 
+  St. 1 St. 2 St.3 
+Year Juv. Adult Juv.   Adult Juv. Adult 
+1994 1121 323 . . . . 
+2002 158 583 . . . . 
+2008 300 441 43 247 1304 467 
+2016 411 348 . . . . 
+2021 379 474 268 977 998 692 
+ 
+ 
+Table 2. Total number of each species captured at 3 stations on Vance Creek, summer 2021.  
+ 
+Species St. 1 St. 2 St. 3 
+Brook Trout 54 116 105 
+Brown Trout 1 0 0 
+Mottled Sculpin 20 5 13 
+Blacknose Dace 0 3 0 
+Longnose Dace 0 1 1 
+Pearl Dace 0 13 0 
+White Sucker 0 29 0 
+Creek Chub 0 15 0 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 6 ---
+ 
+ 
+ 
+ 
+Figure 1. Relative abundance (Catch per effort; fish per mile) of Brook Trout at Station 1 on Vance Creek 
+from 1994 to 2021.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 2. Length frequency distribution of Brook Trout at 3 stations on Vance Creek, summer 2021.  
+ 
+ 
+ 
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1994 2002 2008 2016 2021
+Catch Per Effort (Fish/Mile)
+Total/ Mile YOY/ Mile Adults/ Mile
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+1 2 3 4 5 6 7 8 9 10 11 12
+Frequency
+Length (in)
+Station 1 Station 2 Station 3

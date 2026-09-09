@@ -1,0 +1,783 @@
+PAGES: 26
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+2022 Comprehensive Fisheries Survey Report 
+Tichigan Lake, Racine County (WBIC 763600) 
+ 
+ 
+ 
+ 
+ 
+  
+Photo Credit: greaterracinecounty.com 
+ 
+ 
+ 
+ 
+Travis Motl 
+DNR Fisheries Biologist 
+2025 
+
+--- PAGE 2 ---
+2 
+ 
+Table Of Contents 
+Executive Summary ........................................................................................................................... 3 
+Introduction ........................................................................................................................................ 5 
+Methods ............................................................................................................................................... 6 
+Results/Discussion ........................................................................................................................... 9 
+Northern pike ................................................................................................................................. 9 
+Walleye ........................................................................................................................................... 11 
+Largemouth Bass ......................................................................................................................... 14 
+Bluegill ........................................................................................................................................... 16 
+Pumpkinseed ................................................................................................................................ 18 
+Black Crappie ................................................................................................................................ 19 
+Yellow Perch ................................................................................................................................ 20 
+Warmouth ...................................................................................................................................... 21 
+Channel Catfish ............................................................................................................................ 21 
+Other Species................................................................................................................................ 22 
+Management Recommendations ................................................................................................. 24 
+References......................................................................................................................................... 24 
+Appendix ............................................................................................................................................ 25 
+ 
+  
+--- PAGE 3 ---
+3 
+ 
+Executive Summary 
+In 2022, the Wisconsin Department of Natural Resources (DNR) conducted a 
+comprehensive fishery survey on Tichigan Lake using a variety of sampling methods 
+throughout the open water period to sample the major components of the fishery. 
+The objectives of the survey were to 1) assess the status of the northern pike (Esox 
+lucius), walleye (Sander vitreus), largemouth bass (Micropterus salmoides), channel 
+catfish (Ictalurus punctatus) and panfish populations, 2) attain a population estimate 
+for northern pike and walleye and 3) update management recommendations for the 
+fishery of Tichigan Lake. The results of the 2022 survey were compared to lakes with 
+similar characteristics and the prior comprehensive fishery survey conducted by the 
+DNR on Tichigan Lake in 2017.  
+ 
+Tichigan Lake offers a quality northern pike angling opportunity with over 30% of the 
+fish being legal size (at least 26 inches). Good growth potential also produces a low 
+abundance of memorable size fish. 
+ 
+Available survey data indicates that Tichigan Lake has potential to produce a high 
+quality walleye fishery at times. In 2022 66% of the walleye captured were of legal 
+size (at least 18 inches). However, management and evaluation of that population is 
+challenging given the open connection to the Fox River. 
+ 
+Tichigan Lake offers a quality largemouth bass angling opportunity. Management and 
+evaluation of that population is challenging due to confounding environmental 
+factors. Due to observed decreases in abundance and size structure the next survey 
+should focus on obtaining robust abundance, size structure and growth data to 
+advise future management needs. 
+ 
+Panfish continue to offer an outstanding angling opportunity in Tichigan Lake. 
+Observations from fyke netting and electrofishing indicate bluegill abundance to be a 
+common to abundant component of the fishery. Size structure data from both efforts 
+show a high quality bluegill angling opportunity where 76% of the bluegill measured 
+during 2022 fyke netting were 6 inches or greater. Pumpkinseed, black crappie, yellow 
+perch and warmouth are all common to abundant in the fishery and all offer good 
+size structure for anglers to enjoy. 
+ 
+Channel catfish represent a unique angling opportunity in Tichigan Lake because of 
+the open connection to the IL Fox River. While harvest and consumption of this 
+species is somewhat limited by the existing consumption advisory, the observed sizes 
+and abundance represent a quality angling opportunity. Of the channel catfish 
+measured during 2021 hoop netting 87% were 16 inches or greater and 48% were 24 
+inches or greater. 
+ 
+ 
+--- PAGE 4 ---
+4 
+ 
+Management recommendations for Tichigan Lake and the Waterford Impoundment 
+section of the Illinois Fox River include: 
+ 
+1. The observed size structure and abundance of northern pike suggests the 26-
+inch minimum length limit and daily bag limit of 2 fish is a good fit for the 
+fishery. No regulation change on northern pike is recommended at this time. 
+Northern pike have not been stocked since 2017. Difficulty of evaluating the 
+practice and ample available spawning habitat in the open system suggests 
+stocking this species is not necessary. The next survey should monitor 
+population trends through an update of abundance, size and growth. 
+2. The observed differences in abundance of walleye between the 2017 and 2022 
+surveys highlights the difficulty in evaluating the species in this system. The 
+2018 walleye regulation change from a 15-inch minimum length limt and daily 
+bag limit of five fish to an 18-inch minimum length limit and daily bag limit of 
+three fish offers greater protection yet the data suggests a decrease in 
+abundance. In addition, biennial stocking of large fingerling walleye since 2014 
+should have increased abundance as well. Given all these factors it is 
+recommended to discontinue walleye stocking by DNR. The next survey should 
+monitor population trends through an update of abundance, size and growth. 
+3. Due to observed decreases in abundance and size structure of largemouth 
+bass the next survey should focus on obtaining robust abundance, size 
+structure and growth data to advise future management needs. 
+4. Panfish continue to offer a high quality angling opportunity with good 
+abundance and quality size structure. The no minimum length limit and daily 
+bag limit of twenty five adequatly protects these species in this productive 
+system. No regulation change or stocking of these species is recommended at 
+this time. The next survey should monitor population trends through an 
+update of abundance, size and growth. 
+5. Channel catfish offer a unique angling opportunity with limited harvest due to 
+the existing consumption advisory. Observed size structure and abundance 
+represent a quality angling opportunity. No regulation change or stocking of 
+channel catfish is recommended at this time. The next survey should focus on 
+standardizing survey window and bait used to monitor population trends 
+through an update of abundance and size structure. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 5 ---
+5 
+ 
+ 
+ 
+ 
+ 
+Introduction 
+Tichigan Lake is a 279-acre drainage lake located in northwestern Racine County with 
+a reported mean depth of 6 feet and maximum depth of 63 feet (Figure 1). The lake 
+has an open connection to the Illinois Fox River near the Village of Waterford. Nearly 
+the entire shoreline is developed as residential homes. A small swath of shoreline on 
+the north end of Tichigan Lake remains in a more natural state. The lake generally 
+has a muck bottom, but also has areas of more course material such as sand and 
+gravel.  
+  
+One measure of a lake’s health is the trophic state, which relates to the amount of 
+algae in the water. The average summer trophic state for Tichigan Lake is consistently 
+in the eutrophic range. Available data shows the trophic state of Tichigan Lake is 
+worse than other deep, lowland drainage lakes. In fact Tichigan Lake and the Fox 
+River are on the Wisconsin impaired waters list due to phosphorus and 
+polychlorinated biphenyls (PCBs). Other challenges include the following 
+documented aquatic invasive species: common carp (Cyprinus carpio), curly-leaf 
+pondweed (Potamogeton crispus), Eurasian water-milfoil (Myriophyllum spicatum), 
+flowering rush (Butomus umbellatus), purple loosestrife (Lythrum salicaria) and 
+zebra mussel (Dreissena polymorpha). 
+ 
+There is no direct public boat access to Tichigan Lake, but access is available via the 
+Fox River. A public boat access with parking exists downstream of the lake in the 
+Village of Waterford and upstream of the lake off Bridge Drive. Tichigan Lake provides 
+diverse angling opportunities due to the open connection to the river. Largemouth 
+bass, northern pike, walleye and channel catfish are the main gamefish species. 
+Bluegill is the primary panfish species, but black crappie, pumpkinseed, yellow perch 
+and warmouth are also common. Wisconsin DNR fish stocking data shows a history of 
+walleye and northern pike stocking in Tichigan Lake and this section of the Fox River 
+and sporadic stocking from private sources of other species (Appendix, Table 1). 
+ 
+The significance of the fishery and public use justifies monitoring of the fish 
+community to assess management options and maximize the fishery potential. The 
+last comprehensive fish survey was conducted in 2017 and those results will be 
+presented for comparison. The purpose of the 2022 comprehensive fish survey was to 
+assess the overall health of the fish community, specifically the status of walleye, 
+northern pike, largemouth bass, panfish and channel catfish populations. 
+ 
+--- PAGE 6 ---
+6 
+ 
+ 
+Figure 1. Tichigan Lake contour map 
+ 
+Methods 
+A comprehensive fisheries survey following standard Wisconsin DNR protocols was 
+conducted on Tichigan Lake and the Fox River in Racine County during late summer 
+and fall of 2021, and spring of 2022. Survey activities were primarily limited to the 279 
+acres of Tichigan Lake proper. However, a channel catfish baited hoop netting survey 
+in late summer 2021 included portions of the Fox River and Waterford impoundment. 
+The primary goal of the surveys was to assess gamefish and panfish population 
+abundance, size structure and growth.  
+ 
+
+--- PAGE 7 ---
+7 
+ 
+Up to 11 fyke nets were set on Tichigan Lake to target spawning northern pike and 
+walleye (SNI) (Figure 2). Nets were lifted and reset every day possible from March 20 
+through April 15, 2022 for a total of 158 net nights of effort. 
+ 
+During SNI in both 2022 and 2017 all walleye, northern pike and a subsample of 
+panfish were measured to the nearest tenth inch for size structure analysis. In 2022 a 
+subsample of all captured walleye was weighed to the nearest tenth-pound and 
+dorsal spines were collected to estimate age. In 2017 a subsample of all captured 
+northern pike was weighed to the nearest tenth-pound and anal fin rays were 
+collected to estimate age. 
+ 
+Captured northern pike and walleye were given differential finclips (female – right 
+pectoral, male – left pectoral, unknown or immature – top caudal) to identify 
+recaptures and facilitate an adult population estimate. Unfortunately due to a low 
+number of northern pike recaptures a population estimate could not be calculated. 
+Population estimates in lakes with open connections to river systems, such as 
+Tichigan Lake, can be difficult to obtain. 
+ 
+Early spring electrofishing (SEI) using a DNR standard pulsed direct current (PDC) 
+boom shocker boat was conducted at night on April 19, 2022 for a total of 3.0 miles 
+and targeted walleye. A total of 46 walleye were captured during SEI, 37 were 
+considered mature adults. All walleye captured during the electrofishing run were 
+inspected for existing finclips to facilitate a population estimate. The adult walleye 
+population estimate was calculated using the Chapman modification of the Petersen 
+index: 
+ 
+𝑁𝑁 = (𝑀𝑀 + 1)(𝐶𝐶 + 1)
+(𝑅𝑅 + 1) − 1 
+ 
+where M is the number of marked fish at large, C is the number of fish examined for 
+marks during the recapture run, and R is the number of marked fish captured during 
+the recapture run. The 2022 Tichigan Lake adult walleye population estimate was 
+calculated as: 
+ 
+𝑁𝑁 = (115 + 1)(37 + 1)
+(15 + 1) − 1 
+ 
+where N = 274.5 or 0.98 per lake acre, 95% CI [195.6 – 432.9]. 
+ 
+ 
+Late spring electrofishing (SEII) using a DNR standard PDC boom shocker boat was 
+conducted at night on May 26, 2022 targeting largemouth and smallmouth bass and 
+panfish species for a total of 3.5 miles of shoreline (0.5 miles targeting all species and 
+3.0 miles targeting bass). All bass and panfish were measured to the nearest tenth 
+inch for size structure analysis. 
+--- PAGE 8 ---
+8 
+ 
+ 
+Fall electrofishing (FE) using a DNR standard PDC boom shocker boat was conducted 
+at night on November 2, 2021. FE targeted walleye for a total of 3.5 miles of shoreline. 
+All walleye were measured to aid in identifying young of the year walleye. 
+ 
+Up to 10 baited hoop nets were set on the Fox River and Waterford impoundment to 
+target channel catfish (figure 2). Nets were lifted and reset every day possible from 
+August 24 through August 27, 2021 for a total of 37 net nights of effort. All catfish were 
+measured to the nearest tenth inch for size structure analysis. 
+ 
+ 
+ 
+Figure 2. White dots showing 2022 SNI net locations on 
+left and 2021 summer baited hoop net locations on right. 
+ 
+ 
+ 
+ 
+
+--- PAGE 9 ---
+9 
+ 
+Results/Discussion 
+NORTHERN PIKE 
+In 2022 a total of 85 northern pike were captured during SNI. Total catch in the 2017 
+SNI was much higher at 280 northern pike. Catch rate (# fish/net night) allows a 
+standardized comparison between surveys. The 2022 catch rate was 0.5 northern 
+pike/net night which was half of the 2017 catch rate of 1 northern pike/net night. 
+Both catch rates were below average when compared to similar waters. Ice out in 
+2017 was much earlier which allowed for an earlier start to SNI and may account for 
+the higher total catch and catch rate of northern pike that year. 
+ 
+The average length of northern pike from the 2022 SNI was 25.5 inches and the 
+maximum observed length was a 38.5 inch female. The average (25.2 inches) and 
+maximum (38.5 inches) lengths from the 2017 SNI were almost identical indicating a 
+very stable size structure (Figure 3). The percent of legal sized fish (26 inches and 
+greater) was also nearly identical between the two surveys (34% in 2022 and 37% in 
+2017). 
+ 
+Age estimates allow calculation of growth rates and comparison to similar waters. 
+The 2017 age estimates indicated growth of Tichigan Lake northern pike is similar to 
+average growth rates in southern Wisconsin waters (Figure 4). This data suggests that 
+northern pike are reaching the current minimum size limit of 26-inches in about four 
+years. 
+ 
+One metric related to fish condition or health is relative weight. Relative weight is a 
+ratio of a fish’s weight to the weight of a “standard” fish of the same length. The 
+average relative weight calculated from all northern pike weighed during the 2017 
+survey was 0.98. This indicates that northern pike condition is good in Tichigan Lake 
+as the calculated relative weight is close to a 1:1 ratio with the standard weight. 
+ 
+In general Tichigan Lake offers a quality northern pike angling opportunity with over 
+30% of the fish sampled in 2022 SNI being of legal size. Good growth potential also 
+produces a low abundance of memorable size fish for anglers to enjoy. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 10 ---
+10 
+ 
+ 
+ 
+ 
+Figure 3. Length-frequency histograms of female, male and unknown sex northern pike sampled during 
+the 2017 and 2022 SNI surveys of Tichigan Lake, Racine County, WI. 
+ 
+ 
+
+--- PAGE 11 ---
+11 
+ 
+ 
+ 
+Figure 4. Northern pike mean length at age determined using anal fin rays collected during the SNI 
+survey of Tichigan Lake in 2017 compared to the Southern Wisonsin mean length at age from spring 
+(January-May) surveys. 
+ 
+ 
+WALLEYE 
+A total of 118 walleye were sampled during 2022 SNI. Total SNI catch in 2017 was much 
+higher at 475 walleye. The 2022 SNI catch rate was 0.7 walleye/net night which was 
+much lower than the 2017 SNI catch rate of 1.8 walleye/net night. The 2022 SNI catch 
+rate was below average and the 2017 SNI catch rate was about average when 
+compared to similar waters. 
+ 
+An adult walleye population estimate of 0.98 fish per lake surface acre was calculated 
+for the 2022 survey. In 2017 an adult walleye population estimate was calculated 
+using the same methods. At that time the adult walleye population was estimated at 
+6.5 fish per lake surface acre. The 2022 population estimate is a relatively low 
+population density while the 2017 population estimate is considered a relatively high 
+population density. This highlights the difficulty in achieving a reliable population 
+estimate in a lake with an open connection to a river system. 
+ 
+The average length of walleye from the 2022 SNI was 18.7 inches and the maximum 
+observed length was a 25.1 inch female. The 2022 average length showed about a one 
+inch increase from the 2017 average length of 17.8 inches. The 2017 SNI maximum 
+length (25.7 inches) was very similar to the 2022 SNI maximum length (Figure 5). The 
+percent of legal sized fish (18 inches and greater) increased between the surveys 
+(41% in 2017 and 66% in 2022). The shift in size structure is likely due to a regulation 
+
+--- PAGE 12 ---
+12 
+ 
+change that went into effect in 2018 which increased the minimum length limit from 
+15 inches to 18 inches and reduced the daily bag limit from five to three walleye.  
+ 
+The 2022 age estimates indicated that the growth of walleye in Tichigan Lake is 
+similar to average growth rates in southern Wisconsin waters (Figure 6). This data 
+suggests that walleye are reaching the current minimum size limit of 18 inches in 
+about five years. 
+ 
+The average relative weight calculated from all walleye weighed during the 2022 
+survey was 0.96. This suggests that walleye condition is good in Tichigan Lake as the 
+calculated relative weight is close to a 1:1 ratio with the standard weight. 
+ 
+Fall electrofishing surveys provide a walleye young of the year catch rate which gives 
+an indication of natural reproduction of walleye. No young of the year walleye were 
+collected in 2021 FE of Tichigan Lake. FE was conducted each year from 2014 through 
+2020 and no young of the year walleye were observed in any of those surveys. This 
+suggests that no natural reproduction of walleye occurs in Tichigan Lake or that the 
+young of the year walleye emigrate into the river system. 
+ 
+Available survey data indicates that Tichigan Lake has potential to produce a high 
+quality walleye fishery at times. However, management and evaluation of the 
+population is challenging given the open connection to the Fox River. 
+ 
+ 
+
+--- PAGE 13 ---
+13 
+ 
+ 
+Figure 5. Length-frequency histograms of female, male and unknown sex walleye sampled during the 
+2017 and 2022 SNI surveys of Tichigan Lake, Racine County, WI. 
+ 
+Figure 6. Walleye mean length at age determined using dorsal spines collected during the SNI survey of 
+Tichigan Lake in 2022 compared to the Southern Wisonsin mean length at age from spring (April-May) 
+surveys. 
+ 
+
+--- PAGE 14 ---
+14 
+ 
+LARGEMOUTH BASS 
+In 2022 a total of 70 largemouth bass were captured during SEII. Total catch in 2017 
+was much higher at 154 largemouth bass. Catch rate (# fish/mile of electrofishing) 
+allows a standardized comparison between surveys. The 2022 catch rate was 20 
+largemouth bass/mile which was about half of the 2017 catch rate of 38.5 largemouth 
+bass/mile. Catch rates are known to be highly variable but are often the best 
+available measure of abundance for some speices. Catch rates from both survey 
+years are above average when compared to similar waters. 
+ 
+The average length of largemouth bass from the 2022 SEII was 12.6 inches and the 
+maximum observed length was 18 inches. The average (14.0 inches) and maximum 
+(20.2 inches) lengths in the 2017 SEII were higher. The percent of legal sized fish (14 
+inches and greater) decreased between surveys (60% in 2017 and 34% in 2022). The 
+size structure from both surveys suggests consistent recruitment and good growth 
+potential (Figure 7). 
+ 
+The changes in abundance and size structure of the largemouth bass population are 
+possibly due to differences in sampling windows. Standard DNR sampling protocols 
+suggest electrofishing prior to peak bass spawn at water temperatures between 55° 
+to 70° F. In 2022 electrofishing was conducted on May 26 when water temperatures 
+were 65°F. In 2017 electrofishing was conducted on April 25 when water temperatures 
+were 60°F. The 2022 sample was also likely influenced by a higher pier density as 
+more residential piers had been installed by the later date. Differences in aquatic 
+plant density may have been a factor as well since the 2022 survey was later in the 
+growing season. In general, little largemouth bass harvest occurs in Wisconsin so 
+these environmental factors may explain the differences in results rather than 
+changes at a population level. The next survey should focus on monitoring the 
+largemouth bass population during the optimal sampling window.  
+ 
+Another dataset related to the bass population of Tichigan Lake and the Fox River is 
+available from DNR permitted fishing tournaments. The first record of a permitted 
+bass fishing tournmanet on Tichigan Lake was one tournament in 2013. Since then 
+there has been relatively steady increase in the number of permitted tournaments 
+including five in 2022. This suggests a quality bass angling opportunity as 
+tournaments tend to frequent waterbodies with potential for larger fish and/or good 
+abundance. 
+ 
+Available survey data indicates that Tichigan Lake offers a quality largemouth bass 
+angling opportunity. Management and evaluation of the population is challenging 
+due to confounding environmental factors. Due to observed decreases in abundance 
+and size structure the next survey should focus on obtaining robust abundance, size 
+structure and growth data to advise future management needs. 
+ 
+ 
+--- PAGE 15 ---
+15 
+ 
+ 
+ 
+Figure 7. Length-frequency histograms of largemouth bass sampled during the 2017 and 2022 SEII surveys 
+of Tichigan Lake, Racine County, WI. 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 16 ---
+16 
+ 
+BLUEGILL 
+In 2022 a total of 39 bluegill were captured during SEII. The total SEII catch in 2017 
+was similar at 42 bluegill. The 2022 catch rate was 78 bluegill/mile which was almost 
+double 2017 catch rate of 42 bluegill/mile. Catch rates are known to be highly 
+variable but are often the best available measure of abundance for some speices. 
+Catch rates from both survey years are below average when compared to similar 
+lakes. Based on observations during 2022 SNI and SEII surveys these abundance 
+estimates are very conservative. During the 2022 SEII there were obvious 
+concentrations of bluegill along certain stretches of the shoreline. The standard 
+bluegill sampling protocol didn’t adequately capture the patchy distribution of the 
+bluegill population in Tichigan Lake. 
+ 
+The average length of bluegill from the 2022 SEII was 6.2 inches and the maximum 
+observed length was 8.4 inches. The average (5.6 inches) and maximum (8.5 inches) 
+lengths in 2017 SEII were similar. During both survey years a subsample of bluegill 
+were measured during SNI to facilitate a more robust estimate of size structure 
+(Figure 8). The average length of bluegill from 2022 SNI was 6.8 inches and the 
+maximum observed length was an impressive 10.0 inches. The average (6.7 inches) 
+and maximum (9.2 inches) lengths in 2017 SNI were similar to 2022. The literature 
+suggests that 6 inches is considered quality size for bluegill (Gabelhouse 1984). Of the 
+bluegill measured during 2022 SNI, 76% were considered quality size of 6 inches or 
+greater. 
+ 
+While the electrofishing data suggests below average abundance, observations from 
+2022 SNI and SEII indicate bluegill abundance to be at least average. Size structure 
+data from both surveys show a high quality bluegill angling opportunity. 
+ 
+ 
+ 
+ 
+--- PAGE 17 ---
+17 
+ 
+ 
+ 
+Figure 8. Length-frequency histograms of bluegill sampled during the 2017 and 2022 SNI and SEII surveys 
+of Tichigan Lake, Racine County, WI. 
+ 
+ 
+ 
+ 
+
+--- PAGE 18 ---
+18 
+ 
+PUMPKINSEED 
+In 2022 and 2017 a subsample of pumpkinseed were measured during SNI to facilitate 
+an estimate of size structure (Figure 9). The average length of pumpkinseed from the 
+2022 SNI was 6.3 inches and the maximum observed length was 8.1 inches. The 
+average (6.4 inches) and maximum (7.9 inches) lengths in the 2017 SNI were almost 
+identical to 2022. The literature suggests that 6 inches is considered quality size for 
+pumpkinseed (Gabelhouse 1984). Of the pumpkinseed measured during the 2022 SNI, 
+77% were considered quality size of 6 inches or greater. Overall the data indicates a 
+stable population size structure and quality pumpkinseed opportunity. No 
+quantitative abundance estimate is available but qualitatively pumpkinseed are a 
+common component of the fishery in Tichigan Lake. 
+ 
+ 
+Figure 9. Length-frequency histograms of pumpkinseed sampled during the 2017 and 2022 SNI surveys of 
+Tichigan Lake, Racine County, WI. 
+
+--- PAGE 19 ---
+19 
+ 
+ 
+BLACK CRAPPIE 
+In 2022 and 2017 a subsample of black crappie were measured during SNI to facilitate 
+an estimate of size structure (Figure 10). The average length of black crappie from the 
+2022 SNI was 8.4 inches and the maximum observed length was 15.9 inches. The 
+average (8.5 inches) and maximum (15.4 inches) lengths in the 2017 SNI were almost 
+identical to 2022. The literature suggests that 8 inches is considered quality size for 
+black crappie (Gabelhouse 1984). Of the black crappie measured during the 2022 SNI, 
+56% were considered quality size of 8 inches or greater. Overall the data indicates a 
+stable population size structure and quality black crappie opportunity. No 
+quantitative abundance estimate is available but qualitatively black crappie are a 
+common component of the fishery in Tichigan Lake. 
+ 
+ 
+ 
+Figure 10. Length-frequency histograms of black crappie sampled during the 2017 and 2022 SNI surveys of 
+Tichigan Lake, Racine County, WI. 
+
+--- PAGE 20 ---
+20 
+ 
+YELLOW PERCH 
+In 2022 and 2017 a subsample of yellow perch were measured during SNI to facilitate 
+an estimate of size structure (Figure 11). The average length of yellow perch from the 
+2022 SNI was 7.0 inches and the maximum observed length was 10.7 inches. The 
+average (7.9 inches) and maximum (11.8 inches) lengths in 2017 SNI were slightly 
+higher than 2022. A larger proportion of 8-10 inch fish were observed in 2017 which 
+accounts for the higher average length. This slight shift in size structure may be an 
+indication of harvest of preferred sizes, or part of a natural cycle. The literature 
+suggests that 8 inches is considered quality size for yellow perch (Gabelhouse 1984). 
+Of the yellow perch measured during the 2022 SNI, 21% were considered quality size 
+of 8 inches or greater. Overall the data indicates a slight decrease in the population 
+size structure and an average yellow perch angling opportunity. No quantitative 
+abundance estimate is available but qualitatively yellow perch are an abundant 
+component of the fishery. 
+ 
+ 
+Figure 11 . Length-frequency histograms of yellow perch sampled during the 2017 and 2022 SNI surveys of 
+Tichigan Lake, Racine County, WI. 
+
+--- PAGE 21 ---
+21 
+ 
+WARMOUTH 
+In 2022 a subsample of warmouth were measured during SNI to facilitate an estimate 
+of size structure (Figure 12). The average length of warmouth from the 2022 SNI was 
+7.5 inches and the maximum observed length was 9.2 inches. The literature suggests 
+that 6 inches is considered quality size for warmouth (Gabelhouse 1984). Of the 
+warmouth measured during the 2022 SNI, 94% were considered quality size of 6 
+inches or greater. Warmouth are not typically targeted by anglers but the species 
+offers another quality sunfish havest opportunity. No quantitative abundance 
+estimate is available but qualitatively warmouth are a common component of the 
+fishery in Tichigan Lake. 
+ 
+ 
+ 
+Figure 12. Length-frequency histogram of warmouth sampled during the 2022 SNI survey of Tichigan Lake, 
+Racine County, WI. 
+ 
+CHANNEL CATFISH 
+In 2021 a total of 154 channel catfish were captured during late summer baited hoop 
+netting. Similar surveys were conducted in 2014 and 2019 and total catch was higher 
+both years (1211 and 405 total channel catfish respectively). The 2021 catch rate was 
+4.2 channel catfish/net night which was less than either of the previous surveys. The 
+2014 catch rate was 23.3/net night and the 2019 catch rate was 6.5/net night. When 
+compared to similar waters the 2019 and 2021 catch rates are about average and the 
+2014 catch rate is above average. 
+ 
+There are a number of factors which may contribute to the differences in total catch 
+and catch rate of channel catfish in these surveys. The survey dates were slightly 
+
+--- PAGE 22 ---
+22 
+ 
+different each year with 2014 being the earliest and 2021 being the latest. The WDNR 
+protocol suggests that surveys should be conducted post spawn when water 
+temperatures are greater than 70°F. Depending on latitude this may occur from mid-
+June through August. It is not recommended to sample beyond August; while 
+temperatures may be appropriate, fish may have already begun their migration from 
+their summer habitats. All the surveys were conducted in August but 2019 and 2021 
+were conducted in late August so some channel catfish may have migrated out of the 
+survey reach by that time. Other factors that varied between surveys were the bait 
+used in the hoop nets, water levels and flows (USGS Water Data) which all likely 
+contributed to the differences observed. 
+ 
+The average length of channel catfish from baited hoop netting in 2021 was 22.7 
+inches and the maximum observed length was 32.6 inches. The average length (23.4 
+inches) and maximum length (31.6 inches) were very similar in 2019. In 2014 the 
+average length of 18.7 inches was significantly lower while the maximum length of 
+30.1 inches was relatively similar to the other surveys. In 2014 there was a greater 
+proportion of channel catfish 14 inches and less which contributed to the lower 
+average length (Figure 13). This again may be related to the differences between 
+surveys in timing, techniques and environmental factors. Literature suggests that 16 
+inches is considered quality size for channel catfish and 24 inches is considered 
+preferred (Gabelhouse 1984). Of the channel catfish measured during 2021 baited 
+hoop netting, 87% were considered quality size of 16 inches or greater and 48% were 
+considered preferred size of 24 inches or greater. 
+ 
+Exloitation or angler harvest is not likely a contributing factor to differences 
+observed in the channel catfish population between surveys. There is a consumption 
+advisory related to polychlorinated biphenyls (PCBs) for channel catfish and common 
+carp on the Fox River and Tichigan Lake. The advisory states no more than one meal a 
+month of these species be consumed from these waters. Further, access to Tichigan 
+Lake and this stretch of the Fox River is somewhat limited. These factors suggest that 
+angler harvest would not drive population level changes in channel catfish. 
+ 
+Channel catfish represent a unique angling opportunity in Tichigan Lake because of 
+the connection to the Illinois Fox River. While harvest and consumption of this 
+species is somewhat limited by the existing consumption advisory and limited access, 
+the observed sizes and abundance represent a quality angling opportunity. 
+ 
+OTHER SPECIES 
+Other species observed during the 2022 survey that were found in low abundance 
+and do not warrant analysis or discussion included (total catch in parentheses): 
+bowfin (3), golden shiner (2), green sunfish (1), rock bass (19), smallmouth bass (4), 
+white sucker (1) and yellow bass (4). 
+ 
+--- PAGE 23 ---
+23 
+ 
+ 
+ 
+ 
+Figure 13 Length-frequency histograms of channel catfish sampled during the 2014, 2019 and 2021 baited 
+hoop net surveys of the Fox River, Racine County, WI. 
+
+--- PAGE 24 ---
+24 
+ 
+Management Recommendations 
+Management recommendations for Tichigan Lake and the Waterford Impoundment 
+section of the Illinois Fox River include: 
+ 
+1. The observed size structure and abundance of northern pike suggests the 26-
+inch minimum length limit and daily bag limit of 2 fish is a good fit for the 
+fishery. No regulation change on northern pike is recommended at this time. 
+Northern pike have not been stocked since 2017. Difficulty of evaluating the 
+practice and ample available spawning habitat in the open system suggests 
+stocking this species is not necessary. The next survey should monitor 
+population trends through an update of abundance, size and growth. 
+2. The observed differences in abundance of walleye between the 2017 and 2022 
+surveys highlights the difficulty in evaluating the species in this system. The 
+2018 walleye regulation change from a 15-inch minimum length limt and daily 
+bag limit of five fish to an 18-inch minimum length limit and daily bag limit of 
+three fish offers greater protection yet the data suggests a decrease in 
+abundance. In addition, biennial stocking of large fingerling walleye since 2014 
+should have increased abundance as well. Given all these factors it is 
+recommended to discontinue walleye stocking by DNR. The next survey should 
+monitor population trends through an update of abundance, size and growth. 
+3. Due to observed decreases in abundance and size structure of largemouth 
+bass the next survey should focus on obtaining robust abundance, size 
+structure and growth data to advise future management needs. 
+4. Panfish continue to offer a high quality angling opportunity with good 
+abundance and quality size structure. The no minimum length limit and daily 
+bag limit of twenty five adequatly protects these species in this productive 
+system. No regulation change or stocking of these species is recommended at 
+this time. The next survey should monitor population trends through an 
+update of abundance, size and growth. 
+5. Channel catfish offer a unique angling opportunity with limited harvest due to 
+the existing consumption advisory. Observed size structure and abundance 
+represent a quality angling opportunity. No regulation change or stocking of 
+channel catfish is recommended at this time. The next survey should focus on 
+standardizing survey window and bait used to monitor population trends 
+through an update of abundance and size structure. 
+ 
+ 
+ 
+ 
+ 
+References 
+Gabelhouse, D. W., Jr. 1984. A length-categorization system to assess fish stocks. 
+North AmericanJournal of Fisheries Management 4:273–285. 
+--- PAGE 25 ---
+25 
+ 
+ 
+Appendix 
+ 
+Table 1. Number of fish stocked in the Waterford Impoundment section of the Fox River and Tichigan Lake 
+since 2012 including year, stocking date, county, waterbody name, species, age class, number of fish 
+stocked and average length. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Year Stocking 
+Date County Waterbody 
+Name Species Age Class # Fish 
+Stocked
+Average 
+Length Inches
+2022 10/19/2022 Racine FOX RIVER WALLEYE LARGE FINGERLING 728 7
+2022 10/19/2022 Racine FOX RIVER WALLEYE LARGE FINGERLING 1066
+2021 11/04/2021 Racine FOX RIVER WALLEYE LARGE FINGERLING 1526 7
+2020 10/16/2020 Racine FOX RIVER WALLEYE LARGE FINGERLING 417 7
+2020 10/16/2020 Racine FOX RIVER WALLEYE LARGE FINGERLING 415 7
+2019 09/13/2019 Racine FOX RIVER SMALLMOUTH BASS YEARLING 540 6
+2019 10/18/2019 Racine FOX RIVER WALLEYE LARGE FINGERLING 726 7
+2018 09/10/2018 Racine FOX RIVER SMALLMOUTH BASS LARGE FINGERLING 540 5
+2018 10/17/2018 Racine FOX RIVER NORTHERN PIKE LARGE FINGERLING 1214 9
+2018 11/01/2018 Racine FOX RIVER WALLEYE LARGE FINGERLING 726 7
+2017 07/26/2017 Racine FOX RIVER WALLEYE LARGE FINGERLING 1872 3.06
+2017 09/19/2017 Racine FOX RIVER WALLEYE LARGE FINGERLING 540 7
+2016 09/23/2016 Racine FOX RIVER MUSKELLUNGE LARGE FINGERLING 175 11
+2016 10/03/2016 Racine FOX RIVER WALLEYE LARGE FINGERLING 556 7
+2015 09/21/2015 Racine FOX RIVER WALLEYE LARGE FINGERLING 570 7
+2014 06/10/2014 Racine FOX RIVER WALLEYE SMALL FINGERLING 22500 1.34
+2014 11/11/2014 Racine FOX RIVER SMALLMOUTH BASS LARGE FINGERLING 698 5
+2013 06/14/2013 Racine FOX RIVER WALLEYE SMALL FINGERLING 11340 1.5
+2012 09/05/2012 Racine FOX RIVER NORTHERN PIKE LARGE FINGERLING 1296 7.9
+2012 09/10/2012 Racine FOX RIVER NORTHERN PIKE LARGE FINGERLING 1164 7.54
+2022 09/23/2022 Racine TICHIGAN LAKE WALLEYE LARGE FINGERLING 1414 7.5
+2020 09/28/2020 Racine TICHIGAN LAKE WALLEYE LARGE FINGERLING 1395 6.4
+2018 09/21/2018 Racine TICHIGAN LAKE SMALLMOUTH BASS LARGE FINGERLING 3000 5
+2018 10/01/2018 Racine TICHIGAN LAKE WALLEYE LARGE FINGERLING 1395 7
+2017 05/24/2017 Racine TICHIGAN LAKE NORTHERN PIKE SMALL FINGERLING 2429 2.32
+2016 10/07/2016 Racine TICHIGAN LAKE WALLEYE LARGE FINGERLING 1395 6.2
+2015 05/21/2015 Racine TICHIGAN LAKE NORTHERN PIKE SMALL FINGERLING 2350 3
+2014 10/16/2014 Racine TICHIGAN LAKE WALLEYE LARGE FINGERLING 1272 7.6
+2014 10/22/2014 Racine TICHIGAN LAKE WALLEYE LARGE FINGERLING 120 7.1
+2014 11/11/2014 Racine TICHIGAN LAKE LARGEMOUTH BASS LARGE FINGERLING 1998 6.5
+2013 10/15/2013 Racine TICHIGAN LAKE NORTHERN PIKE LARGE FINGERLING 1793 10
+2012 06/01/2012 Racine TICHIGAN LAKE WALLEYE SMALL FINGERLING 39620 1.52
+--- PAGE 26 ---
+26 
+ 
+Table 2 . Catch statistics for SNI, SEII and hoop netting samples from Tichigan Lake, Racine County in 2021 and 2022. 
+ 
+ 
+Species Total Catch 
+(netting)
+CPE      
+(catch/net night)
+Total Catch 
+(electrofishing)
+CPE 
+(catch/mile)
+Average Length 
+(inches)
+Min Length 
+(inches)
+Max Length 
+(inches)
+Northern pike (all) 85 0.54 NA NA 25.5 16.5 38.5
+Northern pike (male) 52 0.33 NA NA 22.7 19.1 33.0
+Northern pike (female) 30 0.19 NA NA 30.6 19.7 38.5
+Northern pike (unknown) 3 0.02 NA NA 23.7 16.5 31.9
+Walleye (all) 118 0.75 46 15.3 18.2 11.5 25.1
+Walleye (male) 86 0.54 30 10.0 18.2 12.9 22.0
+Walleye (female) 28 0.18 7 2.3 20.6 16.3 25.1
+Walleye (unknown) 4 0.03 9 3.0 12.6 11.5 13.2
+Largemouth bass NA NA 70 20.0 12.6 7.1 18.0
+Bluegill 301 (subsample) NA 39 78.0 6.8 3.4 10.0
+Pumpkinseed 104 (subsample) NA 0 NA 6.3 4.1 8.1
+Black crappie 250 (subsample) NA 0 NA 8.4 5.0 15.9
+Yellow perch 270 (subsample) NA 3 6.0 7.0 5.2 10.7
+Warmouth 94 (subsample NA 0 NA 7.5 4.2 9.2
+Channel catfish 154 4.2 NA NA 22.7 11.4 32.6

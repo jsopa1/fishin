@@ -1,0 +1,286 @@
+PAGES: 6
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Fisheries Survey Report for South Fork Willow River, St. Croix County, 
+Wisconsin 2021 
+WATERBODY IDENTIFICATION CODE 2609200 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+KASEY YALLALY 
+DNR Fisheries Biologist 
+Baldwin, Wisconsin 
+February 2022 
+
+--- PAGE 2 ---
+Introduction 
+The South Fork Willow River is a small Class II coldwater tributary to the Willow River located 
+in northeastern St. Croix County. The stream flows from east to west and contains 5.3 miles of 
+Class II trout water. The stream is classified as a cool-cold headwater and mainstem stream. 
+The headwaters are located to the east of the town of Cylon and the confluence with the 
+Willow River is located just east of County Road T. In 2018, the stream was classified as 
+impaired due to high phosphorous levels and ranked as High for runoff impacts on 
+groundwater from non-point source pollutants. Land use in the watershed is primarily 
+agricultural (50%) mixed with grassland, forest and wetlands to a lesser extent.  
+ 
+Access to the stream is very limited as the stream is mostly surrounded by private ownership, 
+and there are few road crossings over the stream. Several small unclassified unnamed 
+tributaries flow into the South Fork Willow River and two larger tributaries, including Dry Run 
+(unclassified trout water) and Hutton Creek (Class II).  
+ 
+Both Brook Trout and Brown Trout historically were stocked in the stream prior to the 1970s 
+and Brook Trout continued to be stocked annually until 2001, when Brook Trout stocking was 
+discontinued. Brown Trout stocking was discontinued in 1995. The stream is primarily a Brook 
+Trout dominant stream; however, very low numbers of Brown Trout have occasionally been 
+detected in the stations located near and downstream of Highway 63.   
+ 
+Methods 
+A total of three stations were sampled on South Fork Willow River in 2021. Sampling was 
+conducted between June 15 and Sept. 15 using a backpack stream shocking unit with a single 
+electrode and a stream barge electrofishing unit with two electrodes. The length of stations 
+was determined by multiplying the mean stream width by 35. Stations were located upstream 
+of Highway 63 (Station 4), upstream of County Road O in the town of Cylon (Station 5) and 
+upstream of 235th St (Station 6). All fish species were collected at all stations, counted and 
+identified to species. All trout were identified to species and measured to the nearest 10th of 
+an inch. Catch rates of Brook Trout were compared to other Class II Brook Trout streams in 
+the Driftless and Western Corn Belt ecoregions and percentiles were determined.  
+ 
+The Index of Biotic Integrity (IBI) was used to measure biological attributes that are 
+influenced by human activities to assess the overall health of the stream. The index uses the 
+species assemblage present to assess water quality and thermal regimes within a waterbody. 
+Coldwater IBIs range in score from 0 to 100, with a high score (90-100) interpreted as an 
+Excellent Integrity rating and 10-20 interpreted as a Poor Integrity rating.  
+ 
+Study Sites 
+Station 4 is a trend site that is sampled annually and was the furthest downstream station 
+sampled due to a lack of access to the lower reaches. Habitat was not quantitatively 
+evaluated during the surveys. However, anecdotally, the stream at Station 4 flows through a 
+heavily wooded corridor with instream habitat consisting of tag alders and some large woody 
+debris, pools and a few undercut banks. The substrate mostly consists of fine sand sediment 
+and silt.  
+ 
+--- PAGE 3 ---
+Station 5 was located upstream of the railroad culvert, located slightly upstream of the 
+County O bridge. The stream in this station flowed through a wooded corridor consisting of 
+tag alder and bottomland hardwoods. The substrate consisted of gravel and sand, and 
+habitat features in the stream consisted of small amounts of woody debris with riffle and 
+pool sequences. 
+ 
+Station 6 flowed through a grassland/wetland corridor and was absent of trees and canopy 
+cover. Reed canary grass offered some overhead cover within the stream, and habitat 
+consisted of a few undercut banks and small pools. The substrate was composed of fine sand 
+and silt.   
+ 
+Results 
+Brook Trout were the dominant trout species collected at all stations in 2021 and were the 
+only trout species collected at Stations 5 and 6 (Table 1). Brook Trout ranged in total 
+abundance from 225/mile at Station 5 to 1538/mile at Station 4, which resulted in the 65th 
+and 95th percentiles, respectively, for similar streams in the ecoregion. Natural reproduction 
+of Brook Trout was detected at all stations and was high at Station 4 with 959 young-of-
+year/mile, which fell in the 90th percentile (Figure 1). Relative abundance of young-of-year 
+Brook Trout was considerably lower at Station 5 and was in the 75th percentile, while Station 6 
+was in the 80th percentile for young-of-year catch rates. Adult Brook Trout (larger than 4.5 
+inches) abundances ranged from 32/mile (30th percentile) at Station 5 to 580/mile (90th 
+percentile) at Station 4. Station 4 consisted of fish with the best size structure compared to 
+the other stations, with 131/fish per mile larger than 8 inches, resulting in the 85th percentile. 
+The maximum size of fish captured from all stations combined was 12 inches. A single 7-inch 
+Brown Trout was collected at Station 4. 
+ 
+Coldwater IBI ratings resulted in a score of 70 for Station 4 and 60 for Station 5, which is 
+ranked as Good, and a rating of 90 or Excellent for Station 6. A total of six non-salmonid fish 
+species were collected at Station 4, with White Sucker, Creek Chubs and Pearl Dace in high 
+abundance at Station 4. Five non-salmonid species were collected at Station 5 and only two 
+were collected at Station 6.  
+ 
+Discussion 
+The trout population has improved from previous surveys of these stations, where no trout 
+were detected in Stations 5 and 6 in 1997 or 2009 (Table 2). Trout are now in moderate to high 
+abundances at these sites and were in the 65th and 85 percentiles for catch rates of Brook 
+Trout in Class II streams. Brook Trout densities at Station 4 were higher than in all previous 
+years of sampling as well (Figure 2). The potential factors leading to improved trout densities 
+within the South Fork Willow River include improved water quality and improved connection 
+to groundwater in the area, which has resulted in optimal thermal regimes within the stream. 
+Station 4 contained the highest trout densities of all the stations, likely due to the larger 
+stream size, better nursery and adult trout habitat, and a larger forage base. Station 5 
+contained the lowest trout densities of all the stations, with adult Brook Trout abundance 
+being within the 30th percentile for Class II Brook Trout streams. The habitat at this site was 
+considerably different than the other two stations sampled and consisted of a wider, 
+shallower stream with very few pools and very little adequate adult fish cover. The stream at 
+--- PAGE 4 ---
+Station 6 was narrower and deeper in comparison, and the habitat consisted of overhanging 
+vegetation and deeper pools. Adult fish at this site were in the 70th percentile, likely because 
+of the more preferred adult trout habitat present. Angling pressure is likely very minimal 
+upstream of Highway 63 due to limited stream access and heavily wooded corridors making 
+angling in these sections undesirable and difficult.  
+ 
+Natural reproduction of Brook Trout was detected at all stations, with abundances of young-
+of-year trout ranging from the 65th to the 95th percentiles for Class II Brook Trout streams. The 
+years 2020 and 2021 have resulted in strong natural reproduction and subsequent year 
+classes of trout within the region are likely due, in part, to stable spring weather patterns 
+and subsequent stable base flows during spring egg incubation and hatching periods. 
+ 
+The Coldwater IBI scores from these sites indicate good water quality with minimal negative 
+impacts within the watershed, especially in the headwaters area upstream of Cylon. Brook 
+Trout were the dominant species at Station 6 and only two other, more tolerant species were 
+captured there, resulting in the Excellent IBI score. Station 5 had the lowest score but was 
+still ranked as Good. This station was located in the center of the town and ran through 
+private land bordered by mowed yards. Erosion was prevalent here, and the stream was 
+more degraded than the other two stations, with poorer habitat and a wider and shallower 
+stream. Species diversity was highest at Station 4, with the most tolerant species present. 
+This station is located farthest downstream in the watershed relative to the other two 
+stations, resulting in a higher diversity of habitats and slightly more degraded conditions 
+with a higher silt and sand load. The South Fork Willow River is listed as Impaired due to high 
+phosphorus levels within the watershed. However, the fish community and IBI ratings during 
+this survey did not reflect this status.  
+ 
+The South Fork Willow River is currently classified as a Class II trout stream. This 
+classification is correct based on this survey for the upstream portion of the stream which 
+would include Stations 5 and 6. However, the stream’s reach in proximity to Station 4 could 
+be reclassified to Class I status based on this survey. Total relative abundances of Brook 
+Trout at this station were in the 95th percentile, with high rates of natural reproduction and 
+multiple year classes present. Unfortunately, due to limited access to the stream and the 
+inability to access lower stream reaches between Station 4 and the confluence with the 
+Willow River, the status of the fishery in this reach is unknown and, therefore, cannot be 
+reclassified until additional data is collected.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 5 ---
+Table 1. Total number of each species captured at three stations on South Fork Willow River, summer 
+2021.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Table 2. Relative abundance (catch per effort; number per mile) of Brook Trout at three stations on South 
+Fork Willow River, summer 2021. ( . Indicates no survey) 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Species St. 4 St. 5 St. 6 
+Brook Trout 199 14 29 
+Brown Trout 1 0 0 
+Brook Stickleback 2 0 0 
+Central Mudminnow 0 4 1 
+Creek Chub 22 2 0 
+Fantail Darter 0 1 1 
+Johnny Darter 7 0 0 
+Mottled Sculpin 0 6 0 
+Pearl Dace 45 0 0 
+Rainbow Darter 1 1 0 
+White Sucker 80 0 0 
+  St. 4 St. 5 St.6 
+Year Juv. Adult Juv.   Adult Juv. Adult 
+1997 35 129 0 0 0 0 
+2001 85 139 . . . . 
+2006 448 77 . . . . 
+2007 340 108 . . . . 
+2008 503 162 . . . . 
+2009 116 255 0 0 . . 
+2010 428 472 . . . . 
+2011 93 108 . . . . 
+2012 131 557 . . . . 
+2013 101 93 . . . . 
+2014 131 193 . . . . 
+2015 178 178 . . . . 
+2016 479 997 . . . . 
+2017 425 611 . . . . 
+2018 827 155 . . . . 
+2019 193 147 . . . . 
+2021 959 580 193 32 274 193 
+--- PAGE 6 ---
+ 
+Figure 1. Length frequency distribution of Brook Trout at three stations on South Fork Willow River, 
+summer 2021.  
+ 
+ 
+ 
+ 
+Figure 2. Relative abundance (Catch per effort; fish per mile) of Brook Trout at Station 4 on South Fork 
+Willow River from 1997 to 2021.  
+ 
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+1 2 3 4 5 6 7 8 9 10 11 12 13
+Number of Fish
+Length (inches)
+St. 4 St. 5 St. 6
+0
+200
+400
+600
+800
+1000
+1200
+1400
+1600
+1800
+1997
+2001
+2006
+2007
+2008
+2009
+2010
+2011
+2012
+2013
+2014
+2015
+2016
+2017
+2018
+2019
+2021
+Catch Per Effort (Fish/Mile)
+Total/ Mile YOY/ Mile 4.6"+/ Mile

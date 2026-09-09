@@ -1,25 +1,34 @@
 #!/usr/bin/env python3
 """
-Wisconsin Conditions & Biology Forecast — V1, expanded statewide (Part 4).
+Wisconsin Conditions & Biology Forecast — V1, expanded to the full
+stocking-only tier plus rivers/streams (this cycle's Parts 1-5).
 
-Supersedes mvp/conditions_forecast.py's single-lake demo with the real,
-expanded V1 data foundation built in Parts 2-3 of this cycle:
-  - data/v1/wi_fisheries_survey_species_sample.csv (22 real, survey-
-    confirmed lakes -- actual observed species composition)
+Supersedes mvp/conditions_forecast.py's single-lake demo, and the prior
+survey-lakes-only version of this script, with:
+  - data/v1/wi_fisheries_survey_species_sample.csv (+ _batch2 if present)
+    -- real, survey-confirmed lakes/streams, authoritative when present
   - data/v1/wi_stocking_statewide_2011_2025.csv (24,683 real statewide
-    stocking records, 2,338 waterbodies -- POSITIVE evidence only, never
-    used to conclude a species is absent)
+    stocking records, 2,338 waterbodies INCLUDING 690 real stream/river
+    waterbodies -- POSITIVE evidence only, never used to conclude a
+    species is absent) -- now surfaced for EVERY waterbody, not just the
+    22 original survey lakes
+  - data/v1/usgs_wi_water_temp_sites.csv (185 real USGS WI sites with
+    daily-value water-temperature coverage: 177 streams/rivers, 8 lakes)
+    -- queried live at runtime for any matching waterbody
   - data/v1/wi_lake_water_temp_current.csv (real current/recent water
-    temperature for the 22 survey lakes + Lake Monona, via USGS live /
-    WDNR CLMN recent readings / NWS air-temp proxy, each honestly labeled)
+    temperature pre-pulled for the original 22 survey lakes + Lake Monona)
   - data/v1/physiology_thresholds_v1.json (26-species physiology reference,
-    docs/v1_physiology_research_candidates.md)
+    docs/v1_physiology_research_candidates.md) -- lake-derived thresholds
+    are flagged, not silently applied, when used against a stream entry
 
 Still explicitly NOT a catch-rate prediction (Decision #005, #012). Every
-output states this plainly.
+output states this plainly. A waterbody with neither survey nor stocking
+data, or neither a real nor proxy temperature source, reports "no_data"
+explicitly -- it is never silently dropped or given a fabricated value.
 
 Usage:
     python analysis/v1_conditions_biology_forecast.py --lake "Devils Lake"
+    python analysis/v1_conditions_biology_forecast.py --lake "Fox River" --county Green Lake
     python analysis/v1_conditions_biology_forecast.py --list-lakes
 """
 
@@ -36,19 +45,22 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).parent.parent
 DATA_V1 = REPO_ROOT / "data" / "v1"
 SURVEY_CSV = DATA_V1 / "wi_fisheries_survey_species_sample.csv"
+SURVEY_CSV_BATCH2 = DATA_V1 / "wi_fisheries_survey_species_sample_batch2.csv"
 STOCKING_CSV = DATA_V1 / "wi_stocking_statewide_2011_2025.csv"
 WATER_TEMP_CSV = DATA_V1 / "wi_lake_water_temp_current.csv"
+USGS_SITES_CSV = DATA_V1 / "usgs_wi_water_temp_sites.csv"
 THRESHOLDS_JSON = DATA_V1 / "physiology_thresholds_v1.json"
 
 USER_AGENT = "fishin-v1-conditions-forecast/0.1 (research prototype; contact via project repo)"
 
-# The one lake in wi_lake_water_temp_current.csv with a genuinely LIVE
-# (not just recent) real water-temperature source, confirmed in Part 3b.
-USGS_LIVE_SITES = {
-    "lake monona": "05429000",
-}
-
 STOCKING_MIN_YEAR_FOR_PRESENCE = 2011  # matches the statewide pull's own window
+
+# Name-keyword heuristic for classifying a waterbody as a river/stream vs.
+# a lake/pond/flowage -- used only to decide whether to flag lake-derived
+# physiology thresholds as unverified for this entry (Part 3). FLOWAGE is
+# deliberately excluded: it's a dammed, lake-like impoundment, not
+# flowing-water stream habitat, despite being river-adjacent by name.
+STREAM_KEYWORDS = ("CREEK", "RIVER", "BROOK", "STREAM", "BRANCH")
 
 
 # ---------------------------------------------------------------------------
@@ -119,20 +131,49 @@ def _group_rows_by_distinct_lake(rows: list, name_key: str, county_key: str) -> 
     return groups
 
 
+def classify_waterbody_type(name: str) -> str:
+    """
+    "stream" if the name contains a flowing-water keyword (CREEK, RIVER,
+    BROOK, STREAM, BRANCH), else "lake" (covers lakes, ponds, and
+    flowages -- a flowage is a dammed, lake-like impoundment, not
+    flowing-water stream habitat, despite the river-adjacent name).
+    Used only to decide whether to flag lake-derived physiology
+    thresholds as unverified for a given entry (Part 3) -- never to
+    exclude a waterbody from coverage.
+    """
+    upper = name.upper()
+    if "FLOWAGE" in upper:
+        return "lake"  # dammed impoundment, lake-like, even when named "X River Flowage"
+    return "stream" if any(kw in upper for kw in STREAM_KEYWORDS) else "lake"
+
+
+def _read_all_survey_rows() -> list:
+    """Reads the original 22-lake survey sample plus batch2 (Part 4's
+    additional survey-report pull), if present. Never errors if batch2
+    doesn't exist yet -- it's an optional, later-arriving file."""
+    rows = []
+    if SURVEY_CSV.exists():
+        with open(SURVEY_CSV, newline="", encoding="utf-8") as f:
+            rows.extend(csv.DictReader(f))
+    if SURVEY_CSV_BATCH2.exists():
+        with open(SURVEY_CSV_BATCH2, newline="", encoding="utf-8") as f:
+            rows.extend(csv.DictReader(f))
+    return rows
+
+
 def load_survey_species(lake_name: str, county: str | None = None) -> list | None:
     """
     Returns a sorted list of (species, cpue_metric, cpue_value) for a
-    survey-confirmed lake, or None if this lake isn't in the real survey
-    sample (22 lakes). This is the authoritative source when present.
-    Raises AmbiguousLakeError if the name matches more than one distinct
-    real lake and no county was given to disambiguate (e.g. "Fish Lake"
+    survey-confirmed waterbody, or None if it isn't in the real survey
+    sample. This is the authoritative source when present. Raises
+    AmbiguousLakeError if the name matches more than one distinct real
+    waterbody and no county was given to disambiguate (e.g. "Fish Lake"
     exists in both Dane and Waushara counties).
     """
-    if not SURVEY_CSV.exists():
+    all_rows = _read_all_survey_rows()
+    if not all_rows:
         return None
     target = _norm(lake_name)
-    with open(SURVEY_CSV, newline="", encoding="utf-8") as f:
-        all_rows = list(csv.DictReader(f))
     matched = [row for row in all_rows if _lake_name_matches(target, row["lake_name"])]
     if not matched:
         return None
@@ -154,6 +195,29 @@ def load_survey_species(lake_name: str, county: str | None = None) -> list | Non
             (row.get("cpue_or_abundance_metric", ""), row.get("cpue_value", ""))
         )
     return sorted(by_species.items())
+
+
+def survey_water_type(lake_name: str, county: str | None = None) -> str | None:
+    """
+    Real water_type from the survey data itself (batch2's PDFs are tagged
+    lake/stream at extraction time -- ground truth, not a name guess), if
+    this waterbody is survey-confirmed and its rows carry that column.
+    Returns None if not survey-confirmed or the column isn't present
+    (the original 22-lake sample predates this column; falls back to
+    classify_waterbody_type's name heuristic in that case).
+    """
+    all_rows = _read_all_survey_rows()
+    if not all_rows:
+        return None
+    target = _norm(lake_name)
+    matched = [row for row in all_rows if _lake_name_matches(target, row["lake_name"])]
+    if county:
+        matched = [row for row in matched if _county_matches(county, row["county"])]
+    for row in matched:
+        wt = row.get("water_type", "").strip().lower()
+        if wt in ("lake", "stream"):
+            return wt
+    return None
 
 
 def load_stocking_species(
@@ -206,26 +270,37 @@ def load_stocking_species(
 def get_species_presence(lake_name: str, county: str | None = None) -> dict:
     """
     Returns {"tier": "survey_confirmed"|"stocking_only"|"no_data",
-             "species": [...]} applying the presence-classification rule
+             "species": [...], "waterbody_type": "lake"|"stream",
+             "detail": {...}} applying the presence-classification rule
     from docs/v1_species_presence_manifest.md: survey data is authoritative
     when present; stocking data is positive-only evidence, never proof of
-    absence; no data means no claim is made either way.
+    absence (per this cycle's Part 1, EVERY waterbody in the statewide
+    stocking pull -- lake or stream, not just the original 22 survey lakes
+    -- surfaces this way, not just a hand-picked subset); no data means no
+    claim is made either way.
     """
     survey = load_survey_species(lake_name, county)
     if survey is not None:
+        # Prefer the real, extraction-time water_type tag (batch2's PDFs
+        # are tagged lake/stream from the source report itself) over the
+        # name heuristic, when available.
+        waterbody_type = survey_water_type(lake_name, county) or classify_waterbody_type(lake_name)
         return {
             "tier": "survey_confirmed",
             "species": [sp for sp, _ in survey],
             "detail": dict(survey),
+            "waterbody_type": waterbody_type,
         }
+    waterbody_type = classify_waterbody_type(lake_name)
     stocking = load_stocking_species(lake_name, county)
     if stocking is not None:
         return {
             "tier": "stocking_only",
             "species": [sp for sp, _ in stocking],
             "detail": dict(stocking),
+            "waterbody_type": waterbody_type,
         }
-    return {"tier": "no_data", "species": [], "detail": {}}
+    return {"tier": "no_data", "species": [], "detail": {}, "waterbody_type": waterbody_type}
 
 
 def load_prepulled_water_temp(lake_name: str, county: str | None = None) -> dict | None:
@@ -252,18 +327,36 @@ def load_prepulled_water_temp(lake_name: str, county: str | None = None) -> dict
 
 
 def list_known_lakes() -> list:
-    """Every (lake, county) pair this script has SOME real data for, deduped
-    by exact name -- shown with county so name collisions (e.g. two "Fish
-    Lake"s) are visible up front rather than discovered via an error."""
+    """Every (lake, county) pair with SURVEY-CONFIRMED or pre-pulled
+    real/proxy temperature data -- the small, high-confidence subset.
+    Deduped by exact name, shown with county so name collisions (e.g. two
+    "Fish Lake"s) are visible up front rather than discovered via an error."""
     pairs = set()
-    if SURVEY_CSV.exists():
-        with open(SURVEY_CSV, newline="", encoding="utf-8") as f:
-            for row in csv.DictReader(f):
-                pairs.add((row["lake_name"], row["county"]))
+    for row in _read_all_survey_rows():
+        pairs.add((row["lake_name"], row["county"]))
     if WATER_TEMP_CSV.exists():
         with open(WATER_TEMP_CSV, newline="", encoding="utf-8") as f:
             for row in csv.DictReader(f):
                 pairs.add((row["lake_name"], row["county"]))
+    return sorted(pairs)
+
+
+def list_stocking_only_waterbodies() -> list:
+    """Every (waterbody, county, type) triple in the full statewide
+    stocking pull -- ~2,338 entries, lakes AND streams. This is the full
+    Part 1 coverage universe: every one of these gets a stocking-only
+    presence result when queried, even though most have no survey or
+    temperature data. Not printed by default (too large for a plain
+    --list-lakes) -- use --list-stocking-only."""
+    if not STOCKING_CSV.exists():
+        return []
+    pairs = set()
+    with open(STOCKING_CSV, newline="", encoding="utf-8") as f:
+        for row in csv.DictReader(f):
+            name = row["waterbody"].strip()
+            if not name:
+                continue
+            pairs.add((name, row["county"], classify_waterbody_type(name)))
     return sorted(pairs)
 
 
@@ -323,57 +416,150 @@ def _parse_coords_from_notes(notes: str):
         return None
 
 
+def load_usgs_sites() -> list:
+    if not USGS_SITES_CSV.exists():
+        return []
+    with open(USGS_SITES_CSV, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def find_usgs_site_matches(waterbody_name: str) -> list:
+    """Real, generic name match against the 185-site USGS WI water-
+    temperature reference table (Part 2/3: 177 streams + 8 lakes). USGS
+    station names are formatted like "FOX RIVER AT BERLIN, WI" -- matches
+    if the waterbody name is a substring of the station name. Returns
+    every match (there can be several sites on the same named river);
+    the caller tries them in order until one yields real live data."""
+    target = _norm(waterbody_name.split("(")[0].strip())
+    if len(target) < 4:
+        return []
+    matches = []
+    for site in load_usgs_sites():
+        if target in _norm(site["station_nm"]):
+            matches.append(site)
+    return matches
+
+
+def geocode_live(waterbody_name: str, county: str | None) -> tuple | None:
+    """Live OpenStreetMap/Nominatim geocode, same real method used for the
+    original 13 NWS-proxy lakes in Part 3b -- extended here to work for
+    ANY waterbody name at request time, not just the ones pre-geocoded.
+    Returns (lat, lon) or None if geocoding fails; never fabricates a
+    location.
+
+    Real, disclosed limitation: reach-level survey names carry a
+    parenthetical description (e.g. "Rush River (whole surveyed reach)")
+    that breaks the geocoder, so it's stripped before querying -- this
+    means a multi-reach river's several entries all geocode to the same
+    approximate point (the river's general location in that county), not
+    the specific surveyed reach.
+    """
+    clean_name = waterbody_name.split("(")[0].strip()
+    query = f"{clean_name}, {county} County, Wisconsin" if county else f"{clean_name}, Wisconsin"
+    url = "https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode(
+        {"q": query, "format": "json", "limit": 1, "countrycodes": "us"}
+    )
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            results = json.loads(resp.read().decode("utf-8"))
+    except (urllib.error.HTTPError, urllib.error.URLError, ValueError):
+        return None
+    if not results:
+        return None
+    try:
+        return float(results[0]["lat"]), float(results[0]["lon"])
+    except (KeyError, ValueError):
+        return None
+
+
+NO_TEMPERATURE_DATA = {
+    "value_c": None,
+    "is_real_water_measurement": False,
+    "method": "no_data",
+    "source": None,
+    "observed_at": None,
+}
+
+
 def get_current_temperature(lake_name: str, county: str | None = None, live_refresh: bool = True) -> dict:
     """
-    Resolution order (Part 3b's real findings):
-      1. USGS live gauge, if this lake is one of the confirmed live sites
-         (currently just Lake Monona) -- refetched live every run.
-      2. Pre-pulled real CLMN/USGS reading from Part 3b's data pull --
-         used AS-IS with its true observed date (this is real, dated data,
-         not stale-and-hidden; CLMN itself is periodic, not a live feed).
+    Resolution order, real sources only, honest no_data if all fail
+    (Part 2/3: this now applies to ANY Wisconsin waterbody, lake or
+    stream, not just the original 22 survey lakes):
+      1. Live USGS gauge -- generic match against the 185-site real
+         reference table (177 streams + 8 lakes), tried in order until one
+         returns real current data. This is the PRIMARY real source for
+         streams, which have far richer live USGS coverage than lakes do.
+      2. Pre-pulled real CLMN/USGS reading from the original 22-lake pull
+         -- used AS-IS with its true observed date (real, dated data, not
+         stale-and-hidden; CLMN itself is periodic, not a live feed).
       3. Live NWS air-temperature proxy, explicitly labeled as such --
-         refetched live every run using coordinates recovered from the
-         pre-pull's notes, since a live proxy is more honest than a
-         cached one that grows staler by the day.
+         live geocode (Nominatim) + live current-conditions fetch for any
+         waterbody not covered by 1 or 2.
+      4. Honest no_data -- returned, never raised and never silently
+         dropped; the narrative builder reports this plainly.
     """
-    key = _norm(lake_name).lower()
-    if key in USGS_LIVE_SITES and live_refresh:
-        site_id = USGS_LIVE_SITES[key]
-        try:
-            value_c, obs_time = get_usgs_live_water_temp_c(site_id)
+    if live_refresh:
+        for site in find_usgs_site_matches(lake_name):
+            try:
+                value_c, obs_time = get_usgs_live_water_temp_c(site["site_no"])
+            except (urllib.error.HTTPError, urllib.error.URLError):
+                continue
             if value_c is not None:
                 return {
                     "value_c": value_c,
                     "is_real_water_measurement": True,
                     "method": "usgs_live",
-                    "source": f"USGS live gauge {site_id}",
+                    "source": f"USGS live gauge {site['site_no']} ({site['station_nm']})",
                     "observed_at": obs_time,
                 }
-        except (urllib.error.HTTPError, urllib.error.URLError):
-            pass  # fall through to the pre-pulled row / proxy below
 
     row = load_prepulled_water_temp(lake_name, county)
-    if row is None:
-        raise ValueError(
-            f"No water-temperature data (real or proxy) on file for '{lake_name}'. "
-            f"Run --list-lakes to see lakes with data."
-        )
+    if row is not None:
+        is_real = row["is_real_water_measurement"].strip().lower() == "true"
+        if is_real:
+            return {
+                "value_c": float(row["value_c"]),
+                "is_real_water_measurement": True,
+                "method": row["method"],
+                "source": row["source_url_or_station"],
+                "observed_at": row["retrieved_at"],
+                "note": row.get("notes", ""),
+            }
 
-    is_real = row["is_real_water_measurement"].strip().lower() == "true"
-    if is_real:
+        # Proxy row: try a live refresh; fall back to the pre-pulled proxy
+        # value if that fails, but still label it a proxy either way.
+        if live_refresh:
+            coords = _parse_coords_from_notes(row.get("notes", ""))
+            if coords:
+                try:
+                    value_c, station, obs_time = get_nws_current_air_temp_c(*coords)
+                    return {
+                        "value_c": value_c,
+                        "is_real_water_measurement": False,
+                        "method": "nws_air_proxy_live",
+                        "source": f"NWS current air temperature (live refresh) [station {station}]",
+                        "observed_at": obs_time,
+                    }
+                except (urllib.error.HTTPError, urllib.error.URLError, RuntimeError):
+                    pass  # fall back to the pre-pulled proxy value below
+
+        cache_reason = "live refresh disabled (--no-live-refresh)" if not live_refresh else "live refresh attempted and failed"
         return {
             "value_c": float(row["value_c"]),
-            "is_real_water_measurement": True,
-            "method": row["method"],
-            "source": row["source_url_or_station"],
+            "is_real_water_measurement": False,
+            "method": row["method"] + "_cached",
+            "source": row["source_url_or_station"] + f" (cached from prior pull, {cache_reason})",
             "observed_at": row["retrieved_at"],
             "note": row.get("notes", ""),
         }
 
-    # Proxy row: try a live refresh; fall back to the pre-pulled proxy
-    # value if that fails, but still label it a proxy either way.
+    # Not in the pre-pulled snapshot at all (the common case for the
+    # ~2,315 stocking-only waterbodies added this cycle) -- try a live
+    # NWS proxy via live geocoding before giving up.
     if live_refresh:
-        coords = _parse_coords_from_notes(row.get("notes", ""))
+        coords = geocode_live(lake_name, county)
         if coords:
             try:
                 value_c, station, obs_time = get_nws_current_air_temp_c(*coords)
@@ -381,21 +567,13 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
                     "value_c": value_c,
                     "is_real_water_measurement": False,
                     "method": "nws_air_proxy_live",
-                    "source": f"NWS current air temperature (live refresh) [station {station}]",
+                    "source": f"NWS current air temperature (live refresh, live-geocoded) [station {station}]",
                     "observed_at": obs_time,
                 }
             except (urllib.error.HTTPError, urllib.error.URLError, RuntimeError):
-                pass  # fall back to the pre-pulled proxy value below
+                pass  # fall through to no_data below
 
-    cache_reason = "live refresh disabled (--no-live-refresh)" if not live_refresh else "live refresh attempted and failed"
-    return {
-        "value_c": float(row["value_c"]),
-        "is_real_water_measurement": False,
-        "method": row["method"] + "_cached",
-        "source": row["source_url_or_station"] + f" (cached from prior pull, {cache_reason})",
-        "observed_at": row["retrieved_at"],
-        "note": row.get("notes", ""),
-    }
+    return dict(NO_TEMPERATURE_DATA)
 
 
 # ---------------------------------------------------------------------------
@@ -465,49 +643,70 @@ def build_narrative(lake_name: str, temp_info: dict, presence: dict, thresholds:
     lines.append("")
 
     value_c = temp_info["value_c"]
-    value_f = c_to_f(value_c)
-    measurement_note = (
-        "a real water-temperature measurement"
-        if temp_info["is_real_water_measurement"]
-        else "an air-temperature PROXY, not a direct water-temperature measurement"
-    )
-    lines.append(
-        f"**Current temperature reading:** {value_f:.1f}°F / {value_c:.1f}°C ({measurement_note}). "
-        f"Source: {temp_info['source']}. Observed: {temp_info['observed_at']}."
-    )
-    if temp_info.get("note"):
-        lines.append(f"_Note: {temp_info['note']}_")
+    waterbody_type = presence.get("waterbody_type", "lake")
+
+    if value_c is None:
+        lines.append(
+            "**No real or proxy water-temperature data is available for this waterbody.** "
+            "Neither a live USGS gauge, a pre-pulled real reading, nor a live NWS proxy could be "
+            "resolved. This is reported honestly as no_data, not a fabricated value."
+        )
+    else:
+        value_f = c_to_f(value_c)
+        measurement_note = (
+            "a real water-temperature measurement"
+            if temp_info["is_real_water_measurement"]
+            else "an air-temperature PROXY, not a direct water-temperature measurement"
+        )
+        lines.append(
+            f"**Current temperature reading:** {value_f:.1f}°F / {value_c:.1f}°C ({measurement_note}). "
+            f"Source: {temp_info['source']}. Observed: {temp_info['observed_at']}."
+        )
+        if temp_info.get("note"):
+            lines.append(f"_Note: {temp_info['note']}_")
     lines.append("")
 
     tier = presence["tier"]
     if tier == "no_data":
         lines.append(
-            "**No species-presence data (survey or stocking) is on file for this lake in this project.** "
-            "No species-level narrative can be generated. Run --list-lakes to see lakes this tool has data for."
+            "**No species-presence data (survey or stocking) is on file for this waterbody in this "
+            "project.** No species-level narrative can be generated. Run --list-lakes or "
+            "--list-stocking-only to see waterbodies this tool has data for."
         )
         return "\n".join(lines)
 
+    type_label = "stream/river" if waterbody_type == "stream" else "lake"
     if tier == "survey_confirmed":
         lines.append(
             f"**Species with real WDNR fisheries-survey-confirmed presence** "
-            f"({len(presence['species'])}): " + ", ".join(sp.title() for sp in presence["species"])
+            f"({len(presence['species'])}, {type_label}): "
+            + ", ".join(sp.title() for sp in presence["species"])
         )
         lines.append(
             "_This is a real, DNR-observed species list from an electrofishing/netting survey — "
-            "the authoritative source for this lake (see docs/v1_species_presence_manifest.md)._"
+            "the authoritative source for this waterbody (see docs/v1_species_presence_manifest.md)._"
         )
     else:
         lines.append(
             f"**Species confirmed present via WDNR stocking records, 2011-present** "
-            f"({len(presence['species'])}): " + ", ".join(sp.title() for sp in presence["species"])
+            f"({len(presence['species'])}, {type_label}): "
+            + ", ".join(sp.title() for sp in presence["species"])
         )
         lines.append(
             "_Stocking-only confirmation: this list is POSITIVE evidence these species were introduced here, "
             "NOT a complete species inventory — a species absent from this list may still be present "
             "(self-sustaining populations are often stocked less, not more). No real fisheries survey "
-            "was pulled for this lake in this project._"
+            "was pulled for this waterbody in this project._"
         )
     lines.append("")
+
+    if value_c is None:
+        lines.append(
+            "_No species-vs-temperature narrative below, since no water-temperature data is available "
+            "for this visit — species presence is still reported honestly above._"
+        )
+        return "\n".join(lines)
+
     lines.append("## Species notes")
     lines.append("")
 
@@ -519,8 +718,17 @@ def build_narrative(lake_name: str, temp_info: dict, presence: dict, thresholds:
         matches = []
         for t in species_entry["thresholds"]:
             m = describe_threshold_match(value_c, t)
-            if m:
-                matches.append((m, t.get("evidence", "unspecified")))
+            if not m:
+                continue
+            river_caveat = ""
+            if waterbody_type == "stream" and t["type"] in ("activity_window", "physiological_optimum", "growth_optimum"):
+                river_caveat = (
+                    " **River/stream caveat: this value is derived from lake-based studies "
+                    "(see docs/v1_physiology_research_candidates.md and "
+                    "docs/v1_river_stream_coverage_report.md) and has not been verified to transfer to "
+                    "flowing-water conditions — reported with this caveat, not excluded.**"
+                )
+            matches.append((m, t.get("evidence", "unspecified"), river_caveat))
         diel_note = ""
         if species_entry.get("diel_active"):
             diel_note = (
@@ -532,15 +740,15 @@ def build_narrative(lake_name: str, temp_info: dict, presence: dict, thresholds:
             continue
         any_match = True
         lines.append(f"### {species.title()}")
-        for m, evidence in matches:
-            lines.append(f"- Water temperature is {m}. (Evidence quality: {evidence})")
+        for m, evidence, river_caveat in matches:
+            lines.append(f"- Water temperature is {m}. (Evidence quality: {evidence}){river_caveat}")
         if diel_note:
             lines.append(f"- {diel_note.strip()}")
         lines.append("")
 
     if not any_match:
         lines.append(
-            "No species confirmed present in this lake currently has water temperature inside any "
+            "No species confirmed present in this waterbody currently has water temperature inside any "
             "of its documented physiology windows (or reference data isn't available for the species "
             "present here). No seasonal-context statement is generated for this visit — this is "
             "expected at many times of year, not an error."
@@ -560,7 +768,14 @@ def main():
         "--county", default=None,
         help='Disambiguates lakes that share a name across counties, e.g. "Fish Lake" (Dane vs. Waushara)',
     )
-    parser.add_argument("--list-lakes", action="store_true", help="List every lake this tool has real data for")
+    parser.add_argument(
+        "--list-lakes", action="store_true",
+        help="List waterbodies with survey-confirmed or pre-pulled temperature data (the high-confidence subset)",
+    )
+    parser.add_argument(
+        "--list-stocking-only", action="store_true",
+        help="List every waterbody (lake or stream) in the full statewide stocking pull (~2,338 entries)",
+    )
     parser.add_argument(
         "--no-live-refresh", action="store_true",
         help="Use only the pre-pulled data/v1 snapshot, skip live USGS/NWS refetch (faster, offline-safe)",
@@ -572,8 +787,13 @@ def main():
             print(f"{name} ({county})")
         return
 
+    if args.list_stocking_only:
+        for name, county, wtype in list_stocking_only_waterbodies():
+            print(f"{name} ({county}) [{wtype}]")
+        return
+
     if not args.lake:
-        parser.error("--lake is required (or use --list-lakes)")
+        parser.error("--lake is required (or use --list-lakes / --list-stocking-only)")
 
     thresholds = load_thresholds()
 
@@ -581,9 +801,6 @@ def main():
         presence = get_species_presence(args.lake, args.county)
         temp_info = get_current_temperature(args.lake, args.county, live_refresh=not args.no_live_refresh)
     except AmbiguousLakeError as e:
-        print(f"ERROR: {e}", file=sys.stderr)
-        sys.exit(1)
-    except ValueError as e:
         print(f"ERROR: {e}", file=sys.stderr)
         sys.exit(1)
 

@@ -1,0 +1,39 @@
+#
+#
+# US Geological Survey
+# retrieved: 2026-09-09 09:02:28 -04:00	(sdas01)
+#
+# The Site File stores location and general information about groundwater,
+# surface water, and meteorological sites
+# for sites in USA.
+#
+# File-format description:  http://help.waterdata.usgs.gov/faq/about-tab-delimited-output
+# Automated-retrieval info: http://waterservices.usgs.gov/rest/Site-Service.html
+#
+# Contact:   gs-w_support_nwisweb@usgs.gov
+#
+# The following selected fields are included in this output:
+#
+#  agency_cd       -- Agency
+#  site_no         -- Site identification number
+#  station_nm      -- Site name
+#  site_tp_cd      -- Site type
+#  dec_lat_va      -- Decimal latitude
+#  dec_long_va     -- Decimal longitude
+#  coord_acy_cd    -- Latitude-longitude accuracy
+#  dec_coord_datum_cd -- Decimal Latitude-longitude datum
+#  alt_va          -- Altitude of Gage/land surface
+#  alt_acy_va      -- Altitude accuracy
+#  alt_datum_cd    -- Altitude datum
+#  huc_cd          -- Hydrologic unit code
+#
+agency_cd	site_no	station_nm	site_tp_cd	dec_lat_va	dec_long_va	coord_acy_cd	dec_coord_datum_cd	alt_va	alt_acy_va	alt_datum_cd	huc_cd
+5s	15s	50s	7s	16s	16s	1s	10s	8s	3s	10s	16s
+USGS	04085500	CEDAR LAKE NEAR KIEL, WI	LK	43.9263904	-87.9397501	S	NAD83	891	1	NAVD88	04030101
+USGS	054279485	STRICKER'S POND AT MIDDLETON, WI	LK	43.0872271	-89.5098037	S	NAD83	923	1	NAVD88	07090002
+USGS	05429000	LAKE MONONA AT MADISON, WI	LK	43.0633297	-89.3970636	S	NAD83	839.86	.01	NAVD88	07090002
+USGS	423755088341700	DELAVAN LAKE INLET-BASE SITE-NEAR LAKE LAWN, WI	LK	42.6319527	-88.5714378	S	NAD83	927	1	NAVD88	07090002
+USGS	453100089343002	LAKE CLARA NEAR TOMAHAWK, WI	LK	45.5166633	-89.5750872	S	NAD83	1519	1	NAVD88	07070001
+USGS	455946089415704	LITTLE ROCK LAKE (WATER TEMP) NEAR WOODRUFF, WI	LK	45.99609467	-89.6992592	S	NAD83	1627	1	NAVD88	07050002
+USGS	461342091561002	ROUND LAKE NEAR GORDON, WI	LK	46.2283143	-91.9362844	S	NAD83	1045	1	NAVD88	07030001
+USGS	462458091274402	EAST EIGHTMILE LAKE NEAR IRON RIVER, WI	LK	46.41609289	-91.462379	S	NAD83	1173	1	NAVD88	07030001

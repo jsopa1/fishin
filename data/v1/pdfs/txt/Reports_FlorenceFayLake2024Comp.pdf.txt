@@ -1,0 +1,412 @@
+PAGES: 6
+--- PAGE 1 ---
+2024 COMPREHENSIVE SURVEY REPORT 
+WATER: FAY LAKE   COUNTY: FLORENCE 
+INTRODUCTION AND SURVEY OBJECTIVES 
+ 
+The Wisconsin Department of Natural Resources conducted a comprehensive survey of Fay Lake, Florence 
+County, to analyze the health of its fishery. A comprehensive survey includes surveys designed to assess 
+abundance, size structure, and recruitment of all the major fish populations within the lake; for species 
+specific survey details see the table below. The summary that follows will detail the current fishery, as well 
+as the bullhead removal efforts as part of the walleye rehabilitation project. Fay Lake is located 
+approximately 2 miles northeast of Long Lake with boat access to Fay Lake off of Fay Lake Landing Road. 
+This survey was a collaborative effort with the US Forest Service. 
+Acres:   282   Shoreline Miles:  4.5               Maximum Depth (feet): 10 
+Lake Type:   Drainage   Lake Class: Complex-Cool-Dark           Public Access: Boat Landing 
+Regulations:  Statewide Regulations 
+WISCONSIN DNR CONTAC T INFO.  
+Page 1 
+ 
+Levi Feucht - Fisheries Biologist 
+Levi.Feucht@Wisconsin.gov  
+ 
+Wisconsin Dept. of Natural Resources 
+5631 Forestry Dr. 
+Florence, WI 54121 
+715-528-4400 x 7 
+FISH METRIC DESCRIPTIONS 
+ 
+Population estimate (PE) is estimated by marking a portion of the population, then 
+capturing another sample of fish and using the ratio of new fish : previously marked fish to 
+estimate the number of fish that are in the population. 
+Catch per unit effort (CPUE) is the number of fish per mile (electrofishing) or per net-
+night (netting), and is used to index abundance when we are unable to get a population 
+estimate. 
+Relative stock density (RSD) is an index used to describe size structure of fish 
+populations. It is calculated by dividing the number of fish larger than a certain length by 
+the number of stock size fish for a given species. Stock size is a length set for each 
+species, and is used to offset potential large year classes of juvenile fish 
+Length frequency distribution (LFD) is a graphical representation of the number of fish 
+captured by inch group. Smaller fish (or younger age classes) may not always be 
+represented in the length frequency due to different habitat usage or sampling gear 
+limitations. 
+SURVEY METHODS 
+• Surveys are designed to evaluate each species when 
+they are particularly vulnerable to our gear.  
+• Standard fyke nets and electrofishing gear is used to 
+capture fish. 
+• Data is collected from the target species of each 
+survey to gather population metrics. 
+• Fish metrics are compared to previous surveys of this 
+water and the mean/median values for waters in this 
+“area” (Florence and Forest Counties). 
+• Data collected is used to monitor the fishery, 
+determine if stocking is necessary, evaluate fishing 
+regulations, and determine how to improve the fishery. 
+SURVEY INFORMATION 
+Species Survey Date(s) Gear Used Effort Water Temp. (°F) 
+Walleye, Northern Pike, Yellow Perch, Black Crappie  3/18-4/5/2024 Fyke Net 21 Net-Nights 38-40 
+Walleye, Northern Pike, Yellow Perch, Black Crappie  4/5-8/2024 Fyke Net 20 Net-Nights 43 
+Walleye 4/8/2024 Boomshocker 3.6 miles 44 
+Bullhead 4/29-5/13/2024 Fyke Net 161 Net-Nights 51-60 
+Largemouth Bass, Bullhead 6/3/2024 Boomshocker 3.6 miles 67 
+Bluegill, Pumpkinseed, Lepomis hybrids, Bullhead  6/3-6/2024 Fyke Net 12 Net-Nights 68-69 
+Bullhead 6/6-14/2024 Fyke Net 56 Net-Nights 64-70 
+Summary of all surveys conducted during 2024 
+GEAR USED DURING THIS SURVEY 
+ 
+• Fyke Nets are set in areas 
+where we anticipate fish to 
+congregate. Fish traveling 
+along the shoreline will be met 
+by a “lead” which is similar to a 
+fence. The lead directs the fish 
+toward the trap end of the net, 
+fish travel through a series of 
+funnels and eventually 
+become trapped. Fish are then removed from the net and placed in holding 
+tanks to gather data before being returned to the lake. 
+• Boomshocker is a specially 
+designed boat that creates an 
+electric current in the water 
+immediately in front of the 
+boat. The boat is driven along 
+the shoreline and shallow 
+areas of the lake, when the 
+boat encounters fish they are 
+momentarily stunned. Once the 
+fish is stunned they can be netted out of the lake and placed in a holding tank. 
+After data is collected the fish are returned to the lake. 
+Fay Lake 
+Photo Credit: Wisconsin DNR 
+Photo Credit: Wisconsin DNR 
+--- PAGE 2 ---
+WALLEYE 
+ 
+During 2024 a mark-recapture survey was conducted to estimate the 
+abundance of adult walleye in Fay Lake. Nets were initially set on 
+3/18/2024 and run until 3/21/2024 when cold weather and reforming ice 
+forced nets to be collapsed. Netting efforts were postponed until nets were 
+able to be reset on 4/2 or 4/5/2024 depending on ice conditions at net 
+locations. All nets were reset by 4/5/2024 allowing for standard netting 
+efforts to resume. Nets were fished until 4/8/2024. During early spring 
+netting, a total of 126 walleye (all adults) were caught and marked with an 
+identifiable fin clip. On 4/8/2025, an electrofishing survey was conducted 
+along the majority of the shoreline of Fay Lake. During this survey, 32 
+adult walleye were caught, with 29 of them (90.1%) having been caught 
+during the fyke netting survey. Given this data, we estimate the adult 
+walleye population of Fay Lake to be 138 fish (0.49 adults/acre). Walleye 
+abundance in Fay Lake has decreased since the previous survey in 2013 
+(0.75 adults/acre), despite large fingerling walleye being stocked every 
+other year at a rate of 10/acre. Fay Lake has poor walleye abundance and 
+is well below the area average of 1.57 adults/acre. Relative abundance 
+was above the median for the lake class (6.25 fish/net-night; median of 
+4.27 fish/net-night). 
+ 
+All walleye captured during the mark-recapture survey, a total of 130 
+different fish, were measured and used for size structure analysis. The 
+walleye size structure of Fay Lake is very high, with 99.2% being ≥ 15 
+inches, 75.4% ≥ 20 inches, and 13.9% ≥ 24 inches. Size structure has 
+increased slightly since 2013 (99.3%, 62.9%, and 10.5% ≥ 15, 20, and 24 
+inches, respectively). The increase is likely associated with the decreased 
+adult walleye abundance. This size structure is well above the area 
+average of 84.5% ≥ 15 inches, 40.5% ≥ 20 inches, and 10.5% ≥ 24 
+inches. Although a favorable size structure for anglers, the lack of shorter 
+fish indicates a continued recruitment issue. A length frequency figure can 
+be seen to the upper right. Although not included in the size structure 
+analysis as it was not caught in the mark-recapture survey, walleye up to 
+30.5 inches were captured during other netting surveys (see picture on 
+page 5). 
+ 
+Age and growth analysis was conducted for walleye in Fay Lake in 2024. 
+Female walleye grew faster than the Northern Region of Wisconsin 
+combined sex average (NOR; see figure on the right). Males grew 
+similarly to the regional average, though slower at older ages. This is 
+typical of walleye populations, as female walleye grow larger and faster 
+than males. The oldest walleye observed in Fay Lake were age-17. Most 
+walleye were age-6 to age-9. No walleye observed were younger than 
+age-5.  
+Page 2 
+NORTHERN PIKE 
+ 
+A mark-recapture population estimate was also conducted on northern 
+pike concurrent with the walleye survey. During this survey a total of 126 
+different adult northern pike were captured and marked with an identifiable 
+fin clip between 3/19 and 4/1/2024. Recapture efforts ran from 4/2-9/2024, 
+and during this time 136 adult northern pike were captured, with 14 of 
+them having been captured previously. Based on this data we estimate 
+the adult northern pike population to be 1,367, or 4.85 adults/acre. 
+Northern pike are the dominant gamefish in Fay Lake. Adult northern pike 
+abundance has decreased slightly since 2013 when abundance was 5.27 
+adults/acre, however, the current population in Fay Lake is still well above 
+the area average of 3.38 adults/acre and is considered abundant. 
+Northern pike were captured at a relative abundance of 3.55 fish/net-night, 
+which is above the 75 percentile for the lake class of 3.38 fish/net-night. 
+ 
+Every northern pike captured during the spring fyke netting efforts was 
+measured to assess size structure. After removing all northern pike 
+shorter than 14 inches, the remaining 232 fish were used for size structure 
+analysis. Of the sample, 43.5% were ≥ 21 inches and 2.2% were ≥ 28 
+inches. This is relatively similar to the 2013 survey (41.7% ≥ 21 inches 
+and 5.7% ≥ 28 inches. A length frequency figure comparing the surveys 
+can be seen to the left. Fay Lake has a lower size structure than the area 
+average (46.9% ≥ 21 inches and 9.7% ≥ 28 inches) which is expected with 
+its above average northern pike abundance. 
+ 
+Northern pike growth was assessed in 2013 and we found that northern 
+pike growth was slower than the regional average, especially after age-3. 
+Females grew faster than males after age-3, which is expected in northern 
+pike, but even the females in Fay Lake grew slower than the combined 
+sex regional average. Although the 2024 age and growth analysis was not 
+as detailed as the 2013 analysis, it continued to show slow growth of 
+northern pike.  
+2024 COMPREHENSIVE SURVEY REPORT 
+WATER: FAY LAKE   COUNTY: FLORENCE  
+ Page 2 
+
+--- PAGE 3 ---
+BLACK CRAPPIE 
+ 
+Black crappie abundance was assessed during the early spring fyke 
+netting efforts from 4/5-8/2024. A total of 57 black crappie were caught 
+during this survey for a relative abundance of 2.85 fish/net-night. This is a 
+significant decrease from the 2013 survey when black crappie were 
+caught at a rate of 339.8 fish/net-night during the early spring fyke netting. 
+Black crappie relative abundance is low compared to the area average for 
+this survey (5.84 fish/net-night). The highest black crappie relative 
+abundance during 2024 was observed during the late spring panfish 
+netting survey, when black crappie were caught at a rate of 8.5 fish/net-
+night. It’s uncommon for black crappie relative abundance to increase 
+during the late spring survey, so it’s possible that our relative abundance 
+estimate may not accurately depict the population, although it’s apparent 
+that the population has declined significantly since 2013. Fish behavior 
+near ice-out may have also been affected by the strange spring warming 
+pattern which may have influenced our survey accuracy. Black crappie 
+populations are very cyclic in nature and it’s not uncommon to see 
+changes in abundance. 
+ 
+All black crappie captured during the 4/5-8/2024 spring netting, as well as 
+all black crappie captured during the netting from 4/29-5/8/2024 targeting 
+bullhead, were measured to assess size structure. In total, 399 black 
+crappie were measured. After removing all fish less than 5 inches, 35.0% 
+of the sample was ≥ 8 inches, while 13.7% was ≥ 10 inches. Size structure 
+has increased significantly from 2013, when only 1.3% of the black 
+crappie were ≥ 8 inches, and no black crappie were ≥ 10 inches. Current 
+size structure is lower than the area average of 62.4% ≥ 8 inches and 
+19.9% ≥ 10 inches. It’s likely that the black crappie population in 2013 was 
+dominated by one year class. The increase in size structure is expected 
+with the decrease in abundance. A length frequency of the measured 
+black crappie can be seen to the right.  
+2024 COMPREHENSIVE SURVEY REPORT 
+WATER: FAY LAKE   COUNTY: FLORENCE 
+ Page 3 
+LARGEMOUTH BASS 
+ 
+On the night of 6/3/2024, an electrofishing survey was conducted along 
+the majority of the shoreline to assess the largemouth bass population of 
+Fay Lake. During this survey a total of 14 largemouth bass were captured 
+(all adults), for a relative abundance of 3.9 adults/mile. Largemouth bass 
+relative abundance has declined in Fay Lake since the 2013 survey when 
+they were captured at a rate of 4.6 adults/mile. This decline is expected 
+with a major winterkill occurring on Fay Lake in 2013-2014, as well as 
+potential minor winterkills before installation of the aeration unit. This is 
+well below the area average largemouth bass relative abundance of 17.0 
+adults/mile, as well as the lake class median of 5.4 fish/mile. 
+ 
+Not enough largemouth bass were collected to conduct comparative size 
+structure analysis on the population. The largemouth bass captured 
+ranged in size from 8.5 inches to 16.4 inches. Only 1 fish was ≥ 15 inches 
+while the majority were in the 13.0-14.9 inch range. The largemouth bass 
+in Fay Lake had much greater size structure in 2013, shown in the length 
+frequency figure to the right, when 44.9% of the bass surveyed were ≥ 14 
+inches and 10.9% were ≥ 18 inches. 
+BLUEGILL 
+ 
+The bluegill population in Fay Lake was assessed during the 6/3-6/2024 
+fyke netting survey. During this survey we captured 1639 bluegill for a 
+relative abundance of 136.6/net-night. Bluegill abundance has increased 
+in Fay Lake since 2013, as the previous survey’s bluegill relative 
+abundance was 94.9 fish/net-night. Fay Lake is considered to have an 
+abundant bluegill population as the area average is 65.6 fish/net-night.  
+ 
+A random subsample of 479 bluegill captured during the 2024 panfish fyke 
+netting survey were measured for size structure analysis of the Fay Lake 
+bluegill population. Of the fish measured, 19.2% were ≥ 6 inches while 
+0.6% were ≥ 7 inches. No bluegill measured were ≥ 8 inches. The bluegill 
+size structure in Fay Lake has decreased since the previous survey in 
+2013 when 48.6% of the bluegill measured were ≥ 6 inches and 4.7% 
+were ≥ 7 inches. Similarly, however, none measured in 2013 were ≥ 8 
+inches. This decrease in size structure is expected with the increased 
+bluegill abundance. The bluegill length frequency can be seen to the left. 
+The bluegill size structure in Fay Lake is very low for the area, with an 
+average of 61.6% ≥ 6 inches, 31.1% ≥ 7 inches, and 9.4% ≥ 8 inches.  
+ 
+ 
+Bluegill age and growth was evaluated in 2024. Bluegill grew faster than 
+the Northern Region of Wisconsin average until age-4, when growth then 
+slowed below the average. No fish were aged older than 5. This growth 
+rate in early years is surprising given the abundance of this population. 
+
+--- PAGE 4 ---
+BULLHEAD 
+ 
+Prior to the 2024 comprehensive survey, Fay Lake was known to have an 
+overabundance of bullhead (33 fish/net-night in 2013). Fay Lake contains 
+all three bullhead species (black, yellow, and brown), with yellow bullhead 
+being the most abundant species. Unless specified by species, “bullhead” 
+refers to the combination of the three species. Bullhead are native to Fay 
+Lake, and due to the lakes shallow nature, productivity, and history of 
+winterkill, it’s a system that can promote bullhead populations. Since the 
+lake is currently managed as a walleye lake and has poor survival of 
+stocked walleye, especially in recent years, the lake was a candidate for 
+bullhead removal efforts. Bullhead have been found to limit walleye natural 
+recruitment and can lead to declines in other fish species through both 
+predation and competition for resources. Through an agreement with the 
+Fay Lake Association, the WDNR agreed to reduce the bullhead population 
+and in return the Fay Lake Association would operate and maintain an 
+aeration unit to minimize winterkill. To accomplish this, all bullheads 
+captured during standard surveys were removed, and additional netting 
+surveys were conducted for increased effort towards bullhead removal. 
+ 
+During the 2024 comprehensive survey, a total of 10,490 bullhead were 
+removed, weighing an estimated 2,509.6 pounds. This equates to 
+approximately 37.2 bullhead removed per acre. A more detailed summary 
+of bullhead removed can be seen in the figure to the upper right. Bullhead 
+abundance in Fay Lake increased from 33.0 fish/net-night in 2013 to 77.5 
+fish/net-night in 2024 during early spring walleye netting. Random samples 
+were measured across all netting periods to assess the size structure of 
+the bullhead population in Fay Lake. A total of 773 bullhead were 
+measured. After removing all bullhead < 6 inches for analysis, 21.0% of the 
+remaining sample was ≥ 9 inches. No bullhead measured were ≥ 12 
+inches. A length frequency graph comparing bullhead sizes between the 
+two 2024 targeted netting surveys can be seen on the right. This is a 
+relatively low size structure of bullhead, which is common with over-
+abundant populations. Size structure has declined since 2013, when 62.9% 
+were ≥ 9 inches and 3.8% were ≥ 12 inches. The size structure comparison 
+between the 2013 and 2024 surveys can be seen below.  
+ 
+ 
+2024 COMPREHENSIVE SURVEY REPORT 
+WATER: FAY LAKE   COUNTY: FLORENCE 
+ Page 4 
+ 
+Fay Lake bullhead abundance was greatly reduced by the bullhead 
+removal project. Despite this, bullhead are capable of compensatory 
+recruitment and can have large year classes should resources allow. The 
+winter aeration system is a pivotal component of the bullhead removal as 
+to not allow for a winterkill situation in which bullhead are afforded an 
+abundance of resources due to their resilience and ability to persist with 
+low dissolved oxygen. We thank the Fay Lake Lake Association for their 
+continued efforts to keeping bullhead numbers down. We encourage 
+harvest of bullheads in Fay Lake, and the WDNR will be continuing 
+bullhead removal efforts in the near future, with plans for additional netting 
+effort in 2026. 
+Photo Credit: Wisconsin DNR 
+--- PAGE 5 ---
+PUMPKINSEED 
+ 
+The pumpkinseed population was assessed during the same fyke netting 
+survey as bluegill . A total of 792 pumpkinseed were captured during that 
+survey for a relative abundance of 66.0 fish/net-night. A subsample of 214  
+pumpkinseed were measured for size structure analysis of the population. 
+Of these, 12.1% were ≥ 6 inches, but only 1 fish (0.5%) was ≥ 7 inches. 
+Like the other panfish species in Fay Lake, the pumpkinseed population 
+has low size structure. The length frequency of the pumpkinseed can be 
+seen to the right. 
+WHITE SUCKER 
+ 
+The Fay Lake white sucker population was assessed during the spring 
+walleye fyke netting survey. Once the ice was completely off and netting 
+resumed on April 5th, white sucker relative abundance was measured at 
+1.7 fish/net-night. This is a decrease from the 2013 survey (13.1 fish/net-
+night) but still slightly above the area average of 1.03 fish/net-night during 
+this time. All 37 white sucker captured were measured and used for size 
+structure analysis. 81.1% were ≥ 10 inches while 18.9% were ≥ 16 
+inches. This is a decrease in size structure from 2013 (90.8% and 15.8% 
+≥ 10 and 16 inches, respectively; see figure on left). 
+2024 COMPREHENSIVE SURVEY REPORT 
+WATER: FAY LAKE   COUNTY: FLORENCE 
+ Page 5 
+OTHER SPECIES 
+ 
+During the 2024 comprehensive survey of Fay Lake, 4 species of fish were captured which were not detailed in this summary. None of these species were 
+caught in high abundance. The table below gives the relative abundance (catch/net-night) for each of these species across the different surveys. Species 
+included in the table are muskellunge (MU), yellow perch (YP), bluegill x pumpkinseed hybrids (BxP), and golden shiner (GSH). Surveys which would 
+exclude non-target species were not included in this table.  
+Note: The muskellunge captured during Bullhead Netting was a 43.4 inch male which was captured twice. This muskellunge was also captured in 2013 
+measuring 42.9 inches. This muskellunge was estimated to be 14 years old in 2013 which makes this fish 25 years old when captured in 2024. 
+RELATIVE ABUNDANCE OF OTHER SPECIES (FISH/NET -NIGHT) 
+Survey YP BxP GSH MU 
+“Pre” Spring Netting 
+(3/18—4/5/2024) 
+0.05 0 0 0 
+Spring Netting #1 
+(4/5—8/2024) 
+0 0 0 0 
+Bullhead Removal #1 
+(4/29—5/13/2024) 
+0.08 0.08 0 0.01 
+Spring Netting #3 
+(6/3—6/2024) 
+0.08 0.42 0.08 0 
+
+--- PAGE 6 ---
+2024 COMPREHENSIVE SURVEY REPORT 
+WATER: FAY LAKE   COUNTY: FLORENCE 
+ Page 6 
+SURVEY NOTES AND MANAGEMENT RECOMMENDATIONS 
+ 
+Fay Lake is a shallow, moderately developed, 282 acre lake in western Florence County, about 2 miles northeast of Long Lake. The lake has good angler 
+access from the public boat launch on Fay Lake Landing Road. This comprehensive survey details all major fish species within the system and should 
+provide an adequate picture to the shape and status of the fishery in its current state. This survey was a collaborative effort between the Wisconsin DNR and 
+the US Forest Service.  
+ 
+Fay Lake is currently managed for walleyes. Despite regular stocking efforts, the walleye population has been on the decline in recent years. Adult walleye 
+abundance has fallen under 0.5 fish/acre. Although abundance is low, the size structure of the fish is still desirable to anglers. Fay Lake is currently 
+undergoing a biomanipulation and lake rehabilitation effort via bullhead removal and installation of an aeration system. Through these efforts the WDNR 
+hopes to improve survival of stocked fish in the system. Fay Lake currently has no special regulations on walleye. The standard regulation currently protects 
+more than 60% of the population and still allows for potential harvest opportunities of stocked fish. Given the current management goals for Fay Lake, this 
+regulation is appropriate. 
+ 
+Fay Lake is currently getting stocked every two years at a rate of 10 large fingerling walleye/acre. Although current survival is low, it is too early in the 
+rehabilitation process to determine the success of the efforts towards improving survival of stocked fish. Fay Lake should continue to be stocked at this rate 
+until the next comprehensive survey. At this point, the walleye population should be reassessed to determine whether stocking success has improved and 
+whether stocking should continue. 
+ 
+Fay Lake experienced a major winterkill during the 2013-2014 winter following the previous comprehensive survey, which greatly impacted the fish 
+community. The largemouth bass population has drastically declined, however the population may be recovering in recent years. The panfish population is 
+mostly comprised of small and abundant bluegill, although the black crappie population may provide an adequate angling opportunity. Anglers should note 
+however that black crappie are naturally cyclic in their reproduction, and significant harvest during “boom” years may lead to extended stretches of low 
+abundance. Northern pike and bullhead species are much more tolerant of low oxygen conditions during events like winterkills. Despite this, northern pike 
+abundance has declined slightly since the previous survey. Northern pike abundance is still above average, and size structure is still below average. 
+Bullhead got extremely abundant following the winterkill. Since the 2013-2014 winterkill, the WDNR has removed a great number of bullhead from Fay Lake 
+in hopes that the reduced competition and predation by bullhead may enhance the fishery by allowing for better survival and growth of other species in the 
+lake. The winter aeration system is a pivotal part in helping to keep the bullhead numbers down, and we thank the Fay Lake Association for their support and 
+efforts towards this cause.  
+ 
+Fay Lake has no special regulations. All current regulations are appropriate. 
+ 
+Fay Lake is on an 11 year sampling rotation, and is currently scheduled for its next comprehensive survey in 2035.  
+ 
+The Wisconsin DNR conducted additional bullhead removal efforts in Fall 2025 and Spring 2026 which are not detailed in this summary. For information on 
+these efforts, please contact the area fisheries biologists. 
+NOTABLE FISH CAPTURED IN THE 2024 COMPREHENSIVE SURVEY 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Photo Credit: Wisconsin DNR Photo Credit: Wisconsin DNR 

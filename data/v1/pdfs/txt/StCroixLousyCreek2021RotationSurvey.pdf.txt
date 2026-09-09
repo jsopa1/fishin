@@ -1,0 +1,230 @@
+PAGES: 5
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Fisheries Survey Report for Lousy Creek, St. Croix County, Wisconsin 2021 
+WATERBODY IDENTIFICATION CODE 2060000 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+KASEY YALLALY 
+DNR Fisheries Biologist 
+Baldwin, Wisconsin 
+March 2022 
+
+--- PAGE 2 ---
+Introduction 
+Lousy Creek is a small spring-fed tributary to the Eau Galle River located in southeastern St. 
+Croix County. The stream flows directly into Lake George or Spring Valley Reservoir and is 6.2 
+miles long with 2.8 miles of Class I trout water. The Eau Galle watershed drains mostly 
+agricultural and forested land and grassland to a lesser degree. The watershed as a whole is 
+ranked high for runoff impacts on streams and groundwater. Access to the stream is limited 
+to two road bridges. Lousy Creek has several small unnamed and unclassified tributaries 
+along its length. The trout population within the stream is fully supported by natural 
+reproduction. Lousy Creek is listed as a candidate stream within the Brook Trout Reserves 
+program, with a classification of Environmentally Resilient. 
+ 
+Methods 
+Because of limited stream access, a single station was sampled on Lousy Creek in 2020 and 
+2021. Sampling was conducted between June 15 and Sept. 15 using a backpack stream 
+shocking unit with a single electrode. The length of the station was determined by 
+multiplying the mean stream width by 35. The station was located upstream of County Road 
+NN (Station 2). All fish species were collected at this station, and all trout were identified to 
+species and measured to the nearest 10th of an inch. All non-game species were identified to 
+species and counted. 
+ 
+The Index of Biotic Integrity (IBI) was used to measure biological attributes that are 
+influenced by human activities to assess the overall health of the stream. The index uses the 
+species assemblage present to assess water quality and thermal regimes within a waterbody. 
+Coldwater IBI’s range in score from 0 to 100, with a high score (90-100) interpreted as an 
+Excellent Integrity rating and 10-20 interpreted as a Poor Integrity rating.  
+ 
+Study Site 
+Station 2 was located upstream of County Road NN, with the stream running through a semi-
+wooded corridor with open to heavy canopy cover. Habitat was not quantitatively evaluated 
+during the surveys; however, anecdotally, the stream at Station 2 exhibited very minimal 
+erosion with high gradient. The substrate consisted of large cobble and gravel. Aquatic 
+vegetation was prevalent in the unshaded areas of the station. Large woody debris was 
+present in low quantities in the pools. High gradient riffles and pools made up the majority 
+of the station.  
+ 
+Results 
+Brook Trout were the only trout species found at Station 2. Brook Trout ranged from 2 to 8 
+inches long (Figure 1). The relative abundance of Brook Trout as measured by catch per effort 
+was 2914 total trout/mile, which resulted in the 95th percentile for Class I Brook Trout streams 
+in the Driftless and Western Corn-belt ecoregions (Table 1). A sampling of this site in 2020 
+resulted in a total catch rate of 705 total trout/mile, and no adults were captured (Figure 2). 
+In 2021, adult (larger than 4.5 inches) Brook Trout abundance was 724 adults/mile or the 85th 
+percentile for similar streams (Table 1; Figure 2). Natural reproduction of Brook Trout was 
+high in 2020 and 2021, with 705 young-of-year/mile (85th percentile) in 2020 and 2189 young-
+of-year/mile (95th percentile) in 2021 (Table 1; Figure 2).   
+--- PAGE 3 ---
+ 
+The survey resulted in a Coldwater IBI rating score of 100, which is ranked as Excellent. A 
+total of two non-salmonid fish species were collected at Station 2, while six were collected in 
+the 2020 survey (Table 2). Species in the 2021 survey included Mottled Sculpin and Creek 
+Chub, while White Sucker, Brook Stickleback, Blacknose Dace, Mottled Sculpin, Green Sunfish 
+and Largescale Stoneroller were collected in 2020 (Table 2). The abundance of more tolerant 
+species in the 2020 survey resulted in a Coldwater IBI score of 80, with a ranking of Good.  
+ 
+Discussion 
+Brook Trout abundance in Lousy Creek at Station 2 is higher than in all previous surveys of 
+the station in terms of adult and young-of-year abundances. Adult densities are well above 
+the long-term average for this site of 212 adults/mile. No adult trout were detected in the 
+2020 survey. The size structure of adult trout was small, with only 48 adults/mile larger than 
+7 inches and no fish captured larger than 8 inches. No Brown Trout were detected at this site 
+in 2021 or in previous surveys. However, Brown Trout were detected in previous surveys (1964 
+to 1998) of Station 1, which is located at the mouth of Lousy Creek where it enters Lake 
+George (Station 1). No Brown Trout were detected in the 2008 survey of Station 1. The 
+absence of Brown Trout in this stream is beneficial for the Brook Trout population, reducing 
+competition between the species and allowing for Brook Trout sustainability in the future. 
+Natural reproduction of Brook Trout is very strong in Lousy Creek, with 2020 and 2021 
+producing excellent year classes of trout in this stream and others in the area. This is likely 
+due to stable spring weather patterns in these years that have allowed for excellent stable 
+flows during the spring egg incubation and hatching periods.  
+ 
+The Excellent Coldwater IBI ratings indicate excellent water quality and thermal regimes 
+preferred by trout and other coldwater species. Instream and riparian habitat were excellent 
+at this site with good adult cover, nursery habitat and spawning substrates.  
+ 
+Lousy Creek is currently classified as a Class I trout stream, and this classification is correct 
+based on this survey. Historically, no stocking has occurred in this stream and current 
+management within the watershed is focused on enhancing and promoting native Brook 
+Trout. Brown Trout stocking within the entire Eau Galle watershed ceased in 2020 to aid in 
+Brook Trout management. Lousy Creek has excellent thermal regimes, habitat and water 
+quality and likely serves as an important spawning and nursery stream for the Eau Galle 
+River and is likely to be an essential part of the sustainability of the Brook Trout population 
+in the future for the upper Eau Galle watershed.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 4 ---
+ 
+Table 1. Relative abundance (catch per effort; number per mile) of Brook Trout at two stations on Lousy 
+Creek. ( . Indicates no survey) 
+ 
+  ST. 1 ST. 2 
+Year Juv. Adult Juv.   Adult 
+1998 610 182 334 123 
+2002 . . 720 80 
+2008 386 348 373 133 
+2020 . . 705 0 
+2021 . . 2189 724 
+ 
+ 
+Table 2. Total number of each species captured at Station 2 on Lousy Creek, summer 2020 and 2021.   
+ 
+SPECIES 2020 2021 
+Brook Trout 53 181 
+Brown Trout 0 0 
+White Sucker 2 0 
+Brook Stickleback 2 0 
+Blacknose Dace 2 0 
+Mottled Sculpin 448 110 
+Green Sunfish 1 0 
+Largescale Stoneroller 1 0 
+Creek Chub 0 3 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 5 ---
+ 
+ 
+ 
+Figure 1. Length frequency distribution of Brook Trout at Station 2 on Lousy Creek, summer 2021.  
+ 
+ 
+ 
+Figure 2. Relative abundance (Catch per effort; fish per mile) of Brook Trout at Station 2 in Lousy Creek 
+from 1998 to 2021.  
+ 
+ 
+ 
+  
+ 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+1 2 3 4 5 6 7 8 9
+Number of Fish
+Length (in)
+0
+500
+1000
+1500
+2000
+2500
+3000
+3500
+1998 2002 2008 2020 2021
+Catch Per Effort (Trout/Mile)
+Total/ Mile YOY/ Mile Adult/Mile

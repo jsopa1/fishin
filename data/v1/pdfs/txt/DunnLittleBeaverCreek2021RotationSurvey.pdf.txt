@@ -1,0 +1,174 @@
+PAGES: 4
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Fisheries Survey Report for Little Beaver Creek, Dunn County, Wisconsin 
+2021 
+WATERBODY IDENTIFICATION CODE 2076300 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+KASEY YALLALY 
+DNR Fisheries Biologist 
+Baldwin, Wisconsin 
+February 2022 
+
+--- PAGE 2 ---
+Introduction 
+Little Beaver Creek is a small, low-gradient stream in northern Dunn County that contains 7 
+miles of Class II trout water. It flows in a south-easterly direction to its confluence with Big 
+Beaver Creek, approximately one mile upstream from the Hay River north of the Village of 
+Wheeler. Little Beaver Creek is within the Hay River watershed, which drains mostly forested 
+and agricultural land and, to a lesser extent, grassland and wetlands.  
+ 
+Little Beaver Creek is considered a Coldwater, Cool-Cold Headwater under the state's Natural 
+Community Determinations. Water temperatures during past surveys indicated poor thermal 
+regimes for trout, and few to no trout were detected during those years. No trout stocking 
+occurs within the Little Beaver watershed; therefore, all trout are the result of natural 
+reproduction. Habitat throughout the stream generally lacks adequate fish cover, and fine 
+sediments make up the substrates, according to previous habitat surveys. A 2018 assessment 
+indicated that Little Beaver Creek is impaired due to high phosphorus levels.  
+ 
+Methods 
+Two stations were sampled on Little Beaver Creek in 2021. Sampling was conducted between 
+June 15 and Sept. 15 using a backpack stream shocking unit with a single electrode. The 
+length of stations was determined by multiplying the mean stream width by 35. Stations were 
+located upstream of 1210th Ave (Station 1) and upstream of 270th St (Station 4). All fish species 
+were collected at both stations. All trout were identified by species and measured to the 
+nearest 10th of an inch. Non-game fish were identified to species and counted. Catch rates of 
+Brook Trout were compared to other Class II Brook Trout streams in the North Central 
+Hardwoods ecoregion and percentiles were determined.  
+ 
+The Index of Biotic Integrity (IBI) was used to measure biological attributes that are 
+influenced by human activities to assess the overall health of the stream. The index uses the 
+species assemblage present to assess water quality and thermal regimes within a waterbody. 
+Coldwater IBI’s range in score from 0 to 100, with a high score (90-100) interpreted as an 
+Excellent Integrity rating and 10-20 interpreted as a Poor Integrity rating.  
+ 
+Study Sites 
+Station 1 was located furthest downstream. Habitat was not quantitatively evaluated during 
+the surveys. However, anecdotally, the stream at Station 1 flows through a heavily wooded 
+corridor with instream habitat consisting of tag alders and some large woody debris. The 
+substrate mostly consists of fine sand, sediment and silt. Station 4 was located several miles 
+upstream of Station 1 and was also located within a heavily wooded corridor. The stream at 
+this location was very shallow, with small pools and some gravel substrate. Because of the 
+stream’s small size and overhanging vegetation, visibility for sampling was more limited.  
+ 
+Results 
+Brook Trout were the dominant trout species collected at Station 1, and no trout were 
+sampled at Station 4 (Table 1). No adult Brook Trout were present at Station 1. Natural 
+reproduction was documented at Station 1, as evidenced by the presence of young-of-year 
+(YOY) trout. YOY Brook Trout were in moderate abundances at 145 YOY per mile, which is in 
+--- PAGE 3 ---
+the 75th percentile for Class II Brook Trout streams in the North Central Hardwoods ecoregion 
+(Table 1). 
+ 
+Only one other fish species was collected at Station 1, the Mottled Sculpin (Table 2). The 
+Coldwater IBI rating for this station was Excellent, with a score of 100. A total of four non-
+game fish species were collected in Station 4, which resulted in a Coldwater IBI rating of Very 
+Poor, with a score of 0 (Table 2). The Warmwater IBI rating for this station was Poor, with a 
+score of 40. Creek Chubs were the dominant species at Station 4 and were in high abundance 
+(Table 2).  
+ 
+Discussion 
+Trout resources are limited in Little Beaver Creek, with trout only detected at Station 1. No 
+adult trout were present at this station, and YOY trout were present in moderate 
+abundances. The stream likely serves as an important tributary for spawning fish from Big 
+Beaver Creek and, with little to no adult fish habitat present (at least) within the sampling 
+station, adult fish may migrate back into Big Beaver Creek or the Hay River after spawning for 
+more preferred overwintering habitat. The 1993 survey of this station occurred in early 
+September and found small adult Brook Trout in low abundances, while no trout were 
+detected in the 2010 survey. No trout have been detected in the 1993, 2010 or 2021 surveys of 
+Station 4 of Little Beaver Creek. According to the fish community present, the thermal regime 
+at this station is too warm for trout survival and reproduction. Instream habitat is very 
+limited and not adequate for trout, especially for multiple year-classes.  
+ 
+A total of four fish species were sampled at Station 4, including Creek Chub, Brook 
+Stickleback, Fathead Minnow and Blacknose Dace. Because of the lack of trout and other 
+coldwater species, the stream at Station 4 received a Very Poor Coldwater IBI rating. This 
+indicates degraded conditions and a fish community that reflects warmwater conditions. The 
+Excellent Coldwater IBI rating at Station 1 indicates excellent water quality and coldwater 
+conditions with little to no effects of degradation or pollutants.  
+ 
+Little Beaver Creek is currently classified as a Class II trout stream. According to this and 
+previous surveys from 1993 and 2010, the stream should be reclassified to a Class III and 
+declassified near Station 4. However, more sampling is needed to determine the appropriate 
+extent of Class III status upstream of Station 1.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 4 ---
+ 
+Table 1. Relative abundance (Catch per Effort; Trout per mile) of Brook Trout captured at two stations on 
+Little Beaver Creek, summer 2021.  
+ 
+  ST. 1 ST. 4 
+Year Juv. Adult Juv.   Adult 
+1993 0 48 0 0 
+2010 0 0 0 0 
+2021 145 0 0 0 
+ 
+ 
+Table 2. Total number of each species captured at two stations on Little Beaver Creek, summer 2021.  
+ 
+SPECIES ST. 1 ST. 4 
+Brook Trout 9 0 
+Mottled Sculpin 1 0 
+Creek Chub 0 81 
+Brook Stickleback 0 3 
+Fathead Minnow 0 1 
+Blacknose Dace 0 9 
+ 
+ 
+ 

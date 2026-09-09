@@ -1,0 +1,1071 @@
+PAGES: 29
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Comprehensive Fishery Survey of Elkhart Lake, 
+Sheboygan County, Wisconsin 2021 
+Waterbody Identification Code 59300 
+ 
+ 
+ 
+ 
+ 
+Ben Breaker 
+Fisheries Biologist – Plymouth 
+Wisconsin Department of Natural Resources 
+2022 
+ 
+
+--- PAGE 2 ---
+2 
+ 
+Table of Contents 
+Executive Summary .............................................................................................................. 3 
+Introduction ........................................................................................................................... 4 
+Methods ............................................................................................................................ 5 
+Results .................................................................................................................................... .8 
+Northern Pike ................................................................................................................... .8 
+Walleye ............................................................................................................................... .8 
+Muskellunge ...................................................................................................................... .9 
+Largemouth Bass……………………………………………………………………………………….……..10 
+Smallmouth Bass………………………………………………………………………………………………10 
+Bluegill………………………………………………………………………………………………………………11 
+Pumpkinseed…………………………………………………………………………………………………….12 
+Black Crappie…………………………………………………………………………………………………….12 
+Yellow Perch………………………………………………………………………………………………………12 
+Rock Bass…………………………………………………………………………………………………………..13 
+Other Species…………………………………………………………………………………………………….13 
+Management Recommendations………………………………………………………………………….14 
+Acknowledgements ………………………………………………………………………………………………15 
+  References ……………………………………………………………………………………………………………15 
+Tables and Figures………………………………………………………………………………………………..16 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 3 ---
+3 
+ 
+Executive Summary 
+In 2022, the Wisconsin Department of Natural Resources (DNR) conducted a 
+comprehensive fishery survey on Elkhart Lake in Sheboygan County, Wisconsin, using 
+a variety of sampling methods throughout the open water period in an attempt to 
+sample the major components of the fishery. The objectives of the survey were to 1) 
+assess the status of the northern pike (Esox lucius), walleye (Sander vitreus), 
+muskellunge (Esox masquinongy), largemouth bass (Micropterus salmoides), 
+smallmouth bass (Micropterus dolomieu) and panfish populations, 2) attain 
+population estimates for northern pike, walleye and muskellunge, and 3) update 
+management recommendations for the fishery of Elkhart Lake. The results of the 2022 
+survey were compared to lakes with similar characteristics, the prior comprehensive 
+fishery survey conducted in 2011 and a special muskellunge survey conducted on the 
+lake in 2018. 
+ 
+Twenty-three northern pike were sampled during the 2022 spring netting I (SNI) fyke 
+net survey for a catch rate of 0.26 fish/net night. The SNI catch rate for northern pike 
+is below average when compared to lakes across the state with similar characteristics 
+(complex, two-story). An additional eight northern pike were sampled during the 2022 
+spring netting II (SNII) fyke net survey for a catch rate of 0.14 fish/net night. The mean 
+length of all fish collected was 22.2 inches, with a maximum length of 31.0 inches. Too 
+few northern pike were sampled in 2022 to estimate the population density in Elkhart 
+Lake. 
+ 
+Four hundred twenty-one walleye (including 83 recaptured fish) were sampled during 
+SNI for a catch rate of 4.78 fish/net night. This fyke netting catch rate for walleye is 
+slightly below average when compared to lakes across the state with similar 
+characteristics (complex two-story). The average length of walleye sampled during 
+SNI was 20.7 inches, with a maximum length of 28.5 inches. The Bailey modification of 
+the Petersen Method adult population estimate for walleye in Elkhart Lake was 1,140 
+(95% CI [778-1,844]), equaling 3.90/acre. This is a substantial increase from the 2011 
+survey when the adult population estimate for walleye in Elkhart Lake was 348 (95% 
+CI [244-628]), equaling 1.19 fish/acre. The growth rate of walleye in Elkhart Lake is 
+above the statewide and South District average, with female walleye reaching legal 
+harvestable size (18 inches) on average by age-3 and males by age-5. 
+ 
+Five muskellunge (including one recaptured fish) were sampled during SNII for a 
+catch rate of 0.09 fish/net night. Fish ranged in length from a 37.0-inch fish of 
+unknown sex to a 46.0-inch female. Too few muskellunge were sampled in 2022 to 
+warrant a recapture netting event in 2023 to facilitate a population estimate. 
+ 
+Management recommendations include: 
+1. Continue biennial stocking of large fingerling walleye and continue to 
+evaluate natural reproduction to determine future stocking needs. 
+--- PAGE 4 ---
+4 
+ 
+2. Continue to evaluate the effectiveness of the county-wide 18-inch minimum 
+length, three fish daily bag limit walleye regulation implemented in 2018 at 
+the time of the next survey. 
+3. Discontinue biennial stocking of Great Lakes spotted muskellunge due to 
+inadequate returns of adult fish to support broodstock collection.  
+4. Discontinue Elkhart Lake as a designated muskellunge broodstock lake and 
+change the current muskellunge special regulation of 50-inch minimum 
+length limit to the previous 40-inch minimum length limit regulation.   
+5. Further assess black crappie and yellow perch populations if new sampling 
+protocols are developed. 
+ 
+Introduction 
+Elkhart Lake is a 292-acre spring lake with a maximum depth of 119 feet, making it the 
+fourth deepest natural lake in the state. The bottom substrate consists of 42% sand, 
+43% gravel and 15% muck. The lake is comprised of two major basins, separated by a 
+large central submerged island (Figure 1). The single outlet, located in the northwest 
+corner of the lake, is controlled by a fixed crested weir and flows into the nearby 
+Sheboygan Marsh. The mean summer Trophic State Index (TSI) for Elkhart Lake over 
+the last five years was 43, indicating a mesotrophic status. For a two-story lake, this is 
+considered a “good” rating. Invasive species, including curly-leaf pondweed 
+(Potamogeton crispus), Eurasian watermilfoil (Myriophyllum spicatum), ornamental 
+water lilies (non-native Nymphaea sp.), yellow iris (Iris pseudacorus) and zebra 
+mussels (Dreissena polymorpha), have been identified in Elkhart Lake.  
+ 
+Much of the shoreline of Elkhart Lake is developed with year-round and summer 
+homes, including one resort. There are a few pockets of undeveloped natural 
+shoreline between homes and in secluded bays, but most of the shoreline has been 
+altered. Public access, provided by Sheboygan County, is available via a boat launch 
+on the northwest side of the lake off County Highway P and offers parking for 20 
+vehicles and restroom facilities. A public fishing pier is also available at the boat 
+launch. Due to the proximity to the cities of Elkhart Lake, Plymouth and Sheboygan, 
+angling pressure on Elkhart Lake can be high. Recreational watercraft use is also very 
+high on Elkhart Lake, which may contribute to shoreline erosion and the loss of near-
+shore habitat. 
+ 
+Elkhart Lake supports populations of muskellunge, northern pike, walleye, 
+largemouth bass, smallmouth bass and a variety of panfish species. Cisco (Coregonus 
+artedi) are also an important component of the fishery and provide a forage base for 
+predators such as northern pike, muskellunge and walleye. A recent statewide project 
+investigating the status and distribution of cisco in inland Wisconsin lakes observed 
+a catch rate of 137 cisco/night gang in Elkhart Lake, the highest of any lake sampled 
+--- PAGE 5 ---
+5 
+ 
+during this survey (K.M. Renik et al. 2020). However, previous gill netting surveys of 
+Elkhart Lake suggest cisco abundance may be highly variable.  
+ 
+Muskellunge were first introduced to Elkhart Lake in 1987 in a collaborative effort 
+between the Between the Lakes Chapter of Muskies Inc. and DNR (Table 1). At the 
+time, the nearest muskellunge fishery was over 50 miles away, and Elkhart Lake was 
+identified as a good candidate to support muskellunge. These fish were purchased 
+from a private source and referred to as “true musky” to distinguish them from tiger 
+muskellunge (Esox lucius × masquinongy; northern pike x muskellunge hybrids). 
+These initial stocking efforts were successful and established a muskellunge fishery 
+in Elkhart Lake. Private muskellunge stockings have since been discontinued. Yearling 
+Great Lakes spotted strain muskellunge have been stocked in Elkhart Lake biennially 
+since 2010 in an attempt to establish a broodstock population from which to collect 
+gametes for DNR hatchery production (Table 1). To date, no egg collections have 
+occurred due to the low catch of mature adult fish.  
+  
+Large fingerling walleye have been stocked in Elkhart Lake biennially since 2014 as 
+part of the Wisconsin Walleye Initiative (WWI; Table 1). Prior to 2014, primarily small 
+fingerling walleye were stocked. Fall electrofishing (FE) surveys to assess the degree 
+of walleye natural reproduction have been conducted in 2010, 2011 and 2018-2022.  
+  
+Historically, brook trout (Salvelinus fontinalis), brown trout (Salmo trutta) and 
+rainbow trout (Oncorhynchus mykiss) were also stocked in Elkhart Lake (Table 1). 
+Records suggest that these efforts were discontinued because these species were not 
+native to Elkhart Lake and would compete with native species, including panfish and 
+cisco, for zooplankton (Nelson 1992). These concerns were especially prudent, given 
+that zebra mussels, a prolific non-native planktivorous mussel, were first identified in 
+Elkhart Lake in 1994 (Surface Water Integrated Monitor System Database).  
+ 
+The first recorded fisheries survey of Elkhart Lake was conducted in 1947. The most 
+recent prior comprehensive fishery survey, including spring netting I (SNI), spring 
+netting II (SNII), spring electrofishing 1 (SEI), spring electrofishing II (SEII) and fall 
+electrofishing (FE), was conducted in 2011. Additionally, a special spring netting 
+survey targeting muskellunge was conducted in 2018. The results of the 2022 survey 
+were compared to each of these previous surveys. High public use of Elkhart Lake by 
+anglers justifies regular fisheries surveys to evaluate management opportunities and 
+maximize the potential of the fishery. 
+ 
+Methods 
+Eight white nylon 0.75-inch bar mesh fyke nets were set on April 16 to target spawning 
+northern pike, walleye and muskellunge (SNI; Figure 2). Nets were checked daily from 
+April 17 to April 27 for a total effort of 88 net nights. Nets were left open from April 27 
+to May 9 when SNII sampling began. SNII concluded on May 16 for a total effort of 56 
+--- PAGE 6 ---
+6 
+ 
+net nights. Water temperature on the first day of SNI was 38 degrees Fahrenheit, and 
+at the conclusion of SNI, the water temperature was 43 degrees Fahrenheit. Water 
+temperature on the first day of SNII was 51 degrees Fahrenheit, and at the conclusion 
+of SNII, the water temperature was 61 degrees Fahrenheit. 
+  
+All gamefish and panfish netted were measured to the nearest 0.1 inches. Northern 
+pike, muskellunge and walleye were also weighed to the nearest 0.1 pounds. 
+Northern pike, muskellunge and walleye were given differential fin clips to identify 
+recaptures and facilitate the calculation of population estimates. Females were 
+marked with a right ventral fin clip; males received a left ventral fin clip; unknown sex 
+fish received a top caudal fin clip. Additionally, all largemouth bass and smallmouth 
+bass were marked with a top caudal fin clip to eliminate duplicate counts. All 
+northern pike, muskellunge and walleye netted were observed for fin clips from 
+previous surveys. Muskellunge were also scanned for the presence of a Passive 
+Integrated Transponder (PIT) tag. Each PIT tag contains a unique identification 
+number that allows tracking of an individual fish through time. If a muskellunge did 
+not carry a previous PIT tag, a new tag was implanted in the dorsal musculature and 
+recorded. Additionally, age structures were removed from northern pike, 
+muskellunge and walleye according to standard sampling protocols. These protocols 
+include removing an anal fin ray from northern pike and muskellunge, a dorsal spine 
+from walleye greater than 12 inches in length and a scale sample from walleye less 
+than 12 inches in length. Aging structures were collected until five structures were 
+collected for each species and each sex for every half-inch increment. A subsample of 
+bluegill, pumpkinseed, black crappie, rock bass and yellow perch were measured to 
+the nearest 0.1 inches and vouchered for collection of aging structures (otoliths).  
+   
+Spring electrofishing (SEI) using a DNR standard pulsed direct current (PDC) boom 
+shocker boat was conducted at night on April 28. SEI sampling encompassed the 
+entire shoreline (~3.7 miles) and included 2.05 hours of sampling effort. Sampling 
+began at 2016 hours and concluded at 2231 hours, with a pause from 2140 hours to 
+2152 hours to process fish. Pulsed direct current was used at 120 volts, 9 amps, at a 
+pulse rate of 80 per second and 25 percent duty cycle. The water temperature was 44 
+degrees Fahrenheit. SEI sampling utilized two dippers, two probes with a total of 16 
+droppers and a dip net bar mesh of 0.375 inches. 
+  
+The objective of SEI was to count and measure adult walleye and northern pike and 
+observe and record marks for adult northern pike and walleye marked with fin clips 
+during SNI to facilitate the calculation of population estimates for both species. All 
+walleye and northern pike sampled were measured to the nearest 0.1 inches and 
+weighed to the nearest 0.1 pounds. Aging structures were collected until five 
+structures were collected for each species and each sex for every half-inch 
+increment. 
+ 
+Spring electrofishing (SEII) using a DNR standard PDC boom shocker boat was 
+conducted at night on May 23, targeting largemouth bass, smallmouth bass and 
+--- PAGE 7 ---
+7 
+ 
+panfish species. SEII sampling encompassed the entire shoreline (3.5 miles) and 
+included 1.83 hours of total sampling effort. The water temperature was 62 degrees 
+Fahrenheit. 
+  
+The first SEII sampling station, targeting all fish species, began at 2143 hours, 
+concluded at 2155 hours (12 minutes of effort) and covered 0.5 miles of shoreline. 
+Pulsed direct current was used at 125 volts and 11.5 amps at a pulse rate of 80 per 
+second on a 25 percent duty cycle. The second sampling station, targeting only 
+gamefish (largemouth bass and smallmouth bass), began at 2204 hours, concluded at 
+2229 hours (25 minutes of effort) and covered 1 mile of shoreline. The third sampling 
+station, targeting all fish species, began at 2129 hours, concluded at 2152 hours (23 
+minutes of effort) and covered 0.5 miles of shoreline. The fourth sampling station, 
+targeting gamefish, began at 2206 hours, concluded at 2240 hours (34 minutes of 
+effort) and covered 1.0 mile of shoreline. The fifth sampling station, targeting all fish 
+species, began at 2248 hours, concluded at 2304 hours (16 minutes of effort) and 
+covered 0.5 miles of shoreline. At stations targeting all species, all fish were 
+collected, and gamefish and panfish were measured to the nearest 0.1 inches. Other 
+fish were identified to species and counted. At stations targeting only gamefish, all 
+gamefish were measured to the nearest 0.1 inches. All gamefish were examined for 
+the presence of fin clip marks from previous surveys. All SEII stations employed two 
+dippers, two probes with a total of 16 droppers and a dip net bar mesh of 0.375 
+inches.  
+  
+Fall electrofishing (FE) using a DNR standard PDC boom shocker boat was conducted 
+at night on Sept. 28 to assess the abundance and recruitment of young of the year 
+and yearling walleye and muskellunge. The FE survey encompassed the entire 
+shoreline (3.5 miles) and included 1.90 hours of sampling effort. The water 
+temperature was 62 degrees Fahrenheit. Sampling began at 1925 hours and 
+concluded at 2119 hours. Pulsed direct current was used at 150 volts, 16 amps with a 
+pulse rate of 80 per second and 25 percent duty cycle. FE sampling employed two 
+dippers, two probes with a total of 16 droppers and a dip net bar mesh of 0.375 
+inches. During FE sampling, only walleye and muskellunge were collected and were 
+measured to the nearest 0.1 inches.  
+ 
+Fyke net total catch and catch-per-unit effort (CPUE, number/net night) were 
+calculated to estimate relative abundance; electrofishing total catch and CPUE 
+(number/mile) were also calculated. Length frequency histograms were constructed 
+for northern pike, walleye, muskellunge, largemouth bass, smallmouth bass, bluegill, 
+pumpkinseed, black crappie, yellow perch and rock bass to assess size structure. 
+  
+Relative weight, the ratio of a fish’s weight to the weight of a standard fish of the 
+same length, was used to assess the body condition of walleye and muskellunge 
+using standard length-at-weight equations (Willis 1998). Relative weight values 
+between 75 and 100 indicate normal weight for a given length. A relative weight value 
+--- PAGE 8 ---
+8 
+ 
+greater than 100 indicates that a fish is in excellent condition. A relative weight value 
+of less than 75 indicates that a fish is in poor condition. 
+  
+Proportional size distribution (PSD), the ratio of the number of “stock” sized fish to 
+the number of “quality” fish, was calculated for walleye, muskellunge, largemouth 
+bass, smallmouth bass and bluegill. In some cases, PSDs were also calculated for 
+other length categories as the ratio of stock fish to “preferred” (PSD-P), “memorable” 
+(PSD-M) or “trophy” (PSD-T) fish. Stock, quality, preferred, memorable and trophy 
+lengths were based on standardized lengths for each species (Neuman et al. 2012). 
+ 
+Age and growth data were obtained from structures taken from northern pike (anal 
+fin rays), walleye (dorsal spines), muskellunge (anal fin ray) and bluegills (otoliths) 
+collected throughout the comprehensive fishery survey. Structures were mounted in 
+epoxy and sectioned using a Buehler Isomet low-speed sectioning saw. Sectioned 
+wafers were viewed and imaged using an Olympus SZX7 Microscope. Growth data 
+from Elkhart Lake was compared to statewide and regional mean growth rates 
+utilized in the DNR Fisheries Information System (FMIS) database. 
+ 
+Results  
+NORTHERN PIKE 
+Twenty-three northern pike were sampled during 2022 SNI for a catch rate of 0.26 
+fish/net night. This catch rate is below average (1.12 fish/net night) when compared 
+to lakes across the state with similar characteristics (complex, two-story). An 
+additional eight northern pike were sampled during 2022 SNII for a catch rate of 
+0.14/net night. The mean length of all fish collected was 22.2 inches, with a maximum 
+length of 31.0 inches (Figure 3). Male northern pike ranged in length from 16.2 to 27.0 
+inches, with a mean length of 20.8 inches. Female northern pike ranged in length 
+from 17.0 to 31.0 inches, with a mean length of 23.8 inches.  
+ 
+One hundred twenty-one northern pike (including 25 recaptured fish) were sampled 
+during the 2011 SNI for a catch rate of 0.72 fish/net night. An additional two northern 
+pike were sampled during the 2011 SNII for a catch rate of 0.06 fish/net night. The 
+mean length of all fish collected was 23.6 inches, with a maximum length of 34.2 
+inches. Male northern pike ranged in length from 17.1 to 29.0 inches, with a mean 
+length of 22.7 inches. Female northern pike ranged in length from 16.9 to 34.2 inches, 
+with a mean length of 26.8 inches.  
+ 
+Northern pike in Elkhart Lake grow faster than the statewide average, though sample 
+size was low for age-5 (n=2) and age-6 (n=2) fish (Figure 4). Too few northern pike 
+were sampled in 2022 to estimate the population density in Elkhart Lake.  
+ 
+--- PAGE 9 ---
+9 
+ 
+WALLEYE 
+Four hundred twenty-four walleye (including 83 recaptured fish) were sampled during 
+the 2022 SNI for a catch rate of 4.82 fish/net night. This catch rate is slightly below 
+average (6.59 fish/net night) when compared to lakes across the state with similar 
+characteristics. The average length of walleye sampled during the 2022 SNI was 20.7 
+inches, with a maximum length of 28.5 inches (Figure 5). Male walleye ranged in 
+length from 13.4 to 26.5 inches, with a mean length of 18.9 inches. Female walleye 
+ranged in length from 17.3 to 28.5 inches, with a mean length of 22.9 inches.  
+ 
+Two hundred seventy-five walleye (including 76 recaptured fish) were sampled during 
+the 2011 SNI for a catch rate of 1.63 fish/net night. The average length of walleye 
+sampled during the 2011 SNI was 24.3 inches, with a maximum length of 29.8 inches. 
+Male walleye ranged in length from 18.9 to 23.6 inches, with a mean length of 20.5 
+inches. Female walleye ranged in length from 19.5 to 29.8 inches, with a mean length 
+of 25.2 inches. 
+ 
+The Bailey modification of the Petersen Method adult population estimate for 
+walleye in Elkhart Lake was 1,140 (95% CI [778-1,844]), equaling 3.90/acre. This is a 
+substantial increase from the 2011 survey when the adult walleye population 
+estimate was 348 (95% CI [244-628]), equaling 1.19/acre. Gender-specific proportional 
+stock density (PSD) was calculated for walleye sampled during the 2022 SNI and SEI 
+(Table 2). PSD was 98 for males and 100 for females (Table 2). Male PSD-P was 29, 
+compared to 92 for females. During the 2011 SNI and SEI, PSD was 100 for males and 
+100 for females. Male PSD-P was 63, compared to 99 for females. The majority of 
+walleye sampled in 2022 were of legal harvestable size, with 71% of males and 99% of 
+females above the current 18-inch minimum length limit (Table 2). 
+  
+Walleye body condition during the 2022 SNI was very good, as suggested by relative 
+weight values ranging from 74 to 169, with a mean of 105 (n=164). Relative weight for 
+females was very good and ranged from 74 to 169, with a mean of 110 (n=95). Male 
+relative weight was good and ranged from 76 to 121, with a mean of 98 (n=69). 
+Relative weight for male walleye was generally lower than females, given the females’ 
+spawning condition and presence of eggs at the time of capture. 
+ 
+Walleye in Elkhart Lake grow faster than the statewide and South District averages, 
+with most fish reaching the current 18-inch minimum length limit by age-4 (Figure 6). 
+On average, female walleye reach legal harvestable size (18-inches) by age-3 and 
+males by age-5. High growth rate and body condition values suggest walleye in 
+Elkhart Lake have ample forage.  
+ 
+MUSKELLUNGE 
+In the 2022 SNI and SNII, five muskellunge (including one recaptured fish) were 
+sampled for a catch rate of 0.03 fish/net night. The average length of muskellunge 
+sampled in 2022 was 40.8 inches, with a maximum length of 46.0 inches (Figure 7). In 
+--- PAGE 10 ---
+10 
+ 
+2022, none of the muskellunge were identified as Great Lakes spotted strain fish. In 
+the 2018 special muskellunge survey, 17 muskellunge (including one recaptured fish) 
+were sampled for a catch rate of 0.29 fish/net night. Of the 16 individual muskellunge 
+sampled in 2018, only three were confirmed to be Great Lakes spotted strain fish. The 
+netting catch rates of muskellunge in 2022 and 2018 were below average when 
+compared to similar lakes statewide.  
+  
+Muskellunge body condition was good for fish collected in the 2018 special 
+muskellunge survey and the 2022 SNII, as suggested by relative weight values that 
+ranged from 58 to 130 with a mean of 84 (n=19). Relative weight for females ranged 
+from 73 to 130, with a mean of 93 (n=8). Relative weight for males was slightly lower 
+and ranged from 58 to 96, with a mean of 78 (n=8), indicating sub-optimal body 
+condition of male muskellunge.  
+ 
+LARGEMOUTH BASS 
+During the 2022 comprehensive fishery survey, 88 largemouth bass were sampled, 
+with the majority (n=35) sampled in SEII for a catch rate of 10.0 fish/mile. This catch 
+rate is above average when compared to lakes with similar characteristics across the 
+state. However, this is a slight decrease from the 2011 SEII, when largemouth bass 
+relative abundance was 16 fish/mile. All largemouth bass sampled in the 2022 SNI 
+and SNII were individually marked with a top caudal fin clip to ensure fish were not 
+counted twice. The average length of largemouth bass sampled during the 2022 SEII 
+was 10.8 inches, with a maximum length of 16.4 inches (Figure 8).  
+ 
+In the 2022 SEII, largemouth bass PSD (greater than or equal to 12 inches) was 53 and 
+PSD-P (greater than or equal to 15 inches) was 11. Similarly, in the 2011 SEII, 
+largemouth bass PSD was 68 and PSD-P was 9. A balanced largemouth bass 
+population typically displays PSD values between 40-60.  
+ 
+The current 14-inch minimum length limit, five fish daily bag limit regulation for 
+largemouth bass in Elkhart Lake has been in place since 1989. Few fish greater than 
+16 inches were sampled during the 2011 and 2022 SEII surveys, though it’s unclear if 
+this is due to slow growth or angler harvest. A largemouth bass population and age 
+and growth estimates were not conducted as part of the 2022 comprehensive fishery 
+survey. However, a population estimate, as well as age and growth estimates, should 
+be conducted during the next comprehensive fishery survey and compared to 
+statewide and regional averages. A catch curve should be conducted to estimate total 
+annual mortality. This information will be valuable to determine if an increased 
+minimum length limit could increase largemouth bass size structure. 
+ 
+SMALLMOUTH BASS 
+During the 2022 comprehensive fishery survey, 104 smallmouth bass were captured, 
+with the majority (n=74) sampled in SEII for a catch rate of 21.1 fish/mile. This catch 
+--- PAGE 11 ---
+11 
+ 
+rate is above average when compared to lakes with similar characteristics across the 
+state. The average length of smallmouth bass sampled during SEII was 12.9 inches, 
+with a maximum length of 20.0 inches (Figure 9). Multiple year classes of smallmouth 
+bass appear to be present, with peaks in the 10-inch, 13-inch and 17-inch length bins. 
+ 
+Smallmouth bass PSD calculated from 2022 SEII data for quality-size fish 11 inches 
+and greater was 65 (n=72). The PSD-P value was 41 (n=30) for preferred-size fish 
+greater than or equal to 14 inches. Memorable (equal to or greater than 17 inches) 
+and trophy (equal to or greater than 20 inches) length smallmouth were also 
+collected in SEII for a PSD-M of 12 (n=9) and PSD-T of 1 (n=1), respectively. Smallmouth 
+bass PSD, PSD-P, PSD-M and PSD-T calculated from 2011 SEII data were 73 (n=22), 46 
+(n=14), 0.03 (n=1) and 0 (n=0), respectively.  
+ 
+BLUEGILL 
+A total of 270 bluegills were sampled in SNI for a catch rate of 3.06/net night. 
+However, fish were not individually identified with a mark; therefore, individual 
+bluegill may have been netted multiple times. Bluegills ranged in size from 1.5 to 7.5 
+inches, with a mean length of 4.5 inches (Figure 10). A total of 52 bluegills were 
+sampled in SEII for a catch rate of 20.8 fish/mile. This catch rate is below average (51 
+fish/mile) compared to lakes across the state with similar characteristics. Bluegills 
+captured in the 2022 SEII ranged in size from 2.5 to 6.7 inches, with a mean length of 
+4.7 inches (Figure 11).  
+ 
+A total of 91 bluegills were sampled in 2011 SEII for a catch rate of 91 fish/mile. 
+Bluegills captured in 2011 SEII ranged in length from 2.9 to 6.5 inches, with a mean 
+length of 4.9 inches.   
+ 
+The PSD value calculated from 2022 SEII data for quality-size fish 6 inches and greater 
+was 13 (n=7); PSD-P was 0 as no fish collected were greater than the preferred size of 
+8 inches. These values are very similar to the 2011 SEII when bluegill PSD was 14 and 
+PSD-P was 0. This indicates that both quality-size and preferred-size bluegills are 
+lacking in Elkhart Lake. PSD values between 40-60 generally describe a balanced 
+population. A PSD-P value of 5 is generally considered a minimum benchmark. 
+  
+The bluegill growth rate in Elkhart Lake was below the statewide mean growth rate 
+for fish age-3 through age-6 (Figure 12). Below average growth may be attributed to 
+the lake’s overall productivity (mesotrophic) and interspecific competition with other 
+fish species and invasive zebra mussels. A low bluegill size structure, as indicated by 
+a mean length of 4.7 inches in SEII, provides a mediocre fishing opportunity in Elkhart 
+Lake. Angler exploitation may be structuring the population via harvest of individuals 
+greater than 6 inches in length. However, given below average growth rates, a 
+reduction in panfish bag limits may not be an effective option to increase size 
+structure. Growth rate comparisons cannot be made between survey years, given 
+bluegill aging structures were not collected in the 2011 comprehensive fishery survey.  
+--- PAGE 12 ---
+12 
+ 
+ 
+PUMPKINSEED 
+One hundred forty-nine pumpkinseeds were sampled in the 2022 SNI for a catch rate 
+of 1.69/net night. Fish were not individually identified with a mark; therefore, 
+individual pumpkinseeds may have been netted multiple times. The mean length was 
+4.9 inches and ranged from 3.2 to 7.4 inches (Figure 13). A total of 13 pumpkinseeds 
+were sampled in the 2022 SEII for a catch rate of 5.2/mile. This catch rate is slightly 
+above average (4.0 fish/mile) when compared to lakes of similar characteristics. The 
+mean length of pumpkinseeds collected in the 2022 SEII was 5.3 inches and ranged 
+from 3.8 to 7.4 inches (Figure 14).    
+ 
+Nineteen pumpkinseeds were sampled in the 2011 SNI for a catch rate of 0.11 fish/net 
+night. Fish were not individually identified with a mark; therefore, individual 
+pumpkinseeds may have been netted multiple times. The mean length was 5.1 inches 
+and ranged from 3.8 to 7.1 inches. A total of 15 pumpkinseeds were sampled in 2011 
+SEII for a catch rate of 15 fish/mile. The mean length of pumpkinseeds collected in 
+2011 SEII was 5.8 inches and ranged from 4.6 to 7.2 inches. 
+ 
+BLACK CRAPPIE 
+During the 2022 comprehensive fisheries survey, 50 black crappies were captured, 
+with the majority (n=28) sampled in SNI for a catch rate of 0.31 fish/net night. A total 
+of 22 black crappies were sampled in the 2022 SNII for a catch rate of 0.25/net night. 
+Fish were not individually identified with a mark; therefore, individual black crappies 
+may have been netted multiple times. The mean length of black crappies sampled in 
+the 2022 SNI and 2022 SNII was 7.9 inches and ranged from 3.1 to 14.7 inches (Figure 
+15). Black crappie recruitment in Elkhart Lake appears to be sporadic, with relatively 
+strong year-classes suggested by peaks in the 4-inch and 8-inch length bins. 
+ 
+Sixteen black crappies were sampled in the 2011 SNI for a catch rate of 0.09 fish/net 
+night. One black crappie was sampled during the 2011 SEII for a catch rate of 1.0 
+fish/mile. The mean length of black crappies sampled in the 2011 SNI was 7.3 inches 
+and ranged from 5.0 to 10.6 inches.  
+ 
+YELLOW PERCH 
+Sixteen yellow perch were sampled during the 2022 SNI for a catch rate of 0.18 
+fish/net night. This catch rate is below average (4.8 fish/net night) when compared to 
+lakes with similar characteristics across the state. Fish were not individually 
+identified with a fin clip mark; therefore, individual yellow perch may have been 
+netted multiple times. The mean length was 7.1 inches and ranged from 5.6 inches to 
+9.9 inches (Figure 16). Fourteen yellow perch were sampled during the 2022 SEII for a 
+catch rate of 9.3 fish/mile. The mean length was 5.7 inches and ranged from 4.1 inches 
+to 8.0 inches (Figure 17).  
+ 
+--- PAGE 13 ---
+13 
+ 
+One-hundred sixteen yellow perch were sampled during the 2011 SNI for a catch rate 
+of 0.69 fish/net night. The mean length was 6.1 inches and ranged from 4.1 to 9.2 
+inches. Thirty-four yellow perch were sampled during the 2011 SEII for a catch rate of 
+34.0 fish/mile. The mean length was 5.5 inches and ranged from 3.7 to 9.1 inches. 
+ 
+ROCK BASS 
+Three hundred thirty-three rock bass were sampled in the 2022 SNII for a catch rate 
+of 5.2 fish/net night. Fish were not individually identified with a fin clip mark; 
+therefore, individual rock bass may have been netted multiple times. The mean 
+length of fish collected in SNII was 6.7 inches and ranged from 4.0 inches to 11.2 
+inches (Figure 18).  
+ 
+Ninety-two rock bass were sampled in the 2011 SNII for a catch rate of 0.53 fish/net 
+night. The mean length of fish collected in the SNII was 6.6 inches and ranged from 
+2.6 to 10.3 inches. Although not typically targeted by anglers, rock bass provide an 
+additional panfish species for anglers to harvest.  
+ 
+OTHER SPECIES 
+In the 2022 comprehensive fishery survey, other species were observed in low 
+abundance that do not warrant analysis but are reported here for consideration. 
+These species included green sunfish (Lepomis cyanellus), yellow bullhead (Ameiurus 
+natalis) and mudpuppies (Necturus maculosus). 
+  
+--- PAGE 14 ---
+14 
+ 
+Management Recommendations 
+The northern pike population of Elkhart Lake was not fully assessed in 2022 due to 
+low catch. The low SNI northern pike rate suggests a low-density population is 
+present. Northern pike abundance in Elkhart Lake may currently be limited by poor 
+recruitment due to the lack of suitable spawning habitat.  
+  
+The walleye population in Elkhart Lake currently provides an excellent fishery, with 
+82% of adult fish of legal harvestable size (18 inches). Large fingerling stocking 
+appears to be effective at establishing year classes and should be continued. The 
+switch from biennial small fingerling to biennial large fingerling walleye stocking in 
+2014 may be the reason for the substantial increase in adult walleye abundance since 
+2011. Although walleye abundance has increased, growth remains above the 
+statewide average, suggesting an ample forage base. 
+ 
+Elkhart Lake is currently managed as a trophy muskellunge fishery with a 50-inch 
+minimum length limit, one fish daily bag limit. This regulation also protects nearly all 
+adult fish from harvest, aiding the potential establishment of the Great Lakes spotted 
+strain broodstock program. However, muskellunge catch rates, including the Great 
+Lake spotted strain, are low. An insufficient number of muskellunge were captured in 
+the 2022 SNI and SNII to warrant a recapture netting event in 2023, which would be 
+necessary to calculate a population estimate. However, since all Great Lakes spotted 
+strain yearling muskellunge receive a PIT tag prior to stocking, PIT tag saturation in 
+the population is assumed to be high. Collaboration with the local chapter of Muskies 
+Inc. by supplying them with PIT tag readers could be one way to collect additional 
+information on the growth and abundance of tagged fish.  
+ 
+Due to the inadequate return of adult fish to support broodstock collection, the 
+biennial stocking of yearling muskellunge and the designation of Elkhart Lake as a 
+broodstock lake should be discontinued. As such, the current muskellunge special 
+regulation of 50-inch minimum length limit should revert to the previous 40-inch 
+minimum length limit regulation.  
+ 
+Elkhart Lake is currently being used as a reference lake in a statewide assessment of 
+experimental panfish regulations. Given the low abundance, size structure and 
+growth of bluegill, the implementation of more restrictive panfish regulations should 
+be reassessed at the conclusion of this statewide study.  
+  
+Management recommendations include: 
+ 
+1. Continue biennial stocking of large fingerling walleye and continue to 
+evaluate natural reproduction to determine future stocking needs. 
+2. Continue to evaluate the effectiveness of the county-wide 18-inch minimum 
+length, three fish daily bag limit walleye regulation implemented in 2018 at 
+the time of the next survey. 
+--- PAGE 15 ---
+15 
+ 
+3. Discontinue the biennial stocking of Great Lakes spotted muskellunge due 
+to inadequate returns of adult fish to support broodstock collection.  
+4. Discontinue Elkhart Lake as a designated muskellunge broodstock lake and 
+change the current muskellunge special regulation of 50-inch minimum 
+length limit to the previous 40-inch minimum length limit regulation.   
+5. Further assess black crappie and yellow perch populations if new sampling 
+protocols are developed. 
+ 
+--- PAGE 16 ---
+16 
+ 
+Acknowledgments 
+The field work, data collection, data entry and structure aging required for this report 
+was conducted by DNR Fisheries Technicians Tanya Meives and Christine Larson. 
+Report reviews and editing was provided by DNR Fisheries Management staff, 
+including Tanya Meives, Laura Stremick and Tim Simonson.  
+ 
+References 
+K.M. Renik, M.J. Jennings. J.M. Campa, J. Lyons, T.P. Parks, G.G. Sass. 2020. Status and  
+distribution of Cisco (Coregonus artedi) and Lake Whitefish (Coregonus clupeaformis)  
+in inland lakes of Wisconsin. Northeastern Naturalist 27(3):469–484. 
+ 
+J.E. Nelson. 1992. 1991 Fishery Survey of Elkhart Lake Sheboygan County, Wisconsin.  
+Wisconsin Department of Natural Resources. Unpublished Report.  
+ 
+Neumann, R.M., C.S. Guy and D.W. Willis. 2012. Length, weight and associated indices.  
+Pages 637-676 in A.V. Zale, D.L. Parrish and T.M. Surron, editors. Fisheries techniques, 
+3rd edition. American Fisheries Society, Bethesda, MD. 
+ 
+Willis, D.W. 1989. Proposed standard length-weight equation for Northern Pike. North  
+American Journal of Fisheries Management 9:203-208. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 17 ---
+17 
+ 
+Tables 
+Table 1. Fish stocked in Big Elkhart Lake since 1976 including year stocked, species, age class, number of 
+fish stocked and strain. 
+Year Species Age Class 
+Number of 
+Fish Stocked Strain 
+2020 Muskellunge Yearling 286 Great Lakes Spotted 
+2020 Walleye Large Fingerling 1459 Lake Michigan 
+2019 Muskellunge Yearling 286 Great Lakes Spotted 
+2018 Walleye Large Fingerling 1428 Mississippi Headwaters 
+2017 Muskellunge Yearling 449 Great Lakes Spotted 
+2017 Walleye Large Fingerling 1533 Lake Michigan 
+2016 Walleye Large Fingerling 1902 Upper Mississippi River 
+2016 Muskellunge Fall Yearling 300 Great Lakes Spotted 
+2015 Muskellunge Fall Yearling 875 Great Lakes Spotted 
+2014 Walleye Large Fingerling 1456 Lake Michigan 
+2013 Muskellunge Fall Yearling 198 Great Lakes Spotted 
+2012 Walleye Small Fingerling 7710 Rock-Fox 
+2010 Walleye Small Fingerling 10010 Rock-Fox 
+2010 Muskellunge Yearling 53 Great Lakes Spotted 
+2009 Muskellunge Yearling 300 Great Lakes Spotted 
+2008 Walleye Small Fingerling 10016 Mississippi Headwaters 
+2006 Walleye Small Fingerling 10010 Mississippi Headwaters 
+2004 Walleye Small Fingerling 28600 Lake Michigan 
+2003 Muskellunge Fingerling 300 Unspecified 
+2002 Walleye Small Fingerling 25410 Mississippi Headwaters 
+2000 Walleye Small Fingerling 28600 Unspecified 
+1998 Walleye Small Fingerling 27339 Unspecified 
+1996 Walleye Fingerling 16300 Unspecified 
+1995 Walleye Fingerling 7000 Unspecified 
+1994 Walleye Fingerling 9465 Unspecified 
+1993 Walleye Fingerling 6700 Unspecified 
+1993 Rainbow trout Yearling 6000 Unspecified 
+1992 Walleye Fingerling 14300 Unspecified 
+1992 Rainbow trout Yearling 3030 Unspecified 
+1991 Muskellunge Fingerling 600 Unspecified 
+1991 Rainbow trout Yearling 2000 Unspecified 
+1991 Walleye Fingerling 7150 Unspecified 
+1990 Muskellunge Fingerling 600 Unspecified 
+1990 Rainbow trout Yearling 2000 Unspecified 
+1989 Brown trout Yearling 1500 Unspecified 
+1989 Brook trout Yearling 1500 Unspecified 
+1989 Walleye Fry 50000 Unspecified 
+1989 Walleye Fingerling 3320 Unspecified 
+1988 Muskellunge Fingerling 800 Unspecified 
+--- PAGE 18 ---
+18 
+ 
+1988 Brown trout Yearling 500 Unspecified 
+1988 Brook trout Yearling 500 Unspecified 
+1988 Rainbow trout Yearling 2000 Unspecified 
+1987 Muskellunge Fingerling 600 Unspecified 
+1987 Rainbow trout Yearling 10500 Unspecified 
+1987 Walleye Fingerling 42450 Unspecified 
+1986 Brook trout Yearling 1500 Unspecified 
+1986 Walleye Fingerling 14300 Unspecified 
+1986 Brown trout Yearling 1500 Unspecified 
+1985 Brook trout Yearling 2004 Unspecified 
+1985 Brown trout Yearling 2158 Unspecified 
+1985 Rainbow trout Adult 74 Unspecified 
+1985 Walleye Fingerling 22785 Unspecified 
+1984 Walleye Fingerling 15000 Unspecified 
+1984 Brown trout Yearling 1580 Unspecified 
+1984 Brook trout Yearling 1548 Unspecified 
+1983 Walleye Fry 500000 Unspecified 
+1983 Brook trout Yearling 1500 Unspecified 
+1983 Brown trout Yearling 1500 Unspecified 
+1982 Brook trout Yearling 1500 Unspecified 
+1982 Walleye Fingerling 13328 Unspecified 
+1982 Brown trout Yearling 1500 Unspecified 
+1981 Brook trout Yearling 1500 Unspecified 
+1981 Walleye Fingerling 26010 Unspecified 
+1981 Brown trout Yearling 1500 Unspecified 
+1980 Rainbow trout Yearling 1000 Unspecified 
+1980 Walleye Fingerling 17520 Unspecified 
+1980 Brown trout Yearling 1000 Unspecified 
+1980 Brook trout Yearling 1000 Unspecified 
+1979 Rainbow trout Yearling 1000 Unspecified 
+1979 Brown trout Yearling 1000 Unspecified 
+1979 Brook trout Yearling 1000 Unspecified 
+1979 Walleye Fingerling 1500 Unspecified 
+1978 Brown trout Yearling 1000 Unspecified 
+1978 Walleye Fingerling 13621 Unspecified 
+1978 Brook trout Yearling 1000 Unspecified 
+1978 Rainbow trout Yearling 1000 Unspecified 
+1977 Brook trout Yearling 1000 Unspecified 
+1977 Brown trout Yearling 1000 Unspecified 
+1977 Rainbow trout Yearling 1000 Unspecified 
+1977 Walleye Fingerling 1500 Unspecified 
+1976 Rainbow trout Yearling 1000 Unspecified 
+1976 Brown trout Yearling 1000 Unspecified 
+1976 Brook trout Yearling 1000 Unspecified 
+1976 Walleye Fingerling 15000 Unspecified 
+--- PAGE 19 ---
+19 
+ 
+Table 2. Number of individual walleye of “stock” and “quality” size and resulting proportional size 
+distribution (PSD) and proportional size distribution of “preferred” fish (PSD-P). The percentage of 
+sampled fish at or above 18 inches was also calculated. Fish were sampled by fyke net (SNI) and 
+electrofishing (SEI) in spring 2022. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  Stock Quality Preferred Memorable Trophy PSD PSD-P % 
+Legal 
+Length 
+(inches) 10 15 20 25 30 98.9 56.3 82.8 
+All 378 374 213 47 0 
+Male 214 210 62 2 0 98.1 28.9 70.6 
+Female 164 164 151 45 0 100 92.1 98.8 
+--- PAGE 20 ---
+20 
+ 
+Figures 
+  
+Figure 1. Contour map of Elkhart Lake, Sheboygan County, Wisconsin.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 21 ---
+21 
+ 
+Figure 2. Fyke net locations during the 2022 Comprehensive Fishery Survey of Elkhart Lake, Sheboygan 
+County, Wisconsin.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 22 ---
+22 
+ 
+Figure 3. Length-frequency histogram of male, female and unknown sex northern pike sampled during 
+the 2022 spring netting (SNI & SNII) surveys in Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+ 
+Figure 4. Northern pike mean length at age determined using anal fin rays collected during the 2022 
+spring netting survey (SNI) of Elkhart Lake, Sheboygan County, Wisconsin compared to the statewide 
+mean length at age from spring (January-May) surveys and the South District average. Error bars 
+represent plus or minus one standard deviation.  
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Length (inches)
+Age (years)
+Elkhart Lake
+Statewide
+South District
+0
+1
+2
+3
+4
+5
+6
+16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31
+Number of Fsih
+Length (inches)
+Male
+Female
+Unknown
+--- PAGE 23 ---
+23 
+ 
+ 
+ 
+Figure 5. Length-frequency histogram of male and female walleye sampled during the 2022 spring 
+netting (SNI) and spring electrofishing (SEI) surveys of Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+Figure 6. Walleye mean length at age determined using dorsal spines collected during 2022 spring 
+netting (SNI) of Elkhart Lake, Sheboygan County, Wisconsin compared to the statewide mean length at 
+age and the South District average.  Error bars represent plus or minus one standard deviation.  
+0
+10
+20
+30
+40
+50
+60
+70
+80
+13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+Number of Fish
+Length (inches)
+Male
+Female
+0
+5
+10
+15
+20
+25
+30
+35
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+Length (inches)
+Age (years)
+Elkhart Lake
+Statewide
+South District
+--- PAGE 24 ---
+24 
+ 
+Figure 7. Length-frequency histogram of male, female and unknown sex muskellunge sampled during 
+2022 spring netting (SNII) of Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+ 
+ 
+ 
+Figure 8. Length-frequency histogram of largemouth bass sampled during 2022 spring electrofishing 
+(SEII) of Elkhart Lake, Sheboygan County, Wisconsin. 
+0
+10
+20
+30
+40
+50
+60
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Number of Fish
+Length (inches)
+0
+1
+2
+3
+35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50
+Number
+Length (Inches)
+Male
+Female
+Unknown
+--- PAGE 25 ---
+25 
+ 
+ 
+Figure 9. Length-frequency histogram of smallmouth bass sampled during 2022 spring electrofishing 
+(SEII) of Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+ 
+Figure 10. Length-frequency histogram of bluegills sampled during 2022 spring netting (SNI) of Elkhart 
+Lake, Sheboygan County, Wisconsin. 
+0
+10
+20
+30
+40
+50
+60
+70
+80
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Number of Fish
+Length (inches)
+0
+20
+40
+60
+80
+100
+120
+2 3 4 5 6 7 8
+Number of Fish
+Length (inches)
+--- PAGE 26 ---
+26 
+ 
+ 
+Figure 11. Length frequency histogram of bluegills sampled during 2022 spring electrofishing (SEII) of 
+Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+ 
+ 
+Figure 12. Bluegill mean length at age determined using otoliths collected during 2022 spring netting 
+(SNII) of Elkhart Lake, Sheboygan County, Wisconsin, compared to statewide mean length.  
+0
+10
+20
+30
+40
+50
+60
+2 3 4 5 6 7 8
+Number of Fish
+Length (inches)
+0
+2
+4
+6
+8
+10
+12
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Length (inches)
+Age (years)
+Statewide Elkhart Lake
+--- PAGE 27 ---
+27 
+ 
+ 
+Figure 13. Length-frequency histogram of pumpkinseeds sampled during 2022 spring netting (SNI) of 
+Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+ 
+ 
+ 
+Figure 14. Length-frequency histogram of pumpkinseeds sampled during 2022 spring electrofishing 
+(SEII) of Elkhart Lake, Sheboygan County, Wisconsin. 
+0
+10
+20
+30
+40
+50
+60
+2 3 4 5 6 7 8
+Number of Fish
+Length (inches)
+0
+10
+20
+30
+40
+50
+60
+2 3 4 5 6 7 8
+Number of Fish
+Length (inches)
+--- PAGE 28 ---
+28 
+ 
+ 
+Figure 15. Length-frequency histogram of black crappies sampled during 2022 spring netting (SNI & 
+SNII) of Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 16. Length-frequency histogram of yellow perch sampled during 2022 spring netting (SNI) of 
+Elkhart Lake, Sheboygan County, Wisconsin. 
+0
+10
+20
+30
+40
+50
+60
+3 4 5 6 7 8 9 10 11 12 13 14 15
+Number of Fish
+Length (inches)
+0
+10
+20
+30
+40
+50
+60
+4 5 6 7 8 9 10 11 12
+Number of Fish
+Length (inches)
+--- PAGE 29 ---
+29 
+ 
+Figure 17. Length-frequency histogram of yellow perch sampled during 2022 spring electrofishing (SEII) 
+of Elkhart Lake, Sheboygan County, Wisconsin. 
+ 
+ 
+ 
+  
+Figure 18. Length-frequency histogram of rock bass sampled during 2022 spring netting (SNII) of Elkhart 
+Lake, Sheboygan County, Wisconsin 
+0
+10
+20
+30
+40
+50
+60
+4 5 6 7 8 9 10 11 12
+Number of Fish
+Length (inches)
+0
+10
+20
+30
+40
+50
+60
+4 5 6 7 8 9 10 11 12
+Number of Fish
+Length (inches)

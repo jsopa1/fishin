@@ -1,106 +1,106 @@
-# V1 Data Coverage Report (Part 4)
+# V1 Data Coverage Report (rewritten — full expanded scope)
 
 What [`analysis/v1_conditions_biology_forecast.py`](../analysis/v1_conditions_biology_forecast.py)
-actually covers today, by data-quality tier, with the source backing each
-row and whether species presence is survey-confirmed or stocking-only. This
-is the honest floor of the tool's current coverage — everything not listed
-here is explicitly "no data," not silently assumed.
+actually covers today, across the full stocking-only tier and rivers/streams
+added this cycle (Decision #014), by data-quality tier and waterbody type.
+Nothing below is rounded up — every count is a real, checkable number from
+the actual data files, and every gap is stated plainly rather than implied
+away.
 
-## Lakes covered (23 total: 22 real-survey lakes + 1 bonus)
+## Coverage by tier and type
 
-| Lake | County | Species tier | Water temp: method | Water temp: real or proxy |
-|---|---|---|---|---|
-| Camelot Lake | Adams | survey-confirmed | CLMN recent | **real** |
-| Spider Lake | Ashland | survey-confirmed | NWS proxy | proxy (CLMN station stale, 29 yrs) |
-| Big Moon Lake | Barron | survey-confirmed | CLMN recent | **real** |
-| Diamond Lake | Bayfield | survey-confirmed | NWS proxy | proxy |
-| Upper/Lower Clam Lake | Burnett | survey-confirmed | NWS proxy | proxy |
-| Lake Wisconsin | Columbia/Sauk | survey-confirmed | CLMN recent | **real** |
-| Fish Lake | Dane | survey-confirmed | NWS proxy | proxy (CLMN station stale, 12 yrs) |
-| Beaver Dam Lake | Dodge | survey-confirmed | CLMN recent | **real** |
-| Big Green Lake | Green Lake | survey-confirmed | NWS proxy | proxy |
-| Little Green Lake | Green Lake | survey-confirmed | NWS proxy | proxy |
-| Blackhawk Lake | Iowa | survey-confirmed | NWS proxy | proxy |
-| Rock Lake | Jefferson | survey-confirmed | CLMN recent | **real** |
-| Lake DuBay | Marathon/Portage | survey-confirmed | NWS proxy | proxy |
-| Bass Lake | Oconto | survey-confirmed | CLMN recent | **real** |
-| Pelican Lake | Oneida | survey-confirmed | CLMN recent | **real** |
-| Devils Lake | Sauk | survey-confirmed | CLMN recent | **real** |
-| Shawano Lake | Shawano | survey-confirmed | NWS proxy | proxy |
-| Dead Pike Lake | Vilas | survey-confirmed | NWS proxy | proxy |
-| Lauderdale Lakes | Walworth | survey-confirmed | CLMN recent | **real** |
-| Stone Lake | Washburn | survey-confirmed | NWS proxy | proxy |
-| White Lake | Waupaca | survey-confirmed | NWS proxy | proxy |
-| Fish Lake | Waushara | survey-confirmed | NWS proxy | proxy |
-| Lake Monona *(bonus)* | Dane | **stocking-only** (Muskellunge, Northern Pike) | USGS live | **real, live** |
+| Tier | Lakes/ponds | Streams/rivers | Total |
+|---|---|---|---|
+| **Survey-confirmed** (authoritative) | 33 | 8 | **41** |
+| **Stocking-only** (positive evidence, not exhaustive) | ~1,599 | ~683 | **~2,282** |
+| **No data** | every other WI waterbody | every other WI waterbody | not enumerable |
 
-**Water temperature: 10 of 23 lakes (43%) have a real measurement** (9 real
-CLMN recent readings + 1 live USGS gauge); **13 of 23 (57%) fall back to a
-live NWS air-temperature proxy**, always explicitly labeled as such in the
-script's output — never blended with real readings. Six of the 13 proxy
-lakes actually have a CLMN station on file, but its only reading is stale
-(9-29 years old) — the script's own `--no-live-refresh`-off default always
-prefers a live proxy fetch over a stale cached one for those lakes; see
-[`docs/v1_water_temp_manifest.md`](v1_water_temp_manifest.md) for the
-per-lake detail and exact staleness.
+- **Survey-confirmed = 41 distinct waterbody entries**: the original 22
+  lakes (all lake) + 19 new entries from this cycle's search (11 new lakes
+  + 8 stream entries, 4 of which are separately-surveyed reaches of the
+  same Rush River — see [`docs/v1_survey_expansion_report.md`](v1_survey_expansion_report.md)
+  for the full list, counties, and search-effort disclosure: 46 counties
+  checked, 17 had a usable report link, 14 yielded real extracted data —
+  roughly a 30% hit rate, not padded).
+- **Stocking-only = the entire real statewide WDNR pull**, ~2,282 distinct
+  (county, waterbody) pairs with a blank-waterbody-free count (24,683 raw
+  records; a small number of rows have no waterbody name and are excluded
+  from every count and every query match, per the blank-waterbody-matching
+  fix made this cycle). Of these, **683 are real stream/river waterbodies**
+  — trout streams especially, per WDNR's stocking practice — surfaced by
+  this tool for the first time this cycle (Decision #014); the other
+  ~1,599 are lakes, ponds, and flowages.
+- **No data**: any Wisconsin waterbody outside both sets above. The script
+  reports this honestly (`{"tier": "no_data", ...}`) — it is never
+  silently dropped or given a fabricated species list.
 
-**Species presence: 22 of 23 lakes (96%) are survey-confirmed** (real WDNR
-electrofishing/netting data — the authoritative source). Lake Monona is the
-sole stocking-only exception, and the script's output for it explicitly
-states presence is "POSITIVE evidence only, NOT a complete species
-inventory" per the presence-classification rule in
-[`docs/v1_species_presence_manifest.md`](v1_species_presence_manifest.md).
+## Water-temperature source breakdown
+
+| Source | Real or proxy | Coverage |
+|---|---|---|
+| **Live USGS gauge** (generic name match, any waterbody) | **real** | 185 real WI sites (177 streams + 8 lakes) in `data/v1/usgs_wi_water_temp_sites.csv`; spot-checked 8 stream sites this cycle — only 3/8 had genuinely live current data today, 3/8 had a registered site but no current reading, 2/8 had no live (iv) service at all despite being dv-listed. **This is disclosed honestly, not smoothed over: dv-listed ≠ guaranteed live** — see [`docs/v1_river_stream_coverage_report.md`](v1_river_stream_coverage_report.md). |
+| **Pre-pulled recent WDNR CLMN reading** | **real** | 9 of the original 22 lakes (dated, not live — CLMN itself is periodic) |
+| **Live NWS air-temperature proxy** (live-geocoded at request time) | proxy, always labeled | Any waterbody with a resolvable Wisconsin location — the honest fallback for the vast majority of the ~2,300+ waterbodies this tool now covers |
+| **No data** | — | Any waterbody where geocoding fails or no station returns a reading (a real, occasional outcome — reported plainly, not retried indefinitely) |
+
+**Practical implication:** for the ~2,282 stocking-only waterbodies, the
+realistic default temperature source is the live NWS proxy (always clearly
+labeled as air temperature, never presented as measured water
+temperature) unless the waterbody happens to be one of the 185 USGS sites
+or the original 10 real-CLMN/USGS lakes.
 
 ## Physiology reference coverage
 
 **26 species** have at least one usable numeric threshold in
-[`data/v1/physiology_thresholds_v1.json`](../data/v1/physiology_thresholds_v1.json),
-sourced from [`docs/v1_physiology_research_candidates.md`](v1_physiology_research_candidates.md).
-Every species actually observed across the 22 survey lakes or confirmed via
-the statewide stocking pull that has real literature coverage is in this
-file — species present in the real data but explicitly out of scope for
-physiology coverage (bullheads, Common Carp, Golden Shiner, hybrid
-sunfish/crappie categories) are named in the research doc's own "Notes for
-next steps" section as a disclosed gap, not silently dropped.
+`data/v1/physiology_thresholds_v1.json`, sourced from
+[`docs/v1_physiology_research_candidates.md`](v1_physiology_research_candidates.md).
 
-One species (Muskellunge) carries a **disclosed, unresolved disagreement**
-between two real sources (22°C vs. 24-27.3°C thermal optimum) rather than a
-single collapsed number — the script's threshold range spans both and its
-generated narrative text says so explicitly whenever it fires.
+**New this cycle: lake-derived thresholds are explicitly flagged when
+applied to a stream/river entry**, per the river/stream research pass
+(`docs/v1_river_stream_coverage_report.md`) — most feeding/growth
+temperature thresholds in this reference trace to lake studies (Lake
+Michigan, Lake Monona, Trout Lake WI), and the script never silently
+applies them to a stream waterbody without disclosing that the value
+"has not been verified to transfer to flowing-water conditions."
+Spawning-trigger thresholds are not flagged the same way, since a real
+share of the species in this reference already have stream-relevant
+spawning citations (salmonid tributary runs, Sauger, Rainbow
+Trout/Steelhead, Brook Trout, Lake Sturgeon).
 
 ## What's explicitly "insufficient data" (not silently omitted)
 
-- **~2,316 of the 2,338 Wisconsin waterbodies** in the statewide stocking
-  pull have stocking-only species data and no water-temperature data at
-  all in this project — running the script against any of them raises a
-  clear `ValueError` ("No water-temperature data... on file"), not a
-  fabricated value.
-- **Any Wisconsin lake outside both the stocking pull and the 22-lake
-  survey sample** has zero data of any kind — `get_species_presence()`
-  returns `{"tier": "no_data", ...}` and the generated narrative says so in
-  plain language, never silently produces an empty-but-plausible-looking
-  report.
-- **Lake-name collisions** (two real "Fish Lake"s in Dane and Waushara
-  counties) require `--county` to disambiguate — the script raises
-  `AmbiguousLakeError` rather than silently picking one, guarding against
-  a real bug this project's own data surfaced during Part 4 testing (see
-  the test suite's `TestSpeciesPresence.test_ambiguous_lake_name_raises_without_county`
-  and the `_lake_name_matches` docstring for the related 813-blank-row fix).
-- **6 of 13 NWS-proxy lakes** have a real but stale CLMN reading on file
-  (9-29 years old) — these are named individually above and in
-  `docs/v1_water_temp_manifest.md`, not glossed over as simply "no CLMN
-  data."
+- **Every Wisconsin waterbody outside the ~2,282-entry stocking pull and
+  the 41-entry survey sample** has zero species data — reported as
+  `no_data`, in plain language, never a fabricated result.
+- **A waterbody with no resolvable USGS, CLMN, or geocodable-NWS
+  temperature source** reports `no_data` for temperature specifically
+  (`v1.NO_TEMPERATURE_DATA`) — this can happen even for a waterbody with
+  real species data (e.g. a lake with a real survey but an unusual enough
+  name that live geocoding fails); the script still reports species
+  presence in that case, it just states plainly that no temperature
+  reading is available for this visit.
+- **Multi-reach stream surveys** (e.g. Rush River's four separately-
+  surveyed sections) are kept as distinct entries rather than merged —
+  querying the bare name without specifying a reach/county correctly
+  raises `AmbiguousLakeError` rather than silently picking one.
+- **Roughly half of the dv-listed USGS stream sites spot-checked this
+  cycle had no genuinely live current reading** despite being listed as
+  daily-value-capable — this is a real, disclosed limitation of the USGS
+  network itself, not a gap in this project's own pull.
+- **Geocoding a reach-level name with a parenthetical description** (e.g.
+  "Rush River (whole surveyed reach)") required stripping the
+  parenthetical before querying — the four Rush River sub-reaches
+  therefore all resolve to the same approximate river location, not
+  reach-specific coordinates. This is disclosed, not hidden.
 
-## Deterministic test coverage (Part 4 requirement)
+## Deterministic test coverage
 
 [`analysis/tests/test_v1_conditions_biology_forecast.py`](../analysis/tests/test_v1_conditions_biology_forecast.py)
-(32 tests, all passing) covers exactly the four areas Part 4 specified:
-threshold-matching correctness (range/point/avoidance-above matching,
-boundary inclusivity, the disputed-Muskellunge-range case), species
-filtering (survey-confirmed-takes-priority, stocking-only fallback,
-the real Fish-Lake-name-collision and blank-waterbody bugs this project's
-own data surfaced and which are now regression-tested), water-temperature
-fallback labeling (real vs. proxy, and the cache-reason wording difference
-between `--no-live-refresh` and a failed live attempt), and
-insufficient-data handling (missing lake raises `ValueError`, `no_data`
-tier never fabricates a species section). 109 tests pass project-wide.
+(45 tests, all passing; 122 project-wide) now additionally covers:
+waterbody-type classification (including the real "X River Flowage"
+misclassification bug found and fixed this cycle), full-statewide
+stocking-only inclusion for both lakes and streams, the river/stream
+lake-derived-physiology caveat (fires for feeding/growth thresholds,
+correctly does not fire for spawning-trigger thresholds or for lake
+entries), generic USGS site name-matching, and `no_data` handling across
+every combination of missing survey/stocking/temperature data.

@@ -1,0 +1,1902 @@
+PAGES: 47
+--- PAGE 1 ---
+ 
+Yellowstone Lake, Lafayette County 
+2018-2019 Surveys 
+(WBIC: 903700) 
+ 
+ 
+ 
+ 
+ 
+ 
+Bradd Sims 
+Fisheries Biologist, Senior 
+Wisconsin Department of Natural Resources 
+Dodgeville, Wisconsin 
+ 
+ 
+ 
+ 
+                                                               
+
+--- PAGE 2 ---
+Executive Summary          
+ 
+A comprehensive fisheries survey was conducted on Yellowstone Lake during the spring 
+and fall of 2018 and spring of 2019. Surveys included spring fyke netting one (SN1) in 
+2018 from March 26 to April 13 targeting walleye, spring fyke netting 2 (SN2) targeting 
+muskellunge from April 23 to May 3, spring electrofishing one (SE1) targeting walleye 
+for recaptures on April 19, spring electrofishing two (SE2) targeting bass and panfish on 
+May 8, and fall electrofishing (FE) targeting walleye and muskellunge recruitment on 
+October 15. During 2019 only SN1 and SN2 surveys were conducted for muskellunge 
+recapture.   
+ 
+Muskellunge were present in low numbers with an adult population estimate of  99 which 
+is 0.22 per acre.  Catch per unit effort (CPUE), experssed as number of fish per net night, 
+was 0.54.  Median CPUE is 0.325 for Wisconsin’s complex warm dark lakes 
+classification. Growth is above the statewide average with muskellunge reaching 38 
+inches at age 7. In 2018, muskellunge ranged in size from 10.4 to 47.7 inches total length 
+with a mean of 34.2.   
+ 
+Walleye were present in good numbers with a population estimate of 1,955 which is 4.3 
+per acre for all mature walleye. CPUE, expressed as fish per net night, was 7.32, which 
+exceeds the  75th percentile of 5.77 for Wisconsin’s complex warm dark lakes 
+classification. Growth for walleye is above the statewide average reaching 25 inches by 
+age 10. Males ranged in total length from 7.0 to 23.7 with a mean of 15.3. Females 
+ranged in length from 14.5 to 29.0 inches with a mean of 23.3. Walleye of unknown 
+gender ranged in total length from 6.7 to 15.7 inches with a mean of 12.0.  
+ 
+Largemouth bass were not as abundant as in previous years’ surveys. CPUE, experessed 
+as number of fish per mile of electrofishing, was 22.75 in 2018. This is down from the 
+CPUE of 76 in 2012 and 38.6 in 2015. There appears to be a downward trend in 
+largemouth bass relative abundance. The median CPUE for Wisconsin’s complex dark 
+lakes classification is 17.4. Largemouth bass sampled during SE2 ranged in size from 
+11.1 to 21 inches with a mean of 14.6.     
+ 
+Channel catfish were abundant with a CPUE of 4.88 channel catfish per net night. 
+Channel catfish ranged in total length from 10.0 to 29.5 with a mean of 16.6.  Channel 
+catfish under 17 inches made up 71 percent of the sample. There is still a small 
+population of flathead catfish being sustained in the lake. Five flathead catfish were 
+sampled in 2019. Total length ranged from 23.3 to 39.5 with a mean of 33.4.   
+ 
+Bluegill relative abundance was low with CPUE of  74 bluegill per mile of electrofishing. 
+The median CPUE for Wisconsin’s complex dark lakes classification is 116.99.  Bluegill 
+ranged in total length from 4.4 to 8.2 inches with a mean of 6.9. Growth was above the 
+statewide average reaching 8 inches at age 5.   
+ 
+--- PAGE 3 ---
+Black crappie were abundant with a CPUE ranging from 0.125 to 24.33 crappie per net 
+night. Black crappie ranged in total length from 6.8 to 12.4 inches with a mean of 9.6.  
+Growth was above the statewide average reaching 11 inches at age 5.  
+ 
+Overall the lake supports a fishable population for many species, however there is a 
+downward trend in abundance for muskellunge, walleye, largemouth bass and bluegill. 
+There is an abundant population of channel catfish and black crappie. Stocking rates for 
+muskellunge and walleye have decreased while bass and bluegill have weak recruitment 
+with very few young fish represented in our samples. Escapement over the spillway is 
+another factor that may be contributing to lower abundance of muskellunge and walleye.  
+Abundance of common carp was not documented. Their abundance appears to be high 
+according to field observations from staff and anglers. Renewing carp removal projects to 
+reduce biomass, improve water clarity and littoral zone habitat for bass and bluegill is 
+recommended. Yellowstone Lake has a cyclic history transforming from a desirable 
+fishery to one dominated by carp. It appears that the lake is headed in the direction of a 
+non-desired fishery again. Further studies are needed to document the biomass of carp, 
+abundance of aquatic macrophytes, reproductive success of largemouth bass & bluegill, 
+presence of crayfish, and escapement of fish over the spillway, particularly muskellunge. 
+Annual water quality sampling shows a trend of increasing phosphorus in the lake and a 
+decrease in secchi depths. Efforts should be made to work with the County on a 
+watershed improvement project.    
+    
+ 
+Introduction           
+ 
+Yellowstone Lake is well known among anglers for producing large size game fish. 
+Especially for musky anglers after producing a 57 inch catch and release unlimited line 
+class record in 2007. The lake is also becoming increasingly popular with bass anglers 
+having the first tournaments scheduled in 2016. Beginning in 2010 the Wisconsin 
+Department of Natural Resources initiated surveys to define the status of the game fish 
+population in Yellowstone Lake. The current survey rate is once every 4 years and will 
+include at minimum an ice out spring fyke net survey, two spring electrofishing surveys, 
+and a fall electrofishing survey for relative abundance, population estimates of select 
+species, size structure, age & growth, and condition. This report summarizes fyke net and 
+electrofishing surveys the Wisconsin Department of Natural Resources fisheries 
+management staff conducted during the 2018 and 2019 field seasons. The data recorded 
+describes  population abundances  (relative abundance or population estimates), size 
+structure, condition, and age & growth. Species targeted were muskellunge, largemouth 
+bass, smallmouth bass, channel catfish, flathead catfish, walleye, bluegill, and black 
+crappie.   
+ 
+The fisheries lake management plan developed in 1997 by WDNR staff, local townships, 
+businesses, and conservation groups recommended implementation of 6 core 
+management practices (Van Dyck, 1997).  
+• Stock large predator fish  
+• Establish regulations to protect large predator fish  
+--- PAGE 4 ---
+• Remove nuisance species (common carp & bullheads)  
+• Increase aquatic macrophytes  
+• Install best management practices within watershed to reduce sedimentation 
+• Implement slow no wake boating to reduce erosion from wave action.   
+ 
+Slow no wake was the only recommendation not implemented. The Fayette Township 
+governs the boating regulations for Yellowstone Lake and the slow no wake ordinance 
+was rejected by the township in the late 1990’s.   
+ 
+Yellowstone Lake is managed for high numbers of predators to keep rough fish and 
+benthivorus fish numbers low. Bio-manipulation is a primary management strategy 
+prescribed for Yellowstone Lake. Common carp are considered nuisance species which 
+can significantly increase chlorophyll, phosphorus, and nitrogen. Common carp are 
+believed to inhibit aquatic macrophyte growth.  The high biomass of carp  may interfere 
+with the production and recruitment of desirable species, particularly centrarchid species: 
+bluegill, largemouth bass, and smallmouth bass. Part of the bio-manipulation of 
+Yellowstone Lake includes the removal of common carp.  Rough fish removal projects 
+were conducted from 1998 thru 2007 with 33 to 395 lbs/acre/year of common carp 
+removed. In the fall of 2018 and early summer of 2019, approximately 4,000lbs of 
+common carp were removed with the help of local volunteers. Gill nets, trammel nets, 
+and electrofishing are the most efficient methods for removing rough fish. Because of the 
+large amounts of fallen trees, stumps, and fish cribs, seining is not an efficient method of 
+rough fish removal.    
+ 
+Current management items of concern for Yellowstone Lake are: 
+• Nutrient loading, sedimentation, & turbidity,  
+• Abundance of common carp  
+• Low densities of aquatic macrophytes 
+• Low natural recruitment of largemouth bass and bluegill  
+• Escapement of muskellunge over the spillway   
+ 
+Location 
+Yellowstone Lake (WBIC: 903700) is located in northeast Lafayette County within the 
+Township of Fayette just east of the Village of Fayette.  Latitude 42.76445 N and 
+Longitude 89.97175 W. Yellowstone Lake is an impoundment of the Yellowstone River 
+(WBIC: 902500).  Constructed in 1954, it was developed as a local recreational 
+opportunity for southern Wisconsin.  
+ 
+Access 
+Yellowstone Lake is bordered by Yellowstone Lake State Park and State Wildlife Area. 
+Public access is allowed along the entire shoreline. Much of the access is located on the 
+north side of the lake within Yellowstone Lake State Park. There are two paved boat 
+launches, a gravel carry in launch, five disabled angler fishing pads, and just over 1.5 
+miles of accessible shore fishing.  
+ 
+ 
+--- PAGE 5 ---
+Lake Characteristics 
+Yellowstone Lake is classified as complex warm dark under Wisconsin’s current lake 
+classification system. The physical characteristics of Yellowstone have changed over the 
+years largely due to the addition of 2 sub-impoundments and the deposition of sediment.  
+Sedimentation and the building of 2 levees have led to the decrease of surface area and 
+miles of shoreline (table 1). Sedimentation has decreased the depth of the lake 
+throughout. Recent core samples have shown up to 72 inches of modern deposits in the 
+upper end of the lake.  
+ 
+Yellowstone is a shallow hypereutrophic lake with an upper watershed having mostly 
+agriculture use. During the periods shortly after ice out and late fall the water clarity is 
+good with sechhi depths up to 2.5 feet recorded. During the summer months, algae 
+blooms combined with re-suspension of sediment from precipitation, rough fish, wind, 
+and recreational boating lead to low water clarity. Sechhi depths less than 1.5 feet are 
+common during high turbidity periods.  Currently total phosphorus levels range from 66 
+to 236 milligrams per liter.        
+ 
+Littoral zone habitats consist of shallow tree falls, aquatic macrophytes, natural rock, and 
+rip-rap. Macrophytes are present mostly in low densities however there are areas of the 
+lake in which they are considered to be in high density. Tree falls are abundant along 
+much of southern shoreline. Woody habitat was also increased with the installation of 42 
+fish cribs in the lower portions of the lake. Rip-rap is present along the dam, much of the 
+north shore and along the impoundment levees. Natural rock habitat occurs along the 
+southeast portions of the lake as the shoreline approaches the dam.  Sandstone is the 
+predominate rock type with some limestone present.  
+ 
+Yellowstone Lake is classified as A1 muskellunge water.  Class A1 waters are best 
+known as trophy waters for their ability to consistently produce large muskellunge, but 
+overall abundance of muskellunge may be relatively low. Angling action can be 
+inconsistent, but the average size of fish caught is larger. 
+ 
+ 
+Fish species 
+Fish species currently documented in Yellowstone Lake are muskellunge, northern pike, 
+largemouth bass, smallmouth bass, walleye, channel catfish, flathead catfish, brown 
+bullhead, black bullhead, bluegill, green sunfish, pumpkinseed sunfish, hybrid sunfish, 
+black crappie, golden shiner, white sucker, fathead minnows, common carp, bigmouth 
+buffalo, and bowfin. 
+  
+ 
+Regulations 
+The primary goal of regulations set on Yellowstone Lake is to protect large predator fish 
+to help control the recruitment of common carp, bullhead catfish, and rusty crayfish.   
+Because of this, there is an aggregate bag limit of 2 in total for walleye, largemouth bass, 
+and smallmouth bass.  A secondary goal is to maintain trophy size sportfish for anglers to 
+catch and enjoy. Yellowstone Lake regulation for muskellunge is a 50 inch minimum 
+--- PAGE 6 ---
+with a daily bag limit of 1. The current size regulation for walleye is a harvest slot limit. 
+Walleye between 15 inches and 18 inches total length may be kept. The current size 
+regulation for largemouth bass is a harvest slot limit. Largemouth bass between 12 inches 
+and 15 inches total length may be kept. The current regulation for panfish is a daily bag 
+limit of 25 with no size limit. The current regulation for channel catfish and flathead 
+catfish is an aggregate daily bag limit of 10 with no size restriction.  
+ 
+ 
+Stocking 
+Muskellunge and walleye are the two species stocked to maintain fishable populations. 
+No stocking is required for largemouth bass, smallmouth bass, panfish species, and 
+catfish species as they reproduce naturally and recruit to the fishery. The previous 10 
+years of stocking history for all species are listed in table 2  
+ 
+Yellowstone Lake receives an annual stocking rate of 0.5 musky per acre which is 225 
+large fingerling muskellunge. Yellowstone lake is within the genetic management zone of 
+universal receptor. Strain may be unspecified. Most recent stocking events have been of 
+the Upper Wisconsin or Chippewa strain raised at the Wild Rose state fish hatchery. 
+Starting in 2013 all large fingerling muskellunge stocked have been injected with a 
+Passive Integrated Transponder (PIT) tag. PIT tags are coded with a numeric sequence 
+unique to individual fish. This allows for age and growth determinations as well as data 
+for evaluating movement and escapement over the dam.  In 2012, the muskellunge 
+stocked from Wild Rose fish hatchery were fed a diet of pellets only and were stocked at 
+a smaller size than normal.  
+ 
+Walleye have been stocked at various rates and sizes over the last 10 years. It is currently 
+stocked every other year with 15,890 small fingerling walleye which is a rate of 35/acre. 
+Most recent strains stocked have been the Upper Rock-Fox River strain raised at the Lake 
+Mills state fish hatchery. It is recommended to switch the strain to Mississippi Main Stem 
+ 
+ 
+Methods                       
+ 
+Field work 
+ 
+Fyke netting protocol was repeated for both years (2018–2019) of the survey.  Fyke net 
+frames measure 4 feet high and 6 feet wide. They are double throated with a ¾ inch bar 
+mesh. Nets were set at ice out each year until a desired number of targeted fish were 
+captured. Fyke nets were set perpendicular to the shore with the lead staked at the shore. 
+Pot ends of the nets were anchored with a flute style anchor. Nets were lifted every 24 
+hours for the duration of the survey. Coordinates for the 2018 net locations are listed in 
+table 3 and coordinates for the 2019 net locations are listed in table 4. 
+ 
+In 2018, spring netting 1 (SN1) was from March 26 to April 13, 2018. The 
+primary objective for this sampling period is to capture, measure, and mark adult 
+walleye for use in estimating their abundance.  The secondary objective is to 
+--- PAGE 7 ---
+measure and, if needed, mark other gamefish. Because of their low density 
+muskellunge were also targeted during this effort. Other species targeted for aging 
+structures during this effort included largemouth bass, channel catfish, bluegill, 
+and black crappie. Total netting effort during SN1 was 159 net nights. Walleye 
+and Muskellunge were both targeted the full 159 net nights.  
+ 
+Spring netting 2 (SN2) was from April 23 to May 03, 2018. The primary objective 
+for this sampling period is to capture, measure, and mark adult muskellunge for 
+use in estimating their abundance.  The secondary objective is to measure and, if 
+needed, mark, and take aging structures from other gamefish. Other species 
+targeted for aging structures during this effort included largemouth bass, channel 
+catfish, bluegill, and black crappie. Total netting effort during SN2 was 262 net 
+nights. Six to 9 nets were fished at 15 different locations. During SN2, 
+muskellunge were targeted for all 262 net nights.  
+ 
+In 2019, SN1 and SN2 were combined for a total effort of 262 net nights for 
+muskellunge. Nets were set on April 4, 2019 and pulled on May 2, 2019. The primary 
+goal for this survey  was to recapture marked fish from 2018 fyke net surveys. 
+ 
+Spring electrofishing 1 survey was conducted on April 19, 2018 using a boom 
+electrofishing boat with dual rings (6 droppers per ring). Current was pulsed DC with a 
+duty cycle of 25 and pulse rate of 60. Volts measured 225 and amps 14.  Two dippers 
+netted fish with a net mesh size of 0.375 inches. Where navigable, the shoreline was 
+sampled for a total effort of 135 minutes and 2 miles.  The primary goal for this survey is 
+to count and measure adult walleye and recapture marked walleye from SN1 netting.  
+ 
+Spring electrofishing 2 survey was conducted on May 8th, 2018 using a boom 
+electrofishing boat with dual rings (6 droppers per ring). Current was pulsed DC with a 
+duty cycle of 25 and pulse rate of 58. Volts measured 220 and amps 22.  Two dippers 
+netted fish with a net mesh size of 0.375 inches. Where navigable, the shoreline was 
+sampled for a total effort of 120 minutes and 3 miles.  Gamefish were collected for the 
+total effort.  Panfish were collected for an effort of 37 minutes and 1 mile. The primary 
+goal of this survey is to count and measure adult bass and panfish, as well as recapture 
+marked Largemouth Bass from SN1 and SN2 surveys to conduct population estimate.  
+ 
+Fall juvenile survey was conducted on October 15th, 2018 using a boom electrofishing 
+boat with dual rings (6 droppers per ring). Current was pulsed DC with a duty cycle of 25 
+and pulse rate of 57. Volts measured 145 and amps 16.  Two dippers netted fish with a 
+net mesh size of 0.375 inches. Where navigable, the shoreline was sampled for a total 
+effort of 171.44 minutes and 5 miles.  Gamefish were collected for the total effort.  
+Panfish were not collected. Survey is intended to provide an indication of bass, walleye, 
+and muskellunge recruitment using young of the year catch rate.  
+ 
+For all game and panfish species, total length to 1/10 of an inch was measured. Weight 
+was taken from all muskellunge. Subsamples of weight, minimum of 250 fish, for all 
+other species were taken to the nearest 1/10 of a pound. Muskellunge, largemouth bass, 
+--- PAGE 8 ---
+and walleye were marked to conduct mark and recapture population estimates. PIT tag 
+numbers were recorded as the capture and recapture data for muskellunge.  Mature 
+walleye and largemouth bass were marked with a top caudal clip. Musky ≥30 inches and 
+walleye ≥15 inches or sexually mature were marked during the 2018 ice out fyke netting 
+survey. Largemouth bass ≥8 inches were marked during the ice out fyke netting and 
+spring electrofishing 1 surveys.   
+ 
+Muskellunge age was determined using PIT tag data from known age fish at time of 
+stocking or recapture of previously aged individuals. Age was only used from the 2018 
+sample for muskellunge. Channel catfish were aged using the proximal section of a dorsal 
+spine. A target of 10 channel catfish per inch group was set for age evaluation.  An image 
+of a pectoral spine cross section is displayed in figure 1. The outside edge of the ray was 
+counted as an annulus. Walleye age was estimated by counting annuli from dorsal fin ray 
+sections. Dorsal rays were collected during the netting and electrofishing surveys. A 
+target of 10 male and 10 female walleye per inch group was set for age evaluation. An 
+image of a cross section is displayed in figure 2.  The outside edge of the ray was counted 
+as an annulus.  Largemouth bass and smallmouth bass age was estimated counting annuli 
+from dorsal fin ray sections. A target of 10 per inch group was set for age evaluation. An 
+image of the cross section is displayed in figure 3.  The outside edge of the ray was 
+counted as an annulus. Bluegill and black crappie age was estimated using the sagittal 
+otolith.  A target of 5 fish per half inch group was set for age evaluation.   
+ 
+Data analysis 
+Length data was analyzed for minimum, maximum, mean size, and proportional size 
+distributions. Proportional size distributions (PSD) can be defined as the proportion of a 
+particular fish size in a stock. Proportional size distributions were calculated for 
+muskellunge, walleye, largemouth bass, channel catfish, bluegill, and black crappie. 
+Muskellunge proportional size distributions were based upon the lengths of 30 inches for 
+stock sized muskellunge as outlined by the Wisconsin Department of Natural Resources 
+fisheries management handbook. Walleye, bass, panfish, and catfish proportional size 
+distributions were based on the length categorization system to assess fish stocks as 
+described by Gablehouse, 1984 North American Journal of Fisheries Management.. 
+Length categories by species used in the calculation of proportional size distributions are 
+listed in Table 15.  
++ 
+Weight data was analyzed for minimum, maximum, mean and relative weights.  Relative 
+weights for muskellunge, walleye, largemouth bass, smallmouth bass, channel catfish, 
+bluegill, and black crappie were downloaded using the reporting function located in the 
+Wisconsin Department of Natural Resources fisheries management data base.  
+  
+Relative abundance defined as number of fished captured per net night was determined 
+for muskellunge, channel catfish, black crappie, and walleye. Relative abundance given 
+as number of fish captured per mile of electrofishing was determined for largemouth bass 
+and bluegill.   
+ 
+--- PAGE 9 ---
+Abundance as a population estimate was determined for muskellunge using Bailey’s 
+modification of the Peterson method with an equation M(C+1)/(R+1).  Abundance as a 
+population estimate for walleye was determined using the Chapman modification of the 
+Peterson method with the equation N=(M+1)(C+1)/R+1 where N is the estimated 
+population at time of marking, M is the number of marked fish, C is the number of fish 
+captured for census, and R is the number of recapture marks in the sample.  A goal of 
+10% of the total population was defined as the minimum number to mark for the 
+population estimates  
+ 
+Age of fish was determined using appropriate structures. Dorsal spine was used for 
+largemouth bass and walleye, otoliths for bluegill and black crappie, and pectoral spine 
+for channel catfish. Muskellunge age was determined using PIT tag data of known aged 
+fish and previously aged fish.  Subsamples of 10 per inch group were aged for all species 
+with panfish having 5 per half inch bin aged.  Ages were then assigned to ll fish not aged 
+using an age length key. This data was used to calculate minimum age, maximum age, 
+mean age, mean length at age, age frequency, and predicted growth models. Predicted 
+growth model was run for all species with age data using the von Bertalanffy growth 
+equation E[L|t] = L∞(1-e-K(t-t0)).  Where E[L|t] is the predicted average length at age t. L∞ 
+is the asymptotic average length. K is the growth rate coefficient. The age when the 
+average length was 0 is represented by t0.  
+ 
+ 
+Water quality monitoring 
+Water temperature was the only water quality parameter recorded during the fisheries 
+surveys.  
+ 
+Surface water temperature was recorded at each net during each lift. In 2018 the mean 
+surface water temperature was 41.2°F with a low of 38°F on March 27th and a high of 
+57°F on April 27th.   In 2019 the mean surface water temperature was 48.0°F with a low 
+of 41°F on April 12th and a high of 59°F on April 24th.  
+ 
+Surface temperatures during the electrofishing surveys were 42°F on April 19, 2018, 
+70°F on May 8, 2018, and 49.6° F on October 15, 2019.  
+ 
+Phosphorus, total Kjeldahl-N, and secchi depth data were thru the Wisconsin Department 
+of Natural Resources Long-Term Trend Monitoring Program and the Long Term Trend 
+Water Quality program. These programs collect annual water quality samples from the 
+surface at the deep hole of the lake near the dam.  Total Kjeldahl Nitrogen was collected 
+once per year. Total phosphorus samples and secchi depths are recorded in the spring and 
+monthly through the summer when possible. Water samples are collected and delivered 
+to the Wisconsin State Lab of Hygiene.   
+ 
+ 
+ 
+ 
+ 
+--- PAGE 10 ---
+Results 
+ 
+ 
+Species present in samples were muskellunge, northern pike, largemouth bass, 
+smallmouth bass, walleye, channel catfish, flathead catfish, brown bullhead, black 
+bullhead, bluegill, green sunfish, pumpkinseed sunfish, hybrid sunfish, black crappie, 
+golden shiner, white sucker, fathead minnows, common carp, bigmouth buffalo, and 
+bowfin. Number, catch rates and population estimates, if applicable, for targeted species 
+are described in detail within that species section. Catch rates for targeted species are also 
+listed in table 14. 
+ 
+ 
+Muskellunge  
+In 2018 there were 82 individual muskellunge netted, 25 males and 49 females and 8 of 
+unknown gender. Total catch per effort was 0.54 muskellunge per net night. Total length 
+in inches ranged 10.4 to 47.7 with a mean of 34.2. Weight in pounds ranged 0.1 to 31.0 
+with a mean of 11.8.  The sample has a mean relative weight index of 91.1 with a range 
+of 58.0 to 121.0. Length frequency of the muskellunge sampled in 2018 is displayed in 
+figure 4. 
+ 
+In 2019 there were 29 individual muskellunge netted, 8 males, 19 females and 2 of 
+unknown gender. Twenty-three were recaptures from 2018. All but one were greater than 
+32 inches. There was one male that was 24 inches in 2018 recapped at 28 inches in 2019. 
+Total catch per effort was 0.19 muskellunge per net night. Total length in inches ranged 
+28.0 to 48.0 with a mean of 37.3. Weight in pounds ranged 6.2 to 31.2 with a mean of 
+14.3.  The sample has a mean relative weight index of 90.9 with a range of 68 to 108. 
+Length frequency of the muskellunge sampled in 2019 is displayed in figure 4. Relative 
+weights of all muskellunge sampled from Yellowstone Lake are displayed in figure 5.  
+ 
+The median catch per effort defined as muskellunge per net night for complex warm dark 
+lakes is 0.33. In 2018, Yellowstone was above the statewide median at 0.54. It was below 
+the statewide median in 2019 with a catch per effort of 0.19.  Starting in 2011 the catch 
+per effort for Yellowstone has ranged from 0.19 (2019) to 1.49 (2014) with a mean of 
+0.73.  Yellowstone muskellunge catch per effort compared to lakes classified as complex 
+warm dark is displayed in figure 6.       
+ 
+The 50th percentile relative weight for class A1 muskellunge waters statewide is 92. 
+Yellowstone Lake falls slightly below with an overall mean relative weight of 91. The 
+lake is meeting its potential for maintain muskellunge in good condition.   
+ 
+In 2018, proportional size distributions (PSD) for muskellunge of 38 inches (PSD38) was 
+24.1 and PSD 42 inches (PSD42) was 17.7.  Proportional size distribution for muskellunge 
+of 50 inches (PSD50) was 0.  In 2015 the PSD38 was 27.6 and the PSD42 was 20.7.  The 
+PDS50 remained at 0.  A summary of PSD values is given in table 5.  
+ 
+--- PAGE 11 ---
+Seventy-nine individual muskellunge were marked. A goal of 79 individual muskellunge 
+was established for the 2019 recapture survey. Only 29 individual muskellunge were 
+examined for recapture marks. Twenty-three were recaptured from 2018.  The adult 
+muskellunge population was estimated at 99 (0.22 per acre) for adult muskellunge. 
+Coefficient of variation was 9%. The 2014-2015 estimate was 129 adult muskellunge at 
+0.32 per acre. 
+ 
+Age was determined for 72 muskellunge (41 females, 22 males, and 9 unknown). Forty-
+eight of the 72 musky were of known age from stocking. Muskellunge were aged from 1 
+to 12 years. Mean length at age, all gender, ranged from 11.0 inches at age 1 to 44.0 
+inches at age 12. Yellowstone Lake muskellunge mean length at age was above the 
+statewide mean. This can be viewed in figure 7 where the mean length at age for 
+Yellowstone Lake muskellunge (all gender) are displayed with the statewide muskellunge 
+mean length at age (all gender).  Minimum, maximum, and mean length at age for 
+Yellowstone Lake muskellunge are listed in table 6. An age frequency distribution is 
+displayed in figure 8. Age three and four musky make up 61.1 percent of the sample 
+collected.  The von Bertalanffy predicted growth model (Lt=45.17(1-exp(-0.3053(t-
+0.4344))) for muskellunge is displayed in figure 9. Length infinity is 45.17.  
+ 
+Walleye 
+In 2018 there were 1,238 individual walleye netted (863 males, 214 females and 161 of 
+unknown gender) and electrofishing sampled 247 walleye (238 males, 7 females, and 2 
+unkown). Of the 247 walleye sampled during the spring I electrofishing survey, 105 were 
+recaptures from the spring I fyke net survey. Total catch per effort netting was 7.32 
+walleye per net night. Males ranged in total length from 7.0 to 23.7 with a mean of 15.3. 
+Females ranged in length from 14.5 to 29.0 inches with a mean of 23.3. Walleye of 
+unknown gender ranged in total length from 6.7 to 15.7 inches with a mean of 12.0. 
+Electrofishing sampled walleye in similar proportions and distributions as netting. Length 
+frequencies for walleye sampled netting and electrofishing in 2018 are displayed in figure 
+10. 
+ 
+Weight in pounds ranged 0.08 to 10.69 with a mean of 2.2.  The sample has a mean 
+relative weight index of 89.2 with a range of 47 to 135. Relative weights of walleye 
+sampled from Yellowstone Lake are displayed in figure 11. 
+ 
+The median catch per effort defined as walleye per net night for complex warm dark 
+lakes is 2.01. In 2018, Yellowstone was above the statewide median at 7.32 (Figure 12).  
+The 2004 and 2014 catch per effort were 17.02 and 78.32 respectively.   
+ 
+Proportional size density for walleye 15 inches or greater (PSD15) was 45, down from 84 
+in 2014. The PSD for preferred size of 20 inches (PSD20) was 24, up from 9 in 2014. 
+Proportional size distribution for memorable sized of 25 inches (PSD25) was 6, up from 1 
+in 2014.  Proportional size distribution for trophy sized walleye of 30 inches (PSD30) was 
+0, no change from 2014. A summary of proportional size distributions is given in table 7.  
+ 
+--- PAGE 12 ---
+Eight hundred forty-two mature walleye were marked. Walleye were considered mature 
+if they had gamete production or were over 15 inches total length. Of the marked 
+walleye, 644 were known males and 167 were known females. Two hundred forty-seven 
+individual mature walleye were examined for recapture marks during spring 
+electrofishing 1. One hundred five were recaptured from the netting survey.  The mark 
+and recapture population estimate was 1,955 (4.3 per acre) for all mature walleye. This 
+falls within our management goal of 4 to 6 per acre. Coefficient of variation was 7.3%.  
+ 
+Age was determined for 291 walleye (106 females, 119 males, and 66 unknown) from 
+dorsal spines. Age was also assigned using an age length key to an additional 695 
+walleye. Walleye ranged in age from 1 to 10 years. Because no fish were stocked in 2014 
+or 2016 ages 2 and 4 are absent from the population. Mean length at age, all gender, 
+ranged from 7.4 inches at age 1 to 25.5 inches at age 10. Yellowstone Lake walleye mean 
+length at age is below the statewide mean for ages 1 thru 3. Yellowstone Lake mean 
+length at age is above the statewide mean for ages 4 thru 10. This can be viewed in figure 
+13 where the mean length at age for Yellowstone Lake walleye (all gender) are displayed 
+with the statewide walleye mean length at age (all gender).  Statewide mean length at 
+defined from aging dorsal spines are displayed. Minimum, maximum, and mean length at 
+age for Yellowstone Lake walleye are listed in table 8. An age frequency distribution is 
+displayed in figure 14. Age 3 walleye are the most abundant followed by ages 5 and 8 
+respectively.  The von Bertalanffy predicted growth model (Lt=31.1626(1-exp(-0.1602(t-
+0.6119))) for walleye is displayed in figure 15.  
+   
+ 
+Largemouth bass 
+In 2018 there were 91 individual largemouth bass sampled during the spring 
+electrofishing II survey. Largemouth bass ranged in total length from 11.1 to 21 inches 
+with a mean of 14.6. Length frequency of largemouth bass sampled during the spring 
+electrofishing II survey is displayed in figure 16. Weight in pounds ranged 0.04 to 7.72 
+with a mean of 2.26.  The sample has a mean relative weight index of 104 with a range of 
+59 to 142. Largemouth bass relative weights are displayed in figure 17.  
+ 
+The median catch per mile for largemouth bass for complex warm dark lakes is 17.37. In 
+2018, Yellowstone was above the statewide median at 22.75 bass per mile of 
+electrofishing.  Yellowstone catch rates 2012, 2014, and 2015 were 76.56, 38.0, and 
+38.64 per mile of electrofishing respectively.  The mean catch per effort from 2012 to 
+2018 was 43.99 per mile of electrofishing. There is a decreasing trend from 2012 to 2018.  
+Yellowstone largemouth bass catch per effort compared to lakes classified as complex 
+warm dark is displayed in figure 18.       
+ 
+The proportional size distribution for 12 inch bass (PSD12) in 2018 was 95. That is up 
+from 81 in 2014. The PSD15 for preferred size of 15 inches was 53. That is down slightly 
+from 57 in 2014. Proportional size distribution for largemouth bass of 18 inches (PSD18) 
+was 18.  That is up from 13 in 2014. A summary of PSD values is given in table 9.  
+ 
+--- PAGE 13 ---
+Ages of 96 largemouth bass were determined from dorsal spines. Age length key was 
+used to assign ages to 131 additional largemouth bass.  Largemouth bass ranged in age 
+from 1 to 10 years. Mean length at age, all gender, ranged from 4.5 inches at age 1 to 21 
+inches at age 12. Yellowstone Lake largemouth bass mean length at age is above the 
+statewide mean. This can be viewed in figure 19. Minimum, maximum, and mean length 
+at age for Yellowstone Lake largemouth bass are listed in table 10.  Ages 4 thru 6 make 
+up 82 percent of the sample. Number of bass per age group is displayed in figure 20. The 
+von Bertalanffy predicted growth model (Lt=21.28577(1-exp(-0.2823(t-0.0594))) for 
+largemouth bass is displayed in figure 21. 
+ 
+ 
+Smallmouth bass 
+Smallmouth bass are present in the Yellowstone Lake and Yellowstone River system. 
+They are more common in the lake during late fall and over winter. As waters warm in 
+the spring they migrate up the Yellowstone River.  They are not present in fishable 
+numbers and are considered a bonus species for anglers.  
+ 
+In 2018 there were 47 individual smallmouth bass sampled. Smallmouth bass ranged in 
+total length from 8.2 to 18.4 inches with a mean of 14.0.  Length frequency of all 
+smallmouth bass sampled in 2018 is displayed in figure 22.  
+ 
+Weight in pounds ranged 0.22 to 2.98 with a mean of 1.60.  The sample has a mean 
+relative weight index of 88 with a range of 60 to 108. Smallmouth bass relative weights 
+are displayed in figure 23.  
+ 
+ 
+Catfish species 
+Yellowstone lake supports 4 species of catfish: channel catfish, flathead catfish, brown 
+bullhead, and black bullhead. Channel catfish is the only species with numbers to support 
+a fishable population.  Once abundant and considered nuisance species, the brown and 
+black bullhead are present in low numbers and show up in anglers creel as by-catch. 
+Flathead catfish, Mississippi River strain, were introduced in the early 2000’s via a 
+stocking of 500lbs of adults purchased from a commercial fisherman.  Initially thought 
+not to have survived, adults and immature flathead catfish have been sampled in the 
+previous two surveys. They are present in low numbers. Anglers have reported catching 
+adult flathead catfish on occasion.  Natural recruitment of flathead catfish has been 
+documented with the presence of immature individuals.  
+ 
+ 
+There were 1,055 channel catfish sampled during the 2018 and 2019 spring fyke net 
+surveys. Mean catch per effort was 4.88 channel catfish per net night. Channel catfish 
+ranged in total length from 10.0 to 29.5 with a mean of 16.6 inches.  Channel catfish 
+under 17 inches made up 71 percent of the sample. Length frequency for channel catfish 
+is displayed in figure 24. 
+ 
+--- PAGE 14 ---
+Weight in pounds ranged 0.22 to 11.66 with a mean of 1.90.  The sample has a mean 
+relative weight index of 82 with a range of 48 to 172. Relative weights of channel catfish 
+are displayed in figure 25. 
+ 
+Proportional size density for channel catfish 16 inches or greater (PSD16) was 47. The 
+PSD for preferred size of 24 inches (PSD24) was 8. Proportional size distribution for 
+memorable sized of 28 inches (PSD28) was 1.  Proportional size distribution for trophy 
+sized catfish of 36 inches (PSD36) was 0.  
+ 
+There were 5 flathead catfish sampled in 2019. Total length ranged from 23.3 to 39.5 
+with a mean of 33.4.  Weight in pounds ranged from 4.64 to 26.9 with a mean of 17.0.   
+ 
+Age was determined for 155 channel catfish using pectoral spines. Age length key was 
+used to assign ages to 893 additional channel catfish. Ages ranged from 3 to 14 years. 
+Mean length at age ranged from 13.0 inches at age 3 to 26.6 inches at age 14. 
+Yellowstone Lake channel catfish mean length is at or above the statewide mean length 
+for ages 4 thru 12. Yellowstone Lake mean length at age is below the statewide mean for 
+ages 3 ,13 and 14. This can be viewed in figure 26 where the mean length at age for 
+Yellowstone Lake channel catfish are displayed with the statewide mean length at age.  
+Minimum, maximum, and mean length at age for Yellowstone Lake channel catfish are 
+listed in table 11. An age frequency distribution is displayed in figure 27. Age 5 channel 
+catfish are the most abundant.  The von Bertalanffy predicted growth model 
+(Lt=26.52019(1-exp(-0.2934(t-0.8196))) for channel catfish is displayed in figure 28.  
+ 
+ 
+Bluegill  
+In 2018 there were only 74 individual bluegill sampled during the spring electrofishing II 
+run. Bluegill ranged in total length from 4.4 to 8.2 inches with a mean of 6.9.  Length 
+frequency of bluegill sampled during the spring electrofishing II run in 2018 is displayed 
+in figure 29. Weight in pounds ranged 0.05 to 0.71 with a mean of 0.27.  The sample has 
+a mean relative weight index of 94 with a range of 26 to 131. Bluegill relative weights are 
+displayed in figure 30.  
+ 
+The median catch per effort for bluegill for complex warm dark lakes is 116.99 per mile 
+of electrofishing. In 2018, Yellowstone was below the statewide median at 74 per mile of 
+electrofishing.  Yellowstone catch rates 2012, 2014, and 2018 were 146.67, 58.67, and 74 
+per mile of electrofishing respectively.  The mean catch per effort from 2012 to 2018 was 
+93.11 per mile of electrofishing. There was a decreasing trend from 2012 to 2018.  
+Yellowstone bluegill catch per effort compared to lakes classified as complex warm dark 
+is displayed in figure 31.       
+ 
+The proportional size distribution for bluegill 6 inches and greater, PSD6, in 2018 was 86. 
+PSD8 for preferred size of 8 inches was 6. PSD10 for memorable size of 10 inches was 0.   
+ 
+Bluegill age was determined for 47 individuals. Age length key was used to assign ages 
+to additional 153 bluegill. Ages ranged from 2 to 7 years. Mean length at age ranged from 
+--- PAGE 15 ---
+5.0 inches at age 2 to 9.2 inches at age 7. Yellowstone Lake bluegill mean length at age is 
+above the statewide mean. This can be viewed in figure 32. Minimum, maximum, and 
+mean length at age for Yellowstone Lake bluegill are listed in table 12.  Age 4 made up 
+64.5 percent of the sample. The number of bluegill per age group is displayed in figure 
+33. The von Bertalanffy predicted growth model (Lt=9.9143(1-exp(-0.3555(t-0.9719))) 
+for bluegill is displayed in figure 34. 
+ 
+ 
+Black Crappie 
+In 2018 there were 977 black crappie sampled during the fyke net survey. Catch per unit 
+effort ranged from 0.125 to 24.33 per net night with an overall catch per effort of 4.8 
+crappie per net night. Black crappie ranged in total length from 6.8 to 12.4 inches with a 
+mean of 9.6.  Length frequency of all black crappie sampled in 2018 is displayed in 
+figure 35. Weight in pounds ranged 0.05 to 1.53 with a mean of 0.54.  The sample has a 
+mean relative weight index of 103 with a range of 69 to 158. Black crappie relative 
+weights are displayed in figure 36.  
+ 
+The proportional size distribution for crappie 8 inches and greater, PSD8, in 2018 was 99. 
+PSD10 for preferred size of 10 inches was 19. PSD12 for memorable size of 12 inches was 
+0.20.   
+ 
+Black crappie age was determined for 49 individuals. Age length key was used to assign 
+ages to additional XX black crappie. Age from 2 to 5 years. Mean length at age ranged 
+from 7.7 inches at age 2 to 11.1 inches at age 5. Yellowstone Lake black crappie mean 
+length at age is above the statewide mean. This can be viewed in figure 37. Minimum, 
+maximum, and mean length at age for Yellowstone Lake black crappie are listed in table 
+13.  The number of black crappie per age group is displayed in figure 38. The von 
+Bertalanffy predicted growth model (Lt=13.1151(1-exp(-0.3191(t-1.6825))) for black 
+crappie is displayed in figure 39. 
+ 
+ 
+Water Quality  
+Recently there have been anecdotal accounts by anglers that algae blooms have been increasing 
+and lasting longer. There have also been reports of decreased water clarity. Field observations 
+made by Wisconsin Department of Resources staff have verified these accounts. Algae blooms 
+last well into the fall and water clarity does appear to be decreasing. Mean total phosphorus and 
+total Kjeldahl nitrogen trends are increasing over time (1998 to present).  Mean total phosphorus 
+ranged 79.25 to 181.5 micrograms per liter with a mean of 127.66.  Total Kjeldahl nitrogen 
+ranged 1.11 to 2.36 milligrams per liter with a mean of 1.59. Figures 40 and 41 graph the trends 
+of mean total phosphorus and total Kjeldahl nitrogen.  
+ 
+With decreased water clarity the amount of rooted aquatic vegetation appears to be decreasing as 
+well. Mean secchi depth measurements have decreased over time (1997 to present). Mean secchi 
+depths have ranged from 1.00 to 3.56 feet with a mean of 2.24. Mean secchi depth readings are 
+graphed in figure 42.   
+ 
+ 
+--- PAGE 16 ---
+Discussion 
+ 
+Yellowstone lake supports a fishable population for bass, muskellunge, walleye, catfish 
+and panfish. However, there is a downward trend in abundance for muskellunge, walleye, 
+largemouth bass and bluegill. Muskellunge number per acre has dropped from 0.30 in 
+2014 to 0.22. Walleye number per acre has dropped from 7.1 in 2014 to 4.3.  CPUE for 
+bass has dropped from a high of 76.52 fish per mile of electrofishing in 2012 to 22.75 
+fish per mile of electrofishing. CPUE for bluegill has dropped from a high of 146.67 fish 
+per mile of electrofishing in 2012 to 74 fish per mile of electrofishing. It should be noted 
+that this is a slight increase from the 2014 sample where the CPUE was 58.67 fish per 
+mile of electrofishing.  
+ 
+Musky management should continue for Yellowstone Lake. It has become popular 
+among muskellunge anglers particularly after producing a 57 inch catch and release 
+unlimited line class record in 2007.  Musky exhibit good growth and size structure. 
+Growth rates are above the statewide average. Muskellunge reach 38 inches at age 7. As 
+mentioned earlier muskellunge abundance has decreased from 0.30 per acre to 0.22 per 
+acre. This may be attributed to escapement of muskellunge over the spillway and reduced 
+stocking rate from 1 to 0,5 musky per acre. The spillway structure allows for surface flow 
+over the dam. There is no barrier preventing muskellunge from leaving the lake. While no 
+official survey has been conducted in the Yellowstone River below the dam, anglers 
+report annual catches of adult muskellunge within the spillway area.   Dam escapement 
+can lead to a smaller size structure and 20% loss of the adult population in a single season 
+(Wolter, 2012). Water levels have been above normal flowing over all 5 spillways since 
+2014. The spring of 2020 was the first spring in which water was only flowing over one 
+spillway.  In 2019, 114 muskellunge were stocked in the Yellowstone River 0.8 miles 
+upstream of the lake and 113 were stocked on the main body of the lake. Future PIT tag 
+recaptures will be analyzed to determine if muskellunge stocked in the river will have a 
+lower percentage of escapement compared to those stocked in the main lake body.    
+ 
+Numerous walleye are present within the harvest slot available for angler harvest and 
+large walleye are abundant to help maintain predation on benthivores such as the 
+common carp. Walleye do not naturally reproduce and are stocked at a rate of 35 small 
+fingerlings per acre. . Stocked fish are surviving and creating a recreational opportunity 
+for walleye in Yellowstone Lake.  With the turbid water and low abundance of 
+largemouth bass, small fingerlings survive to produce a walleye fishery.   
+  
+Largemouth bass were not as abundant as in previous years surveys. The harvest slot 
+regulation is working well with a good size structure present. Proportional size 
+distribution for largemouth bass of 18 inches (PSD18) was 18.  That is up from 13 in 
+2014. Age 1 and 2 bass only made up 3 percent of the ample. This may be an indication 
+of missing to failed recruitment. With the abundance of carp in the lake, areas critical for 
+spawning centrarchids are being disturbed.  Littoral habitat appears degraded with turbid 
+water and lack of aquatic macrophytes.  
+ 
+--- PAGE 17 ---
+Channel catfish are abundant. The increased abundance of channel catfish may be a result 
+of the decrease in largemouth bass and walleye. Recruitment is irregular with year classes 
+low to missing. The current channel catfish population is supported by the age 5 cohort. 
+This cohort made up 68% of the sample. Catfish growth rates are good, equaling the 
+statewide growth rates through age 5 and surpassing statewide growth rates age 6 and 
+above.  
+ 
+Bluegill relative abundance was low to moderate. Age and 2 bluegill make up 15 percent 
+of the ample. This may be an indication of missing to failed recruitment. With the 
+abundance of carp in the lake, areas critical for spawning centrarchids are being 
+disturbed.  Littoral habitat appears degraded with turbid water and lack of aquatic 
+macrophytes.  Age 4 bluegill are 65% of the sample ranging in size from 6.5 to 8.2 
+inches. They appear to be supporting the current fishery harvest by anglers. Once this age 
+4 cohort has passed through the fishery, there may not be another cohort to sustain a 
+desirable bluegill fishery.     
+ 
+Black crappie were abundant. With boom or bust year classes and the common 
+occurrence of columnaris bacteria, black crappie have always been cyclic in Yellowstone 
+Lake.  Currently the age 3 and 4 cohorts make up 97.7% of the sample. Once these year 
+classes move through the fishery, the crappie population may see a significant drop in 
+abundance until there is another strong year class.    
+ 
+Annual water quality sampling shows a trend of increasing phosphorus in the lake and a 
+decrease in secchi depths. Algae blooms have become more common on Yellowstone. 
+They appear to be starting earlier in the year and lasting longer into the fall. Increased 
+phosphorus may be due to the increased biomass of carp and possibly watershed runoff 
+coming in via the Yellowstone River.     
+ 
+Common carp abundance appears to be high. This through observations from field staff 
+and anglers. Carp are observed in the large schools during the summer and pre winter 
+feeding. Common carp are currently considered a nuisance species.  It is common 
+knowledge that common carp can significantly increase chlorophyll, phosphorus, and 
+nitrogen. Common carp are also believed to inhibit aquatic macrophyte growth.  The high 
+biomass of carp may interfere with the production and recruitment of desirable species, 
+particularly centrarchid species: bluegill, largemouth bass, and smallmouth bass. Carp 
+were removed from 1998 thru 2007 with 33 to 395 lbs/acre/year of common carp 
+removed. In the fall of 2018 and early summer of 2019, approximately 4,000lbs of 
+common carp were removed with the help of local volunteers. It appears that the density 
+of predatory fish are such that they are not able to keep detrimental fish in check.  
+ 
+With the increase in phosphorus, turbidity, and abundance of carp there appears to be a 
+reciprocal decrease of centrarchid recruitment and aquatic macrophyte abundance. Work 
+will be needed to focus on habitat improvement. This would include improving water 
+quality, reducing carp biomass, and increasing aquatic macrophyte densities within the 
+littoral zone.  Partnerships with local and county entities should focus on watershed 
+improvement with improved land use practices and nutrient management.  
+ 
+--- PAGE 18 ---
+ 
+Management Recommendations        
+ 
+Musky 
+ 
+Goal: Trophy opportunity and biomanipulation to help reduce numbers of benthivores 
+and planktivores. Maintain A1 muskellunge designation.  
+ 
+Objectives  
+• Maintain a muskellunge population density of 0.25 to 0.5 fish per acre  
+ 
+• Maintain Proportional Size Distribution -38 inches (PSD-38) of 30 or greater . 
+ 
+• Reduce escapement, if it truly is a problem 
+ 
+ 
+Strategies  
+• Stock large fingerlings at 0.5 per acre every year 
+ 
+• Maintain 50 inch minimum size limit with daily bag limit of 1 
+ 
+ 
+Additional recommended strategies: 
+• Continue PIT tagging stocked muskellunge 
+• Study escapement of adult muskellunge over dam 
+ 
+ 
+Walleye 
+ 
+Goal: Trophy opportunity and biomanipulation to help reduce numbers of benthivores 
+and planktivores. 
+ 
+Objectives  
+• Maintain a walleye density greater than 4 per acre  
+• Maintain Proportional Size Distribution-15 inches (PSD15) of 40 or greater.  
+ 
+ 
+Strategies  
+• Stock small fingerlings at 35 per acre every other year 
+ 
+• Maintain 15 to 18 inch harvest slot limit with aggregate bag limit of 2 
+ 
+ 
+ 
+ 
+--- PAGE 19 ---
+Largemouth bass 
+ 
+Goal: Trophy opportunity and biomanipulation to help reduce numbers of benthivores 
+and planktivores. 
+ 
+Objectives  
+• Maintain largemouth bass CPUE at or above 37 per mile.  
+ 
+• Maintain Proportional Size Distribution-15 inches (PSD15) of 45 or greater.  
+ 
+Strategies  
+• Maintain 15 to 18 inch harvest slot limit with aggregate bag limit of 2 
+ 
+Additional recommended strategies: 
+• Improve littoral zone habitat 
+ 
+ 
+ 
+Channel catfish 
+ 
+Goal: Provide harvest opportunities for channel catfish   
+ 
+Objectives  
+• Maintain relative abundance above 3 channel catfish per net night 
+• Maintain Proportional Size Distribution-15 inches (PSD15) of 45 or greater.  
+ 
+Strategies  
+• Maintain current regulation with a daily bag limit of 10 and no size restriction.  
+ 
+ 
+ 
+Panfish  
+ 
+Goal: Provide harvest opportunities for bluegill and black crappie  
+ 
+Objectives  
+• Maintain bluegill Proportional Size Distribution-6 inches (PSD6) of 50 or greater. 
+• Maintain bluegill electrofishing catch per effort 54 per mile or greater.   
+• Maintain black crappie Proportional Size Distribution-8 inches (PSD8) of 50 or 
+greater 
+• Maintain black crappie Proportional Size Distribution-8 inches (PSD8) of 50 or 
+greater. 
+ 
+Strategies  
+• Maintain current regulation with a daily bag limit of 25 panfish  
+--- PAGE 20 ---
+ 
+Additional recommended strategies: 
+• Improve littoral zone habitat with increased number of aquatic macrophytes 
+ 
+ 
+ 
+Water Quality and Habitat   
+ 
+Recommendations 
+ 
+1) Assess biomass of carp  
+2) Meet with county on initiation of watershed improvement project  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 21 ---
+References 
+ 
+Gablehouse, D.W. Jr., A length categorization system to assess fish stocks. North  
+  American Journal of Fisheries Management. 4: 273-285 (1984).   
+ 
+Van Dyck, E., Wisconsin Department of Natural Resources Yellowstone Lake 
+Management Report. 1997.  
+ 
+Wolter, M.H. (2012) The effects of temperature, latitudinal origin, and dam escapement 
+ on management of muskellunge. (Masters thesis) University of Illinois, Urbana-
+ Champaign: United States 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 22 ---
+ 
+Figure 1. Pectoral spine cross section of Yellowstone Lake channel catfish used for age and 
+growth analysis. 
+ 
+ 
+ 
+ 
+Figure 2. Dorsal ray cross section of Yellowstone Lake walleye used for age and growth 
+analysis.   
+ 
+ 
+ 
+ 
+Figure 3. Dorsal ray cross section of Yellowstone Lake largemouth bass used for age and 
+growth analysis.   
+
+--- PAGE 23 ---
+ 
+ 
+ 
+ 
+Figure 4.  Length frequency of muskellunge, 2018 and 2019 fyke net surveys 
+ 
+ 
+ 
+Figure 5.  Relative weight of muskellunge (all gender), 2018 and 2019 
+ 
+ 
+ 
+ 
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+10 12 14 16 18 20 22 24 26 28 30 32 34 36 38 40 42 44 46 48
+Number  
+Length (inches)
+2018 2019
+0
+25
+50
+75
+100
+125
+150
+20 22 24 26 28 30 32 34 36 38 40 42 44 46 48 50
+Relative weight (Wr)
+Length (inches)
+--- PAGE 24 ---
+ 
+Figure 6.  Yellowstone Lake muskellunge catch per effort plotted with the 25th, 50th, and 
+75th percentiles for Wisconsin’s complex warm dark lakes.   
+ 
+ 
+ 
+ 
+Figure 7.  Muskellunge mean length at age from Yellowstone Lake and statewide. 
+ 
+ 
+ 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Mean Length (inches)
+Age
+Statewide Yellowstone Lake
+--- PAGE 25 ---
+ 
+Figure 8.  Number of muskellunge per age group, 2018  
+ 
+ 
+ 
+Figure 9.  von Bertalanffy predicted growth model for Yellowstone Lake muskellunge 
+2018, L∞= 45.17 
+ 
+ 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+1 2 3 4 5 6 7 8 9 10 11 12
+Number
+Age
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+0 2 4 6 8 10 12 14 16
+LENGTH (inches)
+AGE (years)
+Predicted growth Observed growth L∞
+--- PAGE 26 ---
+ 
+Figure 10.  Length frequency of walleye, fyke net survey & spring electrofishing 1 survey 
+ 
+ 
+ 
+  
+Figure 11.  Relative weight of walleye (all gender)  
+ 
+ 
+0
+20
+40
+60
+80
+100
+120
+140
+160
+180
+200
+220
+240
+260
+280
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29
+Number
+Length (inches)
+Fyke Net Electrofishing
+0
+25
+50
+75
+100
+125
+150
+5 7 9 11 13 15 17 19 21 23 25 27 29 31
+Relative weight (Wr)
+Length inches
+--- PAGE 27 ---
+ 
+Figure 12.  Yellowstone Lake walleye catch per effort plotted with the 25th, 50th, and 75th 
+percentiles for Wisconsin’s complex warm dark lakes.   
+ 
+ 
+ 
+ 
+Figure 13.  Walleye mean length at age from Yellowstone Lake and statewide   
+ 
+ 
+ 
+0
+5
+10
+15
+20
+25
+30
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
+Mean length (inches)
+Age
+Statewide Yellowstone Lake
+--- PAGE 28 ---
+ 
+Figure 14. Walleye number per age group  
+ 
+ 
+ 
+ 
+  
+Figure 15.  von Bertalanffy predicted growth model for Yellowstone Lake walleye, L∞ = 
+31.16 
+ 
+0
+100
+200
+300
+400
+500
+600
+0 1 2 3 4 5 6 7 8 9 10
+Number 
+Age
+0
+5
+10
+15
+20
+25
+30
+35
+0 2 4 6 8 10 12 14
+LENGTH (inches)
+AGE (years)
+Predicted growth Observed growth L∞
+--- PAGE 29 ---
+ 
+Figure 16.  Length frequency of largemouth bass, spring electrofishing II survey 
+ 
+ 
+ 
+ 
+ 
+Figure 17.  Relative weight of largemouth bass  
+ 
+ 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+Number
+Length (inches)
+0
+25
+50
+75
+100
+125
+150
+175
+7 9 11 13 15 17 19 21 23
+Relative weight
+Length (inches)
+--- PAGE 30 ---
+ 
+Figure 18.  Yellowstone Lake largemouth bass catch per effort plotted with the 25th, 50th, 
+and 75th percentiles for Wisconsin’s complex warm dark lakes.   
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 19.  Largemouth bass mean length at age from Yellowstone Lake and statewide  
+ 
+ 
+0
+5
+10
+15
+20
+25
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Mean Length (inches)
+Age
+Statewide Yellowstone Lake
+--- PAGE 31 ---
+  
+Figure 20.  Largemouth bass number per age group 
+ 
+ 
+ 
+ 
+Figure 21.  von Bertalanffy predicted growth model for Yellowstone Lake largemouth 
+bass, L∞ = 22.36 
+ 
+ 
+0
+10
+20
+30
+40
+50
+60
+70
+0 1 2 3 4 5 6 7 8 9 10 11 12
+Number
+Age
+0
+5
+10
+15
+20
+25
+0 2 4 6 8 10 12 14
+LENGTH (inches)
+AGE (years)
+Predicted growth Observed growth L∞
+--- PAGE 32 ---
+ 
+Figure 22. Length frequency of smallmouth bass 2018  
+ 
+ 
+ 
+ 
+Figure 23.  Relative weight of smallmouth bass  
+ 
+ 
+0
+2
+4
+6
+8
+10
+12
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+Number
+Length (inches)
+0
+25
+50
+75
+100
+125
+6 8 10 12 14 16 18 20
+Relative weight (Wr)
+Length (inches)
+--- PAGE 33 ---
+ 
+Figure 24.  Length frequency of channel catfish 2018 fyke net survey 
+ 
+ 
+ 
+ 
+Figure 25.  Relative weight of channel catfish  
+ 
+ 
+0
+50
+100
+150
+200
+250
+5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
+Number
+Length (inches)
+0
+25
+50
+75
+100
+125
+150
+175
+200
+5 7 9 11 13 15 17 19 21 23 25 27 29 31
+Relative weight (Wr)
+Length inches
+--- PAGE 34 ---
+ 
+ 
+.   
+Figure 26.  Channel catfish mean length at age from Yellowstone Lake and statewide  
+ 
+ 
+   
+ 
+Figure 27.  Channel catfish number per age group, 2018 
+ 
+0
+5
+10
+15
+20
+25
+30
+35
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Mean length (inches)
+Age
+Statewide Yellowstone Lake
+0
+100
+200
+300
+400
+500
+600
+700
+800
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Number
+Age
+--- PAGE 35 ---
+ 
+Figure 28.  von Bertalanffy predicted growth model for Yellowstone Lake channel 
+catfish, L∞ = 26.52 
+ 
+ 
+ 
+ 
+ 
+Figure 29. Length frequency of bluegill 2018, spring electrofishing II survey 
+ 
+ 
+0
+5
+10
+15
+20
+25
+30
+0 2 4 6 8 10 12 14 16
+LENGTH (inches)
+AGE (years)
+Predicted growth Observed growth L∞
+0
+5
+10
+15
+20
+25
+30
+35
+4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5
+Number
+Length (inches)
+--- PAGE 36 ---
+ 
+Figure 30.  Relative weight of bluegill  
+ 
+ 
+ 
+ 
+Figure 31.  Yellowstone Lake bluegill catch per effort plotted with the 25th, 50th, and 75th 
+percentiles for Wisconsin’s complex warm dark lakes.  
+ 
+0
+25
+50
+75
+100
+125
+150
+3.5 4 4.5 5 5.5 6 6.5 7 7.5 8 8.5 9 9.5
+Relative weight (Wr)
+Length inches
+
+--- PAGE 37 ---
+  
+Figure 32.  Bluegill mean length at age from Yellowstone Lake and statewide 
+ 
+ 
+ 
+ 
+Figure 33.  Bluegill number per age group, 2018 
+ 
+ 
+ 
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+Mean Length (inches)
+Age
+Statewide Yellowstone Lake
+0
+20
+40
+60
+80
+100
+120
+140
+0 1 2 3 4 5 6 7
+Number
+Age
+--- PAGE 38 ---
+ 
+Figure 34.  von Bertalanffy predicted growth model for Yellowstone Lake bluegill, L∞ = 
+9.91 
+ 
+ 
+ 
+ 
+Figure 35. Length frequency of black crappie 2018 
+0
+2
+4
+6
+8
+10
+12
+0 1 2 3 4 5 6 7 8
+LENGTH (inches)
+AGE (years)
+Predicted growth Observed growth L∞
+0
+50
+100
+150
+200
+250
+300
+350
+400
+450
+5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10 10.5 11 11.5 12
+Number
+Length (inches)
+--- PAGE 39 ---
+ 
+Figure 36.  Relative weight of black crappie  
+ 
+ 
+ 
+ 
+ 
+Figure 37.  Black crappie mean length at age from Yellowstone Lake and statewide 
+ 
+0
+25
+50
+75
+100
+125
+150
+175
+5 5.5 6 6.5 7 7.5 8 8.5 9 9.5 10 10.5 11 11.5 12 12.5
+Relative Weight (Wr)
+Length (inches)
+0
+2
+4
+6
+8
+10
+12
+14
+16
+0 1 2 3 4 5 6 7 8 9 10 11
+Mean length (inches)
+Age
+Statewide Yellowstone Lake
+--- PAGE 40 ---
+ 
+Figure 38.  Black crappie number per age group, 2018 
+ 
+ 
+ 
+ 
+ 
+Figure 39.  von Bertalanffy predicted growth model for Yellowstone Lake black crappie, 
+L∞ = 13.11 
+ 
+0
+100
+200
+300
+400
+500
+600
+2 3 4 5
+Number
+Age
+0
+2
+4
+6
+8
+10
+12
+14
+0 1 2 3 4 5 6
+LENGTH (inches)
+AGE (years)
+Predicted growth Observed growth L∞
+--- PAGE 41 ---
+ 
+Figure 40. Mean total phosphorus (µg/l) from 1998 to 2019.  
+ 
+ 
+ 
+ 
+Figure 40. Mean total Kjeldahl nitrogen (mg/l) from 1999 to 2019.  
+ 
+ 
+0
+50
+100
+150
+200
+250
+300
+350
+400
+450
+1999 2001 2003 2005 2007 2009 2011 2013 2015 2017 2019
+Mean total  phosphorus µg/L
+Year
+0
+0.5
+1
+1.5
+2
+2.5
+1999 2000 2001 2002 2004 2005 2006 2007 2008 2009 2010 2011 2013 2014 2015 2016 2017 2019
+Total Kjeldahl Nitrogen (mg/l)
+Year
+--- PAGE 42 ---
+ 
+Figure 40. Mean secchi depths (feet) 1997 to 2019.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+0.00
+1.00
+2.00
+3.00
+4.00
+5.00
+6.00
+7.00
+8.00
+9.00
+10.00
+1997 1999 2001 2005 2007 2009 2011 2013 2015 2017 2019
+Mean secchi depth (ft.)
+Year
+--- PAGE 43 ---
+Table 1.  Surface area, maximum depth, and miles of shoreline for Yellowstone Lake in  
+1965 and 2019.  
+ 2019 1965 
+Surface Area (acres)  450 455 
+Maximum Depth (feet) 14 16 
+Miles of Shoreline 6.34 
+ 
+6.34 
+ 
+ 
+ 
+ 
+Table 2.  Stocking history of Yellowstone Lake from 2009 thru 2019 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Year Species  Strain  Age Class  Number 
+Stocked 
+2010 Muskellunge Upper Wisconsin Large fingerling 450 
+2010 Walleye Fry Unspecified 149,000 
+2011 Muskellunge Upper Chippewa Large fingerling 450 
+2011 Walleye Lake Michigan Small fingerling 7,735 
+2012 Muskellunge Upper Wisconsin Large fingerling 450 
+2012 Walleye Rock-Fox Small fingerling 7,735 
+2013 Muskellunge Upper Wisconsin Large fingerling 450 
+2013 Walleye Rock-Fox Small fingerling 7,735 
+2014 Muskellunge Upper Wisconsin Large fingerling 450 
+2015 Muskellunge Upper Wisconsin Large fingerling 450 
+2015 Walleye Rock-Fox Small fingerling 17,994 
+2016 Muskellunge Upper-Wisconsin Large fingerling 462 
+2017 Muskellunge Upper-Wisconsin Large fingerling 452 
+2017 Walleye Rock-Fox Small fingerling 15,856 
+2018 Muskellunge Upper-Wisconsin Large fingerling 227 
+2019 Muskellunge Upper-Wisconsin Large fingerling 227 
+2019 Walleye Rock-Fox Small fingerling 17,418 
+--- PAGE 44 ---
+Table 3. Latitude and longitude coordinates of fyke nets during 2018 Yellowstone Lake 
+muskellunge survey  
+ 
+ 
+ 
+Table 4. Latitude and longitude coordinates of fyke nets during 2019 Yellowstone Lake 
+muskellunge survey  
+ 
+ 
+ 
+ 
+ 
+ 
+Net number Latitude Longitude 
+1 42.76789 -89.97021 
+2 42.76467 -89.96830 
+3 42.76134 -89.96198 
+4 42.75714 -89.95766 
+5 42.75608 -89.96983 
+5A 42.75677 -89.96648 
+6 42.75794 -89.97038 
+7 42.76586 -89.97655 
+8 42.76645 -89.98052 
+8A 42.76631 -89.97923 
+9 42.76172 -89.97312 
+9A 42.76998 -89.97502 
+10 42.76295 -89.97346 
+11 42.76593 -89.97675 
+12 42.76593 -89.97675 
+Net number Latitude Longitude 
+1 42.76997 -89.97501 
+2 42.76453 -89.96848 
+3 42.75617 -89.96980 
+4 42.75790 -89.97029 
+5 42.76177 -89.97292 
+6 42.76366 -89.97499 
+7 42.76643 -89.97912 
+8 42.75549 -89.96238 
+9 42.75994 89.97092 
+10 42.79712 -89.96947 
+11 42.76148 -89.97092 
+12 42.76928 -89.98393 
+13 42.76591 -89.98230 
+--- PAGE 45 ---
+Table 5.  Muskellunge proportional size distributions (PSD) from the 2018 and 2019 fyke net 
+survey of Yellowstone Lake, Lafayette County. 
+ 2018 2019 
+PSD38 24.1 27.6 
+PSD42 17.7 20.7 
+PSD50 0 0 
+ 
+ 
+ 
+Table 6.  Minimum, maximum, and mean length at age of muskellunge determined from PIT tag 
+data from 2018 Yellowstone Lake, Lafayette County. No age 6 fish were collected. 
+ 
+Age 1 2 3 4 5 7 8 9 10 11 12 
+Minimum 
+length 
+10.0 24.1 28.0 31.2 33.6 36.8 38.0 43.1 36.9 37.0 44.0 
+Maximum 
+length 
+12.0 24.1 33.4 37.5 41.3 43.0 44.1 44.5 47.7 48.0 44.0 
+Mean 
+length 
+11.0 24.1 31.4 34.4 36.9 38.5 42.3 43.6 42.86 44.2 44.0 
+ 
+ 
+ 
+Table 7.  Walleye proportional size distributions (PSD) from the 2014 & 2018 fyke net surveys. 
+ 2014 2018 
+PSD 84 45 
+PSD20 9 24 
+PSD25 1 6 
+PSD30 0 0 
+ 
+ 
+Table 8.  Minimum, maximum, and mean length of age of walleye determined from dorsal spine 
+cross sections, 2018 
+Age 1 2 3 4 5 6 7 8 9 10 
+Minimum 
+length 
+6.7  10.2  13.1 17.8 17.9 20.1 21.3 23.2 
+Maximum 
+length 
+8.4  18.0  23.2 25.4 26.6 28.3 29.0 28.6 
+Mean 
+length 
+7.4  13.1  17.8 21.0 22.4 24.5 24.4 25.5 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 46 ---
+Table 9.  Largemouth mouth bass proportional size distributions (PSD) from 2014 & 2018 
+electrofishing survey. 
+ 2014 2018 
+PSD 81 95 
+PSD15 57 53 
+PSD18 13 18 
+ 
+ 
+ 
+Table 10.  Minimum, maximum, and mean length of age of largemouth bass determined from 
+dorsal spine cross sections during the spring of 2018 
+Age 1 2 3 4 5 6 7 8 9 10 11 12 
+Minimum 
+length 
+4.5 11.2 10.8 11.1 13.3 14.3 15.8 14.6 17.2 18.5 - 21.0 
+Maximum 
+length 
+5.6 12.5 17.0 
+ 
+19.1 19.3 20.0 20.2 20.4 20.6 20.5 - 21.0 
+Mean 
+length 
+5.0 11.8 13.8 14.8 16.4 17.7 18.2 18.6 18.4 19.4 - 21 
+ 
+ 
+ 
+ 
+Table 11.  Minimum, maximum, and mean length of age of channel catfish determined from 
+pectoral spine cross sections. 
+Age 3 4 5 6 7 8 9 10 11 12 13 14 
+Minimum 
+length 
+12.1 11.4 12.1 18.4 26.0 25.8 22.6 22.0 22.2 21.4 21.0 24.4 
+Maximum 
+length 
+14.2 22.2 22.2 20.5 26.0 25.8 24.8 26.9 28.7 29.5 28.4 28.1 
+Mean 
+length 
+13.0 14.7 17.2 19.5 26.0 25.8 23.7 24.7 26.2 26.0 25.3 26.6 
+ 
+ 
+Table 12.  Minimum, maximum, and mean length of age of bluegill determined from sagittal 
+otolith cross sections. 
+Age 2 3 4 5 6 7 
+Minimum 
+length 
+4.1 6.0 6.5 7.8 8.5 8.6 
+Maximum 
+length 
+6.1 6.9 8.2 9.4 8.6 9.7 
+Mean 
+length 
+5.0 6.6 7.4 8.1 8.6 9.2 
+ 
+ 
+ 
+--- PAGE 47 ---
+Table 13.  Minimum, maximum, and mean length of age of black crappie determined from 
+sagittal otolith cross sections. 
+Age 2 3 4 5 
+Minimum 
+length 
+6.8 8.4 8.3 10.8 
+Maximum 
+length 
+8.3 9.9 12.4 11.8 
+Mean 
+length 
+7.7 9.3 9.9 11.1 
+ 
+ 
+ 
+Table 14. Gamefish and panfish mean catch per unit effort and gear used. 
+Species Sampling 
+period 
+Gear Catch rate Unit 
+Muskellunge Spring netting 1 
+& 2 
+Fyke net 0.54 Net night 
+Walleye Spring netting 1  Fyke net 7.32 Net night 
+Channel 
+catfish 
+Spring netting 1 
+& 2 
+Fyke net 4.88 Net night 
+Black Crappie Spring netting 1 
+& 2 
+Fyke net 4.80 Net night 
+Largemouth 
+bass 
+Spring 
+electrofishing 2 
+Boom 
+Electrofishing 
+22.75 Mile 
+Smallmouth 
+bass 
+Fall 
+electrofishing  
+Boom 
+Electrofishing 
+3.40 Mile 
+Bluegill Spring 
+electrofishing 2 
+Boom 
+Electrofishing 
+74.00 Mile 
+ 
+ 
+ 
+Table 15. Length categories by species used for proportional size distribution 
+calculations.  
+Species Stock  Quality  Preferred  Memorable  Trophy  
+Muskellunge 30 30 38 42 50 
+Walleye 10 15 20 25 30 
+Laregmouth 
+bass 
+8 12 15 20 25 
+Channel catfish 11 16 24 28 36 
+Bluegill 3 6 8 10  
+Black crappie 5 8 10 12  
+ 

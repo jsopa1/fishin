@@ -1,0 +1,849 @@
+PAGES: 26
+--- PAGE 1 ---
+WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Fishery Survey Report for Amnicon Lake, 
+Douglas County, Wisconsin 2024-2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Logan Cutler 
+DNR Fisheries Biologist 
+Bayfield & Douglas Counties (Inland Waters) 
+December 2025  
+Photo Credit: DNR Staff 
+--- PAGE 2 ---
+2 
+ 
+Table Of Contents 
+Executive Summary ........................................................................................................................... 3 
+Introduction ........................................................................................................................................ 4 
+Fishing Regulations ....................................................................................................................... 4 
+Stocking ............................................................................................................................................ 4 
+Methods ............................................................................................................................................... 4 
+Fish Survey ...................................................................................................................................... 4 
+Creel Survey .................................................................................................................................... 6 
+Results .................................................................................................................................................. 6 
+Creel Survey .................................................................................................................................... 6 
+Muskellunge .................................................................................................................................... 7 
+Northern Pike ............................................................................................................................... 10 
+Walleye ........................................................................................................................................... 12 
+Largemouth Bass ......................................................................................................................... 15 
+Black Crappie ................................................................................................................................ 16 
+Bluegill ........................................................................................................................................... 18 
+Other Species ............................................................................................................................... 19 
+Discussion ........................................................................................................................................ 20 
+Management Recommendations ................................................................................................. 22 
+References......................................................................................................................................... 23 
+Appendix ............................................................................................................................................ 25 
+ 
+  
+--- PAGE 3 ---
+3 
+ 
+Executive Summary 
+A comprehensive fisheries survey with an angler creel survey was conducted on 
+Amnicon Lake from April 2024 to May 2025 to assess the status of the fishery. The goal 
+of this survey was to estimate angler catch and harvest, abundance and size structure 
+of muskellunge, northern pike, walleye, largemouth bass, black crappie and bluegill.  
+ 
+Anglers fished Amnicon Lake less in 2024 than previous surveys, but more than the 
+Douglas and Bayfield County average. Anglers targeted northern pike most often, but 
+many also targeted black crappie, muskellunge and largemouth bass. 
+ 
+Northern pike were first documented in Amnicon Lake in 2006. Northern pike 
+abundance was not effectively assessed with the early spring fyke net survey, but 
+angler catch and harvest rates were high and size structure was low. Anglers are 
+encouraged to harvest northern pike in Amnicon Lake to help decrease their 
+abundance and minimize impacts on other species.  
+ 
+The muskellunge population has shifted from a high abundance, smaller size, action 
+fishery to a lower abundance, larger size, quality or trophy fishery. A muskellunge 
+population with lower density and higher size structure can be expected moving 
+forward, but higher northern pike harvest may increase muskellunge abundance. 
+Muskellunge stocking should continue, and protection of shoreline habitat is critical 
+to encourage natural reproduction. Our management objective is to maintain 
+muskellunge density between 0.15 to 0.30 per acre with a PSD-42 of at least 15. 
+ 
+The walleye population can be classified as having low abundance with high size 
+structure. Angler harvest has remained low, and the 18-inch minimum length limit 
+remains effective in protecting walleyes until they spawn at least once. As a result of 
+the low adult density and low angler use, walleye stocking has been deferred. To 
+support natural reproduction, protection of shoreline habitat is critical. Our 
+management objective is to maintain a lower density, higher size structure walleye 
+population supported by natural reproduction. 
+ 
+Largemouth bass had average abundance and size structure compared to similar 
+lakes. Our management objective is to maintain a catch rate of 5 to 15 largemouth 
+bass per mile with a PSD-12 of at least 60. Moving forward, a late spring electrofishing 
+survey should be completed every six years to monitor bass and bluegill populations. 
+ 
+Black crappie and bluegill each had moderate abundance with low size structure and 
+slow growth. Slow growth and low size structure indicates overabundance, so anglers 
+are encouraged to harvest these smaller black crappies and bluegill. Increased 
+harvest will increase food availability for the remaining fish and improve growth 
+rates. Yellow perch were rare, small and primarily serve as an additional prey fish for 
+walleye, muskellunge, northern pike and largemouth bass in Amnicon Lake.  
+--- PAGE 4 ---
+4 
+ 
+Introduction 
+Amnicon Lake is a 390-acre drainage lake located in central Douglas County with an 
+average depth of 10 feet and a maximum depth of 31 feet. The lake has an inlet from 
+an unnamed creek to the east that flows from Dowling Lake, and an outlet to the 
+Amnicon River on the southwest end of the lake that flows through Lyman Lake and 
+eventually drains into Lake Superior. The primary public access site is a boat launch 
+on the northwest side of the lake owned by the Town of Summit. 
+ 
+Amnicon Lake is a high productivity system (eutrophic) with water clarity around 5 
+feet (Secchi depth) and is classified as a complex-cool-dark lake based on fish 
+species, water temperature and clarity (Rypel et al. 2019). The watershed (2,770 acres) 
+is primarily forest (42%) with wetlands (26%), surface waters (20%), urban 
+development (6%) and minimal agriculture (2%; Midwest Glacial Lakes Conservation 
+Planner). The DNR Lake Page provides additional information on lake characteristics 
+such as substrate types and bathymetry. DNR fisheries management staff surveyed 
+Amnicon Lake in 2024 and 2025 to assess the status of the fisheries. 
+ 
+FISHING REGULATIONS 
+Walleye are currently managed with an 18-inch minimum length, which has been in 
+place since 2015. All other species are managed with statewide limits including 
+muskellunge (40-inch minimum length) and largemouth (14-inch minimum length). 
+See Appendix Table A1 for more detailed regulations. 
+ 
+STOCKING 
+Large fingerling walleyes were stocked at approximately 5 fish per acre in alternate 
+years from 2014 to 2022 (Appendix Table A2). Walleye have not been stocked since 
+2022 due to low survival and angler use. Large fingerling muskellunge are stocked at 
+approximately 0.5 fish per acre in even-numbered years. Beginning in 2024, Great 
+Lakes strain muskellunge have been stocked into Amnicon Lake to conform to our 
+genetics management plan.  
+ 
+Methods 
+FISH SURVEY 
+Survey methods followed standard DNR Treaty comprehensive assessment protocols 
+(Cichosz 2025; Appendix Table A3). Sampling consisted of two spring fyke net surveys, 
+two spring electrofishing surveys and a fall electrofishing survey. All fish captured 
+during these surveys were identified to species, counted and measured to the 
+nearest 0.1 inch. 
+ 
+Walleye and muskellunge populations were estimated using a mark-recapture 
+framework. Walleye were marked with fin clips during the early spring netting survey 
+(SN1) where fyke nets were set after ice-out (59 net-nights). This was followed by an 
+--- PAGE 5 ---
+5 
+ 
+early spring electrofishing survey (SE1) of the entire shoreline (6.0 miles, including 
+islands) targeting walleye, some of which had been marked with a fin clip during the 
+SN1 survey. Muskellunge were marked with fin clips during the SN1 survey and during 
+a late spring fyke net survey (SN2) that immediately followed the SE1 survey in 2024 
+(34 net-nights). Another SN2 survey was conducted in 2025 (30 net-nights) to 
+recapture marked muskellunge. For these walleye and muskellunge surveys, the 
+number of fish captured were used to calculate a population estimate of adult 
+walleye (sex identified via eggs or milt present or ≥ 15 inches) and muskellunge (sex 
+identified via eggs or milt present or ≥ 30 inches) using the Lincoln-Peterson 
+estimator with Chapman modification (Ricker 1975): 
+ 
+N = (M+1)(C+1)
+(R+1)   
+ 
+where N = population estimate, M = number of fish marked, C = total number of fish 
+captured during the recapture survey and R = number of marked fish captured during 
+the recapture survey. 
+ 
+Shortly after the 2024 SN2 survey, gamefish and panfish were targeted during the late 
+spring electrofishing survey (SE2). Gamefish were collected along the entire shoreline 
+(4.5 miles) and all species were collected in two 0.5-mi stations. 
+ 
+To evaluate walleye recruitment, a fall electrofishing survey (FE1) was conducted by 
+shocking the entire shoreline (6.0 miles, including islands). The number of age-0 (fish 
+born that spring) and age-1 walleye captured per mile were calculated to index the 
+relative abundance of each year class. 
+ 
+Catch rates (fish/mile or fish/net-night) were used to index relative abundance of all 
+species other than walleye and muskellunge in the most effective survey for each 
+species. Northern pike and yellow perch were best sampled in the SN1 survey, black 
+crappie were best sampled in the SN2 survey, and largemouth bass and bluegill were 
+best sampled in the SE2 survey. 
+ 
+Size structure for each species was visualized using length frequency histograms and 
+quantified using the proportional size distribution (PSD) metric:  
+ 
+PSD = # of fish ≥given length category
+# of fish ≥stock length  * 100 
+ 
+PSD can generally be interpreted as the percent of fish greater than stock size 
+(Gabelhouse 1984; Appendix Table A4). PSD results were only included when ≥ 30 
+individuals were sampled. 
+ 
+--- PAGE 6 ---
+6 
+ 
+To estimate age and model growth, anal fin rays were collected from all muskellunge 
+and dorsal spines were collected from five walleyes of each sex per 0.5-inch length 
+bin. To characterize panfish growth, otoliths were collected from approximately 
+twenty 6 to 7-inch bluegills and 8 to 9-inch black crappies. 
+ 
+To evaluate trends through time, results were compared to previous surveys 
+conducted on Amnicon Lake from 1993 to 2020, when possible. To determine the 
+status of Amnicon relative to similar lakes, walleye PSD was compared to other 
+complex-cool-dark lakes with a combination of stocking and natural walleye 
+recruitment. Similarly, catch rate and PSD of other species were compared to other 
+complex-cool-dark lakes. 
+ 
+CREEL SURVEY 
+An angler creel survey was conducted during the 2024-2025 fishing season (May 2024-
+March 2025, excluding November) following standard DNR treaty comprehensive 
+assessment protocols (Cichosz 2025). Angler metrics of species-specific fishing effort, 
+catch rates and harvest per acre were estimated. Angler exploitation (% of population 
+harvested by anglers) of walleye was calculated by dividing the estimated number of 
+angler-harvested marked walleye by the total number of walleye marked during the 
+spring surveys in 2024. Exploitation of walleye by tribal spearing was calculated by 
+dividing the total number of spear-harvested walleye by the walleye population 
+estimate. These results were compared to results from previous creel surveys 
+conducted on Amnicon Lake in 1999 and 2006 to evaluate trends through time. To 
+determine the status of Amnicon Lake relative to similar lakes, these results were 
+compared to other creel surveys in the Ceded Territory during the same timeframe. 
+ 
+Results 
+CREEL SURVEY 
+Anglers spent an estimated 9,344 hours (23.9 hours/acre) fishing Amnicon Lake in 
+2024, which was lower than in 2006 (11,054 hours) and 1999 (12,057 hours) but above 
+the Douglas and Bayfield County average of 21.3 hours/acre since 2010. Anglers 
+directed the most effort at northern pike, with an estimated 4,785 hours or 36% of the 
+total directed (species specific) effort, but many also targeted black crappie (2,559 
+hours, 19% of total directed effort), muskellunge (2,161 hours, 16% of total directed 
+effort) and largemouth bass (1,678 hours, 13% of total directed effort; Figure 1). Over 
+time, Amnicon Lake anglers have spent more time targeting northern pike, but less 
+time targeting muskellunge, black crappie and walleye (Figure 1). 
+--- PAGE 7 ---
+7 
+ 
+ 
+Figure 1. Percent of total directed angling effort on Amnicon Lake by species in 1999, 2006 and 2024. 
+Species with less than 2% of directed effort were removed for clarity. 
+ 
+MUSKELLUNGE 
+FISH SURVEY 
+Muskellunge captured during the population estimate on Amnicon Lake in 2024 and 
+2025 ranged from 12.9 to 48.6 inches (Figure 2). The largest male sampled was 40.3 
+inches, and the largest female sampled was 48.6 inches. The adult muskellunge (≥ 30 
+inches or sexable) population was estimated to be 65 fish (95% CI = 36-94) or 0.15 
+adults/acre (95% CI = 0.08-0.22; Figure 3). This density was much lower than the 2007 
+estimate of 1.8 adults/acre (Figure 3). The PSD-42 was 25, which was much higher than 
+the 2007 survey (<1) and above average for other muskellunge lakes throughout the 
+state (Figure 4). It took about 7 years to reach 35 inches and about 15 years to reach 
+40 inches (Figure 5). More muskellunge were present at older ages, indicating 
+declining natural reproduction, except for age-6 muskellunge which was the only 
+stocked year class present at the time of this survey (Figure 6). 
+ 
+
+--- PAGE 8 ---
+8 
+ 
+Figure 2. Length frequency histogram of female (red), male (blue) and unknown sex (white) muskellunge 
+captured during spring fyke net surveys (SN1 and SN2) on Amnicon Lake in 2024 and 2025 with 
+recaptured fish removed. 
+ 
+ 
+ 
+Figure 3. Adult muskellunge (≥ 30 inches or sexable) 
+density estimates (adult fish/acre) with 95% 
+confidence intervals from mark recapture surveys 
+on Amnicon Lake from 1993 to 2025. 
+Figure 4. Proportional size distribution (PSD-42, % ≥ 
+42 inches) of muskellunge captured during spring 
+surveys (SN1, SE1 and SN2) on Amnicon Lake (blue 
+circles) from 2006 to 2025. Running average 
+(dashed line) and 95% confidence interval (shaded 
+area) of other muskellunge lakes throughout the 
+state were used for comparison. 
+
+--- PAGE 9 ---
+9 
+ 
+Figure 5. Von Bertalanffy growth curve for muskellunge captured during spring surveys (SN1, SE1 and 
+SN2) on Amnicon Lake in 2024 and 2025. The horizontal dashed line represents the minimum length 
+limit. 
+ 
+ 
+Figure 6. Age structure of muskellunge captured during spring surveys (SN1, SE1 and SN2) on Amnicon 
+Lake in 2024 and 2025. Yellow bars represent year classes with stocking and blue bars indicate naturally 
+reproduced year classes. 
+ 
+CREEL SURVEY 
+Muskellunge were the third most targeted species on Amnicon Lake in 2024 with 2,161 
+hours or 16% of the total directed effort (Figure 1). Muskellunge angling effort was 5.5 
+hours/acre in 2024, which was lower than in 2006 (10.0) and 1999 (9.9) but near the 
+average for creel surveys in Ceded Territory lakes with muskellunge (Figure 7, left 
+panel). It took anglers an average of 27 hours to catch a muskellunge, which was 
+much longer than in 2006 (7.6) and 1999 (6.5) but near the average for Ceded Territory 
+
+--- PAGE 10 ---
+10 
+ 
+creel surveys (Figure 7, middle panel). Muskellunge exploitation was low with no 
+angler harvest of muskellunge documented in the 2024 creel survey (Figure 7, right 
+panel). Tribal harvest of muskellunge has also been low on Amnicon Lake. There were 
+no muskellunge harvested via tribal spearing in 2024 and a total of 11 muskellunge 
+harvested via tribal spearing from 2000 to 2025. 
+ 
+ 
+Figure 7. Muskellunge angler effort (left), catch rate (middle) and angler harvest (right) on Amnicon Lake 
+(blue circles) from 1999 to 2024. Running average (dashed line) and 95% confidence interval (shaded 
+area) of creel surveys from Ceded Territory lakes were used for comparison. 
+ 
+NORTHERN PIKE 
+FISH SURVEY 
+During the 2024 SN1 survey, 102 northern pike were captured that ranged from 6.9 to 
+29.0 inches (Figure 8). The northern pike catch rate was 1.7 fish/net-night, which was 
+much higher than in 2006 (0.1) when northern pike were first documented in Amnicon 
+Lake, but still below average for complex-cool-dark lakes (average = 4.5). However, 
+most northern pike had already spawned by the sampling period and were not as 
+vulnerable to capture. The northern pike PSD-21 was 33, which was below average for 
+complex-cool-dark lakes (average = 42). 
+
+--- PAGE 11 ---
+11 
+ 
+ 
+Figure 8. Length frequency histogram of northern pike captured during the early spring fyke net survey 
+(SN1) on Amnicon Lake in 2024. 
+ 
+CREEL SURVEY 
+Northern pike were the most targeted species on Amnicon Lake in 2024 with 4,785 
+hours, or 36% of the total directed effort (Figure 1). The estimated angling effort 
+directed at northern pike was 12.3 hours/acre, which was well above average for 
+Ceded Territory creel surveys (Figure 9, left panel). The angler catch rate was 0.8 
+northern pike/hour, which was above average for Ceded Territory creel surveys 
+(Figure 9, middle panel). Anglers harvested approximately 629 northern pike (1.6 
+northern pike/acre), which was the eighth highest northern pike harvest rate ever 
+documented in a Ceded Territory creel survey (Figure 9, right panel). 
+ 
+ 
+Figure 9. Northern pike effort (left), catch rate (middle) and angler harvest (right) on Amnicon Lake (blue 
+circles) from 2006 to 2024. Running average (dashed line) and 95% confidence interval (shaded area) of 
+creel surveys from Ceded Territory lakes were used for comparison. 
+ 
+
+--- PAGE 12 ---
+12 
+ 
+WALLEYE 
+FISH SURVEY 
+Walleye captured during the SN1 survey ranged from 8.4 to 26.7 inches, with 64% of 
+the fish larger than the 18-inch minimum length limit (Figure 10). The largest male 
+sampled was 23.4 inches, and the largest female sampled was 26.7 inches. There was 
+1.0 male for every female in 2024, down from 4.3 in 2014 and 4.0 in 2006. The adult 
+walleye population in Amnicon Lake was estimated to be 377 fish or 0.9 adults/acre in 
+2024 (Figure 11). This density was higher than the 2014 estimate (0.2 adults/acre), but 
+well below population estimates from 2006 (2.9 adults/acre) and 1999 (4.2 
+adults/acre; Figure 11). 
+ 
+ 
+Figure 10. Length frequency histogram of female (red), male (blue) and unknown sex (white) walleye 
+captured during the early spring fyke net survey (SN1) on Amnicon Lake in 2024 with recaptured fish 
+removed. Sixty-four percent of the fish were ≥ the 18-inch minimum length limit (vertical dashed line). 
+ 
+No age-0 or age-1 walleye were captured in the 2024 fall electrofishing survey. Age-0 
+and age-1 walleye have only been captured in four of the 17 fall electrofishing surveys 
+on Amnicon Lake since 1989 and no surveys have found more than five age-0 or two 
+age-1 walleye per mile (15 age-0 and eight age-1 per mile are typically enough to 
+produce a fishable adult year-class). Sampling efficiency during fall electrofishing 
+surveys on Amnicon Lake was generally poor due to dense vegetation. 
+ 
+The PSD-15 in the SN1 survey was 94, which was much higher than all previous 
+surveys and above average for complex-cool-dark lakes supported primarily by 
+stocking (Figure 12). For walleye to reach 18 inches in Amnicon Lake, it takes 4-5 years 
+for females and about 5-6 years for males (Figure 13). Stocked year classes were more 
+
+--- PAGE 13 ---
+13 
+ 
+abundant, but some naturally reproduced fish were present in years without stocking 
+(Figure 14). 
+Figure 13. Von Bertalanffy growth curves of male (blue line) and female (red line) walleye captured 
+during the 2024 early spring fyke net survey (SN1) on Amnicon Lake. The horizontal dashed line 
+represents the 18-inch minimum length limit. 
+Figure 12. Proportional size distribution (PSD, % ≥ 15 
+inches) of walleye captured during the early spring 
+fyke net survey (SN1) on Amnicon Lake (circles) 
+from 1999 to 2024. Running average (dashed line) 
+and 95% confidence interval (shaded area) of 
+complex-cool-dark lakes with a combination of 
+stocking and natural walleye recruitment were used 
+for comparison. 
+Figure 11. Adult walleye density estimates (adult 
+fish/acre) with 95% confidence intervals from WI 
+DNR (circles) and Great Lakes Indian Fish and 
+Wildlife Commission (GLIFWC; squares) mark-
+recapture surveys on Amnicon Lake from 1991 to 
+2024. 
+
+--- PAGE 14 ---
+14 
+ 
+ 
+Figure 14. Estimated age structure of walleye captured during spring surveys (SN1 and SE1) on Amnicon 
+Lake in 2024. Yellow bars represent year classes with stocking and blue bars indicate naturally 
+reproduced year classes. 
+ 
+CREEL SURVEY 
+Walleye were the sixth most targeted species on Amnicon Lake in 2024 with 7% of the 
+total directed effort (Figure 1). Walleye angling effort was 2.4 hours/acre, which was 
+about half of 2006 (5.0 hours/acre) and followed the trend of other Ceded Territory 
+creel surveys (Figure 15, left panel). Similarly, the angler catch rate was 0.04 
+walleye/hour, which was lower than 2006 (0.11 walleye/hour) and well below average 
+for Ceded Territory creel surveys (Figure 15, middle panel). Angler harvest remained 
+low and well below average for Ceded Territory creel surveys with 16 walleye 
+harvested (Figure 15, right panel). 
+ 
+ 
+Figure 15. Walleye angler effort (left), catch rate (middle) and angler harvest (right) on Amnicon Lake 
+(blue circles) from 1999 to 2024. Running average (dashed line) and 95% confidence interval (shaded 
+area) of creel surveys from Ceded Territory lakes were used for comparison. 
+ 
+
+--- PAGE 15 ---
+15 
+ 
+The total walleye exploitation rate (% of the adult population harvested) was 0.8% in 
+2024 and all estimates have been <1%. Safe harvest is established as less than a 1-in-
+40 chance of exceeding 35% exploitation, so Amnicon Lake is well below that 
+threshold. No walleyes were harvested by tribal spearing in 2024, so all harvest was 
+by anglers. Tribal spear harvest on Amnicon Lake has been low in recent years with a 
+total of 26 walleyes harvested from 2011 to 2024. 
+ 
+LARGEMOUTH BASS 
+FISH SURVEY 
+During the 2024 SE2 survey, 32 largemouth bass were captured that ranged from 9.1 
+to 20.3 inches, with 38% larger than the 14-inch minimum length limit (Figure 16). No 
+other SE2 surveys have been conducted on Amnicon Lake so trends over time could 
+not be assessed. The largemouth bass catch rate was 8.1 fish/mile, which was near 
+the average for complex-cool-dark lakes (average = 9.6). The largemouth bass PSD-12 
+was 81, which was slightly above average for complex-cool-dark lakes (average = 65). 
+ 
+ 
+Figure 16. Length frequency histogram of largemouth bass captured during the late spring 
+electrofishing survey (SE2) on Amnicon Lake in 2024. Thirty-eight percent of largemouth bass were ≥ the 
+14-inch minimum length limit (vertical dashed line). 
+ 
+CREEL SURVEY 
+Largemouth bass were the fourth most targeted species on Amnicon Lake in 2024 
+with 1,678 hours or 13% of the total directed effort (Figure 1). Estimated angling effort 
+targeting largemouth bass was 4.3 hours/acre, which was similar to 2006 (4.7) but 
+below average for Ceded Territory creel surveys (Figure 17, left panel). The angler 
+catch rate was 0.6 largemouth bass/hour, which was slightly lower than in 2006 (0.7) 
+and near the average for Ceded Territory creel surveys (Figure 17, middle panel). 
+Estimated angler harvest was low with 0.09 largemouth bass/acre harvested but was 
+
+--- PAGE 16 ---
+16 
+ 
+higher than in 2006 (0.02) and below the average for Ceded Territory creel surveys 
+(Figure 17, right panel). 
+ 
+Figure 17. Largemouth bass effort (left), catch rate (middle) and angler harvest (right) on Amnicon Lake 
+(blue circles) from 1999 to 2024. Running average (dashed line) and 95% confidence interval (shaded 
+area) of creel surveys from Ceded Territory lakes were used for comparison. 
+ 
+BLACK CRAPPIE 
+FISH SURVEY 
+During the 2024 SN2 survey, 487 black crappie were 
+captured that ranged from 2.8 to 12.5 inches 
+(Figure 18). The black crappie catch rate was 14.3 
+fish/net-night in the SN2 survey, which was higher 
+than in 2017 (7.5) and near the average for 
+complex-cool-dark lakes (Figure 19, left panel). The 
+black crappie PSD-8 was 15, which was lower than 
+in 2017 (39) and well below average for complex-
+cool-dark lakes (Figure 19, right panel). Twenty-two 
+8-9-inch black crappies were kept for aging. Age 
+ranged from 6 to 12 years with a mean of 7.8 years, 
+which is much slower than average growth for 
+similar lakes (5.8 years; Figure 20). 
+Figure 20. Age of 8-9-inch black 
+crappies captured during the 2025 late 
+spring fyke net survey (SN2) on 
+Amnicon Lake and reference lakes. 
+Wider bars indicate more fish at that 
+age. Reference lakes include other 
+complex-cool-dark lakes since 2010. 
+
+--- PAGE 17 ---
+17 
+ 
+Figure 18. Length frequency histogram of black crappie captured during the late spring fyke net survey 
+(SN2) on Amnicon Lake in 2024. 
+Figure 19. Black crappie catch rate (left; fish/net-night) and proportional size distribution (right; PSD; % 
+≥ 8 inches) during the late spring fyke net survey (SN2) on Amnicon Lake (blue circles) in 2017 and 2024. 
+Running average (dashed line) and 95% confidence interval (shaded area) of complex-cool-dark lakes 
+were used for comparison. 
+ 
+CREEL SURVEY 
+Black crappie were the second most targeted species on Amnicon Lake in 2024 with 
+2,559 hours, or 19% of the total directed effort (Figure 1). Estimated angling effort 
+targeting black crappie was 6.6 hours/acre, which was lower than in 2006 (9.9) and 
+near the average for Ceded Territory creel surveys (Figure 21, left panel). The angler 
+catch rate was 2.3 black crappie/hour, which was much higher than in 2006 (1.4) and 
+well above average for Ceded Territory creel surveys (Figure 21, middle panel). Angler 
+catch rate was in the top 5% of creel surveys statewide. Estimated angler harvest was 
+
+--- PAGE 18 ---
+18 
+ 
+2.0 black crappie/acre, which was much lower than in 2006 (5.8) and slightly below 
+the average for Ceded Territory creel surveys (Figure 21, right panel). 
+Figure 21. Black crappie effort (left), catch rate (middle) and angler harvest (right) on Amnicon Lake 
+(blue circles) from 1999 to 2024. Running average (dashed line) and 95% confidence interval (shaded 
+area) of creel surveys from Ceded Territory lakes were used for comparison. 
+ 
+BLUEGILL 
+FISH SURVEY 
+During the 2024 SE2 survey, 145 bluegills were captured that ranged from 2.5 to 7.6 
+inches (Figure 22). No other SE2 surveys have been conducted on Amnicon Lake so 
+trends over time could not be assessed. The bluegill catch rate was 145 fish/mile, 
+which was near the average for complex-cool-dark lakes (average = 120). The bluegill 
+PSD-6 was 15, which was below average for complex-cool-dark lakes (average = 42). 
+Twenty-one 6-7-inch bluegills were kept for aging. Age ranged from 4 to 9 years with 
+a mean of 6.3 years, which is slower than average growth for similar lakes (5.9 years; 
+Figure 23). 
+ 
+Figure 22. Length frequency histogram of bluegill captured during the late spring electrofishing survey 
+(SE2) on Amnicon Lake in 2024. 
+
+--- PAGE 19 ---
+19 
+ 
+CREEL SURVEY 
+Bluegill were the fifth most targeted species 
+on Amnicon Lake in 2024 with 1,274 hours, or 
+9% of the total directed effort (Figure 1). 
+Estimated angling effort targeting bluegill was 
+3.3 hours/acre, which was less than in 2006 
+(4.7) and below average of Ceded Territory 
+creel surveys (Figure 24, left panel). The angler 
+catch rate was 2.3 bluegill/hour, which was 
+higher than in 2006 (1.6) and near the average 
+for Ceded Territory creel surveys (Figure 24, 
+middle panel). Estimated angler harvest was 
+1.5 bluegill/acre, which was much higher than 
+in 2006 (0.1) and below average for Ceded 
+Territory creel surveys (Figure 24, right panel). 
+ 
+ 
+ 
+ 
+ 
+ 
+Figure 24. Bluegill effort (left), catch rate (middle) and angler harvest (right) on Amnicon Lake (blue 
+circles) from 1999 to 2024. Running average (dashed line) and 95% confidence interval (shaded area) of 
+creel surveys from Ceded Territory lakes were used for comparison. 
+ 
+OTHER SPECIES 
+Other species captured during the 2024 Amnicon Lake fyke net and electrofishing 
+surveys included 114 white suckers, 37 pumpkinseeds, 30 golden shiners, 22 yellow 
+perch, 16 yellow bullheads, five spottail shiners, three creek chubs, two central 
+mudminnows, two common shiners, one johnny darter and one tadpole madtom. 
+Pumpkinseeds ranged from 3.4 to 8.4 inches. Yellow perch ranged from 3.8 to 6.0 
+inches. 
+Figure 23. Age of 6-7-inch bluegills 
+captured during the 2024 late spring 
+electrofishing survey (SE2) on Amnicon 
+Lake and reference lakes. Wider bars 
+indicate more fish at that age. 
+Reference lakes include other 
+complex-cool-dark lakes since 2010. 
+
+--- PAGE 20 ---
+20 
+ 
+Discussion 
+Fisheries in Amnicon Lake have changed substantially over the last two decades with 
+the introduction of northern pike, a decline in muskellunge abundance and 
+reshaping of the walleye population. With these changes in the fishery, angler effort 
+has also changed as more effort is directed at northern pike and less effort was 
+directed at muskellunge and walleye. Despite these changes, total angling effort has 
+remained relatively constant since 1999. 
+ 
+The largest change in the Amnicon Lake fishery has been the introduction of northern 
+pike. Northern pike were first detected in Bear Lake in 1997 and likely traveled 
+through Bear Creek and the Amnicon River to invade Amnicon Lake. They were first 
+documented in Amnicon Lake in 2006 when one was captured in a fyke net, and 
+another was reported in the creel survey (Toshner 2010). Since then, abundance has 
+increased, and anglers now target northern pike more than any other species in 
+Amnicon Lake. Despite the high angler catch rate, the 2024 early spring fyke net 
+survey found a relatively low abundance of northern pike. However, nets were set 
+over a week after the initial ice-out date on Amnicon Lake in 2024 due to a cold front 
+and a small area of ice blocking the boat ramp. It is likely that many northern pike 
+spawned after the initial ice-out date but before nets were set and were not as 
+vulnerable to capture during the survey. Therefore, the northern pike population may 
+be more abundant than what was documented in this survey. In future surveys, nets 
+should be set as soon after ice-out as possible to effectively capture northern pike in 
+addition to walleyes. Northern pike introductions often result in decreased 
+abundance but larger size of other species, particularly muskellunge (Inskip and 
+Magnuson 1983; Harvey 2009; Wolter 2024). Anglers are encouraged to harvest 
+northern pike in Amnicon Lake to help decrease their abundance. Harvest of small 
+northern pike (<20 inches) will also be necessary to minimize impacts on other 
+species. 
+ 
+Following the introduction of northern pike, the muskellunge population has 
+responded by shifting from a high abundance, low size structure, action fishery to a 
+lower abundance, higher size structure, quality or trophy fishery. At its recent peak, 
+Amnicon Lake supported approximately 771 adult muskellunge but now supports 
+about 65. However, less than 1% of the population reached 40 inches with the higher 
+abundance and now nearly half of the population reaches that mark. Similar trends 
+have been seen in other lakes in Northern Wisconsin following northern pike 
+introductions (Inskip and Magnuson 1983; Harvey 2009; Wolter 2024) and were 
+anticipated when northern pike were first documented in Amnicon Lake (Toshner 
+2010). A lower density and higher size structure muskellunge population can be 
+expected moving forward, but high harvest of northern pike may increase 
+muskellunge abundance. Since northern pike spawn earlier than muskellunge in 
+similar habitats, northern pike introductions often limit natural reproduction of 
+muskellunge. As such, stocking of muskellunge should continue in alternate years in 
+Amnicon Lake. Only one age class of stocked muskellunge was present at the time of 
+--- PAGE 21 ---
+21 
+ 
+this survey and that age class was the second most abundant age class. Without 
+continued stocking, it is likely that the musky population will decrease as the larger 
+naturally reproduced age classes age out of the fishery. However, since we were only 
+able to assess one stocked year class, continued monitoring will be essential to 
+evaluate long term stocking success. To encourage natural reproduction of 
+muskellunge, protection of shallow water aquatic plants, fine sediments and 
+shoreline vegetation is critical. Most high-quality muskellunge spawning habitat is in 
+the southern third of the lake and is primarily along privately owned shoreline where 
+landowners are encouraged to maintain natural shorelines. Our management 
+objective is to maintain muskellunge density between 0.15 to 0.30 per acre with a 
+PSD-42 of at least 15 to meet the goals of a quality muskellunge fishery. The 
+muskellunge population and stocking success should be assessed again with a 
+population estimate survey in 2036 and 2037. 
+ 
+The walleye population can be classified as having low abundance and high size 
+structure. Walleye abundance shifted from a high of 4.2 adults per acre in 1999 to a 
+low of 0.3 adults per acre in 2014 and has since rebounded to 0.9 adults per acre in 
+2024. Along with the changes in abundance came changes in size structure, where 
+only 20% of walleye reached 15 inches in 1999 and now 94% reached 15 inches and 
+64% reached 18 inches in 2024. Despite these population changes, walleye have not 
+been a primary species of interest for Amnicon Lake anglers since at least 1999. 
+Contribution of stocking versus natural reproduction to the adult walleye population 
+is currently unknown since fall juvenile walleye electrofishing surveys are ineffective 
+on Amnicon Lake due to dense vegetation growth around most of the lake. Based on 
+the estimated age frequency, most of the population was from stocked age classes, 
+but non-stocked age classes were still represented in the population. As a result of 
+the low adult density and low angler use, current walleye stocking review criteria 
+have identified Amnicon Lake as a lower priority than other stocked fisheries and 
+walleye stocking has been deferred. Moving forward, the walleye fishery will rely on 
+natural reproduction for recruitment, which occurs primarily on shallow gravel on the 
+north and east sides of Amnicon Lake. To maintain or improve these habitats, which 
+are currently some of the most developed sections of shoreline, and to encourage 
+natural reproduction of walleye, protection or restoration of shoreline vegetation is 
+critical. Landowners are encouraged to go to Wisconsin’s Healthy Lakes Program for 
+more information. The 18-inch minimum length limit remains effective in protecting 
+walleyes until they spawn at least once (3-6 years old). Angler harvest remains low 
+despite almost two thirds of the population being at least 18 inches. Since it is 
+unlikely that DNR raised walleye will be stocked into Amnicon Lake in the near future, 
+it is expected that based on recent levels of natural reproduction, the walleye 
+population will have a lower density population (< 1 adult walleye per acre) with 
+higher size structure. The walleye population should be assessed again with a 
+population estimate survey in 2036. 
+ 
+Largemouth bass had average abundance and size structure compared to similar 
+lakes. No other late spring electrofishing surveys, which target bass and bluegill, have 
+--- PAGE 22 ---
+22 
+ 
+been completed on Amnicon Lake. Angler catch rates remained good, so the low 
+harvest rate indicates that most anglers prefer to catch and release largemouth bass. 
+Approximately 38% of the population was harvestable size, so the statewide 14-inch 
+minimum length limit is still appropriate. To maintain a quality largemouth bass 
+fishery, our management objective is to maintain a catch rate of 5 to 15 per mile with 
+a PSD-12 of at least 60. Moving forward, a late spring electrofishing survey should be 
+completed every 6 years (i.e., 2030). 
+ 
+Black crappie and bluegill each had moderate abundance with low size structure and 
+slow growth. The angler catch rate was extremely high for black crappie and 
+moderate for bluegill, but harvest was low for each likely due to small size. Slow 
+growth and low size structure indicates overabundance, so anglers are encouraged to 
+harvest these smaller black crappies and bluegill. Increased harvest will increase 
+food availability for the remaining fish and improve growth rates. Yellow perch were 
+small and primarily serve as an additional prey fish for walleye, muskellunge, 
+northern pike and largemouth bass in Amnicon Lake. 
+ 
+Management Recommendations 
+1. Encourage harvest of northern pike to minimize impacts on other species. 
+Northern pike were first found in Amnicon Lake in 2006 and have expanded 
+rapidly. Reducing abundance of northern pike (including fish <20 inches) may 
+help minimize impacts on other species, especially muskellunge. 
+ 
+2. Maintain muskellunge density between 0.15 to 0.30 per acre with a PSD-42 of 
+at least 15. 
+A high density muskellunge fishery is no longer feasible after the introduction 
+of northern pike. However, maintaining a moderate abundance of larger 
+muskellunge is still desirable for many anglers. 
+ 
+3. Maintain a lower density, higher size structure walleye population supported 
+by natural reproduction. 
+As a result of the low adult density and low angler use, walleye stocking has 
+been deferred. However, natural reproduction is likely to support a small 
+population of larger walleyes. The 18-inch minimum length limit allows walleye 
+to spawn at least once before being vulnerable to angler harvest, yet 64% of 
+the population is still large enough to harvest. 
+ 
+4. Maintain a catch rate of 5 to 15 largemouth bass per mile with a PSD-12 of at 
+least 60. 
+Largemouth bass are moderately abundant with average size structure in 
+Amnicon Lake. 
+ 
+ 
+--- PAGE 23 ---
+23 
+ 
+5. Maintain statewide regulations for panfish and encourage harvest of black 
+crappie and bluegill. 
+Black crappie and bluegill each have moderate abundance with low size 
+structure and slow growth. Angler harvest is encouraged to help improve 
+growth rates and size structure. 
+ 
+6. Continue monitoring the fisheries with late-spring electrofishing surveys 
+every 6 years and walleye and muskellunge population estimates every 12 
+years. 
+Recurring monitoring is critical to evaluating stocking needs and regulation 
+changes. Late spring electrofishing surveys are used to monitor bass and 
+bluegills, walleye netting is used to monitor walleyes and northern pike, and 
+muskellunge netting is used to monitor muskellunge and black crappies. 
+ 
+7. Protect and restore shoreline and littoral habitat. 
+Although fishing regulations and stocking can at times improve a fishery, 
+degrading habitat can overwhelm other improvement efforts. Landowners are 
+encouraged to maintain and restore shoreline vegetation buffers and woody 
+habitat. See Wisconsin’s Healthy Lakes Program for more information. 
+ 
+References 
+Cichosz, T. A. 2025. 2023-2024 Ceded Territory Fishery Assessment Report. Wisconsin 
+Department of Natural Resources Bureau of Fisheries Management, Administrative 
+Report 105. 
+ 
+Gabelhouse, D. W. Jr. 1984. A length-categorization system to assess fish stocks. North 
+American Journal of Fisheries Management 4:273–285. 
+ 
+Harvey, B. 2009. A biological synopsis of northern pike (Esox lucius). Canadian 
+Manuscript Report of Fisheries and Aquatic Sciences 2885. 
+ 
+Inskip, P. D. and J. J. Magnuson. 1983. Change in fish populations over an 80-year 
+period: Big Pine Lake, Wisconsin. Transactions of the American Fisheries Society 
+112:378-389. 
+ 
+Ricker, W. E. 1975. Computation and interpretation of biological statistics of fish 
+populations. Fisheries Research Board of Canada Bulletin 191. 
+ 
+Rypel, A. L., T. D. Simonson, D. L. Oele, J. D. T. Griffin, T. P. Parks, D. Seibel, C. M. 
+Roberts, S. Toshner, L. S. Tate and J. Lyons. 2019. Flexible classification of Wisconsin 
+lakes for improved fisheries conservation and management. Fisheries 44:225–238.  
+ 
+--- PAGE 24 ---
+24 
+ 
+Toshner, S. 2010. Fishery survey – Amnicon Lake, Douglas County, 2006-2007. 
+Wisconsin Department of Natural Resources. Available at 
+https://p.widencdn.net/bcspyh/Reports_AmniconDouglas2006Survey  
+ 
+Wolter, M. 2024. 2024 spring fisheries survey summary, Spider Chain, Sawyer County. 
+Wisconsin Department of Natural Resources. Available at 
+https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Reports_SawyerSpider20
+24SN1SE2.pdf   
+--- PAGE 25 ---
+25 
+ 
+Appendix 
+Table A1. General fishing regulations for Amnicon Lake in 2025. 
+SPECIES SEASON DATES DAILY BAG LIMIT SIZE LIMIT 
+Muskellunge Saturday nearest 
+Memorial Day to Dec 31 
+1 40 inches 
+Northern Pike 1st Saturday in May to 
+1st Sunday in March 
+5 None 
+Walleye 1st Saturday in May to 
+1st Sunday in March 
+3 18 inches 
+Largemouth Bass 1st Saturday in May to 
+1st Sunday in March 
+5 14 inches 
+Panfish Open all year 25 None 
+ 
+ 
+Table A2. Stocking history on Amnicon Lake since 1990. 
+YEAR Species Number 
+Stocked Size 
+2024 Muskellunge 194 Large Fingerling 
+2022 Walleye 1,948 Large Fingerling 
+2020 Walleye 2,146 Large Fingerling 
+2018  Muskellunge 215 Large Fingerling 
+2018 Walleye 1,951 Large Fingerling 
+2016 Walleye 1,950 Large Fingerling 
+2014 Walleye 2,187 Large Fingerling 
+2007 Walleye 125,000 Fry 
+2006 Walleye 161,000 Fry 
+2005 Walleye 400,000 Fry 
+2003 Walleye 300,000 Fry 
+2002 Walleye 500,000 Fry 
+1997 Muskellunge  200 Large Fingerling 
+1996 Muskellunge 1600 Fingerling 
+1993 Muskellunge 400 Fingerling 
+1992 Muskellunge 400 Fingerling 
+1991 Muskellunge 400 Fingerling 
+1990 Muskellunge 200 Fingerling 
+ 
+  
+--- PAGE 26 ---
+26 
+ 
+Table A3. Standard DNR surveys for inland lakes, gear used and target water temperature and species. 
+SURVEY GEAR TARGET WATER 
+TEMPERATURE (°F) 
+TARGET 
+SPECIES 
+Early spring netting (SN1) Fyke net 40-50 
+Walleye 
+Muskellunge 
+Northern pike 
+Yellow perch 
+Early spring electrofishing (SE1) Electrofishing boat 45-50 Walleye 
+Late spring netting (SN2) Fyke net 50-55 
+Muskellunge 
+Northern pike 
+Black crappie 
+Late spring electrofishing (SE2) Electrofishing boat 55-70 Bass 
+Panfish 
+Fall electrofishing (FE1) Electrofishing boat 50-65 Juvenile walleye 
+ 
+Table A4. Length categories for species of interest captured in Amnicon Lake. 
+SPECIES LENGTH CATEGORY (inches) 
+Stock Quality Preferred Memorable Trophy 
+Walleye 10 15 20 25 30 
+Muskellunge 30 34 38 42 50 
+Northern pike 14 21 28 34 44 
+Largemouth bass 8 12 15 20 25 
+Black crappie 5 8 10 12 15 
+Bluegill 3 6 8 10 12 
+ 

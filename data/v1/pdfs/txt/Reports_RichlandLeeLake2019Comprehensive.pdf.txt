@@ -1,0 +1,565 @@
+PAGES: 18
+--- PAGE 1 ---
+ 
+ 
+ WISCONSIN DEPARTMENT OF NATURAL RESOURCES 
+Spring Fishery Survey of Lee Lake 
+Richland County, Wisconsin 2019 
+ 
+ 
+ 
+ 
+Jared Myers 
+Fisheries Technician – Advanced 
+Justin Haglund 
+Fisheries Biologist - Senior 
+Wisconsin Department of Natural Resources 
+Dodgeville, Wisconsin 
+2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+--- PAGE 2 ---
+2 
+ 
+Table of Contents 
+Executive Summary………………………………………………………………………………….…....3 
+Lake Overview…………………………………………………………………………………………..…...4 
+Introduction…………………………………………………………………………………………….….….5 
+ Methods……………………………………………………………………………………….….…..5 
+Results………………………………………………………………………………………………….…….…..6 
+Discussion…………………………………………………………………………………………….….……..6 
+Management Recommendations………………………………………………………………..….8 
+References……………………………………………………………………………………………….….….9 
+Figures & Tables…………………………………………………………………………………………….10 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 3 ---
+3 
+ 
+Executive Summary 
+The Wisconsin Department of Natural Resources (DNR) conducted a tier 1 baseline 
+lake electrofishing survey of Lee Lake in 2019 (SE2). The primary focus of this survey 
+was to estimate relative abundance and size structure of bass and panfish as well as 
+other gamefish populations in the lake. 
+The largemouth bass catch-per-unit effort (CPUE) was 60 fish/mile, ranking high 
+when compared to other lakes in the simple-riverine lake class. Bluegill CPUE during 
+spring electrofishing was calculated at 142 fish/mile, ranking above average when 
+compared to other lakes in the simple-riverine lake class. Walleye CPUE was 
+calculated at 5.5 fish/mile which was low, despite the numerous private stocking 
+events by the local Cazenovia Turkey Busters club. Yellow perch, pumpkinseed, black 
+crappie, white sucker, black bullhead and yellow bullhead were also captured in this 
+survey. 
+Overall, the Lee Lake fishery is simple and dominated by largemouth bass and 
+bluegill. This fishery features an abundant largemouth bass population, a moderately 
+abundant bluegill population and a minor walleye fishery. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 4 ---
+4 
+ 
+ 
+Lake and Location 
+Lee Lake, Richland County 
+T12N, R2E Section 13 
+ 
+Physical/Chemical Attributes 
+• Morphometry: 46 acres, maximum depth 11 feet, 2 miles of shoreline 
+• HUC-12 Watershed: Cazenovia Branch 
+• Lake type: Drainage 
+• Water clarity: Low 
+• Littoral substrate: Sand and silt 
+• Trophic status: Eutrophic 
+• Boat landings: One public boat landing is available 
+• Other features: Lee Lake is located within the Cazenovia Memorial Park. Public 
+Picnic area is available. 
+ 
+Purpose of Survey 
+Baseline lake survey tier 1 assessment. 
+ 
+Dates of Fieldwork 
+Electrofishing survey was conducted on May 13, 2019 (SE2). 
+ 
+Fishery 
+The Lee Lake fishery consists of bluegill, black crappie, yellow perch, pumpkinseed, 
+largemouth bass and walleye. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 5 ---
+5 
+ 
+Introduction 
+Lee Lake is a 46-acre reservoir located in Richland County, Wisconsin. Lee Lake is a 
+eutrophic drainage lake with a maximum depth of 11 feet. This lake is fed by the 
+Cazenovia Branch and flows out into the Cazenovia Branch which eventually reaches 
+the Little Baraboo River.  
+This lake has a few species of panfish including bluegill (Lepomis machrochirus), 
+pumpkinseed (Lepomis gibbosus), black crappie (Pomoxis negromachulatus) and 
+yellow perch (Perca flavescens), as well as predatory gamefish including largemouth 
+bass (Micropterus salmoides) and walleye (Sander vitreus). Curly-leaf pondweed 
+(Potamogeton crispus), Eurasian watermilfoil (Microphyllum spicatum) and purple 
+loosestrife (Lythrum salicaria) are the known invasive species present in the lake. 
+Lee Lake followed the general fishing regulations for all species until 1997 when the 
+DNR implemented a special regulation. This regulation allowed for the harvest of 
+three walleye, sauger, or hybrids, all which must be at least 18 inches in length (Table 
+1).  
+Since 1973, lake surveys have been conducted and include general surveys, baseline 
+monitoring surveys and standardized fisheries assessments. This is the first spring 
+fisheries assessment completed on Lee Lake with the last survey being conducted in 
+the fall of 2005. The main objective of this survey was to assess abundance and size 
+structure of gamefish and panfish populations. 
+Stocking has occurred on Lee Lake since 1974. Originally, stocking was limited to 
+northern pike and brown trout until a large stocking event in 1993, when multiple 
+species were stocked including largemouth bass, bluegill, walleye, black crappie, 
+golden shiner and pumpkinseed. Since 1993 only walleye have been stocked except 
+for yellow perch and largemouth bass in 2017. In the decade preceding the 2019 
+survey (2009-2018), Lee Lake was stocked 5 times, most recently with 700 large 
+fingerling walleyes in 2018 (Table 2). 
+Methods 
+A spring night electrofishing survey was conducted at Lee Lake on May 13, 2019, 
+following standard DNR procedures listed in the DNR Fisheries Management 
+Handbook (Simonson 2015). The primary objective for this spring survey was to 
+collect and measure predatory gamefish and panfish. One all-species station was 
+sampled totaling half a mile and all species were collected (Figure 1). For the 
+remainder of the entire shoreline survey only predatory gamefish were collected. 
+One boat operator and two experienced technicians, using 3/8” mesh dip nets 
+conducted the surveys. All panfish and predatory gamefish from each species were 
+dipped from the tub and measured.  
+ 
+--- PAGE 6 ---
+6 
+ 
+ 
+Results 
+Summary of catch rates for gamefish and panfish sampled during the spring 
+electrofishing survey: 
+ Bluegill Pumpkinseed Largemouth 
+bass 
+Yellow 
+perch 
+Black 
+Crappie 
+Walleye 
+Total Catch 71.0 6.0 120.0 10.0 1.0 11.0 
+CPUE (number 
+per mile) 
+142.0 12.0 60.0 20.0 2.0 5.5 
+ 
+BLUEGILL 
+A total of 71 bluegills was collected during spring electrofishing in 2019. Bluegill CPUE 
+during spring electrofishing was calculated at 142 fish per mile. Lee Lake’s catch rates 
+rank above average when compared to other lakes in the simple-riverine lake 
+classification (Figure 2). Mean length of all bluegill sampled was 5.1 (SD = 1.0) inches 
+with lengths ranging from 2.8 to 7.5 inches (Figure 3).  
+LARGEMOUTH BASS 
+A total of 120 largemouth bass was collected during spring electrofishing surveys in 
+2019. Largemouth bass CPUE was calculated at 60 fish per mile. This ranks high when 
+compared to other lakes in the simple-riverine lake classification (Figure 4).  Average 
+length of all largemouth bass sampled in Lee Lake was 11.8 (SD = 3.5) inches with 
+lengths ranging from 4.1 to 18.0 inches (Figure 5). Approximately 35% of the fish 
+captured during the survey were over 14 inches. 
+WALLEYE 
+A total of 11 walleyes was collected during spring electrofishing survey in 2019. 
+Walleye CPUE was calculated at 5.5 fish per mile. Average length of all walleyes 
+sampled in Lee Lake was 9.1 (SD = 0.8) inches with lengths ranging from 7.1 to 10.0 
+inches (Figure 6).  
+OTHER SPECIES 
+White sucker, yellow perch, pumpkinseed, black crappie, black bullhead and brown 
+bullhead were also present in the lake in very small numbers. A total of 248 white 
+suckers, 10 yellow perch, 6 pumpkinseeds ,1 black crappie, 1 black bullhead and 1 
+yellow bullhead was collected.  
+Discussion 
+--- PAGE 7 ---
+7 
+ 
+Overall, the Lee Lake Fishery is a very simple fishery that lacks diversity and mainly 
+consists of largemouth bass and bluegill. Like other small eutrophic lakes, bluegill is 
+the most abundant species. Fishing opportunities are present from shore in 
+Cazenovia Memorial Park or by boat with the availability of one public boat launch 
+also located in the park. Possible concerns for Lee Lake are the number of invasive 
+aquatic plants including curly-leaf pondweed, Eurasian watermilfoil and purple 
+loosestrife; however, no significant problems to the fishery or fishability of the lake 
+has resulted from these invasives thus far. 
+Bluegill was moderate in abundance in Lee Lake. This moderate abundance is 
+expected, given the small size of this lake and the high-density largemouth bass 
+population. However, the mean length is lower than we’d like to see in a lake with 
+moderate abundance where we might expect mean lengths closer to 6 inches. Given 
+that no aging structures were taken, we were unable to assess bluegill growth rates. 
+Therefore, DNR will continue to manage the panfish population under the statewide 
+regulation of 25 panfish per day and will assess bluegill age structure during the next 
+comprehensive survey in 2028. 
+Largemouth bass in Lee Lake are doing quite well. Catch rates during spring 
+electrofishing surveys documented 60 largemouth bass per mile. Largemouth bass is 
+the dominant predatory gamefish species in Lee Lake, and this will likely continue 
+given good natural reproduction and recruitment to the fishery.  
+The walleye population in Lee Lake is lacking, despite the numerous stocking events 
+by the local Cazenovia Turkey Busters club. Lee Lake received an average of 633 large 
+fingerling walleyes in 2009, 2011 and 2018. However, despite multiple prior stocking 
+events, the 2019 walleye catch only included a single year class that was stocked the 
+previous fall.  Since we didn’t conduct a spring netting survey with a follow up early 
+spring electrofishing survey (SE1), it’s possible that adults are present in the lake 
+since the timing and temperatures during this electrofishing event don’t target 
+aggregations of mature, spawning spring walleye. The only fyke netting survey that 
+has been conducted in Lee Lake was in 2006. This survey was conducted in the 
+summer and only mini-fyke nets were used.  
+Additionally, the club has continued to stock walleye annually through 2025 following 
+this survey (Table 2). Considering that, Lee Lake would benefit from having a spring 
+netting (SE1) and follow-up electrofishing (SE1) survey conducted to gather 
+information on the current status of the walleye population. This would give DNR 
+baseline information as to how this lake should be managed. This is especially 
+important considering the stocking practices put forth by the local club up to this 
+survey in 2019 and continued stocking events in years after the survey. The DNR could 
+then make sound management decisions on the future of stocking and if walleye is a 
+species that should be a priority for management. Therefore, a full comprehensive 
+fishery survey should be conducted during the spring of 2028. If the comprehensive 
+survey concludes that a fishable walleye population is non-existent, then stocking 
+efforts should be discontinued and management efforts should be focused 
+--- PAGE 8 ---
+8 
+ 
+elsewhere. However, if a fishable population >2 adults per acre is present, stocking of 
+walleye can continue by the local club to provide a fishery. 
+  
+--- PAGE 9 ---
+9 
+ 
+Management Recommendations  
+Goal: Determine if a fishable walleye population exists in Lee Lake. 
+Objective: Adult walleye population >2 fish per acre in next comprehensive 
+survey. 
+Strategy: Conduct a comprehensive fishery survey on Lee Lake in 2028. If a 
+fishable population exists, maintain 2-4 adult walleye per acre. Continue 
+allowing Caz Branch Turkey Busters to stock privately funded walleye.  
+ 
+Goal: Maintain current bluegill population. 
+Objective: Maintain >96 fish per mile (simple riverine lake class median value) 
+during SE2 surveys. 
+Strategy: Continue managing with statewide 25 fish daily bag limit. 
+ 
+Goal: Maintain a high-density largemouth bass population. 
+Objective: Maintain >38 fish per mile (simple riverine lake class 75th percentile 
+value) during SE2 surveys. 
+Strategy: Continue managing with statewide 5 fish daily bag limit and 
+minimum length limit of 14 inches. 
+ 
+ADDITONAL MANAGEMENT RECOMMENDATIONS 
+ Assess bluegill and largemouth bass growth rates in Lee Lake. Conduct SE2 
+survey during spring of 2028 and collect aging structures for each species. 
+  
+--- PAGE 10 ---
+10 
+ 
+References 
+Anderson, R. O. and R. M. Neumann.1996. Length, weight and associated structural 
+indices. Pages 447-482 in B. R. Murphy and D. W. Willis, editors. Fisheries 
+Techniques, 2nd addition. American Fisheries Society. Bethesda, Maryland.  
+Simonson, T. 2015. Surveys and Investigations – Inland Fisheries Surveys. Fish 
+Management Handbook Chapter 510, Wisconsin Department of Natural 
+Resources internal publication. Madison, Wisconsin.   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+--- PAGE 11 ---
+11 
+ 
+ 
+ 
+Figure 1. Spring electrofishing (SE2) survey stations sampled in 2019. The blue line 
+refers to all-species stations, while the red line refers to an all-predatory gamefish 
+stations. 
+ 
+ 
+ 
+  
+ 
+ 
+
+--- PAGE 12 ---
+12 
+ 
+ 
+Figure 2. Catch per unit effort quartile values for bluegill electrofishing catch rates across all 
+Wisconsin lakes in the simple-riverine classification. The Lee Lake value is shown as the blue 
+diamond. 
+  
+0
+50
+100
+150
+200
+250
+Bluegill
+CPUE (fish/mile)
+Simple-Riverine Lake Class 
+--- PAGE 13 ---
+13 
+ 
+Figure 3. Bluegill size structure from individual fish captured during SE2. 
+ 
+ 
+  
+1
+5
+7
+19
+10
+7
+9
+7
+5
+1
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+3.0 3.5 4.0 4.5 5.0 5.5 6.0 6.5 7.0 7.5
+Number of Fish
+Total Length (in)
+Bluegill Size Structure
+n=71 
+--- PAGE 14 ---
+14 
+ 
+ 
+Figure 4. Catch per unit effort quartile values for largemouth bass electrofishing catch rates 
+across all Wisconsin lakes in the simple-riverine classification. The Lee Lake value is shown as 
+the blue diamond. 
+ 
+ 
+  
+0
+10
+20
+30
+40
+50
+60
+70
+Largemouth Bass
+CPUE (fish/mile)
+Simple-Riverine Lake Class
+--- PAGE 15 ---
+15 
+ 
+ 
+Figure 5. Largemouth bass size structure from individual fish captured during SE2. 
+ 
+ 
+ 
+1
+11 11
+7
+8 8
+11
+18
+3
+8
+12
+14
+7
+1
+0
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+4 6 7 8 9 10 11 12 13 14 15 16 17 18
+Number of Fish
+Total Length (in)
+Largemouth Bass Size Structure
+n=120 
+--- PAGE 16 ---
+16 
+ 
+ 
+Figure 6. Walleye size structure from individual fish captured during SE2. 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+1
+3
+6
+1
+0
+1
+2
+3
+4
+5
+6
+7
+7 8 9 10
+Number of Fish
+Total Length (in)
+Walleye Size Structure
+n=11 
+--- PAGE 17 ---
+17 
+ 
+Table 1. Current hook and line fishing regulations for predatory gamefish and panfish on Lee 
+Lake. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+Species Open Season Daily 
+Limit 
+Minimum Length 
+Largemouth 
+bass 
+1st Saturday in 
+May-1st Sunday in 
+March 
+ 
+5 14 inches 
+Panfish Open All Year 25 None 
+Walleye, sauger, 
+hybrids 
+1st Saturday in 
+May-1st Sunday in 
+March 
+ 
+3 18 inches 
+--- PAGE 18 ---
+18 
+ 
+Table 2. Fish stocking records for Lee Lake, Richland County, Wisconsin 2009-2025. 
+ 
+ 
+Year Source Species Strain Age Class Number 
+Stocked 
+2025 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerlings 
+500 
+2024 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerling 
+500     
+2021 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerling 
+500 
+2020 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerling 
+520 
+2019 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerling 
+500 
+2018 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerling 
+700 
+2017 Non-DNR 
+Governmental 
+Yellow perch Unspecified Small 
+Fingerling 
+4,000 
+2017 DNR Largemouth 
+bass 
+Unspecified Large 
+Fingerling 
+2,646 
+2011 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerling 
+700 
+2009 Private 
+Hatchery 
+Walleye Unspecified Large 
+Fingerling 
+600 
