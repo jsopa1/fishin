@@ -3,6 +3,14 @@
 {% block content %}
 <h1>Browse Results</h1>
 
+{% if data_unavailable %}
+<p class="empty-state">⚠ The results database is currently unavailable. Please try again shortly.</p>
+{% endif %}
+
+{% if tier_note %}
+<p class="empty-state">⚠ {{ tier_note }}</p>
+{% endif %}
+
 <form class="filters" method="get" action="{{ url_for('browse') }}">
   <div>
     <label for="name">Waterbody name</label>
@@ -35,6 +43,7 @@
 <p class="result-count">{{ results|length }} result{{ '' if results|length == 1 else 's' }} shown (max 500).</p>
 
 {% if results %}
+<div class="table-scroll">
 <table>
   <thead>
     <tr><th>Waterbody</th><th>County</th><th>Type</th><th>Presence tier</th><th>Temp (°F)</th><th>Temp source</th></tr>
@@ -57,6 +66,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 {% else %}
 <p class="empty-state">No results match these filters.</p>
 {% endif %}

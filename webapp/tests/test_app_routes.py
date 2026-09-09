@@ -104,5 +104,69 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertIn(b"National Weather Service", resp.data)
 
 
+class WebAppErrorHandlingTests(unittest.TestCase):
+    """Part 3 of the polish pass: malformed input, missing params, and
+    unmatched routes must degrade gracefully -- never a raw error page or
+    stack trace, always a clear, honest message."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def test_invalid_tier_falls_back_to_all_with_a_visible_note(self):
+        resp = self.client.get("/browse?tier=not_a_real_tier")
+        self.assertEqual(resp.status_code, 200)  # degrades gracefully, doesn't error
+        self.assertIn(b"not a recognized presence tier", resp.data)
+        # Falling back to "all" means real results still show, not zero.
+        self.assertGreater(resp.data.count(b"<tr>"), 1)
+
+    def test_waterbody_detail_missing_params_returns_400_not_crash(self):
+        resp = self.client.get("/waterbody")
+        self.assertEqual(resp.status_code, 400)
+        self.assertIn(b"missing a waterbody name or county", resp.data)
+
+    def test_unmatched_route_returns_styled_404_no_traceback(self):
+        resp = self.client.get("/this-route-does-not-exist")
+        self.assertEqual(resp.status_code, 404)
+        self.assertIn(b"Page not found", resp.data)
+        self.assertNotIn(b"Traceback", resp.data)
+        self.assertNotIn(b"werkzeug", resp.data.lower())
+
+    def test_percent_and_underscore_in_search_do_not_crash_or_wildcard_match(self):
+        # Regression check at the route level for the LIKE-escaping fix.
+        resp = self.client.get("/browse?name=" + "%25%25%25")  # literal "%%%"
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b"0 results shown", resp.data)
+
+    def test_data_unavailable_state_never_shows_bare_empty_page(self):
+        # Simulates a failed data load (Criterion 3) without touching the
+        # real database file -- patches find_db_path to return a path
+        # that doesn't exist.
+        import v1_review_data as rd
+        from pathlib import Path
+
+        original = rd.find_db_path
+        rd.find_db_path = lambda start=None: Path("/nonexistent/does-not-exist.db")
+        try:
+            resp = self.client.get("/browse")
+            self.assertEqual(resp.status_code, 503)
+            self.assertIn(b"currently unavailable", resp.data)
+
+            resp = self.client.get("/summary")
+            self.assertEqual(resp.status_code, 503)
+            self.assertIn(b"currently unavailable", resp.data)
+
+            resp = self.client.get("/failures")
+            self.assertEqual(resp.status_code, 503)
+            self.assertIn(b"currently unavailable", resp.data)
+
+            resp = self.client.get("/waterbody?name=X&county=Y")
+            self.assertEqual(resp.status_code, 503)
+            self.assertIn(b"currently unavailable", resp.data)
+        finally:
+            rd.find_db_path = original
+
+
 if __name__ == "__main__":
     unittest.main()

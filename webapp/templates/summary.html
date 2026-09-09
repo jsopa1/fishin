@@ -2,6 +2,9 @@
 {% block title %}Summary{% endblock %}
 {% block content %}
 <h1>Summary</h1>
+{% if data_unavailable %}
+<p class="empty-state">⚠ The results database is currently unavailable. Please try again shortly.</p>
+{% else %}
 <p>Live counts from the database — cross-check these against
    <a href="https://github.com/jsopa1/fishin/blob/main/docs/v1_full_run_report.md" target="_blank" rel="noopener">docs/v1_full_run_report.md</a>.</p>
 
@@ -40,4 +43,5 @@
     <table>{% for k, v in counts.by_failure_type.items() %}<tr><th>{{ k }}</th><td>{{ v }}</td></tr>{% endfor %}</table>
   </div>
 </div>
+{% endif %}
 {% endblock %}

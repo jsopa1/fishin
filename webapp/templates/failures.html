@@ -5,6 +5,10 @@
 <p>Every waterbody or species where the model could not produce a result, logged honestly with
    the real reason — nothing here was silently dropped from the run.</p>
 
+{% if data_unavailable %}
+<p class="empty-state">⚠ The results database is currently unavailable. Please try again shortly.</p>
+{% endif %}
+
 <form class="filters" method="get" action="{{ url_for('failures') }}">
   <div>
     <label for="waterbody">Waterbody</label>
@@ -28,6 +32,7 @@
 <p class="result-count">{{ results|length }} result{{ '' if results|length == 1 else 's' }} shown (max 500).</p>
 
 {% if results %}
+<div class="table-scroll">
 <table>
   <thead><tr><th>Waterbody</th><th>County</th><th>Species</th><th>Failure type</th><th>Message</th></tr></thead>
   <tbody>
@@ -42,6 +47,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 {% else %}
 <p class="empty-state">No failures match these filters.</p>
 {% endif %}

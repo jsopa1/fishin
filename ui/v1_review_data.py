@@ -101,6 +101,19 @@ def get_summary_counts(conn: sqlite3.Connection) -> dict:
 TIER_CHOICES = ("all", "survey_confirmed", "stocking_only")
 
 
+def _like_pattern(term: str) -> str:
+    """
+    Builds a safe '%term%' SQL LIKE pattern, escaping SQL wildcard
+    characters (% and _) in the user's own input first. Without this, a
+    real waterbody/species search containing a literal "%" or "_" (rare,
+    but not impossible -- e.g. a name fragment someone copy-pastes) would
+    be silently reinterpreted as a wildcard instead of matched literally.
+    Callers must add "ESCAPE '\\'" to the SQL LIKE clause.
+    """
+    escaped = term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+    return f"%{escaped}%"
+
+
 def list_distinct_counties(conn: sqlite3.Connection) -> list:
     return [r[0] for r in conn.execute("SELECT DISTINCT county FROM waterbody_results ORDER BY county")]
 
@@ -126,11 +139,11 @@ def search_waterbodies(
     params = []
 
     if name:
-        clauses.append("wr.waterbody_name LIKE ?")
-        params.append(f"%{name}%")
+        clauses.append("wr.waterbody_name LIKE ? ESCAPE '\\'")
+        params.append(_like_pattern(name))
     if county:
-        clauses.append("wr.county LIKE ?")
-        params.append(f"%{county}%")
+        clauses.append("wr.county LIKE ? ESCAPE '\\'")
+        params.append(_like_pattern(county))
     if tier and tier != "all":
         clauses.append("wr.presence_tier = ?")
         params.append(tier)
@@ -138,9 +151,9 @@ def search_waterbodies(
     if species:
         clauses.append(
             "EXISTS (SELECT 1 FROM species_predictions sp WHERE sp.waterbody_name = wr.waterbody_name "
-            "AND sp.county = wr.county AND sp.species LIKE ?)"
+            "AND sp.county = wr.county AND sp.species LIKE ? ESCAPE '\\')"
         )
-        params.append(f"%{species.upper()}%")
+        params.append(_like_pattern(species.upper()))
 
     where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
     query = (
@@ -183,11 +196,11 @@ def search_failures(
     clauses = []
     params = []
     if waterbody:
-        clauses.append("waterbody_name LIKE ?")
-        params.append(f"%{waterbody}%")
+        clauses.append("waterbody_name LIKE ? ESCAPE '\\'")
+        params.append(_like_pattern(waterbody))
     if species:
-        clauses.append("species LIKE ?")
-        params.append(f"%{species.upper()}%")
+        clauses.append("species LIKE ? ESCAPE '\\'")
+        params.append(_like_pattern(species.upper()))
     if failure_type and failure_type != "all":
         clauses.append("failure_type = ?")
         params.append(failure_type)

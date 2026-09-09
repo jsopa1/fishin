@@ -240,6 +240,26 @@ class TestSearchWaterbodies(DataTestBase):
         results = rd.search_waterbodies(self.conn, name="Nonexistent Lake XYZ")
         self.assertEqual(results, [])
 
+    def test_percent_sign_in_query_treated_as_literal_not_wildcard(self):
+        # Real bug found during polish testing: an unescaped "%" in user
+        # input is a SQL LIKE wildcard, so a real waterbody named e.g.
+        # "50% Slough" would match against ANY name once naively wrapped
+        # in %...% -- and, worse, searching for a literal "%" that isn't
+        # actually in any name should find nothing, not everything.
+        self._insert_waterbody("50% Slough", "TestCounty")
+        results = rd.search_waterbodies(self.conn, name="50%")
+        self.assertEqual([r["waterbody_name"] for r in results], ["50% Slough"])
+        # A literal percent sign with no real match must return nothing,
+        # not silently match every row via wildcard reinterpretation.
+        no_match = rd.search_waterbodies(self.conn, name="99%")
+        self.assertEqual(no_match, [])
+
+    def test_underscore_in_query_treated_as_literal_not_single_char_wildcard(self):
+        self._insert_waterbody("Big_Lake", "TestCounty")
+        self._insert_waterbody("BigXLake", "TestCounty")  # would match "Big_Lake" if _ were a wildcard
+        results = rd.search_waterbodies(self.conn, name="Big_Lake")
+        self.assertEqual([r["waterbody_name"] for r in results], ["Big_Lake"])
+
 
 class TestWaterbodyDetail(DataTestBase):
     def test_detail_includes_full_narrative_and_species(self):

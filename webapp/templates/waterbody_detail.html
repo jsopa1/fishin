@@ -4,9 +4,8 @@
 <p><a href="{{ url_for('browse') }}">&larr; Back to Browse</a></p>
 {% if not wb %}
 <h1>Not found</h1>
-<p class="empty-state">No stored result for this waterbody/county combination. It may have been
-   removed by a data-quality fix, or the name/county in the link doesn't exactly match a stored
-   record. Try <a href="{{ url_for('browse') }}">searching again</a>.</p>
+<p class="empty-state">⚠ {{ not_found_reason or "No stored result for this waterbody/county combination." }}
+   Try <a href="{{ url_for('browse') }}">searching again</a>.</p>
 {% else %}
 <h1>{{ wb.waterbody_name }} <small style="color:#888; font-weight:400;">({{ wb.county }})</small></h1>
 

@@ -10,6 +10,7 @@ Reads data/v1/v1_full_run_results.db directly. Never writes to it, never
 fabricates a result.
 """
 
+import os
 import sys
 from pathlib import Path
 
@@ -26,11 +27,16 @@ app = Flask(__name__)
 
 def get_conn():
     """A fresh connection per request -- simplest safe pattern for a
-    small, read-only SQLite file under Flask's threaded dev/prod server."""
+    small, read-only SQLite file under Flask's threaded dev/prod server.
+    Returns None if the database genuinely can't be found -- callers must
+    show a clear "data unavailable" message, never a silent empty page."""
     db_path = data.find_db_path(start=REPO_ROOT)
     if db_path is None:
         return None
-    return data.connect(db_path)
+    try:
+        return data.connect(db_path)
+    except Exception:  # noqa: BLE001 -- a corrupt/locked DB file is a real, if rare, possibility
+        return None
 
 
 def run_context():
@@ -79,13 +85,22 @@ def home():
 def browse():
     conn = get_conn()
     if conn is None:
-        return render_template("browse.html", results=[], species_list=[], tier_choices=data.TIER_CHOICES, filters={})
+        return render_template(
+            "browse.html", results=[], species_list=[], tier_choices=data.TIER_CHOICES, filters={},
+            data_unavailable=True,
+        ), 503
+
+    raw_tier = request.args.get("tier", "all")
+    tier_note = None
+    if raw_tier not in data.TIER_CHOICES:
+        tier_note = f'"{raw_tier}" is not a recognized presence tier -- showing all tiers instead.'
+        raw_tier = "all"
 
     filters = {
         "name": request.args.get("name", "").strip() or None,
         "county": request.args.get("county", "").strip() or None,
         "species": request.args.get("species", "").strip() or None,
-        "tier": request.args.get("tier", "all"),
+        "tier": raw_tier,
     }
     results = data.search_waterbodies(
         conn, name=filters["name"], county=filters["county"], species=filters["species"], tier=filters["tier"]
@@ -93,7 +108,8 @@ def browse():
     species_list = data.list_distinct_species(conn)
     conn.close()
     return render_template(
-        "browse.html", results=results, species_list=species_list, tier_choices=data.TIER_CHOICES, filters=filters
+        "browse.html", results=results, species_list=species_list, tier_choices=data.TIER_CHOICES,
+        filters=filters, tier_note=tier_note, data_unavailable=False,
     )
 
 
@@ -101,14 +117,29 @@ def browse():
 def waterbody_detail():
     name = request.args.get("name", "")
     county = request.args.get("county", "")
+    if not name or not county:
+        return render_template(
+            "waterbody_detail.html", wb=None, species_predictions=[],
+            not_found_reason="This link is missing a waterbody name or county.",
+        ), 400
+
     conn = get_conn()
     if conn is None:
-        return render_template("waterbody_detail.html", wb=None, species_predictions=[]), 404
+        return render_template(
+            "waterbody_detail.html", wb=None, species_predictions=[],
+            not_found_reason="The results database is currently unavailable. Please try again shortly.",
+        ), 503
 
     detail = data.get_waterbody_detail(conn, name, county)
     conn.close()
     if detail is None:
-        return render_template("waterbody_detail.html", wb=None, species_predictions=[]), 404
+        return render_template(
+            "waterbody_detail.html", wb=None, species_predictions=[],
+            not_found_reason=(
+                "No stored result for this waterbody/county combination. It may have been removed by a "
+                "data-quality fix, or the name/county in this link doesn't exactly match a stored record."
+            ),
+        ), 404
     return render_template("waterbody_detail.html", wb=detail["waterbody"], species_predictions=detail["species_predictions"])
 
 
@@ -116,7 +147,7 @@ def waterbody_detail():
 def failures():
     conn = get_conn()
     if conn is None:
-        return render_template("failures.html", results=[], failure_types=["all"], filters={})
+        return render_template("failures.html", results=[], failure_types=["all"], filters={}, data_unavailable=True), 503
 
     filters = {
         "waterbody": request.args.get("waterbody", "").strip() or None,
@@ -128,21 +159,37 @@ def failures():
     )
     failure_types = ["all"] + data.list_distinct_failure_types(conn)
     conn.close()
-    return render_template("failures.html", results=results, failure_types=failure_types, filters=filters)
+    return render_template(
+        "failures.html", results=results, failure_types=failure_types, filters=filters, data_unavailable=False
+    )
 
 
 @app.route("/summary")
 def summary():
     conn = get_conn()
     if conn is None:
-        return render_template("summary.html", counts={
-            "total_waterbodies": 0, "total_species_predictions": 0, "total_failures": 0,
-            "by_tier": {}, "by_type": {}, "by_temp_method": {}, "by_failure_type": {}, "species_any_match": {},
-        })
+        return render_template("summary.html", counts=None, data_unavailable=True), 503
     counts = data.get_summary_counts(conn)
     conn.close()
-    return render_template("summary.html", counts=counts)
+    return render_template("summary.html", counts=counts, data_unavailable=False)
+
+
+@app.errorhandler(404)
+def not_found(_error):
+    return render_template("error.html", code=404, message="Page not found."), 404
+
+
+@app.errorhandler(500)
+def server_error(_error):
+    # Never leak a stack trace to the user -- Flask's default non-debug
+    # 500 page already avoids that, but this keeps it on-brand and gives
+    # a clear, honest message instead of a bare "Internal Server Error".
+    return render_template(
+        "error.html", code=500,
+        message="Something went wrong loading this page. This has been logged; please try again.",
+    ), 500
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    debug_mode = os.environ.get("FLASK_DEBUG", "0") == "1"
+    app.run(host="0.0.0.0", port=5000, debug=debug_mode)
