@@ -49,3 +49,30 @@ Counties in scope: Milwaukee, Waukesha, Racine, Kenosha, Walworth, Winnebago.
 - Southeast Wisconsin has strong public data coverage (USGS gauges, NOAA/Great Lakes buoy and weather data, WDNR fishing/stocking records) to test the feasibility hypothesis
 - Lake Michigan and inland lakes together give both a large-lake and small-lake test case within one pilot
 - Out of scope for V0: any other state, region, or water body not listed above; expansion is a future-phase decision requiring CEO approval
+
+## 008 — Expand V0 inland-lake search beyond Pewaukee/Delavan/Geneva
+
+The V0 feasibility report found that WDNR does not creel-survey Pewaukee
+Lake, Delavan Lake, or Geneva Lake — no real angler catch/harvest-rate
+outcome data exists for any of the three, so prediction could not be tested
+there. Rather than abandon the inland-lake question, V0's inland-lake search
+is expanded to any Wisconsin inland lake with real, extractable creel survey
+data, not limited to southeast Wisconsin — with the explicit goal of testing
+whether a predictor-outcome relationship learned on one lake with real data
+transfers to a similar lake, including lakes (like Pewaukee and Delavan)
+that still have no outcome data of their own.
+
+**Rationale:**
+- The original three lakes were chosen for regional concentration (Decision
+  #007), not because they were confirmed to have creel data — that
+  assumption did not hold, per the V0 feasibility report
+- Widening the inland-lake search statewide is the direct, evidence-driven
+  fix for a data-availability gap, not a scope expansion for its own sake
+- This does not change or reopen the Lake Michigan findings and conclusions
+  already reported in `docs/V0_FEASIBILITY_REPORT.md` — those stand as
+  reported
+- Per Decision #005, any cross-lake transfer of a predictor-outcome
+  relationship must be held-out tested wherever real outcome data exists on
+  both lakes being compared, before it is proposed as a basis for predicting
+  a lake that has no outcome data of its own; where it cannot be tested, it
+  must be labeled an untested extrapolation, not a validated result
