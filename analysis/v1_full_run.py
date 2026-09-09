@@ -59,12 +59,24 @@ def build_waterbody_universe() -> list:
     the full statewide stocking pool, deduplicated so a waterbody already
     covered by a real survey isn't also processed under its stocking-only
     name/spelling. Returns [(name, county), ...].
+
+    Dedup key uses v1._norm_county() (strips a trailing "COUNTY" and
+    normalizes "AND"/"/" separators), not a plain string match on the raw
+    county field. Real bug this fixes: the original 22-lake survey CSV
+    writes counties as e.g. "Sauk County", "Oneida County", "Shawano
+    County", while the statewide stocking CSV writes the same real
+    counties as "Sauk", "Oneida", "Shawano" -- a plain-string dedup key
+    treated these as different counties, so waterbodies present in BOTH
+    files (Devils Lake, Pelican Lake, Shawano Lake, ...) were processed
+    twice under two spellings of the same real place, producing visible
+    duplicate entries in the results (e.g. "DEVILS LAKE, Sauk" alongside
+    "Devils Lake, Sauk County").
     """
     seen = set()
     universe = []
 
     for row in v1._read_all_survey_rows():
-        key = (v1._norm(row["lake_name"]), v1._norm(row["county"]))
+        key = (v1._norm(row["lake_name"]), v1._norm_county(row["county"]))
         if key in seen:
             continue
         seen.add(key)
@@ -76,7 +88,7 @@ def build_waterbody_universe() -> list:
                 name = row["waterbody"].strip()
                 if not name:
                     continue
-                key = (v1._norm(name), v1._norm(row["county"]))
+                key = (v1._norm(name), v1._norm_county(row["county"]))
                 if key in seen:
                     continue
                 seen.add(key)

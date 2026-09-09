@@ -112,6 +112,41 @@ class TestBuildWaterbodyUniverse(FullRunTestBase):
         self.assertIn("Survey Lake", names)
         self.assertIn("STOCKING ONLY LAKE", names)
 
+    def test_county_suffix_mismatch_does_not_create_a_duplicate(self):
+        # Real bug this project's own data surfaced: the survey CSV writes
+        # "Sauk County" while the stocking CSV writes the same real county
+        # as "Sauk" -- a plain-string dedup key treated Devils Lake as two
+        # different waterbodies ("Devils Lake, Sauk County" and "DEVILS
+        # LAKE, Sauk") until _norm_county() was used for the dedup key.
+        self._set_survey([
+            {"lake_name": "Devils Lake", "county": "Sauk County", "survey_year": "2024", "species": "Walleye",
+             "cpue_or_abundance_metric": "x", "cpue_value": "1", "notes": "", "source_pdf_url": ""},
+        ])
+        self._set_stocking([
+            {"source_url": "", "retrieval_date": "", "stocking_year": "2020", "source_type": "DNR",
+             "county": "Sauk", "waterbody": "DEVILS LAKE", "local_wb_name": "", "species": "WALLEYE",
+             "strain": "", "age_class": "", "number_stocked": "1", "avg_length_in": ""},
+        ])
+        universe = fr.build_waterbody_universe()
+        self.assertEqual(len(universe), 1)
+        self.assertEqual(universe[0], ("Devils Lake", "Sauk County"))  # keeps the survey (authoritative) spelling
+
+    def test_genuinely_different_counties_stay_separate(self):
+        # Must not over-merge: two real, distinct waterbodies that happen
+        # to share a name in different counties (e.g. two real "Bass
+        # Lake"s) must remain two separate universe entries.
+        self._set_survey([])
+        self._set_stocking([
+            {"source_url": "", "retrieval_date": "", "stocking_year": "2020", "source_type": "DNR",
+             "county": "Oconto", "waterbody": "BASS LAKE", "local_wb_name": "", "species": "WALLEYE",
+             "strain": "", "age_class": "", "number_stocked": "1", "avg_length_in": ""},
+            {"source_url": "", "retrieval_date": "", "stocking_year": "2020", "source_type": "DNR",
+             "county": "Price", "waterbody": "BASS LAKE", "local_wb_name": "", "species": "WALLEYE",
+             "strain": "", "age_class": "", "number_stocked": "1", "avg_length_in": ""},
+        ])
+        universe = fr.build_waterbody_universe()
+        self.assertEqual(len(universe), 2)
+
     def test_blank_waterbody_rows_excluded(self):
         self._set_survey([])
         self._set_stocking([
