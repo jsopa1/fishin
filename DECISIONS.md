@@ -164,3 +164,91 @@ be resumed without a future CEO decision to do so.
   sensor coverage for Lake Michigan salmon must be confirmed before any
   acquisition or modeling — this decision authorizes investigation only,
   not data acquisition or modeling
+
+## 011 — GLATOS Deferred to Future Upcycle
+
+Investigation of GLATOS (Great Lakes Acoustic Telemetry Observation System)
+per Decision #010 surfaced structural problems with the data that go beyond
+the access/coverage questions that investigation set out to answer:
+
+- **GLATOS acoustic telemetry data is not real-time.** Receivers are
+  stationary, deployed on the lake bottom, and must be physically retrieved
+  and downloaded periodically. Detection histories available for analysis
+  are inherently retrospective — months to a year or more old — not a live
+  feed. A movement-prediction MVP built on this data would be predicting
+  from data already substantially out of date at the time it's used.
+- **Coverage is inconsistent over time.** Transmitter battery life ranges
+  from a few months to ten years, so which fish are trackable shifts
+  continuously as tags expire and new tagging projects begin. A detection
+  gap in the record can mean the tag failed, not that the fish left the
+  area — a real confound that would need to be modeled or ruled out before
+  any absence-of-detection could be treated as a movement signal.
+- **Individual fish behavior adds further noise on top of the above.**
+  Predation, food availability, and individual variation all affect a
+  single tagged fish's movement, layered on top of the retrospective-data
+  and coverage-inconsistency problems — a harder modeling problem than the
+  creel-data confounds already documented across V0 (Decisions #007-#009).
+
+**Decision: GLATOS/telemetry work is deferred to a future project upcycle.
+Not abandoned — documented here for future reference.** No telemetry data
+acquisition or modeling is in current scope. See Decision #012 for the
+project's current scope in light of this deferral.
+
+**Rationale:**
+- Per Decision #005, a movement-prediction MVP cannot be honestly built on
+  data that is structurally retrospective and inconsistently covered
+  without first solving problems (data-lag correction, tag-failure vs.
+  absence disambiguation) that are themselves substantial research
+  questions, not implementation details
+- Documenting the deferral (rather than silently dropping it) preserves the
+  investigation's findings for whoever picks this track back up, and
+  distinguishes "deferred, evidence-based" from "abandoned, unexamined"
+
+## 012 — MVP Scope: Statewide Wisconsin Conditions & Biology Forecast
+
+Following Decision #011's deferral of GLATOS/telemetry work, the project's
+current MVP scope is a statewide Wisconsin **"conditions & biology"
+forecast** — explicitly **not** a validated catch-rate prediction.
+
+**This does not reopen or contradict the V0 finding that catch-rate
+prediction is not demonstrated** (see `docs/V0_FEASIBILITY_REPORT.md`,
+`docs/v0_lake_transfer_report.md`, `docs/v0_inland_predictability_results.md`,
+and `docs/v0_physiology_predictors_report.md` — no single "final
+conclusion" document exists in the repo under that name; these four reports
+together are V0's documented conclusion). It delivers a different,
+honestly-scoped kind of value instead: real-time seasonal/biological
+context, not a prediction of whether an angler will catch a fish.
+
+**Inputs — all real and live/current, not historical-lag data:**
+- **(a) Current/forecast water temperature** — WDNR Citizen Lake
+  Monitoring Network (CLMN) where available for a given lake, NWS/NOAA
+  weather-service data otherwise (e.g. air-temperature-based estimation, or
+  a nearby buoy/gauge for Lake Michigan)
+- **(b) Established fish physiology thresholds** already compiled in
+  `docs/v0_physiology_research_candidates.md` (spawning triggers, activity
+  temperature windows, by species) — reused as reference data, not
+  re-derived
+- **(c) WDNR fish stocking records**, to confirm which species are actually
+  present in a given lake before reporting anything about them — a lake
+  with no record of a species being stocked or naturally present should not
+  get a narrative about that species
+
+**Output:** an informational narrative per lake — e.g., *"water
+temperature is currently in the range associated with walleye spawning
+activity"* — explicitly labeled as general, science-based seasonal
+context, **not** a personalized or validated catch prediction, per
+Decision #005.
+
+**Out of scope:** GLATOS/telemetry (Decision #011) and inland pooled
+catch-rate modeling (Decisions #008/#009, V0's negative results) remain
+deferred/out of scope for this MVP. This tool does not predict catch rate,
+does not claim a fish will bite, and does not represent any output as
+scientifically validated beyond what the cited physiology sources and
+live/current conditions data actually support.
+
+**Rationale:**
+- Per Decision #005, this scope is chosen specifically because it can be
+  built entirely from claims already honestly sourced (V0's physiology
+  research) and real, live, current data — no predictive model whose
+  accuracy would need to be claimed or validated is involved
+- All prior CEO-approval-gate discipline carries forward unchanged

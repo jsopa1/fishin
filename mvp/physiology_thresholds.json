@@ -1,0 +1,196 @@
+{
+  "_source": "docs/v0_physiology_research_candidates.md and docs/v0_physiology_eval_results.md (Wismer & Christie 1987, GLFC Special Publication 87-3, and cited field studies). Every value below traces to a specific candidate/citation in those documents. Values marked \"evidence: weak\" carry the same caveat noted there and should be read with more caution.",
+  "_units": "All values in degrees Celsius unless noted. °F given alongside for readability.",
+  "species": {
+    "WALLEYE": [
+      {
+        "type": "activity_window",
+        "range_c": [12.8, 23.9],
+        "range_f": [55, 75],
+        "preferred_point_c": 20.6,
+        "preferred_point_f": 69.1,
+        "description": "general feeding/activity range, with a field-measured preference point of 20.6°C (69°F) from Trout Lake, Wisconsin",
+        "evidence": "solid field telemetry + WI-specific field value (Coutant 1977a via GLFC Sp87-3)",
+        "candidate_ref": 2
+      },
+      {
+        "type": "reduced_feeding_below",
+        "threshold_c": 10.0,
+        "threshold_f": 50,
+        "description": "feeding becomes less frequent and more selective below this temperature",
+        "evidence": "field telemetry study",
+        "candidate_ref": 2
+      },
+      {
+        "type": "spawning_trigger",
+        "range_c": [4.4, 11.1],
+        "range_f": [40, 52],
+        "peak_range_c": [6.7, 8.9],
+        "peak_range_f": [44, 48],
+        "description": "spawning begins around 40°F, peak activity commonly cited 44-48°F",
+        "evidence": "agency/extension-tier for precise window; underlying trigger mechanism well established",
+        "candidate_ref": 3
+      }
+    ],
+    "YELLOW PERCH": [
+      {
+        "type": "activity_window",
+        "preferred_point_c": 20.5,
+        "preferred_point_f": 68.9,
+        "description": "field-measured preference, averaging Lake Michigan (20.8°C) and Trout Lake/Silver Lake, WI (20.2°C) values",
+        "evidence": "peer-reviewed growth-performance study + WI/LM field values (GLFC Sp87-3)",
+        "candidate_ref": 4
+      }
+    ],
+    "LARGEMOUTH BASS": [
+      {
+        "type": "activity_window",
+        "range_c": [25.0, 29.0],
+        "range_f": [77, 84],
+        "description": "thermal optimum for growth; note one study found HIGHER feeding rates at 18°C, so warmer is not uniformly better in the primary literature",
+        "evidence": "weak / mixed — conflicting findings within the primary literature itself",
+        "candidate_ref": 5
+      }
+    ],
+    "SMALLMOUTH BASS": [
+      {
+        "type": "activity_window",
+        "range_c": [22.0, 25.0],
+        "range_f": [72, 77],
+        "description": "thermal preference; field-validated in a Lake Michigan harbor telemetry study",
+        "evidence": "solid — field telemetry directly in Lake Michigan",
+        "candidate_ref": 6
+      },
+      {
+        "type": "spawning_trigger",
+        "range_c": [15.0, 18.0],
+        "range_f": [59, 64],
+        "description": "spawning occurs in this range, notably cooler than largemouth bass",
+        "evidence": "field telemetry study",
+        "candidate_ref": 6
+      }
+    ],
+    "NORTHERN PIKE": [
+      {
+        "type": "activity_window",
+        "range_c": [12.8, 18.3],
+        "range_f": [55, 65],
+        "description": "peak activity range",
+        "evidence": "agency/extension-tier for this precise range",
+        "candidate_ref": 7
+      },
+      {
+        "type": "physiological_optimum",
+        "range_c": [19.0, 21.0],
+        "range_f": [66, 70],
+        "description": "growth-optimum range from lab/experimental physiology studies",
+        "evidence": "solid — laboratory physiology",
+        "candidate_ref": 7
+      },
+      {
+        "type": "avoidance_above",
+        "threshold_c": 23.9,
+        "threshold_f": 75,
+        "description": "pike begin avoiding water warmer than this (coolwater-adapted species)",
+        "evidence": "field telemetry (Minnesota lakes)",
+        "candidate_ref": 7
+      },
+      {
+        "type": "spawning_trigger",
+        "range_c": [4.4, 8.9],
+        "range_f": [40, 48],
+        "description": "earliest gamefish to spawn in spring, triggered in this range",
+        "evidence": "extension-tier for precise figure; consistent with supporting cold-temperature physiology",
+        "candidate_ref": 8
+      }
+    ],
+    "MUSKELLUNGE": [
+      {
+        "type": "activity_window",
+        "preferred_point_c": 22.0,
+        "preferred_point_f": 71.6,
+        "description": "thermal optimum; activity is documented to decline above 25°C (77°F)",
+        "evidence": "solid — field telemetry/radio-tracking studies",
+        "candidate_ref": 9
+      },
+      {
+        "type": "avoidance_above",
+        "threshold_c": 25.0,
+        "threshold_f": 77,
+        "description": "activity declines above this temperature",
+        "evidence": "field telemetry/radio-tracking studies",
+        "candidate_ref": 9
+      }
+    ],
+    "BLACK CRAPPIE": [
+      {
+        "type": "activity_window",
+        "range_c": [27.0, 29.0],
+        "range_f": [81, 84],
+        "description": "preferred temperature for juvenile/adult fish",
+        "evidence": "weak — undergraduate research report is the direct evidence source; preferred-temp figure lacks a clear primary citation",
+        "candidate_ref": 10
+      }
+    ],
+    "BLUEGILL": [
+      {
+        "type": "spawning_trigger",
+        "range_c": [18.3, 26.7],
+        "range_f": [65, 80],
+        "peak_point_c": 22.0,
+        "peak_point_f": 71.6,
+        "description": "spawning trigger range, with repeat spawning roughly every 30 days while temperature stays above the peak-initiation point",
+        "evidence": "weak — extension/angling-media-tier for the precise numbers, though the underlying mechanism (temperature-triggered spawning) is well-established general fish reproductive physiology",
+        "candidate_ref": 11
+      }
+    ],
+    "CHINOOK SALMON": [
+      {
+        "type": "activity_window",
+        "preferred_point_c": 11.7,
+        "preferred_point_f": 53.1,
+        "description": "Lake Michigan field final-temperature-preferendum value (Coutant 1977a via GLFC Sp87-3). Note: this species tracks the thermocline and may be well below the surface even when surface water reads warmer — a surface-temperature-only comparison is a weak proxy for this species specifically",
+        "evidence": "solid field value, but surface-only measurement is a poor proxy for depth-following behavior",
+        "candidate_ref": 12
+      }
+    ],
+    "COHO SALMON": [
+      {
+        "type": "activity_window",
+        "preferred_point_c": 11.4,
+        "preferred_point_f": 52.5,
+        "description": "Lake Michigan field final-temperature-preferendum value (GLFC Sp87-3). Same surface-vs-depth caveat as Chinook applies",
+        "evidence": "solid field value, but surface-only measurement is a poor proxy for depth-following behavior",
+        "candidate_ref": 13
+      }
+    ],
+    "BROWN TROUT": [
+      {
+        "type": "activity_window",
+        "range_c": [12.0, 16.0],
+        "range_f": [53.6, 60.8],
+        "preferred_point_c": 13.8,
+        "preferred_point_f": 56.8,
+        "description": "annual modal selected temperature ~12°C, upper preferred limit ~16°C, field value 13.8°C from a Lake Michigan thermal-gradient study",
+        "evidence": "reasonably strong — field study specifically in/near Lake Michigan",
+        "candidate_ref": 14
+      }
+    ],
+    "LAKE TROUT": [
+      {
+        "type": "activity_window",
+        "range_c": [4.4, 11.1],
+        "range_f": [40, 52],
+        "preferred_point_c": 11.8,
+        "preferred_point_f": 53.2,
+        "description": "cold-water preference range; field value 11.8°C from a Point Beach, Lake Michigan study",
+        "evidence": "field value solid; general range is extension/secondary-tier synthesis",
+        "candidate_ref": 15
+      }
+    ]
+  },
+  "_excluded": {
+    "WALLEYE_DIEL_LIGHT": "Candidate #1 (walleye dusk/dawn low-light feeding activity) is the single best-evidenced physiological mechanism found across V0's research, but requires a light-condition/time-of-day input this MVP does not compute in v1 (it's about immediate feeding activity, not a seasonal temperature window). Deliberately left out of this reference file rather than approximated.",
+    "BAROMETRIC_PRESSURE": "Explicitly excluded per docs/v0_physiology_research_candidates.md candidate #17 — no primary scientific support found; angling folklore."
+  }
+}

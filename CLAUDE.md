@@ -1,46 +1,48 @@
-# fishin — V1: Lake Michigan Salmon Movement-Prediction MVP
+# fishin — MVP: Wisconsin Conditions & Biology Forecast
 
 ## Mission
-Predict Lake Michigan salmon movement patterns — proximity to shore,
-presence in rivers/tributaries, and likely depth — from historical GLATOS
-acoustic telemetry data paired with environmental conditions. This is a
-deliberate scope narrowing from V0's broader creel-based catch-rate work,
-per DECISIONS.md #010. Inland lakes and every other V0 track (Decisions
-#007-#009) are explicitly out of scope for now.
+Deliver a statewide Wisconsin "conditions & biology" forecast: an
+informational, per-lake narrative combining live/current water temperature
+with established fish physiology thresholds and confirmed species presence.
+**This is explicitly not a validated catch-rate prediction** — per
+DECISIONS.md #012, it does not reopen or contradict V0's finding that
+catch-rate prediction was not demonstrated. GLATOS/telemetry work
+(DECISIONS.md #011) and inland pooled catch-rate modeling (DECISIONS.md
+#008/#009) are deferred, not in scope.
 
 ## Scope
-- **Water body:** Wisconsin waters of Lake Michigan only. No inland lakes,
-  no other states, no other regions, without a future CEO decision to
-  resume them.
-- **Dependent variable:** GLATOS (Great Lakes Acoustic Telemetry
-  Observation System) detection data for Lake Michigan salmon (species per
-  actual GLATOS coverage — Chinook, Coho, or whichever the data confirms) —
-  position, and depth/temperature where tag sensors provide it. This
-  replaces creel-based catch rate as the outcome measure.
-- **Goal:** predict salmon proximity to shore, presence in rivers/
-  tributaries, and likely depth, from historical telemetry patterns plus
-  environmental predictors (water temperature, season, etc.).
-- **Explicitly out of scope by default:** real-time individual-fish
-  location tracking or prediction. Tagged research fish location data can
-  create poaching pressure, and data-sharing agreements commonly restrict
-  this. Only historical/aggregate pattern-based prediction is assumed
-  viable unless GLATOS's actual terms confirm otherwise.
+- **Water bodies:** any Wisconsin lake, not limited to a specific region —
+  the tool's inputs (live water temp, physiology thresholds, stocking
+  records) are queryable per-lake on demand, not tied to a fixed pilot
+  geography like V0 was.
+- **Inputs — all real, live/current data, never historical-lag:**
+  1. **Current/forecast water temperature** — WDNR Citizen Lake Monitoring
+     Network (CLMN) where available for that lake; NWS/NOAA weather-service
+     data otherwise (air temperature as a proxy, or a nearby buoy/gauge for
+     Lake Michigan).
+  2. **Established fish physiology thresholds** — reused from
+     `docs/v0_physiology_research_candidates.md` (spawning triggers,
+     activity temperature windows, by species). Reference data, not
+     re-derived or re-validated here.
+  3. **WDNR fish stocking records** — confirm which species are actually
+     present in a given lake before generating any narrative about them. No
+     stocking/presence record, no narrative for that species on that lake.
+- **Output:** a per-lake informational narrative, e.g. *"water temperature
+  is currently in the range associated with walleye spawning activity."*
+  Every output must be explicitly labeled as general, science-based
+  seasonal context — never as a personalized or validated catch
+  prediction (DECISIONS.md #005).
+- **Explicitly out of scope:** GLATOS/telemetry data or modeling
+  (DECISIONS.md #011); any claim of predicted catch rate or catch
+  probability; inland pooled catch-rate modeling (V0, negative result).
 
-## Current phase — investigation only, no modeling yet
-Per DECISIONS.md #010, the next required step is investigating real GLATOS
-data access (public download vs. data-use agreement) and confirming
-species/depth/temperature coverage for Lake Michigan salmon specifically.
-**Do not begin modeling, and do not acquire GLATOS data, until this
-investigation is complete and CEO-reviewed.**
-
-## Standing discipline (carries forward from V0, unchanged)
-- No data acquisition, modeling, or claims beyond what's tested and
-  held-out-validated (DECISIONS.md #005)
-- No action past a draft/investigation stage without explicit CEO review
-- Simple, interpretable models only unless a CEO decision says otherwise
-  (DECISIONS.md #002)
-- Leakage-safe, time-aware evaluation splits; deterministic tests for all
-  data-prep and evaluation logic
-- No STATE.md update, no commit, no action on any recommendation past a
-  report/investigation draft without explicit CEO approval — same hard-stop
-  gate used throughout V0
+## Standing discipline (carries forward, unchanged)
+- No claim beyond what live/current data and the cited physiology sources
+  actually support (DECISIONS.md #005)
+- No action past a draft/prototype stage without explicit CEO review
+- Simple, interpretable logic only — this is a lookup/threshold-comparison
+  tool, not a predictive model, so no model-validation claims apply, but
+  the same "don't overstate" discipline applies to every narrative string
+  produced
+- No STATE.md update, no commit, no action on any recommendation without
+  explicit CEO approval — same hard-stop gate used throughout V0 and V1
