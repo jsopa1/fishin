@@ -194,7 +194,7 @@ class TestSpeciesPresence(TempDataMixin, unittest.TestCase):
         ])
         presence = v1.get_species_presence("Test Lake")
         self.assertEqual(presence["tier"], "survey_confirmed")
-        self.assertEqual(presence["species"], ["Walleye"])
+        self.assertEqual(presence["species"], ["WALLEYE"])
 
     def test_falls_back_to_stocking_only_when_no_survey(self):
         self._set_survey([])
@@ -251,7 +251,7 @@ class TestSpeciesPresence(TempDataMixin, unittest.TestCase):
         ])
         self._set_stocking([])
         presence = v1.get_species_presence("Fish Lake", county="Dane")
-        self.assertEqual(presence["species"], ["Bluegill"])
+        self.assertEqual(presence["species"], ["BLUEGILL"])
 
     def test_blank_waterbody_stocking_rows_never_match(self):
         # Real bug: 813 real stocking rows have an empty waterbody field

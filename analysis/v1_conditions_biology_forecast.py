@@ -131,6 +131,46 @@ def _group_rows_by_distinct_lake(rows: list, name_key: str, county_key: str) -> 
     return groups
 
 
+def _resolve_distinct_waterbody(
+    all_rows: list, name_key: str, county_key: str, query_name: str, query_county: str | None, source_label: str
+) -> list | None:
+    """
+    Shared resolution used by every loader (survey, stocking, water-temp):
+    fuzzy-matches query_name against name_key across all_rows, groups by
+    the real distinct (name, county) pairs found, and returns the one
+    group of rows to use -- or None if nothing matched.
+
+    Real bug this fixes: `_lake_name_matches`'s bidirectional substring
+    check means an EXACT query for e.g. "Apple River" also fuzzy-matches
+    "Apple River Flowage" (and vice versa) -- without this function, an
+    exact, unambiguous query would spuriously raise AmbiguousLakeError
+    just because another real waterbody's name happens to contain it as a
+    substring. Fix: if any candidate's real name is an EXACT match (after
+    normalization) to the query, prefer it and ignore the fuzzy matches --
+    only raise ambiguity when the query itself doesn't exactly identify a
+    single real waterbody.
+    """
+    target = _norm(query_name)
+    matched = [row for row in all_rows if _lake_name_matches(target, row[name_key])]
+    if not matched:
+        return None
+    groups = _group_rows_by_distinct_lake(matched, name_key, county_key)
+    if query_county:
+        groups = {k: v for k, v in groups.items() if _county_matches(query_county, k[1])}
+    if not groups:
+        return None
+    exact_groups = {k: v for k, v in groups.items() if _norm(k[0]) == target}
+    if exact_groups:
+        groups = exact_groups
+    if len(groups) > 1:
+        options = ", ".join(f"{n} ({c})" for n, c in sorted(groups))
+        raise AmbiguousLakeError(
+            f"'{query_name}' matches more than one distinct waterbody in the {source_label}: {options}. "
+            f"Pass --county to disambiguate."
+        )
+    return next(iter(groups.values()))
+
+
 def classify_waterbody_type(name: str) -> str:
     """
     "stream" if the name contains a flowing-water keyword (CREEK, RIVER,
@@ -147,18 +187,36 @@ def classify_waterbody_type(name: str) -> str:
     return "stream" if any(kw in upper for kw in STREAM_KEYWORDS) else "lake"
 
 
+_csv_read_cache: dict = {}  # {(resolved_path, mtime): [row dicts]} -- see _read_csv_cached
+
+
+def _read_csv_cached(path) -> list:
+    """
+    Reads a CSV once per (path, mtime) and reuses the parsed rows on
+    every subsequent call in this process. Pure I/O memoization, not a
+    change to any matching/decision logic -- added because a full batch
+    run calls these loaders once per waterbody (thousands of times), and
+    without this, each call re-parses the entire 24,683-row statewide
+    stocking CSV from scratch, which is the dominant cost of a full run.
+    Safe for this project's read-only, locally-pre-pulled data files.
+    """
+    if not path.exists():
+        return []
+    key = (str(path), path.stat().st_mtime)
+    cached = _csv_read_cache.get(key)
+    if cached is not None:
+        return cached
+    with open(path, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    _csv_read_cache[key] = rows
+    return rows
+
+
 def _read_all_survey_rows() -> list:
     """Reads the original 22-lake survey sample plus batch2 (Part 4's
     additional survey-report pull), if present. Never errors if batch2
     doesn't exist yet -- it's an optional, later-arriving file."""
-    rows = []
-    if SURVEY_CSV.exists():
-        with open(SURVEY_CSV, newline="", encoding="utf-8") as f:
-            rows.extend(csv.DictReader(f))
-    if SURVEY_CSV_BATCH2.exists():
-        with open(SURVEY_CSV_BATCH2, newline="", encoding="utf-8") as f:
-            rows.extend(csv.DictReader(f))
-    return rows
+    return _read_csv_cached(SURVEY_CSV) + _read_csv_cached(SURVEY_CSV_BATCH2)
 
 
 def load_survey_species(lake_name: str, county: str | None = None) -> list | None:
@@ -173,25 +231,19 @@ def load_survey_species(lake_name: str, county: str | None = None) -> list | Non
     all_rows = _read_all_survey_rows()
     if not all_rows:
         return None
-    target = _norm(lake_name)
-    matched = [row for row in all_rows if _lake_name_matches(target, row["lake_name"])]
-    if not matched:
+    rows = _resolve_distinct_waterbody(all_rows, "lake_name", "county", lake_name, county, "survey data")
+    if rows is None:
         return None
-    groups = _group_rows_by_distinct_lake(matched, "lake_name", "county")
-    if county:
-        groups = {k: v for k, v in groups.items() if _county_matches(county, k[1])}
-    if len(groups) > 1:
-        options = ", ".join(f"{n} ({c})" for n, c in sorted(groups))
-        raise AmbiguousLakeError(
-            f"'{lake_name}' matches more than one distinct lake in the survey data: {options}. "
-            f"Pass --county to disambiguate."
-        )
-    if not groups:
-        return None
-    rows = next(iter(groups.values()))
     by_species = {}
     for row in rows:
-        by_species.setdefault(row["species"], []).append(
+        # Uppercase to match load_stocking_species's convention and the
+        # physiology_thresholds_v1.json key casing -- the survey CSVs store
+        # species in Title Case ("Walleye"), so without this every
+        # survey-confirmed waterbody's species silently failed to match any
+        # threshold (a real bug this full-run exercise surfaced: matching
+        # only ever worked via the stocking-only path before this fix).
+        species = row["species"].strip().upper()
+        by_species.setdefault(species, []).append(
             (row.get("cpue_or_abundance_metric", ""), row.get("cpue_value", ""))
         )
     return sorted(by_species.items())
@@ -230,26 +282,12 @@ def load_stocking_species(
     unconfirmed complete list", never treat as a full species inventory.
     Same ambiguity handling as load_survey_species.
     """
-    if not STOCKING_CSV.exists():
+    all_rows = _read_csv_cached(STOCKING_CSV)
+    if not all_rows:
         return None
-    target = _norm(lake_name)
-    with open(STOCKING_CSV, newline="", encoding="utf-8") as f:
-        all_rows = list(csv.DictReader(f))
-    matched = [row for row in all_rows if _lake_name_matches(target, row["waterbody"])]
-    if not matched:
+    rows = _resolve_distinct_waterbody(all_rows, "waterbody", "county", lake_name, county, "stocking data")
+    if rows is None:
         return None
-    groups = _group_rows_by_distinct_lake(matched, "waterbody", "county")
-    if county:
-        groups = {k: v for k, v in groups.items() if _county_matches(county, k[1])}
-    if len(groups) > 1:
-        options = ", ".join(f"{n} ({c})" for n, c in sorted(groups))
-        raise AmbiguousLakeError(
-            f"'{lake_name}' matches more than one distinct lake in the stocking data: {options}. "
-            f"Pass --county to disambiguate."
-        )
-    if not groups:
-        return None
-    rows = next(iter(groups.values()))
     by_species = {}
     for row in rows:
         try:
@@ -304,26 +342,11 @@ def get_species_presence(lake_name: str, county: str | None = None) -> dict:
 
 
 def load_prepulled_water_temp(lake_name: str, county: str | None = None) -> dict | None:
-    if not WATER_TEMP_CSV.exists():
+    all_rows = _read_csv_cached(WATER_TEMP_CSV)
+    if not all_rows:
         return None
-    target = _norm(lake_name)
-    with open(WATER_TEMP_CSV, newline="", encoding="utf-8") as f:
-        all_rows = list(csv.DictReader(f))
-    matched = [row for row in all_rows if _lake_name_matches(target, row["lake_name"])]
-    if not matched:
-        return None
-    groups = _group_rows_by_distinct_lake(matched, "lake_name", "county")
-    if county:
-        groups = {k: v for k, v in groups.items() if _county_matches(county, k[1])}
-    if len(groups) > 1:
-        options = ", ".join(f"{n} ({c})" for n, c in sorted(groups))
-        raise AmbiguousLakeError(
-            f"'{lake_name}' matches more than one distinct lake in the water-temperature data: "
-            f"{options}. Pass --county to disambiguate."
-        )
-    if not groups:
-        return None
-    return next(iter(groups.values()))[0]
+    rows = _resolve_distinct_waterbody(all_rows, "lake_name", "county", lake_name, county, "water-temperature data")
+    return rows[0] if rows else None
 
 
 def list_known_lakes() -> list:
@@ -334,10 +357,8 @@ def list_known_lakes() -> list:
     pairs = set()
     for row in _read_all_survey_rows():
         pairs.add((row["lake_name"], row["county"]))
-    if WATER_TEMP_CSV.exists():
-        with open(WATER_TEMP_CSV, newline="", encoding="utf-8") as f:
-            for row in csv.DictReader(f):
-                pairs.add((row["lake_name"], row["county"]))
+    for row in _read_csv_cached(WATER_TEMP_CSV):
+        pairs.add((row["lake_name"], row["county"]))
     return sorted(pairs)
 
 
@@ -348,15 +369,12 @@ def list_stocking_only_waterbodies() -> list:
     presence result when queried, even though most have no survey or
     temperature data. Not printed by default (too large for a plain
     --list-lakes) -- use --list-stocking-only."""
-    if not STOCKING_CSV.exists():
-        return []
     pairs = set()
-    with open(STOCKING_CSV, newline="", encoding="utf-8") as f:
-        for row in csv.DictReader(f):
-            name = row["waterbody"].strip()
-            if not name:
-                continue
-            pairs.add((name, row["county"], classify_waterbody_type(name)))
+    for row in _read_csv_cached(STOCKING_CSV):
+        name = row["waterbody"].strip()
+        if not name:
+            continue
+        pairs.add((name, row["county"], classify_waterbody_type(name)))
     return sorted(pairs)
 
 
@@ -417,10 +435,7 @@ def _parse_coords_from_notes(notes: str):
 
 
 def load_usgs_sites() -> list:
-    if not USGS_SITES_CSV.exists():
-        return []
-    with open(USGS_SITES_CSV, newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+    return _read_csv_cached(USGS_SITES_CSV)
 
 
 def find_usgs_site_matches(waterbody_name: str) -> list:
@@ -631,6 +646,52 @@ def describe_threshold_match(current_c: float, threshold: dict) -> str | None:
     return None
 
 
+RIVER_STREAM_CAVEAT = (
+    "River/stream caveat: this value is derived from lake-based studies "
+    "(see docs/v1_physiology_research_candidates.md and "
+    "docs/v1_river_stream_coverage_report.md) and has not been verified to transfer to "
+    "flowing-water conditions — reported with this caveat, not excluded."
+)
+DIEL_NOTE = (
+    "This species also has documented low-light/dawn-dusk-or-nocturnal feeding activity "
+    "(see docs/v1_physiology_research_candidates.md) — not evaluated against the clock here, "
+    "logged for reference."
+)
+
+
+def evaluate_species_at_waterbody(species: str, value_c: float | None, waterbody_type: str, thresholds: dict) -> dict:
+    """
+    The core per-species prediction step, shared by build_narrative() (the
+    single-waterbody CLI) and v1_full_run.py (the batch runner) so both
+    exercise EXACTLY the same matching logic -- no drift between the two.
+
+    Returns {"has_threshold_data": bool, "matches": [(description,
+    evidence, river_caveat_applied: bool), ...], "diel_active": bool}.
+    matches is empty (but has_threshold_data True) when the species has
+    reference data but none of it matches the current temperature -- a
+    real, expected outcome, distinct from "no reference data at all".
+    """
+    species_entry = thresholds["species"].get(species)
+    if not species_entry:
+        return {"has_threshold_data": False, "matches": [], "diel_active": False}
+    matches = []
+    if value_c is not None:
+        for t in species_entry["thresholds"]:
+            m = describe_threshold_match(value_c, t)
+            if not m:
+                continue
+            river_caveat_applied = (
+                waterbody_type == "stream"
+                and t["type"] in ("activity_window", "physiological_optimum", "growth_optimum")
+            )
+            matches.append((m, t.get("evidence", "unspecified"), river_caveat_applied))
+    return {
+        "has_threshold_data": True,
+        "matches": matches,
+        "diel_active": bool(species_entry.get("diel_active")),
+    }
+
+
 def build_narrative(lake_name: str, temp_info: dict, presence: dict, thresholds: dict) -> str:
     lines = []
     lines.append(f"# Conditions & Biology Forecast — {lake_name}")
@@ -712,36 +773,18 @@ def build_narrative(lake_name: str, temp_info: dict, presence: dict, thresholds:
 
     any_match = False
     for species in presence["species"]:
-        species_entry = thresholds["species"].get(species)
-        if not species_entry:
+        evaluation = evaluate_species_at_waterbody(species, value_c, waterbody_type, thresholds)
+        if not evaluation["has_threshold_data"]:
             continue
-        matches = []
-        for t in species_entry["thresholds"]:
-            m = describe_threshold_match(value_c, t)
-            if not m:
-                continue
-            river_caveat = ""
-            if waterbody_type == "stream" and t["type"] in ("activity_window", "physiological_optimum", "growth_optimum"):
-                river_caveat = (
-                    " **River/stream caveat: this value is derived from lake-based studies "
-                    "(see docs/v1_physiology_research_candidates.md and "
-                    "docs/v1_river_stream_coverage_report.md) and has not been verified to transfer to "
-                    "flowing-water conditions — reported with this caveat, not excluded.**"
-                )
-            matches.append((m, t.get("evidence", "unspecified"), river_caveat))
-        diel_note = ""
-        if species_entry.get("diel_active"):
-            diel_note = (
-                " This species also has documented low-light/dawn-dusk-or-nocturnal feeding activity "
-                "(see docs/v1_physiology_research_candidates.md) — not evaluated against the clock here, "
-                "logged for reference."
-            )
+        matches = evaluation["matches"]
+        diel_note = f" {DIEL_NOTE}" if evaluation["diel_active"] else ""
         if not matches and not diel_note:
             continue
         any_match = True
         lines.append(f"### {species.title()}")
-        for m, evidence, river_caveat in matches:
-            lines.append(f"- Water temperature is {m}. (Evidence quality: {evidence}){river_caveat}")
+        for m, evidence, river_caveat_applied in matches:
+            caveat_text = f" **{RIVER_STREAM_CAVEAT}**" if river_caveat_applied else ""
+            lines.append(f"- Water temperature is {m}. (Evidence quality: {evidence}){caveat_text}")
         if diel_note:
             lines.append(f"- {diel_note.strip()}")
         lines.append("")
