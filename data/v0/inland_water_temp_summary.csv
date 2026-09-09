@@ -1,0 +1,7 @@
+lake,creel_year,station_id,station_name,n_readings_in_window,mean_temp_c_in_window,total_shallow_readings_all_time
+Minocqua Lake,2024-25,443134,Minocqua Lake - Center Basin,3,20.87,255
+Pelican Lake,2024-25,443140,Pelican Lake - Deep Hole,15,22.31,263
+Devils Lake,Jul 2023-Jun 2024,10034776,Devils Lake - Deep Hole (LOC 19),4,18.8,159
+Pine Lake,2023-24,263036,Pine Lake - Deep Hole,5,21.01,72
+Sand Lake,2023-24,583047,Sand Lake - Deep Hole,5,21.51,187
+White Potato Lake,2019-20,433343,White Potato Lake - Deep Hole,6,18.84,17

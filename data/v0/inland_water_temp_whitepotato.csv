@@ -1,0 +1,18 @@
+date,depth_ft,temperature_c,station_id,station_name,lake_name,creel_year,in_creel_window
+1999-07-12,0.0,23.7,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+1999-08-04,0.0,22.3,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2000-01-26,0.0,1.8,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2011-03-01,0.0,2.2,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2011-04-27,0.0,9.2,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2011-06-01,0.0,18.3,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2011-07-18,0.0,27.0,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2011-08-25,0.0,22.6,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2011-11-07,0.0,6.6,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2012-02-23,0.0,4.2,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False
+2019-08-06,0.0,25.42,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,True
+2019-08-06,3.0,25.48,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,True
+2019-09-16,1.0,19.75,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,True
+2019-09-16,2.0,19.36,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,True
+2019-09-16,3.0,18.84,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,True
+2020-02-24,3.0,4.2,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,True
+2020-05-13,2.0,12.57,433343,White Potato Lake - Deep Hole,White Potato Lake,2019-20,False

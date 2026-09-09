@@ -1,0 +1,17 @@
+resolution,model,n,r,p,loo_mae,baseline_mae,beats_baseline,note
+lake-level,mean_tmax_c,11,0.2952446678655338,0.37808547715811697,0.09295029070254544,0.09184467410376967,False,
+lake-level,mean_tmin_c,11,0.24429918819853638,0.4690887878132356,0.09550307930253309,0.09184467410376967,False,
+lake-level,total_prcp_mm,11,0.2350799332445956,0.4865379096046212,0.1080857689686264,0.09184467410376967,False,
+lake-level,surface_area_acres,11,0.10398235788637353,0.7609364733384193,0.11147591352125769,0.09184467410376967,False,
+lake-level,max_depth_ft,11,0.7078876097459151,0.014796299980567914,0.09445838692361562,0.09184467410376967,False,
+lake-level,mean_depth_ft,7,0.7039788998288178,0.07747666367443909,0.14283865648096503,0.1295536199880116,False,reduced n: this characteristic is missing for some lakes
+lake-level,trophic_index,8,-0.2361089566858966,0.5734736281706623,0.1251354998043709,0.11542527089049315,False,reduced n: this characteristic is missing for some lakes
+lake-level,weather combined,11,,,0.11638922430366407,0.09184467410376967,False,"3 predictors, 9-10 training rows per fold -- low power, reported for completeness"
+lake-level,"characteristics combined (area, max depth)",11,,,0.1139783014826312,0.09184467410376967,False,"2 predictors, n=11"
+lake-level,weather + characteristics combined,11,,,0.04837000128793261,0.09184467410376967,True,"5 predictors, 9-10 training rows per fold -- NOT statistically defensible at this sample size, reported only for transparency, not as evidence"
+species-level,weather only,118,,,0.25247007837547164,0.24033207677687565,False,
+species-level,weather only vs species-identity baseline,118,,,0.25247007837547164,0.16803526352053635,False,Compares the model's LOO-by-lake MAE against a species-identity (not naive-mean) baseline: predicting each held-out species row with that same species' mean harvest rate from every OTHER lake.
+species-level,"characteristics only (area, max depth)",118,,,0.25121265879407173,0.24033207677687565,False,
+species-level,"characteristics only (area, max depth) vs species-identity baseline",118,,,0.25121265879407173,0.16803526352053635,False,Compares the model's LOO-by-lake MAE against a species-identity (not naive-mean) baseline: predicting each held-out species row with that same species' mean harvest rate from every OTHER lake.
+species-level,weather + characteristics combined,118,,,0.264077224450498,0.24033207677687565,False,
+species-level,weather + characteristics combined vs species-identity baseline,118,,,0.264077224450498,0.16803526352053635,False,Compares the model's LOO-by-lake MAE against a species-identity (not naive-mean) baseline: predicting each held-out species row with that same species' mean harvest rate from every OTHER lake.
