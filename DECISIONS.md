@@ -252,3 +252,58 @@ live/current conditions data actually support.
   research) and real, live, current data — no predictive model whose
   accuracy would need to be claimed or validated is involved
 - All prior CEO-approval-gate discipline carries forward unchanged
+
+## 013 — V1 expanded statewide: additional data sources, deeper physiology research, and ROADMAP.md as canonical phase overview
+
+Following Decision #012's MVP scope, V1's data foundation is expanded from
+a single-lake demo to real, sourced coverage across 23 Wisconsin lakes, and
+[`ROADMAP.md`](ROADMAP.md) is established as the canonical, always-current
+summary of project phases (V0-V4) going forward — this decisions log
+remains the detailed rationale trail, but ROADMAP.md is the place to check
+current phase status at a glance.
+
+**What changed:**
+- **New data sources catalogued** (`docs/v1_source_discovery_report.md`):
+  WDNR fisheries-survey "Comprehensive Summary Report" PDFs (real observed
+  species composition, not just stocking), a live USGS water-temperature
+  gauge (Lake Monona), the GLOS Seagull API (Lake Michigan nearshore
+  water quality), NTL-LTER, and several others — each verified real and
+  accessible, not assumed.
+- **Species-presence data expanded statewide**
+  (`docs/v1_species_presence_manifest.md`): a real statewide WDNR stocking
+  pull (24,683 records, 2011-2025, 2,338 waterbodies) plus a real,
+  geographically-diverse 22-lake fisheries-survey sample. Per Decision
+  #012's own instruction, stocking records are used as **positive-only**
+  evidence of presence — never as evidence of absence — and survey data is
+  treated as authoritative when it exists for a lake.
+- **Physiology research expanded from 12 to 26 species**
+  (`docs/v1_physiology_research_candidates.md`, superseding the V0-era
+  document), re-verified against a primary Great Lakes Fishery Commission
+  compilation (Wismer & Christie 1987) fetched and read in full this
+  cycle. Real disagreements between sources (e.g. Muskellunge's thermal
+  optimum) are disclosed, not collapsed to a single convenient number, per
+  Decision #005.
+- **Real current/recent water temperature pulled for all 23 lakes**
+  (`docs/v1_water_temp_manifest.md`): live USGS and recent WDNR CLMN
+  readings where they exist (10 of 23 lakes), an explicitly-labeled live
+  NWS air-temperature proxy everywhere else — never blended or presented
+  with false confidence.
+- **`analysis/v1_conditions_biology_forecast.py`** supersedes
+  `mvp/conditions_forecast.py` as the working implementation, with 32
+  passing deterministic tests (109 project-wide) covering threshold
+  matching, survey-vs-stocking presence classification, real-vs-proxy
+  temperature labeling, and explicit "insufficient data" handling — no
+  silent failures.
+
+**Rationale:**
+- Breadth (more lakes, more species) was pursued without lowering the
+  evidentiary bar used throughout this project — every new source was
+  checked for real accessibility before being relied on, and gaps are
+  logged explicitly rather than papered over (Decision #005)
+- Consolidating phase status in `ROADMAP.md` gives a single, always-current
+  answer to "what phase is this project in and what's its status," while
+  this decisions log remains the record of why each phase change happened
+- This cycle does not reopen or change the V0 findings
+  (`docs/V0_FEASIBILITY_REPORT.md` and its three follow-on reports) or the
+  GLATOS deferral (Decision #011) — it is scoped entirely to deepening
+  V1's already-approved conditions-and-biology scope (Decision #012)

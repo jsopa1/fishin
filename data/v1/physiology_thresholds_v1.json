@@ -1,0 +1,191 @@
+{
+  "_source": "docs/v1_physiology_research_candidates.md (supersedes docs/v0_physiology_research_candidates.md), which is itself sourced primarily from Wismer & Christie 1987 (GLFC Special Publication 87-3) plus independently cited peer-reviewed/agency studies per species. Every value below traces to a specific section of that document. Where the underlying literature disagrees, the range given spans the disagreement rather than picking a winner, and the description says so.",
+  "_units": "All values in degrees Celsius unless noted. range_c/range_f give the best-supported single band; where multiple real bands exist, this is the field-preferendum/agency-tier cluster judged most representative, and disagreements are called out in the description.",
+  "_diel_note": "Three species (Walleye, Black Crappie, Channel Catfish) have documented low-light/nocturnal feeding-activity advantages -- see diel_active flag. This is not temperature-based and is not used by the threshold matcher; it's informational for a time-of-day narrative line.",
+  "species": {
+    "WALLEYE": {
+      "diel_active": true,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "preferred_point_c": 20.6, "preferred_point_f": 69.1, "description": "general feeding/activity range; field-measured WI preference point 20.6C (Trout Lake, Coutant 1977a)", "evidence": "agency-tier, WI-specific"},
+        {"type": "spawning_trigger", "range_c": [4.4, 11.1], "range_f": [40, 52], "peak_range_c": [6.7, 8.9], "peak_range_f": [44, 48], "description": "spawning trigger band, confirmed against GLFC primary compilation (2.2-15.6C full study range)", "evidence": "agency-tier"}
+      ]
+    },
+    "YELLOW PERCH": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "preferred_point_c": 20.5, "preferred_point_f": 68.9, "description": "field preferendum averaging Lake Michigan (20.8C) and WI (20.2C) values (Coutant 1977a)", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [5.0, 12.2], "range_f": [41, 54], "description": "spawning trigger band across GLFC studies (~45-59F cluster)", "evidence": "agency-tier"},
+        {"type": "growth_optimum", "range_c": [22.5, 24.2], "range_f": [72.5, 75.6], "description": "growth-optimum band, cross-confirmed by 3 independent sources", "evidence": "well-established"}
+      ]
+    },
+    "LARGEMOUTH BASS": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [26.5, 30.0], "range_f": [79.7, 86.0], "description": "field preferendum cluster, WI-anchored (Lake Monona) and multi-state (27-30C)", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [15.6, 21.0], "range_f": [60, 70], "description": "spawning trigger optimum band (field, Carlander 1977)", "evidence": "agency-tier"}
+      ]
+    },
+    "SMALLMOUTH BASS": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [22.0, 25.0], "range_f": [72, 77], "description": "thermal preference; Lake Michigan harbor field telemetry study", "evidence": "well-established"},
+        {"type": "spawning_trigger", "range_c": [15.0, 18.0], "range_f": [59, 64], "description": "Great Lakes field study (Shuter et al. 1980, Lake Huron)", "evidence": "well-established"}
+      ]
+    },
+    "NORTHERN PIKE": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [12.8, 18.3], "range_f": [55, 65], "description": "peak activity range", "evidence": "agency-tier"},
+        {"type": "physiological_optimum", "range_c": [19.0, 21.0], "range_f": [66, 70], "description": "growth/physiological optimum (GLFC-confirmed)", "evidence": "agency-tier"},
+        {"type": "avoidance_above", "threshold_c": 23.9, "threshold_f": 75, "description": "pike begin avoiding water warmer than this", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [6.7, 7.8], "range_f": [44, 46], "description": "WI-specific field value (Scott & Crossman 1973)", "evidence": "agency-tier"}
+      ]
+    },
+    "MUSKELLUNGE": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [22.0, 27.3], "range_f": [71.6, 81.1], "description": "DISPUTED: V0 telemetry study found ~22C optimum; GLFC field/lab preferendum cluster is materially higher (24-27.3C). Range shown spans both -- treat any single value drawn from here as one source's estimate, not a resolved consensus", "evidence": "agency-tier, genuine disagreement disclosed"},
+        {"type": "avoidance_above", "threshold_c": 25.0, "threshold_f": 77, "description": "activity documented to decline above this (in tension with the higher GLFC preferendum cluster -- also disclosed, not resolved)", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [9.4, 15.5], "range_f": [49, 60], "description": "spawning trigger band (GLFC)", "evidence": "agency-tier"}
+      ]
+    },
+    "BLACK CRAPPIE": {
+      "diel_active": true,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [27.8, 29.8], "range_f": [82, 85.6], "description": "WI field value (Lake Monona, Coutant 1977a) -- upgraded from V0's undergraduate-report source", "evidence": "agency-tier"}
+      ]
+    },
+    "BLUEGILL": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [18.3, 26.7], "range_f": [65, 80], "peak_range_c": [22.2, 23.9], "peak_range_f": [72, 75], "description": "GLFC-compiled spawning range, upgraded from V0's extension-tier source", "evidence": "agency-tier"},
+        {"type": "activity_window", "range_c": [29.4, 31.3], "range_f": [85, 88.3], "description": "field preferendum, WI-anchored (Lake Monona) -- new in V1, V0 had no feeding-temp number for this species", "evidence": "agency-tier"}
+      ]
+    },
+    "CHINOOK SALMON": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "preferred_point_c": 11.7, "preferred_point_f": 53.1, "description": "Lake Michigan field final-temperature-preferendum value (Coutant 1977a). Surface-only measurement is a poor proxy for this species' depth-following behavior", "evidence": "well-established, multiple LM field readings"}
+      ]
+    },
+    "COHO SALMON": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "preferred_point_c": 11.4, "preferred_point_f": 52.5, "description": "Lake Michigan field final-temperature-preferendum value (Coutant 1977a). Same surface-vs-depth caveat as Chinook", "evidence": "well-established, multiple LM field readings"}
+      ]
+    },
+    "BROWN TROUT": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [12.2, 19.9], "range_f": [54, 67.8], "description": "Lake Michigan-specific cluster within a wider 12.2-23.9C full disclosed range across all studies", "evidence": "agency-tier, wide range disclosed"},
+        {"type": "spawning_trigger", "range_c": [6.7, 8.9], "range_f": [40, 48], "description": "SE Ontario field value (Scott & Crossman 1973)", "evidence": "agency-tier"}
+      ]
+    },
+    "LAKE TROUT": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "preferred_point_c": 11.8, "preferred_point_f": 53.2, "description": "Point Beach, Lake Michigan field value (Talmage & Coutant 1980)", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [8.9, 13.9], "range_f": [48, 57], "description": "Algonquin Park, Ontario field value; fall spawner in cooling water", "evidence": "agency-tier"}
+      ]
+    },
+    "SAUGER": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [19.0, 22.6], "range_f": [66.2, 72.7], "description": "noisy scatter across studies (18.6-28C full range) -- treat cautiously, this is the noisiest species in the reference set", "evidence": "agency-tier, noisier than most"},
+        {"type": "spawning_trigger", "range_c": [4.0, 14.4], "range_f": [39, 58], "description": "spawning trigger band", "evidence": "agency-tier"}
+      ]
+    },
+    "WHITE CRAPPIE": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [18.3, 19.8], "range_f": [64.9, 67.6], "description": "cooler-running than Black Crappie's WI summer preferendum (27.8-29.8C) -- a real species-level distinction", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [16.0, 20.0], "range_f": [61, 68], "description": "spawning trigger optimum cluster", "evidence": "agency-tier"}
+      ]
+    },
+    "ROCK BASS": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [20.7, 21.3], "range_f": [69.3, 70.3], "description": "two independent WI field values agreeing closely (Coutant 1977a, Lake Monona)", "evidence": "well-established, WI-specific"},
+        {"type": "spawning_trigger", "range_c": [20.5, 21.0], "range_f": [69, 70], "description": "spawning optimum (Lab/Michigan pond, Brown 1974)", "evidence": "agency-tier"}
+      ]
+    },
+    "PUMPKINSEED": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [20.0, 28.0], "range_f": [68, 82.4], "description": "warmer-cluster spawning range; a cooler 13-18C row also exists in the same source, disclosed as real within-source scatter", "evidence": "agency-tier, scatter disclosed"}
+      ]
+    },
+    "WHITE BASS": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [12.0, 30.0], "range_f": [53.6, 86.0], "description": "real wide seasonal swing, not a fixed optimum -- summer cluster 28-30C, winter/spring 12-17C", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [14.4, 21.1], "range_f": [58, 70], "description": "spawning trigger cluster", "evidence": "agency-tier"}
+      ]
+    },
+    "RAINBOW TROUT": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [11.0, 22.0], "range_f": [51.8, 71.6], "description": "widest, least-converged scatter of any salmonid in this reference set -- reported as a real range, not forced to one number", "evidence": "agency-tier, wide disclosed range"},
+        {"type": "spawning_trigger", "range_c": [6.0, 10.0], "range_f": [42.8, 50], "description": "early-spring spawner, ahead of most warm-water species", "evidence": "agency-tier"}
+      ]
+    },
+    "BROOK TROUT": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [19.0, 20.3], "range_f": [66.2, 68.5], "description": "fairly tight wild-population field cluster (Moosehead Lake ME, Redrock Lake ON, Lake Michigan)", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [2.2, 11.7], "range_f": [36, 53], "description": "fall spawner in cold water", "evidence": "agency-tier"}
+      ]
+    },
+    "CISCO": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [3.3, 5.0], "range_f": [37.9, 41], "description": "WI-specific, very cold late-fall/early-winter spawner (Scott & Crossman 1973)", "evidence": "agency-tier, WI-specific"}
+      ]
+    },
+    "LAKE WHITEFISH": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [4.0, 17.0], "range_f": [39.2, 62.6], "description": "wide range across life stages -- cold, deep, benthic-feeding coregonid", "evidence": "agency-tier"},
+        {"type": "spawning_trigger", "range_c": [0.5, 4.5], "range_f": [32.9, 40.1], "description": "very cold late-fall spawner, congener of cisco", "evidence": "agency-tier"}
+      ]
+    },
+    "WHITE SUCKER": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [4.0, 18.0], "range_f": [39.2, 64.4], "description": "classic early-spring spawner, ahead of most gamefish (EPA 1974)", "evidence": "agency-tier"},
+        {"type": "growth_optimum", "range_c": [24.0, 27.0], "range_f": [75.2, 80.6], "description": "growth optimum, notably warmer than spawning trigger", "evidence": "agency-tier"}
+      ]
+    },
+    "CHANNEL CATFISH": {
+      "diel_active": true,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [23.9, 29.5], "range_f": [75, 85.1], "description": "late, warm-water spawner among this project's species", "evidence": "agency-tier"}
+      ]
+    },
+    "FRESHWATER DRUM": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "activity_window", "range_c": [29.5, 30.3], "range_f": [85.1, 86.5], "description": "WI-specific summer preferendum (Lake Monona, Coutant 1977a) -- among the warmest of any species in this reference set", "evidence": "agency-tier, WI-specific"},
+        {"type": "spawning_trigger", "range_c": [18.0, 22.2], "range_f": [64.4, 72], "description": "WI-specific spawning range (Brown 1974)", "evidence": "agency-tier, WI-specific"}
+      ]
+    },
+    "BURBOT": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [0.6, 1.7], "range_f": [33.1, 35.1], "description": "extreme cold, under-ice, mid-winter spawner -- the only Great Lakes cod-family fish, one of very few N. American freshwater fish spawning under ice", "evidence": "agency-tier"}
+      ]
+    },
+    "FATHEAD MINNOW": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [15.6, 17.8], "range_f": [60.1, 64], "description": "onset of multi-brood summer spawning (continues into much warmer water through summer). Present in WI data mainly as forage/baitfish stocking, not an angling target", "evidence": "agency-tier"}
+      ]
+    },
+    "LAKE STURGEON": {
+      "diel_active": false,
+      "thresholds": [
+        {"type": "spawning_trigger", "range_c": [11.5, 16.0], "range_f": [52.7, 60.8], "description": "peak spawning-activity band, converging WDNR-quoted (53F/11.7C) and peer-reviewed Quebec field study (11.5-16.0C peak) -- not GLFC-sourced (Lake Sturgeon has no GLFC Sp87-3 coverage at all)", "evidence": "agency-tier, converging independent sources"}
+      ]
+    }
+  }
+}
