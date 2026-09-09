@@ -1,53 +1,46 @@
-# fishin — V0 Pilot: Southeastern Wisconsin & Lake Michigan
+# fishin — V1: Lake Michigan Salmon Movement-Prediction MVP
 
 ## Mission
-Run the full V0 pipeline autonomously, start to finish, without stopping
-for confirmation between steps. Only stop at the final gate below.
+Predict Lake Michigan salmon movement patterns — proximity to shore,
+presence in rivers/tributaries, and likely depth — from historical GLATOS
+acoustic telemetry data paired with environmental conditions. This is a
+deliberate scope narrowing from V0's broader creel-based catch-rate work,
+per DECISIONS.md #010. Inland lakes and every other V0 track (Decisions
+#007-#009) are explicitly out of scope for now.
 
 ## Scope
-- Southeastern Wisconsin inland lakes
-- Wisconsin waters of Lake Michigan
-Outcome data: WDNR creel survey reports (PDFs). Lake Michigan predictors
-can use NOAA CO-OPS/buoy wave and water-level data. Inland lakes have no
-tide/wave data — use ice-out date, water temperature, and season/
-regulation windows instead.
+- **Water body:** Wisconsin waters of Lake Michigan only. No inland lakes,
+  no other states, no other regions, without a future CEO decision to
+  resume them.
+- **Dependent variable:** GLATOS (Great Lakes Acoustic Telemetry
+  Observation System) detection data for Lake Michigan salmon (species per
+  actual GLATOS coverage — Chinook, Coho, or whichever the data confirms) —
+  position, and depth/temperature where tag sensors provide it. This
+  replaces creel-based catch rate as the outcome measure.
+- **Goal:** predict salmon proximity to shore, presence in rivers/
+  tributaries, and likely depth, from historical telemetry patterns plus
+  environmental predictors (water temperature, season, etc.).
+- **Explicitly out of scope by default:** real-time individual-fish
+  location tracking or prediction. Tagged research fish location data can
+  create poaching pressure, and data-sharing agreements commonly restrict
+  this. Only historical/aggregate pattern-based prediction is assumed
+  viable unless GLATOS's actual terms confirm otherwise.
 
-## Pipeline (run all steps autonomously, in order)
+## Current phase — investigation only, no modeling yet
+Per DECISIONS.md #010, the next required step is investigating real GLATOS
+data access (public download vs. data-use agreement) and confirming
+species/depth/temperature coverage for Lake Michigan salmon specifically.
+**Do not begin modeling, and do not acquire GLATOS data, until this
+investigation is complete and CEO-reviewed.**
 
-1. **Research** — search broadly and without restriction for anything
-   plausibly predictive of freshwater/Great Lakes catch rates: environmental,
-   temporal, biological, angler-behavior, academic, forums, anywhere. Build
-   a candidate predictor list, each tagged with source, claimed effect, and
-   whether a real accessible Wisconsin/Lake Michigan data source exists.
-
-2. **Dataset build** — for every candidate with a verified accessible data
-   source, extract/assemble it. Candidates without a real data source get
-   logged as "considered, not testable in V0" — not tested anyway.
-
-3. **Baseline check** — no legacy baseline issue applies (repo issue
-   history is legacy/disregarded). Establish a simple baseline yourself
-   (e.g. naive/majority-class or persistence baseline for catch rate)
-   before evaluating any candidate against it, and document how the
-   baseline was defined.
-
-4. **Evaluation** — test every data-backed candidate against baseline.
-   Simple, interpretable statistical models only, no deep learning.
-   Leakage-safe, time/geography-aware splits, mandatory. Deterministic
-   tests for all feature prep and evaluation logic. This step is what
-   makes the result real, not a bottleneck — do not shortcut it even
-   though the research phase was intentionally unrestricted.
-
-5. **Report** — draft the feasibility report. Document every candidate
-   considered, which ones had real signal, which were untestable, and
-   why. No claim beyond what held-out evidence supports. No fabricated
-   data, sources, metrics, or conclusions.
-
-## Hard stop — CEO approval gate
-After step 5, STOP. Do not update STATE.md, do not commit, do not act on
-the recommendation. Present the full report — including the research
-candidate list and what got tested vs. excluded — and wait for explicit
-approval. This is the only stop in the whole pipeline.
-
-## Subagents
-Use .claude/agents/predictor-research.md, pdf-extraction.md,
-predictor-eval.md, and feasibility-report.md for steps 1, 2, 4, and 5.
+## Standing discipline (carries forward from V0, unchanged)
+- No data acquisition, modeling, or claims beyond what's tested and
+  held-out-validated (DECISIONS.md #005)
+- No action past a draft/investigation stage without explicit CEO review
+- Simple, interpretable models only unless a CEO decision says otherwise
+  (DECISIONS.md #002)
+- Leakage-safe, time-aware evaluation splits; deterministic tests for all
+  data-prep and evaluation logic
+- No STATE.md update, no commit, no action on any recommendation past a
+  report/investigation draft without explicit CEO approval — same hard-stop
+  gate used throughout V0
