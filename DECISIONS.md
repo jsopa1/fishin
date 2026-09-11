@@ -358,3 +358,47 @@ two axes without lowering the evidentiary bar Decision #005 requires:
   work, not just a scope-completeness exercise
 - `ROADMAP.md` and `CLAUDE.md` are updated to reflect this scope; this
   decisions log remains the detailed rationale trail
+
+## 015 — Portfolio polish: visual redesign, README rewrite, legacy cleanup
+
+Following a CEO request to prepare this repository as a resume/portfolio
+piece, the hosted web app and top-level documentation were polished. No
+prediction logic, data sources, or evidentiary tiers changed — this is a
+presentation-layer and documentation pass only.
+
+- **`webapp/static/style.css` was rewritten** as a cohesive design system
+  (CSS custom properties, a proper type/color scale, Inter + JetBrains
+  Mono via Google Fonts). All WCAG AA contrast pairs were re-verified
+  programmatically (≥5.29:1, above the 4.5:1 threshold). A real mobile
+  bug was found and fixed in the process: the header nav had no wrap
+  behavior below ~640px, clipping the "Source" link and banner text off
+  the visible viewport on a phone — confirmed via `document.body.
+  scrollWidth` before and after, not by eyeballing a screenshot.
+- **The live results database was regenerated** via the existing,
+  unchanged `analysis/v1_full_run.py` so the deployed app shows current
+  data rather than a stale-data warning — same 2,296 waterbodies logic,
+  a fresh timestamp only.
+- **Eleven pre-refactor "autonomous agent company" files were removed**
+  (`COPILOT.md`, `AGENTS.md`, `GOALS.md`, `PROJECT.md`, `STRATEGY.md`,
+  `VISION.md`, `agent-roles/`, `docs/architecture/`,
+  `docs/operations/runs/*`, two empty `docs/experiments|research`
+  placeholders). These described a GitHub-Issues-driven workflow
+  (Decision #006) that predates and was never used for the real V0/V1
+  work in this repo; git history preserves them in full, and
+  `ROADMAP.md`/`DECISIONS.md`/`STATE.md` remain the authoritative record.
+  Verified via `grep` that no live documentation depended on these paths
+  before removal.
+- **`README.md` was rewritten** to reflect the actual, current state of
+  the project (the V0→V1 pivot story, the full-scale run, the desktop
+  app, the hosted web app, real screenshots) and to explicitly credit
+  Claude Code as the tool this project was built with, per the CEO's
+  request that the development process itself be visible to a reviewer.
+
+**Rationale:**
+- A portfolio audience needs the README and live app to reflect what the
+  project actually is today, not its V0-era `mvp/` architecture or a
+  scaffolding layer that was never load-bearing
+- Fixing the mobile nav bug rather than cropping around it in screenshots
+  keeps this pass consistent with Decision #005's discipline: don't let
+  a polished presentation imply something (full responsiveness) that
+  wasn't actually verified

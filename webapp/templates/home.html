@@ -11,7 +11,14 @@
     <strong>confirmed presence</strong> at a given Wisconsin lake, pond, river, or stream — either
     from a real WDNR fisheries survey, or from real WDNR stocking records.
   </p>
-  <p><a href="{{ url_for('browse') }}"><strong>&rarr; Browse the results</strong></a></p>
+  {% if counts %}
+  <div class="badge-row">
+    <span class="pill">📍 {{ "{:,}".format(counts.total_waterbodies) }} waterbodies</span>
+    <span class="pill">🐟 {{ "{:,}".format(counts.total_species_predictions) }} physiology comparisons</span>
+    <span class="pill">✅ {{ "{:,}".format(counts.by_tier.get('survey_confirmed', 0)) }} survey-confirmed</span>
+  </div>
+  {% endif %}
+  <p><a class="cta" href="{{ url_for('browse') }}">Browse the results →</a></p>
 </div>
 
 <h2 id="about">What this is — and isn't</h2>

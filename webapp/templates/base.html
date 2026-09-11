@@ -3,18 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A real, sourced Wisconsin fishing conditions &amp; biology reference — live water temperature compared against cited fish physiology, for confirmed species. Not a catch-rate prediction.">
   <title>{% block title %}V1 Conditions & Biology Reference{% endblock %} — fishin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎣</text></svg>">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="{{ url_for('home') }}">🎣 fishin — V1 Conditions &amp; Biology Reference</a>
+      <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">🎣</span> fishin <span class="brand-sub">V1 Conditions &amp; Biology Reference</span></a>
       <nav>
         <a href="{{ url_for('browse') }}">Browse</a>
         <a href="{{ url_for('failures') }}">Failures</a>
         <a href="{{ url_for('summary') }}">Summary</a>
         <a href="{{ url_for('home') }}#about">About</a>
+        <a class="nav-source" href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">Source ↗</a>
       </nav>
     </div>
   </header>

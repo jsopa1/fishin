@@ -78,7 +78,11 @@ def inject_run_context():
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    conn = get_conn()
+    counts = data.get_summary_counts(conn) if conn is not None else None
+    if conn is not None:
+        conn.close()
+    return render_template("home.html", counts=counts)
 
 
 @app.route("/browse")
