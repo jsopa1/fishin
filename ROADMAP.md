@@ -58,13 +58,17 @@ for the working implementation (supersedes the earlier `mvp/` script).
 
 Maps, water bodies, access points, habitat, and environmental intelligence.
 
-**Status: In progress.** First slice shipped: a statewide access-point map
-(`analysis/v2_access_points.py`, `/map` in the web app) showing 3,272 real
-Wisconsin public boat access and shore fishing sites, pulled live from
-WDNR's own ArcGIS service and linked to an existing V1 waterbody detail
-page wherever a confident name/county match exists. See
-[DECISIONS.md](DECISIONS.md) #016. Habitat and broader "environmental
-intelligence" scope remain not started.
+**Status: In progress.** First slice shipped and polished: a statewide
+access-point map (`analysis/v2_access_points.py`, `/map` in the web app)
+showing 3,272 real Wisconsin public boat access and shore fishing sites,
+pulled live from WDNR's own ArcGIS service, linked to an existing V1
+waterbody detail page wherever a confident name/county match exists,
+clustered for performance, and search-to-zoom on filter. Full account:
+[docs/v2_access_points_report.md](docs/v2_access_points_report.md);
+decisions: [DECISIONS.md](DECISIONS.md) #016-#017. Real per-lake size
+data was investigated and deliberately deferred (needs a WBIC join this
+project doesn't yet have — see the report). Broader "habitat" scoring and
+"environmental intelligence" remain not started.
 
 ## V3 — Continuous Validation
 

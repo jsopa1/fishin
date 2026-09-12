@@ -453,3 +453,42 @@ one tightly-scoped, real-data slice: a statewide access-point map.
   than a separate service -- means the map benefits from, and links
   back into, everything V1 already verified about waterbody data
   quality, instead of starting a second, disconnected data story
+
+## 017 — V2 slice #1 complete: map polish shipped, lake-size data deferred
+
+Closing out the first V2 slice (Decision #016) with performance/UX
+polish and an honest investigation of a second real data source, rather
+than declaring it done without checking. Full account in
+[docs/v2_access_points_report.md](docs/v2_access_points_report.md).
+
+- **Shipped**: marker clustering (3,272 raw markers was exactly the kind
+  of load Leaflet.markercluster exists for -- verified render count
+  before adding it), and search-to-zoom (`fitBounds` on the real
+  coordinates a filter actually returns, instead of leaving a filtered
+  handful of points lost on a statewide view). Both verified live, not
+  just by reading the code.
+- **Investigated and deferred**: real per-lake surface acreage/depth data
+  ("habitat"), from WDNR's 24K Hydro waterbody polygon layer. Two real
+  problems found before writing any ingestion code: (1) that layer has no
+  county attribute, and a live query for "Devils Lake" returned a
+  polygon ~46.29°N -- nowhere near the Sauk County Devils Lake this
+  project's V1 data covers, the exact same-name collision V1 already hit
+  once; a safe fix needs a WBIC join, and this project doesn't yet store
+  WBIC anywhere. (2) The layer has 138,766 polygon records (59,517 even
+  filtered to lake/pond/reservoir types), the large majority unnamed farm
+  ponds -- not a clean "named lakes" dataset. Shipping a per-lake size
+  number without a reliable join risks attaching the wrong lake's size to
+  the wrong page, a correctness failure, not a cosmetic one -- so it's
+  deferred, not forced.
+
+**Rationale:**
+- Matches this project's standing discipline (Decision #005, and the
+  same judgment call behind Decision #011's GLATOS deferral): a real data
+  source existing is not sufficient reason to ship a feature built on it
+  -- if using it safely requires infrastructure this project doesn't yet
+  have (a WBIC join), say so and defer, rather than force a lower-
+  confidence match through
+- Clustering and search-to-zoom were prioritized over the deferred data
+  layer because they improve something 100% of visitors to `/map`
+  actually experience (a 3,272-marker page), versus a data layer that
+  would only enrich waterbodies with a confident polygon match
