@@ -6,7 +6,7 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![177 tests passing](https://img.shields.io/badge/tests-177%20passing-brightgreen.svg)](#tests)
+[![197 tests passing](https://img.shields.io/badge/tests-197%20passing-brightgreen.svg)](#tests)
 
 ---
 
@@ -52,6 +52,12 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 |---|---|
 | ![Summary page with live counts](docs/screenshots/summary.png) | ![Mobile view of the browse page](docs/screenshots/mobile.png) |
 
+**V2, in progress:** a statewide map of 3,272 real WDNR boat access and shore fishing sites, each linked to its waterbody's V1 conditions page where a confident match exists.
+
+<p align="center">
+  <img src="docs/screenshots/map.png" alt="Statewide map of real WDNR boat access and shore fishing sites, color-coded by type, tracing the outline of Wisconsin" width="800">
+</p>
+
 ## The Story: V0 → V1
 
 | Phase | What it tried | What happened |
@@ -63,7 +69,7 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 | **V1 (considered)** | Pivot to real-time acoustic telemetry (GLATOS) for salmon tracking | Investigated and **deferred** — retrospective-only data, confounded coverage — [`DECISIONS.md` #011](DECISIONS.md) |
 | **V1 (shipped)** | Stop trying to predict catch rate. Report real conditions vs. real biology instead | The app in this repo. Scaled statewide, validated at 2,296-waterbody scale, polished, and deployed. |
 
-Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 14 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped.
+Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 16 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
 
 ## What the app actually does
 
@@ -75,11 +81,15 @@ For each of 2,296 real waterbodies, the same rule-based logic (no black box — 
 
 The result — a narrative like *"water temperature is currently within Walleye's documented spawning-trigger range"* — is stored per waterbody/species and browsable through the web app: search by name, county, species, or evidentiary tier; every caveat, source, and timestamp shown in full, never simplified.
 
+## The V2 access-point map
+
+[`analysis/v2_access_points.py`](analysis/v2_access_points.py) pulls Wisconsin's real public boat access and shore fishing site locations live from [WDNR's own ArcGIS service](https://dnr.wisconsin.gov/topic/lands/boataccess) — 3,135 boat access sites (ramp + carry-in) and 142 shore fishing sites, each with a real lat/lon, waterbody name, county, and (for boat access) ADA-accessibility and ownership. The [`/map`](webapp/templates/map.html) page plots all of it on a Leaflet + OpenStreetMap map, filterable by county, waterbody, or access type. A marker links back to its waterbody's V1 conditions page only when its name and county match an existing result exactly — no fuzzy guessing; an unmatched marker still shows every real field WDNR publishes for it.
+
 ## Built with Claude Code
 
 This entire project — research, statistical evaluation, data pipelines, the desktop review tool, this web app, and its deployment — was built through iterative sessions with **[Claude Code](https://claude.com/claude-code)**, Anthropic's agentic CLI. A few things about *how* it was built are worth calling out for anyone evaluating this as a development-process sample, not just a code sample:
 
-- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 14 numbered decisions, each with its own rationale, including the ones that reversed course.
+- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 16 numbered decisions, each with its own rationale, including the ones that reversed course.
 - **Negative results were kept, not massaged.** Four independent statistical research cycles came back null. All four shipped in full, because that's what actually happened.
 - **Real bugs were found by actually running the thing at scale**, not just code review. Running the model across all 2,296 waterbodies (not a handful of demo cases) surfaced two silent, previously-undetected defects — a species-name casing mismatch that meant survey-confirmed matches had *never* actually fired in any prior demo, and a county-naming inconsistency that produced duplicate lake entries (caught by literally looking at the app's own output afterward and noticing "Devils Lake" listed twice). Both are documented, fixed, and regression-tested — see [`docs/v1_full_run_report.md`](docs/v1_full_run_report.md).
 - **The UI polish pass was criteria-driven and verified, not vibes-based** — 7 explicit criteria (responsive layout, functional correctness, error handling, performance, honesty of framing, accessibility, attribution), each checked with a real measurement (`scrollWidth` diffs across 3 real viewport widths, WCAG contrast ratios computed and one failure fixed, all 516 interactive elements confirmed keyboard-focusable, live-database query timings) before being marked done. See [`docs/v1_polish_report.md`](docs/v1_polish_report.md).
@@ -105,8 +115,11 @@ flowchart TD
     Ref --> Model
     Model --> FullRun["analysis/v1_full_run.py\nruns the model on all 2,296 waterbodies"]
     FullRun --> DB[("data/v1/v1_full_run_results.db\nSQLite, queryable")]
+    WDNR_GIS["WDNR ArcGIS service\nboat access + shore fishing"] --> V2Script["analysis/v2_access_points.py\nlive pull + exact-match linking"]
+    V2Script --> DB
     DB --> Exe["ui/ — Tkinter desktop review tool"]
     DB --> Web["webapp/ — Flask + Jinja2\n(this live app)"]
+    Web --> MapPage["/map — Leaflet + OpenStreetMap"]
 
     subgraph V0["V0 research pipeline (archived, honest negative result)"]
         Creel["WDNR creel PDFs"] --> Extract["Extraction + cleaning"]
@@ -121,7 +134,8 @@ flowchart TD
 ```
 webapp/                 The live app — Flask backend, Jinja2 templates, deployment config
 ui/                      Shared data-access layer + the Tkinter desktop review tool (.exe)
-analysis/                The rule-based model + the full-scale batch runner + LOO-CV V0 scripts
+analysis/                The rule-based model, the full-scale batch runner, the V2 access-point
+                          puller, and the LOO-CV V0 scripts
 mvp/                     The original single-lake proof-of-concept script (superseded by webapp/)
 data/v0/, data/v1/        Real extracted datasets — creel PDFs, USGS/NOAA series, stocking
                           records, and the queryable results database
@@ -148,11 +162,11 @@ render.yaml               One-file Render deployment blueprint
 python -m pytest
 ```
 
-**177 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
+**197 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
 
 ## Tech stack
 
-Python · Flask + Jinja2 (web app) · Tkinter + PyInstaller (desktop review tool) · SQLite (queryable results store) · pandas / numpy / scipy (V0 statistical evaluation) · stdlib `urllib` for zero-dependency live API calls · pytest · real government open-data APIs (WDNR, USGS NWIS, NOAA NDBC/CO-OPS, NWS) — no paid services, no API keys required anywhere in this repo.
+Python · Flask + Jinja2 (web app) · Leaflet + OpenStreetMap (V2 map, no API key) · Tkinter + PyInstaller (desktop review tool) · SQLite (queryable results store) · pandas / numpy / scipy (V0 statistical evaluation) · stdlib `urllib` for zero-dependency live API calls · pytest · real government open-data APIs (WDNR, USGS NWIS, NOAA NDBC/CO-OPS, NWS, WDNR ArcGIS) — no paid services, no API keys required anywhere in this repo.
 
 ## License
 

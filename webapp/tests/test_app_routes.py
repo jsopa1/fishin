@@ -93,7 +93,7 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertIn(str(counts["total_species_predictions"]).encode(), resp.data)
 
     def test_staleness_banner_present_on_every_page(self):
-        for path in ("/", "/browse", "/failures", "/summary"):
+        for path in ("/", "/browse", "/failures", "/summary", "/map"):
             resp = self.client.get(path)
             self.assertIn(b'class="banner', resp.data, msg=f"banner missing on {path}")
 
@@ -102,6 +102,53 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertIn(b"Wisconsin Department of Natural Resources", resp.data)
         self.assertIn(b"U.S. Geological Survey", resp.data)
         self.assertIn(b"National Weather Service", resp.data)
+
+    def test_map_page_loads_and_shows_real_counts(self):
+        import v1_review_data as data
+
+        conn = flask_app_module.get_conn()
+        meta = data.get_access_points_meta(conn)
+        conn.close()
+
+        resp = self.client.get("/map")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("{:,}".format(meta["total_boat_ramp"]).encode(), resp.data)
+        self.assertIn("{:,}".format(meta["total_shore_fishing"]).encode(), resp.data)
+
+    def test_map_data_endpoint_returns_real_points(self):
+        resp = self.client.get("/map/data")
+        self.assertEqual(resp.status_code, 200)
+        payload = resp.get_json()
+        self.assertFalse(payload["data_unavailable"])
+        self.assertGreater(len(payload["points"]), 0)
+        point = payload["points"][0]
+        for field in ("source_type", "waterbody_name", "county", "lat", "lon"):
+            self.assertIn(field, point)
+
+    def test_map_data_filters_by_source_type(self):
+        resp = self.client.get("/map/data?source_type=shore_fishing")
+        payload = resp.get_json()
+        self.assertGreater(len(payload["points"]), 0)
+        self.assertTrue(all(p["source_type"] == "shore_fishing" for p in payload["points"]))
+
+    def test_map_data_filters_by_waterbody_name(self):
+        resp = self.client.get("/map/data?waterbody=Devils+Lake")
+        payload = resp.get_json()
+        self.assertGreater(len(payload["points"]), 0)
+        self.assertTrue(all("devils lake" in p["waterbody_name"].lower()
+                             or (p["matched_waterbody_name"] and "devils lake" in p["matched_waterbody_name"].lower())
+                             for p in payload["points"]))
+
+    def test_map_points_linked_to_real_waterbody_have_valid_link_target(self):
+        resp = self.client.get("/map/data")
+        payload = resp.get_json()
+        linked = [p for p in payload["points"] if p["matched_waterbody_name"]]
+        self.assertGreater(len(linked), 0)
+        sample = linked[0]
+        wb_resp = self.client.get(
+            "/waterbody?name=" + sample["matched_waterbody_name"] + "&county=" + sample["matched_county"]
+        )
+        self.assertEqual(wb_resp.status_code, 200)
 
 
 class WebAppErrorHandlingTests(unittest.TestCase):
@@ -164,6 +211,14 @@ class WebAppErrorHandlingTests(unittest.TestCase):
             resp = self.client.get("/waterbody?name=X&county=Y")
             self.assertEqual(resp.status_code, 503)
             self.assertIn(b"currently unavailable", resp.data)
+
+            resp = self.client.get("/map")
+            self.assertEqual(resp.status_code, 503)
+            self.assertIn(b"currently unavailable", resp.data)
+
+            resp = self.client.get("/map/data")
+            self.assertEqual(resp.status_code, 503)
+            self.assertTrue(resp.get_json()["data_unavailable"])
         finally:
             rd.find_db_path = original
 

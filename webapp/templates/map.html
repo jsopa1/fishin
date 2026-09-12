@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}Access Point Map{% endblock %}
+{% block content %}
+<h1>Boat Access &amp; Shore Fishing Map</h1>
+
+{% if data_unavailable %}
+<p class="empty-state">⚠ The results database is currently unavailable. Please try again shortly.</p>
+{% else %}
+<p>
+  Real, current locations of Wisconsin public boat access sites (ramp and carry-in) and developed
+  shore fishing sites, pulled live from
+  <a href="{{ meta.source_url }}" target="_blank" rel="noopener">WDNR's own ArcGIS service</a>
+  &mdash; the same data behind the DNR's
+  <a href="https://dnr.wisconsin.gov/topic/lands/boataccess" target="_blank" rel="noopener">Boat and Shore Fishing Access</a>
+  page. A marker links to this site's own waterbody page only when its name and county could be
+  matched exactly to an existing V1 result; an unmatched marker still shows every real field WDNR
+  publishes for it.
+</p>
+
+<div class="badge-row">
+  <span class="pill">🛥️ {{ "{:,}".format(meta.total_boat_ramp) }} boat ramps</span>
+  <span class="pill">🛶 {{ "{:,}".format(meta.total_boat_carry_in) }} carry-in sites</span>
+  <span class="pill">🎣 {{ "{:,}".format(meta.total_shore_fishing) }} shore fishing sites</span>
+  <span class="pill">📅 pulled {{ meta.fetched_at }}</span>
+</div>
+
+<form class="filters" method="get" action="{{ url_for('map_view') }}">
+  <div>
+    <label for="waterbody">Waterbody name</label>
+    <input type="text" id="waterbody" name="waterbody" value="{{ filters.waterbody or '' }}" placeholder="e.g. Devils Lake">
+  </div>
+  <div>
+    <label for="county">County</label>
+    <input type="text" id="county" name="county" value="{{ filters.county or '' }}" placeholder="e.g. Sauk">
+  </div>
+  <div>
+    <label for="source_type">Access type</label>
+    <select id="source_type" name="source_type">
+      {% for value, label in access_point_types %}
+        <option value="{{ value }}" {{ 'selected' if filters.source_type == value else '' }}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit">Filter map</button>
+</form>
+
+<div class="map-legend">
+  <span><i class="map-dot dot-ramp"></i> Boat ramp</span>
+  <span><i class="map-dot dot-carry-in"></i> Carry-in</span>
+  <span><i class="map-dot dot-shore"></i> Shore fishing</span>
+</div>
+
+<div id="access-map" data-county="{{ filters.county or '' }}" data-source-type="{{ filters.source_type or 'all' }}" data-waterbody="{{ filters.waterbody or '' }}"></div>
+<p id="map-status" class="result-count">Loading access points…</p>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+(function () {
+  var el = document.getElementById('access-map');
+  var status = document.getElementById('map-status');
+  var map = L.map(el).setView([44.6, -89.9], 7); // Wisconsin center, statewide zoom
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var colors = { boat_ramp: '#0f6b4f', boat_carry_in: '#146c9e', shore_fishing: '#7a5f00' };
+  var labels = { boat_ramp: 'Boat ramp', boat_carry_in: 'Carry-in', shore_fishing: 'Shore fishing site' };
+
+  function escapeHtml(s) {
+    if (s === null || s === undefined) return '';
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  var params = new URLSearchParams();
+  if (el.dataset.county) params.set('county', el.dataset.county);
+  if (el.dataset.sourceType) params.set('source_type', el.dataset.sourceType);
+  if (el.dataset.waterbody) params.set('waterbody', el.dataset.waterbody);
+
+  fetch('{{ url_for("map_data") }}?' + params.toString())
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (data.data_unavailable) {
+        status.textContent = 'Access-point data is currently unavailable.';
+        return;
+      }
+      var pts = data.points;
+      pts.forEach(function (p) {
+        var marker = L.circleMarker([p.lat, p.lon], {
+          radius: 6,
+          color: colors[p.source_type] || '#5b6472',
+          fillColor: colors[p.source_type] || '#5b6472',
+          fillOpacity: 0.85,
+          weight: 1
+        });
+        var html = '<strong>' + escapeHtml(p.facility_name || labels[p.source_type]) + '</strong><br>'
+          + escapeHtml(labels[p.source_type]) + '<br>'
+          + escapeHtml(p.waterbody_name) + ' (' + escapeHtml(p.county) + ')';
+        if (p.ada_accessible) html += '<br>ADA accessible: ' + escapeHtml(p.ada_accessible);
+        if (p.ownership) html += '<br>Managed by: ' + escapeHtml(p.ownership);
+        if (p.more_info_url) html += '<br><a href="' + escapeHtml(p.more_info_url) + '" target="_blank" rel="noopener">More info ↗</a>';
+        if (p.matched_waterbody_name) {
+          html += '<br><a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
+            + '&county=' + encodeURIComponent(p.matched_county) + '">View waterbody conditions →</a>';
+        }
+        marker.bindPopup(html);
+        marker.addTo(map);
+      });
+      status.textContent = pts.length.toLocaleString() + ' access point' + (pts.length === 1 ? '' : 's') + ' shown.';
+      if (pts.length === 0) {
+        status.textContent = 'No access points match these filters.';
+      }
+    })
+    .catch(function () {
+      status.textContent = 'Could not load access-point data.';
+    });
+})();
+</script>
+{% endif %}
+{% endblock %}

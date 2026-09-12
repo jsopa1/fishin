@@ -14,7 +14,7 @@ import os
 import sys
 from pathlib import Path
 
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 
 REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
@@ -176,6 +176,69 @@ def summary():
     counts = data.get_summary_counts(conn)
     conn.close()
     return render_template("summary.html", counts=counts, data_unavailable=False)
+
+
+ACCESS_POINT_TYPES = (
+    ("all", "All types"),
+    ("boat_ramp", "Boat ramp"),
+    ("boat_carry_in", "Carry-in (canoe/kayak)"),
+    ("shore_fishing", "Shore fishing site"),
+)
+
+
+@app.route("/map")
+def map_view():
+    conn = get_conn()
+    meta = data.get_access_points_meta(conn) if conn is not None else None
+    if conn is not None:
+        conn.close()
+    context = dict(
+        meta=meta,
+        access_point_types=ACCESS_POINT_TYPES,
+        filters={
+            "county": request.args.get("county", "").strip(),
+            "source_type": request.args.get("source_type", "all"),
+            "waterbody": request.args.get("waterbody", "").strip(),
+        },
+        data_unavailable=meta is None,
+    )
+    if meta is None:
+        return render_template("map.html", **context), 503
+    return render_template("map.html", **context)
+
+
+@app.route("/map/data")
+def map_data():
+    conn = get_conn()
+    if conn is None:
+        return jsonify({"points": [], "data_unavailable": True}), 503
+
+    county = request.args.get("county", "").strip() or None
+    source_type = request.args.get("source_type", "all")
+    waterbody = request.args.get("waterbody", "").strip() or None
+
+    points = data.list_access_points(conn, county=county, source_type=source_type, waterbody=waterbody)
+    conn.close()
+    return jsonify({
+        "points": [
+            {
+                "source_type": p["source_type"],
+                "facility_name": p["facility_name"],
+                "waterbody_name": p["waterbody_name"],
+                "county": p["county"],
+                "municipality": p["municipality"],
+                "lat": p["latitude"],
+                "lon": p["longitude"],
+                "ada_accessible": p["ada_accessible"],
+                "ownership": p["ownership"],
+                "more_info_url": p["more_info_url"],
+                "matched_waterbody_name": p["matched_waterbody_name"],
+                "matched_county": p["matched_county"],
+            }
+            for p in points
+        ],
+        "data_unavailable": False,
+    })
 
 
 @app.errorhandler(404)

@@ -58,7 +58,13 @@ for the working implementation (supersedes the earlier `mvp/` script).
 
 Maps, water bodies, access points, habitat, and environmental intelligence.
 
-**Status: Not started.**
+**Status: In progress.** First slice shipped: a statewide access-point map
+(`analysis/v2_access_points.py`, `/map` in the web app) showing 3,272 real
+Wisconsin public boat access and shore fishing sites, pulled live from
+WDNR's own ArcGIS service and linked to an existing V1 waterbody detail
+page wherever a confident name/county match exists. See
+[DECISIONS.md](DECISIONS.md) #016. Habitat and broader "environmental
+intelligence" scope remain not started.
 
 ## V3 — Continuous Validation
 

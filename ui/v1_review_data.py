@@ -212,3 +212,50 @@ def search_failures(
 
 def list_distinct_failure_types(conn: sqlite3.Connection) -> list:
     return [r[0] for r in conn.execute("SELECT DISTINCT failure_type FROM run_failures ORDER BY failure_type")]
+
+
+# ---------------------------------------------------------------------------
+# V2: access points (real WDNR public boat access / shore fishing sites,
+# see analysis/v2_access_points.py). Wrapped in try/except OperationalError
+# because these tables only exist once that script has been run at least
+# once against this DB file -- an older committed DB predating V2 should
+# report "no data" honestly, not crash the whole page.
+# ---------------------------------------------------------------------------
+
+def get_access_points_meta(conn: sqlite3.Connection) -> dict | None:
+    try:
+        row = conn.execute("SELECT * FROM access_points_meta WHERE id = 1").fetchone()
+    except sqlite3.OperationalError:
+        return None
+    return dict(row) if row else None
+
+
+def list_access_points(
+    conn: sqlite3.Connection,
+    county: str = None,
+    source_type: str = None,
+    waterbody: str = None,
+    limit: int = 5000,
+) -> list:
+    """Real, current access-point rows for the map -- every field exactly
+    as stored, including a null matched_waterbody_name/county when this
+    point couldn't be confidently linked to a known V1 waterbody entry."""
+    clauses = []
+    params = []
+    if county:
+        clauses.append("county LIKE ? ESCAPE '\\'")
+        params.append(_like_pattern(county))
+    if source_type and source_type != "all":
+        clauses.append("source_type = ?")
+        params.append(source_type)
+    if waterbody:
+        clauses.append("(waterbody_name LIKE ? ESCAPE '\\' OR matched_waterbody_name LIKE ? ESCAPE '\\')")
+        params.append(_like_pattern(waterbody))
+        params.append(_like_pattern(waterbody))
+    where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+    query = f"SELECT * FROM access_points {where} ORDER BY waterbody_name, county LIMIT ?"
+    params.append(limit)
+    try:
+        return [dict(row) for row in conn.execute(query, params)]
+    except sqlite3.OperationalError:
+        return []

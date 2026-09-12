@@ -402,3 +402,54 @@ presentation-layer and documentation pass only.
   keeps this pass consistent with Decision #005's discipline: don't let
   a polished presentation imply something (full responsiveness) that
   wasn't actually verified
+
+## 016 — V2 kickoff: real WDNR access-point map, first slice only
+
+Per ROADMAP.md, V2 ("Where Should I Fish?") was gated behind V1 being
+"sufficiently developed and reviewed" -- true after the full run, desktop
+app, web app, and polish pass. Rather than build the full V2 vision
+(maps + habitat + "environmental intelligence") at once, this starts with
+one tightly-scoped, real-data slice: a statewide access-point map.
+
+- **Real source, investigated before any code was written**: WDNR
+  publishes public boat access and shore fishing site locations through
+  its own live ArcGIS REST service
+  (`dnrmaps.wi.gov/arcgis2/rest/services/PR_Recreation/PR_Boat_Access_Shore_Fishing_WTM_Ext/MapServer`),
+  the same data behind DNR's own
+  [Boat and Shore Fishing Access](https://dnr.wisconsin.gov/topic/lands/boataccess)
+  page -- 3,135 real boat access sites (ramp + carry-in) and 142 real
+  shore fishing sites, each with real lat/lon, waterbody name, county,
+  and (for boat access) ADA-accessibility and ownership fields. Verified
+  directly against the live endpoint (`analysis/v2_access_points.py`)
+  before building anything on top of it, the same research-before-code
+  discipline V0 and V1 both used.
+- **New script, no change to V1's own tables or logic**:
+  `analysis/v2_access_points.py` fetches both layers live, drops
+  abandoned/geometry-less/unnamed records, and persists them into two new
+  tables (`access_points`, `access_points_meta`) in the same
+  `data/v1/v1_full_run_results.db` -- additive only, `waterbody_results`/
+  `species_predictions`/`run_failures` are untouched.
+- **Linking is exact-or-nothing, never fuzzy**: an access point is
+  connected to an existing V1 waterbody detail page only when its
+  (normalized name, loosely-matched county) matches one exactly, reusing
+  v1_conditions_biology_forecast.py's own `_norm`/`_norm_county`/
+  `_county_matches` helpers rather than a new guessing heuristic. Of
+  3,272 stored access points, 1,759 linked; the rest still render on the
+  map with every real field WDNR publishes, just without a "view
+  conditions" link -- never hidden, never force-matched.
+- **New `/map` page** (Leaflet + OpenStreetMap tiles, no API key or
+  account needed) with county/waterbody/access-type filters, color-coded
+  by type, real popups per marker. Reuses the same "data unavailable
+  degrades to 503 with a clear message" discipline as every other route.
+- 20 new tests (10 pure-logic unit tests for normalization/linking, 5 DB
+  round-trip tests, 5 new Flask route tests) -- 197 passing total.
+
+**Rationale:**
+- Matches the recommendation given when this phase was scoped: start
+  with real government access-point data (reuses V1's no-fabrication
+  discipline) rather than the harder, less-validated "habitat scoring"
+  part of the V2 vision
+- Keeping V2's first slice in the same database and web app -- rather
+  than a separate service -- means the map benefits from, and links
+  back into, everything V1 already verified about waterbody data
+  quality, instead of starting a second, disconnected data story
