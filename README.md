@@ -10,7 +10,9 @@ Real government data, real statistical rigor, an honest negative result that res
 
 ---
 
-### ▶ [Live demo](https://github.com/jsopa1/fishin#quickstart) · [Screenshots](#screenshots) · [The full story](#the-story-v0--v1) · [Built with Claude Code](#built-with-claude-code)
+### ▶ [Live demo ↗](https://nascar-leather-lessons-width.trycloudflare.com) · [Screenshots](#screenshots) · [The full story](#the-story-v0--v1) · [Built with Claude Code](#built-with-claude-code)
+
+*The live demo link runs from a temporary local tunnel and may go offline between visits — see [Quickstart](#quickstart) to run it yourself if the link is down.*
 
 ---
 
