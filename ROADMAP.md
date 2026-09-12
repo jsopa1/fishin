@@ -58,17 +58,30 @@ for the working implementation (supersedes the earlier `mvp/` script).
 
 Maps, water bodies, access points, habitat, and environmental intelligence.
 
-**Status: In progress.** First slice shipped and polished: a statewide
+**Status: First slice complete.** Shipped and polished: a statewide
 access-point map (`analysis/v2_access_points.py`, `/map` in the web app)
 showing 3,272 real Wisconsin public boat access and shore fishing sites,
 pulled live from WDNR's own ArcGIS service, linked to an existing V1
 waterbody detail page wherever a confident name/county match exists,
-clustered for performance, and search-to-zoom on filter. Full account:
+clustered for performance, with search-to-zoom on filter — plus an
+optional, off-by-default layer of 557 real, WDNR-verified aquatic
+invasive species sightings (`analysis/v2_invasive_species.py`) across 6
+commonly-tracked species. Full account:
 [docs/v2_access_points_report.md](docs/v2_access_points_report.md);
-decisions: [DECISIONS.md](DECISIONS.md) #016-#017. Real per-lake size
-data was investigated and deliberately deferred (needs a WBIC join this
-project doesn't yet have — see the report). Broader "habitat" scoring and
-"environmental intelligence" remain not started.
+decisions: [DECISIONS.md](DECISIONS.md) #016-#018.
+
+Real per-lake size/depth data was investigated **twice**, independently
+(name-based matching, then a spatial point-in-polygon join), and
+deliberately closed out both times — WDNR's available hydrography layer
+fragments complex shorelines into many small polygons, so neither
+approach reliably identifies "the lake" without a materially larger
+curation effort than this slice's scope justifies. Not pursuing a third
+attempt at the same source was itself the disciplined call, not a gap.
+
+Broader "habitat scoring" and open-ended "environmental intelligence"
+(e.g. weather overlays) remain future, uncommitted V2 extensions — real
+possibilities, not yet scoped or started, and not required for this
+slice to count as done.
 
 ## V3 — Continuous Validation
 

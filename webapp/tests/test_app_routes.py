@@ -150,6 +150,41 @@ class WebAppRouteTests(unittest.TestCase):
         )
         self.assertEqual(wb_resp.status_code, 200)
 
+    def test_map_page_shows_invasive_species_count(self):
+        import v1_review_data as data
+
+        conn = flask_app_module.get_conn()
+        invasive_meta = data.get_invasive_species_meta(conn)
+        conn.close()
+
+        resp = self.client.get("/map")
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn("{:,}".format(invasive_meta["total_sightings"]).encode(), resp.data)
+
+    def test_invasive_species_data_endpoint_returns_real_sightings(self):
+        resp = self.client.get("/map/invasive-species-data")
+        self.assertEqual(resp.status_code, 200)
+        payload = resp.get_json()
+        self.assertFalse(payload["data_unavailable"])
+        self.assertGreater(len(payload["sightings"]), 0)
+        sighting = payload["sightings"][0]
+        for field in ("species_common_name", "species_scientific_name", "taxon_group", "lat", "lon"):
+            self.assertIn(field, sighting)
+
+    def test_invasive_species_data_filters_by_species(self):
+        resp = self.client.get("/map/invasive-species-data?species=Zebra+Mussel")
+        payload = resp.get_json()
+        self.assertGreater(len(payload["sightings"]), 0)
+        self.assertTrue(all(s["species_common_name"] == "Zebra Mussel" for s in payload["sightings"]))
+
+    def test_invasive_species_sightings_not_linked_to_waterbody_fields(self):
+        # Deliberate design: these are a standalone real layer, not joined
+        # to V1 waterbody records (see docs/v2_access_points_report.md).
+        resp = self.client.get("/map/invasive-species-data")
+        payload = resp.get_json()
+        sighting = payload["sightings"][0]
+        self.assertNotIn("matched_waterbody_name", sighting)
+
 
 class WebAppErrorHandlingTests(unittest.TestCase):
     """Part 3 of the polish pass: malformed input, missing params, and
@@ -217,6 +252,10 @@ class WebAppErrorHandlingTests(unittest.TestCase):
             self.assertIn(b"currently unavailable", resp.data)
 
             resp = self.client.get("/map/data")
+            self.assertEqual(resp.status_code, 503)
+            self.assertTrue(resp.get_json()["data_unavailable"])
+
+            resp = self.client.get("/map/invasive-species-data")
             self.assertEqual(resp.status_code, 503)
             self.assertTrue(resp.get_json()["data_unavailable"])
         finally:

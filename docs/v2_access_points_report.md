@@ -116,12 +116,66 @@ verified two live services:
   round-trip check that a `matched_waterbody_name` returned by
   `/map/data` actually resolves to a real 200 on `/waterbody`).
 
-## 5. Honest gaps / not done this cycle
+## 6. Follow-up: a second attempt at lake-size data, and a pivot to AIS
 
-- Lake size/depth ("habitat") data — investigated, deferred, see §2.
-  Doing it right needs a WBIC join, which needs WBIC added to the V1
-  waterbody universe first.
-- Aquatic invasive species presence — not investigated this cycle.
-- The broader "environmental intelligence" part of V2's scope (weather
-  overlays, seasonal context beyond what V1 already provides) — not
-  started.
+Before closing this slice out, a second, smarter attempt was made at the
+lake-size problem from §2, and a real "environmental intelligence" layer
+(aquatic invasive species) was shipped instead once that attempt also
+came back negative. Full rationale: DECISIONS.md #018.
+
+- **Second attempt: spatial join instead of name matching.** Rather than
+  match lake polygons by name (the approach that failed in §2), this
+  tried a point-in-polygon spatial query: take a real, already-trusted
+  coordinate from a confidently-linked access point (e.g. the real "North
+  Shore Landing" boat ramp at 43.4263°N, -89.7281°W, linked to Sauk
+  County's Devils Lake), and ask WDNR's 24K Hydro layer which polygon
+  contains that exact point — no name ambiguity possible. Live-tested
+  against that real coordinate. Result: the point landed on a polygon
+  named `"Unnamed"` (`HYDROTYPE` 710, "Unspecified Open Water"), not the
+  named Devils Lake polygon — because this hydrography layer breaks
+  complex shorelines (docks, channels, marina inlets) into many small
+  fragment polygons near the shore, not one polygon per named lake.
+  Getting the "right" fragment reliably would need a nearest-largest-
+  named-polygon heuristic — real added complexity and a second source of
+  possible error, not a clean fix. **Confirmed deferred**, with stronger
+  evidence than §2 alone (two independent techniques, two independent
+  failure modes) — see DECISIONS.md #018 for the full rationale on why
+  this closes out the investigation rather than prompting a third
+  attempt.
+- **Shipped instead: real, verified aquatic invasive species sightings**
+  (`analysis/v2_invasive_species.py`), pulled live from WDNR's AIS
+  monitoring service (`WY_Lakes_AIS` ArcGIS services) — 557 real,
+  WDNR-verified sightings across 6 commonly-tracked species (Zebra
+  Mussel, Spiny Waterflea, Rusty Crayfish, Eurasian Water-Milfoil,
+  Curly-Leaf Pondweed, Round Goby), each with a real detection date,
+  site description, and verification status. Deliberately **not** joined
+  to V1 waterbody records, for the same reason the lake-size join was
+  deferred — these records carry a `WBIC` field but no county, and this
+  project doesn't yet have a safe way to resolve that to one of its own
+  waterbodies. Instead, each sighting stands on its own real location, an
+  optional (off-by-default) map layer toggled via a Leaflet layer
+  control, exactly like an unmatched access point already does.
+  Positive-only framing applied explicitly in the UI copy: a sighting is
+  real evidence a species was found there; its absence from this layer
+  is not evidence the species isn't present, since WDNR's monitoring
+  coverage is real but not exhaustive — the same rule already governing
+  stocking-derived species presence in V1.
+- Verified live: toggling the layer control on renders exactly 557 real
+  markers (`document.querySelectorAll('path...[stroke="#b3261e"]').length`);
+  clicking one produced a real, correct popup (Curly-Leaf Pondweed,
+  *Potamogeton crispus*, "Pine River Apache Rd", "Verified (Not
+  Vouchered)", detected 2018-08-15).
+- 11 new tests (7 pure-logic/DB unit tests for
+  `analysis/v2_invasive_species.py`, 4 new Flask route tests) — 208
+  passing total.
+
+## 7. Honest gaps / not done this cycle
+
+- Lake size/depth ("habitat") data — investigated twice (§2, §6),
+  deferred both times. A safe fix needs either WBIC added to the V1
+  waterbody universe plus a curated per-WBIC "largest polygon" rule, or
+  a genuinely different data source than WDNR's 24K Hydro layer.
+- The broader "environmental intelligence" part of V2's scope beyond
+  access points and AIS sightings (e.g. weather overlays, seasonal
+  context beyond what V1 already provides) — not started, and not
+  considered essential to call this V2 slice complete.

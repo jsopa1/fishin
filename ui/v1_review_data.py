@@ -259,3 +259,49 @@ def list_access_points(
         return [dict(row) for row in conn.execute(query, params)]
     except sqlite3.OperationalError:
         return []
+
+
+# ---------------------------------------------------------------------------
+# V2: invasive species sightings (real WDNR-verified AIS locations, see
+# analysis/v2_invasive_species.py). Same "no crash on a DB predating this
+# script" discipline as the access-points functions above. Per this
+# project's positive-only-evidence rule: a sighting here is real, verified
+# positive evidence -- absence of a sighting is never evidence a species
+# isn't present, since WDNR's monitoring coverage is real but not
+# exhaustive (the same rule already applied to stocking-derived presence).
+# ---------------------------------------------------------------------------
+
+def get_invasive_species_meta(conn: sqlite3.Connection) -> dict | None:
+    try:
+        row = conn.execute("SELECT * FROM invasive_species_meta WHERE id = 1").fetchone()
+    except sqlite3.OperationalError:
+        return None
+    return dict(row) if row else None
+
+
+def list_invasive_species_sightings(
+    conn: sqlite3.Connection,
+    species: str = None,
+    limit: int = 2000,
+) -> list:
+    clauses = []
+    params = []
+    if species and species != "all":
+        clauses.append("species_common_name = ?")
+        params.append(species)
+    where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+    query = f"SELECT * FROM invasive_species_sightings {where} ORDER BY species_common_name LIMIT ?"
+    params.append(limit)
+    try:
+        return [dict(row) for row in conn.execute(query, params)]
+    except sqlite3.OperationalError:
+        return []
+
+
+def list_distinct_invasive_species(conn: sqlite3.Connection) -> list:
+    try:
+        return [r[0] for r in conn.execute(
+            "SELECT DISTINCT species_common_name FROM invasive_species_sightings ORDER BY species_common_name"
+        )]
+    except sqlite3.OperationalError:
+        return []

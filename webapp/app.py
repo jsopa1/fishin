@@ -190,10 +190,14 @@ ACCESS_POINT_TYPES = (
 def map_view():
     conn = get_conn()
     meta = data.get_access_points_meta(conn) if conn is not None else None
+    invasive_meta = data.get_invasive_species_meta(conn) if conn is not None else None
+    invasive_species_list = data.list_distinct_invasive_species(conn) if conn is not None else []
     if conn is not None:
         conn.close()
     context = dict(
         meta=meta,
+        invasive_meta=invasive_meta,
+        invasive_species_list=invasive_species_list,
         access_point_types=ACCESS_POINT_TYPES,
         filters={
             "county": request.args.get("county", "").strip(),
@@ -236,6 +240,34 @@ def map_data():
                 "matched_county": p["matched_county"],
             }
             for p in points
+        ],
+        "data_unavailable": False,
+    })
+
+
+@app.route("/map/invasive-species-data")
+def invasive_species_data():
+    conn = get_conn()
+    if conn is None:
+        return jsonify({"sightings": [], "data_unavailable": True}), 503
+
+    species = request.args.get("species", "all")
+    sightings = data.list_invasive_species_sightings(conn, species=species)
+    conn.close()
+    return jsonify({
+        "sightings": [
+            {
+                "species_common_name": s["species_common_name"],
+                "species_scientific_name": s["species_scientific_name"],
+                "taxon_group": s["taxon_group"],
+                "site_description": s["site_description"],
+                "status": s["status"],
+                "detected_date": s["detected_date"],
+                "wbic": s["wbic"],
+                "lat": s["latitude"],
+                "lon": s["longitude"],
+            }
+            for s in sightings
         ],
         "data_unavailable": False,
     })

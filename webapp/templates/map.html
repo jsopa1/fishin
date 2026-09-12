@@ -24,6 +24,20 @@
   <span class="pill">📅 pulled {{ meta.fetched_at }}</span>
 </div>
 
+{% if invasive_meta %}
+<p>
+  Also available as an optional map layer (off by default — use the layers control at the map's
+  top right to turn it on): {{ "{:,}".format(invasive_meta.total_sightings) }} real, WDNR-verified
+  invasive species sightings across {{ invasive_meta.species_covered }} commonly-tracked species,
+  pulled from the same
+  <a href="https://dnrmaps.wi.gov/H5/?viewer=Lakes_AIS_Viewer" target="_blank" rel="noopener">WDNR AIS monitoring service</a>.
+  <strong>A sighting shown here is real, positive evidence of a past detection — the absence of a
+  sighting at a given lake is not evidence the species isn't there</strong>, since WDNR's monitoring
+  coverage is real but not exhaustive (the same positive-only-evidence rule this site already
+  applies to stocking-derived species presence).
+</p>
+{% endif %}
+
 <form class="filters" method="get" action="{{ url_for('map_view') }}">
   <div>
     <label for="waterbody">Waterbody name</label>
@@ -48,6 +62,7 @@
   <span><i class="map-dot dot-ramp"></i> Boat ramp</span>
   <span><i class="map-dot dot-carry-in"></i> Carry-in</span>
   <span><i class="map-dot dot-shore"></i> Shore fishing</span>
+  {% if invasive_meta %}<span><i class="map-dot dot-invasive"></i> Invasive species sighting (optional layer)</span>{% endif %}
 </div>
 
 <div id="access-map" data-county="{{ filters.county or '' }}" data-source-type="{{ filters.source_type or 'all' }}" data-waterbody="{{ filters.waterbody or '' }}" role="application" aria-label="Map of Wisconsin boat access and shore fishing sites"></div>
@@ -72,6 +87,7 @@
 
   var colors = { boat_ramp: '#0f6b4f', boat_carry_in: '#146c9e', shore_fishing: '#7a5f00' };
   var labels = { boat_ramp: 'Boat ramp', boat_carry_in: 'Carry-in', shore_fishing: 'Shore fishing site' };
+  var invasiveColor = '#b3261e';
 
   // Clustering matters here specifically because this map plots every real
   // WDNR access point at once (3,272 as of the last pull) -- without it,
@@ -147,6 +163,39 @@
           map.fitBounds(L.latLngBounds(latLngs), { padding: [30, 30], maxZoom: 13 });
         }
       }
+
+      {% if invasive_meta %}
+      // Optional, off-by-default layer -- real WDNR-verified AIS sightings.
+      // Not linked to a specific V1 waterbody (see docs/v2_access_points_report.md
+      // and DECISIONS.md #018 for why); each point stands on its own real location.
+      var invasiveLayer = L.layerGroup();
+      fetch('{{ url_for("invasive_species_data") }}')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.data_unavailable) return;
+          data.sightings.forEach(function (s) {
+            var marker = L.circleMarker([s.lat, s.lon], {
+              radius: 5,
+              color: invasiveColor,
+              fillColor: invasiveColor,
+              fillOpacity: 0.75,
+              weight: 1
+            });
+            var html = '<strong>⚠ ' + escapeHtml(s.species_common_name) + '</strong><br>'
+              + '<em>' + escapeHtml(s.species_scientific_name) + '</em><br>';
+            if (s.site_description) html += escapeHtml(s.site_description) + '<br>';
+            if (s.status) html += escapeHtml(s.status) + '<br>';
+            if (s.detected_date) html += 'Detected: ' + escapeHtml(s.detected_date);
+            marker.bindPopup(html);
+            invasiveLayer.addLayer(marker);
+          });
+          var overlays = {};
+          overlays['Access points'] = clusters;
+          overlays['Invasive species sightings (' + data.sightings.length.toLocaleString() + ')'] = invasiveLayer;
+          L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+        })
+        .catch(function () { /* optional layer -- a failure here shouldn't affect the main map */ });
+      {% endif %}
     })
     .catch(function () {
       status.textContent = 'Could not load access-point data.';

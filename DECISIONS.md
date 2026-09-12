@@ -492,3 +492,55 @@ than declaring it done without checking. Full account in
   layer because they improve something 100% of visitors to `/map`
   actually experience (a 3,272-marker page), versus a data layer that
   would only enrich waterbodies with a confident polygon match
+
+## 018 — Lake-size data closed out (2nd attempt); AIS sightings shipped instead
+
+Following a CEO instruction to keep completing V2's natural next steps
+until none remain, this tried one more approach to the lake-size problem
+Decision #017 deferred, then shipped a different real data layer once
+that also failed. Full account: `docs/v2_access_points_report.md` §6.
+
+- **Second attempt, spatial not name-based**: point-in-polygon query
+  against WDNR's 24K Hydro layer using a real, already-trusted coordinate
+  (a confidently-linked access point's own lat/lon) instead of matching
+  by name -- specifically to route around the exact failure mode from
+  Decision #017. Live-tested against the real Sauk County Devils Lake
+  boat ramp coordinate. Result: the query returned a polygon labeled
+  `"Unnamed"` (`HYDROTYPE` "Unspecified Open Water"), not the lake itself
+  -- this hydrography layer fragments complex shorelines into many small
+  polygons near docks/channels, so even a spatially exact point doesn't
+  reliably land on "the lake." A fix exists (nearest-largest-named-
+  polygon heuristic) but trades one source of ambiguity for another.
+- **Conclusion: closing this investigation, not attempting a third
+  approach.** Two independent techniques (name+county matching in #017,
+  spatial join here) have now both surfaced real, different failure
+  modes in the same underlying data layer. Per Decision #005's standard
+  (never present a number that might be wrong), that's sufficient
+  evidence this specific WDNR layer isn't a safe fit for a per-lake size
+  feature without materially more curation work than this project's V2
+  scope justifies -- a third attempt at the same source would be
+  diminishing returns, not diligence.
+- **Shipped instead**: `analysis/v2_invasive_species.py` -- 557 real,
+  WDNR-verified aquatic invasive species sightings (6 curated species:
+  Zebra Mussel, Spiny Waterflea, Rusty Crayfish, Eurasian Water-Milfoil,
+  Curly-Leaf Pondweed, Round Goby) from WDNR's own AIS monitoring
+  service, added to `/map` as an optional, off-by-default layer. Not
+  joined to V1 waterbody records, for the same reason as the lake-size
+  data -- these records carry a WBIC but no county, and a safe join
+  needs infrastructure (WBIC on this project's own waterbody universe)
+  that doesn't exist yet. Each sighting stands on its own real location
+  instead, framed with the same positive-only-evidence rule V1 already
+  applies to stocking data: a sighting is real evidence of a past
+  detection, its absence is not evidence of a species' absence.
+- 11 new tests (208 passing total).
+
+**Rationale:**
+- "Complete all next natural steps" is read here as "pursue real,
+  honestly-scoped improvements until they run out or stop being safe to
+  ship" -- not as license to force a feature a second failed
+  investigation already argued against. Recognizing when to stop
+  investigating one data source and redirect effort toward a real
+  alternative is itself the natural next step, not a failure to finish
+- AIS sightings satisfy the same part of V2's scope ("environmental
+  intelligence") the lake-size feature would have, via a source that
+  didn't have the same correctness risk
