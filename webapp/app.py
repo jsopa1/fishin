@@ -291,6 +291,47 @@ def invasive_species_data():
     })
 
 
+@app.route("/spot")
+def spot_detail():
+    """Phase 4 of docs/v2_fish_intelligence_platform_plan.md: the
+    one-stop-shop spot view. Keyed by lat/lon (+ optional facility name
+    to disambiguate the rare shared-coordinate case) rather than
+    access_points.id, since that id isn't stable across a future
+    re-ingestion (see docs/v2_access_points_report.md section 8) -- the
+    map/list views already have the exact lat/lon for every marker they
+    render, so they can link here directly with no extra lookup."""
+    lat_raw = request.args.get("lat", "")
+    lon_raw = request.args.get("lon", "")
+    name = request.args.get("name", "").strip() or None
+    try:
+        lat = float(lat_raw)
+        lon = float(lon_raw)
+    except ValueError:
+        return render_template(
+            "spot_detail.html", spot=None,
+            not_found_reason="This link is missing a valid spot location.",
+        ), 400
+
+    conn = get_conn()
+    if conn is None:
+        return render_template(
+            "spot_detail.html", spot=None,
+            not_found_reason="The results database is currently unavailable. Please try again shortly.",
+        ), 503
+
+    detail = data.get_spot_detail(conn, lat, lon, name=name)
+    conn.close()
+    if detail is None:
+        return render_template(
+            "spot_detail.html", spot=None,
+            not_found_reason="No stored access point at this location. It may have been removed by a data refresh.",
+        ), 404
+    return render_template(
+        "spot_detail.html", spot=detail["point"], temperature=detail["temperature"],
+        species_predictions=detail["species_predictions"],
+    )
+
+
 @app.errorhandler(404)
 def not_found(_error):
     return render_template("error.html", code=404, message="Page not found."), 404

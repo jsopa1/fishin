@@ -206,7 +206,12 @@ table td a:hover { text-decoration: underline; }
 .tag.stocking_only { background: var(--stocking-bg); color: var(--stocking); }
 .tag.real { background: var(--survey-bg); color: var(--survey); }
 .tag.proxy { background: #eef0f2; color: #4b5563; }
+.tag.estimated { background: var(--stocking-bg); color: var(--stocking); }
 .tag.no_data { background: var(--stale-light); color: #a3001e; }
+
+.anchor-list { margin: 6px 0 0; padding-left: 18px; font-size: 0.85rem; color: var(--muted); }
+.spot-fields dt { color: var(--muted); font-weight: 500; }
+.spot-fields dd { margin: 0 0 4px; }
 
 .result-count { color: var(--muted); font-size: 0.9rem; margin-bottom: 10px; }
 

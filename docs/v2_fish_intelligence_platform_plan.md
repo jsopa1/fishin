@@ -227,3 +227,50 @@ work — but Phase 4's bait/technique section simply stays empty/omitted
 for species until Phase 3 has real, cited data for them, never a
 placeholder claim. Phase 5 is independent and can come before or after
 the others.
+
+## Implementation status
+
+**Phases 1, 2, and 4: shipped**, per Decision #022.
+
+- **Phase 1** — `ui/v1_review_data.py`'s `build_temperature_anchors()`
+  pools every real (non-proxy) water-temperature reading from the
+  latest V1 run with a resolvable real coordinate (matched access
+  point, USGS gauge site, or NDBC buoy — tried in that order per
+  waterbody), and `estimate_temperature_from_nearby()` runs
+  inverse-distance-weighted interpolation over that pool within a 15km
+  radius (nearest 5 anchors), honestly returning `None` when nothing
+  real is close enough. `get_spot_temperature()` sits on top with the
+  full priority ladder: a real matched-waterbody measurement first,
+  then the IDW estimate, then the matched waterbody's own proxy value,
+  then honest no-data — verified live on a real, previously-unmatched
+  Ada Lake Campground boat ramp (Langlade County), which resolved to a
+  21.2°C estimate from one real anchor (Bass Lake, Oconto County,
+  13.4km away).
+- **Phase 2** — `get_spot_detail()` reuses `get_waterbody_detail()`
+  unchanged for a matched spot (full species-card rendering, including
+  the "why not a match" boxes from Decision #020); an unmatched spot
+  honestly states no species-presence data is available for that
+  specific location, never inferred from a nearby waterbody.
+- **Phase 4** — a new `/spot` Flask route (`webapp/app.py`) and
+  `webapp/templates/spot_detail.html`, keyed by the point's own real
+  lat/lon (+ optional facility name to disambiguate the 23 real
+  duplicate-coordinate pairs found in the data) rather than
+  `access_points.id`, matching the same stability reasoning already
+  used for `shore_fishing_details` (`docs/v2_access_points_report.md`
+  §8) — `access_points.id` isn't stable across a future WDNR
+  re-ingestion, but a real physical location's own coordinate is. The
+  map popup and list view (`webapp/templates/map.html`) both link here
+  now via a new "Full spot report" link, for every one of the 3,272
+  real access points, matched or not. The species-card markup itself
+  was factored out to `webapp/templates/_species_cards.html` so the
+  waterbody-detail and spot-detail pages render it identically rather
+  than maintaining two copies.
+- Verified with 26 new unit tests on the interpolation math and spot
+  lookup (`ui/tests/test_v1_review_data.py`) and 6 new Flask route
+  tests against the real database, including a real matched point, a
+  real unmatched point, and the 400/404 honest-failure paths
+  (`webapp/tests/test_app_routes.py`) — 296 tests passing project-wide.
+- **Phase 3** (bait/technique research) and **Phase 5** (more niche
+  spot sources) remain not started — per the plan above, Phase 3 is a
+  research task and Phase 4's bait/technique section is correctly
+  omitted entirely until it lands, never a placeholder.

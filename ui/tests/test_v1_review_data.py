@@ -71,6 +71,21 @@ CREATE TABLE run_failures (
     failure_type TEXT NOT NULL,
     error_message TEXT NOT NULL
 );
+CREATE TABLE access_points (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    source_type TEXT NOT NULL,
+    facility_name TEXT,
+    waterbody_name TEXT NOT NULL,
+    county TEXT NOT NULL,
+    municipality TEXT,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    ada_accessible TEXT,
+    ownership TEXT,
+    more_info_url TEXT,
+    matched_waterbody_name TEXT,
+    matched_county TEXT
+);
 """
 
 
@@ -126,6 +141,21 @@ class DataTestBase(unittest.TestCase):
             "INSERT INTO run_failures (run_timestamp, waterbody_name, county, species, failure_type, error_message) "
             "VALUES (?, ?, ?, ?, ?, ?)",
             (run_timestamp, name, county, species, failure_type, message),
+        )
+        self.conn.commit()
+
+    def _insert_access_point(
+        self, name, county, lat, lon, matched_name=None, matched_county=None,
+        source_type="boat_ramp", facility_name="Test Ramp",
+    ):
+        self.conn.execute(
+            """INSERT INTO access_points
+               (source_type, facility_name, waterbody_name, county, latitude, longitude,
+                matched_waterbody_name, matched_county)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+            (source_type, facility_name, name, county, lat, lon,
+             matched_name if matched_name is not None else name,
+             matched_county if matched_county is not None else county),
         )
         self.conn.commit()
 
@@ -316,6 +346,252 @@ class TestSearchFailures(DataTestBase):
     def test_species_none_preserved_not_fabricated(self):
         results = rd.search_failures(self.conn, waterbody="Lake B")
         self.assertIsNone(results[0]["species"])
+
+
+class TestHaversineDistance(unittest.TestCase):
+    def test_real_milwaukee_chicago_distance(self):
+        # Real coordinates; real straight-line distance is ~146km.
+        milwaukee = (43.0389, -87.9065)
+        chicago = (41.8781, -87.6298)
+        d = rd._haversine_km(milwaukee[0], milwaukee[1], chicago[0], chicago[1])
+        self.assertAlmostEqual(d, 146, delta=15)
+
+    def test_same_point_is_zero(self):
+        self.assertAlmostEqual(rd._haversine_km(43.0, -89.0, 43.0, -89.0), 0.0, delta=0.001)
+
+
+class TestBuildTemperatureAnchors(DataTestBase):
+    def setUp(self):
+        super().setUp()
+        self._insert_run()
+
+    def test_source1_matched_access_point_used_as_anchor(self):
+        self._insert_waterbody("Devils Lake", "Sauk", temp_value_c=18.5, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301)
+
+        anchors = rd.build_temperature_anchors(self.conn)
+        self.assertEqual(len(anchors), 1)
+        self.assertAlmostEqual(anchors[0]["lat"], 43.4286)
+        self.assertAlmostEqual(anchors[0]["lon"], -89.7301)
+        self.assertAlmostEqual(anchors[0]["value_c"], 18.5)
+        self.assertEqual(anchors[0]["source"], "clmn_recent")
+
+    def test_proxy_temperature_excluded_from_anchor_pool(self):
+        self._insert_waterbody("Nowhere Lake", "Vilas", temp_value_c=22.0, temp_is_real=0, temp_method="nws_air_proxy_live")
+        self._insert_access_point("Nowhere Lake", "Vilas", lat=46.0, lon=-89.5)
+
+        anchors = rd.build_temperature_anchors(self.conn)
+        self.assertEqual(anchors, [])
+
+    def test_unmatched_real_temp_with_no_coordinate_source_excluded(self):
+        # temp_method isn't usgs_live or ndbc_buoy_live, and no matching
+        # access point exists -- no coordinate source resolves, so this
+        # waterbody must be left out rather than guessed.
+        self._insert_waterbody("Mystery Lake", "Oneida", temp_value_c=19.0, temp_is_real=1, temp_method="clmn_recent")
+
+        anchors = rd.build_temperature_anchors(self.conn)
+        self.assertEqual(anchors, [])
+
+    def test_source2_usgs_gauge_coordinate_used_when_no_matched_access_point(self):
+        # Real USGS station "BOIS BRULE RIVER NEAR LAKE SUPERIOR, WI" is in
+        # data/v1/usgs_wi_water_temp_sites.csv; find_usgs_site_matches()
+        # substring-matches on the waterbody name.
+        self._insert_waterbody("Bois Brule River", "Douglas", temp_value_c=14.2, temp_is_real=1, temp_method="usgs_live")
+
+        anchors = rd.build_temperature_anchors(self.conn)
+        self.assertEqual(len(anchors), 1)
+        self.assertAlmostEqual(anchors[0]["lat"], 46.7055374, delta=0.01)
+        self.assertAlmostEqual(anchors[0]["lon"], -91.6021071, delta=0.01)
+        self.assertAlmostEqual(anchors[0]["value_c"], 14.2)
+
+    def test_source3_ndbc_buoy_coordinate_used_for_lake_michigan(self):
+        # Real buoy 45013 (Atwater Park, Milwaukee) is in
+        # data/v1/lake_michigan_buoy_sites.csv.
+        self._insert_waterbody(
+            "Lake Michigan", "Milwaukee", temp_value_c=16.8, temp_is_real=1, temp_method="ndbc_buoy_live",
+        )
+        self.conn.execute(
+            "UPDATE waterbody_results SET temp_source = ? WHERE waterbody_name = 'Lake Michigan'",
+            ("NOAA NDBC buoy 45013 (ATW20 - Atwater Park WI (Milwaukee))",),
+        )
+        self.conn.commit()
+
+        anchors = rd.build_temperature_anchors(self.conn)
+        self.assertEqual(len(anchors), 1)
+        self.assertAlmostEqual(anchors[0]["lat"], 43.098, delta=0.01)
+        self.assertAlmostEqual(anchors[0]["lon"], -87.85, delta=0.01)
+
+    def test_matched_access_point_takes_priority_over_usgs_lookup(self):
+        # Even though temp_method is 'usgs_live', a directly matched
+        # access point's own coordinate should win -- it's a more precise
+        # real coordinate than a generic name-matched USGS site.
+        self._insert_waterbody("Bois Brule River", "Douglas", temp_value_c=14.2, temp_is_real=1, temp_method="usgs_live")
+        self._insert_access_point("Bois Brule River", "Douglas", lat=1.0, lon=2.0)
+
+        anchors = rd.build_temperature_anchors(self.conn)
+        self.assertEqual(len(anchors), 1)
+        self.assertEqual(anchors[0]["lat"], 1.0)
+        self.assertEqual(anchors[0]["lon"], 2.0)
+
+    def test_no_runs_returns_empty_list(self):
+        conn2 = sqlite3.connect(":memory:")
+        conn2.row_factory = sqlite3.Row
+        conn2.executescript(SCHEMA)
+        self.assertEqual(rd.build_temperature_anchors(conn2), [])
+
+
+class TestEstimateTemperatureFromNearby(DataTestBase):
+    def setUp(self):
+        super().setUp()
+        self._insert_run()
+
+    def test_no_real_anchor_in_range_returns_none(self):
+        # Real anchor far away (Devils Lake, Sauk) from a query point in
+        # a different part of the state (Ashland, far north).
+        self._insert_waterbody("Devils Lake", "Sauk", temp_value_c=18.0, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301)
+
+        result = rd.estimate_temperature_from_nearby(self.conn, lat=46.5927, lon=-90.8823, max_km=15.0)
+        self.assertIsNone(result)
+
+    def test_single_close_real_anchor_returns_its_value(self):
+        # Real Devils Lake, Sauk coordinate; query point ~1km away.
+        self._insert_waterbody("Devils Lake", "Sauk", temp_value_c=18.0, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301)
+
+        result = rd.estimate_temperature_from_nearby(self.conn, lat=43.4370, lon=-89.7301, max_km=15.0)
+        self.assertIsNotNone(result)
+        self.assertAlmostEqual(result["value_c"], 18.0, delta=0.01)
+        self.assertEqual(result["anchor_count"], 1)
+        self.assertLess(result["nearest_km"], 2.0)
+        self.assertEqual(result["anchors"][0]["waterbody_name"], "Devils Lake")
+
+    def test_idw_weights_nearer_anchor_more_heavily(self):
+        # Two synthetic anchors on either side of the query point, one
+        # much closer than the other -- the estimate must land closer to
+        # the near anchor's value than a plain average would.
+        self._insert_waterbody("Near Lake", "TestCounty", temp_value_c=10.0, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_access_point("Near Lake", "TestCounty", lat=43.001, lon=-89.0)
+        self._insert_waterbody("Far Lake", "TestCounty", temp_value_c=20.0, temp_is_real=1, temp_method="clmn_recent",
+                                run_timestamp="2026-09-09T12:00:00+00:00")
+        self._insert_access_point("Far Lake", "TestCounty", lat=43.1, lon=-89.0)
+
+        result = rd.estimate_temperature_from_nearby(self.conn, lat=43.0, lon=-89.0, max_km=15.0)
+        self.assertIsNotNone(result)
+        self.assertEqual(result["anchor_count"], 2)
+        plain_average = (10.0 + 20.0) / 2
+        self.assertLess(result["value_c"], plain_average)
+        self.assertGreater(result["value_c"], 10.0)
+
+    def test_max_anchors_caps_how_many_are_used(self):
+        for i in range(8):
+            name = f"Lake{i}"
+            self._insert_waterbody(name, "TestCounty", temp_value_c=float(i), temp_is_real=1, temp_method="clmn_recent")
+            self._insert_access_point(name, "TestCounty", lat=43.0 + i * 0.001, lon=-89.0)
+
+        result = rd.estimate_temperature_from_nearby(self.conn, lat=43.0, lon=-89.0, max_km=15.0, max_anchors=3)
+        self.assertEqual(result["anchor_count"], 3)
+
+
+class TestFindAccessPointByCoords(DataTestBase):
+    def test_finds_by_exact_coordinate(self):
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301, facility_name="Devils Lake Ramp")
+        point = rd.find_access_point_by_coords(self.conn, 43.4286, -89.7301)
+        self.assertIsNotNone(point)
+        self.assertEqual(point["facility_name"], "Devils Lake Ramp")
+
+    def test_finds_within_small_float_tolerance(self):
+        # Real-world coordinates round-trip through JSON/JS -- a spot
+        # link must still resolve even with tiny float drift.
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286001, lon=-89.7301, facility_name="Devils Lake Ramp")
+        point = rd.find_access_point_by_coords(self.conn, 43.4286, -89.7301)
+        self.assertIsNotNone(point)
+
+    def test_returns_none_when_no_point_at_coordinate(self):
+        point = rd.find_access_point_by_coords(self.conn, 0.0, 0.0)
+        self.assertIsNone(point)
+
+    def test_name_disambiguates_duplicate_coordinates(self):
+        # Real data has 23 duplicate lat/lon pairs (two real points at the
+        # same physical location) -- facility_name must pick the right one.
+        self._insert_access_point("Shared Spot A", "TestCounty", lat=44.0, lon=-90.0, facility_name="Ramp A")
+        self._insert_access_point("Shared Spot B", "TestCounty", lat=44.0, lon=-90.0, facility_name="Ramp B")
+        point = rd.find_access_point_by_coords(self.conn, 44.0, -90.0, name="Ramp B")
+        self.assertEqual(point["facility_name"], "Ramp B")
+
+
+class TestGetSpotTemperature(DataTestBase):
+    def setUp(self):
+        super().setUp()
+        self._insert_run()
+
+    def test_real_matched_waterbody_temperature_used_first(self):
+        self._insert_waterbody("Devils Lake", "Sauk", temp_value_c=18.0, temp_is_real=1, temp_method="clmn_recent")
+        result = rd.get_spot_temperature(self.conn, 43.4286, -89.7301, matched_waterbody="Devils Lake", matched_county="Sauk")
+        self.assertEqual(result["resolution"], "matched_waterbody_real")
+        self.assertTrue(result["is_real"])
+        self.assertAlmostEqual(result["value_c"], 18.0)
+
+    def test_falls_back_to_interpolation_when_matched_temp_is_proxy(self):
+        self._insert_waterbody("Nowhere Lake", "Vilas", temp_value_c=22.0, temp_is_real=0, temp_method="nws_air_proxy_live")
+        self._insert_waterbody("Nearby Real Lake", "Vilas", temp_value_c=17.5, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_access_point("Nearby Real Lake", "Vilas", lat=46.001, lon=-89.5)
+
+        result = rd.get_spot_temperature(self.conn, 46.0, -89.5, matched_waterbody="Nowhere Lake", matched_county="Vilas")
+        self.assertEqual(result["resolution"], "interpolated_nearby")
+        self.assertFalse(result["is_real"])
+
+    def test_falls_back_to_proxy_when_no_real_anchor_nearby(self):
+        self._insert_waterbody("Nowhere Lake", "Vilas", temp_value_c=22.0, temp_is_real=0, temp_method="nws_air_proxy_live")
+        result = rd.get_spot_temperature(self.conn, 46.0, -89.5, matched_waterbody="Nowhere Lake", matched_county="Vilas")
+        self.assertEqual(result["resolution"], "matched_waterbody_proxy")
+        self.assertFalse(result["is_real"])
+        self.assertAlmostEqual(result["value_c"], 22.0)
+
+    def test_none_when_unmatched_and_no_nearby_anchor(self):
+        result = rd.get_spot_temperature(self.conn, 46.0, -89.5)
+        self.assertIsNone(result)
+
+    def test_unmatched_point_still_gets_interpolated_estimate(self):
+        self._insert_waterbody("Nearby Real Lake", "Vilas", temp_value_c=17.5, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_access_point("Nearby Real Lake", "Vilas", lat=46.001, lon=-89.5)
+
+        result = rd.get_spot_temperature(self.conn, 46.0, -89.5)
+        self.assertEqual(result["resolution"], "interpolated_nearby")
+
+
+class TestGetSpotDetail(DataTestBase):
+    def setUp(self):
+        super().setUp()
+        self._insert_run()
+
+    def test_unknown_coordinate_returns_none(self):
+        self.assertIsNone(rd.get_spot_detail(self.conn, 0.0, 0.0))
+
+    def test_matched_spot_includes_species_predictions(self):
+        self._insert_waterbody("Devils Lake", "Sauk", temp_value_c=18.0, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_species_prediction("Devils Lake", "Sauk", "WALLEYE", any_match=1)
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301, facility_name="Devils Lake Ramp")
+
+        detail = rd.get_spot_detail(self.conn, 43.4286, -89.7301)
+        self.assertIsNotNone(detail)
+        self.assertEqual(detail["point"]["facility_name"], "Devils Lake Ramp")
+        self.assertEqual(detail["temperature"]["resolution"], "matched_waterbody_real")
+        self.assertEqual(len(detail["species_predictions"]), 1)
+        self.assertEqual(detail["species_predictions"][0]["species"], "WALLEYE")
+
+    def test_unmatched_spot_has_no_species_predictions_never_guessed(self):
+        self.conn.execute(
+            """INSERT INTO access_points
+               (source_type, facility_name, waterbody_name, county, latitude, longitude,
+                matched_waterbody_name, matched_county)
+               VALUES ('boat_ramp', 'Lone Ramp', 'Unknown Pond', 'Vilas', 46.0, -89.5, NULL, NULL)"""
+        )
+        self.conn.commit()
+
+        detail = rd.get_spot_detail(self.conn, 46.0, -89.5)
+        self.assertIsNotNone(detail)
+        self.assertEqual(detail["species_predictions"], [])
 
 
 if __name__ == "__main__":

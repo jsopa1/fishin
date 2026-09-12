@@ -230,6 +230,43 @@ class WebAppRouteTests(unittest.TestCase):
         sighting = payload["sightings"][0]
         self.assertNotIn("matched_waterbody_name", sighting)
 
+    def test_spot_report_loads_for_a_matched_real_point(self):
+        map_resp = self.client.get("/map/data")
+        points = map_resp.get_json()["points"]
+        matched = next(p for p in points if p["matched_waterbody_name"])
+
+        resp = self.client.get(
+            "/spot?lat={}&lon={}&name={}".format(matched["lat"], matched["lon"], matched["facility_name"] or "")
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(matched["waterbody_name"].encode(), resp.data)
+
+    def test_spot_report_loads_for_an_unmatched_real_point_honest_gaps(self):
+        map_resp = self.client.get("/map/data")
+        points = map_resp.get_json()["points"]
+        unmatched = next(p for p in points if not p["matched_waterbody_name"])
+
+        resp = self.client.get(
+            "/spot?lat={}&lon={}&name={}".format(unmatched["lat"], unmatched["lon"], unmatched["facility_name"] or "")
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b"no species-presence data", resp.data)
+        self.assertIn(b"available for this specific spot", resp.data)
+
+    def test_spot_report_404_for_coordinates_matching_no_real_point(self):
+        resp = self.client.get("/spot?lat=0.0&lon=0.0")
+        self.assertEqual(resp.status_code, 404)
+        self.assertIn(b"Not found", resp.data)
+
+    def test_spot_report_400_for_missing_coordinates(self):
+        resp = self.client.get("/spot")
+        self.assertEqual(resp.status_code, 400)
+
+    def test_map_popup_links_to_spot_report(self):
+        resp = self.client.get("/map")
+        self.assertIn(b"Full spot report", resp.data)
+        self.assertIn(b"spotUrl", resp.data)
+
 
 class WebAppErrorHandlingTests(unittest.TestCase):
     """Part 3 of the polish pass: malformed input, missing params, and

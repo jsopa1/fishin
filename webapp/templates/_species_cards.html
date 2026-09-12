@@ -1,0 +1,44 @@
+{% if species_predictions %}
+  {% for sp in species_predictions %}
+  <div class="species-card">
+    <div class="species-head">
+      <h4>{{ sp.species.title() }}</h4>
+      {% if not sp.has_threshold_data %}
+        <span class="match-badge none">No reference data</span>
+      {% elif sp.any_match %}
+        <span class="match-badge yes">✓ Currently matching</span>
+      {% else %}
+        <span class="match-badge no">No match right now</span>
+      {% endif %}
+    </div>
+    {% if sp.river_caveat_applied or sp.diel_active %}
+    <div class="flag-row">
+      {% if sp.river_caveat_applied %}
+        <span class="flag flag-caveat">⚠ Lake-derived threshold — unverified for streams</span>
+      {% endif %}
+      {% if sp.diel_active %}
+        <span class="flag flag-diel">🌙 Documented dawn/dusk/nocturnal feeder</span>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if sp.match_description %}
+      <p class="species-desc">{{ sp.match_description }}</p>
+    {% endif %}
+    {% if sp.evidence_quality %}
+      <p class="species-evidence">Evidence quality: <span class="tag evidence">{{ sp.evidence_quality }}</span></p>
+    {% endif %}
+    {% if sp.non_match_explanation %}
+      <div class="why-not-box">
+        <p class="why-not-label">Why not a match right now:</p>
+        <ul>
+          {% for gap in sp.non_match_explanation.split(' | ') %}
+            <li>{{ gap }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+{% else %}
+  <p class="empty-state">No species prediction records for this waterbody.</p>
+{% endif %}

@@ -11,7 +11,11 @@ no_data/None values, so the UI can present them honestly.
 
 import datetime
 import sqlite3
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent / "analysis"))
+import v1_conditions_biology_forecast as v1  # noqa: E402
 
 DEFAULT_STALE_HOURS = 24
 
@@ -397,3 +401,288 @@ def list_distinct_invasive_species(conn: sqlite3.Connection) -> list:
         )]
     except sqlite3.OperationalError:
         return []
+
+
+# ---------------------------------------------------------------------------
+# Spot-level temperature interpolation (V2 fish-intelligence deepening,
+# Decision #021 / docs/v2_fish_intelligence_platform_plan.md Phase 1).
+# Most access points aren't matched to a full V1 waterbody record, so
+# they have no temperature at all today. This estimates one from nearby
+# REAL (never proxy) readings only -- honestly returning nothing when no
+# real reading is close enough, rather than guessing.
+# ---------------------------------------------------------------------------
+
+def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    """Same formula as analysis/v1_conditions_biology_forecast.py's
+    _haversine_km (verified there against a real Milwaukee-Chicago
+    distance) -- duplicated rather than imported to keep ui/ and
+    analysis/ independent of each other's internals; this one function
+    is small and stable enough that the duplication is cheaper than the
+    coupling."""
+    import math
+
+    r = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp = math.radians(lat2 - lat1)
+    dl = math.radians(lon2 - lon1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
+
+
+def build_temperature_anchors(conn: sqlite3.Connection) -> list:
+    """Every REAL (non-proxy) water-temperature reading from the latest
+    V1 run, paired with a real coordinate -- the anchor pool for
+    spot-level interpolation. A real-temp waterbody with no available
+    coordinate is left out of the pool rather than geocoded fresh here
+    (this must stay fast: called per spot-detail request, not once per
+    batch run, unlike the live geocoding v1_full_run.py already does).
+
+    Three real coordinate sources, tried in order per waterbody:
+      1. A matched access point's own real ArcGIS coordinate (covers
+         the large majority of real-temp waterbodies with any public
+         access at all).
+      2. The USGS gauge site's own coordinate, for `usgs_live` readings
+         not covered by (1) -- reuses v1's own find_usgs_site_matches().
+      3. The NDBC buoy's own coordinate, for `ndbc_buoy_live` readings
+         not covered by (1) -- parsed from the stored temp_source text
+         (e.g. "NOAA NDBC buoy 45013 (...)").
+
+    Returns [{"lat", "lon", "value_c", "waterbody_name", "county",
+    "source"}, ...], one entry per distinct real-temp waterbody that
+    resolved a coordinate.
+    """
+    try:
+        row = conn.execute("SELECT run_timestamp FROM runs ORDER BY finished_at DESC LIMIT 1").fetchone()
+    except sqlite3.OperationalError:
+        return []
+    if row is None:
+        return []
+    latest = row[0]
+
+    anchors = {}  # (name, county) -> anchor dict; first coordinate source found wins
+
+    try:
+        rows = conn.execute(
+            """SELECT wr.waterbody_name, wr.county, wr.temp_value_c, wr.temp_method,
+                      ap.latitude, ap.longitude
+               FROM waterbody_results wr
+               JOIN access_points ap ON ap.matched_waterbody_name = wr.waterbody_name
+                   AND ap.matched_county = wr.county
+               WHERE wr.temp_is_real = 1 AND wr.run_timestamp = ?""",
+            (latest,),
+        ).fetchall()
+    except sqlite3.OperationalError:
+        rows = []
+    for name, county, value_c, method, lat, lon in rows:
+        key = (name, county)
+        if key not in anchors:
+            anchors[key] = {
+                "lat": lat, "lon": lon, "value_c": value_c,
+                "waterbody_name": name, "county": county, "source": method,
+            }
+
+    remaining_usgs = conn.execute(
+        "SELECT waterbody_name, county, temp_value_c, temp_method FROM waterbody_results "
+        "WHERE temp_is_real = 1 AND run_timestamp = ? AND temp_method = 'usgs_live'", (latest,)
+    ).fetchall()
+    for name, county, value_c, method in remaining_usgs:
+        key = (name, county)
+        if key in anchors:
+            continue
+        matches = v1.find_usgs_site_matches(name)
+        if matches:
+            site = matches[0]
+            anchors[key] = {
+                "lat": float(site["lat"]), "lon": float(site["lon"]), "value_c": value_c,
+                "waterbody_name": name, "county": county, "source": method,
+            }
+
+    buoy_sites = {s["station_id"]: s for s in v1.load_lake_michigan_buoy_sites()}
+    remaining_buoy = conn.execute(
+        "SELECT waterbody_name, county, temp_value_c, temp_method, temp_source FROM waterbody_results "
+        "WHERE temp_is_real = 1 AND run_timestamp = ? AND temp_method = 'ndbc_buoy_live'", (latest,)
+    ).fetchall()
+    for name, county, value_c, method, source in remaining_buoy:
+        key = (name, county)
+        if key in anchors:
+            continue
+        for station_id, site in buoy_sites.items():
+            if f"buoy {station_id} " in (source or "") or (source or "").endswith(f"buoy {station_id}"):
+                anchors[key] = {
+                    "lat": float(site["lat"]), "lon": float(site["lon"]), "value_c": value_c,
+                    "waterbody_name": name, "county": county, "source": method,
+                }
+                break
+
+    return list(anchors.values())
+
+
+def estimate_temperature_from_nearby(
+    conn: sqlite3.Connection, lat: float, lon: float, max_km: float = 15.0, max_anchors: int = 5
+):
+    """Inverse-distance-weighted estimate from real anchor readings
+    only (build_temperature_anchors) within max_km. Returns None when no
+    real anchor is close enough -- an honest absence, never a fabricated
+    guess with nothing behind it. Never uses a proxy reading as an
+    anchor: a proxy is already an estimate, and re-estimating from an
+    estimate would compound uncertainty invisibly.
+
+    Returns {"value_c", "anchor_count", "nearest_km", "anchors":
+    [{"waterbody_name", "county", "distance_km"}, ...]} on success.
+    """
+    anchors = build_temperature_anchors(conn)
+    nearby = []
+    for a in anchors:
+        d = _haversine_km(lat, lon, a["lat"], a["lon"])
+        if d <= max_km:
+            nearby.append((d, a))
+    if not nearby:
+        return None
+    nearby.sort(key=lambda pair: pair[0])
+    nearby = nearby[:max_anchors]
+
+    weights = [1.0 / max(d, 0.05) for d, _ in nearby]
+    total_weight = sum(weights)
+    value_c = sum(w * a["value_c"] for w, (_, a) in zip(weights, nearby)) / total_weight
+
+    return {
+        "value_c": value_c,
+        "anchor_count": len(nearby),
+        "nearest_km": nearby[0][0],
+        "anchors": [
+            {"waterbody_name": a["waterbody_name"], "county": a["county"], "distance_km": round(d, 1)}
+            for d, a in nearby
+        ],
+    }
+
+
+# ---------------------------------------------------------------------------
+# Spot detail (V2 fish-intelligence deepening, Phases 1/2/4 -- Decision
+# #021 / docs/v2_fish_intelligence_platform_plan.md). "Spot" means any
+# access point on the map, matched to a V1 waterbody or not -- the
+# one-stop-shop view the CEO described.
+# ---------------------------------------------------------------------------
+
+_COORD_MATCH_TOLERANCE = 0.0001  # ~11m at WI latitudes -- exact-float-equality-safe but not so loose it could pick up a different real point
+
+
+def find_access_point_by_coords(conn: sqlite3.Connection, lat: float, lon: float, name: str = None) -> dict | None:
+    """Looks up one access point by its own real coordinate -- the stable
+    key for a spot-detail link, since access_points.id is only an
+    AUTOINCREMENT that isn't stable across a future re-ingestion (see
+    docs/v2_access_points_report.md section 8). `name` (facility_name)
+    disambiguates the rare (23 of 3,272) case of two real points sharing
+    a coordinate. Reuses the same shore_fishing_details join as
+    list_access_points so a spot page has every field the map popup has."""
+    base_query = """
+        SELECT ap.*, sfd.directions, sfd.fishing_trail, sfd.fixed_pier, sfd.end_of_pier_depth,
+               sfd.travel_route_surface, sfd.vehicle_stalls, sfd.vehicle_trailer_stalls,
+               sfd.restrooms, sfd.fish_species_raw, sfd.fish_cleaning_area,
+               sfd.additional_amenities, sfd.comments, sfd.ada_vehicle_stalls,
+               sfd.ada_vehicle_trailer_stalls, sfd.ada_restrooms, sfd.property_manager,
+               sfd.property_manager_phone
+        FROM access_points ap
+        LEFT JOIN shore_fishing_details sfd ON sfd.more_info_url = ap.more_info_url
+        WHERE ABS(ap.latitude - ?) < ? AND ABS(ap.longitude - ?) < ?
+    """
+    params = [lat, _COORD_MATCH_TOLERANCE, lon, _COORD_MATCH_TOLERANCE]
+    if name:
+        base_query += " AND ap.facility_name = ?"
+        params.append(name)
+    try:
+        row = conn.execute(base_query, params).fetchone()
+    except sqlite3.OperationalError:
+        fallback_query = "SELECT * FROM access_points WHERE ABS(latitude - ?) < ? AND ABS(longitude - ?) < ?"
+        fallback_params = [lat, _COORD_MATCH_TOLERANCE, lon, _COORD_MATCH_TOLERANCE]
+        if name:
+            fallback_query += " AND facility_name = ?"
+            fallback_params.append(name)
+        row = conn.execute(fallback_query, fallback_params).fetchone()
+    return dict(row) if row else None
+
+
+def get_spot_temperature(
+    conn: sqlite3.Connection, lat: float, lon: float, matched_waterbody: str = None, matched_county: str = None
+) -> dict | None:
+    """Resolves one spot's water temperature, honestly, in priority order:
+      1. A real (non-proxy) V1 measurement, when this spot is matched to
+         a waterbody that already has one -- the most direct real evidence.
+      2. An inverse-distance-weighted estimate from real nearby readings
+         (estimate_temperature_from_nearby) -- more informative than a
+         generic air-temperature proxy when a real reading exists nearby.
+      3. The matched waterbody's own proxy temperature, only if nothing
+         better was found.
+      4. None (honest no-data) if none of the above resolves.
+    Every branch is labeled distinctly (`resolution`) so the UI never
+    conflates a real measurement, an estimate, and a proxy."""
+    matched_row = None
+    if matched_waterbody and matched_county:
+        matched_row = conn.execute(
+            "SELECT temp_value_c, temp_is_real, temp_method, temp_source, temp_observed_at "
+            "FROM waterbody_results WHERE waterbody_name = ? AND county = ?",
+            (matched_waterbody, matched_county),
+        ).fetchone()
+
+    if matched_row and matched_row["temp_is_real"] and matched_row["temp_value_c"] is not None:
+        return {
+            "value_c": matched_row["temp_value_c"],
+            "is_real": True,
+            "method": matched_row["temp_method"],
+            "source": matched_row["temp_source"],
+            "observed_at": matched_row["temp_observed_at"],
+            "resolution": "matched_waterbody_real",
+        }
+
+    estimate = estimate_temperature_from_nearby(conn, lat, lon)
+    if estimate is not None:
+        return {
+            "value_c": estimate["value_c"],
+            "is_real": False,
+            "method": "interpolated_nearby",
+            "resolution": "interpolated_nearby",
+            "anchor_count": estimate["anchor_count"],
+            "nearest_km": estimate["nearest_km"],
+            "anchors": estimate["anchors"],
+        }
+
+    if matched_row and matched_row["temp_value_c"] is not None:
+        return {
+            "value_c": matched_row["temp_value_c"],
+            "is_real": False,
+            "method": matched_row["temp_method"],
+            "source": matched_row["temp_source"],
+            "observed_at": matched_row["temp_observed_at"],
+            "resolution": "matched_waterbody_proxy",
+        }
+
+    return None
+
+
+def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str = None) -> dict | None:
+    """The full one-stop-shop payload for a single spot: its own real
+    access-point fields, an honestly-resolved temperature (see
+    get_spot_temperature), and -- only when matched to a known V1
+    waterbody -- that waterbody's species predictions (Phase 2: reused
+    unchanged, never guessed for an unmatched point). Returns None only
+    when the coordinate doesn't resolve to any real access point at all."""
+    point = find_access_point_by_coords(conn, lat, lon, name=name)
+    if point is None:
+        return None
+
+    temperature = get_spot_temperature(
+        conn, lat, lon,
+        matched_waterbody=point.get("matched_waterbody_name"),
+        matched_county=point.get("matched_county"),
+    )
+
+    species_predictions = []
+    if point.get("matched_waterbody_name") and point.get("matched_county"):
+        wb_detail = get_waterbody_detail(conn, point["matched_waterbody_name"], point["matched_county"])
+        if wb_detail:
+            species_predictions = wb_detail["species_predictions"]
+
+    return {
+        "point": point,
+        "temperature": temperature,
+        "species_predictions": species_predictions,
+    }

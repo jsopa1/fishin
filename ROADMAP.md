@@ -96,13 +96,19 @@ Broader "habitat scoring" and open-ended "environmental intelligence"
 possibilities, not yet scoped or started, and not required for this
 slice to count as done.
 
-**Second slice, planned (Decision #021)**: a CEO-directed deepening of
-this same "Where Should I Fish?" scope into a real spot-level fishing
-intelligence platform — click a spot on the map, get water temperature
-(real, honestly estimated, or honestly unavailable), likely species and
-why, and bait/technique recommendations with real citations. Full plan:
+**Second slice, in progress (Decision #021/#022)**: a CEO-directed
+deepening of this same "Where Should I Fish?" scope into a real
+spot-level fishing intelligence platform — click a spot on the map, get
+water temperature (real, honestly estimated, or honestly unavailable),
+likely species and why, and bait/technique recommendations with real
+citations. Every one of the 3,272 real access points, matched to a V1
+waterbody or not, now has its own `/spot` page combining a real or
+honestly-interpolated temperature (inverse-distance-weighted from real
+nearby readings, never fabricated) with the existing species-match/
+why-not system. Full plan and implementation status:
 [docs/v2_fish_intelligence_platform_plan.md](docs/v2_fish_intelligence_platform_plan.md).
-**Status: planned, build starting.**
+**Status: Phases 1/2/4 shipped; Phase 3 (bait/technique research) and
+Phase 5 (more niche spot sources) not yet started.**
 
 ## V3 — Continuous Validation
 

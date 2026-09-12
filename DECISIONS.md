@@ -749,3 +749,54 @@ before more code — full plan:
   it mid-build) keeps the same "research first, build second"
   discipline intact, and prevents Phase 4 from ever shipping a bait
   recommendation without a real citation behind it
+
+## 022 — Spot-level temperature interpolation and the one-stop-shop spot page (Phases 1/2/4)
+
+Implemented the engineering slice of Decision #021's plan (Phases 1, 2,
+and 4, shipped together as planned since Phase 4 has nothing to show
+without 1+2) — full detail:
+[docs/v2_fish_intelligence_platform_plan.md](docs/v2_fish_intelligence_platform_plan.md#implementation-status).
+
+- **Temperature interpolation is IDW over real anchors only, honestly
+  empty otherwise**: `build_temperature_anchors()` never includes a
+  proxy reading as an anchor (an estimate shouldn't be re-estimated
+  from), and `estimate_temperature_from_nearby()` returns `None` rather
+  than a number when no real anchor is within 15km — the same
+  no-fabrication rule this project has applied since Decision #005,
+  now extended to an interpolated value rather than just a raw
+  measurement.
+- **Priority ladder for a spot's displayed temperature**:
+  real matched-waterbody measurement > IDW estimate from real nearby
+  readings > the matched waterbody's own proxy value > honest no-data.
+  An estimate from real nearby data was judged more informative than a
+  generic county-wide air-temperature proxy, so it's tried first — but
+  a real, already-known measurement always wins outright when one
+  exists.
+- **Spot pages are keyed by the point's own real coordinate, not
+  `access_points.id`** — that id isn't stable across a future WDNR
+  re-ingestion (already the reason `shore_fishing_details` uses
+  `more_info_url` instead, Decision #019/§8 of
+  `docs/v2_access_points_report.md`), and unlike `more_info_url` (only
+  ~4% of access points have one), every access point has a real
+  lat/lon. 23 of 3,272 real points share an exact coordinate with
+  another point, so the facility name is used as a secondary
+  disambiguator.
+- **Species data is reused, not rebuilt**, per the plan — a matched
+  spot shows the exact same species-card markup (now factored into
+  `webapp/templates/_species_cards.html` so both pages render it
+  identically), and an unmatched spot honestly states no
+  species-presence data is available for that specific location rather
+  than inferring from the nearest waterbody.
+
+**Rationale:**
+- Matches the CEO's explicit instruction in Decision #021 not to
+  fabricate a value where there's genuinely nothing to base one on --
+  applied here to interpolation specifically, not just raw lookups
+- Reusing `get_waterbody_detail()`'s species logic unchanged (rather
+  than writing a second version for spots) keeps the "why not a match"
+  explanations and evidence-quality labels consistent everywhere they
+  appear, with one source of truth to maintain
+- Verified live against the real database (not just unit tests) before
+  considering this done -- a real previously-unmatched access point
+  (Ada Lake Campground boat ramp, Langlade County) was confirmed to
+  resolve a sane interpolated estimate from a real nearby reading

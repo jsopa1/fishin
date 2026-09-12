@@ -172,7 +172,16 @@
       html += '<br><a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
         + '&county=' + encodeURIComponent(p.matched_county) + '">View waterbody conditions →</a>';
     }
+    html += '<br><a href="' + spotUrl(p) + '"><strong>Full spot report (temperature, species, why) →</strong></a>';
     return html;
+  }
+
+  function spotUrl(p) {
+    var params = new URLSearchParams();
+    params.set('lat', p.lat);
+    params.set('lon', p.lon);
+    if (p.facility_name) params.set('name', p.facility_name);
+    return '{{ url_for("spot_detail") }}?' + params.toString();
   }
 
   function renderList(pts) {
@@ -183,13 +192,7 @@
     var rows = pts.map(function (p, i) {
       var species = p.fish_species_raw || '';
       var typeLabel = labels[p.source_type] || p.source_type;
-      var linkCell = '';
-      if (p.matched_waterbody_name) {
-        linkCell = '<a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
-          + '&county=' + encodeURIComponent(p.matched_county) + '">Conditions →</a>';
-      } else if (p.more_info_url) {
-        linkCell = '<a href="' + escapeHtml(p.more_info_url) + '" target="_blank" rel="noopener">WDNR page ↗</a>';
-      }
+      var linkCell = '<a href="' + spotUrl(p) + '">Spot report →</a>';
       return '<tr class="access-list-row" data-idx="' + i + '">'
         + '<td>' + escapeHtml(p.facility_name || typeLabel) + '</td>'
         + '<td><span class="access-type-tag type-' + p.source_type + '">' + escapeHtml(typeLabel) + '</span></td>'
