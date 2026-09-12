@@ -53,6 +53,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 import v1_conditions_biology_forecast as v1  # noqa: E402
+import v2_species_canonicalization as canon  # noqa: E402
 
 DB_PATH = v1.DATA_V1 / "v1_full_run_results.db"
 
@@ -197,6 +198,17 @@ def init_db(conn: sqlite3.Connection):
             ON shore_fishing_species(species_text);
         CREATE INDEX IF NOT EXISTS idx_shore_fishing_species_url
             ON shore_fishing_species(more_info_url);
+
+        CREATE TABLE IF NOT EXISTS shore_fishing_species_canonical (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            more_info_url TEXT NOT NULL,
+            canonical_species TEXT NOT NULL
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_shore_fishing_species_canonical_name
+            ON shore_fishing_species_canonical(canonical_species);
+        CREATE INDEX IF NOT EXISTS idx_shore_fishing_species_canonical_url
+            ON shore_fishing_species_canonical(more_info_url);
         """
     )
     conn.commit()
@@ -216,6 +228,15 @@ def write_details(conn: sqlite3.Connection, more_info_url: str, fields: dict, fe
     conn.executemany(
         "INSERT INTO shore_fishing_species (more_info_url, species_text) VALUES (?, ?)",
         [(more_info_url, s) for s in species],
+    )
+    # Real, WDNR-published text is preserved above, untouched. This table
+    # is purely a filtering aid -- see v2_species_canonicalization.py's
+    # own docstring for the no-fabrication discipline it follows.
+    conn.execute("DELETE FROM shore_fishing_species_canonical WHERE more_info_url = ?", (more_info_url,))
+    canonical_names = sorted({name for s in species for name in canon.canonicalize(s)})
+    conn.executemany(
+        "INSERT INTO shore_fishing_species_canonical (more_info_url, canonical_species) VALUES (?, ?)",
+        [(more_info_url, name) for name in canonical_names],
     )
     conn.commit()
 

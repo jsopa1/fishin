@@ -268,14 +268,14 @@ def list_access_points(
     if species:
         clauses.append(
             "("
-            "EXISTS (SELECT 1 FROM shore_fishing_species sfs WHERE sfs.more_info_url = ap.more_info_url "
-            "AND sfs.species_text LIKE ? ESCAPE '\\')"
+            "EXISTS (SELECT 1 FROM shore_fishing_species_canonical sfc WHERE sfc.more_info_url = ap.more_info_url "
+            "AND sfc.canonical_species = ?)"
             " OR "
             "EXISTS (SELECT 1 FROM species_predictions sp WHERE sp.waterbody_name = ap.matched_waterbody_name "
             "AND sp.county = ap.matched_county AND sp.species LIKE ? ESCAPE '\\')"
             ")"
         )
-        params.append(_like_pattern(species))
+        params.append(species)
         params.append(_like_pattern(species.upper()))
     where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
     query = f"""
@@ -322,18 +322,25 @@ def list_access_points(
 def list_combined_species(conn: sqlite3.Connection) -> list:
     """A single, deduplicated (case-insensitive) species list spanning
     both real sources: V1's own clean species_predictions list, and the
-    raw phrases WDNR publishes on shore-fishing detail pages (kept
-    verbatim, typos and all -- see analysis/v2_shore_fishing_details.py).
-    Where the same species appears in both with different casing, V1's
-    form is kept as the canonical display form since it's already
-    normalized; this never changes which underlying rows a filter on
-    either form matches (list_access_points checks both sources)."""
+    CANONICAL species WDNR's shore-fishing pages resolve to (see
+    analysis/v2_species_canonicalization.py -- the raw text itself, e.g.
+    "SM BASS" or "LAREMOUTH BASS", is preserved untouched everywhere it's
+    displayed; only this filter-list/lookup path uses the canonical
+    form). Without canonicalizing first, this list would offer dozens of
+    near-duplicate options for a handful of real species (verified: 61
+    raw WDNR phrases collapse to 30 real species here). Where the same
+    species appears in both sources with different casing, V1's form is
+    kept as the canonical display form since it's already normalized;
+    this never changes which underlying rows a filter on either form
+    matches (list_access_points checks both sources)."""
     try:
         v1_species = [r[0] for r in conn.execute("SELECT DISTINCT species FROM species_predictions")]
     except sqlite3.OperationalError:
         v1_species = []
     try:
-        shore_species = [r[0] for r in conn.execute("SELECT DISTINCT species_text FROM shore_fishing_species")]
+        shore_species = [
+            r[0] for r in conn.execute("SELECT DISTINCT canonical_species FROM shore_fishing_species_canonical")
+        ]
     except sqlite3.OperationalError:
         shore_species = []
 

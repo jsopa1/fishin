@@ -46,6 +46,7 @@ class TempDataMixin:
             "STOCKING_CSV": v1.STOCKING_CSV,
             "WATER_TEMP_CSV": v1.WATER_TEMP_CSV,
             "USGS_SITES_CSV": v1.USGS_SITES_CSV,
+            "LAKE_MICHIGAN_BUOY_CSV": v1.LAKE_MICHIGAN_BUOY_CSV,
             "THRESHOLDS_JSON": v1.THRESHOLDS_JSON,
         }
         # Point batch2 and the USGS sites table at nonexistent temp paths by
@@ -53,6 +54,7 @@ class TempDataMixin:
         # files -- each test that needs one calls the matching _set_* helper.
         v1.SURVEY_CSV_BATCH2 = Path(self._tmpdir) / "no_batch2.csv"
         v1.USGS_SITES_CSV = Path(self._tmpdir) / "no_usgs_sites.csv"
+        v1.LAKE_MICHIGAN_BUOY_CSV = Path(self._tmpdir) / "no_buoy_sites.csv"
 
     def tearDown(self):
         for name, path in self._orig_paths.items():
@@ -62,6 +64,11 @@ class TempDataMixin:
         path = os.path.join(self._tmpdir, "usgs_sites.csv")
         _write_csv(path, rows, ["site_no", "station_nm", "site_type", "lat", "lon"])
         v1.USGS_SITES_CSV = Path(path)
+
+    def _set_buoy_sites(self, rows):
+        path = os.path.join(self._tmpdir, "buoy_sites.csv")
+        _write_csv(path, rows, ["station_id", "station_name", "lat", "lon"])
+        v1.LAKE_MICHIGAN_BUOY_CSV = Path(path)
 
     def _set_survey(self, rows):
         path = os.path.join(self._tmpdir, "survey.csv")
@@ -137,6 +144,94 @@ class TestThresholdMatching(unittest.TestCase):
         t = {"type": "activity_window", "range_c": [22.0, 27.3], "range_f": [71.6, 81.1], "description": "disputed"}
         self.assertIsNotNone(v1.describe_threshold_match(22.0, t))
         self.assertIsNotNone(v1.describe_threshold_match(26.0, t))
+
+
+class TestThresholdGapExplanation(unittest.TestCase):
+    """describe_threshold_gap() -- the "why not a match right now"
+    explanation for a threshold that did NOT match."""
+
+    def test_none_when_actually_matching(self):
+        t = {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"}
+        self.assertIsNone(v1.describe_threshold_gap(20.0, t))
+
+    def test_range_below_reports_gap_and_direction(self):
+        t = {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"}
+        gap = v1.describe_threshold_gap(10.0, t)
+        self.assertIn("below", gap)
+        self.assertIn("2.8", gap)  # 12.8 - 10.0 = 2.8C gap
+
+    def test_range_above_reports_gap_and_direction(self):
+        t = {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"}
+        gap = v1.describe_threshold_gap(30.0, t)
+        self.assertIn("above", gap)
+        self.assertIn("6.1", gap)  # 30.0 - 23.9 = 6.1C gap
+
+    def test_range_boundary_has_no_gap(self):
+        t = {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"}
+        self.assertIsNone(v1.describe_threshold_gap(12.8, t))
+        self.assertIsNone(v1.describe_threshold_gap(23.9, t))
+
+    def test_avoidance_above_not_yet_triggered_worded_neutrally(self):
+        t = {"type": "avoidance_above", "threshold_c": 23.9, "threshold_f": 75, "description": "x"}
+        gap = v1.describe_threshold_gap(20.0, t)
+        self.assertIn("not yet warm enough", gap)
+        self.assertNotIn("above", gap.split("not yet")[0].split("below")[0] or "")
+
+    def test_avoidance_above_triggered_has_no_gap(self):
+        # When it DID trigger (matched), there's nothing to explain.
+        t = {"type": "avoidance_above", "threshold_c": 23.9, "threshold_f": 75, "description": "x"}
+        self.assertIsNone(v1.describe_threshold_gap(25.0, t))
+
+    def test_preferred_point_outside_tolerance_reports_gap(self):
+        t = {"type": "activity_window", "preferred_point_c": 11.7, "preferred_point_f": 53.1, "description": "x"}
+        gap = v1.describe_threshold_gap(20.0, t)
+        self.assertIn("above", gap)
+        self.assertIn("8.3", gap)  # 20.0 - 11.7 = 8.3C gap
+
+    def test_preferred_point_within_tolerance_has_no_gap(self):
+        t = {"type": "activity_window", "preferred_point_c": 11.7, "preferred_point_f": 53.1, "description": "x"}
+        self.assertIsNone(v1.describe_threshold_gap(12.5, t))
+
+
+class TestEvaluateSpeciesNonMatches(unittest.TestCase):
+    """evaluate_species_at_waterbody()'s non_matches field -- populated
+    only when the species has threshold data, a real temperature exists,
+    and nothing matched."""
+
+    def _thresholds(self, entries):
+        return {"species": {"WALLEYE": {"diel_active": False, "thresholds": entries}}}
+
+    def test_non_matches_populated_when_nothing_matches(self):
+        thresholds = self._thresholds([
+            {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"},
+        ])
+        result = v1.evaluate_species_at_waterbody("WALLEYE", 5.0, "lake", thresholds)
+        self.assertEqual(result["matches"], [])
+        self.assertEqual(len(result["non_matches"]), 1)
+        self.assertIn("below", result["non_matches"][0])
+
+    def test_non_matches_empty_when_a_real_match_exists(self):
+        thresholds = self._thresholds([
+            {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"},
+        ])
+        result = v1.evaluate_species_at_waterbody("WALLEYE", 20.0, "lake", thresholds)
+        self.assertEqual(len(result["matches"]), 1)
+        self.assertEqual(result["non_matches"], [])
+
+    def test_non_matches_empty_when_no_temperature_reading(self):
+        thresholds = self._thresholds([
+            {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"},
+        ])
+        result = v1.evaluate_species_at_waterbody("WALLEYE", None, "lake", thresholds)
+        self.assertEqual(result["non_matches"], [])
+
+    def test_non_matches_one_entry_per_unmatched_threshold(self):
+        thresholds = self._thresholds([
+            {"type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75], "description": "x"},
+            {"type": "spawning_trigger", "range_c": [4.4, 11.1], "range_f": [40, 52], "description": "y"},
+        ])
+        result = v1.evaluate_species_at_waterbody("WALLEYE", 30.0, "lake", thresholds)
+        self.assertEqual(len(result["non_matches"]), 2)
 
 
 class TestLakeNameMatching(unittest.TestCase):
@@ -481,6 +576,103 @@ class TestNoDataAcrossAllSources(TempDataMixin, unittest.TestCase):
         narrative = v1.build_narrative("Nowhere Creek", temp_info, presence, v1.load_thresholds())
         self.assertIn("No real or proxy water-temperature data", narrative)
         self.assertIn("No species-presence data", narrative)
+
+
+class TestHaversineDistance(unittest.TestCase):
+    def test_same_point_is_zero(self):
+        self.assertAlmostEqual(v1._haversine_km(43.0, -87.9, 43.0, -87.9), 0.0)
+
+    def test_real_milwaukee_to_chicago_distance_is_plausible(self):
+        # Real coordinates: Milwaukee lakefront ~ (43.04, -87.91), Chicago
+        # lakefront ~ (41.88, -87.62). True great-circle distance is ~130km.
+        dist = v1._haversine_km(43.04, -87.91, 41.88, -87.62)
+        self.assertTrue(120 <= dist <= 140, msg=f"got {dist}")
+
+
+class TestFindNearestBuoys(TempDataMixin, unittest.TestCase):
+    def test_returns_all_sorted_nearest_first(self):
+        self._set_buoy_sites([
+            {"station_id": "FAR", "station_name": "Far buoy", "lat": "45.0", "lon": "-87.0"},
+            {"station_id": "NEAR", "station_name": "Near buoy", "lat": "43.01", "lon": "-87.91"},
+        ])
+        result = v1.find_nearest_buoys(43.0, -87.9)
+        self.assertEqual([r["station_id"] for r in result], ["NEAR", "FAR"])
+
+    def test_empty_site_table_returns_empty_list(self):
+        self._set_buoy_sites([])
+        self.assertEqual(v1.find_nearest_buoys(43.0, -87.9), [])
+
+
+class TestParseNdbcRealtime2(unittest.TestCase):
+    """Pure parsing of NDBC's real, public realtime2.txt format -- see
+    docstring on parse_ndbc_realtime2 for the real column layout, taken
+    from a live fetch of station 45013 during this project's own
+    development."""
+
+    FIXTURE = (
+        "#YY  MM DD hh mm WDIR WSPD GST  WVHT   DPD   APD MWD   PRES  ATMP  WTMP  DEWP  VIS PTDY  TIDE\n"
+        "#yr  mo dy hr mn degT m/s  m/s     m   sec   sec degT   hPa  degC  degC  degC  nmi  hPa    ft\n"
+        "{y} {mo:02d} {d:02d} {h:02d} {mi:02d} 170  5.0  7.0   0.6     4    MM 116 1013.7  20.3  17.8  18.2   MM -2.1    MM\n"
+    )
+
+    def _fixture_for(self, dt):
+        return self.FIXTURE.format(y=dt.year, mo=dt.month, d=dt.day, h=dt.hour, mi=dt.minute)
+
+    def test_real_recent_reading_parsed(self):
+        import datetime
+
+        now = datetime.datetime(2026, 9, 12, 12, 0, tzinfo=datetime.timezone.utc)
+        recent = now - datetime.timedelta(hours=2)
+        value_c, observed_at = v1.parse_ndbc_realtime2(self._fixture_for(recent), now=now)
+        self.assertEqual(value_c, 17.8)
+        self.assertIn(str(recent.year), observed_at)
+
+    def test_stale_reading_beyond_max_age_rejected(self):
+        import datetime
+
+        now = datetime.datetime(2026, 9, 12, 12, 0, tzinfo=datetime.timezone.utc)
+        stale = now - datetime.timedelta(hours=v1.NDBC_BUOY_MAX_AGE_HOURS + 1)
+        value_c, observed_at = v1.parse_ndbc_realtime2(self._fixture_for(stale), now=now)
+        self.assertIsNone(value_c)
+        self.assertIsNone(observed_at)
+
+    def test_missing_wtmp_column_returns_none(self):
+        text = (
+            "#YY  MM DD hh mm WDIR WSPD GST  WVHT   DPD   APD MWD   PRES  ATMP  WTMP  DEWP  VIS PTDY  TIDE\n"
+            "#yr  mo dy hr mn degT m/s  m/s     m   sec   sec degT   hPa  degC  degC  degC  nmi  hPa    ft\n"
+            "2026 09 12 10 00 200  9.0 12.0   1.4    MM   4.3 193 1007.4  20.8    MM    MM   MM   MM    MM\n"
+        )
+        value_c, observed_at = v1.parse_ndbc_realtime2(text)
+        self.assertIsNone(value_c)
+
+    def test_empty_text_returns_none(self):
+        self.assertEqual(v1.parse_ndbc_realtime2(""), (None, None))
+
+    def test_only_comment_lines_returns_none(self):
+        text = "#YY  MM DD hh mm\n#yr  mo dy hr mn\n"
+        self.assertEqual(v1.parse_ndbc_realtime2(text), (None, None))
+
+
+class TestLakeMichiganTemperatureRouting(TempDataMixin, unittest.TestCase):
+    """get_current_temperature() routes Lake Michigan to the buoy step
+    (1b) only for Lake Michigan itself -- not other waterbodies, and not
+    when live_refresh is disabled."""
+
+    def test_non_lake_michigan_waterbody_does_not_use_buoy_path(self):
+        self._set_buoy_sites([
+            {"station_id": "X", "station_name": "Test buoy", "lat": "43.0", "lon": "-87.9"},
+        ])
+        self._set_water_temp([])
+        result = v1.get_current_temperature("Devils Lake", county="Sauk", live_refresh=False)
+        self.assertNotEqual(result["method"], "ndbc_buoy_live")
+
+    def test_live_refresh_disabled_skips_buoy_path(self):
+        self._set_buoy_sites([
+            {"station_id": "X", "station_name": "Test buoy", "lat": "43.0", "lon": "-87.9"},
+        ])
+        self._set_water_temp([])
+        result = v1.get_current_temperature("LAKE MICHIGAN", county="Milwaukee", live_refresh=False)
+        self.assertEqual(result["method"], "no_data")
 
 
 if __name__ == "__main__":

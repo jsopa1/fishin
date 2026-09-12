@@ -595,3 +595,157 @@ toggle. Full account: `docs/v2_access_points_report.md` §8.
   confirmed via a direct 404 test, not assumed -- so their species data
   still comes only from a V1 match, same as before this pass; this is
   disclosed in the report rather than presented as symmetric coverage
+
+## 020 — Species canonicalization, "why not a match" explanations, Lake Michigan live buoys
+
+Addresses four real, CEO-identified gaps in one pass: (1) shore-fishing
+species text had dozens of near-duplicate variants undermining trust in
+the species filter; (2) a species with no current match gave no reason
+why, also undermining trust; (3) Lake Michigan's ten real waterbody
+entries were all using an air-temperature proxy despite Lake Michigan
+having real, live water-temperature buoys; (4) investigated whether a
+better source exists for fishing spots not currently on the map. Full
+account: `docs/v2_access_points_report.md` §9-11 (once written).
+
+- **Species canonicalization** (`analysis/v2_species_canonicalization.py`):
+  maps all 61 real raw WDNR species phrases (verified: every one
+  actually present in `shore_fishing_species`, not a hypothetical list)
+  to 30 canonical species names, used only for the filter/dropdown --
+  the raw WDNR text is never altered anywhere it's displayed. Spelling
+  typos (`LAREMOUTH BASS`, `WALEYE`, `MUDKY`) map to the correctly-named
+  species; common-vs-proper names (`MUSKY`/`MUSKIE` -> `Muskellunge`)
+  align with V1's own vocabulary; compound phrases (`LM & SM BASS`,
+  `BASS (LG. MOUTH, ROCK)`) map to multiple species, not one guessed
+  choice; genuinely ambiguous terms (`PANFISH`, `TROUT`, the "YELLOW" in
+  `PIKE (NORTHERN, YELLOW)`) are kept as their own honest, undecomposed
+  bucket rather than guessed into a specific species. Result: the "Bass"
+  filter went from 7 confusing near-duplicate raw entries to 5 real
+  distinct species (Largemouth, Smallmouth, Rock, White, and an
+  explicit "unspecified" bucket for generic mentions).
+- **"Why not a match" explanations**: `describe_threshold_gap()` (the
+  counterpart to the existing `describe_threshold_match()`) computes,
+  for each threshold a species did NOT match, how far off the current
+  reading is and in which direction -- e.g. "currently 8.2°F / 4.5°C
+  below the documented activity/feeding-temperature window." Stored in
+  a new `species_predictions.non_match_explanation` column (migrated
+  onto the real, already-existing table via `ALTER TABLE`, since `CREATE
+  TABLE IF NOT EXISTS` silently no-ops against a table that already
+  exists -- a real failure hit and fixed against the actual production
+  database before the full re-run, not just in theory). This changes
+  nothing about which species count as matching -- only adds
+  explanatory text for the ones that don't, closing the exact trust gap
+  described: "No match right now" no longer means "we won't tell you
+  why."
+- **Lake Michigan live water-temperature buoys**: researched and
+  verified 15 real NOAA NDBC buoys covering Wisconsin's Lake Michigan
+  shoreline (`data/v1/lake_michigan_buoy_sites.csv`), confirmed live and
+  currently reporting real WTMP readings before writing any integration
+  code. `get_current_temperature()` now tries the nearest real buoy
+  (by haversine distance to a live-geocoded coordinate) before falling
+  back to the air-temperature proxy -- inserted specifically because a
+  huge, thermally-buffered lake makes air temperature a poor stand-in
+  for water temperature, verified true of every one of Lake Michigan's
+  10 real waterbody entries before this fix (all were on
+  `nws_air_proxy_live`). Live-tested against 5 real WI counties
+  (Milwaukee, Door, Kenosha, Marinette, Sheboygan) -- all 5 now resolve
+  to a real buoy reading (`ndbc_buoy_live`), not a proxy.
+- **A real, separate bug found and fixed while verifying the buoy work**:
+  running `analysis/v1_full_run.py` a second time in the same session
+  (needed to regenerate `non_match_explanation` for the whole database)
+  exposed that no read-side query in `ui/v1_review_data.py`
+  (`search_waterbodies`, `get_waterbody_detail`, summary counts, ...)
+  filters by `run_timestamp` -- every one of them has always assumed
+  exactly one run's data lives in the database. That assumption held
+  for months only because this script had typically been run once per
+  session; running it twice left both runs' rows coexisting, caught by
+  a real live test regressing (`browse?name=Devils+Lake` returned 6
+  rows instead of 3). Fixed at the source in `run_full_batch()`: once a
+  new run's data is fully committed, every other run's rows are deleted
+  from all four tables -- the database now always holds exactly the
+  latest run, matching what the staleness banner and every UI query
+  already assumed. A regression test (`test_rerun_leaves_only_the_
+  latest_run_no_duplicate_rows`) runs the batch twice and asserts only
+  one run's data survives.
+- **Additional fishing-spot sources investigated**: found a real,
+  promising candidate -- WDNR's non-DNR trout-stream easement layer
+  (`FM_Trout/FM_TROUT_NONDNR_EASEMENTS_WTM_Ext`), representing public
+  fishing access on otherwise-private land along trout streams, exactly
+  the kind of informal spot a local angler might use that a boat-launch/
+  shore-fishing-pier inventory wouldn't capture. Not integrated this
+  cycle: it's polygon geometry (stream-reach easement areas), a
+  genuinely different map feature than the point markers this project's
+  map is built around, and would need its own UI design (an area
+  overlay, not a pin) rather than fitting the existing marker/popup
+  pattern. Documented as real, found, deferred -- not silently dropped.
+  Also confirmed this project's existing boat-access count (3,135) is
+  already close to WDNR's own stated inventory size ("over 2,000... and
+  over 100 shore fishing sites") and independent third-party estimates
+  ("3,000+ public DNR ramps"), suggesting the core point-access dataset
+  is not substantially undercounting official public access sites.
+
+**Rationale:**
+- Every change here is additive/explanatory (canonical filter layer,
+  gap explanations, a better real temperature source) -- none change
+  which species match, which access points exist, or any prediction
+  V1 already made; this keeps the "don't touch the underlying
+  prediction logic without being asked" discipline intact while still
+  directly answering what was asked
+- Deferring the trout-easement polygon layer rather than forcing it
+  into the point-marker map matches the same judgment already applied
+  to the lake-size data in Decisions #017-#018: a real data source
+  existing is not sufficient reason to ship a feature built on it when
+  doing so well needs work this cycle's scope doesn't cover
+
+## 021 — Fish Intelligence Platform: a real plan before more building
+
+The CEO stepped back from continuous feature-by-feature development to
+define what this app is actually for and set a real, documented plan
+before more code — full plan:
+[docs/v2_fish_intelligence_platform_plan.md](docs/v2_fish_intelligence_platform_plan.md).
+
+- **Vision**: click a spot on the map (official or niche), get an
+  honest, evidence-backed answer to "what's my best shot here, right
+  now, and why" — water temperature, likely species and why (or why
+  not), signs to look for, and bait/technique with real citations.
+- **Checked before planning, not assumed**: a full read of
+  `physiology_thresholds_v1.json` (all 26 species) and every docs file
+  confirmed no bait, lure, technique, or "signs to look for" data
+  exists anywhere in this repo -- the only near-hits are one-line
+  mentions in the *superseded* V0 catch-rate research (explicitly
+  rejected as untestable) and the existing `diel_active` flag. This
+  means the bait/technique part of the vision is new, real research,
+  not an engineering task over data that already exists -- flagged as
+  its own phase (Phase 3) specifically so it isn't rushed.
+- **"Niche spots" clarified directly with the CEO**: more real
+  government data sources first (e.g. the trout-stream easement layer
+  found and deferred in Decision #017), with user-submitted spots
+  (accounts, a submission flow, moderation) explicitly deferred to a
+  separate, later phase -- a materially bigger scope than "read real
+  government data," not taken on implicitly.
+- **Five-phase plan**: (1) spot-level temperature via distance-weighted
+  interpolation from real nearby readings only, honestly `no_data` when
+  no real anchor is close enough -- never a guess where there's nothing
+  to base one on, per the CEO's explicit instruction; (2) spot-level
+  species data, reusing the existing physiology-match and "why not"
+  system unchanged; (3) the new bait/technique research pass; (4) a
+  real "one-stop-shop" spot-detail page combining 1-3; (5) more real
+  niche spot sources. Phases 1/2/4 ship together; phase 3 (research)
+  runs in parallel but never ships a placeholder claim ahead of real
+  citations.
+- **Filed as a V2 deepening, not a new "V3"**: `ROADMAP.md` already
+  defines V3 (trip logging/outcome validation) and V4 (personalization)
+  as distinct future concepts. This plan is a second slice of V2's own
+  "Where Should I Fish?" scope, named and filed accordingly
+  (`docs/v2_fish_intelligence_platform_plan.md`) to avoid confusing a
+  future reader cross-referencing the roadmap.
+
+**Rationale:**
+- Matches this project's own established discipline of a real plan/
+  research pass before building (V0's research-first approach, V1's
+  phased statewide expansion) -- the CEO asked for exactly that pattern
+  explicitly this time, rather than continued incremental feature work
+  with no unifying plan
+- Confirming the bait-data gap before planning (rather than discovering
+  it mid-build) keeps the same "research first, build second"
+  discipline intact, and prevents Phase 4 from ever shipping a bait
+  recommendation without a real citation behind it

@@ -63,6 +63,16 @@
     {% if sp.evidence_quality %}
       <p class="species-evidence">Evidence quality: <span class="tag evidence">{{ sp.evidence_quality }}</span></p>
     {% endif %}
+    {% if sp.non_match_explanation %}
+      <div class="why-not-box">
+        <p class="why-not-label">Why not a match right now:</p>
+        <ul>
+          {% for gap in sp.non_match_explanation.split(' | ') %}
+            <li>{{ gap }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
   </div>
   {% endfor %}
 {% else %}

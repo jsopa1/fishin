@@ -49,6 +49,7 @@ SURVEY_CSV_BATCH2 = DATA_V1 / "wi_fisheries_survey_species_sample_batch2.csv"
 STOCKING_CSV = DATA_V1 / "wi_stocking_statewide_2011_2025.csv"
 WATER_TEMP_CSV = DATA_V1 / "wi_lake_water_temp_current.csv"
 USGS_SITES_CSV = DATA_V1 / "usgs_wi_water_temp_sites.csv"
+LAKE_MICHIGAN_BUOY_CSV = DATA_V1 / "lake_michigan_buoy_sites.csv"
 THRESHOLDS_JSON = DATA_V1 / "physiology_thresholds_v1.json"
 
 USER_AGENT = "fishin-v1-conditions-forecast/0.1 (research prototype; contact via project repo)"
@@ -455,6 +456,86 @@ def find_usgs_site_matches(waterbody_name: str) -> list:
     return matches
 
 
+def load_lake_michigan_buoy_sites() -> list:
+    return _read_csv_cached(LAKE_MICHIGAN_BUOY_CSV)
+
+
+def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
+    """Great-circle distance in km -- used only to pick the nearest real
+    NDBC buoy to a real, geocoded Lake Michigan coordinate, never to
+    estimate or interpolate a temperature value itself."""
+    import math
+
+    r = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp = math.radians(lat2 - lat1)
+    dl = math.radians(lon2 - lon1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
+
+
+def find_nearest_buoys(lat: float, lon: float) -> list:
+    """Every real NDBC/Lake Michigan buoy in the reference table
+    (see data/v1/lake_michigan_buoy_sites.csv), nearest first. Returns
+    all of them so the caller can try each in turn until one has a
+    real, fresh reading -- some real buoys go stale or offline
+    seasonally (verified: station 45014 was reporting nothing newer
+    than a week old during this project's own live testing)."""
+    sites = load_lake_michigan_buoy_sites()
+    return sorted(sites, key=lambda s: _haversine_km(lat, lon, float(s["lat"]), float(s["lon"])))
+
+
+NDBC_BUOY_MAX_AGE_HOURS = 48  # a real reading older than this isn't "live" in any useful sense
+
+
+def parse_ndbc_realtime2(text: str, now: "datetime.datetime | None" = None):
+    """Pure, testable: raw NDBC realtime2.txt content -> (value_c,
+    observed_at_iso), or (None, None) if the most recent row has no real
+    WTMP value or is older than NDBC_BUOY_MAX_AGE_HOURS. Real format:
+    whitespace-columned, two comment header lines starting with '#',
+    most-recent-first, 'MM' marks a missing field. Column order: YY MM
+    DD hh mm WDIR WSPD GST WVHT DPD APD MWD PRES ATMP WTMP DEWP VIS PTDY
+    TIDE (WTMP is column index 14)."""
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    lines = [ln for ln in text.splitlines() if ln and not ln.startswith("#")]
+    if not lines:
+        return None, None
+    cols = lines[0].split()
+    if len(cols) < 15:
+        return None, None
+    try:
+        year, month, day, hour, minute = (int(c) for c in cols[:5])
+        wtmp_raw = cols[14]
+    except (ValueError, IndexError):
+        return None, None
+    if wtmp_raw == "MM":
+        return None, None
+    observed_at = datetime.datetime(year, month, day, hour, minute, tzinfo=datetime.timezone.utc)
+    age_hours = (now - observed_at).total_seconds() / 3600
+    if age_hours > NDBC_BUOY_MAX_AGE_HOURS:
+        return None, None
+    try:
+        return float(wtmp_raw), observed_at.isoformat()
+    except ValueError:
+        return None, None
+
+
+def get_ndbc_buoy_water_temp_c(station_id: str):
+    """Live real-time water temperature from a real NOAA NDBC buoy --
+    https://www.ndbc.noaa.gov/data/realtime2/<station_id>.txt, the
+    standard public NDBC realtime2 text format. No API key, freely
+    public. Returns (value_c, observed_at_iso), or (None, None) if the
+    station has no recent reading (real buoys do go stale/offline,
+    especially in winter) -- never a stale value silently presented as
+    current. See parse_ndbc_realtime2() for the tested parsing logic;
+    this wrapper only does the live fetch."""
+    url = f"https://www.ndbc.noaa.gov/data/realtime2/{station_id}.txt"
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(req, timeout=15) as resp:
+        text = resp.read().decode("utf-8", errors="replace")
+    return parse_ndbc_realtime2(text)
+
+
 def geocode_live(waterbody_name: str, county: str | None) -> tuple | None:
     """Live OpenStreetMap/Nominatim geocode, same real method used for the
     original 13 NWS-proxy lakes in Part 3b -- extended here to work for
@@ -506,12 +587,22 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
          reference table (177 streams + 8 lakes), tried in order until one
          returns real current data. This is the PRIMARY real source for
          streams, which have far richer live USGS coverage than lakes do.
+      1b. For Lake Michigan specifically: a live NOAA NDBC buoy water-
+          temperature reading (real water measurement, not an air proxy)
+          from the nearest of 15 real Lake Michigan buoys, tried in
+          distance order until one has a fresh reading. USGS stream
+          gauges don't cover the open lake, so this is Lake Michigan's
+          own equivalent of step 1 -- inserted here, before falling back
+          to an air-temperature proxy, specifically because a huge,
+          thermally-buffered lake makes air temperature a poor stand-in
+          for water temperature (verified: every Lake Michigan entry was
+          using the air proxy before this was added).
       2. Pre-pulled real CLMN/USGS reading from the original 22-lake pull
          -- used AS-IS with its true observed date (real, dated data, not
          stale-and-hidden; CLMN itself is periodic, not a live feed).
       3. Live NWS air-temperature proxy, explicitly labeled as such --
          live geocode (Nominatim) + live current-conditions fetch for any
-         waterbody not covered by 1 or 2.
+         waterbody not covered by 1, 1b, or 2.
       4. Honest no_data -- returned, never raised and never silently
          dropped; the narrative builder reports this plainly.
     """
@@ -529,6 +620,23 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
                     "source": f"USGS live gauge {site['site_no']} ({site['station_nm']})",
                     "observed_at": obs_time,
                 }
+
+    if live_refresh and _norm(lake_name) == "LAKE MICHIGAN":
+        coords = geocode_live(lake_name, county) or (geocode_live(county, None) if county else None)
+        if coords:
+            for buoy in find_nearest_buoys(*coords):
+                try:
+                    value_c, obs_time = get_ndbc_buoy_water_temp_c(buoy["station_id"])
+                except (urllib.error.HTTPError, urllib.error.URLError):
+                    continue
+                if value_c is not None:
+                    return {
+                        "value_c": value_c,
+                        "is_real_water_measurement": True,
+                        "method": "ndbc_buoy_live",
+                        "source": f"NOAA NDBC buoy {buoy['station_id']} ({buoy['station_name']})",
+                        "observed_at": obs_time,
+                    }
 
     row = load_prepulled_water_temp(lake_name, county)
     if row is not None:
@@ -646,6 +754,73 @@ def describe_threshold_match(current_c: float, threshold: dict) -> str | None:
     return None
 
 
+def describe_threshold_gap(current_c: float, threshold: dict) -> str | None:
+    """The counterpart to describe_threshold_match(): when a threshold
+    does NOT match the current temperature, this describes how far off
+    and in which direction, instead of a silent, unexplained "no match."
+    Returns None when the threshold DID match (nothing to explain) or
+    when the gap genuinely can't be computed.
+
+    For an avoidance_above threshold specifically, "not matching" means
+    the water is NOT yet warm enough to trigger avoidance -- worded as
+    neutral/reassuring information (water within a safe range for this
+    species), not as a problem, since a non-match here is not a bad
+    thing for the fish."""
+    ttype = threshold["type"]
+    kind_label = {
+        "activity_window": "documented activity/feeding-temperature window",
+        "spawning_trigger": "documented spawning-trigger range",
+        "physiological_optimum": "documented physiological growth-optimum range",
+        "growth_optimum": "documented growth-optimum range",
+        "avoidance_above": "documented warm-water avoidance threshold",
+    }.get(ttype, ttype)
+
+    if "range_c" in threshold:
+        lo, hi = threshold["range_c"]
+        lo_f, hi_f = threshold.get("range_f", (c_to_f(lo), c_to_f(hi)))
+        if lo <= current_c <= hi:
+            return None
+        if current_c < lo:
+            gap_c, direction = lo - current_c, "below"
+        else:
+            gap_c, direction = current_c - hi, "above"
+        gap_f = gap_c * 9 / 5
+        return (
+            f"currently {gap_f:.1f}°F / {gap_c:.1f}°C {direction} the {kind_label} "
+            f"({lo_f:.0f}-{hi_f:.0f}°F / {lo:.1f}-{hi:.1f}°C) — {threshold['description']}"
+        )
+
+    if "threshold_c" in threshold:
+        t_c = threshold["threshold_c"]
+        t_f = threshold.get("threshold_f", c_to_f(t_c))
+        if ttype == "avoidance_above":
+            if current_c > t_c:
+                return None
+            gap_c = t_c - current_c
+            gap_f = gap_c * 9 / 5
+            return (
+                f"currently {gap_f:.1f}°F / {gap_c:.1f}°C below the {kind_label} "
+                f"({t_f:.0f}°F / {t_c:.1f}°C) — not yet warm enough to trigger avoidance behavior "
+                f"for this species — {threshold['description']}"
+            )
+        return None
+
+    if "preferred_point_c" in threshold:
+        p_c = threshold["preferred_point_c"]
+        p_f = threshold.get("preferred_point_f", c_to_f(p_c))
+        if abs(current_c - p_c) <= 1.5:
+            return None
+        gap_c = abs(current_c - p_c)
+        gap_f = gap_c * 9 / 5
+        direction = "below" if current_c < p_c else "above"
+        return (
+            f"currently {gap_f:.1f}°F / {gap_c:.1f}°C {direction} the field-measured preferred temperature "
+            f"({p_f:.1f}°F / {p_c:.1f}°C, outside the ±1.5°C window) — {threshold['description']}"
+        )
+
+    return None
+
+
 RIVER_STREAM_CAVEAT = (
     "River/stream caveat: this value is derived from lake-based studies "
     "(see docs/v1_physiology_research_candidates.md and "
@@ -666,28 +841,40 @@ def evaluate_species_at_waterbody(species: str, value_c: float | None, waterbody
     exercise EXACTLY the same matching logic -- no drift between the two.
 
     Returns {"has_threshold_data": bool, "matches": [(description,
-    evidence, river_caveat_applied: bool), ...], "diel_active": bool}.
-    matches is empty (but has_threshold_data True) when the species has
-    reference data but none of it matches the current temperature -- a
-    real, expected outcome, distinct from "no reference data at all".
+    evidence, river_caveat_applied: bool), ...], "non_matches": [str, ...],
+    "diel_active": bool}. matches is empty (but has_threshold_data True)
+    when the species has reference data but none of it matches the
+    current temperature -- a real, expected outcome, distinct from "no
+    reference data at all". non_matches is only populated in that no-match
+    case (a real temperature reading exists, but nothing matched): one
+    entry per threshold explaining how far off and in which direction,
+    via describe_threshold_gap(), so "no match" is never an unexplained
+    dead end -- this never changes which species count as matching,
+    only adds explanatory text for the ones that don't.
     """
     species_entry = thresholds["species"].get(species)
     if not species_entry:
-        return {"has_threshold_data": False, "matches": [], "diel_active": False}
+        return {"has_threshold_data": False, "matches": [], "non_matches": [], "diel_active": False}
     matches = []
+    non_matches = []
     if value_c is not None:
         for t in species_entry["thresholds"]:
             m = describe_threshold_match(value_c, t)
-            if not m:
-                continue
-            river_caveat_applied = (
-                waterbody_type == "stream"
-                and t["type"] in ("activity_window", "physiological_optimum", "growth_optimum")
-            )
-            matches.append((m, t.get("evidence", "unspecified"), river_caveat_applied))
+            if m:
+                river_caveat_applied = (
+                    waterbody_type == "stream"
+                    and t["type"] in ("activity_window", "physiological_optimum", "growth_optimum")
+                )
+                matches.append((m, t.get("evidence", "unspecified"), river_caveat_applied))
+        if not matches:
+            for t in species_entry["thresholds"]:
+                gap = describe_threshold_gap(value_c, t)
+                if gap:
+                    non_matches.append(gap)
     return {
         "has_threshold_data": True,
         "matches": matches,
+        "non_matches": non_matches,
         "diel_active": bool(species_entry.get("diel_active")),
     }
 
@@ -777,14 +964,22 @@ def build_narrative(lake_name: str, temp_info: dict, presence: dict, thresholds:
         if not evaluation["has_threshold_data"]:
             continue
         matches = evaluation["matches"]
+        non_matches = evaluation["non_matches"]
         diel_note = f" {DIEL_NOTE}" if evaluation["diel_active"] else ""
-        if not matches and not diel_note:
+        if not matches and not non_matches and not diel_note:
             continue
-        any_match = True
         lines.append(f"### {species.title()}")
-        for m, evidence, river_caveat_applied in matches:
-            caveat_text = f" **{RIVER_STREAM_CAVEAT}**" if river_caveat_applied else ""
-            lines.append(f"- Water temperature is {m}. (Evidence quality: {evidence}){caveat_text}")
+        if matches:
+            any_match = True
+            for m, evidence, river_caveat_applied in matches:
+                caveat_text = f" **{RIVER_STREAM_CAVEAT}**" if river_caveat_applied else ""
+                lines.append(f"- Water temperature is {m}. (Evidence quality: {evidence}){caveat_text}")
+        elif non_matches:
+            # Explains WHY this species isn't a match right now, instead
+            # of a silent "no match" -- see describe_threshold_gap().
+            lines.append("- No documented physiology window matches the current temperature. Why not:")
+            for gap in non_matches:
+                lines.append(f"  - Water temperature is {gap}.")
         if diel_note:
             lines.append(f"- {diel_note.strip()}")
         lines.append("")
@@ -794,7 +989,8 @@ def build_narrative(lake_name: str, temp_info: dict, presence: dict, thresholds:
             "No species confirmed present in this waterbody currently has water temperature inside any "
             "of its documented physiology windows (or reference data isn't available for the species "
             "present here). No seasonal-context statement is generated for this visit — this is "
-            "expected at many times of year, not an error."
+            "expected at many times of year, not an error. See each species above for why, when a real "
+            "temperature reading was available to compare against."
         )
 
     return "\n".join(lines)

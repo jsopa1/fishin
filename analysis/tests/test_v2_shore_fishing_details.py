@@ -145,6 +145,14 @@ class DbRoundTripTests(unittest.TestCase):
             "SELECT species_text FROM shore_fishing_species WHERE more_info_url = ? ORDER BY id", (url,)
         ).fetchall()
         self.assertEqual([s[0] for s in species], ["PANFISH", "LARGEMOUTH BASS", "NORTHEN PIKE"])
+
+        canonical = conn.execute(
+            "SELECT canonical_species FROM shore_fishing_species_canonical WHERE more_info_url = ? ORDER BY canonical_species",
+            (url,),
+        ).fetchall()
+        self.assertEqual(
+            [c[0] for c in canonical], ["Largemouth Bass", "Northern Pike", "Panfish (unspecified)"]
+        )
         conn.close()
 
     def test_rerun_replaces_rather_than_accumulates(self):

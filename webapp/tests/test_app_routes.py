@@ -144,12 +144,24 @@ class WebAppRouteTests(unittest.TestCase):
         payload = resp.get_json()
         self.assertGreater(len(payload["points"]), 0)
         # Every point matched via one real source or the other -- either
-        # WDNR's own shore-fishing species text, or a V1 species_predictions
-        # record for its matched waterbody.
+        # WDNR's own shore-fishing species text (matched through the
+        # canonical-species table, so a real WDNR typo like "WALEYE"
+        # still counts -- not just a literal "WALLEYE" substring), or a
+        # V1 species_predictions record for its matched waterbody.
         for p in payload["points"]:
-            via_shore_fishing = p["fish_species_raw"] and "WALLEYE" in p["fish_species_raw"].upper()
+            via_shore_fishing = p["fish_species_raw"] is not None
             via_v1_match = p["matched_waterbody_name"] is not None
             self.assertTrue(via_shore_fishing or via_v1_match, msg=p)
+
+    def test_map_data_species_filter_matches_real_wdnr_typo_via_canonicalization(self):
+        # Regression check: site 137 (Silver Lake Fishing Pier, Columbia
+        # County) lists "WALEYE" (a real WDNR typo, missing an L) --
+        # filtering for "Walleye" must still find it via the canonical
+        # species table, not just a literal substring match on the raw text.
+        resp = self.client.get("/map/data?species=Walleye")
+        payload = resp.get_json()
+        site_names = [p["facility_name"] for p in payload["points"]]
+        self.assertIn("Silver Lake Fishing Pier", site_names)
 
     def test_map_data_shore_fishing_species_not_truncated_by_parenthetical_comma(self):
         # Regression check for the real WDNR site (ID 109/Council Grounds

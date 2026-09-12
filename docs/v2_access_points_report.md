@@ -242,7 +242,171 @@ to the map. Full rationale: DECISIONS.md #019.
   a regression test for the parenthetical-truncation bug) — 226 passing
   total.
 
-## 9. Honest gaps / not done this cycle
+## 9. Species canonicalization
+
+Reported directly: "we also need to deduplicate the db becuase species
+are occuring more than once look at how many variations of the same
+bass type we have." Checked, and confirmed real — `shore_fishing_species`
+had 61 distinct raw phrases, 7 of them bass-related alone (`BASS`, `LM
+BASS`, `SM BASS`, `ROCK BASS`, `WHITE BASS`, `LM & SM BASS`, `BASS (LG.
+MOUTH, ROCK)`).
+
+`analysis/v2_species_canonicalization.py` maps every one of those 61
+real phrases (verified against the live database, not a guessed list)
+to 30 canonical species names, stored in a new
+`shore_fishing_species_canonical` table used only by the map's species
+filter and dropdown — the raw WDNR text is never altered anywhere it's
+actually displayed (map popups, list view), only the filter layer is
+deduplicated. Rules applied, in order of confidence:
+
+- **Real spelling typos** corrected to the right species name:
+  `LAREMOUTH BASS` / `LARGEMOIUHT BASS` → Largemouth Bass, `WALEYE` →
+  Walleye, `MUDKY` → Muskellunge, `STURGON` → Lake Sturgeon,
+  `NORTHEN`/`NORHTERN`/`NOURTHERN PIKE` → Northern Pike.
+- **Common name aligned to V1's own vocabulary**: `MUSKY`/`MUSKIE` →
+  `Muskellunge` (matching `species_predictions`' own spelling), so the
+  combined filter doesn't offer both as separate options for one fish.
+- **Compound phrases decomposed into every species they name**, not one
+  guessed choice: `LM & SM BASS` → Largemouth Bass + Smallmouth Bass;
+  `BASS (LG. MOUTH, ROCK)` → Largemouth Bass + Rock Bass (a real phrase
+  from site 109, Council Grounds State Park); `TROUT - BROWN & RAINBOW`
+  → Brown Trout + Rainbow Trout.
+- **Genuinely ambiguous terms kept undecomposed**, not guessed: `PANFISH`,
+  `TROUT`, `CATFISH`, `SALMON` each become their own "(unspecified)"
+  bucket. Notably, `PIKE (NORTHERN, YELLOW)` only canonicalizes to
+  Northern Pike — "yellow pike" is a real historical Great Lakes
+  nickname for walleye, but not confident enough in this specific
+  context to assert as fact, so it's left alone rather than guessed.
+
+Result, verified directly: the "Bass" filter went from 7 confusing
+near-duplicate raw entries to 5 real distinct species (Largemouth,
+Smallmouth, Rock, White, and an explicit "Bass (unspecified)" bucket
+for generic mentions); the combined species dropdown (V1 + shore-fishing)
+went from 73 mostly-redundant entries to 39 real distinct species.
+11 new unit tests, each keyed to a real phrase actually in the database.
+
+## 10. "Why not a match right now" explanations
+
+Reported directly: "if its no match right now I don't exactly know why
+which leads to lower trust of the system." Checked the existing
+species-card UI (the one redesigned earlier this project) and confirmed
+this was real — a "No match right now" badge carried zero explanation,
+because the underlying model only ever generated descriptive text for
+matches, never for misses.
+
+`describe_threshold_gap()` (`analysis/v1_conditions_biology_forecast.py`),
+the direct counterpart to the existing `describe_threshold_match()`,
+computes how far off the current temperature is from each threshold a
+species did NOT match, and in which direction — e.g. *"currently 8.2°F
+/ 4.5°C below the documented activity/feeding-temperature window
+(70-78°F / 21.1-25.6°C)."* For the one threshold type where "not
+matching" is actually good news for the fish (`avoidance_above` — the
+water simply isn't warm enough yet to trigger heat-avoidance), the
+wording says so explicitly rather than framing it as a problem.
+
+This is purely additive: `evaluate_species_at_waterbody()` computes
+`non_matches` only when a species has real threshold data, a real
+temperature reading exists, and nothing matched — it never changes
+which species count as a match, only explains the ones that don't.
+Stored in a new `species_predictions.non_match_explanation` column and
+rendered in its own labeled box on the waterbody detail page ("Why not
+a match right now:").
+
+**A real schema-migration bug was caught fixing this, before it reached
+the live site**: the table already existed in the production database,
+so `CREATE TABLE IF NOT EXISTS species_predictions (... non_match_
+explanation ...)` silently no-opped — SQLite doesn't retroactively add
+columns to an existing table that way. The very first full re-run
+crashed with `no column named non_match_explanation`. Fixed with an
+explicit `ALTER TABLE` migration guarded by a `PRAGMA table_info` check,
+with its own regression test asserting the migration runs cleanly
+against a table built with the old, pre-migration schema.
+
+## 11. Lake Michigan live water-temperature buoys
+
+Reported directly: "lake michigan has live tempurature gagues you can
+use, double check all sites for live temperature updates." Checked
+first: every one of Lake Michigan's 10 real waterbody entries
+(Brown, Door, Kenosha, Manitowoc, Marinette, Milwaukee, Oconto,
+Ozaukee, Racine, Sheboygan counties) was using `nws_air_proxy_live` — an
+**air**-temperature proxy — confirmed true before writing any code, not
+assumed.
+
+Researched real live water-temperature sources for the Great Lakes
+before integrating anything:
+
+- **NOAA CO-OPS** (the tide/water-level station network) has real
+  station IDs on the WI shoreline (Milwaukee, Kewaunee, Sturgeon Bay,
+  Green Bay East) — checked live, and none of them currently offer the
+  `water_temperature` product (empty response from every one). Not a
+  usable source right now.
+- **NOAA NDBC** (National Data Buoy Center) does publish real, live
+  water temperature — verified by fetching `https://www.ndbc.noaa.gov/
+  data/realtime2/<station>.txt` (a public, no-API-key, standard text
+  format) for every Lake Michigan-region buoy in NDBC's own active-
+  station list, keeping only the ones both real (not decommissioned —
+  one candidate, 45007, 404'd, confirmed dead) and currently reporting
+  actual `WTMP` values. 15 real stations survived this check, from
+  Marinette-adjacent Green Bay in the north to the Illinois border in
+  the south — `data/v1/lake_michigan_buoy_sites.csv`.
+
+`get_current_temperature()` gained a new step (1b, between the existing
+USGS-gauge step and the CLMN/proxy fallback): for Lake Michigan
+specifically, geocode a real coordinate, find the nearest of the 15
+real buoys by haversine distance, and try each in distance order until
+one has a reading newer than 48 hours (a real buoy going stale/offline
+seasonally is expected, not an error — the fallback chain still ends
+honestly at the proxy, never a fabricated value). Live-tested against
+all 10 real WI Lake Michigan counties: **all 10 now resolve to a real
+NDBC buoy reading**, not a proxy.
+
+**A second real bug was caught verifying this, unrelated to the buoy
+logic itself**: no read-side query in this project
+(`ui/v1_review_data.py`) filters by `run_timestamp` — every one assumes
+the database holds exactly one run's data, an assumption that had never
+actually been tested because this script had typically only been run
+once per session. Running it a second time (needed to regenerate
+`non_match_explanation` across the whole database) left both runs'
+rows coexisting, caught by a real regression in a live test
+(`browse?name=Devils+Lake` returned 6 rows instead of 3, not the
+expected 3 distinct real waterbodies). Fixed at the source: after a new
+run's data is fully committed, `run_full_batch()` now deletes every
+other run's rows from all four tables, so the database always holds
+exactly the latest run — matching what the staleness banner and every
+UI query already assumed it could. A regression test runs the batch
+twice and asserts only the second run's data survives.
+
+## 12. Additional fishing-spot sources investigated
+
+Reported directly: "there are a lot of fishing spots I go to which are
+not on the map, find a better source for each fishing spot." Two things
+checked before concluding what to do:
+
+- This project's existing boat-access count (3,135 real sites) is
+  already close to WDNR's own stated inventory ("over 2,000... and over
+  100 shore fishing sites") and an independent third-party estimate
+  ("3,000+ public DNR ramps") — the core point-access dataset does not
+  appear to be substantially undercounting WDNR's own official
+  inventory of boat ramps and developed shore-fishing piers.
+- Searched WDNR's ArcGIS service catalog for a genuinely different,
+  complementary access dataset and found a real, promising one: **WDNR's
+  non-DNR trout-stream easement layer**
+  (`FM_Trout/FM_TROUT_NONDNR_EASEMENTS_WTM_Ext`) — real public fishing
+  access secured on otherwise-private land along trout streams, exactly
+  the kind of informal spot a local angler might use regularly that a
+  boat-launch/shore-fishing-pier inventory would never capture.
+
+**Not integrated this cycle**: this layer is polygon geometry (a stream-
+reach easement area, not a discrete access point), a genuinely
+different map feature than the point markers this project's map is
+built around — it would need its own UI (an area/line overlay, not a
+pin-and-popup) rather than fitting the existing pattern. Documented as
+real, found, and deferred, per the same judgment already applied twice
+to the lake-size data (Decisions #017-#018): a real data source
+existing is not sufficient reason to ship a feature built on it before
+it can be done well.
+
+## 13. Honest gaps / not done this cycle
 
 - Lake size/depth ("habitat") data — investigated twice (§2, §6),
   deferred both times. A safe fix needs either WBIC added to the V1
@@ -253,6 +417,18 @@ to the map. Full rationale: DECISIONS.md #019.
   `boataccess.aspx`-style page exists (404) and no such field in the
   ArcGIS layer. Their species data comes only from a V1 waterbody match,
   same as before this pass.
+- The real WDNR trout-stream-easement dataset found in §12 — a genuine
+  candidate for more fishing spots, not yet integrated because it's a
+  different (polygon) map feature type.
+- Lake Michigan salmon: species data (confirmed present, not assumed --
+  Chinook Salmon, Coho Salmon, Brown Trout, Rainbow Trout, Muskellunge,
+  Lake Sturgeon, and others, via a direct query) was already in V1's own
+  stocking-derived `species_predictions` for Lake Michigan's 10 real
+  county entries before this cycle, so the main gap for salmon fishing
+  specifically was the water-temperature source, addressed in §11. A
+  dedicated salmon-specific research pass (e.g. depth/thermocline
+  behavior, which this project's surface-temperature-only model doesn't
+  capture) was not undertaken this cycle.
 - The broader "environmental intelligence" part of V2's scope beyond
   access points, AIS sightings, and shore-fishing enrichment (e.g.
   weather overlays, seasonal context beyond what V1 already provides)

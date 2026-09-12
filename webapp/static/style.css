@@ -274,6 +274,11 @@ main h1 { overflow-wrap: anywhere; word-break: break-word; }
 
 .species-desc { margin: 12px 0 0; }
 .species-evidence { margin: 8px 0 0; font-size: 0.85rem; color: var(--muted); }
+.why-not-box { margin: 12px 0 0; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.why-not-label { margin: 0 0 6px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; color: var(--muted); }
+.why-not-box ul { margin: 0; padding-left: 18px; }
+.why-not-box li { font-size: 0.88rem; margin-bottom: 4px; }
+.why-not-box li:last-child { margin-bottom: 0; }
 .tag.evidence { background: var(--border-soft); color: var(--ink); font-weight: 600; text-transform: none; }
 
 /* ---------- Footer ---------- */

@@ -90,6 +90,51 @@ class FullRunTestBase(unittest.TestCase):
         v1.THRESHOLDS_JSON = Path(path)
 
 
+class TestSchemaMigration(FullRunTestBase):
+    """init_db() must add non_match_explanation to a real, pre-existing
+    database created before that column existed -- CREATE TABLE IF NOT
+    EXISTS alone silently no-ops against an already-existing table, which
+    is exactly the real failure hit against the production DB (verified:
+    a live run against the real database failed with "table
+    species_predictions has no column named non_match_explanation" before
+    this migration step was added)."""
+
+    def test_adds_column_to_pre_existing_table_without_the_column(self):
+        conn = sqlite3.connect(str(fr.DB_PATH))
+        conn.executescript(
+            """
+            CREATE TABLE species_predictions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                run_timestamp TEXT NOT NULL,
+                waterbody_name TEXT NOT NULL,
+                county TEXT NOT NULL,
+                species TEXT NOT NULL,
+                has_threshold_data INTEGER NOT NULL,
+                any_match INTEGER NOT NULL,
+                match_description TEXT,
+                evidence_quality TEXT,
+                river_caveat_applied INTEGER NOT NULL,
+                diel_active INTEGER NOT NULL
+            );
+            """
+        )
+        conn.commit()
+        columns_before = {row[1] for row in conn.execute("PRAGMA table_info(species_predictions)")}
+        self.assertNotIn("non_match_explanation", columns_before)
+
+        fr.init_db(conn)
+
+        columns_after = {row[1] for row in conn.execute("PRAGMA table_info(species_predictions)")}
+        self.assertIn("non_match_explanation", columns_after)
+        conn.close()
+
+    def test_running_init_db_twice_does_not_error(self):
+        conn = sqlite3.connect(str(fr.DB_PATH))
+        fr.init_db(conn)
+        fr.init_db(conn)  # must not raise "duplicate column"
+        conn.close()
+
+
 class TestBuildWaterbodyUniverse(FullRunTestBase):
     def test_survey_and_stocking_combined_deduplicated(self):
         self._set_survey([
@@ -255,6 +300,39 @@ class TestPersistedRecordAccuracy(FullRunTestBase):
             ]},
         })
 
+    def test_rerun_leaves_only_the_latest_run_no_duplicate_rows(self):
+        # Regression test for a real bug: search_waterbodies() and every
+        # other read-side query has no run_timestamp filter, so a second
+        # run used to leave both runs' rows in the table -- a real live
+        # test (browse?name=Devils+Lake) returned 6 rows instead of 3
+        # after running this script twice in the same session. Each run
+        # must now leave only its own data behind.
+        self._set_survey([
+            {"lake_name": "Repeat Lake", "county": "A", "survey_year": "2024", "species": "Muskellunge",
+             "cpue_or_abundance_metric": "x", "cpue_value": "1", "notes": "", "source_pdf_url": ""},
+        ])
+        self._set_stocking([])
+        self._set_water_temp([
+            {"lake_name": "Repeat Lake", "county": "A", "method": "clmn_recent", "value_c": "24.0",
+             "value_f": "75.2", "is_real_water_measurement": "true", "retrieved_at": "2026-01-01",
+             "source_url_or_station": "test", "notes": ""},
+        ])
+        first = fr.run_full_batch(live_refresh=False, progress_every=0)
+        second = fr.run_full_batch(live_refresh=False, progress_every=0)
+        self.assertNotEqual(first["run_timestamp"], second["run_timestamp"])
+
+        conn = sqlite3.connect(str(fr.DB_PATH))
+        runs_count = conn.execute("SELECT COUNT(*) FROM runs").fetchone()[0]
+        wb_count = conn.execute(
+            "SELECT COUNT(*) FROM waterbody_results WHERE waterbody_name='Repeat Lake'"
+        ).fetchone()[0]
+        remaining_run_ts = conn.execute("SELECT run_timestamp FROM runs").fetchone()[0]
+        conn.close()
+
+        self.assertEqual(runs_count, 1)
+        self.assertEqual(wb_count, 1)
+        self.assertEqual(remaining_run_ts, second["run_timestamp"])
+
     def test_run_timestamp_present_and_consistent_across_tables(self):
         self._set_survey([])
         self._set_stocking([
@@ -307,6 +385,51 @@ class TestPersistedRecordAccuracy(FullRunTestBase):
         ).fetchone()
         conn.close()
         self.assertEqual(row, ("survey_confirmed", "lake", 1))
+
+    def test_non_match_explanation_populated_when_temp_available_but_no_match(self):
+        self._set_survey([
+            {"lake_name": "Cold Lake", "county": "A", "survey_year": "2024", "species": "Muskellunge",
+             "cpue_or_abundance_metric": "x", "cpue_value": "1", "notes": "", "source_pdf_url": ""},
+        ])
+        self._set_stocking([])
+        self._set_water_temp([
+            # 5.0C is well below the fixture's Muskellunge activity_window (22.0-27.3C).
+            {"lake_name": "Cold Lake", "county": "A", "method": "clmn_recent", "value_c": "5.0",
+             "value_f": "41.0", "is_real_water_measurement": "true", "retrieved_at": "2026-01-01",
+             "source_url_or_station": "test", "notes": ""},
+        ])
+        fr.run_full_batch(live_refresh=False, progress_every=0)
+        conn = sqlite3.connect(str(fr.DB_PATH))
+        row = conn.execute(
+            "SELECT any_match, match_description, non_match_explanation FROM species_predictions "
+            "WHERE waterbody_name='Cold Lake' AND species='MUSKELLUNGE'"
+        ).fetchone()
+        conn.close()
+        self.assertEqual(row[0], 0)
+        self.assertIsNone(row[1])
+        self.assertIsNotNone(row[2])
+        self.assertIn("below", row[2])
+
+    def test_non_match_explanation_null_when_a_real_match_exists(self):
+        self._set_survey([
+            {"lake_name": "Warm Lake", "county": "A", "survey_year": "2024", "species": "Muskellunge",
+             "cpue_or_abundance_metric": "x", "cpue_value": "1", "notes": "", "source_pdf_url": ""},
+        ])
+        self._set_stocking([])
+        self._set_water_temp([
+            {"lake_name": "Warm Lake", "county": "A", "method": "clmn_recent", "value_c": "24.0",
+             "value_f": "75.2", "is_real_water_measurement": "true", "retrieved_at": "2026-01-01",
+             "source_url_or_station": "test", "notes": ""},
+        ])
+        fr.run_full_batch(live_refresh=False, progress_every=0)
+        conn = sqlite3.connect(str(fr.DB_PATH))
+        row = conn.execute(
+            "SELECT any_match, non_match_explanation FROM species_predictions "
+            "WHERE waterbody_name='Warm Lake' AND species='MUSKELLUNGE'"
+        ).fetchone()
+        conn.close()
+        self.assertEqual(row[0], 1)
+        self.assertIsNone(row[1])
 
     def test_narrative_never_empty_even_with_no_data(self):
         self._set_survey([])

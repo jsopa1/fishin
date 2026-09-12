@@ -202,6 +202,7 @@ def init_db(conn: sqlite3.Connection):
             evidence_quality TEXT,
             river_caveat_applied INTEGER NOT NULL,
             diel_active INTEGER NOT NULL,
+            non_match_explanation TEXT,
             FOREIGN KEY (run_timestamp) REFERENCES runs(run_timestamp)
         );
 
@@ -222,6 +223,12 @@ def init_db(conn: sqlite3.Connection):
         CREATE INDEX IF NOT EXISTS idx_species_predictions_waterbody ON species_predictions(waterbody_name, county);
         """
     )
+    # CREATE TABLE IF NOT EXISTS only applies to a genuinely new database --
+    # a real DB from before non_match_explanation existed needs an actual
+    # migration, not just a schema string that's silently ignored.
+    existing_columns = {row[1] for row in conn.execute("PRAGMA table_info(species_predictions)")}
+    if "non_match_explanation" not in existing_columns:
+        conn.execute("ALTER TABLE species_predictions ADD COLUMN non_match_explanation TEXT")
     conn.commit()
 
 
@@ -373,12 +380,21 @@ def run_full_batch(limit: int = None, live_refresh: bool = True, progress_every:
                         )
                         total_species_predictions += 1
                 else:
+                    # Explains WHY this species isn't a match right now
+                    # (see describe_threshold_gap()) instead of leaving
+                    # any_match=0 as an unexplained dead end -- None only
+                    # when there was no real temperature reading to
+                    # compare against in the first place.
+                    non_match_explanation = None
+                    if evaluation["non_matches"]:
+                        non_match_explanation = " | ".join(evaluation["non_matches"])
                     conn.execute(
                         """INSERT INTO species_predictions
                            (run_timestamp, waterbody_name, county, species, has_threshold_data, any_match,
-                            match_description, evidence_quality, river_caveat_applied, diel_active)
-                           VALUES (?, ?, ?, ?, 1, 0, NULL, NULL, 0, ?)""",
-                        (run_timestamp, name, county, species, int(evaluation["diel_active"])),
+                            match_description, evidence_quality, river_caveat_applied, diel_active,
+                            non_match_explanation)
+                           VALUES (?, ?, ?, ?, 1, 0, NULL, NULL, 0, ?, ?)""",
+                        (run_timestamp, name, county, species, int(evaluation["diel_active"]), non_match_explanation),
                     )
                     total_species_predictions += 1
 
@@ -397,6 +413,22 @@ def run_full_batch(limit: int = None, live_refresh: bool = True, progress_every:
         (run_timestamp, started_at, finished_at, len(universe), total_species_predictions,
          total_failures, int(live_refresh)),
     )
+    conn.commit()
+
+    # Every read-side query (search_waterbodies, get_waterbody_detail,
+    # summary counts, ...) queries waterbody_results/species_predictions/
+    # run_failures with no run_timestamp filter -- it has always assumed
+    # exactly one run's data lives here. That assumption went unverified
+    # for a long time because this script was typically run once per
+    # session; running it twice in the same session (as this cycle's
+    # Lake Michigan buoy work did) surfaced the real bug directly: a real
+    # duplicate-row regression in a live test (`browse?name=Devils+Lake`
+    # returned 6 rows instead of 3). Fixed at the source, not by patching
+    # every read query -- only this run's own rows survive.
+    conn.execute("DELETE FROM waterbody_results WHERE run_timestamp != ?", (run_timestamp,))
+    conn.execute("DELETE FROM species_predictions WHERE run_timestamp != ?", (run_timestamp,))
+    conn.execute("DELETE FROM run_failures WHERE run_timestamp != ?", (run_timestamp,))
+    conn.execute("DELETE FROM runs WHERE run_timestamp != ?", (run_timestamp,))
     conn.commit()
     conn.close()
 

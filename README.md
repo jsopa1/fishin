@@ -6,7 +6,7 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![226 tests passing](https://img.shields.io/badge/tests-226%20passing-brightgreen.svg)](#tests)
+[![266 tests passing](https://img.shields.io/badge/tests-266%20passing-brightgreen.svg)](#tests)
 
 ---
 
@@ -69,23 +69,23 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 | **V1 (considered)** | Pivot to real-time acoustic telemetry (GLATOS) for salmon tracking | Investigated and **deferred** — retrospective-only data, confounded coverage — [`DECISIONS.md` #011](DECISIONS.md) |
 | **V1 (shipped)** | Stop trying to predict catch rate. Report real conditions vs. real biology instead | The app in this repo. Scaled statewide, validated at 2,296-waterbody scale, polished, and deployed. |
 
-Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 19 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
+Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 20 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
 
 ## What the app actually does
 
 For each of 2,296 real waterbodies, the same rule-based logic (no black box — [read it](analysis/v1_conditions_biology_forecast.py)) runs:
 
-1. **Real current water temperature** — a live USGS gauge where one exists, a recent WDNR Citizen Lake Monitoring Network reading, or an explicitly-labeled NWS air-temperature proxy. Never blended, always labeled.
+1. **Real current water temperature** — a live USGS gauge where one exists, a live NOAA buoy for Lake Michigan specifically, a recent WDNR Citizen Lake Monitoring Network reading, or an explicitly-labeled NWS air-temperature proxy as a last resort. Never blended, always labeled.
 2. **Real species presence** — WDNR fisheries-survey data where it exists (authoritative), WDNR stocking records otherwise (used only as *positive* evidence — a species absent from stocking records is never treated as absent from the lake).
 3. **Real, cited physiology thresholds** — 26 species, sourced from peer-reviewed literature and a Great Lakes Fishery Commission compilation. Where two sources genuinely disagree (Muskellunge's thermal optimum), **both numbers are shown, not averaged away**.
 
-The result — a narrative like *"water temperature is currently within Walleye's documented spawning-trigger range"* — is stored per waterbody/species and browsable through the web app: search by name, county, species, or evidentiary tier; every caveat, source, and timestamp shown in full, never simplified.
+The result — a narrative like *"water temperature is currently within Walleye's documented spawning-trigger range"* — is stored per waterbody/species and browsable through the web app: search by name, county, species, or evidentiary tier; every caveat, source, and timestamp shown in full, never simplified. When a species **isn't** a current match, the app says why — e.g. *"currently 8.2°F below the documented activity window"* — instead of a bare "no match" with no explanation.
 
 ## The V2 map: access points, species search, and invasive species
 
 [`analysis/v2_access_points.py`](analysis/v2_access_points.py) pulls Wisconsin's real public boat access and shore fishing site locations live from [WDNR's own ArcGIS service](https://dnr.wisconsin.gov/topic/lands/boataccess) — 3,135 boat access sites (ramp + carry-in) and 142 shore fishing sites, each with a real lat/lon, waterbody name, county, and (for boat access) ADA-accessibility and ownership. [`analysis/v2_shore_fishing_details.py`](analysis/v2_shore_fishing_details.py) further enriches every shore-fishing site with real per-site data scraped live from WDNR's own detail pages — available fish species, directions, amenities, ADA accessibility — filling the species-data gap for sites outside V1's waterbody universe.
 
-The [`/map`](webapp/templates/map.html) page plots all of it on a Leaflet + OpenStreetMap map (clustered for performance, auto-zooms to a filtered result), filterable by county, waterbody, access type, **or fish species** — the species filter checks both real sources independently (WDNR's own shore-fishing species list, or a linked V1 waterbody's species data) and never merges or guesses between them. A **Map/List toggle** switches to a sortable table with an expandable "one-stop-shop" detail row per site — species, directions, stall counts, amenities, ADA info, manager contact — sharing the exact same renderer as the map's popups, so both views always show identical information. A marker links back to its waterbody's V1 conditions page only when its name and county match an existing result exactly — no fuzzy guessing; an unmatched marker still shows every real field WDNR publishes for it.
+The [`/map`](webapp/templates/map.html) page plots all of it on a Leaflet + OpenStreetMap map (clustered for performance, auto-zooms to a filtered result), filterable by county, waterbody, access type, **or fish species** — the species filter checks both real sources independently (WDNR's own shore-fishing species list, or a linked V1 waterbody's species data) and never merges or guesses between them. [`analysis/v2_species_canonicalization.py`](analysis/v2_species_canonicalization.py) collapses the 61 real raw species phrases WDNR's own text contains (typos, abbreviations, and all — e.g. `LM BASS`, `SM. MOUTH BASS`, `LAREMOUTH BASS`) into 39 real, deduplicated filter options, without ever altering the raw text shown on the site itself. A **Map/List toggle** switches to a sortable table with an expandable "one-stop-shop" detail row per site — species, directions, stall counts, amenities, ADA info, manager contact — sharing the exact same renderer as the map's popups, so both views always show identical information. A marker links back to its waterbody's V1 conditions page only when its name and county match an existing result exactly — no fuzzy guessing; an unmatched marker still shows every real field WDNR publishes for it.
 
 [`analysis/v2_invasive_species.py`](analysis/v2_invasive_species.py) adds a second, optional map layer: 557 real, WDNR-verified aquatic invasive species sightings (Zebra Mussel, Eurasian Water-Milfoil, Rusty Crayfish, and others) toggled via the map's layer control, off by default. Framed with the same positive-only-evidence rule V1 already applies to stocking data — a sighting is real evidence of a past detection, its absence elsewhere is not evidence a species isn't there.
 
@@ -95,12 +95,13 @@ Full write-up, including two independent, real data sources that were investigat
 
 This entire project — research, statistical evaluation, data pipelines, the desktop review tool, this web app, and its deployment — was built through iterative sessions with **[Claude Code](https://claude.com/claude-code)**, Anthropic's agentic CLI. A few things about *how* it was built are worth calling out for anyone evaluating this as a development-process sample, not just a code sample:
 
-- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 19 numbered decisions, each with its own rationale, including the ones that reversed course.
+- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 20 numbered decisions, each with its own rationale, including the ones that reversed course.
 - **Negative results were kept, not massaged.** Four independent statistical research cycles came back null. All four shipped in full, because that's what actually happened.
 - **Real bugs were found by actually running the thing at scale**, not just code review. Running the model across all 2,296 waterbodies (not a handful of demo cases) surfaced two silent, previously-undetected defects — a species-name casing mismatch that meant survey-confirmed matches had *never* actually fired in any prior demo, and a county-naming inconsistency that produced duplicate lake entries (caught by literally looking at the app's own output afterward and noticing "Devils Lake" listed twice). Both are documented, fixed, and regression-tested — see [`docs/v1_full_run_report.md`](docs/v1_full_run_report.md).
 - **The UI polish pass was criteria-driven and verified, not vibes-based** — 7 explicit criteria (responsive layout, functional correctness, error handling, performance, honesty of framing, accessibility, attribution), each checked with a real measurement (`scrollWidth` diffs across 3 real viewport widths, WCAG contrast ratios computed and one failure fixed, all 516 interactive elements confirmed keyboard-focusable, live-database query timings) before being marked done. See [`docs/v1_polish_report.md`](docs/v1_polish_report.md).
 - **A real data source was investigated twice, independently, and deliberately not shipped, in V2.** WDNR also publishes a lake-polygon layer that could give real per-lake surface acreage — but it has no county field, and a live test query for "Devils Lake" returned a polygon 300+ miles from the one this app's data actually covers (the exact same-name collision V1 had already hit once). A second attempt tried a spatial point-in-polygon join instead of name matching, using a real, already-trusted coordinate — and hit a different real problem: the query landed on an `"Unnamed"` shoreline-fragment polygon, not the lake itself. Two independent techniques, two independent failure modes, on the same underlying data — treated as sufficient evidence to close the investigation rather than try a third approach. See [`docs/v2_access_points_report.md`](docs/v2_access_points_report.md) §2 and §6.
 - **Scraping WDNR's own site pages surfaced two real bugs, caught by checking actual output, not assumed correct.** A naive comma-split on WDNR's "available fish species" text truncated any entry with a nested list in parentheses (real text: `"BASS (SMALLMOUTH, ROCK)"` → broken `"BASS (SMALLMOUTH"`) — fixed with a paren-aware splitter and a regression test using the exact real string. Separately, WDNR spells "unknown" three different ways across real records (`UNKNOWN`, `UKNOWN`, `UNKOWN`) — only recognizing the first meant a typo'd placeholder was rendering in the UI as if it were real content.
+- **Adding Lake Michigan live buoys surfaced a real, separate, pre-existing bug — a genuine "run it twice and something breaks" story.** Regenerating the database a second time in one session (needed for an unrelated new field) exposed that no read-side query in this project filters by run timestamp; both runs' rows silently coexisted, caught by a live regression test returning 6 rows instead of 3 for a query that should be deterministic. Fixed at the source — each run now deletes every other run's data once its own is safely committed — with a regression test that runs the batch twice and asserts only the latest survives. A second, smaller bug in the same pass: `CREATE TABLE IF NOT EXISTS` silently no-ops against a table that already exists, so adding a new column to an already-populated production table needed an actual `ALTER TABLE` migration, not just an updated schema string.
 
 If you're reviewing this as a portfolio piece: the interesting part usually isn't any single file, it's `DECISIONS.md` and the `docs/v1_*_report.md`/`docs/v2_*_report.md` series read in order — a real, unedited record of an AI-assisted engineering process that included wrong turns, self-caught bugs, and a project pivot driven by honest negative results.
 
@@ -110,6 +111,7 @@ If you're reviewing this as a portfolio piece: the interesting part usually isn'
 flowchart TD
     subgraph Sources["Real, live public data sources"]
         USGS["USGS water-temp gauges\n(185 sites, 42 live)"]
+        NDBC["NOAA NDBC buoys\n(15 sites, Lake Michigan)"]
         CLMN["WDNR CLMN\nrecent readings"]
         NWS["NWS air-temp proxy\n(live, labeled)"]
         WDNR_S["WDNR fisheries surveys\n(authoritative presence)"]
@@ -120,6 +122,7 @@ flowchart TD
     end
 
     Sources --> Model["analysis/v1_conditions_biology_forecast.py\n(rule-based, no ML)"]
+    NDBC --> Model
     Ref --> Model
     Model --> FullRun["analysis/v1_full_run.py\nruns the model on all 2,296 waterbodies"]
     FullRun --> DB[("data/v1/v1_full_run_results.db\nSQLite, queryable")]
@@ -174,7 +177,7 @@ render.yaml               One-file Render deployment blueprint
 python -m pytest
 ```
 
-**226 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
+**266 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
 
 ## Tech stack
 

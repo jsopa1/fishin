@@ -71,10 +71,17 @@ real per-site data scraped live from WDNR's own detail pages
 (`analysis/v2_shore_fishing_details.py`) — available fish species,
 directions, amenities, ADA accessibility — filling the species-data gap
 for sites outside V1's waterbody universe. The map now has a species
-filter spanning both real data sources and a toggleable list view
-showing the same "one-stop-shop" per-site detail as the map's popups.
+filter spanning both real data sources — deduplicated via
+[`analysis/v2_species_canonicalization.py`](analysis/v2_species_canonicalization.py),
+which collapses 61 real raw WDNR species phrases into 39 real distinct
+species without altering the raw text shown on the site — and a
+toggleable list view showing the same "one-stop-shop" per-site detail
+as the map's popups. Every V1 species prediction that isn't currently a
+match now explains why not (`describe_threshold_gap()`), and Lake
+Michigan's 10 real waterbody entries resolve to a live NOAA NDBC buoy
+water-temperature reading instead of an air-temperature proxy.
 Full account: [docs/v2_access_points_report.md](docs/v2_access_points_report.md);
-decisions: [DECISIONS.md](DECISIONS.md) #016-#019.
+decisions: [DECISIONS.md](DECISIONS.md) #016-#020.
 
 Real per-lake size/depth data was investigated **twice**, independently
 (name-based matching, then a spatial point-in-polygon join), and
@@ -88,6 +95,14 @@ Broader "habitat scoring" and open-ended "environmental intelligence"
 (e.g. weather overlays) remain future, uncommitted V2 extensions — real
 possibilities, not yet scoped or started, and not required for this
 slice to count as done.
+
+**Second slice, planned (Decision #021)**: a CEO-directed deepening of
+this same "Where Should I Fish?" scope into a real spot-level fishing
+intelligence platform — click a spot on the map, get water temperature
+(real, honestly estimated, or honestly unavailable), likely species and
+why, and bait/technique recommendations with real citations. Full plan:
+[docs/v2_fish_intelligence_platform_plan.md](docs/v2_fish_intelligence_platform_plan.md).
+**Status: planned, build starting.**
 
 ## V3 — Continuous Validation
 
