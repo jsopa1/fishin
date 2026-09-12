@@ -241,8 +241,40 @@ main h1 { overflow-wrap: anywhere; word-break: break-word; }
   background: var(--card);
   box-shadow: var(--shadow-sm);
 }
-.species-card h4 { margin: 0 0 8px; font-size: 1.02rem; }
+.species-card h4 { margin: 0; font-size: 1.02rem; }
 .species-card .caveat { color: var(--stocking); font-weight: 600; }
+
+.species-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.match-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.match-badge.yes { background: var(--survey-bg); color: var(--survey); }
+.match-badge.no { background: var(--border-soft); color: var(--muted); }
+.match-badge.none { background: var(--stale-light); color: #a3001e; }
+
+.flag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.flag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.flag-caveat { background: var(--stocking-bg); color: var(--stocking); }
+.flag-diel { background: var(--accent-light); color: var(--accent-dark); }
+
+.species-desc { margin: 12px 0 0; }
+.species-evidence { margin: 8px 0 0; font-size: 0.85rem; color: var(--muted); }
+.tag.evidence { background: var(--border-soft); color: var(--ink); font-weight: 600; text-transform: none; }
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--card); border-top: 1px solid var(--border); padding: 28px 0 36px; font-size: 0.85rem; color: var(--muted); margin-top: 48px; }

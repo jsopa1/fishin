@@ -33,16 +33,35 @@
   <div class="narrative">{{ wb.narrative_text }}</div>
 </div>
 
-<h2>Species predictions (exactly as stored)</h2>
+<h2 id="species-predictions">Species predictions</h2>
 {% if species_predictions %}
   {% for sp in species_predictions %}
   <div class="species-card">
-    <h4>{{ sp.species.title() }}</h4>
-    <p>has_threshold_data={{ sp.has_threshold_data }} &middot; any_match={{ sp.any_match }}
-       &middot; river_caveat_applied={{ sp.river_caveat_applied }} &middot; diel_active={{ sp.diel_active }}</p>
+    <div class="species-head">
+      <h4>{{ sp.species.title() }}</h4>
+      {% if not sp.has_threshold_data %}
+        <span class="match-badge none">No reference data</span>
+      {% elif sp.any_match %}
+        <span class="match-badge yes">✓ Currently matching</span>
+      {% else %}
+        <span class="match-badge no">No match right now</span>
+      {% endif %}
+    </div>
+    {% if sp.river_caveat_applied or sp.diel_active %}
+    <div class="flag-row">
+      {% if sp.river_caveat_applied %}
+        <span class="flag flag-caveat">⚠ Lake-derived threshold — unverified for streams</span>
+      {% endif %}
+      {% if sp.diel_active %}
+        <span class="flag flag-diel">🌙 Documented dawn/dusk/nocturnal feeder</span>
+      {% endif %}
+    </div>
+    {% endif %}
     {% if sp.match_description %}
-      <p>{{ sp.match_description }}</p>
-      <p><em>Evidence quality: {{ sp.evidence_quality }}</em></p>
+      <p class="species-desc">{{ sp.match_description }}</p>
+    {% endif %}
+    {% if sp.evidence_quality %}
+      <p class="species-evidence">Evidence quality: <span class="tag evidence">{{ sp.evidence_quality }}</span></p>
     {% endif %}
   </div>
   {% endfor %}

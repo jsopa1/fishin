@@ -44,7 +44,7 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 
 | Search & filter | Full detail, every caveat shown |
 |---|---|
-| ![Browse results with search filters](docs/screenshots/browse.png) | ![Waterbody detail page showing full narrative and disputed threshold](docs/screenshots/detail.png) |
+| ![Browse results with search filters](docs/screenshots/browse.png) | ![Per-species match badges, caveats, and evidence quality on a waterbody detail page](docs/screenshots/detail.png) |
 
 | Live summary stats | Mobile-responsive |
 |---|---|
