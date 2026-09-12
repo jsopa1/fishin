@@ -169,13 +169,92 @@ came back negative. Full rationale: DECISIONS.md #018.
   `analysis/v2_invasive_species.py`, 4 new Flask route tests) — 208
   passing total.
 
-## 7. Honest gaps / not done this cycle
+## 8. Shore-fishing species enrichment, species filter, and list view
+
+Following a CEO request to "fill in gaps" for sites without species
+info and make the map "a one-stop shop... clearly labeled," this pass
+adds a real per-site data source specifically for shore-fishing sites,
+a species filter spanning both real sources, and a list-view alternative
+to the map. Full rationale: DECISIONS.md #019.
+
+- **New source, investigated and verified before writing an ingestion
+  script**: every shore-fishing access point's `more_info_url` already
+  pointed at a real WDNR detail page
+  (`dnrmaps.wi.gov/LF_ShowDetails/shorefishing.aspx?ID=<n>`) that this
+  project was only ever linking to, never reading. That page publishes,
+  per site: available fish species, directions, vehicle/ADA stall
+  counts, restrooms, fish-cleaning area, amenities, comments, and
+  property-manager contact — real fields no ArcGIS layer this project
+  uses carries. Confirmed the page's HTML structure is stable (fixed
+  `<td><b>LABEL</b></td><td><span>VALUE</span>` rows) across three real
+  site IDs (21, 5, 116) before writing a parser against it.
+- **Deliberately does not trust this page's own Latitude/Longitude
+  fields.** Site ID 5 (Namekagon Lake) has them backwards in WDNR's own
+  data ("Latitude: -91.08", "Longitude: 46.21" — swapped for a Wisconsin
+  site). This project already has a real, trustworthy coordinate for
+  every shore-fishing point from the ArcGIS layer
+  (`analysis/v2_access_points.py`); the new scraper
+  (`analysis/v2_shore_fishing_details.py`) only adds the text fields
+  that layer doesn't carry, never touching the coordinate.
+- **`analysis/v2_shore_fishing_details.py`** fetched all 138 real
+  shore-fishing detail pages live (109 had a species list — the other
+  29 are real WDNR records that simply don't list species, an honest
+  gap in WDNR's own data, not something to paper over). Keyed by
+  `more_info_url` rather than `access_points.id`, so this enrichment
+  survives a future `access_points` re-ingestion (that table's
+  AUTOINCREMENT ids aren't stable across reruns) without silently
+  attaching to the wrong site.
+- **Two real bugs found and fixed while verifying the real scraped
+  data, not assumed correct from a first pass:**
+  1. Naive `split(",")` truncated species text that nests a second
+     comma-separated list inside parentheses — real WDNR text at site
+     109 (Council Grounds State Park) reads `"PIKE (NORTHERN, YELLOW),
+     ... BASS (SMALLMOUTH, ROCK), ..."`; a plain split produced the
+     broken fragment `"BASS (SMALLMOUTH"` with no closing paren.
+     Fixed with a paren-depth-aware splitter and a regression test
+     using this exact real string.
+  2. WDNR's own "unknown" placeholder is spelled three different ways
+     across real records — `UNKNOWN`, `UKNOWN` (site 109), and `UNKOWN`
+     (2 other sites). Only recognizing the first meant "UKNOWN" was
+     rendering in the UI as if it were real content. All three are now
+     recognized as the same "no info" marker; this only affects
+     placeholder detection, never species text, which is still shown
+     with every real WDNR typo intact (e.g. "NORTHEN PIKE") per this
+     project's no-"fixing" discipline.
+- **Species filter** (`list_combined_species`, `list_access_points`'
+  new `species` param) checks both real sources independently for a
+  given access point: its own WDNR shore-fishing species text, OR (if
+  linked to a V1 waterbody) V1's `species_predictions` table for that
+  waterbody. A point can match via either path, both, or neither —
+  never merged or cross-fabricated between sources. Verified live:
+  filtering to "Walleye" returns 987 points, each matching via one real
+  path or the other (`test_map_data_filters_by_species_matches_shore_fishing_and_v1_sources`).
+- **Map/List toggle** — the same fetched data renders either as
+  clustered map markers or as a sortable table with an expandable
+  detail row per site, sharing one `buildDetailHtml()` function so the
+  map popup and the list's detail panel show identical, complete
+  information — every real field WDNR publishes, clearly labeled, nulls
+  simply omitted rather than shown as blank or "N/A." Verified live on
+  a real record (Council Grounds State Park Fishing Pier): species,
+  directions, stall counts, amenities, ADA info, and manager
+  contact all rendered correctly in the list's detail panel.
+- 18 new tests (14 for the scraper, 5 new Flask route tests including
+  a regression test for the parenthetical-truncation bug) — 226 passing
+  total.
+
+## 9. Honest gaps / not done this cycle
 
 - Lake size/depth ("habitat") data — investigated twice (§2, §6),
   deferred both times. A safe fix needs either WBIC added to the V1
   waterbody universe plus a curated per-WBIC "largest polygon" rule, or
   a genuinely different data source than WDNR's 24K Hydro layer.
+- Boat access (ramp/carry-in) sites have no equivalent WDNR detail page
+  to enrich the way shore-fishing sites now are — confirmed no
+  `boataccess.aspx`-style page exists (404) and no such field in the
+  ArcGIS layer. Their species data comes only from a V1 waterbody match,
+  same as before this pass.
 - The broader "environmental intelligence" part of V2's scope beyond
-  access points and AIS sightings (e.g. weather overlays, seasonal
-  context beyond what V1 already provides) — not started, and not
-  considered essential to call this V2 slice complete.
+  access points, AIS sightings, and shore-fishing enrichment (e.g.
+  weather overlays, seasonal context beyond what V1 already provides)
+  — not started, and not considered essential to call this V2 slice
+  complete.

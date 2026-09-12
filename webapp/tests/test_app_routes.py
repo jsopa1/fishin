@@ -139,6 +139,39 @@ class WebAppRouteTests(unittest.TestCase):
                              or (p["matched_waterbody_name"] and "devils lake" in p["matched_waterbody_name"].lower())
                              for p in payload["points"]))
 
+    def test_map_data_filters_by_species_matches_shore_fishing_and_v1_sources(self):
+        resp = self.client.get("/map/data?species=Walleye")
+        payload = resp.get_json()
+        self.assertGreater(len(payload["points"]), 0)
+        # Every point matched via one real source or the other -- either
+        # WDNR's own shore-fishing species text, or a V1 species_predictions
+        # record for its matched waterbody.
+        for p in payload["points"]:
+            via_shore_fishing = p["fish_species_raw"] and "WALLEYE" in p["fish_species_raw"].upper()
+            via_v1_match = p["matched_waterbody_name"] is not None
+            self.assertTrue(via_shore_fishing or via_v1_match, msg=p)
+
+    def test_map_data_shore_fishing_species_not_truncated_by_parenthetical_comma(self):
+        # Regression check for the real WDNR site (ID 109/Council Grounds
+        # State Park) whose species text nests a comma inside parens --
+        # a naive split would have shown "BASS (LG. MOUTH" without its
+        # closing paren.
+        resp = self.client.get("/map/data?source_type=shore_fishing")
+        payload = resp.get_json()
+        combined = " | ".join(p["fish_species_raw"] or "" for p in payload["points"])
+        self.assertNotIn("BASS (LG. MOUTH |", combined)
+        self.assertNotIn("BASS (SMALLMOUTH |", combined)
+
+    def test_map_page_shows_species_filter_dropdown(self):
+        resp = self.client.get("/map")
+        self.assertIn(b'name="species"', resp.data)
+        self.assertIn(b"Walleye", resp.data)
+
+    def test_map_page_shows_view_toggle(self):
+        resp = self.client.get("/map")
+        self.assertIn(b"toggle-map-btn", resp.data)
+        self.assertIn(b"toggle-list-btn", resp.data)
+
     def test_map_points_linked_to_real_waterbody_have_valid_link_target(self):
         resp = self.client.get("/map/data")
         payload = resp.get_json()

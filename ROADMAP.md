@@ -66,9 +66,15 @@ waterbody detail page wherever a confident name/county match exists,
 clustered for performance, with search-to-zoom on filter — plus an
 optional, off-by-default layer of 557 real, WDNR-verified aquatic
 invasive species sightings (`analysis/v2_invasive_species.py`) across 6
-commonly-tracked species. Full account:
-[docs/v2_access_points_report.md](docs/v2_access_points_report.md);
-decisions: [DECISIONS.md](DECISIONS.md) #016-#018.
+commonly-tracked species. Shore-fishing sites are further enriched with
+real per-site data scraped live from WDNR's own detail pages
+(`analysis/v2_shore_fishing_details.py`) — available fish species,
+directions, amenities, ADA accessibility — filling the species-data gap
+for sites outside V1's waterbody universe. The map now has a species
+filter spanning both real data sources and a toggleable list view
+showing the same "one-stop-shop" per-site detail as the map's popups.
+Full account: [docs/v2_access_points_report.md](docs/v2_access_points_report.md);
+decisions: [DECISIONS.md](DECISIONS.md) #016-#019.
 
 Real per-lake size/depth data was investigated **twice**, independently
 (name-based matching, then a spatial point-in-polygon join), and

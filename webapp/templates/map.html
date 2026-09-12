@@ -12,9 +12,13 @@
   <a href="{{ meta.source_url }}" target="_blank" rel="noopener">WDNR's own ArcGIS service</a>
   &mdash; the same data behind the DNR's
   <a href="https://dnr.wisconsin.gov/topic/lands/boataccess" target="_blank" rel="noopener">Boat and Shore Fishing Access</a>
-  page. A marker links to this site's own waterbody page only when its name and county could be
-  matched exactly to an existing V1 result; an unmatched marker still shows every real field WDNR
-  publishes for it.
+  page. Shore-fishing sites are further enriched with WDNR's own per-site details (available fish
+  species, directions, amenities, ADA accessibility), pulled live from
+  <a href="https://dnrmaps.wi.gov/LF_ShowDetails/shorefishing.aspx" target="_blank" rel="noopener">WDNR's shore-fishing site pages</a>
+  &mdash; this fills in species information for sites regardless of whether they match a V1
+  waterbody record. A marker links to this site's own V1 conditions page only when its name and
+  county could be matched exactly to an existing result; an unmatched marker still shows every real
+  field WDNR publishes for it.
 </p>
 
 <div class="badge-row">
@@ -55,8 +59,22 @@
       {% endfor %}
     </select>
   </div>
-  <button type="submit">Filter map</button>
+  <div>
+    <label for="species">Fish species</label>
+    <select id="species" name="species">
+      <option value="">(any)</option>
+      {% for sp in combined_species_list %}
+        <option value="{{ sp }}" {{ 'selected' if filters.species == sp else '' }}>{{ sp }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit">Filter</button>
 </form>
+
+<div class="view-toggle" role="group" aria-label="Switch between map and list view">
+  <button type="button" id="toggle-map-btn" class="view-toggle-btn active">🗺️ Map</button>
+  <button type="button" id="toggle-list-btn" class="view-toggle-btn">📋 List</button>
+</div>
 
 <div class="map-legend">
   <span><i class="map-dot dot-ramp"></i> Boat ramp</span>
@@ -65,7 +83,8 @@
   {% if invasive_meta %}<span><i class="map-dot dot-invasive"></i> Invasive species sighting (optional layer)</span>{% endif %}
 </div>
 
-<div id="access-map" data-county="{{ filters.county or '' }}" data-source-type="{{ filters.source_type or 'all' }}" data-waterbody="{{ filters.waterbody or '' }}" role="application" aria-label="Map of Wisconsin boat access and shore fishing sites"></div>
+<div id="access-map" data-county="{{ filters.county or '' }}" data-source-type="{{ filters.source_type or 'all' }}" data-waterbody="{{ filters.waterbody or '' }}" data-species="{{ filters.species or '' }}" role="application" aria-label="Map of Wisconsin boat access and shore fishing sites"></div>
+<div id="access-list" class="table-scroll" hidden></div>
 <p id="map-status" class="result-count" aria-live="polite">Loading access points…</p>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -76,7 +95,10 @@
 <script>
 (function () {
   var el = document.getElementById('access-map');
+  var listEl = document.getElementById('access-list');
   var status = document.getElementById('map-status');
+  var mapBtn = document.getElementById('toggle-map-btn');
+  var listBtn = document.getElementById('toggle-list-btn');
   var WI_CENTER = [44.6, -89.9];
   var WI_ZOOM = 7;
   var map = L.map(el).setView(WI_CENTER, WI_ZOOM);
@@ -113,12 +135,104 @@
     });
   }
 
-  var hasFilter = !!(el.dataset.county || el.dataset.waterbody || (el.dataset.sourceType && el.dataset.sourceType !== 'all'));
+  // One "one stop shop" info block, shared verbatim between the map
+  // popup and the list view's expandable detail row -- every real field
+  // WDNR publishes, clearly labeled, nothing invented for fields WDNR
+  // didn't provide (those are simply omitted, never shown as blank/N/A).
+  function buildDetailHtml(p) {
+    var html = '<strong>' + escapeHtml(p.facility_name || labels[p.source_type]) + '</strong><br>'
+      + escapeHtml(labels[p.source_type]) + '<br>'
+      + escapeHtml(p.waterbody_name) + ' (' + escapeHtml(p.county) + ')';
+    if (p.fish_species_raw) {
+      html += '<br><strong>Fish species (WDNR-listed):</strong> ' + escapeHtml(p.fish_species_raw);
+    }
+    if (p.directions) html += '<br><strong>Directions:</strong> ' + escapeHtml(p.directions);
+    if (p.vehicle_stalls) html += '<br>Vehicle stalls: ' + escapeHtml(p.vehicle_stalls);
+    if (p.vehicle_trailer_stalls) html += '<br>Vehicle/trailer stalls: ' + escapeHtml(p.vehicle_trailer_stalls);
+    if (p.restrooms) html += '<br>Restrooms: ' + escapeHtml(p.restrooms);
+    if (p.fish_cleaning_area) html += '<br>Fish cleaning area: ' + escapeHtml(p.fish_cleaning_area);
+    if (p.additional_amenities) html += '<br><strong>Amenities:</strong> ' + escapeHtml(p.additional_amenities);
+    if (p.ada_vehicle_stalls || p.ada_restrooms) {
+      html += '<br><strong>ADA accessible:</strong> ';
+      var adaParts = [];
+      if (p.ada_vehicle_stalls) adaParts.push('vehicle stalls (' + escapeHtml(p.ada_vehicle_stalls) + ')');
+      if (p.ada_restrooms) adaParts.push('restrooms (' + escapeHtml(p.ada_restrooms) + ')');
+      html += adaParts.join(', ');
+    }
+    if (p.ada_accessible) html += '<br>ADA accessible: ' + escapeHtml(p.ada_accessible);
+    if (p.property_manager) {
+      html += '<br>Managed by: ' + escapeHtml(p.property_manager);
+      if (p.property_manager_phone) html += ' (' + escapeHtml(p.property_manager_phone) + ')';
+    } else if (p.ownership) {
+      html += '<br>Managed by: ' + escapeHtml(p.ownership);
+    }
+    if (p.comments) html += '<br><strong>Comments:</strong> ' + escapeHtml(p.comments);
+    if (p.more_info_url) html += '<br><a href="' + escapeHtml(p.more_info_url) + '" target="_blank" rel="noopener">WDNR site page ↗</a>';
+    if (p.matched_waterbody_name) {
+      html += '<br><a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
+        + '&county=' + encodeURIComponent(p.matched_county) + '">View waterbody conditions →</a>';
+    }
+    return html;
+  }
+
+  function renderList(pts) {
+    if (pts.length === 0) {
+      listEl.innerHTML = '<p class="empty-state">No access points match these filters.</p>';
+      return;
+    }
+    var rows = pts.map(function (p, i) {
+      var species = p.fish_species_raw || '';
+      var typeLabel = labels[p.source_type] || p.source_type;
+      var linkCell = '';
+      if (p.matched_waterbody_name) {
+        linkCell = '<a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
+          + '&county=' + encodeURIComponent(p.matched_county) + '">Conditions →</a>';
+      } else if (p.more_info_url) {
+        linkCell = '<a href="' + escapeHtml(p.more_info_url) + '" target="_blank" rel="noopener">WDNR page ↗</a>';
+      }
+      return '<tr class="access-list-row" data-idx="' + i + '">'
+        + '<td>' + escapeHtml(p.facility_name || typeLabel) + '</td>'
+        + '<td><span class="access-type-tag type-' + p.source_type + '">' + escapeHtml(typeLabel) + '</span></td>'
+        + '<td>' + escapeHtml(p.waterbody_name) + ' (' + escapeHtml(p.county) + ')</td>'
+        + '<td>' + escapeHtml(species) + '</td>'
+        + '<td>' + linkCell + '</td>'
+        + '</tr>'
+        + '<tr class="access-list-detail" data-idx="' + i + '" hidden><td colspan="5">' + buildDetailHtml(p) + '</td></tr>';
+    }).join('');
+    listEl.innerHTML = '<table><thead><tr><th>Name</th><th>Type</th><th>Waterbody</th><th>Species</th><th>Link</th></tr></thead><tbody>'
+      + rows + '</tbody></table><p class="result-count">Click a row for full details.</p>';
+    listEl.querySelectorAll('.access-list-row').forEach(function (row) {
+      row.addEventListener('click', function () {
+        var idx = row.getAttribute('data-idx');
+        var detail = listEl.querySelector('.access-list-detail[data-idx="' + idx + '"]');
+        if (detail) detail.hidden = !detail.hidden;
+      });
+    });
+  }
+
+  function showMapView() {
+    el.hidden = false;
+    listEl.hidden = true;
+    mapBtn.classList.add('active');
+    listBtn.classList.remove('active');
+    setTimeout(function () { map.invalidateSize(); }, 50);
+  }
+  function showListView() {
+    el.hidden = true;
+    listEl.hidden = false;
+    listBtn.classList.add('active');
+    mapBtn.classList.remove('active');
+  }
+  mapBtn.addEventListener('click', showMapView);
+  listBtn.addEventListener('click', showListView);
+
+  var hasFilter = !!(el.dataset.county || el.dataset.waterbody || el.dataset.species || (el.dataset.sourceType && el.dataset.sourceType !== 'all'));
 
   var params = new URLSearchParams();
   if (el.dataset.county) params.set('county', el.dataset.county);
   if (el.dataset.sourceType) params.set('source_type', el.dataset.sourceType);
   if (el.dataset.waterbody) params.set('waterbody', el.dataset.waterbody);
+  if (el.dataset.species) params.set('species', el.dataset.species);
 
   fetch('{{ url_for("map_data") }}?' + params.toString())
     .then(function (r) { return r.json(); })
@@ -137,21 +251,12 @@
           fillOpacity: 0.85,
           weight: 1
         });
-        var html = '<strong>' + escapeHtml(p.facility_name || labels[p.source_type]) + '</strong><br>'
-          + escapeHtml(labels[p.source_type]) + '<br>'
-          + escapeHtml(p.waterbody_name) + ' (' + escapeHtml(p.county) + ')';
-        if (p.ada_accessible) html += '<br>ADA accessible: ' + escapeHtml(p.ada_accessible);
-        if (p.ownership) html += '<br>Managed by: ' + escapeHtml(p.ownership);
-        if (p.more_info_url) html += '<br><a href="' + escapeHtml(p.more_info_url) + '" target="_blank" rel="noopener">More info ↗</a>';
-        if (p.matched_waterbody_name) {
-          html += '<br><a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
-            + '&county=' + encodeURIComponent(p.matched_county) + '">View waterbody conditions →</a>';
-        }
-        marker.bindPopup(html);
+        marker.bindPopup(buildDetailHtml(p));
         clusters.addLayer(marker);
         latLngs.push([p.lat, p.lon]);
       });
       map.addLayer(clusters);
+      renderList(pts);
 
       if (pts.length === 0) {
         status.textContent = 'No access points match these filters.';

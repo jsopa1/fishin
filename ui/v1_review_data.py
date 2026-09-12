@@ -235,30 +235,115 @@ def list_access_points(
     county: str = None,
     source_type: str = None,
     waterbody: str = None,
+    species: str = None,
     limit: int = 5000,
 ) -> list:
     """Real, current access-point rows for the map -- every field exactly
     as stored, including a null matched_waterbody_name/county when this
-    point couldn't be confidently linked to a known V1 waterbody entry."""
+    point couldn't be confidently linked to a known V1 waterbody entry.
+
+    When shore_fishing_details exists for a row (see
+    analysis/v2_shore_fishing_details.py), its real per-site fields
+    (species list, directions, amenities, ADA info) are joined in --
+    NULL for every other row, never fabricated.
+
+    A `species` filter matches EITHER real source, independently: a
+    shore-fishing site whose own WDNR-published species list contains
+    the term, OR a point linked to a V1 waterbody where V1's own
+    species_predictions has a matching record. Never merges or
+    cross-fabricates between the two -- a point can match via one path,
+    the other, both, or neither."""
     clauses = []
     params = []
     if county:
-        clauses.append("county LIKE ? ESCAPE '\\'")
+        clauses.append("ap.county LIKE ? ESCAPE '\\'")
         params.append(_like_pattern(county))
     if source_type and source_type != "all":
-        clauses.append("source_type = ?")
+        clauses.append("ap.source_type = ?")
         params.append(source_type)
     if waterbody:
-        clauses.append("(waterbody_name LIKE ? ESCAPE '\\' OR matched_waterbody_name LIKE ? ESCAPE '\\')")
+        clauses.append("(ap.waterbody_name LIKE ? ESCAPE '\\' OR ap.matched_waterbody_name LIKE ? ESCAPE '\\')")
         params.append(_like_pattern(waterbody))
         params.append(_like_pattern(waterbody))
+    if species:
+        clauses.append(
+            "("
+            "EXISTS (SELECT 1 FROM shore_fishing_species sfs WHERE sfs.more_info_url = ap.more_info_url "
+            "AND sfs.species_text LIKE ? ESCAPE '\\')"
+            " OR "
+            "EXISTS (SELECT 1 FROM species_predictions sp WHERE sp.waterbody_name = ap.matched_waterbody_name "
+            "AND sp.county = ap.matched_county AND sp.species LIKE ? ESCAPE '\\')"
+            ")"
+        )
+        params.append(_like_pattern(species))
+        params.append(_like_pattern(species.upper()))
     where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
-    query = f"SELECT * FROM access_points {where} ORDER BY waterbody_name, county LIMIT ?"
+    query = f"""
+        SELECT ap.*, sfd.directions, sfd.fishing_trail, sfd.fixed_pier, sfd.end_of_pier_depth,
+               sfd.travel_route_surface, sfd.vehicle_stalls, sfd.vehicle_trailer_stalls,
+               sfd.restrooms, sfd.fish_species_raw, sfd.fish_cleaning_area,
+               sfd.additional_amenities, sfd.comments, sfd.ada_vehicle_stalls,
+               sfd.ada_vehicle_trailer_stalls, sfd.ada_restrooms, sfd.property_manager,
+               sfd.property_manager_phone
+        FROM access_points ap
+        LEFT JOIN shore_fishing_details sfd ON sfd.more_info_url = ap.more_info_url
+        {where}
+        ORDER BY ap.waterbody_name, ap.county
+        LIMIT ?
+    """
     params.append(limit)
     try:
         return [dict(row) for row in conn.execute(query, params)]
     except sqlite3.OperationalError:
-        return []
+        # shore_fishing_details/shore_fishing_species may not exist yet on
+        # an older DB predating this script -- fall back to plain access
+        # points rather than a hard failure.
+        clauses_fallback = []
+        params_fallback = []
+        if county:
+            clauses_fallback.append("county LIKE ? ESCAPE '\\'")
+            params_fallback.append(_like_pattern(county))
+        if source_type and source_type != "all":
+            clauses_fallback.append("source_type = ?")
+            params_fallback.append(source_type)
+        if waterbody:
+            clauses_fallback.append("(waterbody_name LIKE ? ESCAPE '\\' OR matched_waterbody_name LIKE ? ESCAPE '\\')")
+            params_fallback.append(_like_pattern(waterbody))
+            params_fallback.append(_like_pattern(waterbody))
+        where_fallback = f"WHERE {' AND '.join(clauses_fallback)}" if clauses_fallback else ""
+        fallback_query = f"SELECT * FROM access_points {where_fallback} ORDER BY waterbody_name, county LIMIT ?"
+        params_fallback.append(limit)
+        try:
+            return [dict(row) for row in conn.execute(fallback_query, params_fallback)]
+        except sqlite3.OperationalError:
+            return []
+
+
+def list_combined_species(conn: sqlite3.Connection) -> list:
+    """A single, deduplicated (case-insensitive) species list spanning
+    both real sources: V1's own clean species_predictions list, and the
+    raw phrases WDNR publishes on shore-fishing detail pages (kept
+    verbatim, typos and all -- see analysis/v2_shore_fishing_details.py).
+    Where the same species appears in both with different casing, V1's
+    form is kept as the canonical display form since it's already
+    normalized; this never changes which underlying rows a filter on
+    either form matches (list_access_points checks both sources)."""
+    try:
+        v1_species = [r[0] for r in conn.execute("SELECT DISTINCT species FROM species_predictions")]
+    except sqlite3.OperationalError:
+        v1_species = []
+    try:
+        shore_species = [r[0] for r in conn.execute("SELECT DISTINCT species_text FROM shore_fishing_species")]
+    except sqlite3.OperationalError:
+        shore_species = []
+
+    seen_upper = {}
+    for s in v1_species:
+        seen_upper.setdefault(s.upper(), s.title())
+    for s in shore_species:
+        if s.upper() not in seen_upper:
+            seen_upper[s.upper()] = s.title()
+    return sorted(seen_upper.values())
 
 
 # ---------------------------------------------------------------------------

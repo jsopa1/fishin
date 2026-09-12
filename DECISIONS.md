@@ -544,3 +544,54 @@ that also failed. Full account: `docs/v2_access_points_report.md` §6.
 - AIS sightings satisfy the same part of V2's scope ("environmental
   intelligence") the lake-size feature would have, via a source that
   didn't have the same correctness risk
+
+## 019 — Shore-fishing species enrichment, species filter, list view
+
+Following a CEO request to fill species-data gaps and make the map "a
+one-stop shop... clearly labeled" with a species filter and a list/map
+toggle. Full account: `docs/v2_access_points_report.md` §8.
+
+- **New source**: every shore-fishing access point's `more_info_url`
+  already pointed at a real WDNR detail page
+  (`dnrmaps.wi.gov/LF_ShowDetails/shorefishing.aspx`) this project was
+  only linking to, never reading. It publishes real per-site fields no
+  ArcGIS layer here carries: available fish species, directions,
+  vehicle/ADA stalls, restrooms, fish-cleaning area, amenities,
+  comments, property-manager contact. `analysis/v2_shore_fishing_details.py`
+  fetched all 138 real pages live (109 had a species list; the other 29
+  are real WDNR records that simply don't list one -- an honest gap,
+  not papered over). Deliberately does not use this page's own
+  Latitude/Longitude fields -- WDNR's own data has them backwards on a
+  real record (site 5, Namekagon Lake); this project already has a
+  trustworthy coordinate for every such point from the ArcGIS layer.
+- **Two real bugs found verifying the scraped output, not assumed
+  correct**: (1) a naive comma-split truncated species text with a
+  nested parenthetical list (real text: `"BASS (SMALLMOUTH, ROCK)"` ->
+  broken `"BASS (SMALLMOUTH"`) -- fixed with a paren-depth-aware
+  splitter, regression-tested against the exact real string. (2) WDNR's
+  own "unknown" placeholder is spelled three ways across real records
+  (`UNKNOWN`, `UKNOWN`, `UNKOWN`) -- only the first was recognized,
+  so "UKNOWN" was rendering as if it were real content. All three now
+  recognized as the same "no info" marker; species text itself is never
+  "corrected" this way, per the project's standing no-fabrication rule.
+- **Species filter** spans both real sources independently per access
+  point -- WDNR's own shore-fishing species text, or (if linked) V1's
+  `species_predictions` for the matched waterbody -- never merged or
+  cross-fabricated. Verified live: "Walleye" returns 987 points, each
+  matching via one real path or the other.
+- **Map/List toggle**, sharing one `buildDetailHtml()` renderer so the
+  map popup and the list's expandable detail row show identical,
+  complete "one-stop-shop" information -- every real field WDNR
+  publishes, clearly labeled, with nulls simply omitted rather than
+  shown as blank or fabricated "N/A."
+- 18 new tests (226 passing total).
+
+**Rationale:**
+- The "fill in gaps" request is satisfied honestly: shore-fishing sites
+  that don't match a V1 waterbody now still show real species data
+  (from WDNR's own per-site page), rather than staying blank or having
+  a species guessed from a nearby match
+- Boat access (ramp/carry-in) sites have no equivalent detail page --
+  confirmed via a direct 404 test, not assumed -- so their species data
+  still comes only from a V1 match, same as before this pass; this is
+  disclosed in the report rather than presented as symmetric coverage

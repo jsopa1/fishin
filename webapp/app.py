@@ -192,17 +192,20 @@ def map_view():
     meta = data.get_access_points_meta(conn) if conn is not None else None
     invasive_meta = data.get_invasive_species_meta(conn) if conn is not None else None
     invasive_species_list = data.list_distinct_invasive_species(conn) if conn is not None else []
+    combined_species_list = data.list_combined_species(conn) if conn is not None else []
     if conn is not None:
         conn.close()
     context = dict(
         meta=meta,
         invasive_meta=invasive_meta,
         invasive_species_list=invasive_species_list,
+        combined_species_list=combined_species_list,
         access_point_types=ACCESS_POINT_TYPES,
         filters={
             "county": request.args.get("county", "").strip(),
             "source_type": request.args.get("source_type", "all"),
             "waterbody": request.args.get("waterbody", "").strip(),
+            "species": request.args.get("species", "").strip(),
         },
         data_unavailable=meta is None,
     )
@@ -220,8 +223,11 @@ def map_data():
     county = request.args.get("county", "").strip() or None
     source_type = request.args.get("source_type", "all")
     waterbody = request.args.get("waterbody", "").strip() or None
+    species = request.args.get("species", "").strip() or None
 
-    points = data.list_access_points(conn, county=county, source_type=source_type, waterbody=waterbody)
+    points = data.list_access_points(
+        conn, county=county, source_type=source_type, waterbody=waterbody, species=species
+    )
     conn.close()
     return jsonify({
         "points": [
@@ -238,6 +244,18 @@ def map_data():
                 "more_info_url": p["more_info_url"],
                 "matched_waterbody_name": p["matched_waterbody_name"],
                 "matched_county": p["matched_county"],
+                "directions": p.get("directions"),
+                "fish_species_raw": p.get("fish_species_raw"),
+                "vehicle_stalls": p.get("vehicle_stalls"),
+                "vehicle_trailer_stalls": p.get("vehicle_trailer_stalls"),
+                "restrooms": p.get("restrooms"),
+                "fish_cleaning_area": p.get("fish_cleaning_area"),
+                "additional_amenities": p.get("additional_amenities"),
+                "ada_vehicle_stalls": p.get("ada_vehicle_stalls"),
+                "ada_restrooms": p.get("ada_restrooms"),
+                "property_manager": p.get("property_manager"),
+                "property_manager_phone": p.get("property_manager_phone"),
+                "comments": p.get("comments"),
             }
             for p in points
         ],

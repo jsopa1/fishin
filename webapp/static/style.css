@@ -295,6 +295,26 @@ main h1 { overflow-wrap: anywhere; word-break: break-word; }
 .summary-card table th, .summary-card table td { padding: 4px 0; font-size: 0.88rem; border: none; background: none; }
 .summary-card table th { text-transform: none; letter-spacing: normal; font-weight: 500; color: var(--ink); }
 
+/* ---------- Access point map: view toggle + list mode ---------- */
+.view-toggle { display: inline-flex; gap: 2px; margin: 4px 0 14px; background: var(--border-soft); border-radius: var(--radius-sm); padding: 3px; }
+.view-toggle-btn {
+  border: none; background: transparent; cursor: pointer;
+  padding: 7px 16px; border-radius: 5px; font-size: 0.9rem; font-weight: 600;
+  font-family: inherit; color: var(--muted);
+}
+.view-toggle-btn.active { background: var(--card); color: var(--ink); box-shadow: var(--shadow-sm); }
+.view-toggle-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.access-type-tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; white-space: nowrap; }
+.access-type-tag.type-boat_ramp { background: var(--survey-bg); color: #0f6b4f; }
+.access-type-tag.type-boat_carry_in { background: #d9edf7; color: #146c9e; }
+.access-type-tag.type-shore_fishing { background: var(--stocking-bg); color: #7a5f00; }
+
+#access-list table { min-width: 720px; }
+#access-list .access-list-row { cursor: pointer; }
+#access-list .access-list-row:hover { background: var(--accent-light); }
+#access-list .access-list-detail td { background: var(--bg); padding: 16px 18px; line-height: 1.7; font-size: 0.9rem; }
+
 /* ---------- Access point map ---------- */
 .map-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: 4px 0 12px; font-size: 0.86rem; color: var(--muted); }
 .map-legend span { display: inline-flex; align-items: center; gap: 6px; }
