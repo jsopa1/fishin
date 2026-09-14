@@ -48,19 +48,21 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 
 ## Screenshots
 
-| Search & filter | Full detail, every caveat shown |
-|---|---|
-| ![Browse results with search filters](docs/screenshots/browse.png) | ![Per-species match badges, caveats, and evidence quality on a waterbody detail page](docs/screenshots/detail.png) |
-
-| Live summary stats | Mobile-responsive |
-|---|---|
-| ![Summary page with live counts](docs/screenshots/summary.png) | ![Mobile view of the browse page](docs/screenshots/mobile.png) |
-
-**V2, first slice complete:** a statewide, clustered map of 3,272 real WDNR boat access and shore fishing sites — filterable by fish species, toggleable between map and list view — each linked to its waterbody's V1 conditions page where a confident match exists, plus an optional layer of 557 real, WDNR-verified invasive species sightings.
+**Explore** — a split map/list of 3,272 real WDNR access points, filterable by species, county and access type. Clustered so the statewide view stays usable on a phone.
 
 <p align="center">
-  <img src="docs/screenshots/map.png" alt="Statewide map of real WDNR boat access and shore fishing sites, color-coded by type, tracing the outline of Wisconsin" width="800">
+  <img src="docs/screenshots/explore.png" alt="Split map and list view of Wisconsin fishing access points, with filter chips for county, access type and species" width="820">
 </p>
+
+**A spot report** — the one-stop answer for a single access point: water temperature and how it was obtained, today's low-light windows computed for that exact coordinate, WDNR's stocking record, and the regulations covering that water.
+
+<p align="center">
+  <img src="docs/screenshots/spot.png" alt="Spot detail page showing water temperature, dawn and dusk windows, and WDNR stocking records" width="820">
+</p>
+
+| Landing | Waterbody Directory | Mobile |
+|---|---|---|
+| ![Landing page leading with live species matches](docs/screenshots/home.png) | ![Waterbody directory card list with presence tiers](docs/screenshots/browse.png) | ![Mobile spot report with bottom tab navigation](docs/screenshots/mobile.png) |
 
 ## The Story: V0 → V1
 
@@ -95,9 +97,24 @@ The [`/map`](webapp/templates/map.html) page plots all of it on a Leaflet + Open
 
 ## The spot-level fishing intelligence platform
 
-Every one of the 3,272 real access points now has its own `/spot` page — click a marker or list row, get a real one-stop-shop answer: water temperature, likely species and why (or why not), and every real WDNR field for that exact site. Most access points aren't matched to a full V1 waterbody record, so [`ui/v1_review_data.py`](ui/v1_review_data.py) resolves temperature through an honest priority ladder — a real measurement first, then an inverse-distance-weighted estimate from real nearby readings within 15km (never a proxy used as an anchor, since an estimate shouldn't be re-estimated from), then the matched waterbody's own proxy value, then an explicit no-data label. When nothing real is close enough, it says so rather than guessing. Spot pages are keyed by the point's own real coordinate rather than its database row id, so a future data refresh can't silently break a saved link. Full plan and what actually shipped: [`docs/v2_fish_intelligence_platform_plan.md`](docs/v2_fish_intelligence_platform_plan.md).
+Every one of the 3,272 real access points has its own `/spot` page — click a marker or list row, get the whole answer in one place. Each piece is sourced, and each piece says how confident it is:
 
-Full write-up, including two independent, real data sources that were investigated and deliberately *not* shipped (with the reasoning behind each): [`docs/v2_access_points_report.md`](docs/v2_access_points_report.md).
+| On a spot page | Where it comes from |
+|---|---|
+| **Water temperature** | A real USGS gauge or NOAA buoy where one is close; otherwise an inverse-distance-weighted estimate from real readings within 60 km, carrying a **measured** confidence level; otherwise an honest air-temperature proxy or a plain "no data". A proxy is never used as an interpolation anchor. |
+| **Species, and whether conditions favour them** | WDNR survey and stocking records compared against cited physiology thresholds — with the reason a species *isn't* matching, not just that it isn't. |
+| **What WDNR says lives here** | WDNR's own per-lake fish list with abundance (Abundant / Common / Present), kept at their category level and never expanded into species. |
+| **Bait & technique** | Keyed to the current thermal state, with the physiological mechanism and the angling convention carried as **separately tiered** claims. |
+| **Today's low-light windows** | Dawn and dusk computed astronomically for that exact coordinate, shown only where a species there is a documented low-light feeder. |
+| **Stocking history** | 23,870 real WDNR records — year, species, stage, number, average length. |
+| **Regulations** | Live from WDNR's own layer, matched **point-in-polygon** rather than by name, shown in their wording with a retrieval time and a verify link. |
+| **Consumption advisories** | WDNR site-specific advice, with the stricter limits for women and children kept visually separate. |
+
+The coordinate matching is not incidental. Wisconsin has eleven unrelated waters named "Devils Lake" with different walleye rules, so name matching could attach one lake's regulations to another — the app resolves by geometry, and where more than one water is in range it names them and refuses to choose.
+
+Full plan and what shipped: [`docs/v2_fish_intelligence_platform_plan.md`](docs/v2_fish_intelligence_platform_plan.md) · bait research: [`docs/v1_bait_technique_research_report.md`](docs/v1_bait_technique_research_report.md) · redesign: [`docs/v2_ux_redesign_report.md`](docs/v2_ux_redesign_report.md).
+
+Full write-up, including real data sources that were investigated and deliberately *not* shipped (with the reasoning behind each): [`docs/v2_access_points_report.md`](docs/v2_access_points_report.md).
 
 ## Built with Claude Code
 
