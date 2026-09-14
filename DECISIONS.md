@@ -1187,3 +1187,55 @@ water using the split form. Every rule-bearing column is now read.
   advertises, and the cheapest remaining one to reach honestly
 - Surfacing an advisory is only useful if the stricter limits reach the
   people they exist to protect, which merging the audiences would defeat
+
+## 032 — WDNR's own fish list, and why it cannot replace stocking-derived species
+
+CEO direction: "on the DNR fishing website they have all species for
+every body of water, let's update our db to include all the values they
+have in theirs, so we no longer have to guess using stocking data."
+
+The premise is right that WDNR publishes a per-lake fish list, and it is
+better than this project's stocking inference in three ways: it is the
+agency's own assessment rather than a derivation, it carries an
+**abundance** rating (Abundant / Common / Present) that appears nowhere
+else in this project's data, and it includes self-sustaining populations
+that were never stocked -- the exact blind spot of stocking-only
+evidence.
+
+**But it cannot replace species-level presence, because it is not
+species-level.** The entire published vocabulary is nine categories:
+
+    Panfish, Largemouth Bass, Smallmouth Bass, Northern Pike, Walleye,
+    Musky, Trout, Catfish, Sturgeon
+
+"Trout (Present)" does not say brook, brown or rainbow. Those three have
+materially different thermal thresholds -- brook trout is the least
+heat-tolerant -- so driving a physiology match from the category would
+mean asserting a temperature conclusion about a species WDNR never named.
+"Panfish" similarly covers bluegill, black crappie and yellow perch,
+which this app models separately with different windows.
+
+So the data is ingested and shown as WDNR's own answer to "what lives
+here", with abundance, sitting above the species cards and explicitly
+labelled as broader than species. It does **not** feed the temperature
+matching. A test asserts categories stay verbatim and are never expanded
+into the species they might contain.
+
+Lakes are identified by WBIC resolved point-in-polygon from a real
+access-point coordinate, exactly as in #030 and for the same reason:
+eleven unrelated Wisconsin waters are named "Devils Lake", so a name
+match would silently attach one lake's fish list to another.
+
+Two incidental wins: the lake pages carry **acreage**, which this project
+tried and failed twice to obtain from polygon data (#017-#018), and they
+expose a per-waterbody regulations deep link
+(`.../LakeRegulation/Details?WBIC=`) that #028 had concluded did not
+exist.
+
+**Rationale:**
+- Taking the better source was right; taking it at a precision it does
+  not have would have quietly reintroduced exactly the guessing the CEO
+  asked to remove
+- Stocking-derived presence stays because it is finer-grained, and the
+  two are shown side by side rather than one silently overwriting the
+  other
