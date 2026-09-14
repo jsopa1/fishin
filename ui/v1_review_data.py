@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "analysis"))
+import v1_bait_technique as bait  # noqa: E402
 import v1_conditions_biology_forecast as v1  # noqa: E402
 
 DEFAULT_STALE_HOURS = 24
@@ -206,9 +207,12 @@ def get_waterbody_detail(conn: sqlite3.Connection, waterbody_name: str, county: 
         "SELECT * FROM species_predictions WHERE waterbody_name = ? AND county = ? ORDER BY species",
         (waterbody_name, county),
     ).fetchall()
+    waterbody = dict(wb_row)
+    species_predictions = [dict(r) for r in species_rows]
+    attach_bait_guidance(species_predictions, waterbody.get("temp_value_c"))
     return {
-        "waterbody": dict(wb_row),
-        "species_predictions": [dict(r) for r in species_rows],
+        "waterbody": waterbody,
+        "species_predictions": species_predictions,
     }
 
 
@@ -753,6 +757,35 @@ def get_spot_temperature(
     return None
 
 
+def attach_bait_guidance(species_predictions: list, temp_c: float | None) -> list:
+    """Adds bait/technique guidance to each species prediction, resolved
+    from the current temperature (see analysis/v1_bait_technique.py).
+
+    Deliberately attached for every state, not only when a species is
+    currently matching. The original plan showed it only on matches, on
+    the reasoning that recommending bait for a fish that isn't biting
+    undercuts trust -- but the guidance is state-aware, so in cold water
+    it explains *why* the fish can't chase and what that means for the
+    presentation. That is more useful than silence and just as honest.
+    """
+    if temp_c is None or not species_predictions:
+        return species_predictions
+
+    try:
+        thresholds = v1.load_thresholds()["species"]
+    except Exception:  # noqa: BLE001 -- guidance is an enhancement, never a page-breaker
+        return species_predictions
+
+    for prediction in species_predictions:
+        entry = thresholds.get(prediction["species"].upper())
+        if not entry:
+            continue
+        prediction["bait_guidance"] = bait.get_guidance(
+            prediction["species"], entry.get("thresholds", []), temp_c
+        )
+    return species_predictions
+
+
 def get_current_highlights(conn: sqlite3.Connection, limit: int = 3) -> list:
     """Real species/waterbody pairs where conditions match a documented
     physiology window right now, for the landing page.
@@ -886,6 +919,9 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
     # instead of a dead end. Never merged with the above -- a spot either has
     # its own documented species or it honestly has regional context, never
     # both presented as one thing.
+    if species_predictions and temperature:
+        attach_bait_guidance(species_predictions, temperature.get("value_c"))
+
     county_species = None
     if not species_predictions:
         county_species = get_county_species_evidence(conn, point.get("county"))

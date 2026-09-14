@@ -37,6 +37,23 @@
         </ul>
       </div>
     {% endif %}
+    {% if sp.bait_guidance %}
+      <div class="bait-box">
+        <p class="bait-label">
+          <svg class="icon" aria-hidden="true"><use href="#icon-route"/></svg>
+          How to fish it right now
+        </p>
+        <p class="bait-why"><strong>Why:</strong> {{ sp.bait_guidance.biological_basis }}</p>
+        <p class="bait-how">{{ sp.bait_guidance.angling_application }}</p>
+        {% if sp.bait_guidance.species_note %}
+          <p class="bait-note">{{ sp.bait_guidance.species_note }}</p>
+        {% endif %}
+        <p class="bait-tiers">
+          Mechanism: <span class="tag evidence">{{ sp.bait_guidance.basis_evidence_tier }}</span>
+          Technique: <span class="tag evidence">{{ sp.bait_guidance.application_evidence_tier }}</span>
+        </p>
+      </div>
+    {% endif %}
   </div>
   {% endfor %}
 {% else %}

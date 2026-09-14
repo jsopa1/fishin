@@ -1009,3 +1009,53 @@ missing feature, since it is the one place WDNR's tool genuinely wins.
 - Leading with a free, official tool's feature set is a losing pitch no
   matter how well it is executed
 - The differentiator was already built and simply not being sold
+
+## 028 — Bait & technique guidance, with the science and the craft labelled apart
+
+Phase 3 of the fish-intelligence plan, and the differentiator identified in
+#027: nobody else ties technique to cited physiology. Full research
+account: [docs/v1_bait_technique_research_report.md](docs/v1_bait_technique_research_report.md).
+
+The research finding that shaped everything: **bait guidance is not the
+same kind of knowledge as thermal physiology.** The mechanism is
+textbook -- fish are ectotherms, metabolic rate scales with temperature
+(Q10 around 2, Clarke & Johnston 1999), aerobic scope and sustainable
+swimming speed are temperature-limited, so a fish in cold water is
+physically less able to chase prey rather than merely disinclined to.
+The technique that follows ("slow the presentation down") is
+widely-practised angling convention. Searching for peer-reviewed backing
+on lure selection and retrieve speed returned magazines and blogs, not
+studies.
+
+Presenting both at one confidence would have been the exact overclaiming
+this project exists to avoid, so every entry carries two separately
+tiered claims -- `biological_basis` at `well-established`,
+`angling_application` at a new `angling-convention` tier -- and the UI
+renders both tiers visibly. A test fails the build if the technique ever
+inherits the physiology's tier.
+
+- **Keyed to thermal state, not season or species alone**, using the same
+  four states the app already derives: below activity window, in activity
+  window, in spawning trigger, above avoidance. Avoidance and spawning
+  outrank the activity window, because a fish fleeing warm water is not
+  feeding normally just because the number also sits in its activity range.
+- **Shown in every state, not only on matches.** The original plan showed
+  bait only for currently-matching species, reasoning that recommending
+  bait for a fish that isn't biting undercuts trust. Reversed: the
+  guidance is state-aware, so in cold water it explains why the fish
+  can't chase and what that means for presentation. More useful than
+  silence, and no less honest.
+- **11 species** with specific entries, chosen by documented waterbody
+  count; species without one still get the general physiology, since the
+  mechanism holds regardless of which fish it is.
+- **No lure brands, sizes or colours**, and no claim that following the
+  guidance catches fish. Spawning entries warn that Wisconsin restricts
+  seasons then; warm-water entries note release mortality, where the
+  honest advice is sometimes to stop fishing rather than switch lures.
+
+**Rationale:**
+- This completes the loop the CEO described in #021 -- where to fish, what
+  species, what bait, and why -- which no competitor offers with citations
+- Labelling the craft as craft is what makes shipping it defensible at all;
+  the alternative was either fabricating research backing or shipping
+  nothing

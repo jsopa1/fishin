@@ -1,0 +1,210 @@
+{
+  "_purpose": "Bait and technique guidance keyed to the SAME temperature states this app already derives from physiology_thresholds_v1.json, so a recommendation is never a fixed 'use lure X' but always a response to the fish's current thermal state.",
+
+  "_honesty_note": "This file deliberately separates two different kinds of claim on every entry. 'biological_basis' is established physiology: fish are ectotherms, so metabolic rate and sustainable swimming performance scale with water temperature (Q10 for fish metabolic rate is typically around 2, i.e. rate roughly doubles per 10C rise within the tolerated range), and spawning behaviour relocates fish predictably. 'angling_application' is the practical technique anglers infer from that. The first is research; the second is widely-practised convention that has NOT been tested the way the physiology has. They are labelled separately so a reader can tell which is which, per Decision #005.",
+
+  "_evidence_tiers": {
+    "well-established": "The biological mechanism is textbook physiology, not in dispute.",
+    "agency-tier": "Stated by a state or federal fisheries agency, or an equivalent compilation.",
+    "angling-convention": "Widely-practised technique consistent with the physiology, but not a tested research finding. Never presented as science."
+  },
+
+  "_sources": [
+    "Q10 / thermal scaling of fish metabolic rate: Clarke & Johnston 1999, 'Scaling of metabolic rate with body mass and temperature in teleost fish', Journal of Animal Ecology 68:893-905.",
+    "Thermal limits on aerobic scope and sustained swimming performance: Brett 1971, and subsequent aerobic-scope literature reviewed in Ern et al. 2016.",
+    "Species temperature windows and spawning behaviour: this project's own physiology_thresholds_v1.json, sourced from peer-reviewed literature and Wismer & Christie 1987 (GLFC Special Publication 87-3).",
+    "Wisconsin-specific seasonal behaviour and regulation context: Wisconsin DNR fishing pages, https://dnr.wisconsin.gov/topic/Fishing"
+  ],
+
+  "_states": {
+    "below_activity_window": "Current water temperature is below the species' documented activity/feeding window.",
+    "in_activity_window": "Current water temperature is inside the documented activity/feeding window.",
+    "in_spawning_trigger": "Current water temperature is inside the documented spawning-trigger range.",
+    "above_avoidance": "Current water temperature is above the documented avoidance threshold."
+  },
+
+  "general": {
+    "below_activity_window": {
+      "biological_basis": "Below the activity window, metabolic rate and aerobic scope are low. Muscle power output and sustainable swimming speed fall with temperature, so a fish is physically less able to run down fast prey and gains less energy from trying.",
+      "angling_application": "Slow the presentation down and keep the bait in the strike zone far longer than feels natural. Vertical or near-stationary presentations, long pauses, and smaller profiles are the usual response.",
+      "evidence_tier": "well-established",
+      "basis_evidence_tier": "well-established",
+      "application_evidence_tier": "angling-convention"
+    },
+    "in_activity_window": {
+      "biological_basis": "Inside the documented activity window the fish is at or near the temperature where feeding and growth are most efficient, with the aerobic capacity to pursue prey.",
+      "angling_application": "This is when active, searching presentations are worth the effort: moving baits covering water, normal retrieve speeds, larger profiles.",
+      "evidence_tier": "well-established",
+      "basis_evidence_tier": "well-established",
+      "application_evidence_tier": "angling-convention"
+    },
+    "in_spawning_trigger": {
+      "biological_basis": "Spawning temperature relocates fish to predictable habitat (shallows, gravel, weed edges or tributaries depending on species) and changes their behaviour from feeding to reproduction and nest defence.",
+      "angling_application": "Location matters more than lure choice here. Note that many strikes during spawning are territorial rather than feeding, and that Wisconsin regulates several species' seasons around exactly this period -- check the rules for the water before fishing it.",
+      "evidence_tier": "well-established",
+      "basis_evidence_tier": "well-established",
+      "application_evidence_tier": "angling-convention"
+    },
+    "above_avoidance": {
+      "biological_basis": "Above the avoidance threshold the fish actively leaves water at that temperature, seeking cooler refuge: depth, spring inflows, or shade. Warm water also holds less dissolved oxygen while metabolic oxygen demand is rising, which compounds the stress.",
+      "angling_application": "Fish the refuge rather than the surface layer -- deeper water, inflows and shade. Fish caught in these conditions are physiologically stressed and release survival is poorer, which is worth weighing before targeting them at all.",
+      "evidence_tier": "well-established",
+      "basis_evidence_tier": "well-established",
+      "application_evidence_tier": "angling-convention"
+    }
+  },
+
+  "species": {
+    "WALLEYE": {
+      "in_activity_window": {
+        "angling_application": "Jigs tipped with minnows or plastics worked near bottom, and crankbaits or live-bait rigs along weed edges and drop-offs. Walleye are documented low-light feeders, so effort near dawn and dusk is usually better spent than midday.",
+        "species_note": "The diel_active flag in this app's physiology data marks walleye as a documented dawn/dusk/nocturnal feeder.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Slow vertical jigging with minnows, held close to bottom structure. This is the standard cold-water and hard-water walleye approach.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "in_spawning_trigger": {
+        "angling_application": "Fish move to rocky shorelines and tributary mouths to spawn. Wisconsin closes or restricts walleye seasons on many waters through this period -- check the regulations for the specific water first.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "LARGEMOUTH BASS": {
+      "in_activity_window": {
+        "angling_application": "Moving baits over and around weed cover -- spinnerbaits, soft plastics, topwater in low light. Largemouth relate strongly to vegetation and wood in Wisconsin lakes.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Slow soft plastics worked on or near bottom, on the deeper edges of the structure fish use in summer.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "in_spawning_trigger": {
+        "angling_application": "Fish move shallow onto nests and strike defensively rather than to feed. Nest-guarding males are easy to catch and their removal exposes the nest, so this is a period where catch-and-release handling speed matters unusually much.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "SMALLMOUTH BASS": {
+      "in_activity_window": {
+        "angling_application": "Crayfish and minnow imitations around rock: tubes, jigs and crankbaits on rocky points, reefs and current seams in rivers.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Slow presentations held on rock structure, often in deeper water than the same fish use in summer.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "in_spawning_trigger": {
+        "angling_application": "Fish move onto gravel and rock shallows. Wisconsin applies catch-and-release or closed-season rules to smallmouth on many waters during this period -- check before fishing.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "NORTHERN PIKE": {
+      "in_activity_window": {
+        "angling_application": "Large moving baits along weed edges -- spoons, spinnerbaits, swimbaits, and suspended live bait under floats. Pike are ambush predators that hold along cover edges.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Larger dead or live bait fished slowly or statically. Pike remain catchable in genuinely cold water but will not chase a fast-moving bait.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "above_avoidance": {
+        "angling_application": "Pike have a comparatively low avoidance threshold for a Wisconsin gamefish, so in hot weather they move deep or to cool inflows. They are also notably fragile when caught warm -- keep handling brief or leave them alone.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "MUSKELLUNGE": {
+      "in_activity_window": {
+        "angling_application": "Large bucktails, glide baits and topwater worked over and along weed edges and bars, with a figure-eight at the boat. Musky fishing is a low-encounter, high-effort pursuit by nature.",
+        "species_note": "This app discloses a genuine disagreement between sources on muskellunge thermal optimum rather than resolving it -- treat any single number as one source's estimate.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Large soft plastics and suckers fished slowly, the standard late-autumn Wisconsin approach as water cools.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "above_avoidance": {
+        "angling_application": "Warm water is when musky release mortality is highest. Many Wisconsin guides stop targeting them entirely above the upper-70s F.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "BLUEGILL": {
+      "in_activity_window": {
+        "angling_application": "Small baits fished shallow -- worm or larva under a float, small jigs. Bluegill are accessible from shore, which makes them the most realistic target at many of the shore-fishing sites on this map.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Very small jigs or bait fished slowly in deeper water; this is the standard Wisconsin panfish ice approach.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "in_spawning_trigger": {
+        "angling_application": "Bluegill build visible colonial nests in shallow sand and gravel and defend them aggressively, which makes this the easiest period of the year to catch them.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "BLACK CRAPPIE": {
+      "in_activity_window": {
+        "angling_application": "Small minnows or jigs suspended over brush, timber and weed edges. Crappie hold off bottom, so depth control matters more than lure choice.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Small jigs or minnows suspended over deeper basin areas, a mainstay of Wisconsin hard-water fishing.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "in_spawning_trigger": {
+        "angling_application": "Fish move into shallow cover to spawn and become concentrated and reachable from shore.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "YELLOW PERCH": {
+      "in_activity_window": {
+        "angling_application": "Small minnows, worms or jigs fished on or near bottom. Perch travel in schools, so a fish usually means more in the same spot.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Small jigging spoons and bait near bottom -- one of Wisconsin's most-targeted ice species.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "BROOK TROUT": {
+      "in_activity_window": {
+        "angling_application": "Small spinners, drifted worms, or flies in the small streams brook trout occupy. Approach matters more than lure choice -- these fish spook easily in clear, low water.",
+        "species_note": "Brook trout have the lowest thermal tolerance of Wisconsin's common trout, which is why many of their streams are spring-fed.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "above_avoidance": {
+        "angling_application": "Brook trout concentrate at cold spring inflows when the main stream warms. Fish hooked in warm water survive release poorly -- this is a genuine reason to stop fishing rather than relocate.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "BROWN TROUT": {
+      "in_activity_window": {
+        "angling_application": "Spinners, minnow imitations and flies fished to undercut banks, log jams and deeper holes. Brown trout tolerate warmer water than brook trout and are more nocturnal as they grow.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Slow, deep presentations in holes -- drifted bait or weighted flies rather than fast-moving hardware.",
+        "application_evidence_tier": "angling-convention"
+      }
+    },
+
+    "RAINBOW TROUT": {
+      "in_activity_window": {
+        "angling_application": "Spinners, spoons, drifted bait and flies. In Wisconsin's Lake Michigan tributaries, migratory rainbows (steelhead) are targeted with drifted spawn and flies during their runs.",
+        "application_evidence_tier": "angling-convention"
+      },
+      "below_activity_window": {
+        "angling_application": "Slow drifted presentations through deeper holding water; rainbows stay catchable at low temperatures that shut down warmwater species.",
+        "application_evidence_tier": "angling-convention"
+      }
+    }
+  }
+}
