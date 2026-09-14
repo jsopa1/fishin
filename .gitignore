@@ -17,3 +17,9 @@ build/
 
 # Third-party downloaded tools (e.g. cloudflared.exe for local tunnel demos)
 .tools/
+
+# SQLite sidecar files. Transient per-process state (journal/WAL), never
+# part of the committed dataset -- committing one can corrupt a clone.
+*.db-journal
+*.db-wal
+*.db-shm

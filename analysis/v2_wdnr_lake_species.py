@@ -183,8 +183,17 @@ def fetch_lake_page(wbic: int, timeout: int = 30) -> str:
 
 
 def run(limit: int | None = None, skip_wbic: bool = False) -> int:
-    conn = sqlite3.connect(str(DB_PATH))
+    # A long ingest shares the database with the running web app and with
+    # any ad-hoc query, and SQLite's default is to fail instantly on a
+    # write lock. An earlier run died ~40 minutes in for exactly that
+    # reason, losing the phase it was midway through. Wait for the lock
+    # instead, and keep WAL so readers never block the writer at all.
+    conn = sqlite3.connect(str(DB_PATH), timeout=60)
     conn.row_factory = sqlite3.Row
+    try:
+        conn.execute("PRAGMA journal_mode=WAL")
+    except sqlite3.DatabaseError:
+        pass
     init_tables(conn)
     now = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
