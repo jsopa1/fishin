@@ -448,3 +448,33 @@ class ProductionReadinessTests(unittest.TestCase):
     def test_feedback_route_is_reachable_from_every_page(self):
         for path in ("/", "/map", "/browse"):
             self.assertIn(b"Report a problem", self.client.get(path).data)
+
+
+class RegulationsPointerTests(unittest.TestCase):
+    """Anglers are legally required to check bag and length limits. The app
+    must point at the authoritative source without restating rules that
+    change between seasons -- a stale copy here could cost someone a
+    citation."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def _a_spot(self):
+        points = self.client.get("/map/data").get_json()["points"]
+        return points[0]
+
+    def test_spot_page_points_at_official_regulations(self):
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data
+        self.assertIn(b"Check the regulations before you keep anything", body)
+        self.assertIn(b"apps.dnr.wi.gov/fisheriesmanagement/Public/LakeRegulation", body)
+
+    def test_app_does_not_restate_bag_or_length_limits(self):
+        # If this ever fails, someone started reproducing legally binding
+        # numbers that this project has no pipeline to keep current.
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode().lower()
+        for claim in ("daily bag limit is", "minimum length is", "you may keep"):
+            self.assertNotIn(claim, body)

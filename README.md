@@ -6,19 +6,23 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![296 tests passing](https://img.shields.io/badge/tests-296%20passing-brightgreen.svg)](#tests)
+[![330 tests passing](https://img.shields.io/badge/tests-330%20passing-brightgreen.svg)](#tests)
 
 ---
 
-### ▶ [Live demo ↗](https://nascar-leather-lessons-width.trycloudflare.com) · [Screenshots](#screenshots) · [The full story](#the-story-v0--v1) · [Built with Claude Code](#built-with-claude-code)
+### ▶ [Screenshots](#screenshots) · [The full story](#the-story-v0--v1) · [Deploy it](DEPLOY.md) · [Built with Claude Code](#built-with-claude-code)
 
-*The live demo link runs from a temporary local tunnel and may go offline between visits — see [Quickstart](#quickstart) to run it yourself if the link is down.*
+*Not currently hosted anywhere permanent — `render.yaml` is ready and [DEPLOY.md](DEPLOY.md) is a ten-minute walkthrough. To run it locally, see [Quickstart](#quickstart).*
 
 ---
 
 ## What this is
 
+**Other apps tell you where people caught fish. This one tells you why they're biting.**
+
 A web app that answers one honest, narrow question for any of **2,296 real Wisconsin lakes, ponds, rivers, and streams**: *right now, is the water temperature inside a documented physiological window — spawning trigger, feeding-activity range — for a species actually confirmed present here?*
+
+That gap is real and verified: Wisconsin DNR's own free [Fishing Finder](https://dnr.wisconsin.gov/topic/fishing/outreach/wifishingfinder) already covers access points, stocking and regulations, and the paid apps sell social catch-logging (Fishbrain) or bathymetric charts (Navionics). **None of them tell you why conditions favour a species right now, with the citation.**
 
 It is **not** a catch-rate prediction. That distinction isn't marketing copy — it's the direct output of a earlier phase of this project (V0) that spent five independent research cycles trying to statistically predict catch rate from public data, and honestly reported that it couldn't be done with the data available. Rather than ship an overclaimed product, the project pivoted to something the evidence actually supports, and built that instead.
 
@@ -69,7 +73,7 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 | **V1 (considered)** | Pivot to real-time acoustic telemetry (GLATOS) for salmon tracking | Investigated and **deferred** — retrospective-only data, confounded coverage — [`DECISIONS.md` #011](DECISIONS.md) |
 | **V1 (shipped)** | Stop trying to predict catch rate. Report real conditions vs. real biology instead | The app in this repo. Scaled statewide, validated at 2,296-waterbody scale, polished, and deployed. |
 
-Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 23 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
+Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 27 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
 
 ## What the app actually does
 
@@ -99,7 +103,7 @@ Full write-up, including two independent, real data sources that were investigat
 
 This entire project — research, statistical evaluation, data pipelines, the desktop review tool, this web app, and its deployment — was built through iterative sessions with **[Claude Code](https://claude.com/claude-code)**, Anthropic's agentic CLI. A few things about *how* it was built are worth calling out for anyone evaluating this as a development-process sample, not just a code sample:
 
-- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 23 numbered decisions, each with its own rationale, including the ones that reversed course.
+- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 27 numbered decisions, each with its own rationale, including the ones that reversed course.
 - **Negative results were kept, not massaged.** Four independent statistical research cycles came back null. All four shipped in full, because that's what actually happened.
 - **Real bugs were found by actually running the thing at scale**, not just code review. Running the model across all 2,296 waterbodies (not a handful of demo cases) surfaced two silent, previously-undetected defects — a species-name casing mismatch that meant survey-confirmed matches had *never* actually fired in any prior demo, and a county-naming inconsistency that produced duplicate lake entries (caught by literally looking at the app's own output afterward and noticing "Devils Lake" listed twice). Both are documented, fixed, and regression-tested — see [`docs/v1_full_run_report.md`](docs/v1_full_run_report.md).
 - **The UI polish pass was criteria-driven and verified, not vibes-based** — 7 explicit criteria (responsive layout, functional correctness, error handling, performance, honesty of framing, accessibility, attribution), each checked with a real measurement (`scrollWidth` diffs across 3 real viewport widths, WCAG contrast ratios computed and one failure fixed, all 516 interactive elements confirmed keyboard-focusable, live-database query timings) before being marked done. See [`docs/v1_polish_report.md`](docs/v1_polish_report.md).
@@ -182,7 +186,7 @@ render.yaml               One-file Render deployment blueprint
 python -m pytest
 ```
 
-**296 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
+**330 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
 
 ## Tech stack
 

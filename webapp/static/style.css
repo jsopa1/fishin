@@ -395,6 +395,22 @@ table td a:hover { text-decoration: underline; }
 .tag.confidence-low { background: var(--gray-100); color: var(--gray-700); }
 .confidence-note { margin: var(--space-2) 0 0; font-size: var(--text-sm); color: var(--muted); }
 
+/* Regulations pointer. Deliberately links out rather than restating bag
+   and length limits: those are legally binding, change between seasons,
+   and a stale copy here could cost someone a citation. */
+.regs-note {
+  display: flex; gap: var(--space-3);
+  background: var(--stocking-bg);
+  border: 1px solid #f2e2b8;
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  margin-top: var(--space-3);
+  color: #5c4a12;
+}
+.regs-note p { margin: 0; font-size: var(--text-sm); color: inherit; }
+.regs-note .icon { flex-shrink: 0; margin-top: 3px; }
+.regs-note a { color: #7a5f00; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+
 /* Regional (county-level) species evidence shown only where a spot has no
    record of its own. Visually distinct from species cards on purpose --
    it must never read as this waterbody's own species list. */

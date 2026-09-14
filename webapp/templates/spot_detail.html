@@ -102,6 +102,17 @@
       </p>
     {% endif %}
   </div>
+  <div class="regs-note">
+    <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
+    <p>
+      <strong>Check the regulations before you keep anything.</strong>
+      Bag limits, length limits and season dates vary by water and change between seasons — look up
+      <strong>{{ spot.waterbody_name|title }}</strong> in
+      <a href="https://apps.dnr.wi.gov/fisheriesmanagement/Public/LakeRegulation" target="_blank" rel="noopener">WDNR's official regulations<svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg></a>.
+      This app reports conditions, not rules.
+    </p>
+  </div>
+
   {% if waterbody %}
   <div class="detail-box">
     <h3>Full conditions narrative (exactly as generated)</h3>
