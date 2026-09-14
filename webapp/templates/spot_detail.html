@@ -36,16 +36,15 @@
     {% if spot.ada_vehicle_stalls or spot.ada_restrooms or spot.ada_accessible == 'Yes' %}
       <span class="stat-chip"><svg class="icon" aria-hidden="true"><use href="#icon-accessibility"/></svg> ADA accessible</span>
     {% endif %}
+    {% if waterbody %}
+      <span class="tag {{ waterbody.presence_tier }}">{{ waterbody.presence_tier.replace('_', ' ') }}</span>
+      <span class="stat-chip"><svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> {{ waterbody.species_count }} species tracked</span>
+    {% endif %}
   </div>
   <div class="detail-hero-actions">
     {% if spot.more_info_url %}
       <a class="btn btn-secondary" href="{{ spot.more_info_url }}" target="_blank" rel="noopener">
         <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg> WDNR site page
-      </a>
-    {% endif %}
-    {% if spot.matched_waterbody_name %}
-      <a class="btn btn-secondary" href="{{ url_for('waterbody_detail') }}?name={{ spot.matched_waterbody_name }}&county={{ spot.matched_county }}">
-        <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Waterbody conditions
       </a>
     {% endif %}
   </div>
@@ -95,6 +94,12 @@
       </p>
     {% endif %}
   </div>
+  {% if waterbody %}
+  <div class="detail-box">
+    <h3>Full conditions narrative (exactly as generated)</h3>
+    <div class="narrative">{{ waterbody.narrative_text }}</div>
+  </div>
+  {% endif %}
 </div>
 
 <div class="section-panel" id="panel-species">

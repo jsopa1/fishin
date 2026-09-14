@@ -662,9 +662,13 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
     """The full one-stop-shop payload for a single spot: its own real
     access-point fields, an honestly-resolved temperature (see
     get_spot_temperature), and -- only when matched to a known V1
-    waterbody -- that waterbody's species predictions (Phase 2: reused
-    unchanged, never guessed for an unmatched point). Returns None only
-    when the coordinate doesn't resolve to any real access point at all."""
+    waterbody -- that waterbody's full record (including the generated
+    narrative_text) and species predictions (Phase 2: reused unchanged,
+    never guessed for an unmatched point). A matched spot's own page
+    carries everything a separate /waterbody page would have shown, so
+    a user never has to leave the spot page to see the full conditions
+    picture. Returns None only when the coordinate doesn't resolve to
+    any real access point at all."""
     point = find_access_point_by_coords(conn, lat, lon, name=name)
     if point is None:
         return None
@@ -675,14 +679,17 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         matched_county=point.get("matched_county"),
     )
 
+    waterbody = None
     species_predictions = []
     if point.get("matched_waterbody_name") and point.get("matched_county"):
         wb_detail = get_waterbody_detail(conn, point["matched_waterbody_name"], point["matched_county"])
         if wb_detail:
+            waterbody = wb_detail["waterbody"]
             species_predictions = wb_detail["species_predictions"]
 
     return {
         "point": point,
         "temperature": temperature,
+        "waterbody": waterbody,
         "species_predictions": species_predictions,
     }

@@ -580,6 +580,21 @@ class TestGetSpotDetail(DataTestBase):
         self.assertEqual(len(detail["species_predictions"]), 1)
         self.assertEqual(detail["species_predictions"][0]["species"], "WALLEYE")
 
+    def test_matched_spot_includes_full_waterbody_record_not_just_species(self):
+        # A matched spot's page must carry the waterbody's own narrative
+        # text and fields -- so viewing a spot never requires clicking
+        # through to a separate /waterbody page for the full picture.
+        self._insert_waterbody(
+            "Devils Lake", "Sauk", temp_value_c=18.0, temp_is_real=1, temp_method="clmn_recent",
+            narrative="=== full generated narrative text ===",
+        )
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301, facility_name="Devils Lake Ramp")
+
+        detail = rd.get_spot_detail(self.conn, 43.4286, -89.7301)
+        self.assertIsNotNone(detail["waterbody"])
+        self.assertIn("full generated narrative text", detail["waterbody"]["narrative_text"])
+        self.assertEqual(detail["waterbody"]["waterbody_name"], "Devils Lake")
+
     def test_unmatched_spot_has_no_species_predictions_never_guessed(self):
         self.conn.execute(
             """INSERT INTO access_points
@@ -592,6 +607,7 @@ class TestGetSpotDetail(DataTestBase):
         detail = rd.get_spot_detail(self.conn, 46.0, -89.5)
         self.assertIsNotNone(detail)
         self.assertEqual(detail["species_predictions"], [])
+        self.assertIsNone(detail["waterbody"])
 
 
 if __name__ == "__main__":

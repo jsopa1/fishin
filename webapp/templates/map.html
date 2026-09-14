@@ -177,10 +177,6 @@
     }
     if (p.comments) html += '<br><strong>Comments:</strong> ' + escapeHtml(p.comments);
     if (p.more_info_url) html += '<br><a href="' + escapeHtml(p.more_info_url) + '" target="_blank" rel="noopener">WDNR site page ↗</a>';
-    if (p.matched_waterbody_name) {
-      html += '<br><a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
-        + '&county=' + encodeURIComponent(p.matched_county) + '">View waterbody conditions →</a>';
-    }
     html += '<br><a href="' + spotUrl(p) + '"><strong>Full spot report (temperature, species, why) →</strong></a>';
     return html;
   }
@@ -193,10 +189,9 @@
     var cards = pts.map(function (p) {
       var typeLabel = labels[p.source_type] || p.source_type;
       var species = p.fish_species_raw ? '<p><strong>Species (WDNR-listed):</strong> ' + escapeHtml(p.fish_species_raw) + '</p>' : '';
-      var conditionsLink = p.matched_waterbody_name
-        ? '<a href="{{ url_for("waterbody_detail") }}?name=' + encodeURIComponent(p.matched_waterbody_name)
-          + '&county=' + encodeURIComponent(p.matched_county) + '">Waterbody conditions</a> &middot; '
-        : '';
+      // Note: no nested <a> here -- the whole card is already a link, and
+      // an <a> inside an <a> is invalid HTML that browsers silently
+      // reparent, which used to break the card's box entirely.
       return '<a class="list-card" href="' + spotUrl(p) + '">'
         + '<div class="list-card-head">'
         + '<div><p class="list-card-title">' + escapeHtml(p.facility_name || typeLabel) + '</p>'
@@ -204,7 +199,7 @@
         + '<span class="access-type-tag type-' + p.source_type + '">' + escapeHtml(typeLabel) + '</span>'
         + '</div>'
         + '<div class="list-card-body">' + species + '</div>'
-        + '<span class="list-card-link">' + conditionsLink + 'Full spot report <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></span>'
+        + '<span class="list-card-link">Full spot report <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></span>'
         + '</a>';
     }).join('');
     listEl.innerHTML = '<div class="card-list">' + cards + '</div>';

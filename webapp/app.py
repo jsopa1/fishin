@@ -331,7 +331,7 @@ def spot_detail():
         ), 404
     return render_template(
         "spot_detail.html", spot=detail["point"], temperature=detail["temperature"],
-        species_predictions=detail["species_predictions"],
+        waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
     )
 
 
