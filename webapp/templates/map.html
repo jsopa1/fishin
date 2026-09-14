@@ -1,34 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Explore{% endblock %}
 {% block content %}
-<h1>Explore</h1>
-
 {% if data_unavailable %}
+<h1>Explore</h1>
 <p class="empty-state">⚠ The results database is currently unavailable. Please try again shortly.</p>
 {% else %}
-<p>
-  Real, current locations of Wisconsin public boat access sites (ramp and carry-in) and developed
-  shore fishing sites, pulled live from <a href="{{ meta.source_url }}" target="_blank" rel="noopener">WDNR's own ArcGIS service</a>.
-  Shore-fishing sites are further enriched with WDNR's own per-site details (species, directions,
-  amenities, ADA accessibility). Tap any spot for a full report — temperature, likely species, and why.
-</p>
-
-<div class="badge-row">
-  <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-anchor"/></svg> {{ "{:,}".format(meta.total_boat_ramp) }} boat ramps</span>
-  <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-waves"/></svg> {{ "{:,}".format(meta.total_boat_carry_in) }} carry-in sites</span>
-  <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> {{ "{:,}".format(meta.total_shore_fishing) }} shore fishing sites</span>
-  <span class="pill">📅 pulled {{ meta.fetched_at }}</span>
+<div class="explore-head">
+  <h1>Explore</h1>
+  <p>Tap any spot for water temperature, likely species, and why — {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }} real Wisconsin access points.</p>
 </div>
-
-{% if invasive_meta %}
-<p>
-  Also available as an optional map layer (off by default — use the layers control at the map's
-  top right): {{ "{:,}".format(invasive_meta.total_sightings) }} real, WDNR-verified invasive species
-  sightings across {{ invasive_meta.species_covered }} species.
-  <strong>A sighting is real, positive evidence of a past detection — its absence elsewhere is not
-  evidence the species isn't there.</strong>
-</p>
-{% endif %}
 
 <div class="explore-toolbar">
   <form class="explore-filters" method="get" action="{{ url_for('map_view') }}">
@@ -90,6 +70,27 @@
     <div class="list-pane list-pane-scroll" id="access-list"></div>
   </div>
 </div>
+
+<!-- Sourcing sits after the map rather than in front of it. It is part of
+     this project's standing discipline and stays on the page, but making
+     someone read three paragraphs before reaching the product was the
+     wrong trade. -->
+<section class="explore-sourcing">
+  <p>
+    Locations pulled live from <a href="{{ meta.source_url }}" target="_blank" rel="noopener">WDNR's own ArcGIS service</a>
+    ({{ "{:,}".format(meta.total_boat_ramp) }} boat ramps, {{ "{:,}".format(meta.total_boat_carry_in) }} carry-in,
+    {{ "{:,}".format(meta.total_shore_fishing) }} shore fishing sites; pulled {{ meta.fetched_at[:10] }}).
+    Shore-fishing sites carry WDNR's own per-site details — species, directions, amenities, ADA access.
+  </p>
+  {% if invasive_meta %}
+  <p>
+    The optional invasive-species layer (off by default, in the map's layers control) shows
+    {{ "{:,}".format(invasive_meta.total_sightings) }} WDNR-verified sightings across
+    {{ invasive_meta.species_covered }} species. <strong>A sighting is positive evidence of a past
+    detection — its absence elsewhere is not evidence the species isn't there.</strong>
+  </p>
+  {% endif %}
+</section>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css" integrity="sha512-ENrTWqddXrLJsQS2A86QmvA17PkJ0GVm1bqj5aTgpeMAfDKN2+SIOLpKG8R/6KkimnhTb+VW5qqUHB/r1zaRgg==" crossorigin="anonymous" referrerpolicy="no-referrer">

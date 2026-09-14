@@ -618,6 +618,13 @@ table td a:hover { text-decoration: underline; }
 .summary-card table th { text-transform: none; letter-spacing: normal; font-weight: 500; color: var(--ink); }
 
 /* ---------- Explore: split map+list ---------- */
+.explore-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-2); }
+.explore-head h1 { margin: 0; }
+.explore-head p { margin: 0; color: var(--muted); font-size: var(--text-sm); }
+.explore-sourcing { margin-top: var(--space-6); padding-top: var(--space-4); border-top: 1px solid var(--border); }
+.explore-sourcing p { font-size: var(--text-sm); color: var(--muted); max-width: 80ch; }
+.explore-sourcing p:last-child { margin-bottom: 0; }
+
 .explore-toolbar { position: sticky; top: var(--header-h); z-index: 15; background: var(--bg); padding: var(--space-4) 0 var(--space-2); }
 .explore-layout { display: flex; flex-direction: column; gap: var(--space-4); }
 .explore-panel { display: flex; flex-direction: column; min-width: 0; }
