@@ -524,8 +524,66 @@ def build_temperature_anchors(conn: sqlite3.Connection) -> list:
     return [a for a in anchors.values() if v1.is_plausible_water_temp_c(a["value_c"])]
 
 
+# How far an estimate may reach, and how much to trust it at that range.
+#
+# Both numbers are measured, not chosen: every pair of the real anchors in
+# this database was bucketed by separation distance and the disagreement
+# between the two readings recorded (see docs/v2_ux_redesign_report.md and
+# DECISIONS #026). Observed median | 90th-percentile disagreement:
+#
+#     0-15km   0.5C | 7.4C      40-60km   2.2C | 10.8C
+#    15-25km   0.5C | 2.5C     60-100km   2.3C |  8.9C
+#    25-40km   1.7C | 5.3C
+#
+# The cutoff is 60km because beyond it the estimate stops being useful for
+# this app's actual purpose: the physiology windows it compares against are
+# narrow (Brown Trout's feeding window is 7.7C wide; its spawning trigger is
+# 2.2C wide), so once the error approaches the width of the window, a
+# match/no-match conclusion drawn from it means nothing even though the
+# number still looks plausible.
+DEFAULT_MAX_ANCHOR_KM = 60.0
+ESTIMATE_CONFIDENCE_BANDS = (
+    # (max nearest-anchor distance, level, typical error, plain-language note)
+    (15.0, "high", 0.5,
+     "within 15km of a real reading, where readings typically agree to within half a degree"),
+    (40.0, "moderate", 1.7,
+     "the nearest real reading is far enough that a degree or two of error is typical"),
+    (DEFAULT_MAX_ANCHOR_KM, "low", 2.2,
+     "the nearest real reading is distant -- treat this as a regional guide, not a lake-specific value"),
+)
+
+
+def describe_estimate_confidence(nearest_km: float, spread_c: float | None = None) -> dict:
+    """How far to trust an interpolated estimate, from measured quantities
+    only: how far away the nearest real reading is, and (when more than one
+    was used) how much those readings disagree with each other.
+
+    This is deliberately not a percentage. A number like "78% confident"
+    implies a validated probability this project has never measured, which
+    is exactly the kind of false precision Decision #005 rules out. The
+    bands below are observed typical errors at real distances."""
+    level, typical_error_c, note = "low", 2.2, ESTIMATE_CONFIDENCE_BANDS[-1][3]
+    for max_km, band_level, band_error, band_note in ESTIMATE_CONFIDENCE_BANDS:
+        if nearest_km <= max_km:
+            level, typical_error_c, note = band_level, band_error, band_note
+            break
+
+    # Anchors that disagree with each other are direct evidence that this
+    # area's water isn't uniform right now, whatever the distance says.
+    if spread_c is not None and spread_c > 3.0 and level != "low":
+        level = "moderate" if level == "high" else "low"
+        typical_error_c = max(typical_error_c, spread_c / 2)
+        note = (
+            f"nearby real readings disagree by {spread_c:.1f}C, so this area's water "
+            "isn't uniform right now"
+        )
+
+    return {"level": level, "typical_error_c": typical_error_c, "note": note}
+
+
 def estimate_temperature_from_nearby(
-    conn: sqlite3.Connection, lat: float, lon: float, max_km: float = 15.0, max_anchors: int = 5
+    conn: sqlite3.Connection, lat: float, lon: float,
+    max_km: float = DEFAULT_MAX_ANCHOR_KM, max_anchors: int = 5,
 ):
     """Inverse-distance-weighted estimate from real anchor readings
     only (build_temperature_anchors) within max_km. Returns None when no
@@ -534,8 +592,8 @@ def estimate_temperature_from_nearby(
     anchor: a proxy is already an estimate, and re-estimating from an
     estimate would compound uncertainty invisibly.
 
-    Returns {"value_c", "anchor_count", "nearest_km", "anchors":
-    [{"waterbody_name", "county", "distance_km"}, ...]} on success.
+    Returns {"value_c", "anchor_count", "nearest_km", "spread_c",
+    "confidence", "anchors": [...]} on success.
     """
     anchors = build_temperature_anchors(conn)
     nearby = []
@@ -552,10 +610,16 @@ def estimate_temperature_from_nearby(
     total_weight = sum(weights)
     value_c = sum(w * a["value_c"] for w, (_, a) in zip(weights, nearby)) / total_weight
 
+    used_values = [a["value_c"] for _, a in nearby]
+    spread_c = (max(used_values) - min(used_values)) if len(used_values) > 1 else None
+    nearest_km = nearby[0][0]
+
     return {
         "value_c": value_c,
         "anchor_count": len(nearby),
-        "nearest_km": nearby[0][0],
+        "nearest_km": nearest_km,
+        "spread_c": spread_c,
+        "confidence": describe_estimate_confidence(nearest_km, spread_c),
         "anchors": [
             {"waterbody_name": a["waterbody_name"], "county": a["county"], "distance_km": round(d, 1)}
             for d, a in nearby
@@ -649,6 +713,8 @@ def get_spot_temperature(
             "resolution": "interpolated_nearby",
             "anchor_count": estimate["anchor_count"],
             "nearest_km": estimate["nearest_km"],
+            "spread_c": estimate["spread_c"],
+            "confidence": estimate["confidence"],
             "anchors": estimate["anchors"],
         }
 
@@ -663,6 +729,58 @@ def get_spot_temperature(
         }
 
     return None
+
+
+def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: int = 8) -> dict | None:
+    """Real, county-level species evidence for a spot that has no record of
+    its own -- 45% of access points are in that position, and an empty page
+    is a dead end for the user.
+
+    This is deliberately NOT presented as this waterbody's species list.
+    It answers a different, weaker, still-useful question: what does WDNR
+    actually document in this county's waters? An angler reading "Walleye
+    in 84 Vilas County waterbodies" learns something true about where they
+    are standing; inventing a species list for the specific lake would not.
+
+    Counts are waterbodies with a documented record, so they carry the same
+    positive-only-evidence rule used everywhere else: a low count means
+    little documentation, never confirmed absence."""
+    if not county:
+        return None
+    try:
+        rows = conn.execute(
+            """SELECT sp.species AS species,
+                      COUNT(DISTINCT sp.waterbody_name) AS waterbody_count,
+                      SUM(CASE WHEN wr.presence_tier = 'survey_confirmed' THEN 1 ELSE 0 END) AS survey_confirmed
+               FROM species_predictions sp
+               JOIN waterbody_results wr
+                 ON wr.waterbody_name = sp.waterbody_name AND wr.county = sp.county
+               WHERE sp.county = ?
+               GROUP BY sp.species
+               ORDER BY waterbody_count DESC, sp.species
+               LIMIT ?""",
+            (county, limit),
+        ).fetchall()
+        total = conn.execute(
+            "SELECT COUNT(DISTINCT waterbody_name) FROM waterbody_results WHERE county = ?", (county,)
+        ).fetchone()[0]
+    except sqlite3.OperationalError:
+        return None
+
+    if not rows:
+        return None
+    return {
+        "county": county,
+        "waterbodies_in_county": total,
+        "species": [
+            {
+                "species": r["species"],
+                "waterbody_count": r["waterbody_count"],
+                "survey_confirmed": bool(r["survey_confirmed"]),
+            }
+            for r in rows
+        ],
+    }
 
 
 def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str = None) -> dict | None:
@@ -694,9 +812,18 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
             waterbody = wb_detail["waterbody"]
             species_predictions = wb_detail["species_predictions"]
 
+    # Only for spots with no record of their own: real county-level evidence
+    # instead of a dead end. Never merged with the above -- a spot either has
+    # its own documented species or it honestly has regional context, never
+    # both presented as one thing.
+    county_species = None
+    if not species_predictions:
+        county_species = get_county_species_evidence(conn, point.get("county"))
+
     return {
         "point": point,
         "temperature": temperature,
         "waterbody": waterbody,
         "species_predictions": species_predictions,
+        "county_species": county_species,
     }

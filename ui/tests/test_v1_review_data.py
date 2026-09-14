@@ -520,6 +520,92 @@ class TestEstimateTemperatureFromNearby(DataTestBase):
         self.assertEqual(result["anchor_count"], 3)
 
 
+class TestEstimateConfidence(unittest.TestCase):
+    """The confidence signal is derived from measured quantities (distance
+    to the nearest real reading, and how much nearby readings disagree),
+    never from an invented probability."""
+
+    def test_close_anchor_is_high_confidence(self):
+        c = rd.describe_estimate_confidence(8.0)
+        self.assertEqual(c["level"], "high")
+
+    def test_mid_range_is_moderate(self):
+        self.assertEqual(rd.describe_estimate_confidence(30.0)["level"], "moderate")
+
+    def test_far_anchor_is_low(self):
+        self.assertEqual(rd.describe_estimate_confidence(55.0)["level"], "low")
+
+    def test_disagreeing_anchors_downgrade_confidence(self):
+        # Distance alone would say "high"; readings that disagree by 6C are
+        # direct evidence the water isn't uniform, whatever the distance.
+        close = rd.describe_estimate_confidence(5.0)
+        disagreeing = rd.describe_estimate_confidence(5.0, spread_c=6.0)
+        self.assertEqual(close["level"], "high")
+        self.assertEqual(disagreeing["level"], "moderate")
+        self.assertIn("disagree", disagreeing["note"])
+
+    def test_confidence_is_never_expressed_as_a_percentage(self):
+        # Decision #005: no false precision. A percentage implies a
+        # validated probability this project has never measured.
+        for km in (1.0, 20.0, 50.0):
+            c = rd.describe_estimate_confidence(km)
+            self.assertNotIn("%", c["note"])
+            self.assertIn(c["level"], ("high", "moderate", "low"))
+
+
+class TestCountySpeciesEvidence(DataTestBase):
+    def setUp(self):
+        super().setUp()
+        self._insert_run()
+
+    def test_returns_real_county_records_ranked_by_waterbody_count(self):
+        self._insert_waterbody("Lake A", "Vilas")
+        self._insert_waterbody("Lake B", "Vilas")
+        self._insert_species_prediction("Lake A", "Vilas", "WALLEYE")
+        self._insert_species_prediction("Lake B", "Vilas", "WALLEYE")
+        self._insert_species_prediction("Lake A", "Vilas", "MUSKELLUNGE")
+
+        ev = rd.get_county_species_evidence(self.conn, "Vilas")
+        self.assertEqual(ev["county"], "Vilas")
+        self.assertEqual(ev["waterbodies_in_county"], 2)
+        self.assertEqual(ev["species"][0]["species"], "WALLEYE")
+        self.assertEqual(ev["species"][0]["waterbody_count"], 2)
+
+    def test_county_with_no_records_returns_none_not_an_empty_shell(self):
+        self.assertIsNone(rd.get_county_species_evidence(self.conn, "Nowhere"))
+
+    def test_missing_county_returns_none(self):
+        self.assertIsNone(rd.get_county_species_evidence(self.conn, None))
+
+    def test_spot_with_own_species_does_not_get_county_fallback(self):
+        # A spot that has real records of its own must never have them
+        # diluted with weaker regional context.
+        self._insert_waterbody("Devils Lake", "Sauk")
+        self._insert_species_prediction("Devils Lake", "Sauk", "WALLEYE")
+        self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301)
+
+        detail = rd.get_spot_detail(self.conn, 43.4286, -89.7301)
+        self.assertEqual(len(detail["species_predictions"]), 1)
+        self.assertIsNone(detail["county_species"])
+
+    def test_unmatched_spot_gets_county_evidence_instead_of_a_dead_end(self):
+        self._insert_waterbody("Big Vilas Lake", "Vilas")
+        self._insert_species_prediction("Big Vilas Lake", "Vilas", "MUSKELLUNGE")
+        self.conn.execute(
+            """INSERT INTO access_points
+               (source_type, facility_name, waterbody_name, county, latitude, longitude,
+                matched_waterbody_name, matched_county)
+               VALUES ('boat_carry_in', 'Bittersweet Carry-In', 'Bittersweet Lake', 'Vilas',
+                       46.02, -89.51, NULL, NULL)"""
+        )
+        self.conn.commit()
+
+        detail = rd.get_spot_detail(self.conn, 46.02, -89.51)
+        self.assertEqual(detail["species_predictions"], [])
+        self.assertIsNotNone(detail["county_species"])
+        self.assertEqual(detail["county_species"]["species"][0]["species"], "MUSKELLUNGE")
+
+
 class TestFindAccessPointByCoords(DataTestBase):
     def test_finds_by_exact_coordinate(self):
         self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301, facility_name="Devils Lake Ramp")

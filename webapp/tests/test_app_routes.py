@@ -250,8 +250,41 @@ class WebAppRouteTests(unittest.TestCase):
             "/spot?lat={}&lon={}&name={}".format(unmatched["lat"], unmatched["lon"], unmatched["facility_name"] or "")
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"no species-presence data", resp.data)
-        self.assertIn(b"available for this specific spot", resp.data)
+        # A spot with no record of its own now shows real county-level
+        # evidence instead of a dead end -- but it must say plainly that
+        # this is regional context, not this water's species list.
+        self.assertIn(b"Regional guide", resp.data)
+        self.assertIn(b"not a species list for this water", resp.data)
+        self.assertIn(b"no fisheries-survey or stocking record tied to this specific spot", resp.data)
+
+    def test_regional_evidence_never_claims_species_are_in_this_water(self):
+        # The honesty property that makes the county fallback defensible:
+        # counts are always attributed to county waterbodies, and the page
+        # never asserts presence at the spot itself.
+        map_resp = self.client.get("/map/data")
+        points = map_resp.get_json()["points"]
+        unmatched = next(p for p in points if not p["matched_waterbody_name"])
+        resp = self.client.get("/spot?lat={}&lon={}".format(unmatched["lat"], unmatched["lon"]))
+        body = resp.data.decode()
+
+        self.assertIn("documented in", body)
+        self.assertIn("waterbod", body)
+        self.assertIn("isn't evidence", body)  # absence-is-not-proof caveat
+
+    def test_interpolated_temperature_carries_a_measured_confidence_signal(self):
+        map_resp = self.client.get("/map/data")
+        points = map_resp.get_json()["points"]
+        # Find a spot whose temperature actually resolves by interpolation.
+        for p in points[:60]:
+            resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
+            if b"estimated from nearby real readings" in resp.data:
+                body = resp.data.decode()
+                self.assertIn("confidence", body)
+                self.assertIn("Typically accurate to about", body)
+                # Never a fabricated probability (Decision #005).
+                self.assertNotIn("% confident", body)
+                return
+        self.skipTest("no interpolated spot found in the sampled points")
 
     def test_spot_report_404_for_coordinates_matching_no_real_point(self):
         resp = self.client.get("/spot?lat=0.0&lon=0.0")

@@ -332,6 +332,7 @@ def spot_detail():
     return render_template(
         "spot_detail.html", spot=detail["point"], temperature=detail["temperature"],
         waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
+        county_species=detail["county_species"],
     )
 
 

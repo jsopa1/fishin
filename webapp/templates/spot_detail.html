@@ -77,8 +77,16 @@
       <p>
         {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
         <span class="tag estimated">estimated from nearby real readings</span>
-        &mdash; averaged from {{ temperature.anchor_count }} real reading{{ "s" if temperature.anchor_count != 1 else "" }},
-        nearest {{ "%.1f"|format(temperature.nearest_km) }}km away
+        <span class="tag confidence-{{ temperature.confidence.level }}">{{ temperature.confidence.level }} confidence</span>
+      </p>
+      <p class="confidence-note">
+        Typically accurate to about ±{{ "%.1f"|format(temperature.confidence.typical_error_c) }}°C
+        ({{ "%.1f"|format(temperature.confidence.typical_error_c * 9/5) }}°F) at this range &mdash;
+        {{ temperature.confidence.note }}.
+      </p>
+      <p class="anchor-intro">
+        Averaged from {{ temperature.anchor_count }} real reading{{ "s" if temperature.anchor_count != 1 else "" }},
+        weighted by distance:
       </p>
       <ul class="anchor-list">
         {% for a in temperature.anchors %}
@@ -104,13 +112,41 @@
 
 <div class="section-panel" id="panel-species">
   <h2 id="species-predictions">Species likely present, and whether conditions currently favor them</h2>
-  {% if spot.matched_waterbody_name %}
+  {% if species_predictions %}
     {% include "_species_cards.html" %}
+  {% elif county_species %}
+    <div class="regional-box">
+      <p class="regional-label">
+        <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg>
+        Regional guide — not a species list for this water
+      </p>
+      <p>
+        WDNR has no fisheries-survey or stocking record tied to this specific spot. What follows is what
+        WDNR documents across
+        <strong>{{ county_species.waterbodies_in_county }} waterbodies in {{ county_species.county }}</strong>,
+        to tell you what kind of water you're standing on — it is <strong>not</strong> a claim about what
+        swims here.
+      </p>
+      <ul class="regional-species">
+        {% for s in county_species.species %}
+          <li>
+            <span class="regional-species-name">{{ s.species.title() }}</span>
+            <span class="regional-species-count">
+              documented in {{ s.waterbody_count }} {{ county_species.county }} waterbod{{ "y" if s.waterbody_count == 1 else "ies" }}
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+      <p class="regional-footnote">
+        Counts are waterbodies with a documented record. A species missing from this list isn't evidence
+        it's absent — WDNR's coverage is real but not exhaustive.
+      </p>
+    </div>
   {% else %}
     <p class="empty-state">
-      This spot isn't matched to a known V1 waterbody record, so there is no species-presence data
-      available for this specific spot. This is an honest gap in coverage, not a claim that no fish
-      are present — see the Site info tab for this exact site's own published species list, if any.
+      WDNR publishes no species record for this spot or its county. That's an honest gap in the source
+      data, not a claim that no fish are present — check the Site info tab for this site's own published
+      details.
     </p>
   {% endif %}
 </div>
