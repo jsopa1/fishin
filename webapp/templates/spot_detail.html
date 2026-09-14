@@ -244,6 +244,33 @@
 
 <div class="section-panel" id="panel-species">
   <h2 id="species-predictions">Species likely present, and whether conditions currently favor them</h2>
+  {% if wdnr_species %}
+  <div class="wdnr-species-box">
+    <p class="wdnr-species-label">
+      <svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg>
+      What WDNR says is in this water
+    </p>
+    <ul class="wdnr-species-list">
+      {% for s in wdnr_species.species %}
+        <li>
+          <span class="wdnr-species-name">{{ s.category }}</span>
+          {% if s.abundance %}
+            <span class="abundance abundance-{{ s.abundance | lower }}">{{ s.abundance }}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    <p class="wdnr-species-note">
+      WDNR's own assessment for
+      <a href="{{ wdnr_species.lake_page_url }}" target="_blank" rel="noopener">{{ wdnr_species.lake_name or 'this lake' }}<svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg></a>{% if wdnr_species.acres %}, {{ "{:,.0f}".format(wdnr_species.acres) }} acres{% endif %}.
+      These are WDNR's own categories, which are broader than species —
+      <strong>&ldquo;Trout&rdquo; doesn't say brook, brown or rainbow, and &ldquo;Panfish&rdquo; covers
+      several fish this app tracks separately</strong>, so they aren't used to drive the temperature
+      matching below.
+    </p>
+  </div>
+  {% endif %}
+
   {% if species_predictions %}
     {% include "_species_cards.html" %}
   {% elif county_species %}

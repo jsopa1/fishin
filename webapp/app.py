@@ -385,6 +385,7 @@ def spot_detail():
         waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
         county_species=detail["county_species"], activity_window=detail["activity_window"],
         diel_species=detail["diel_species"], stocking=detail["stocking"],
+        wdnr_species=detail["wdnr_species"],
         regulations=regulations, advisory=advisory,
     )
 

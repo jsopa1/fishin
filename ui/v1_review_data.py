@@ -786,6 +786,57 @@ def attach_bait_guidance(species_predictions: list, temp_c: float | None) -> lis
     return species_predictions
 
 
+def get_wdnr_lake_species(conn: sqlite3.Connection, waterbody: str, county: str) -> dict | None:
+    """WDNR's own published fish list for this water, with abundance.
+
+    This is the agency's assessment rather than this app's inference, and
+    it carries an abundance rating ("Abundant"/"Common"/"Present") that
+    appears nowhere else in this project's data. It also catches
+    self-sustaining populations that were never stocked -- the blind spot
+    of stocking-derived presence.
+
+    It is deliberately NOT used to drive species-level physiology
+    matching, because WDNR's published vocabulary is coarser than species:
+    the whole list is nine categories, and "Trout" does not say brook,
+    brown or rainbow -- which matters, since those have materially
+    different thermal thresholds. Expanding a category into a species
+    would be inventing a fact WDNR did not state.
+    """
+    if not waterbody:
+        return None
+    try:
+        row = conn.execute(
+            "SELECT wbic FROM wdnr_wbic_map WHERE UPPER(waterbody_name) = UPPER(?) "
+            "AND UPPER(county) = UPPER(?) AND wbic IS NOT NULL",
+            (waterbody, county),
+        ).fetchone()
+        if row is None:
+            return None
+        wbic = row["wbic"]
+        species = conn.execute(
+            "SELECT category, abundance, lake_name, acres FROM wdnr_lake_species "
+            "WHERE wbic = ? ORDER BY CASE abundance WHEN 'Abundant' THEN 0 "
+            "WHEN 'Common' THEN 1 WHEN 'Present' THEN 2 ELSE 3 END, category",
+            (wbic,),
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return None
+
+    if not species:
+        return None
+    return {
+        "wbic": wbic,
+        "lake_name": species[0]["lake_name"],
+        "acres": species[0]["acres"],
+        "species": [{"category": r["category"], "abundance": r["abundance"]} for r in species],
+        "regulations_url": (
+            "https://apps.dnr.wi.gov/fisheriesmanagement/Public/LakeRegulation/Details"
+            f"?WBIC={wbic}"
+        ),
+        "lake_page_url": f"https://apps.dnr.wi.gov/lakes/lakepages/LakeDetail.aspx?wbic={wbic}",
+    }
+
+
 def get_stocking_history(conn: sqlite3.Connection, waterbody: str, county: str, since_year: int = 2020) -> dict | None:
     """Real WDNR stocking records for one water, as published.
 
@@ -1044,6 +1095,12 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
     if stocking is None:
         stocking = get_stocking_history(conn, point.get("waterbody_name"), point.get("county"))
 
+    wdnr_species = None
+    if point.get("matched_waterbody_name") and point.get("matched_county"):
+        wdnr_species = get_wdnr_lake_species(conn, point["matched_waterbody_name"], point["matched_county"])
+    if wdnr_species is None:
+        wdnr_species = get_wdnr_lake_species(conn, point.get("waterbody_name"), point.get("county"))
+
     return {
         "point": point,
         "temperature": temperature,
@@ -1053,4 +1110,5 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         "activity_window": activity_window,
         "diel_species": diel_species,
         "stocking": stocking,
+        "wdnr_species": wdnr_species,
     }

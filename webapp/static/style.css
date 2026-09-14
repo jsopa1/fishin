@@ -441,6 +441,40 @@ table td a:hover { text-decoration: underline; }
 .bait-note { margin: 0 0 var(--space-2); font-size: var(--text-sm); color: var(--muted); font-style: italic; }
 .bait-tiers { margin: 0; font-size: var(--text-xs); color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
+/* WDNR's own published fish list, with abundance. Visually distinct from
+   the species cards below it because it answers a different question --
+   "what lives here", at WDNR's coarser category level -- and must not be
+   read as this app's species-level temperature matching. */
+.wdnr-species-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--survey);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+.wdnr-species-label {
+  display: flex; align-items: center; gap: 6px; margin: 0 0 var(--space-4);
+  font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--survey);
+}
+.wdnr-species-list { list-style: none; margin: 0 0 var(--space-4); padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.wdnr-species-list li {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: var(--radius-full);
+  background: var(--bg); border: 1px solid var(--border);
+}
+.wdnr-species-name { font-weight: 600; font-size: var(--text-sm); }
+.abundance {
+  font-size: var(--text-xs); font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.03em; padding: 1px 7px; border-radius: var(--radius-full);
+}
+.abundance-abundant { background: var(--survey-bg); color: var(--survey); }
+.abundance-common { background: var(--water-bg); color: var(--water); }
+.abundance-present { background: var(--border-soft); color: var(--muted); }
+.wdnr-species-note { margin: 0; font-size: var(--text-sm); color: var(--muted); }
+.wdnr-species-note a { display: inline-flex; align-items: center; gap: 3px; font-weight: 600; }
+
 /* Consumption advisory. The two audiences are kept visually separate
    because the limits genuinely differ -- large walleye can be "one meal
    per month" for most people and "do not eat" for women of childbearing
