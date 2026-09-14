@@ -3,8 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A real, sourced Wisconsin fishing conditions &amp; biology reference — live water temperature compared against cited fish physiology, for confirmed species. Not a catch-rate prediction.">
-  <title>{% block title %}V1 Conditions & Biology Reference{% endblock %} — fishin</title>
+  {% set meta_title = self.title() ~ " — fishin" %}
+  {% set meta_description = "Live Wisconsin water temperatures checked against published fish-physiology research, so you can see which species are inside their documented feeding or spawning range right now — with the reasoning and the source for every answer." %}
+  <meta name="description" content="{{ meta_description }}">
+  <title>{% block title %}Wisconsin Fishing Conditions{% endblock %} — fishin</title>
+
+  <!-- Share previews. The recommended launch channels (angler forums,
+       Wisconsin fishing groups, Reddit) all render link cards, and a link
+       with no card reads as spam in exactly those places. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="fishin">
+  <meta property="og:title" content="{{ meta_title }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:image" content="{{ url_for('static', filename='share-card.svg', _external=True) }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ meta_title }}">
+  <meta name="twitter:description" content="{{ meta_description }}">
+  <meta name="theme-color" content="#2456d6">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -174,6 +189,7 @@
         <li><a href="{{ url_for('summary') }}">Data Summary</a></li>
         <li><a href="{{ url_for('failures') }}">Data Health / Failures</a></li>
         <li><a href="{{ url_for('home') }}#about">About</a></li>
+        <li><a href="https://github.com/jsopa1/fishin/issues/new" target="_blank" rel="noopener">Report a problem</a></li>
       </ul>
       <p><strong>Data sources &amp; attribution:</strong></p>
       <ul>

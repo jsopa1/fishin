@@ -1,0 +1,76 @@
+name: Refresh water temperatures
+
+# Water temperature is the only thing in this database that ages in hours,
+# and a stale reading is not a cosmetic problem: during testing one gauge
+# moved 17.0C -> 12.1C over 43 hours, a bigger shift than the width of some
+# spawning windows, which is enough to flip a species from "matching" to
+# "not". Render's free tier has no scheduler, so the schedule lives here
+# and the committed database is the delivery mechanism -- pushing it back
+# to main triggers the normal auto-deploy.
+#
+# Cost: ~65 sensor calls, a couple of minutes. Nothing is geocoded.
+
+on:
+  schedule:
+    # Every four hours. Times are UTC; GitHub may delay runs under load,
+    # which is fine -- the app shows its own freshness either way.
+    - cron: "0 */4 * * *"
+  workflow_dispatch:        # so it can be run by hand before a launch
+
+permissions:
+  contents: write
+
+concurrency:
+  # Never let two refreshes race to commit the same database file.
+  group: refresh-temperatures
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Refresh sensor-backed temperatures
+        run: python analysis/refresh_temperatures.py
+
+      - name: Verify the database is still sane
+        # A refresh that corrupts the database is worse than a stale one,
+        # so this gate runs before anything is committed. The sentinel
+        # check is here because a USGS "no data" value once reached
+        # production and poisoned interpolation statewide (DECISIONS #025).
+        run: |
+          python - <<'PY'
+          import sqlite3, sys
+          conn = sqlite3.connect("data/v1/v1_full_run_results.db")
+          bad = conn.execute(
+              "SELECT COUNT(*) FROM waterbody_results "
+              "WHERE temp_value_c IS NOT NULL AND (temp_value_c < -5 OR temp_value_c > 45)"
+          ).fetchone()[0]
+          real = conn.execute(
+              "SELECT COUNT(*) FROM waterbody_results WHERE temp_is_real = 1"
+          ).fetchone()[0]
+          print(f"implausible temperatures: {bad}")
+          print(f"real readings remaining:  {real}")
+          if bad:
+              sys.exit("Refresh produced implausible temperatures -- not committing.")
+          if real < 40:
+              sys.exit(f"Only {real} real readings left (expected ~65) -- not committing.")
+          PY
+
+      - name: Commit refreshed readings
+        run: |
+          if git diff --quiet -- data/v1/v1_full_run_results.db; then
+            echo "No temperature changes to commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/v1/v1_full_run_results.db
+          git commit -m "Refresh water temperatures [skip ci]"
+          git push

@@ -14,7 +14,7 @@ import os
 import sys
 from pathlib import Path
 
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, Response, jsonify, render_template, request, url_for
 
 REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
@@ -354,6 +354,57 @@ def spot_detail():
         waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
         county_species=detail["county_species"],
     )
+
+
+@app.route("/healthz")
+def healthz():
+    """Liveness plus a real readiness check. A 200 here means the process
+    is up AND the database actually answers -- a process that boots but
+    can't read its data is not healthy, and on a free tier that spins down
+    between requests, the difference matters."""
+    conn = get_conn()
+    if conn is None:
+        return jsonify({"status": "degraded", "database": "unavailable"}), 503
+    try:
+        waterbodies = conn.execute("SELECT COUNT(*) FROM waterbody_results").fetchone()[0]
+        refresh_row = data.get_latest_temperature_refresh(conn)
+    except Exception:  # noqa: BLE001 -- a health check must never raise
+        return jsonify({"status": "degraded", "database": "unreadable"}), 503
+    finally:
+        conn.close()
+
+    return jsonify({
+        "status": "ok",
+        "waterbodies": waterbodies,
+        "temperatures_refreshed_at": refresh_row["finished_at"] if refresh_row else None,
+    })
+
+
+@app.route("/robots.txt")
+def robots():
+    # The diagnostic pages are real and public, but they are not what
+    # should surface in a search for Wisconsin fishing conditions.
+    body = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /failures\n"
+        "Disallow: /summary\n"
+        "Disallow: /map/data\n"
+        "Disallow: /map/invasive-species-data\n"
+        f"Sitemap: {url_for('sitemap', _external=True)}\n"
+    )
+    return Response(body, mimetype="text/plain")
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    """Only the pages worth indexing. Spot pages are deliberately excluded:
+    there are 3,272 of them, they are keyed by coordinate, and their value
+    is current conditions rather than durable content."""
+    pages = [url_for(e, _external=True) for e in ("home", "map_view", "browse")]
+    urls = "".join(f"<url><loc>{p}</loc><changefreq>daily</changefreq></url>" for p in pages)
+    xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>'
+    return Response(xml, mimetype="application/xml")
 
 
 @app.errorhandler(404)

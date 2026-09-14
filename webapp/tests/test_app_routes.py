@@ -400,3 +400,51 @@ class WebAppErrorHandlingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ProductionReadinessTests(unittest.TestCase):
+    """Things a publicly-launched site needs that a review tool doesn't."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def test_healthz_reports_ok_and_a_real_row_count(self):
+        resp = self.client.get("/healthz")
+        self.assertEqual(resp.status_code, 200)
+        payload = resp.get_json()
+        self.assertEqual(payload["status"], "ok")
+        self.assertGreater(payload["waterbodies"], 0)
+
+    def test_healthz_degrades_to_503_when_the_database_is_gone(self):
+        # A process that boots but can't read its data is not healthy.
+        with mock.patch.object(flask_app_module, "get_conn", return_value=None):
+            resp = self.client.get("/healthz")
+        self.assertEqual(resp.status_code, 503)
+        self.assertEqual(resp.get_json()["status"], "degraded")
+
+    def test_robots_allows_the_product_and_hides_the_diagnostics(self):
+        body = self.client.get("/robots.txt").data.decode()
+        self.assertIn("Disallow: /failures", body)
+        self.assertIn("Disallow: /summary", body)
+        self.assertIn("Sitemap:", body)
+
+    def test_sitemap_lists_the_real_pages(self):
+        body = self.client.get("/sitemap.xml").data.decode()
+        self.assertIn("/map", body)
+        self.assertIn("/browse", body)
+
+    def test_share_preview_tags_present_so_shared_links_render_a_card(self):
+        body = self.client.get("/").data.decode()
+        self.assertIn('property="og:title"', body)
+        self.assertIn('property="og:image"', body)
+        self.assertIn('name="twitter:card"', body)
+
+    def test_share_card_image_is_served(self):
+        resp = self.client.get("/static/share-card.svg")
+        self.assertEqual(resp.status_code, 200)
+
+    def test_feedback_route_is_reachable_from_every_page(self):
+        for path in ("/", "/map", "/browse"):
+            self.assertIn(b"Report a problem", self.client.get(path).data)
