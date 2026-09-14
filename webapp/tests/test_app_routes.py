@@ -442,7 +442,7 @@ class ProductionReadinessTests(unittest.TestCase):
         self.assertIn('name="twitter:card"', body)
 
     def test_share_card_image_is_served(self):
-        resp = self.client.get("/static/share-card.svg")
+        resp = self.client.get("/static/share-card.png")
         self.assertEqual(resp.status_code, 200)
 
     def test_feedback_route_is_reachable_from_every_page(self):

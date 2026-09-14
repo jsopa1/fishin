@@ -939,3 +939,73 @@ Fixed in three layers:
 - Regenerating the row through the production path means the stored
   value is what a real run produces, so the next full run won't
   silently disagree with it
+
+## 026 — Every spot gets real data, without inventing any
+
+The CEO asked to "make assumptions for species, and water temps for all
+fishing spots, then give a confidence score on those... we should always
+provide data to all fishing spots." The underlying complaint was real:
+45% of spots showed no species data and 82% had no temperature estimate,
+so most spot pages were dead ends.
+
+**Fabricated values with confidence scores were not built.** A score
+attached to an invented number reads as *more* rigorous than a blank, so
+it fails harder the moment a knowledgeable angler checks a lake they
+know -- and Decision #005 rules out presenting an unvalidated number as
+if it were measured. What was built instead delivers the same user
+outcome from real records only:
+
+- **Interpolation reaches 60km instead of 15km**, taking temperature
+  coverage from 18% to 79% of access points. The radius is measured, not
+  chosen: every pair of real anchors was bucketed by separation and the
+  disagreement recorded (0-15km: 0.5C median, 25-40km: 1.7C, 40-60km:
+  2.2C). The 60km cutoff exists because the physiology windows this app
+  compares against are 2.2-7.7C wide, so past that range the error
+  approaches the width of the window and any match/no-match conclusion
+  drawn from it is meaningless however plausible the number looks.
+- **A real confidence signal**, from distance to the nearest reading and
+  how much the anchors used disagree with each other -- deliberately
+  expressed as high/moderate/low with a typical error in degrees, never
+  as a percentage, which would imply a validated probability that has
+  never been measured.
+- **County-level species evidence** for spots with no record of their
+  own, drawn from real WDNR records and labelled plainly as a regional
+  guide rather than this water's species list. Species dead ends fell
+  from 1,462 spots to 31.
+
+**Rationale:**
+- The honest version answers the CEO's actual question ("always show
+  something useful") better than the fabricated one would, because
+  "Walleye documented in 84 Vilas County waterbodies" is checkable and
+  "Walleye, 78% confidence" is not
+- Trust is the product's only unoccupied ground in this market (see
+  #027); fabricating the underlying data would spend exactly the asset
+  the positioning depends on
+
+## 027 — Market position: the map is commodity, the biology is the moat
+
+Competitive research done before recommending any product direction.
+
+- **WDNR launched its own free Wisconsin Fishing Finder in April 2025**,
+  covering boat launches, shore fishing spots, stocking records,
+  invasive species, public easements and habitat -- which is, almost
+  feature for feature, fishin's V2 access map, built on data pulled from
+  WDNR's own service. That layer is commodity and cannot be the pitch.
+- **It has no live water temperature and no fish-activity reasoning**,
+  and neither does any paid competitor: Fishbrain (~$9.99/mo) sells
+  social catch-logging to 15M+ users, Navionics ($14.99 + $49.99/yr)
+  sells bathymetric charts, FishAngler sells a free catch log with bite
+  windows that carry no cited physiology.
+- Nobody sells *"here is why the fish should be active right now, with
+  the citation"*. That gap is exactly what V1 and V2 built and had been
+  treating as back-end plumbing.
+
+Product consequences, now implemented: the landing page leads with the
+reasoning and proves it with real current matches rather than describing
+the data pipeline; regulations were identified as the highest-value
+missing feature, since it is the one place WDNR's tool genuinely wins.
+
+**Rationale:**
+- Leading with a free, official tool's feature set is a losing pitch no
+  matter how well it is executed
+- The differentiator was already built and simply not being sold

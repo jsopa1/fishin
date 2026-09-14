@@ -15,7 +15,12 @@
   <meta property="og:site_name" content="fishin">
   <meta property="og:title" content="{{ meta_title }}">
   <meta property="og:description" content="{{ meta_description }}">
-  <meta property="og:image" content="{{ url_for('static', filename='share-card.svg', _external=True) }}">
+  <!-- PNG, not SVG: Facebook, Reddit and LinkedIn silently refuse to
+       render an SVG og:image, and those are the launch channels. -->
+  <meta property="og:image" content="{{ url_for('static', filename='share-card.png', _external=True) }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="{{ url_for('static', filename='share-card.png', _external=True) }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ meta_title }}">
   <meta name="twitter:description" content="{{ meta_description }}">
