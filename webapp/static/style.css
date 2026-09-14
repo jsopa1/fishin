@@ -441,6 +441,26 @@ table td a:hover { text-decoration: underline; }
 .bait-note { margin: 0 0 var(--space-2); font-size: var(--text-sm); color: var(--muted); font-style: italic; }
 .bait-tiers { margin: 0; font-size: var(--text-xs); color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
+/* Regulations, shown as WDNR publishes them: their wording, dated, with a
+   verify link. Never a paraphrase -- these carry legal penalties. */
+.regs-intro { margin: 0 0 var(--space-4); font-size: var(--text-sm); color: var(--muted); }
+.regs-list { display: grid; grid-template-columns: 1fr; gap: 0; margin: 0; }
+.regs-list dt {
+  font-weight: 700; font-size: var(--text-sm); color: var(--accent-dark);
+  padding-top: var(--space-3); border-top: 1px solid var(--border-soft);
+}
+.regs-list dt:first-child { border-top: none; padding-top: 0; }
+.regs-list dd { margin: 4px 0 var(--space-3); font-size: var(--text-sm); color: var(--gray-700); }
+.regs-source { margin: var(--space-4) 0 0; font-size: var(--text-xs); color: var(--muted); }
+.regs-source a { display: inline-flex; align-items: center; gap: 3px; font-weight: 600; }
+
+@media (min-width: 768px) {
+  .regs-list { grid-template-columns: minmax(0, 210px) minmax(0, 1fr); gap: 0 var(--space-4); }
+  .regs-list dt { border-top: 1px solid var(--border-soft); padding-top: var(--space-3); }
+  .regs-list dd { border-top: 1px solid var(--border-soft); padding-top: var(--space-3); margin-bottom: var(--space-3); }
+  .regs-list dt:first-child, .regs-list dt:first-child + dd { border-top: none; padding-top: 0; }
+}
+
 /* Regulations pointer. Deliberately links out rather than restating bag
    and length limits: those are legally binding, change between seasons,
    and a stale copy here could cost someone a citation. */

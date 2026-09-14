@@ -465,16 +465,38 @@ class RegulationsPointerTests(unittest.TestCase):
         points = self.client.get("/map/data").get_json()["points"]
         return points[0]
 
-    def test_spot_page_points_at_official_regulations(self):
+    def test_spot_page_always_routes_the_reader_to_official_regulations(self):
+        # Whether the live lookup resolved a water, found several, or found
+        # none, the page must always end up pointing at WDNR.
         p = self._a_spot()
         body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data
-        self.assertIn(b"Check the regulations before you keep anything", body)
         self.assertIn(b"apps.dnr.wi.gov/fisheriesmanagement/Public/LakeRegulation", body)
+        self.assertTrue(
+            b"Check the regulations before you keep anything" in body
+            or b"Regulations for this water" in body,
+            msg="spot page showed neither resolved regulations nor the fallback pointer",
+        )
 
-    def test_app_does_not_restate_bag_or_length_limits(self):
-        # If this ever fails, someone started reproducing legally binding
-        # numbers that this project has no pipeline to keep current.
+    def test_any_displayed_limits_are_wdnrs_own_dated_and_verifiable(self):
+        # Regulations may now be shown, but only because they come verbatim
+        # from WDNR's live service. If limits ever appear, three things must
+        # appear with them: whose words they are, when they were retrieved,
+        # and a link to verify. Hand-written limits would fail this.
         p = self._a_spot()
-        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode().lower()
-        for claim in ("daily bag limit is", "minimum length is", "you may keep"):
-            self.assertNotIn(claim, body)
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+        lowered = body.lower()
+        shows_limits = any(c in lowered for c in ("daily bag limit", "minimum length"))
+        if shows_limits:
+            self.assertIn("WDNR's own wording", body)
+            self.assertIn("retrieved", lowered)
+            self.assertIn("verify with WDNR", body)
+            self.assertIn("apps.dnr.wi.gov/fisheriesmanagement", body)
+
+    def test_regulations_are_never_matched_by_name_alone(self):
+        # Wisconsin has eleven unrelated waters called "Devils Lake" with
+        # different walleye rules. The page must say it matched on
+        # coordinates, so a reader knows it isn't a name guess.
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+        if "Regulations for this water" in body:
+            self.assertIn("coordinates rather than by", body)

@@ -166,16 +166,46 @@
   </div>
   {% endif %}
 
+  {% if regulations and regulations.status == 'ok' %}
+  <div class="detail-box">
+    <h3>Regulations for this water</h3>
+    {% set water = regulations.waters[0] %}
+    <p class="regs-intro">
+      WDNR's published rules for <strong>{{ water.waterbody_name }}</strong>{% if water.wbic %}
+      (WBIC {{ water.wbic | int }}){% endif %}, matched to this spot's own coordinates rather than by
+      name — Wisconsin has several unrelated waters sharing the same name.
+    </p>
+    <dl class="regs-list">
+      {% for rule in water.rules %}
+        <dt>{{ rule.label }}</dt>
+        <dd>{{ rule.text }}</dd>
+      {% endfor %}
+    </dl>
+    <p class="regs-source">
+      WDNR's own wording, retrieved {{ regulations.fetched_at | central('%-d %b %Y, %-I:%M %p') }}.
+      {% if regulations.stale %}<strong>The live service was unreachable, so this is a cached copy.</strong>{% endif %}
+      Regulations change between seasons and carry legal penalties —
+      <a href="{{ regulations.source_url }}" target="_blank" rel="noopener">verify with WDNR<svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg></a>
+      before keeping a fish.
+    </p>
+  </div>
+  {% else %}
   <div class="regs-note">
     <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
     <p>
       <strong>Check the regulations before you keep anything.</strong>
-      Bag limits, length limits and season dates vary by water and change between seasons — look up
-      <strong>{{ spot.waterbody_name|title }}</strong> in
+      {% if regulations and regulations.status == 'ambiguous' %}
+        More than one regulated water sits within {{ 100 }}m of this spot
+        ({{ regulations.waters | map(attribute='waterbody_name') | join(', ') }}), so this app won't
+        guess which set of rules applies here.
+      {% else %}
+        No regulation record matched this spot's coordinates.
+      {% endif %}
+      Look up <strong>{{ spot.waterbody_name|title }}</strong> in
       <a href="https://apps.dnr.wi.gov/fisheriesmanagement/Public/LakeRegulation" target="_blank" rel="noopener">WDNR's official regulations<svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg></a>.
-      This app reports conditions, not rules.
     </p>
   </div>
+  {% endif %}
 
   {% if waterbody %}
   <div class="detail-box">

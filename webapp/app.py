@@ -19,7 +19,9 @@ from flask import Flask, Response, jsonify, render_template, request, url_for
 
 REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
+sys.path.insert(0, str(REPO_ROOT / "analysis"))
 import v1_review_data as data  # noqa: E402
+import v2_fishing_regulations as fishing_regulations  # noqa: E402
 
 # Water temperature is the only thing here that ages in hours. Six hours
 # is roughly how long a real reading stays representative in open water --
@@ -360,6 +362,14 @@ def spot_detail():
         ), 503
 
     detail = data.get_spot_detail(conn, lat, lon, name=name)
+    # Live, cached 24h, and allowed to fail: regulations are valuable but
+    # never worth a blank page if WDNR's service is slow or down.
+    regulations = None
+    if detail is not None:
+        try:
+            regulations = fishing_regulations.get_regulations(conn, lat, lon)
+        except Exception:  # noqa: BLE001 -- an enhancement must not break the page
+            regulations = None
     conn.close()
     if detail is None:
         return render_template(
@@ -371,6 +381,7 @@ def spot_detail():
         waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
         county_species=detail["county_species"], activity_window=detail["activity_window"],
         diel_species=detail["diel_species"], stocking=detail["stocking"],
+        regulations=regulations,
     )
 
 

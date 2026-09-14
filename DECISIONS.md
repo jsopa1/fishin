@@ -1108,3 +1108,51 @@ trout-easement layer stays deferred.
 - Computing the low-light window locally rather than calling a sunrise
   API keeps the app dependency-free and correct offline, and the
   astronomy is deterministic enough to verify against published values
+
+## 030 — Real regulations, matched spatially because names are not safe
+
+Reverses the pointer-only decision in #028, because the constraint that
+drove it turned out not to apply.
+
+#028 declined to show bag and length limits on the grounds that they are
+legally binding, change seasonally, and this project had no pipeline to
+keep a hand-written copy current. Searching WDNR's ArcGIS catalogue for
+the (since-removed) trout-easement layer turned up something better:
+**`FM_WFF/FM_WFF_LAKE_REGULATIONS_WTM_EXT`**, 7,018 polygons carrying
+WDNR's own per-species regulation text, currently showing 2026-27 season
+dates.
+
+That changes the calculation entirely. Showing the agency's verbatim
+text, fetched live and dated, is a different act from composing limits
+and hoping they stay true.
+
+- **Queried live per spot, cached 24h**, so what a reader sees is what
+  WDNR currently publishes rather than a snapshot frozen into the
+  committed database. A failed lookup falls back to the cached copy and
+  says so; it never blanks the page.
+- **Matched spatially, never by name.** Wisconsin has eleven distinct
+  waters called "Devils Lake" in this layer, with different walleye
+  rules -- name matching would have silently picked one and could have
+  cost someone a citation. A point-in-polygon query against the spot's
+  real coordinate returns the area that actually contains it. A 100m
+  buffer is required because access points sit on the bank, outside the
+  water polygon (verified: a real Devils Lake ramp returns nothing at 0m
+  and exactly one correct water, WBIC 980900, at 100m).
+- **Refuses to guess.** If more than one regulated water falls inside
+  the buffer, the page names them and declines to choose rather than
+  showing one set of rules as though it were authoritative.
+- **WDNR's words, dated, with a verify link**, never a paraphrase.
+
+The guard test from #028 (which forbade limits appearing at all) was
+replaced rather than deleted: it now asserts that whenever limits are
+shown, the page also carries whose words they are, when they were
+retrieved, and a link to verify -- a property hand-written limits could
+not satisfy.
+
+**Rationale:**
+- A prior "no" is worth revisiting when the blocking constraint changes;
+  the earlier reasoning was about maintaining a copy, and there is now no
+  copy to maintain
+- The same-name hazard is the exact failure this project has hit twice
+  before on lake matching (#017/#018), and is far more consequential here
+  than it was for lake surface area
