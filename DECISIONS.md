@@ -890,3 +890,52 @@ specifically -- combined with the already-chosen outdoor-app direction
   finance features) leak into fishin as a fabricated feature -- only
   the reusable layout/interaction patterns (bottom nav, raised center
   action, card dashboard styling) were adopted
+
+## 025 — USGS sentinel values were being stored as real measurements
+
+Found while measuring how fast real water-temperature readings diverge
+with distance (to set an honest basis for interpolation): two anchors
+disagreed by over a million degrees.
+
+`get_usgs_live_water_temp_c()` took the last point in the NWIS series
+unconditionally. USGS reports missing data as the sentinel **-999999**
+rather than omitting the point, so `BREWERY CREEK` (Iowa County) stored
+-999999C with `temp_is_real = 1`.
+
+- Its own page rendered **-1,799,966F labelled "a real water-temperature
+  measurement"**, and the generated narrative said species were
+  "1,800,020F below the documented activity window."
+- Worse, real readings seed the spot-level interpolation pool, so the
+  bad anchor corrupted every spot within the search radius: **Salmo Pond
+  resolved to -476,254C**, and four Lake Mendota ramps sat inside the
+  same 15km radius.
+- Verified live: that gauge returned -999999 for **all 283 points** in a
+  24h window -- it is simply offline, not intermittently missing.
+
+Fixed in three layers:
+1. **Parse time** (`analysis/v1_conditions_biology_forecast.py`): a new
+   `is_plausible_water_temp_c()` range check (-5C to 45C), and the
+   parser now walks the series newest-first to take the most recent
+   *real* reading rather than discarding a site whose latest point
+   happens to be a sentinel.
+2. **Anchor pool** (`ui/v1_review_data.py`): implausible values are
+   filtered out where stored rows become interpolation inputs, so a row
+   written by an older run can never poison neighbouring spots. Applied
+   once at the end of `build_temperature_anchors()` so it also covers
+   any future anchor source.
+3. **Stored data**: the poisoned row and its species predictions were
+   regenerated through the real production code path (not hand-edited),
+   which correctly falls through to the NWS air proxy now that USGS
+   returns nothing. Brewery Creek reads 9.9C via `nws_air_proxy_live`;
+   Salmo Pond reads 14.6C.
+
+**Rationale:**
+- The single-value bug was cosmetic on one page but systemic through
+  interpolation -- the lesson is that any value feeding a derived
+  calculation needs validating at that boundary too, not just where it
+  is displayed
+- Walking the series newest-first recovers real data from gauges that
+  drop out mid-day instead of discarding the whole site
+- Regenerating the row through the production path means the stored
+  value is what a real run produces, so the next full run won't
+  silently disagree with it

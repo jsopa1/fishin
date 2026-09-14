@@ -20,6 +20,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -554,6 +555,51 @@ class TestUsgsGenericSiteMatching(TempDataMixin, unittest.TestCase):
             {"site_no": "1", "station_nm": "FOX RIVER AT BERLIN, WI", "site_type": "ST", "lat": "1", "lon": "1"},
         ])
         self.assertEqual(v1.find_usgs_site_matches("Fox"), [])  # too short to substring-match safely
+
+
+class TestUsgsSentinelValuesRejected(unittest.TestCase):
+    """Real bug: USGS NWIS reports missing data as the sentinel -999999
+    rather than omitting the point. Taking the last point in the series
+    unconditionally stored -999999C for BREWERY CREEK (Iowa County) as a
+    'real measurement' -- it rendered as -1,799,966F on its own page and,
+    because real readings seed the spot-level interpolation pool, dragged
+    Salmo Pond to -476,254C and sat inside the search radius of four Lake
+    Mendota ramps. Verified live: that site returned -999999 for all 283
+    points in a 24h window."""
+
+    def test_sentinel_value_is_not_plausible(self):
+        self.assertFalse(v1.is_plausible_water_temp_c(-999999.0))
+        self.assertFalse(v1.is_plausible_water_temp_c("-999999"))
+
+    def test_real_wisconsin_temperatures_are_plausible(self):
+        for value in (0.0, 4.4, 18.5, 23.9, 32.0):
+            self.assertTrue(v1.is_plausible_water_temp_c(value), msg=value)
+
+    def test_none_and_garbage_are_not_plausible(self):
+        for value in (None, "", "n/a", float("nan")):
+            self.assertFalse(v1.is_plausible_water_temp_c(value), msg=repr(value))
+
+    def test_all_sentinel_series_yields_no_reading_rather_than_a_fake_one(self):
+        series = [{"value": "-999999", "dateTime": f"2026-09-14T0{i}:00"} for i in range(5)]
+        payload = {"value": {"timeSeries": [{"values": [{"value": series}]}]}}
+        with mock.patch.object(v1, "http_get_json", return_value=payload):
+            value_c, observed_at = v1.get_usgs_live_water_temp_c("05406469")
+        self.assertIsNone(value_c)
+        self.assertIsNone(observed_at)
+
+    def test_trailing_sentinel_falls_back_to_most_recent_real_reading(self):
+        # A gauge that drops out mid-day still has valid earlier readings;
+        # discarding the whole site would throw away real data.
+        series = [
+            {"value": "17.2", "dateTime": "2026-09-14T04:00"},
+            {"value": "18.1", "dateTime": "2026-09-14T05:00"},
+            {"value": "-999999", "dateTime": "2026-09-14T06:00"},
+        ]
+        payload = {"value": {"timeSeries": [{"values": [{"value": series}]}]}}
+        with mock.patch.object(v1, "http_get_json", return_value=payload):
+            value_c, observed_at = v1.get_usgs_live_water_temp_c("04073500")
+        self.assertAlmostEqual(value_c, 18.1)
+        self.assertEqual(observed_at, "2026-09-14T05:00")
 
 
 class TestNoDataAcrossAllSources(TempDataMixin, unittest.TestCase):

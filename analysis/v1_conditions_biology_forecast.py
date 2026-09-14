@@ -390,6 +390,31 @@ def http_get_json(url: str, timeout: int = 15):
         return json.loads(resp.read().decode("utf-8"))
 
 
+# Real water temperatures this project could plausibly see. Wisconsin
+# surface water runs from ice (0C) to roughly 32C in shallow summer
+# water; this range is deliberately generous at both ends so it only
+# ever rejects values that cannot be real measurements.
+PLAUSIBLE_WATER_TEMP_C = (-5.0, 45.0)
+
+
+def is_plausible_water_temp_c(value) -> bool:
+    """USGS NWIS reports missing data as the sentinel -999999 rather than
+    omitting the point (verified live: site 05406469 returned -999999 for
+    all 283 points in a 24h window). Treating that as a reading stored
+    -999999C as a 'real measurement' and, because real readings seed the
+    spot-level interpolation pool, poisoned every nearby spot's estimate
+    too. Anything outside the physical range is not a measurement."""
+    if value is None:
+        return False
+    try:
+        value = float(value)
+    except (TypeError, ValueError):
+        return False
+    if value != value:  # NaN
+        return False
+    return PLAUSIBLE_WATER_TEMP_C[0] <= value <= PLAUSIBLE_WATER_TEMP_C[1]
+
+
 def get_usgs_live_water_temp_c(site_id: str):
     url = f"https://waterservices.usgs.gov/nwis/iv/?format=json&sites={site_id}&parameterCd=00010&period=P1D"
     data = http_get_json(url)
@@ -397,10 +422,13 @@ def get_usgs_live_water_temp_c(site_id: str):
         series = data["value"]["timeSeries"][0]["values"][0]["value"]
     except (KeyError, IndexError):
         return None, None
-    if not series:
-        return None, None
-    latest = series[-1]
-    return float(latest["value"]), latest["dateTime"]
+    # Newest first: a gauge often reports a trailing sentinel while still
+    # having valid readings earlier in the same day, so take the most
+    # recent real one rather than discarding the site outright.
+    for point in reversed(series):
+        if is_plausible_water_temp_c(point.get("value")):
+            return float(point["value"]), point.get("dateTime")
+    return None, None
 
 
 def get_nws_current_air_temp_c(lat: float, lon: float):

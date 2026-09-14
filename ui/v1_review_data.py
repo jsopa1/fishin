@@ -514,7 +514,14 @@ def build_temperature_anchors(conn: sqlite3.Connection) -> list:
                 }
                 break
 
-    return list(anchors.values())
+    # Defence in depth, at the boundary where stored rows become inputs to
+    # interpolation. A single implausible value (USGS reports missing data
+    # as the sentinel -999999, not as an omitted point) doesn't just render
+    # wrong on its own page -- as an anchor it silently corrupts every spot
+    # within the search radius. The parse-time guard in
+    # v1_conditions_biology_forecast prevents new ones; this stops any row
+    # already written by an older run from reaching the estimator.
+    return [a for a in anchors.values() if v1.is_plausible_water_temp_c(a["value_c"])]
 
 
 def estimate_temperature_from_nearby(

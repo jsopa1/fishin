@@ -433,6 +433,33 @@ class TestBuildTemperatureAnchors(DataTestBase):
         self.assertEqual(anchors[0]["lat"], 1.0)
         self.assertEqual(anchors[0]["lon"], 2.0)
 
+    def test_implausible_stored_value_never_becomes_an_anchor(self):
+        # Real bug: BREWERY CREEK (Iowa County) stored USGS's -999999
+        # "no data" sentinel as a real measurement. As an anchor it
+        # dragged Salmo Pond's estimate to -476,254C and sat inside the
+        # radius of four Lake Mendota ramps. A row written by an older
+        # run must never reach the estimator.
+        self._insert_waterbody(
+            "Brewery Creek", "Iowa", temp_value_c=-999999.0, temp_is_real=1, temp_method="clmn_recent",
+        )
+        self._insert_access_point("Brewery Creek", "Iowa", lat=43.125, lon=-89.635)
+
+        anchors = rd.build_temperature_anchors(self.conn)
+        self.assertEqual(anchors, [])
+
+    def test_implausible_anchor_does_not_poison_a_nearby_estimate(self):
+        self._insert_waterbody(
+            "Brewery Creek", "Iowa", temp_value_c=-999999.0, temp_is_real=1, temp_method="clmn_recent",
+        )
+        self._insert_access_point("Brewery Creek", "Iowa", lat=43.125, lon=-89.635)
+        self._insert_waterbody("Good Lake", "Dane", temp_value_c=19.0, temp_is_real=1, temp_method="clmn_recent")
+        self._insert_access_point("Good Lake", "Dane", lat=43.130, lon=-89.640)
+
+        result = rd.estimate_temperature_from_nearby(self.conn, lat=43.127, lon=-89.637, max_km=15.0)
+        self.assertIsNotNone(result)
+        self.assertAlmostEqual(result["value_c"], 19.0, delta=0.01)
+        self.assertEqual(result["anchor_count"], 1)
+
     def test_no_runs_returns_empty_list(self):
         conn2 = sqlite3.connect(":memory:")
         conn2.row_factory = sqlite3.Row
