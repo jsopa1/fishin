@@ -1059,3 +1059,52 @@ inherits the physiology's tier.
 - Labelling the craft as craft is what makes shipping it defensible at all;
   the alternative was either fabricating research backing or shipping
   nothing
+
+## 029 — Parity with WDNR's Fishing Finder, and a real edge on "right now"
+
+CEO direction: this should be a step up from the DNR's own fishing site
+-- have everything they have, and more on what activity looks like right
+now. Their tool publishes six categories: regulations, access, public
+lands/easements, stocking, fish-consumption guidance, and service
+centres/licence agents.
+
+**Two gaps closed from data this project already held.**
+
+- **Stocking detail.** 23,870 real WDNR stocking records (2011-2025,
+  2,282 waterbodies) have been in this repo since V1 and were used only
+  as a yes/no presence signal -- every other column discarded. They now
+  load into a queryable table and surface per water: year, species,
+  stage, number stocked and average length. "1,122,000 walleye fry,
+  2025" or "16,466 brown trout yearlings averaging 9 inches" is the most
+  concrete thing WDNR publishes about a water, and a species name alone
+  throws it away. Shown as published, with the positive-only-evidence
+  caveat intact.
+- **Low-light windows -- the piece their tool has no equivalent for.**
+  Several species already carry a documented `diel_active` dawn/dusk
+  feeding flag, but "fish at dawn" is useless without knowing when dawn
+  is at this latitude on this date, and Wisconsin's sunrise moves more
+  than three hours across the year. Dawn and dusk are now computed
+  astronomically (NOAA solar position, civil twilight boundaries) for
+  the spot's own coordinates -- no network call, works anywhere, and
+  verified against published Madison times to within a couple of minutes
+  at both solstices. Shown only where a species there is actually a
+  documented low-light feeder, rather than as generic sunrise trivia.
+
+A real bug surfaced while testing it: solar noon at Wisconsin's
+longitude sits near 18:00 UTC, so sunset crosses midnight UTC. Wrapping
+the result into the same calendar day produced the correct clock time on
+the wrong date and sorted sunset before sunrise. Caught by an ordering
+assertion rather than by reading the times, which looked right.
+
+**Still not at parity, deliberately:** regulations remain a pointer to
+WDNR rather than restated limits (#028 reasoning: legally binding,
+seasonal, and no pipeline to keep a copy current), fish-consumption
+guidance and licence-agent locations are not yet carried, and the
+trout-easement layer stays deferred.
+
+**Rationale:**
+- The cheapest parity wins were sitting in data already committed to the
+  repo and merely under-used -- no new source, no new trust surface
+- Computing the low-light window locally rather than calling a sunrise
+  API keeps the app dependency-free and correct offline, and the
+  astronomy is deterministic enough to verify against published values

@@ -12,6 +12,7 @@ fabricates a result.
 
 import os
 import sys
+import zoneinfo
 from pathlib import Path
 
 from flask import Flask, Response, jsonify, render_template, request, url_for
@@ -27,6 +28,22 @@ TEMPERATURE_STALE_HOURS = 6
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True  # templates are cheap to re-check per request; keeps local dev iteration fast without needing debug mode
+
+# Wisconsin is entirely Central. Solar times are computed in UTC, and an
+# angler reading "sunrise 11:37" would rightly stop trusting the page.
+CENTRAL = zoneinfo.ZoneInfo("America/Chicago")
+
+
+@app.template_filter("central")
+def central_time(value, fmt: str = "%-I:%M %p"):
+    if value is None:
+        return ""
+    local = value.astimezone(CENTRAL)
+    try:
+        return local.strftime(fmt)
+    except ValueError:
+        # %-I is glibc-only; Windows needs %#I.
+        return local.strftime(fmt.replace("%-", "%#"))
 
 
 def get_conn():
@@ -352,7 +369,8 @@ def spot_detail():
     return render_template(
         "spot_detail.html", spot=detail["point"], temperature=detail["temperature"],
         waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
-        county_species=detail["county_species"],
+        county_species=detail["county_species"], activity_window=detail["activity_window"],
+        diel_species=detail["diel_species"], stocking=detail["stocking"],
     )
 
 

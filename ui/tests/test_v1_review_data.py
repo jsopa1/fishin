@@ -764,3 +764,84 @@ class TestGetSpotDetail(DataTestBase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestActivityWindow(unittest.TestCase):
+    """Real dawn/dusk times at a real coordinate. Verified against
+    published Madison, WI times: the algorithm lands within a couple of
+    minutes across both solstices."""
+
+    MADISON = (43.0731, -89.4012)
+
+    def _ct(self, dt):
+        import zoneinfo
+        return dt.astimezone(zoneinfo.ZoneInfo("America/Chicago"))
+
+    def test_summer_solstice_matches_published_madison_times(self):
+        when = datetime.datetime(2026, 6, 21, 12, tzinfo=datetime.timezone.utc)
+        w = rd.get_activity_window(*self.MADISON, when=when)
+        sunrise = self._ct(w["sunrise"])
+        sunset = self._ct(w["sunset"])
+        # Published: sunrise ~5:18, sunset ~20:38 CDT
+        self.assertEqual(sunrise.hour, 5)
+        self.assertLess(abs(sunrise.minute - 18), 8)
+        self.assertEqual(sunset.hour, 20)
+        self.assertLess(abs(sunset.minute - 38), 8)
+
+    def test_winter_solstice_is_dramatically_shorter(self):
+        summer = rd.get_activity_window(*self.MADISON, when=datetime.datetime(2026, 6, 21, 12, tzinfo=datetime.timezone.utc))
+        winter = rd.get_activity_window(*self.MADISON, when=datetime.datetime(2026, 12, 21, 12, tzinfo=datetime.timezone.utc))
+        summer_len = (summer["sunset"] - summer["sunrise"]).total_seconds() / 3600
+        winter_len = (winter["sunset"] - winter["sunrise"]).total_seconds() / 3600
+        self.assertGreater(summer_len, 15)
+        self.assertLess(winter_len, 10)
+
+    def test_dawn_window_precedes_sunrise_and_dusk_follows_sunset(self):
+        w = rd.get_activity_window(*self.MADISON)
+        self.assertLess(w["dawn_start"], w["sunrise"])
+        self.assertLess(w["sunrise"], w["sunset"])
+        self.assertLess(w["sunset"], w["dusk_end"])
+
+    def test_missing_coordinates_return_none(self):
+        self.assertIsNone(rd.get_activity_window(None, None))
+
+
+class TestStockingHistory(DataTestBase):
+    def setUp(self):
+        super().setUp()
+        self.conn.executescript(
+            """CREATE TABLE stocking_history (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   waterbody TEXT NOT NULL, county TEXT NOT NULL,
+                   stocking_year INTEGER NOT NULL, species TEXT NOT NULL,
+                   strain TEXT, age_class TEXT, number_stocked INTEGER,
+                   avg_length_in REAL, source_type TEXT NOT NULL, source_url TEXT);"""
+        )
+        self.conn.commit()
+
+    def _stock(self, waterbody, county, year, species, n, age="YEARLING"):
+        self.conn.execute(
+            "INSERT INTO stocking_history (waterbody, county, stocking_year, species, age_class, "
+            "number_stocked, avg_length_in, source_type) VALUES (?,?,?,?,?,?,?, 'DNR')",
+            (waterbody, county, year, species, age, n, 9.0),
+        )
+        self.conn.commit()
+
+    def test_returns_records_newest_first_with_totals(self):
+        self._stock("DEVILS LAKE", "Sauk", 2023, "BROWN TROUT", 16110)
+        self._stock("DEVILS LAKE", "Sauk", 2025, "BROWN TROUT", 16466)
+        h = rd.get_stocking_history(self.conn, "DEVILS LAKE", "Sauk")
+        self.assertEqual(h["latest_year"], 2025)
+        self.assertEqual(h["total_stocked"], 32576)
+        self.assertEqual(h["events"][0]["stocking_year"], 2025)
+
+    def test_case_insensitive_match(self):
+        self._stock("DEVILS LAKE", "Sauk", 2025, "WALLEYE", 100)
+        self.assertIsNotNone(rd.get_stocking_history(self.conn, "devils lake", "sauk"))
+
+    def test_respects_the_since_year_cutoff(self):
+        self._stock("OLD LAKE", "Iron", 2012, "WALLEYE", 500)
+        self.assertIsNone(rd.get_stocking_history(self.conn, "OLD LAKE", "Iron", since_year=2020))
+
+    def test_unstocked_water_returns_none_not_an_empty_shell(self):
+        self.assertIsNone(rd.get_stocking_history(self.conn, "NOWHERE LAKE", "Vilas"))

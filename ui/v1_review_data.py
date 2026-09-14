@@ -786,6 +786,112 @@ def attach_bait_guidance(species_predictions: list, temp_c: float | None) -> lis
     return species_predictions
 
 
+def get_stocking_history(conn: sqlite3.Connection, waterbody: str, county: str, since_year: int = 2020) -> dict | None:
+    """Real WDNR stocking records for one water, as published.
+
+    This project has held these records since V1 but only ever used them
+    as a yes/no presence signal. The detail is the most concrete thing
+    WDNR publishes about a water: "16,466 brown trout yearlings averaging
+    9 inches, 2025" tells an angler what is actually in there and roughly
+    how big, which a species name alone does not.
+
+    Matched on the stocking file's own waterbody/county spelling, which
+    is the same source the presence data is derived from.
+    """
+    if not waterbody:
+        return None
+    try:
+        rows = conn.execute(
+            """SELECT stocking_year, species, strain, age_class, number_stocked,
+                      avg_length_in, source_type
+               FROM stocking_history
+               WHERE UPPER(waterbody) = UPPER(?) AND UPPER(county) = UPPER(?)
+                 AND stocking_year >= ?
+               ORDER BY stocking_year DESC, number_stocked DESC""",
+            (waterbody, county, since_year),
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return None
+    if not rows:
+        return None
+
+    events = [dict(r) for r in rows]
+    return {
+        "waterbody": waterbody,
+        "county": county,
+        "since_year": since_year,
+        "latest_year": events[0]["stocking_year"],
+        "total_stocked": sum(e["number_stocked"] or 0 for e in events),
+        "species_count": len({e["species"] for e in events}),
+        "events": events,
+    }
+
+
+def get_activity_window(lat: float, lon: float, when=None) -> dict | None:
+    """Today's real dawn and dusk times at this location.
+
+    This is the part the DNR's own tool has no equivalent for. Several
+    species in this app's physiology data carry a documented
+    dawn/dusk/nocturnal feeding flag (`diel_active`), but "fish at dawn"
+    is useless without knowing when dawn actually is at this latitude on
+    this date -- and Wisconsin's sunrise moves by more than three hours
+    across the year.
+
+    Computed astronomically (NOAA's standard solar position algorithm),
+    so it needs no network call and works for any coordinate. Civil
+    twilight is used for the low-light window boundaries because that is
+    the light level the feeding behaviour is associated with, not the
+    instant of sunrise.
+    """
+    import datetime
+    import math
+
+    if lat is None or lon is None:
+        return None
+    when = when or datetime.datetime.now(datetime.timezone.utc)
+    day_of_year = when.timetuple().tm_yday
+
+    # NOAA solar position, simplified: declination and the hour angle at
+    # which the sun sits at a given altitude.
+    decl = 0.4093 * math.sin(2 * math.pi * (284 + day_of_year) / 365.0)
+    lat_rad = math.radians(lat)
+
+    def hour_angle(altitude_deg: float):
+        alt = math.radians(altitude_deg)
+        cos_h = (math.sin(alt) - math.sin(lat_rad) * math.sin(decl)) / (
+            math.cos(lat_rad) * math.cos(decl)
+        )
+        if cos_h > 1 or cos_h < -1:
+            return None  # sun never reaches this altitude here today
+        return math.degrees(math.acos(cos_h)) / 15.0  # hours from solar noon
+
+    sunrise_offset = hour_angle(-0.833)      # standard refraction-corrected sunrise
+    twilight_offset = hour_angle(-6.0)       # civil twilight
+    if sunrise_offset is None or twilight_offset is None:
+        return None
+
+    # Solar noon in UTC for this longitude, with the equation of time.
+    b = 2 * math.pi * (day_of_year - 81) / 364.0
+    eq_time = 9.87 * math.sin(2 * b) - 7.53 * math.cos(b) - 1.5 * math.sin(b)
+    solar_noon_utc = 12.0 - (lon / 15.0) - (eq_time / 60.0)
+
+    def to_time(hours_utc: float) -> datetime.datetime:
+        # No modulo here: at Wisconsin's longitude solar noon sits around
+        # 18:00 UTC, so sunset lands past midnight UTC. Wrapping it into
+        # the same calendar day produced the right clock time on the wrong
+        # date, and made sunset sort before sunrise.
+        base = datetime.datetime(when.year, when.month, when.day, tzinfo=datetime.timezone.utc)
+        return base + datetime.timedelta(hours=hours_utc)
+
+    return {
+        "dawn_start": to_time(solar_noon_utc - twilight_offset),
+        "sunrise": to_time(solar_noon_utc - sunrise_offset),
+        "sunset": to_time(solar_noon_utc + sunrise_offset),
+        "dusk_end": to_time(solar_noon_utc + twilight_offset),
+        "computed_for": when,
+    }
+
+
 def get_current_highlights(conn: sqlite3.Connection, limit: int = 3) -> list:
     """Real species/waterbody pairs where conditions match a documented
     physiology window right now, for the landing page.
@@ -926,10 +1032,25 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
     if not species_predictions:
         county_species = get_county_species_evidence(conn, point.get("county"))
 
+    # Low-light timing only matters if something here is documented as a
+    # dawn/dusk feeder, so it is attached conditionally rather than shown
+    # as generic sunrise trivia.
+    diel_species = [s["species"] for s in species_predictions if s.get("diel_active")]
+    activity_window = get_activity_window(lat, lon) if diel_species else None
+
+    stocking = None
+    if point.get("matched_waterbody_name") and point.get("matched_county"):
+        stocking = get_stocking_history(conn, point["matched_waterbody_name"], point["matched_county"])
+    if stocking is None:
+        stocking = get_stocking_history(conn, point.get("waterbody_name"), point.get("county"))
+
     return {
         "point": point,
         "temperature": temperature,
         "waterbody": waterbody,
         "species_predictions": species_predictions,
         "county_species": county_species,
+        "activity_window": activity_window,
+        "diel_species": diel_species,
+        "stocking": stocking,
     }

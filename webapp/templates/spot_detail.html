@@ -102,6 +102,70 @@
       </p>
     {% endif %}
   </div>
+  {% if activity_window %}
+  <div class="detail-box">
+    <h3>Best low-light windows today</h3>
+    <p class="window-intro">
+      {{ diel_species | map('title') | join(', ') }}
+      {{ "is a" if diel_species|length == 1 else "are" }} documented dawn/dusk
+      {{ "feeder" if diel_species|length == 1 else "feeders" }} in this app's physiology data.
+      Here is when that actually falls at this spot today.
+    </p>
+    <div class="window-grid">
+      <div class="window-block">
+        <span class="window-label">Dawn window</span>
+        <span class="window-time">{{ activity_window.dawn_start | central }} – {{ activity_window.sunrise | central }}</span>
+        <span class="window-sub">first light to sunrise</span>
+      </div>
+      <div class="window-block">
+        <span class="window-label">Dusk window</span>
+        <span class="window-time">{{ activity_window.sunset | central }} – {{ activity_window.dusk_end | central }}</span>
+        <span class="window-sub">sunset to last light</span>
+      </div>
+    </div>
+    <p class="window-note">
+      Civil twilight to sunrise, and sunset to civil twilight, computed for this spot's own
+      coordinates — not a statewide average. Times are Central.
+    </p>
+  </div>
+  {% endif %}
+
+  {% if stocking %}
+  <div class="detail-box">
+    <h3>What WDNR has stocked here</h3>
+    <p class="stocking-intro">
+      <strong>{{ "{:,}".format(stocking.total_stocked) }} fish</strong> across
+      {{ stocking.species_count }} species since {{ stocking.since_year }}, most recently in
+      {{ stocking.latest_year }}. Numbers and sizes are WDNR's own records, as published.
+    </p>
+    <div class="scroll">
+      <table class="stocking-table">
+        <thead>
+          <tr><th>Year</th><th>Species</th><th>Stage</th><th>Number</th><th>Avg length</th></tr>
+        </thead>
+        <tbody>
+          {% for e in stocking.events[:12] %}
+          <tr>
+            <td>{{ e.stocking_year }}</td>
+            <td>{{ e.species | title }}</td>
+            <td>{{ (e.age_class or '—') | title }}</td>
+            <td>{{ "{:,}".format(e.number_stocked) if e.number_stocked else '—' }}</td>
+            <td>{{ '%.1f"' % e.avg_length_in if e.avg_length_in else '—' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% if stocking.events|length > 12 %}
+      <p class="stocking-more">Showing the 12 most recent of {{ stocking.events|length }} records since {{ stocking.since_year }}.</p>
+    {% endif %}
+    <p class="stocking-note">
+      Stocking is positive evidence only — a species not listed here may still be present and
+      self-sustaining, which is often true of the best populations.
+    </p>
+  </div>
+  {% endif %}
+
   <div class="regs-note">
     <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
     <p>
