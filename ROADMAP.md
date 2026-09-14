@@ -107,8 +107,12 @@ honestly-interpolated temperature (inverse-distance-weighted from real
 nearby readings, never fabricated) with the existing species-match/
 why-not system. Full plan and implementation status:
 [docs/v2_fish_intelligence_platform_plan.md](docs/v2_fish_intelligence_platform_plan.md).
-**Status: Phases 1/2/4 shipped; Phase 3 (bait/technique research) and
-Phase 5 (more niche spot sources) not yet started.**
+**Status: Phases 1/2/4 shipped, and Phase 3 (bait & technique) now
+shipped too** — guidance keyed to the same thermal states the app
+derives, with the physiological mechanism and the angling technique
+carried as separately-tiered claims so craft is never presented as
+research (Decision #028, [research report](docs/v1_bait_technique_research_report.md)).
+**Phase 5 (more niche spot sources) remains not started.**
 
 **Full UX redesign (Decision #023)**: a CEO-directed rework of the
 entire app's look, feel, and navigation, modeled on popular outdoor/
