@@ -32,7 +32,7 @@
 
 <div class="explore-toolbar">
   <form class="explore-filters" method="get" action="{{ url_for('map_view') }}">
-    <div class="search-bar">
+    <div class="search-bar" id="explore-search">
       <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
       <input type="text" name="waterbody" placeholder="Search by waterbody name…" value="{{ filters.waterbody or '' }}" aria-label="Search by waterbody name">
       <button type="submit" class="btn btn-primary btn-sm">Search</button>
@@ -229,6 +229,13 @@
   document.querySelectorAll('.explore-filters input[type="radio"], .explore-filters select').forEach(function (input) {
     input.addEventListener('change', function () { input.closest('form').submit(); });
   });
+
+  // The bottom-nav search shortcut links here as #explore-search --
+  // focus the field so a tap lands ready to type.
+  if (window.location.hash === '#explore-search') {
+    var nameInput = document.querySelector('.explore-filters input[name="waterbody"]');
+    if (nameInput) nameInput.focus();
+  }
 
   var hasFilter = !!(el.dataset.county || el.dataset.waterbody || el.dataset.species || (el.dataset.sourceType && el.dataset.sourceType !== 'all'));
 

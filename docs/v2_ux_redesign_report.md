@@ -140,6 +140,35 @@ breakpoint.
   substance everywhere it appears — only its visual presentation
   changed.
 
+## Follow-up: blue primary color + mobile bottom tab bar
+
+After the initial redesign shipped, the CEO shared four mockups from
+popular consumer apps (a food-tracking app, two finance apps, a
+banking app) as further style inspiration, clarifying on request that
+this was visual/layout inspiration for fishin specifically — combined
+with the already-chosen outdoor-app direction (AllTrails/OnX/Fishbrain)
+— with **blue** as the preferred primary color.
+
+- **Brand color switched from pine-green to blue** (`--accent: #2456d6`).
+  Real-world outdoor apps like OnX are themselves blue-branded, so this
+  is a natural fit alongside the existing outdoor-app direction, not a
+  contradiction of it. Data-status colors (survey-confirmed green,
+  stale red, stocking amber, proxy gray) were deliberately **not**
+  changed — those are meaningful evidentiary signals, not brand chrome,
+  and `--survey-bg` was decoupled from the brand token (it had
+  accidentally been aliased to it) so it stays green regardless of
+  brand color.
+- **A persistent mobile bottom tab bar** replaces the old hamburger
+  dropdown nav on narrow viewports, matching the bottom-nav pattern in
+  all four reference mockups: Home, Explore, a raised center action,
+  Directory, About. The raised center button is a real "Search"
+  shortcut into Explore's search field (`#explore-search`), not a
+  fabricated feature — mirroring the reference apps' elevated center
+  button without inventing functionality fishin doesn't have (no
+  calorie logging, no bank transfers). The desktop horizontal nav is
+  unchanged; the hamburger toggle and its now-dead CSS/JS were removed
+  entirely rather than left unused.
+
 ## Verification
 
 - Full test suite: 296 passing (unchanged count from before this pass

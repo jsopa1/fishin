@@ -859,3 +859,34 @@ Full detail: [docs/v2_ux_redesign_report.md](docs/v2_ux_redesign_report.md).
   (computed CSS values, live page text) rather than trusting a
   screenshot or assuming the new markup was correct, consistent with
   this project's standing "verify against real data" discipline
+
+## 024 — Blue brand color + mobile bottom tab bar
+
+Follow-up to Decision #023: the CEO shared four consumer-app mockups
+(food tracking, two finance apps, a banking app) as further style
+inspiration, clarifying these were visual/layout reference for fishin
+specifically -- combined with the already-chosen outdoor-app direction
+-- with blue as the preferred primary color.
+
+- Brand accent switched from pine-green to blue (`#2456d6`) --
+  data-status colors (survey-confirmed green, stale red, stocking
+  amber) deliberately left unchanged since they're evidentiary signals,
+  not brand chrome; `--survey-bg` was decoupled from the brand token it
+  had accidentally been aliased to, so it stays green under the new
+  brand color.
+- The old hamburger dropdown nav (mobile only) was replaced with a
+  persistent bottom tab bar matching all four reference mockups' own
+  nav pattern -- Home/Explore/a raised center Search shortcut/Directory/
+  About. The raised center action maps to a real fishin feature
+  (Explore's search field) rather than copying the mockups' own
+  domain-specific actions (calorie logging, bank transfers) that don't
+  apply here.
+
+**Rationale:**
+- Real-world OnX is itself blue-branded, so blue reconciles cleanly
+  with the already-approved outdoor-app direction rather than
+  contradicting it
+- Never let a reference mockup's domain-specific functionality (diet/
+  finance features) leak into fishin as a fabricated feature -- only
+  the reusable layout/interaction patterns (bottom nav, raised center
+  action, card dashboard styling) were adopted
