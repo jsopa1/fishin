@@ -786,6 +786,124 @@ def attach_bait_guidance(species_predictions: list, temp_c: float | None) -> lis
     return species_predictions
 
 
+def _window_distance_c(thresholds: list, temp_c: float):
+    """How far the current temperature sits from the nearest documented
+    feeding/activity window, and which way. Zero means inside it.
+
+    Returns (distance_c, direction, window_range_c) or None when the
+    species has no activity window to measure against."""
+    best = None
+    for threshold in thresholds:
+        if threshold.get("type") not in ("activity_window", "growth_optimum", "physiological_optimum"):
+            continue
+        low_high = threshold.get("range_c")
+        if not low_high:
+            continue
+        low, high = low_high
+        if low <= temp_c <= high:
+            return (0.0, "inside", low_high)
+        distance = (low - temp_c) if temp_c < low else (temp_c - high)
+        direction = "below" if temp_c < low else "above"
+        if best is None or distance < best[0]:
+            best = (distance, direction, low_high)
+    return best
+
+
+def rank_species_by_proximity(species_predictions: list, temp_c: float) -> list:
+    """Order species by how close conditions are to their documented
+    window, nearest first.
+
+    This exists because 42% of waterbodies currently have no species
+    inside a window at all, and answering "nothing is matching" is a dead
+    end for the reader. The distance is already known -- the app computes
+    it to explain *why* a species isn't matching -- so it can rank on it
+    and always give a best-available answer instead of a blank.
+
+    Ranking is not a prediction. A species 1C outside its documented
+    window is not "probably biting"; it is the closest thing to it here,
+    and the page says exactly that."""
+    if temp_c is None or not species_predictions:
+        return []
+    try:
+        thresholds = v1.load_thresholds()["species"]
+    except Exception:  # noqa: BLE001
+        return []
+
+    ranked = []
+    for prediction in species_predictions:
+        entry = thresholds.get(prediction["species"].upper())
+        if not entry:
+            continue
+        measured = _window_distance_c(entry.get("thresholds", []), temp_c)
+        if measured is None:
+            continue
+        distance_c, direction, window = measured
+        ranked.append({
+            "species": prediction["species"],
+            "any_match": bool(prediction.get("any_match")),
+            "distance_c": distance_c,
+            "distance_f": distance_c * 9 / 5,
+            "direction": direction,
+            "window_c": window,
+            "diel_active": bool(prediction.get("diel_active")),
+        })
+
+    ranked.sort(key=lambda r: (not r["any_match"], r["distance_c"]))
+    return ranked
+
+
+def build_spot_verdict(species_predictions: list, temperature: dict | None, activity_window: dict | None) -> dict:
+    """The one-line answer a spot page opens with: is it worth fishing
+    here today, and for what.
+
+    Everything here is derived from data already on the page. The point
+    is ordering, not new information -- a reader should get the answer
+    before the evidence, rather than assembling it from five sections."""
+    temp_c = temperature.get("value_c") if temperature else None
+    ranked = rank_species_by_proximity(species_predictions, temp_c)
+    matching = [r for r in ranked if r["any_match"]]
+
+    verdict = {
+        "temp_c": temp_c,
+        "temp_confidence": (temperature or {}).get("confidence"),
+        "temp_is_real": bool((temperature or {}).get("is_real")),
+        "matching": matching,
+        "closest": ranked[0] if ranked and not matching else None,
+        "next_window": None,
+        "headline": None,
+        "detail": None,
+    }
+
+    if activity_window and (not ranked or any(r["diel_active"] for r in ranked)):
+        verdict["next_window"] = activity_window
+
+    if temp_c is None:
+        verdict["headline"] = "No temperature reading"
+        verdict["detail"] = (
+            "Without a water temperature there is nothing to compare against physiology, "
+            "so this page can't say whether conditions favour anything here."
+        )
+    elif matching:
+        names = ", ".join(m["species"].title() for m in matching[:3])
+        more = len(matching) - 3
+        verdict["headline"] = (
+            f"{len(matching)} species in their documented window"
+            if len(matching) > 1 else "1 species in its documented window"
+        )
+        verdict["detail"] = names + (f", and {more} more" if more > 0 else "")
+    elif verdict["closest"]:
+        closest = verdict["closest"]
+        verdict["headline"] = "Nothing is inside its window right now"
+        verdict["detail"] = (
+            f"Closest is {closest['species'].title()}, "
+            f"{closest['distance_f']:.1f}°F {closest['direction']} its documented window."
+        )
+    else:
+        verdict["headline"] = "No species data for this spot"
+        verdict["detail"] = "WDNR publishes no species record tied to this exact location."
+    return verdict
+
+
 def get_wdnr_lake_species(conn: sqlite3.Connection, waterbody: str, county: str) -> dict | None:
     """WDNR's own published fish list for this water, with abundance.
 
@@ -1101,9 +1219,12 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
     if wdnr_species is None:
         wdnr_species = get_wdnr_lake_species(conn, point.get("waterbody_name"), point.get("county"))
 
+    verdict = build_spot_verdict(species_predictions, temperature, activity_window)
+
     return {
         "point": point,
         "temperature": temperature,
+        "verdict": verdict,
         "waterbody": waterbody,
         "species_predictions": species_predictions,
         "county_species": county_species,

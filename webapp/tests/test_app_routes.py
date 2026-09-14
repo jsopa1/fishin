@@ -143,21 +143,21 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertFalse(payload["data_unavailable"])
         self.assertGreater(len(payload["points"]), 0)
         point = payload["points"][0]
-        for field in ("source_type", "waterbody_name", "county", "lat", "lon"):
+        for field in ("t", "w", "c", "lat", "lon"):
             self.assertIn(field, point)
 
     def test_map_data_filters_by_source_type(self):
         resp = self.client.get("/map/data?source_type=shore_fishing")
         payload = resp.get_json()
         self.assertGreater(len(payload["points"]), 0)
-        self.assertTrue(all(p["source_type"] == "shore_fishing" for p in payload["points"]))
+        self.assertTrue(all(p["t"] == "shore_fishing" for p in payload["points"]))
 
     def test_map_data_filters_by_waterbody_name(self):
         resp = self.client.get("/map/data?waterbody=Devils+Lake")
         payload = resp.get_json()
         self.assertGreater(len(payload["points"]), 0)
-        self.assertTrue(all("devils lake" in p["waterbody_name"].lower()
-                             or (p["matched_waterbody_name"] and "devils lake" in p["matched_waterbody_name"].lower())
+        self.assertTrue(all("devils lake" in p["w"].lower()
+                             or (p["mw"] and "devils lake" in p["mw"].lower())
                              for p in payload["points"]))
 
     def test_map_data_filters_by_species_matches_shore_fishing_and_v1_sources(self):
@@ -170,8 +170,8 @@ class WebAppRouteTests(unittest.TestCase):
         # still counts -- not just a literal "WALLEYE" substring), or a
         # V1 species_predictions record for its matched waterbody.
         for p in payload["points"]:
-            via_shore_fishing = p["fish_species_raw"] is not None
-            via_v1_match = p["matched_waterbody_name"] is not None
+            via_shore_fishing = p["sp"] is not None
+            via_v1_match = p["mw"] is not None
             self.assertTrue(via_shore_fishing or via_v1_match, msg=p)
 
     def test_map_data_species_filter_matches_real_wdnr_typo_via_canonicalization(self):
@@ -181,7 +181,7 @@ class WebAppRouteTests(unittest.TestCase):
         # species table, not just a literal substring match on the raw text.
         resp = self.client.get("/map/data?species=Walleye")
         payload = resp.get_json()
-        site_names = [p["facility_name"] for p in payload["points"]]
+        site_names = [p["n"] for p in payload["points"]]
         self.assertIn("Silver Lake Fishing Pier", site_names)
 
     def test_map_data_shore_fishing_species_not_truncated_by_parenthetical_comma(self):
@@ -191,7 +191,7 @@ class WebAppRouteTests(unittest.TestCase):
         # closing paren.
         resp = self.client.get("/map/data?source_type=shore_fishing")
         payload = resp.get_json()
-        combined = " | ".join(p["fish_species_raw"] or "" for p in payload["points"])
+        combined = " | ".join(p["sp"] or "" for p in payload["points"])
         self.assertNotIn("BASS (LG. MOUTH |", combined)
         self.assertNotIn("BASS (SMALLMOUTH |", combined)
 
@@ -208,11 +208,11 @@ class WebAppRouteTests(unittest.TestCase):
     def test_map_points_linked_to_real_waterbody_have_valid_link_target(self):
         resp = self.client.get("/map/data")
         payload = resp.get_json()
-        linked = [p for p in payload["points"] if p["matched_waterbody_name"]]
+        linked = [p for p in payload["points"] if p["mw"]]
         self.assertGreater(len(linked), 0)
         sample = linked[0]
         wb_resp = self.client.get(
-            "/waterbody?name=" + sample["matched_waterbody_name"] + "&county=" + sample["matched_county"]
+            "/waterbody?name=" + sample["mw"] + "&county=" + sample["mc"]
         )
         self.assertEqual(wb_resp.status_code, 200)
 
@@ -254,21 +254,21 @@ class WebAppRouteTests(unittest.TestCase):
     def test_spot_report_loads_for_a_matched_real_point(self):
         map_resp = self.client.get("/map/data")
         points = map_resp.get_json()["points"]
-        matched = next(p for p in points if p["matched_waterbody_name"])
+        matched = next(p for p in points if p["mw"])
 
         resp = self.client.get(
-            "/spot?lat={}&lon={}&name={}".format(matched["lat"], matched["lon"], matched["facility_name"] or "")
+            "/spot?lat={}&lon={}&name={}".format(matched["lat"], matched["lon"], matched["n"] or "")
         )
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(matched["waterbody_name"].encode(), resp.data)
+        self.assertIn(matched["w"].encode(), resp.data)
 
     def test_spot_report_loads_for_an_unmatched_real_point_honest_gaps(self):
         map_resp = self.client.get("/map/data")
         points = map_resp.get_json()["points"]
-        unmatched = next(p for p in points if not p["matched_waterbody_name"])
+        unmatched = next(p for p in points if not p["mw"])
 
         resp = self.client.get(
-            "/spot?lat={}&lon={}&name={}".format(unmatched["lat"], unmatched["lon"], unmatched["facility_name"] or "")
+            "/spot?lat={}&lon={}&name={}".format(unmatched["lat"], unmatched["lon"], unmatched["n"] or "")
         )
         self.assertEqual(resp.status_code, 200)
         # A spot with no record of its own now shows real county-level
@@ -284,7 +284,7 @@ class WebAppRouteTests(unittest.TestCase):
         # never asserts presence at the spot itself.
         map_resp = self.client.get("/map/data")
         points = map_resp.get_json()["points"]
-        unmatched = next(p for p in points if not p["matched_waterbody_name"])
+        unmatched = next(p for p in points if not p["mw"])
         resp = self.client.get("/spot?lat={}&lon={}".format(unmatched["lat"], unmatched["lon"]))
         body = resp.data.decode()
 

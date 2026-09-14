@@ -271,33 +271,25 @@ def map_data():
         conn, county=county, source_type=source_type, waterbody=waterbody, species=species
     )
     conn.close()
+
+    # Only what the map pins and the list cards actually render. The full
+    # per-site detail (directions, stalls, amenities, ADA, manager) lives
+    # on the spot page, which is the real destination now -- shipping all
+    # of it to every visitor made this response 2.07MB, and the bulk of
+    # that was field names repeated 3,272 times for data nobody had asked
+    # to see yet. That matters on cellular at a boat ramp.
     return jsonify({
         "points": [
             {
-                "source_type": p["source_type"],
-                "facility_name": p["facility_name"],
-                "waterbody_name": p["waterbody_name"],
-                "county": p["county"],
-                "municipality": p["municipality"],
+                "t": p["source_type"],
+                "n": p["facility_name"],
+                "w": p["waterbody_name"],
+                "c": p["county"],
                 "lat": p["latitude"],
                 "lon": p["longitude"],
-                "ada_accessible": p["ada_accessible"],
-                "ownership": p["ownership"],
-                "more_info_url": p["more_info_url"],
-                "matched_waterbody_name": p["matched_waterbody_name"],
-                "matched_county": p["matched_county"],
-                "directions": p.get("directions"),
-                "fish_species_raw": p.get("fish_species_raw"),
-                "vehicle_stalls": p.get("vehicle_stalls"),
-                "vehicle_trailer_stalls": p.get("vehicle_trailer_stalls"),
-                "restrooms": p.get("restrooms"),
-                "fish_cleaning_area": p.get("fish_cleaning_area"),
-                "additional_amenities": p.get("additional_amenities"),
-                "ada_vehicle_stalls": p.get("ada_vehicle_stalls"),
-                "ada_restrooms": p.get("ada_restrooms"),
-                "property_manager": p.get("property_manager"),
-                "property_manager_phone": p.get("property_manager_phone"),
-                "comments": p.get("comments"),
+                "mw": p["matched_waterbody_name"],
+                "mc": p["matched_county"],
+                "sp": p.get("fish_species_raw"),
             }
             for p in points
         ],
@@ -385,7 +377,7 @@ def spot_detail():
         waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
         county_species=detail["county_species"], activity_window=detail["activity_window"],
         diel_species=detail["diel_species"], stocking=detail["stocking"],
-        wdnr_species=detail["wdnr_species"],
+        wdnr_species=detail["wdnr_species"], verdict=detail["verdict"],
         regulations=regulations, advisory=advisory,
     )
 

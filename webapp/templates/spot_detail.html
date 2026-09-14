@@ -50,6 +50,39 @@
   </div>
 </div>
 
+{% if verdict %}
+<div class="verdict {{ 'verdict-good' if verdict.matching else 'verdict-quiet' }}">
+  <div class="verdict-main">
+    <p class="verdict-headline">{{ verdict.headline }}</p>
+    {% if verdict.detail %}<p class="verdict-detail">{{ verdict.detail }}</p>{% endif %}
+    {% if verdict.matching %}
+      <ul class="verdict-species">
+        {% for m in verdict.matching[:4] %}
+          <li><span class="verdict-species-name">{{ m.species.title() }}</span>
+          {% if m.diel_active %}<span class="verdict-diel"><svg class="icon" aria-hidden="true"><use href="#icon-moon"/></svg> dawn/dusk</span>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+  <div class="verdict-side">
+    {% if verdict.temp_c is not none %}
+      <div class="verdict-stat">
+        <span class="verdict-stat-value">{{ "%.0f"|format(verdict.temp_c * 9/5 + 32) }}°F</span>
+        <span class="verdict-stat-label">
+          {% if verdict.temp_is_real %}measured{% elif verdict.temp_confidence %}estimated · {{ verdict.temp_confidence.level }}{% else %}estimated{% endif %}
+        </span>
+      </div>
+    {% endif %}
+    {% if verdict.next_window %}
+      <div class="verdict-stat">
+        <span class="verdict-stat-value">{{ verdict.next_window.sunset | central }}</span>
+        <span class="verdict-stat-label">dusk window opens</span>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
 <div class="section-tabs" id="spot-tabs" role="tablist">
   <button type="button" class="section-tab active" data-target="panel-conditions" role="tab" aria-selected="true">
     <svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg> Conditions

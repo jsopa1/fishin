@@ -441,6 +441,40 @@ table td a:hover { text-decoration: underline; }
 .bait-note { margin: 0 0 var(--space-2); font-size: var(--text-sm); color: var(--muted); font-style: italic; }
 .bait-tiers { margin: 0; font-size: var(--text-xs); color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
+/* The verdict: the answer, before the evidence. This exists because 42%
+   of waterbodies currently have nothing inside a window, and the page
+   used to open on five sections of data the reader had to assemble that
+   conclusion from themselves. */
+.verdict {
+  display: flex; flex-wrap: wrap; gap: var(--space-5);
+  align-items: flex-start; justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-5);
+  border: 1px solid var(--border);
+}
+.verdict-good { background: var(--survey-bg); border-color: var(--accent-100); }
+.verdict-quiet { background: var(--card); }
+.verdict-main { flex: 1 1 300px; min-width: 0; }
+.verdict-headline {
+  margin: 0; font-size: var(--text-lg); font-weight: 800;
+  letter-spacing: -0.01em; color: var(--ink); text-wrap: balance;
+}
+.verdict-good .verdict-headline { color: var(--survey); }
+.verdict-detail { margin: var(--space-2) 0 0; font-size: var(--text-base); color: var(--gray-700); }
+.verdict-species { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.verdict-species li {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-full); padding: 5px 12px;
+}
+.verdict-species-name { font-weight: 700; font-size: var(--text-sm); }
+.verdict-diel { display: inline-flex; align-items: center; gap: 3px; font-size: var(--text-xs); color: var(--muted); }
+.verdict-side { display: flex; gap: var(--space-5); flex-wrap: wrap; }
+.verdict-stat { display: flex; flex-direction: column; }
+.verdict-stat-value { font-size: 1.6rem; font-weight: 800; line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.verdict-stat-label { font-size: var(--text-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; margin-top: 2px; }
+
 /* WDNR's own published fish list, with abundance. Visually distinct from
    the species cards below it because it answers a different question --
    "what lives here", at WDNR's coarser category level -- and must not be
@@ -597,6 +631,14 @@ table td a:hover { text-decoration: underline; }
 .list-card-body { margin-top: var(--space-3); font-size: var(--text-sm); color: var(--gray-700); }
 .list-card-body p { margin: 4px 0; color: inherit; }
 .list-card-link { display: inline-flex; align-items: center; gap: 4px; margin-top: var(--space-3); font-weight: 600; font-size: var(--text-sm); color: var(--accent); }
+
+.chip-locate { border-color: var(--accent); color: var(--accent-dark); font-weight: 700; }
+.chip-locate.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chip-locate:disabled { opacity: 0.65; cursor: progress; }
+.list-card-distance {
+  margin: 6px 0 0; font-size: var(--text-sm); font-weight: 700;
+  color: var(--accent-dark); font-variant-numeric: tabular-nums;
+}
 
 .stat-chip {
   display: inline-flex;

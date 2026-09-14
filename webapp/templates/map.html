@@ -18,6 +18,10 @@
       <button type="submit" class="btn btn-primary btn-sm">Search</button>
     </div>
     <div class="chip-bar">
+      <button type="button" class="chip chip-locate" id="locate-btn">
+        <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg>
+        <span id="locate-label">Spots near me</span>
+      </button>
       <label class="chip">
         <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg>
         <input type="text" name="county" placeholder="County" value="{{ filters.county or '' }}"
@@ -142,63 +146,58 @@
     var params = new URLSearchParams();
     params.set('lat', p.lat);
     params.set('lon', p.lon);
-    if (p.facility_name) params.set('name', p.facility_name);
+    if (p.n) params.set('name', p.n);
     return '{{ url_for("spot_detail") }}?' + params.toString();
   }
 
   // One "one stop shop" info block, shared verbatim between the map
   // popup and the list view's card -- every real field WDNR publishes,
   // clearly labeled, nothing invented for fields WDNR didn't provide.
+  // A lightweight preview only. Every full field -- directions, stalls,
+  // amenities, ADA, manager, regulations, temperature -- lives on the
+  // spot page, so the map payload no longer ships them to everyone.
   function buildDetailHtml(p) {
-    var html = '<strong>' + escapeHtml(p.facility_name || labels[p.source_type]) + '</strong><br>'
-      + escapeHtml(labels[p.source_type]) + '<br>'
-      + escapeHtml(p.waterbody_name) + ' (' + escapeHtml(p.county) + ')';
-    if (p.fish_species_raw) {
-      html += '<br><strong>Fish species (WDNR-listed):</strong> ' + escapeHtml(p.fish_species_raw);
-    }
-    if (p.directions) html += '<br><strong>Directions:</strong> ' + escapeHtml(p.directions);
-    if (p.vehicle_stalls) html += '<br>Vehicle stalls: ' + escapeHtml(p.vehicle_stalls);
-    if (p.vehicle_trailer_stalls) html += '<br>Vehicle/trailer stalls: ' + escapeHtml(p.vehicle_trailer_stalls);
-    if (p.restrooms) html += '<br>Restrooms: ' + escapeHtml(p.restrooms);
-    if (p.fish_cleaning_area) html += '<br>Fish cleaning area: ' + escapeHtml(p.fish_cleaning_area);
-    if (p.additional_amenities) html += '<br><strong>Amenities:</strong> ' + escapeHtml(p.additional_amenities);
-    if (p.ada_vehicle_stalls || p.ada_restrooms) {
-      html += '<br><strong>ADA accessible:</strong> ';
-      var adaParts = [];
-      if (p.ada_vehicle_stalls) adaParts.push('vehicle stalls (' + escapeHtml(p.ada_vehicle_stalls) + ')');
-      if (p.ada_restrooms) adaParts.push('restrooms (' + escapeHtml(p.ada_restrooms) + ')');
-      html += adaParts.join(', ');
-    }
-    if (p.ada_accessible) html += '<br>ADA accessible: ' + escapeHtml(p.ada_accessible);
-    if (p.property_manager) {
-      html += '<br>Managed by: ' + escapeHtml(p.property_manager);
-      if (p.property_manager_phone) html += ' (' + escapeHtml(p.property_manager_phone) + ')';
-    } else if (p.ownership) {
-      html += '<br>Managed by: ' + escapeHtml(p.ownership);
-    }
-    if (p.comments) html += '<br><strong>Comments:</strong> ' + escapeHtml(p.comments);
-    if (p.more_info_url) html += '<br><a href="' + escapeHtml(p.more_info_url) + '" target="_blank" rel="noopener">WDNR site page ↗</a>';
-    html += '<br><a href="' + spotUrl(p) + '"><strong>Full spot report (temperature, species, why) →</strong></a>';
+    var html = '<strong>' + escapeHtml(p.n || labels[p.t]) + '</strong><br>'
+      + escapeHtml(labels[p.t]) + '<br>'
+      + escapeHtml(p.w) + ' (' + escapeHtml(p.c) + ')';
+    if (p.sp) html += '<br><strong>Species (WDNR-listed):</strong> ' + escapeHtml(p.sp);
+    html += '<br><a href="' + spotUrl(p) + '"><strong>Full spot report (temperature, species, why) &rarr;</strong></a>';
     return html;
   }
 
   function renderList(pts) {
+    lastPoints = pts;
     if (pts.length === 0) {
       listEl.innerHTML = '<p class="empty-state">No access points match these filters.</p>';
       return;
     }
+    // Once the angler has shared a location, nearest-first is the only
+    // ordering that makes sense; alphabetical is useless standing at a
+    // ramp. Capped so the list stays scannable rather than 3,272 long.
+    if (userPosition) {
+      pts = pts.map(function (p) {
+        return Object.assign({}, p, {
+          _km: haversineKm(userPosition.lat, userPosition.lon, p.lat, p.lon)
+        });
+      }).sort(function (a, b) { return a._km - b._km; }).slice(0, 60);
+    }
     var cards = pts.map(function (p) {
-      var typeLabel = labels[p.source_type] || p.source_type;
-      var species = p.fish_species_raw ? '<p><strong>Species (WDNR-listed):</strong> ' + escapeHtml(p.fish_species_raw) + '</p>' : '';
+      var typeLabel = labels[p.t] || p.t;
+      var species = p.sp ? '<p><strong>Species (WDNR-listed):</strong> ' + escapeHtml(p.sp) + '</p>' : '';
       // Note: no nested <a> here -- the whole card is already a link, and
       // an <a> inside an <a> is invalid HTML that browsers silently
       // reparent, which used to break the card's box entirely.
       return '<a class="list-card" href="' + spotUrl(p) + '">'
         + '<div class="list-card-head">'
-        + '<div><p class="list-card-title">' + escapeHtml(p.facility_name || typeLabel) + '</p>'
-        + '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + escapeHtml(p.waterbody_name) + ' (' + escapeHtml(p.county) + ')</p></div>'
-        + '<span class="access-type-tag type-' + p.source_type + '">' + escapeHtml(typeLabel) + '</span>'
+        + '<div><p class="list-card-title">' + escapeHtml(p.n || typeLabel) + '</p>'
+        + '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + escapeHtml(p.w) + ' (' + escapeHtml(p.c) + ')</p></div>'
+        + '<span class="access-type-tag type-' + p.t + '">' + escapeHtml(typeLabel) + '</span>'
         + '</div>'
+        + (p._km !== undefined
+            ? '<p class="list-card-distance">' + (p._km < 1.6
+                ? (p._km * 0.621371).toFixed(1) + ' mi away'
+                : Math.round(p._km * 0.621371) + ' mi away') + '</p>'
+            : '')
         + '<div class="list-card-body">' + species + '</div>'
         + '<span class="list-card-link">Full spot report <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></span>'
         + '</a>';
@@ -225,6 +224,50 @@
   document.querySelectorAll('.explore-filters input[type="radio"], .explore-filters select').forEach(function (input) {
     input.addEventListener('change', function () { input.closest('form').submit(); });
   });
+
+  // "Spots near me". An angler at a boat ramp asks what is close, not
+  // for a lake name they already know -- this is the single affordance
+  // every comparable outdoor app opens with. Geolocation is requested
+  // only on an explicit tap, never on page load, and the coordinate is
+  // used in the browser to sort the list. It is never sent anywhere.
+  var lastPoints = [];
+  var userPosition = null;
+
+  function haversineKm(aLat, aLon, bLat, bLon) {
+    var R = 6371, toRad = function (d) { return d * Math.PI / 180; };
+    var dLat = toRad(bLat - aLat), dLon = toRad(bLon - aLon);
+    var h = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+      + Math.cos(toRad(aLat)) * Math.cos(toRad(bLat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
+  var locateBtn = document.getElementById('locate-btn');
+  var locateLabel = document.getElementById('locate-label');
+  if (locateBtn) {
+    locateBtn.addEventListener('click', function () {
+      if (!navigator.geolocation) {
+        locateLabel.textContent = 'Location not available';
+        return;
+      }
+      locateLabel.textContent = 'Locating…';
+      locateBtn.disabled = true;
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        userPosition = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+        locateBtn.classList.add('active');
+        locateBtn.disabled = false;
+        locateLabel.textContent = 'Nearest first';
+        map.setView([userPosition.lat, userPosition.lon], 11);
+        L.circleMarker([userPosition.lat, userPosition.lon], {
+          radius: 7, color: '#2456d6', fillColor: '#2456d6', fillOpacity: 0.9, weight: 3
+        }).addTo(map).bindPopup('You are here');
+        renderList(lastPoints);
+        setMobileView('list');
+      }, function () {
+        locateBtn.disabled = false;
+        locateLabel.textContent = 'Location blocked';
+      }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
+    });
+  }
 
   // The bottom-nav search shortcut links here as #explore-search --
   // focus the field so a tap lands ready to type.
@@ -253,8 +296,8 @@
       pts.forEach(function (p) {
         var marker = L.circleMarker([p.lat, p.lon], {
           radius: 6,
-          color: colors[p.source_type] || '#5b6472',
-          fillColor: colors[p.source_type] || '#5b6472',
+          color: colors[p.t] || '#5b6472',
+          fillColor: colors[p.t] || '#5b6472',
           fillOpacity: 0.85,
           weight: 1
         });

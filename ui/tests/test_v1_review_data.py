@@ -845,3 +845,61 @@ class TestStockingHistory(DataTestBase):
 
     def test_unstocked_water_returns_none_not_an_empty_shell(self):
         self.assertIsNone(rd.get_stocking_history(self.conn, "NOWHERE LAKE", "Vilas"))
+
+
+class TestSpotVerdict(unittest.TestCase):
+    """The page must always give an answer. 42% of waterbodies have
+    nothing inside a window, and 'no match' is a dead end for a reader
+    trying to decide whether to drive somewhere."""
+
+    WALLEYE = [{"type": "activity_window", "range_c": [12.8, 23.9]}]
+
+    def test_inside_window_measures_zero_distance(self):
+        d, direction, _ = rd._window_distance_c(self.WALLEYE, 18.0)
+        self.assertEqual(d, 0.0)
+        self.assertEqual(direction, "inside")
+
+    def test_below_window_measures_real_distance(self):
+        d, direction, _ = rd._window_distance_c(self.WALLEYE, 10.8)
+        self.assertAlmostEqual(d, 2.0)
+        self.assertEqual(direction, "below")
+
+    def test_above_window_measures_real_distance(self):
+        d, direction, _ = rd._window_distance_c(self.WALLEYE, 25.9)
+        self.assertAlmostEqual(d, 2.0)
+        self.assertEqual(direction, "above")
+
+    def test_matching_species_rank_ahead_of_near_misses(self):
+        preds = [
+            {"species": "WALLEYE", "any_match": 0, "diel_active": 1},
+            {"species": "BLUEGILL", "any_match": 1, "diel_active": 0},
+        ]
+        ranked = rd.rank_species_by_proximity(preds, 21.0)
+        self.assertTrue(ranked[0]["any_match"])
+
+    def test_verdict_names_what_is_matching(self):
+        preds = [{"species": "WALLEYE", "any_match": 1, "diel_active": 1}]
+        v = rd.build_spot_verdict(preds, {"value_c": 18.0, "is_real": True}, None)
+        self.assertIn("window", v["headline"])
+        self.assertIn("Walleye", v["detail"])
+
+    def test_verdict_offers_the_closest_species_when_nothing_matches(self):
+        # The whole point: never answer with a blank.
+        preds = [{"species": "WALLEYE", "any_match": 0, "diel_active": 1}]
+        v = rd.build_spot_verdict(preds, {"value_c": 10.8, "is_real": True}, None)
+        self.assertIsNotNone(v["closest"])
+        self.assertIn("Closest is Walleye", v["detail"])
+        self.assertIn("below", v["detail"])
+
+    def test_verdict_is_honest_when_there_is_no_temperature(self):
+        preds = [{"species": "WALLEYE", "any_match": 0, "diel_active": 0}]
+        v = rd.build_spot_verdict(preds, None, None)
+        self.assertIn("No temperature", v["headline"])
+        self.assertEqual(v["matching"], [])
+
+    def test_ranking_never_claims_a_near_miss_is_biting(self):
+        # A species outside its window is "closest", never "matching".
+        preds = [{"species": "WALLEYE", "any_match": 0, "diel_active": 0}]
+        v = rd.build_spot_verdict(preds, {"value_c": 10.8, "is_real": True}, None)
+        self.assertEqual(v["matching"], [])
+        self.assertNotIn("biting", (v["detail"] or "").lower())
