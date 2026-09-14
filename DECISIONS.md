@@ -800,3 +800,62 @@ without 1+2) — full detail:
   considering this done -- a real previously-unmatched access point
   (Ada Lake Campground boat ramp, Langlade County) was confirmed to
   resolve a sane interpolated estimate from a real nearby reading
+
+## 023 — Full UX redesign, modeled on popular outdoor apps
+
+The CEO asked for a full redesign of the entire app's look, feel, and
+navigation, modeled on popular outdoor/fishing apps (AllTrails, OnX
+Fish/Hunt, Fishbrain) -- explicitly a full UX rework, not just a visual
+skin: navigation and information architecture were both open to change.
+Full detail: [docs/v2_ux_redesign_report.md](docs/v2_ux_redesign_report.md).
+
+- **New design system**: a real token system (neutral/spacing/type
+  scales) built around the existing pine-green brand color, a new
+  component library (buttons, search bar, filter chips, list cards,
+  detail hero, section tabs), and a single inline SVG icon sprite
+  replacing emoji throughout -- zero new dependency, no build step.
+- **`/map` became "Explore"**, rebuilt as a split map+list view (side
+  by side on desktop, a toggle on mobile) with chip-based filters,
+  replacing the old map-with-a-separate-toggle-to-a-table pattern.
+- **`/` became a map-first landing** with a search bar and a live
+  (non-interactive) map preview, while keeping the full trust-building
+  "what this is/isn't" framing in place -- that messaging is
+  load-bearing (Decision #005) and wasn't cut to match a reference
+  app's brevity.
+- **`/browse` became the "Waterbody Directory"**, restyled with a card
+  list, kept as a secondary surface since it's the only way to reach
+  waterbodies with no physical access point.
+- **`/failures` and `/summary` moved out of primary nav** into a footer
+  "Data Health" section -- real, useful pages, but not what an angler
+  opens first.
+- **`/waterbody` and `/spot` got a hero + tabbed layout** instead of one
+  long scroll, reusing `_species_cards.html` unchanged so the species-
+  match/why-not-match content itself didn't need to be touched.
+- **No routes were removed, renamed, or given new required parameters**
+  -- every URL, filter, and bookmark from before this redesign still
+  works identically.
+- **Two real bugs found and fixed during the build**: a CSS ID-selector
+  specificity bug that collapsed the Explore map to 2px tall (caught by
+  checking computed height directly, not just a screenshot); and a
+  pre-existing real data inconsistency in the `county` column (some
+  records already include the word "County," e.g. "Sauk County") that
+  a new card template's added `" County"` suffix turned into "Sauk
+  County County" -- fixed by displaying the stored field as-is
+  everywhere, matching how the rest of the app already handled this.
+
+**Rationale:**
+- Matches this project's own established discipline of planning before
+  building for a CEO-directed pivot of this size (same pattern as
+  Decision #021) -- explored the codebase, wrote a plan, got explicit
+  approval, then built in a fixed sequence with live verification at
+  each step
+- Kept the brand color and every real-data field/evidentiary framing
+  unchanged -- the CEO asked for a UX rework, not a new identity or any
+  change to what the app actually claims
+- No route was removed or renamed specifically so this redesign carries
+  zero risk to existing bookmarks, external links, or the Flask-level
+  test suite's route coverage
+- Both real bugs were caught by checking actual rendered output
+  (computed CSS values, live page text) rather than trusting a
+  screenshot or assuming the new markup was correct, consistent with
+  this project's standing "verify against real data" discipline

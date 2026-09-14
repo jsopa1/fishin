@@ -1,105 +1,186 @@
 {% extends "base.html" %}
 {% block title %}{{ spot.facility_name if spot else "Not found" }} — Spot Detail{% endblock %}
 {% block content %}
-<p><a href="{{ url_for('map_view') }}">&larr; Back to Map</a></p>
+<a class="back-link" href="{{ url_for('map_view') }}">
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to Explore
+</a>
 {% if not spot %}
 <h1>Not found</h1>
 <p class="empty-state">⚠ {{ not_found_reason or "No stored access point at this location." }}
    Try <a href="{{ url_for('map_view') }}">the map again</a>.</p>
 {% else %}
-<h1>{{ spot.facility_name or spot.waterbody_name }}
-  <small style="color:#888; font-weight:400;">({{ spot.waterbody_name }}, {{ spot.county }})</small>
-</h1>
-
-<div class="detail-box">
-  <dl class="spot-fields">
-    <dt>Access type</dt>
-    <dd>{{ {"boat_ramp": "Boat ramp", "boat_carry_in": "Carry-in (canoe/kayak)", "shore_fishing": "Shore fishing site"}.get(spot.source_type, spot.source_type) }}</dd>
-    {% if spot.fish_species_raw %}
-      <dt>Fish species (WDNR-listed)</dt><dd>{{ spot.fish_species_raw }}</dd>
+{% set type_labels = {"boat_ramp": "Boat ramp", "boat_carry_in": "Carry-in (canoe/kayak)", "shore_fishing": "Shore fishing site"} %}
+<div class="detail-hero">
+  <div class="detail-hero-kicker">
+    <svg class="icon" aria-hidden="true"><use href="#icon-anchor"/></svg>
+    {{ type_labels.get(spot.source_type, spot.source_type) }}
+  </div>
+  <h1>{{ spot.facility_name or spot.waterbody_name }}</h1>
+  <p class="detail-hero-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ spot.waterbody_name }}, {{ spot.county }}</p>
+  <div class="detail-hero-stats">
+    {% if temperature is none %}
+      <span class="tag no_data">no temperature data available</span>
+    {% else %}
+      <span class="stat-chip">
+        <svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg>
+        {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
+      </span>
+      {% if temperature.resolution == "matched_waterbody_real" %}
+        <span class="tag real">real measurement</span>
+      {% elif temperature.resolution == "interpolated_nearby" %}
+        <span class="tag estimated">estimated</span>
+      {% elif temperature.resolution == "matched_waterbody_proxy" %}
+        <span class="tag proxy">air-temperature proxy</span>
+      {% endif %}
     {% endif %}
-    {% if spot.directions %}
-      <dt>Directions</dt><dd>{{ spot.directions }}</dd>
+    {% if spot.ada_vehicle_stalls or spot.ada_restrooms or spot.ada_accessible == 'Yes' %}
+      <span class="stat-chip"><svg class="icon" aria-hidden="true"><use href="#icon-accessibility"/></svg> ADA accessible</span>
     {% endif %}
-    {% if spot.vehicle_stalls %}
-      <dt>Vehicle stalls</dt><dd>{{ spot.vehicle_stalls }}</dd>
-    {% endif %}
-    {% if spot.vehicle_trailer_stalls %}
-      <dt>Vehicle/trailer stalls</dt><dd>{{ spot.vehicle_trailer_stalls }}</dd>
-    {% endif %}
-    {% if spot.restrooms %}
-      <dt>Restrooms</dt><dd>{{ spot.restrooms }}</dd>
-    {% endif %}
-    {% if spot.fish_cleaning_area %}
-      <dt>Fish cleaning area</dt><dd>{{ spot.fish_cleaning_area }}</dd>
-    {% endif %}
-    {% if spot.additional_amenities %}
-      <dt>Amenities</dt><dd>{{ spot.additional_amenities }}</dd>
-    {% endif %}
-    {% if spot.ada_vehicle_stalls or spot.ada_restrooms %}
-      <dt>ADA accessible</dt>
-      <dd>
-        {% set ada_parts = [] %}
-        {% if spot.ada_vehicle_stalls %}{{ ada_parts.append("vehicle stalls (" ~ spot.ada_vehicle_stalls ~ ")") or "" }}{% endif %}
-        {% if spot.ada_restrooms %}{{ ada_parts.append("restrooms (" ~ spot.ada_restrooms ~ ")") or "" }}{% endif %}
-        {{ ada_parts|join(", ") }}
-      </dd>
-    {% elif spot.ada_accessible %}
-      <dt>ADA accessible</dt><dd>{{ spot.ada_accessible }}</dd>
-    {% endif %}
-    {% if spot.property_manager %}
-      <dt>Managed by</dt><dd>{{ spot.property_manager }}{% if spot.property_manager_phone %} ({{ spot.property_manager_phone }}){% endif %}</dd>
-    {% elif spot.ownership %}
-      <dt>Managed by</dt><dd>{{ spot.ownership }}</dd>
-    {% endif %}
-    {% if spot.comments %}
-      <dt>Comments</dt><dd>{{ spot.comments }}</dd>
-    {% endif %}
+  </div>
+  <div class="detail-hero-actions">
     {% if spot.more_info_url %}
-      <dt>WDNR site page</dt><dd><a href="{{ spot.more_info_url }}" target="_blank" rel="noopener">View on WDNR ↗</a></dd>
+      <a class="btn btn-secondary" href="{{ spot.more_info_url }}" target="_blank" rel="noopener">
+        <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg> WDNR site page
+      </a>
     {% endif %}
-  </dl>
+    {% if spot.matched_waterbody_name %}
+      <a class="btn btn-secondary" href="{{ url_for('waterbody_detail') }}?name={{ spot.matched_waterbody_name }}&county={{ spot.matched_county }}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Waterbody conditions
+      </a>
+    {% endif %}
+  </div>
+</div>
 
-  <h3>Water temperature</h3>
-  {% if temperature is none %}
-    <p><span class="tag no_data">no real, estimated, or proxy temperature data available</span></p>
-  {% elif temperature.resolution == "matched_waterbody_real" %}
-    <p>
-      {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
-      <span class="tag real">real measurement</span>
-      &mdash; {{ temperature.method }}{% if temperature.observed_at %}, observed {{ temperature.observed_at }}{% endif %}
-    </p>
-  {% elif temperature.resolution == "interpolated_nearby" %}
-    <p>
-      {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
-      <span class="tag estimated">estimated from nearby real readings</span>
-      &mdash; averaged from {{ temperature.anchor_count }} real reading{{ "s" if temperature.anchor_count != 1 else "" }},
-      nearest {{ "%.1f"|format(temperature.nearest_km) }}km away
-    </p>
-    <ul class="anchor-list">
-      {% for a in temperature.anchors %}
-        <li>{{ a.waterbody_name }} ({{ a.county }}) — {{ "%.1f"|format(a.distance_km) }}km away</li>
-      {% endfor %}
-    </ul>
-  {% elif temperature.resolution == "matched_waterbody_proxy" %}
-    <p>
-      {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
-      <span class="tag proxy">air-temperature proxy</span>
-      &mdash; no real water-temperature reading was close enough to estimate from; this is a general air-temperature
-      proxy for the wider area, not a water measurement.
+<div class="section-tabs" id="spot-tabs" role="tablist">
+  <button type="button" class="section-tab active" data-target="panel-conditions" role="tab" aria-selected="true">
+    <svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg> Conditions
+  </button>
+  <button type="button" class="section-tab" data-target="panel-species" role="tab" aria-selected="false">
+    <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Species
+  </button>
+  <button type="button" class="section-tab" data-target="panel-info" role="tab" aria-selected="false">
+    <svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg> Site info
+  </button>
+</div>
+
+<div class="section-panel" id="panel-conditions">
+  <div class="detail-box">
+    <h3>Water temperature</h3>
+    {% if temperature is none %}
+      <p><span class="tag no_data">no real, estimated, or proxy temperature data available</span></p>
+    {% elif temperature.resolution == "matched_waterbody_real" %}
+      <p>
+        {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
+        <span class="tag real">real measurement</span>
+        &mdash; {{ temperature.method }}{% if temperature.observed_at %}, observed {{ temperature.observed_at }}{% endif %}
+      </p>
+    {% elif temperature.resolution == "interpolated_nearby" %}
+      <p>
+        {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
+        <span class="tag estimated">estimated from nearby real readings</span>
+        &mdash; averaged from {{ temperature.anchor_count }} real reading{{ "s" if temperature.anchor_count != 1 else "" }},
+        nearest {{ "%.1f"|format(temperature.nearest_km) }}km away
+      </p>
+      <ul class="anchor-list">
+        {% for a in temperature.anchors %}
+          <li>{{ a.waterbody_name }} ({{ a.county }}) — {{ "%.1f"|format(a.distance_km) }}km away</li>
+        {% endfor %}
+      </ul>
+    {% elif temperature.resolution == "matched_waterbody_proxy" %}
+      <p>
+        {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
+        <span class="tag proxy">air-temperature proxy</span>
+        &mdash; no real water-temperature reading was close enough to estimate from; this is a general air-temperature
+        proxy for the wider area, not a water measurement.
+      </p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="section-panel" id="panel-species">
+  <h2 id="species-predictions">Species likely present, and whether conditions currently favor them</h2>
+  {% if spot.matched_waterbody_name %}
+    {% include "_species_cards.html" %}
+  {% else %}
+    <p class="empty-state">
+      This spot isn't matched to a known V1 waterbody record, so there is no species-presence data
+      available for this specific spot. This is an honest gap in coverage, not a claim that no fish
+      are present — see the Site info tab for this exact site's own published species list, if any.
     </p>
   {% endif %}
 </div>
 
-<h2 id="species-predictions">Species likely present, and whether conditions currently favor them</h2>
-{% if spot.matched_waterbody_name %}
-  {% include "_species_cards.html" %}
-{% else %}
-  <p class="empty-state">
-    This spot isn't matched to a known V1 waterbody record, so there is no species-presence data
-    available for this specific spot. This is an honest gap in coverage, not a claim that no fish
-    are present — see the WDNR-listed species above, if any, for this exact site's own published info.
-  </p>
-{% endif %}
+<div class="section-panel" id="panel-info">
+  <div class="detail-box">
+    <dl class="spot-fields">
+      <dt>Access type</dt>
+      <dd>{{ type_labels.get(spot.source_type, spot.source_type) }}</dd>
+      {% if spot.fish_species_raw %}
+        <dt>Fish species (WDNR-listed)</dt><dd>{{ spot.fish_species_raw }}</dd>
+      {% endif %}
+      {% if spot.directions %}
+        <dt>Directions</dt><dd>{{ spot.directions }}</dd>
+      {% endif %}
+      {% if spot.vehicle_stalls %}
+        <dt>Vehicle stalls</dt><dd>{{ spot.vehicle_stalls }}</dd>
+      {% endif %}
+      {% if spot.vehicle_trailer_stalls %}
+        <dt>Vehicle/trailer stalls</dt><dd>{{ spot.vehicle_trailer_stalls }}</dd>
+      {% endif %}
+      {% if spot.restrooms %}
+        <dt>Restrooms</dt><dd>{{ spot.restrooms }}</dd>
+      {% endif %}
+      {% if spot.fish_cleaning_area %}
+        <dt>Fish cleaning area</dt><dd>{{ spot.fish_cleaning_area }}</dd>
+      {% endif %}
+      {% if spot.additional_amenities %}
+        <dt>Amenities</dt><dd>{{ spot.additional_amenities }}</dd>
+      {% endif %}
+      {% if spot.ada_vehicle_stalls or spot.ada_restrooms %}
+        <dt>ADA accessible</dt>
+        <dd>
+          {% set ada_parts = [] %}
+          {% if spot.ada_vehicle_stalls %}{{ ada_parts.append("vehicle stalls (" ~ spot.ada_vehicle_stalls ~ ")") or "" }}{% endif %}
+          {% if spot.ada_restrooms %}{{ ada_parts.append("restrooms (" ~ spot.ada_restrooms ~ ")") or "" }}{% endif %}
+          {{ ada_parts|join(", ") }}
+        </dd>
+      {% elif spot.ada_accessible %}
+        <dt>ADA accessible</dt><dd>{{ spot.ada_accessible }}</dd>
+      {% endif %}
+      {% if spot.property_manager %}
+        <dt>Managed by</dt><dd>{{ spot.property_manager }}{% if spot.property_manager_phone %} ({{ spot.property_manager_phone }}){% endif %}</dd>
+      {% elif spot.ownership %}
+        <dt>Managed by</dt><dd>{{ spot.ownership }}</dd>
+      {% endif %}
+      {% if spot.comments %}
+        <dt>Comments</dt><dd>{{ spot.comments }}</dd>
+      {% endif %}
+      {% if spot.more_info_url %}
+        <dt>WDNR site page</dt><dd><a href="{{ spot.more_info_url }}" target="_blank" rel="noopener">View on WDNR ↗</a></dd>
+      {% endif %}
+    </dl>
+  </div>
+</div>
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('#spot-tabs .section-tab');
+  var panels = {
+    'panel-conditions': document.getElementById('panel-conditions'),
+    'panel-species': document.getElementById('panel-species'),
+    'panel-info': document.getElementById('panel-info')
+  };
+  function activate(id) {
+    tabs.forEach(function (t) {
+      var isActive = t.dataset.target === id;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    Object.keys(panels).forEach(function (key) { panels[key].hidden = key !== id; });
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { activate(t.dataset.target); }); });
+  activate('panel-conditions');
+})();
+</script>
 {% endif %}
 {% endblock %}

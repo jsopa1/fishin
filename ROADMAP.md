@@ -110,6 +110,17 @@ why-not system. Full plan and implementation status:
 **Status: Phases 1/2/4 shipped; Phase 3 (bait/technique research) and
 Phase 5 (more niche spot sources) not yet started.**
 
+**Full UX redesign (Decision #023)**: a CEO-directed rework of the
+entire app's look, feel, and navigation, modeled on popular outdoor/
+fishing apps (AllTrails, OnX Fish/Hunt, Fishbrain). `/map` became
+"Explore" — a split map+list view with chip-based filters — and became
+the app's primary surface; `/` became a map-first landing; `/browse`
+became the "Waterbody Directory"; `/failures`/`/summary` moved to a
+footer "Data Health" section; both detail pages got a hero + tabbed
+layout. No routes, params, or real-data claims changed — only
+presentation. Full report: [docs/v2_ux_redesign_report.md](docs/v2_ux_redesign_report.md).
+**Status: shipped.**
+
 ## V3 — Continuous Validation
 
 Fishing-trip logging, catch observations, weather attachment, and

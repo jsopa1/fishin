@@ -23,6 +23,7 @@ import v1_review_data as data  # noqa: E402
 STALE_HOURS = 24
 
 app = Flask(__name__)
+app.config["TEMPLATES_AUTO_RELOAD"] = True  # templates are cheap to re-check per request; keeps local dev iteration fast without needing debug mode
 
 
 def get_conn():
@@ -80,9 +81,10 @@ def inject_run_context():
 def home():
     conn = get_conn()
     counts = data.get_summary_counts(conn) if conn is not None else None
+    meta = data.get_access_points_meta(conn) if conn is not None else None
     if conn is not None:
         conn.close()
-    return render_template("home.html", counts=counts)
+    return render_template("home.html", counts=counts, meta=meta)
 
 
 @app.route("/browse")
@@ -91,7 +93,7 @@ def browse():
     if conn is None:
         return render_template(
             "browse.html", results=[], species_list=[], tier_choices=data.TIER_CHOICES, filters={},
-            data_unavailable=True,
+            data_unavailable=True, counts=None,
         ), 503
 
     raw_tier = request.args.get("tier", "all")
@@ -110,9 +112,10 @@ def browse():
         conn, name=filters["name"], county=filters["county"], species=filters["species"], tier=filters["tier"]
     )
     species_list = data.list_distinct_species(conn)
+    counts = data.get_summary_counts(conn)
     conn.close()
     return render_template(
-        "browse.html", results=results, species_list=species_list, tier_choices=data.TIER_CHOICES,
+        "browse.html", results=results, species_list=species_list, tier_choices=data.TIER_CHOICES, counts=counts,
         filters=filters, tier_note=tier_note, data_unavailable=False,
     )
 

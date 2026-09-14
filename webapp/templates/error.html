@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Error {{ code }}{% endblock %}
 {% block content %}
-<h1>{{ code }}</h1>
-<p class="empty-state">{{ message }}</p>
-<p><a href="{{ url_for('home') }}">&larr; Back to home</a></p>
+<div class="empty-state" style="padding: var(--space-8) var(--space-6);">
+  <svg class="icon icon-lg" aria-hidden="true" style="width:2em;height:2em;margin-bottom:var(--space-3);"><use href="#icon-alert-triangle"/></svg>
+  <h1 style="margin: 0 0 var(--space-2); font-style: normal;">{{ code }}</h1>
+  <p style="font-style: normal;">{{ message }}</p>
+  <a class="btn btn-primary" href="{{ url_for('home') }}" style="margin-top: var(--space-3);">
+    <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to home
+  </a>
+</div>
 {% endblock %}

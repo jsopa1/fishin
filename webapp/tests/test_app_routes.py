@@ -41,7 +41,7 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         # Real dedup fix verification: exactly the distinct real waterbodies,
         # not a duplicate "Devils Lake" entry under two county spellings.
-        self.assertEqual(resp.data.count(b"<tr>"), 4)  # 1 header + 3 real distinct entries
+        self.assertEqual(resp.data.count(b'class="list-card"'), 3)
 
     def test_browse_filters_by_tier(self):
         resp = self.client.get("/browse?tier=survey_confirmed")
@@ -283,7 +283,7 @@ class WebAppErrorHandlingTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)  # degrades gracefully, doesn't error
         self.assertIn(b"not a recognized presence tier", resp.data)
         # Falling back to "all" means real results still show, not zero.
-        self.assertGreater(resp.data.count(b"<tr>"), 1)
+        self.assertGreater(resp.data.count(b'class="list-card"'), 0)
 
     def test_waterbody_detail_missing_params_returns_400_not_crash(self):
         resp = self.client.get("/waterbody")

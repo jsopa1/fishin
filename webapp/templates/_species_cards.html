@@ -6,7 +6,7 @@
       {% if not sp.has_threshold_data %}
         <span class="match-badge none">No reference data</span>
       {% elif sp.any_match %}
-        <span class="match-badge yes">✓ Currently matching</span>
+        <span class="match-badge yes"><svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> Currently matching</span>
       {% else %}
         <span class="match-badge no">No match right now</span>
       {% endif %}
@@ -14,10 +14,10 @@
     {% if sp.river_caveat_applied or sp.diel_active %}
     <div class="flag-row">
       {% if sp.river_caveat_applied %}
-        <span class="flag flag-caveat">⚠ Lake-derived threshold — unverified for streams</span>
+        <span class="flag flag-caveat"><svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg> Lake-derived threshold — unverified for streams</span>
       {% endif %}
       {% if sp.diel_active %}
-        <span class="flag flag-diel">🌙 Documented dawn/dusk/nocturnal feeder</span>
+        <span class="flag flag-diel"><svg class="icon" aria-hidden="true"><use href="#icon-moon"/></svg> Documented dawn/dusk/nocturnal feeder</span>
       {% endif %}
     </div>
     {% endif %}
