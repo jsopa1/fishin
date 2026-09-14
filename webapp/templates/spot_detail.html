@@ -42,6 +42,19 @@
     {% endif %}
   </div>
   <div class="detail-hero-actions">
+    <button type="button" class="btn btn-secondary" id="save-spot"
+            data-name="{{ spot.facility_name or spot.waterbody_name }}"
+            data-water="{{ spot.waterbody_name }}"
+            data-county="{{ spot.county }}"
+            data-lat="{{ spot.latitude }}" data-lon="{{ spot.longitude }}"
+            aria-pressed="false">
+      <svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg>
+      <span id="save-spot-label">Save this spot</span>
+    </button>
+    <a class="btn btn-secondary" href="https://www.google.com/maps/dir/?api=1&destination={{ spot.latitude }},{{ spot.longitude }}"
+       target="_blank" rel="noopener">
+      <svg class="icon" aria-hidden="true"><use href="#icon-route"/></svg> Directions
+    </a>
     {% if spot.more_info_url %}
       <a class="btn btn-secondary" href="{{ spot.more_info_url }}" target="_blank" rel="noopener">
         <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg> WDNR site page
@@ -396,6 +409,48 @@
 </div>
 
 <script>
+// Saved spots. Kept in this browser only -- no account, no server, and
+// nothing about where someone fishes ever leaves their device, which for
+// anglers is the whole point: a spot is not something you want uploaded.
+(function () {
+  var KEY = 'fishin.saved.v1';
+  var btn = document.getElementById('save-spot');
+  var label = document.getElementById('save-spot-label');
+  if (!btn) return;
+
+  function read() {
+    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
+    catch (e) { return []; }
+  }
+  function write(list) {
+    try { localStorage.setItem(KEY, JSON.stringify(list.slice(0, 200))); }
+    catch (e) { /* private mode or quota -- saving is a convenience, not a feature to break on */ }
+  }
+  function idOf(d) { return d.lat + ',' + d.lon; }
+
+  var me = {
+    id: idOf(btn.dataset), name: btn.dataset.name, water: btn.dataset.water,
+    county: btn.dataset.county, lat: btn.dataset.lat, lon: btn.dataset.lon
+  };
+
+  function paint(saved) {
+    btn.setAttribute('aria-pressed', saved ? 'true' : 'false');
+    btn.classList.toggle('btn-primary', saved);
+    btn.classList.toggle('btn-secondary', !saved);
+    label.textContent = saved ? 'Saved' : 'Save this spot';
+  }
+
+  paint(read().some(function (s) { return s.id === me.id; }));
+
+  btn.addEventListener('click', function () {
+    var list = read();
+    var at = list.findIndex(function (s) { return s.id === me.id; });
+    if (at >= 0) { list.splice(at, 1); paint(false); }
+    else { list.unshift(me); paint(true); }
+    write(list);
+  });
+})();
+
 (function () {
   var tabs = document.querySelectorAll('#spot-tabs .section-tab');
   var panels = {

@@ -500,3 +500,59 @@ class RegulationsPointerTests(unittest.TestCase):
         body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
         if "Regulations for this water" in body:
             self.assertIn("coordinates rather than by", body)
+
+
+class ProductLoopTests(unittest.TestCase):
+    """The things that make this a product someone returns to, rather
+    than a data reference they read once."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def _a_spot(self):
+        return self.client.get("/map/data").get_json()["points"][0]
+
+    def test_spot_page_opens_with_an_answer_not_a_data_dump(self):
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+        self.assertIn('class="verdict', body)
+        # The verdict must precede the evidence tabs.
+        self.assertLess(body.index('class="verdict'), body.index('id="spot-tabs"'))
+
+    def test_every_spot_gets_a_verdict_headline(self):
+        # Never a blank answer, whatever the conditions.
+        points = self.client.get("/map/data").get_json()["points"]
+        for p in points[:12]:
+            body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+            self.assertIn("verdict-headline", body, msg=f"no verdict at {p['lat']},{p['lon']}")
+
+    def test_spot_page_offers_save_and_directions(self):
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+        self.assertIn('id="save-spot"', body)
+        self.assertIn("google.com/maps/dir", body)
+
+    def test_saved_spots_never_leave_the_browser(self):
+        # No endpoint accepts saved spots, and the page says so. Where
+        # someone fishes is exactly the data not to upload.
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+        self.assertIn("localStorage", body)
+        home = self.client.get("/").data.decode()
+        self.assertIn("never uploaded anywhere", home)
+
+    def test_explore_offers_spots_near_me(self):
+        body = self.client.get("/map").data.decode()
+        self.assertIn('id="locate-btn"', body)
+        self.assertIn("Spots near me", body)
+
+    def test_map_payload_stays_lean(self):
+        # Regression guard: this was 2.07MB before trimming, which is a
+        # real cost on cellular at a boat ramp.
+        resp = self.client.get("/map/data")
+        self.assertLess(len(resp.data), 900_000)
+        point = resp.get_json()["points"][0]
+        for heavy in ("directions", "additional_amenities", "property_manager", "ownership"):
+            self.assertNotIn(heavy, point)
