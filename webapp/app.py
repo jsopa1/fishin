@@ -20,7 +20,10 @@ REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
 import v1_review_data as data  # noqa: E402
 
-STALE_HOURS = 24
+# Water temperature is the only thing here that ages in hours. Six hours
+# is roughly how long a real reading stays representative in open water --
+# and it is reachable, since refresh_temperatures.py takes minutes.
+TEMPERATURE_STALE_HOURS = 6
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True  # templates are cheap to re-check per request; keeps local dev iteration fast without needing debug mode
@@ -40,35 +43,51 @@ def get_conn():
         return None
 
 
+def _humanise_age(age) -> str:
+    if age is None:
+        return "unknown"
+    hours = age.total_seconds() / 3600
+    if hours < 1:
+        return f"{int(age.total_seconds() / 60)} minutes ago"
+    if hours < 48:
+        return f"{hours:.0f} hours ago"
+    return f"{hours / 24:.0f} days ago"
+
+
 def run_context():
-    """Shared banner/staleness context injected into every page via the
-    base template, so Part 3's freshness notice appears everywhere."""
+    """Freshness context injected into every page.
+
+    Temperature and species data age at completely different rates, so
+    they get separate clocks. Water temperature moves in hours and is
+    refreshed on its own fast schedule (analysis/refresh_temperatures.py);
+    species presence and stocking records come from annual WDNR surveys
+    and are not meaningfully staler at 40 hours than at 4. The old single
+    banner judged both by the batch-run timestamp, so it shouted that
+    everything was stale whenever the slow clock ticked over -- alarming
+    on every page, and wrong about most of the data."""
     conn = get_conn()
     if conn is None:
-        return {"run_row": None, "is_stale": True, "age_text": "unknown", "finished_at_text": "unknown", "stale_hours": STALE_HOURS}
+        return {
+            "run_row": None, "temp_is_stale": True, "temp_age_text": "unknown",
+            "survey_age_text": "unknown", "stale_hours": TEMPERATURE_STALE_HOURS,
+        }
+
     run_row = data.get_latest_run(conn)
-    age = data.data_age(run_row)
-    stale = data.is_stale(run_row, STALE_HOURS)
+    refresh_row = data.get_latest_temperature_refresh(conn)
 
-    if age is None:
-        age_text = "unknown"
-    else:
-        hours = age.total_seconds() / 3600
-        if hours < 1:
-            age_text = f"{int(age.total_seconds() / 60)} minutes ago"
-        elif hours < 48:
-            age_text = f"{hours:.1f} hours ago"
-        else:
-            age_text = f"{hours / 24:.1f} days ago"
+    # Temperature freshness: the refresh clock if one has ever run,
+    # otherwise fall back to the full run that last wrote temperatures.
+    temp_source_row = refresh_row or run_row
+    temp_age = data.data_age(temp_source_row)
+    temp_is_stale = data.is_stale(temp_source_row, TEMPERATURE_STALE_HOURS)
 
-    finished_at_text = run_row["finished_at"] if run_row else "n/a"
     conn.close()
     return {
         "run_row": run_row,
-        "is_stale": stale,
-        "age_text": age_text,
-        "finished_at_text": finished_at_text,
-        "stale_hours": STALE_HOURS,
+        "temp_is_stale": temp_is_stale,
+        "temp_age_text": _humanise_age(temp_age),
+        "survey_age_text": _humanise_age(data.data_age(run_row)),
+        "stale_hours": TEMPERATURE_STALE_HOURS,
     }
 
 

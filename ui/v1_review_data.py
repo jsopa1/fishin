@@ -58,6 +58,28 @@ def get_latest_run(conn: sqlite3.Connection) -> dict | None:
     return dict(row) if row else None
 
 
+def get_latest_temperature_refresh(conn: sqlite3.Connection) -> dict | None:
+    """When the sensor-backed temperatures were last refreshed
+    (analysis/refresh_temperatures.py), which is a different and much
+    faster clock than the full run.
+
+    These two ages are not interchangeable. Water temperature moves in
+    hours -- a real reading went from 17.0C to 12.1C over one 43-hour
+    window during testing, a bigger shift than the width of some spawning
+    windows. Species presence and stocking records come from annual
+    surveys and are not meaningfully staler at 40 hours than at 4. Judging
+    both by the batch-run timestamp told users everything was stale when
+    only one thing actually was."""
+    try:
+        row = conn.execute(
+            "SELECT * FROM temperature_refreshes WHERE finished_at IS NOT NULL "
+            "ORDER BY finished_at DESC LIMIT 1"
+        ).fetchone()
+    except sqlite3.OperationalError:
+        return None
+    return dict(row) if row else None
+
+
 def parse_iso(ts: str) -> datetime.datetime:
     return datetime.datetime.fromisoformat(ts)
 

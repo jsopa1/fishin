@@ -135,23 +135,21 @@
     </a>
   </nav>
 
-  <div class="banner {{ 'stale' if is_stale else 'fresh' }}">
+  {% if run_row is none %}
+  <div class="banner stale">
     <div class="wrap">
-      {% if run_row is none %}
-        <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg> No completed data run found. This site has nothing to show yet.
-      {% elif is_stale %}
-        <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg> Data may be stale — generated {{ age_text }} (finished {{ finished_at_text }}), more than {{ stale_hours }}h ago.
-      {% else %}
-        <svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> Data current — generated {{ age_text }} (finished {{ finished_at_text }}).
-      {% endif %}
+      <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
+      No completed data run found — this site has nothing to show yet.
     </div>
   </div>
-
-  <div class="disclaimer wrap">
-    <svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg>
-    <span><strong>This is general, science-based seasonal context — not a catch prediction.</strong>
-    It does not estimate catch rate or the likelihood of catching any fish. See <a href="{{ url_for('home') }}#about">About</a>.</span>
+  {% elif temp_is_stale %}
+  <div class="banner stale">
+    <div class="wrap">
+      <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
+      Water temperatures last updated {{ temp_age_text }} — they may have moved since.
+    </div>
   </div>
+  {% endif %}
 
   <main class="wrap">
     {% block content %}{% endblock %}
@@ -159,6 +157,17 @@
 
   <footer class="site-footer">
     <div class="wrap">
+      <p class="footer-scope">
+        <strong>What this is:</strong> real water temperature compared against published fish-physiology
+        research, for species WDNR documents as present. It reports conditions and the reasoning behind
+        them — it does not predict whether you'll catch anything.
+        <a href="{{ url_for('home') }}#about">How it works</a>
+      </p>
+      {% if run_row %}
+      <p class="footer-freshness">
+        Water temperatures updated {{ temp_age_text }} · species &amp; stocking records from WDNR surveys, loaded {{ survey_age_text }}
+      </p>
+      {% endif %}
       <ul class="footer-links">
         <li><a href="{{ url_for('map_view') }}">Explore</a></li>
         <li><a href="{{ url_for('browse') }}">Waterbody Directory</a></li>

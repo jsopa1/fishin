@@ -12,6 +12,7 @@ Run: python -m pytest webapp/tests/test_app_routes.py
 import os
 import sys
 import unittest
+from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -92,10 +93,30 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertIn(str(counts["total_waterbodies"]).encode(), resp.data)
         self.assertIn(str(counts["total_species_predictions"]).encode(), resp.data)
 
-    def test_staleness_banner_present_on_every_page(self):
+    def test_data_freshness_visible_on_every_page(self):
+        # Freshness must always be disclosed, but it no longer shouts from a
+        # full-width banner when nothing is actually stale -- the two clocks
+        # (fast-moving temperature, annual survey data) are reported
+        # separately in the footer instead.
         for path in ("/", "/browse", "/failures", "/summary", "/map"):
             resp = self.client.get(path)
-            self.assertIn(b'class="banner', resp.data, msg=f"banner missing on {path}")
+            self.assertIn(b"Water temperatures updated", resp.data, msg=f"freshness missing on {path}")
+            self.assertIn(b"species &amp; stocking records", resp.data, msg=f"survey age missing on {path}")
+
+    def test_scope_statement_present_on_every_page(self):
+        # The honest framing moved out of the full-width bar, but it must
+        # still appear on every page -- quieter, not gone.
+        for path in ("/", "/browse", "/map"):
+            resp = self.client.get(path)
+            self.assertIn(b"does not predict whether you", resp.data, msg=f"scope note missing on {path}")
+
+    def test_stale_temperature_still_raises_a_visible_banner(self):
+        # The banner isn't deleted, it's conditional: when temperatures
+        # genuinely age out, users are still told plainly.
+        with mock.patch.object(flask_app_module.data, "is_stale", return_value=True):
+            resp = self.client.get("/")
+        self.assertIn(b'class="banner', resp.data)
+        self.assertIn(b"Water temperatures last updated", resp.data)
 
     def test_attribution_footer_present(self):
         resp = self.client.get("/")
