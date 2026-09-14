@@ -207,6 +207,33 @@
   </div>
   {% endif %}
 
+  {% if advisory and advisory.status == 'site_specific' %}
+  <div class="advisory-box">
+    <p class="advisory-label">
+      <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
+      Fish consumption advisory for this water
+    </p>
+    {% for water in advisory.waters %}
+      <p class="advisory-water">{{ water.waterbody_name }}</p>
+      {% for group in water.groups %}
+        <div class="advisory-group">
+          <p class="advisory-audience">{{ group.audience }}</p>
+          <dl class="advisory-advice">
+            {% for item in group.advice %}
+              <dt class="advice-{{ item.level | lower | replace(' ', '-') }}">{{ item.level }}</dt>
+              <dd>{{ item.species }}</dd>
+            {% endfor %}
+          </dl>
+        </div>
+      {% endfor %}
+    {% endfor %}
+    <p class="advisory-source">
+      WDNR's own advisory, retrieved {{ advisory.fetched_at | central('%-d %b %Y') }} —
+      <a href="{{ advisory.source_url }}" target="_blank" rel="noopener">full guidance<svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg></a>.
+    </p>
+  </div>
+  {% endif %}
+
   {% if waterbody %}
   <div class="detail-box">
     <h3>Full conditions narrative (exactly as generated)</h3>

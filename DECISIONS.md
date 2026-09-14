@@ -1156,3 +1156,34 @@ not satisfy.
 - The same-name hazard is the exact failure this project has hit twice
   before on lake matching (#017/#018), and is far more consequential here
   than it was for lake surface area
+
+## 031 — Fish consumption advisories, with the two audiences kept apart
+
+The last cheap parity gap against WDNR's Fishing Finder, and the one with
+health consequences rather than legal ones. Same source family and the
+same spatial approach as #030: 154 Wisconsin waters carry a site-specific
+advisory, queried by coordinate and cached 24h.
+
+The design decision that mattered: **WDNR publishes two audiences
+separately, and this app keeps them separate.** On Anodanta Lake
+(Bayfield County) muskies are "one meal per month" for most people and
+**"do not eat"** for women of childbearing age and children under 15.
+Collapsing those into one list would be actively harmful, so the two are
+rendered as distinct blocks with the do-not-eat tier visually marked.
+
+"No site-specific advisory" is reported as `statewide` rather than as
+nothing, because Wisconsin's statewide advisory still applies to every
+water -- an empty result here is not an absence of advice.
+
+A real bug was found while testing: the regulation layer carries both
+combined and split columns for several species (`WALLEYE` alongside
+`WALLEYE_SAUGER_AND_HYBRIDS`, and similarly for bass), and different
+waters populate different ones. The initial field list read only the
+combined columns, which would have silently dropped real rules on any
+water using the split form. Every rule-bearing column is now read.
+
+**Rationale:**
+- Health guidance is one of the six categories WDNR's own tool
+  advertises, and the cheapest remaining one to reach honestly
+- Surfacing an advisory is only useful if the stricter limits reach the
+  people they exist to protect, which merging the audiences would defeat

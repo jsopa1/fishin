@@ -364,12 +364,16 @@ def spot_detail():
     detail = data.get_spot_detail(conn, lat, lon, name=name)
     # Live, cached 24h, and allowed to fail: regulations are valuable but
     # never worth a blank page if WDNR's service is slow or down.
-    regulations = None
+    regulations = advisory = None
     if detail is not None:
         try:
             regulations = fishing_regulations.get_regulations(conn, lat, lon)
         except Exception:  # noqa: BLE001 -- an enhancement must not break the page
             regulations = None
+        try:
+            advisory = fishing_regulations.get_consumption_advisory(conn, lat, lon)
+        except Exception:  # noqa: BLE001
+            advisory = None
     conn.close()
     if detail is None:
         return render_template(
@@ -381,7 +385,7 @@ def spot_detail():
         waterbody=detail["waterbody"], species_predictions=detail["species_predictions"],
         county_species=detail["county_species"], activity_window=detail["activity_window"],
         diel_species=detail["diel_species"], stocking=detail["stocking"],
-        regulations=regulations,
+        regulations=regulations, advisory=advisory,
     )
 
 
