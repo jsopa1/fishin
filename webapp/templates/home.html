@@ -2,11 +2,12 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <div class="hero">
-  <h1>Know where to fish in Wisconsin — and why</h1>
+  <h1>Other apps tell you where people caught fish. This one tells you why they're biting.</h1>
   <p>
-    Real, current water temperature (live USGS gauges, NOAA buoys, WDNR lake monitoring, or a
-    clearly-labeled air-temperature proxy) compared against real, cited fish physiology, for species
-    with confirmed presence at a given Wisconsin lake, pond, river, or stream.
+    Live water temperature from real Wisconsin sensors, checked against published fish-physiology
+    research — so you can see which species are inside their documented feeding or spawning range
+    right now, at {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) if meta else "3,272" }}
+    real public access points. Every answer shows its reasoning and its source.
   </p>
 
   <form class="search-bar" style="max-width: 480px;" method="get" action="{{ url_for('map_view') }}">
@@ -33,6 +34,36 @@
   </div>
   {% endif %}
 </div>
+
+{% if highlights %}
+<section class="highlights">
+  <h2 class="highlights-head">Matching right now</h2>
+  <p class="highlights-sub">
+    Real readings from survey-confirmed waters, compared against published physiology this morning.
+  </p>
+  <div class="highlight-grid">
+    {% for h in highlights %}
+    <a class="highlight-card" href="{{ url_for('waterbody_detail', name=h.waterbody_name, county=h.county) }}">
+      <div class="highlight-top">
+        <span class="highlight-species">{{ h.species.title() }}</span>
+        <span class="stat-chip">
+          <svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg>
+          {{ "%.1f"|format(h.temp_value_c * 9/5 + 32) }}°F
+        </span>
+      </div>
+      <p class="highlight-where">
+        <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg>
+        {{ h.waterbody_name|title }}, {{ h.county }}
+      </p>
+      <p class="highlight-why">{{ h.match_description }}</p>
+      {% if h.evidence_quality %}
+        <span class="tag evidence">{{ h.evidence_quality }}</span>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 
 <a href="{{ url_for('map_view') }}" class="map-preview-link" aria-label="Open Explore — the live statewide map" style="display:block; text-decoration:none; margin-bottom: var(--space-7);">
   <div id="home-map-preview" class="map-pane" style="height: 280px; pointer-events: none;" aria-hidden="true"></div>

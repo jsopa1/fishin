@@ -753,6 +753,54 @@ def get_spot_temperature(
     return None
 
 
+def get_current_highlights(conn: sqlite3.Connection, limit: int = 3) -> list:
+    """Real species/waterbody pairs where conditions match a documented
+    physiology window right now, for the landing page.
+
+    Restricted to survey-confirmed waterbodies with a real (non-proxy)
+    temperature reading, so the front page shows the strongest evidence
+    the database actually holds rather than its most eye-catching claim.
+    One per waterbody, so it reads as a picture of the state rather than
+    five facts about one lake."""
+    try:
+        rows = conn.execute(
+            """SELECT sp.species, sp.match_description, sp.evidence_quality,
+                      wr.waterbody_name, wr.county, wr.temp_value_c
+               FROM species_predictions sp
+               JOIN waterbody_results wr
+                 ON wr.waterbody_name = sp.waterbody_name AND wr.county = sp.county
+               WHERE sp.any_match = 1
+                 AND wr.temp_is_real = 1
+                 AND wr.presence_tier = 'survey_confirmed'
+                 AND sp.match_description IS NOT NULL
+               ORDER BY wr.waterbody_name, sp.species"""
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return []
+
+    # Distinct on both axes: three cards showing the same species, or the
+    # same lake three times, reads as a bug rather than as a picture of
+    # what's happening across the state.
+    seen_waters, seen_species, highlights = set(), set(), []
+    for r in rows:
+        key = (r["waterbody_name"], r["county"])
+        if key in seen_waters or r["species"] in seen_species:
+            continue
+        seen_waters.add(key)
+        seen_species.add(r["species"])
+        highlights.append({
+            "species": r["species"],
+            "waterbody_name": r["waterbody_name"],
+            "county": r["county"],
+            "temp_value_c": r["temp_value_c"],
+            "match_description": r["match_description"],
+            "evidence_quality": r["evidence_quality"],
+        })
+        if len(highlights) >= limit:
+            break
+    return highlights
+
+
 def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: int = 8) -> dict | None:
     """Real, county-level species evidence for a spot that has no record of
     its own -- 45% of access points are in that position, and an empty page

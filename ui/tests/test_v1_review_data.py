@@ -606,6 +606,45 @@ class TestCountySpeciesEvidence(DataTestBase):
         self.assertEqual(detail["county_species"]["species"][0]["species"], "MUSKELLUNGE")
 
 
+class TestCurrentHighlights(DataTestBase):
+    def setUp(self):
+        super().setUp()
+        self._insert_run()
+
+    def _matching_waterbody(self, name, county, species, temp=21.0):
+        self._insert_waterbody(name, county, tier="survey_confirmed", temp_value_c=temp, temp_is_real=1)
+        self._insert_species_prediction(name, county, species, any_match=1, match_description="within range")
+
+    def test_highlights_are_distinct_by_species_and_waterbody(self):
+        # Three cards of the same species, or the same lake three times,
+        # reads as a bug rather than a picture of the state.
+        self._matching_waterbody("Lake One", "A", "BLUEGILL")
+        self._insert_species_prediction("Lake One", "A", "WALLEYE", any_match=1, match_description="within range")
+        self._matching_waterbody("Lake Two", "B", "BLUEGILL")
+        self._matching_waterbody("Lake Three", "C", "WALLEYE")
+        self._matching_waterbody("Lake Four", "D", "MUSKELLUNGE")
+
+        highlights = rd.get_current_highlights(self.conn, limit=3)
+        self.assertEqual(len(highlights), 3)
+        self.assertEqual(len({h["species"] for h in highlights}), 3)
+        self.assertEqual(len({h["waterbody_name"] for h in highlights}), 3)
+
+    def test_only_survey_confirmed_with_real_temperature_is_showcased(self):
+        # The front page shows the strongest evidence the database holds,
+        # never a proxy reading or a stocking-only record.
+        self._insert_waterbody("Proxy Lake", "P", tier="survey_confirmed", temp_value_c=21.0, temp_is_real=0)
+        self._insert_species_prediction("Proxy Lake", "P", "WALLEYE", any_match=1, match_description="within range")
+        self._insert_waterbody("Stocked Lake", "S", tier="stocking_only", temp_value_c=21.0, temp_is_real=1)
+        self._insert_species_prediction("Stocked Lake", "S", "PERCH", any_match=1, match_description="within range")
+
+        self.assertEqual(rd.get_current_highlights(self.conn), [])
+
+    def test_no_matches_returns_empty_list(self):
+        self._insert_waterbody("Cold Lake", "Z", tier="survey_confirmed", temp_value_c=2.0, temp_is_real=1)
+        self._insert_species_prediction("Cold Lake", "Z", "WALLEYE", any_match=0, match_description=None)
+        self.assertEqual(rd.get_current_highlights(self.conn), [])
+
+
 class TestFindAccessPointByCoords(DataTestBase):
     def test_finds_by_exact_coordinate(self):
         self._insert_access_point("Devils Lake", "Sauk", lat=43.4286, lon=-89.7301, facility_name="Devils Lake Ramp")

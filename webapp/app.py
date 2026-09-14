@@ -101,9 +101,10 @@ def home():
     conn = get_conn()
     counts = data.get_summary_counts(conn) if conn is not None else None
     meta = data.get_access_points_meta(conn) if conn is not None else None
+    highlights = data.get_current_highlights(conn) if conn is not None else []
     if conn is not None:
         conn.close()
-    return render_template("home.html", counts=counts, meta=meta)
+    return render_template("home.html", counts=counts, meta=meta, highlights=highlights)
 
 
 @app.route("/browse")
