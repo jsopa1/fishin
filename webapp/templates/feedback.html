@@ -1,32 +1,43 @@
 {% extends "base.html" %}
 {% block title %}Report a problem{% endblock %}
 {% block content %}
-<h1>Report a problem</h1>
-<p>Found something wrong — a bad reading, a confusing page, a broken link? Tell us directly. You don't need a GitHub account.</p>
+<div class="form-page">
+  <div class="form-icon-header">
+    <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg></span>
+    <h1>Report a problem</h1>
+  </div>
+  <p>Found something wrong — a bad reading, a confusing page, a broken link? Tell us directly. You don't need a GitHub account.</p>
 
-<div class="form-card">
-  {% if submitted %}
-    <p class="form-success">Thanks — this has been recorded and will be looked at.</p>
-    <a class="btn btn-secondary" href="{{ url_for('home') }}" style="margin-top: var(--space-4);">Back to home</a>
-  {% else %}
-    {% if error %}
-    <div class="form-errors"><ul><li>{{ error }}</li></ul></div>
+  <div class="form-card">
+    {% if submitted %}
+      <div class="form-success">
+        <svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg>
+        Thanks — this has been recorded and will be looked at.
+      </div>
+      <a class="btn btn-secondary" href="{{ url_for('home') }}" style="margin-top: var(--space-4);">Back to home</a>
+    {% else %}
+      {% if error %}
+      <div class="form-errors">
+        <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
+        <ul><li>{{ error }}</li></ul>
+      </div>
+      {% endif %}
+      <form method="post" action="{{ url_for('feedback') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="page" value="{{ page }}">
+        <div class="form-field">
+          <label for="feedback-message">What happened?</label>
+          <textarea id="feedback-message" name="message" required maxlength="5000" placeholder="e.g. the water temperature on this page looks way off, or this page wouldn't load"></textarea>
+        </div>
+        <div class="form-field">
+          <label for="feedback-contact">Email <span class="form-hint">(optional — only if you want a reply)</span></label>
+          <input type="text" id="feedback-contact" name="contact" maxlength="200" autocomplete="email">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send</button>
+      </form>
     {% endif %}
-    <form method="post" action="{{ url_for('feedback') }}">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <input type="hidden" name="page" value="{{ page }}">
-      <div class="form-field">
-        <label for="feedback-message">What happened?</label>
-        <textarea id="feedback-message" name="message" required maxlength="5000" placeholder="e.g. the water temperature on this page looks way off, or this page wouldn't load"></textarea>
-      </div>
-      <div class="form-field">
-        <label for="feedback-contact">Email <span class="form-hint">(optional — only if you want a reply)</span></label>
-        <input type="text" id="feedback-contact" name="contact" maxlength="200">
-      </div>
-      <button type="submit" class="btn btn-primary btn-block">Send</button>
-    </form>
-  {% endif %}
-</div>
+  </div>
 
-<p class="form-switch">Prefer GitHub? <a href="https://github.com/jsopa1/fishin/issues/new" target="_blank" rel="noopener">Open an issue directly</a>.</p>
+  <p class="form-switch">Prefer GitHub? <a href="https://github.com/jsopa1/fishin/issues/new" target="_blank" rel="noopener">Open an issue directly</a>.</p>
+</div>
 {% endblock %}
