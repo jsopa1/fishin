@@ -29,6 +29,7 @@ import v3_current_conditions as current_conditions  # noqa: E402
 sys.path.insert(0, str(Path(__file__).parent))
 import user_data as udata  # noqa: E402
 from security import csrf_protect, get_csrf_token  # noqa: E402
+from accounts import accounts_bp  # noqa: E402
 
 # Water temperature is the only thing here that ages in hours. Six hours
 # is roughly how long a real reading stays representative in open water --
@@ -46,6 +47,7 @@ if app.secret_key == "dev-only-insecure-secret-key-change-me" and not app.testin
         file=sys.stderr,
     )
 app.context_processor(lambda: {"csrf_token": get_csrf_token})
+app.register_blueprint(accounts_bp)
 
 # ---------------------------------------------------------------------------
 # Minimal, self-hosted analytics. No third-party service (none is signed

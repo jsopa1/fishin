@@ -60,7 +60,17 @@
         <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg> WDNR site page
       </a>
     {% endif %}
+    {% if session.user_id %}
+      <a class="btn btn-secondary" href="{{ url_for('accounts.account', lat=spot.latitude, lon=spot.longitude, name=spot.facility_name or spot.waterbody_name) }}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Log a catch here
+      </a>
+    {% endif %}
   </div>
+  {% if not session.user_id %}
+    <p class="list-card-sub" style="margin-top: var(--space-2);">
+      Want this catch saved across devices? <a href="{{ url_for('accounts.signup') }}">Create a free account</a>.
+    </p>
+  {% endif %}
 </div>
 
 {% if verdict %}

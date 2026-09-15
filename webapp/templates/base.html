@@ -132,6 +132,13 @@
           <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg> Waterbody Directory
         </a>
         <a href="{{ url_for('home') }}#about" class="{{ 'active' if request.endpoint == 'home' else '' }}">About</a>
+        {% if session.user_id %}
+        <a href="{{ url_for('accounts.account') }}" class="{{ 'active' if request.endpoint == 'accounts.account' else '' }}">
+          <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> My Catches
+        </a>
+        {% else %}
+        <a href="{{ url_for('accounts.login') }}" class="{{ 'active' if request.endpoint in ('accounts.login', 'accounts.signup') else '' }}">Log in</a>
+        {% endif %}
         <a class="nav-source" href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">
           Source <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg>
         </a>
