@@ -1239,3 +1239,21 @@ exist.
 - Stocking-derived presence stays because it is finer-grained, and the
   two are shown side by side rather than one silently overwriting the
   other
+
+**Completion note:** the full statewide run finished at 1,062 lakes with
+a fish list, 4,013 species rows, 597 with acreage, and abundance data on
+every one of the 1,062 -- category counts (Panfish 1,011, Largemouth
+Bass 980, Northern Pike 778, Walleye 488, Musky 287, Smallmouth Bass
+278, Trout 119, Catfish 44, Sturgeon 28) confirmed to stay inside the
+nine real categories above. An acreage regex bug caught the singular
+phrasing WDNR actually uses ("is a 374 acre lake") after an initial
+plural-only pattern ("...acres") matched nothing -- caught by testing
+against the exact real page text, not by inspection.
+
+Landing this also collided with the scheduled temperature-refresh
+Action (Decision on `refresh_temperatures.py`), which had pushed four
+commits to the same SQLite file while this ingest ran locally. Rather
+than let either side clobber the other, the two were reconciled at the
+table level -- the fresher temperatures kept as the base, the three new
+`wdnr_*` tables copied in on top -- and the full test suite re-run
+against the merged database before it was pushed.
