@@ -173,6 +173,14 @@
   </div>
   {% endif %}
 
+  <div class="banner tag-intro" id="tag-intro-banner" hidden>
+    <div class="wrap">
+      <svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg>
+      Tap any colored tag to see what it means.
+      <button type="button" id="tag-intro-dismiss" class="tag-intro-dismiss" aria-label="Dismiss">&times;</button>
+    </div>
+  </div>
+
   <main class="wrap">
     {% block content %}{% endblock %}
   </main>
@@ -208,5 +216,6 @@
       <p>Project source and full documentation: <a href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">github.com/jsopa1/fishin</a></p>
     </div>
   </footer>
+  <script src="{{ url_for('static', filename='tags-explainer.js') }}"></script>
 </body>
 </html>

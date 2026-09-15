@@ -395,6 +395,36 @@ table td a:hover { text-decoration: underline; }
 .tag.confidence-low { background: var(--gray-100); color: var(--gray-700); }
 .confidence-note { margin: var(--space-2) 0 0; font-size: var(--text-sm); color: var(--muted); }
 
+/* Tag onboarding: a from-scratch popover, wired entirely by
+   webapp/static/tags-explainer.js against the tag classes already
+   present -- no template changes needed. */
+.tag[tabindex] { cursor: help; }
+.tag-popover {
+  position: fixed;
+  z-index: 1000;
+  max-width: 260px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+.banner.tag-intro { background: var(--gray-700); }
+.banner.tag-intro .wrap { justify-content: flex-start; }
+.tag-intro-dismiss {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
 /* Low-light windows: the piece the DNR's tool has no equivalent for, so
    it reads as a headline figure rather than a footnote. */
 .window-intro { margin: 0 0 var(--space-4); font-size: var(--text-sm); color: var(--muted); }

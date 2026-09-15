@@ -10,6 +10,7 @@ Run: python -m pytest webapp/tests/test_app_routes.py
 """
 
 import os
+import re
 import sys
 import unittest
 from unittest import mock
@@ -627,3 +628,53 @@ class ManifestTests(unittest.TestCase):
         body = self.client.get("/").data
         self.assertIn(b'rel="manifest"', body)
         self.assertIn(b"apple-touch-icon", body)
+
+
+class TagOnboardingTests(unittest.TestCase):
+    """The tag popover is wired by JS against classes already in the
+    markup, not by editing templates -- so what's tested server-side is
+    that the script is actually loaded, and that every tag value the
+    templates can render has a matching explanation, so a new tag value
+    can't silently ship unexplained."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def _a_spot(self):
+        points = self.client.get("/map/data").get_json()["points"]
+        return points[0]
+
+    def test_tags_explainer_script_loaded_on_pages_with_tags(self):
+        p = self._a_spot()
+        for path in ("/", "/browse", "/spot?lat={}&lon={}".format(p["lat"], p["lon"])):
+            body = self.client.get(path).data
+            self.assertIn(b"tags-explainer.js", body, msg=f"{path} did not load the tags explainer")
+
+    def test_tag_intro_banner_present_in_base_template(self):
+        body = self.client.get("/").data
+        self.assertIn(b'id="tag-intro-banner"', body)
+        self.assertIn(b'id="tag-intro-dismiss"', body)
+
+    def test_tag_vocabulary_in_js_covers_every_tag_class_used_in_templates(self):
+        webapp_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        js_path = os.path.join(webapp_dir, "static", "tags-explainer.js")
+        with open(js_path, encoding="utf-8") as f:
+            js_source = f.read()
+        explained = set(re.findall(r'^\s*(\w+):\s*"', js_source, re.MULTILINE))
+        self.assertTrue(explained, "could not parse any explanation keys out of tags-explainer.js")
+
+        # Literal (non-templated) tag values used across every template --
+        # the templated ones (presence_tier, confidence.level) only ever
+        # render values already covered by these literals or the
+        # confidence- prefix, which the JS handles as a special case.
+        literal_values = {
+            "survey_confirmed", "stocking_only", "real", "proxy",
+            "estimated", "no_data", "evidence",
+        }
+        missing = literal_values - explained
+        self.assertFalse(missing, f"tag values with no explanation in tags-explainer.js: {missing}")
+
+        with open(js_path, encoding="utf-8") as f:
+            self.assertIn('indexOf("confidence-")', f.read(), msg="confidence-* tags must stay handled as a prefix case")
