@@ -6,7 +6,7 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![372 tests passing](https://img.shields.io/badge/tests-372%20passing-brightgreen.svg)](#tests)
+[![386 tests passing](https://img.shields.io/badge/tests-386%20passing-brightgreen.svg)](#tests)
 
 ---
 
@@ -203,7 +203,7 @@ render.yaml               One-file Render deployment blueprint
 python -m pytest
 ```
 
-**372 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
+**386 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
 
 ## Tech stack
 
