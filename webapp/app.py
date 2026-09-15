@@ -10,6 +10,7 @@ Reads data/v1/v1_full_run_results.db directly. Never writes to it, never
 fabricates a result.
 """
 
+import json
 import os
 import sys
 import zoneinfo
@@ -22,6 +23,7 @@ sys.path.insert(0, str(REPO_ROOT / "ui"))
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 import v1_review_data as data  # noqa: E402
 import v2_fishing_regulations as fishing_regulations  # noqa: E402
+import v3_current_conditions as current_conditions  # noqa: E402
 
 # Water temperature is the only thing here that ages in hours. Six hours
 # is roughly how long a real reading stays representative in open water --
@@ -356,7 +358,7 @@ def spot_detail():
     detail = data.get_spot_detail(conn, lat, lon, name=name)
     # Live, cached 24h, and allowed to fail: regulations are valuable but
     # never worth a blank page if WDNR's service is slow or down.
-    regulations = advisory = None
+    regulations = advisory = conditions = None
     if detail is not None:
         try:
             regulations = fishing_regulations.get_regulations(conn, lat, lon)
@@ -366,6 +368,10 @@ def spot_detail():
             advisory = fishing_regulations.get_consumption_advisory(conn, lat, lon)
         except Exception:  # noqa: BLE001
             advisory = None
+        try:
+            conditions = current_conditions.get_current_conditions(conn, lat, lon)
+        except Exception:  # noqa: BLE001
+            conditions = None
     conn.close()
     if detail is None:
         return render_template(
@@ -378,7 +384,7 @@ def spot_detail():
         county_species=detail["county_species"], activity_window=detail["activity_window"],
         diel_species=detail["diel_species"], stocking=detail["stocking"],
         wdnr_species=detail["wdnr_species"], verdict=detail["verdict"],
-        regulations=regulations, advisory=advisory,
+        regulations=regulations, advisory=advisory, conditions=conditions,
     )
 
 
@@ -431,6 +437,29 @@ def sitemap():
     urls = "".join(f"<url><loc>{p}</loc><changefreq>daily</changefreq></url>" for p in pages)
     xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>'
     return Response(xml, mimetype="application/xml")
+
+
+@app.route("/manifest.json")
+def manifest():
+    """At the root, not under /static, so the PWA's default scope covers
+    the whole site rather than just /static/."""
+    body = {
+        "name": "fishin — Wisconsin Fishing Conditions",
+        "short_name": "fishin",
+        "description": "Live Wisconsin water temperatures checked against published fish-physiology research.",
+        "start_url": "/",
+        "scope": "/",
+        "display": "standalone",
+        "background_color": "#f7f8fa",
+        "theme_color": "#2456d6",
+        "icons": [
+            {"src": url_for("static", filename="icons/icon-192.png"), "sizes": "192x192", "type": "image/png", "purpose": "any"},
+            {"src": url_for("static", filename="icons/icon-512.png"), "sizes": "512x512", "type": "image/png", "purpose": "any"},
+            {"src": url_for("static", filename="icons/icon-192-maskable.png"), "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+            {"src": url_for("static", filename="icons/icon-512-maskable.png"), "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+        ],
+    }
+    return Response(json.dumps(body), mimetype="application/manifest+json")
 
 
 @app.errorhandler(404)

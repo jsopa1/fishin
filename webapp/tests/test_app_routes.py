@@ -502,6 +502,33 @@ class RegulationsPointerTests(unittest.TestCase):
             self.assertIn("coordinates rather than by", body)
 
 
+class CurrentConditionsTests(unittest.TestCase):
+    """Wind and pressure are shown for trip planning only. Peer-reviewed
+    research (and this project's own V0 null result) found no reliable
+    direct link to fish behaviour, so nothing here may let wind or
+    pressure act like an evidentiary claim."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def _a_spot(self):
+        points = self.client.get("/map/data").get_json()["points"]
+        return points[0]
+
+    def test_wind_and_pressure_are_labeled_as_not_used_in_the_match(self):
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data
+        if b"mph" in body and b"not used in the match" not in body:
+            self.fail("a wind reading appeared without its informational-only disclaimer")
+
+    def test_missing_conditions_never_break_the_page(self):
+        p = self._a_spot()
+        resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
+        self.assertEqual(resp.status_code, 200)
+
+
 class ProductLoopTests(unittest.TestCase):
     """The things that make this a product someone returns to, rather
     than a data reference they read once."""
@@ -556,3 +583,47 @@ class ProductLoopTests(unittest.TestCase):
         point = resp.get_json()["points"][0]
         for heavy in ("directions", "additional_amenities", "property_manager", "ownership"):
             self.assertNotIn(heavy, point)
+
+
+class ManifestTests(unittest.TestCase):
+    """Installability: a real manifest with real icon files behind it, not
+    just a link tag that points at nothing."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def test_manifest_route_returns_expected_mimetype_and_fields(self):
+        resp = self.client.get("/manifest.json")
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp.mimetype, "application/manifest+json")
+        body = resp.get_json()
+        self.assertEqual(body["name"], "fishin — Wisconsin Fishing Conditions")
+        self.assertEqual(body["short_name"], "fishin")
+        self.assertEqual(body["start_url"], "/")
+        self.assertEqual(body["display"], "standalone")
+        self.assertEqual(body["theme_color"], "#2456d6")
+
+    def test_manifest_icons_cover_192_and_512_both_any_and_maskable(self):
+        body = self.client.get("/manifest.json").get_json()
+        sizes_purposes = {(i["sizes"], i["purpose"]) for i in body["icons"]}
+        self.assertEqual(
+            sizes_purposes,
+            {("192x192", "any"), ("512x512", "any"), ("192x192", "maskable"), ("512x512", "maskable")},
+        )
+
+    def test_manifest_icon_files_actually_exist_on_disk(self):
+        static_root = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "static")
+        body = self.client.get("/manifest.json").get_json()
+        for icon in body["icons"]:
+            rel = icon["src"].split("/static/", 1)[-1]
+            self.assertTrue(
+                os.path.exists(os.path.join(static_root, rel)),
+                msg=f"manifest references {icon['src']} but no such file exists",
+            )
+
+    def test_manifest_linked_and_apple_touch_icon_present_on_home_page(self):
+        body = self.client.get("/").data
+        self.assertIn(b'rel="manifest"', body)
+        self.assertIn(b"apple-touch-icon", body)

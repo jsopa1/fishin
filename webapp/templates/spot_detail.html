@@ -92,6 +92,17 @@
         <span class="verdict-stat-label">dusk window opens</span>
       </div>
     {% endif %}
+    {% if conditions and conditions.status == 'ok' and (conditions.wind_speed_mph is not none or conditions.pressure_inhg is not none) %}
+      <div class="verdict-stat verdict-stat-conditions">
+        {% if conditions.wind_speed_mph is not none %}
+          <span class="verdict-stat-value">{{ "%.0f"|format(conditions.wind_speed_mph) }} mph{{ ' ' + conditions.wind_direction_compass if conditions.wind_direction_compass else '' }}</span>
+        {% endif %}
+        {% if conditions.pressure_inhg is not none %}
+          <span class="verdict-stat-value verdict-stat-value-sub">{{ conditions.pressure_inhg }}" Hg</span>
+        {% endif %}
+        <span class="verdict-stat-label">wind &amp; pressure now — not used in the match above</span>
+      </div>
+    {% endif %}
   </div>
 </div>
 {% endif %}
