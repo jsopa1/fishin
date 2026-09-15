@@ -457,7 +457,15 @@
     var list = read();
     var at = list.findIndex(function (s) { return s.id === me.id; });
     if (at >= 0) { list.splice(at, 1); paint(false); }
-    else { list.unshift(me); paint(true); }
+    else {
+      list.unshift(me); paint(true);
+      // Anonymous save-rate signal only -- the coordinate itself never
+      // leaves the browser, only the fact that a save happened here.
+      if (navigator.sendBeacon) {
+        var data = new URLSearchParams({ page: window.location.pathname });
+        navigator.sendBeacon('{{ url_for("log_save_event") }}', data);
+      }
+    }
     write(list);
   });
 })();

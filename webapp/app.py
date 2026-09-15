@@ -12,6 +12,7 @@ fabricates a result.
 
 import json
 import os
+import secrets
 import sys
 import zoneinfo
 from pathlib import Path
@@ -45,6 +46,64 @@ if app.secret_key == "dev-only-insecure-secret-key-change-me" and not app.testin
         file=sys.stderr,
     )
 app.context_processor(lambda: {"csrf_token": get_csrf_token})
+
+# ---------------------------------------------------------------------------
+# Minimal, self-hosted analytics. No third-party service (none is signed
+# up for on anyone's behalf), no tracking cookie beyond the same signed
+# session cookie already used for CSRF, and never an IP address or
+# user-agent string -- see user_data.record_event()'s own guard. Enough
+# to compute the three numbers that actually matter for retention: spot
+# pages per visit, save rate, and return within 7 days.
+# ---------------------------------------------------------------------------
+EXCLUDED_PAGEVIEW_PATHS = {"/healthz", "/manifest.json", "/robots.txt", "/sitemap.xml", "/events/save"}
+EXCLUDED_PAGEVIEW_PREFIXES = ("/static", "/map/data", "/map/invasive-species-data")
+
+
+def _analytics_session_id() -> str:
+    sid = session.get("asid")
+    if not sid:
+        sid = secrets.token_urlsafe(16)
+        session["asid"] = sid
+    return sid
+
+
+@app.after_request
+def _log_pageview(response):
+    try:
+        path = request.path
+        if (
+            request.method == "GET" and response.status_code < 400
+            and path not in EXCLUDED_PAGEVIEW_PATHS
+            and not path.startswith(EXCLUDED_PAGEVIEW_PREFIXES)
+        ):
+            conn = udata.connect()
+            udata.record_event(
+                conn, event_type="pageview", page_path=path,
+                referrer=request.referrer, session_id=_analytics_session_id(),
+            )
+            conn.close()
+    except Exception:  # noqa: BLE001 -- analytics must never break a page
+        pass
+    return response
+
+
+@app.route("/events/save", methods=["POST"])
+def log_save_event():
+    # A fire-and-forget navigator.sendBeacon ping, not a form post -- kept
+    # outside CSRF protection since it changes nothing about the user's
+    # own data (the actual save stays localStorage-only, see spot_detail.html),
+    # it only increments an anonymous counter.
+    try:
+        conn = udata.connect()
+        udata.record_event(
+            conn, event_type="save", page_path=(request.form.get("page") or request.path)[:200],
+            referrer=None, session_id=_analytics_session_id(),
+        )
+        conn.close()
+    except Exception:  # noqa: BLE001
+        pass
+    return ("", 204)
+
 
 # Wisconsin is entirely Central. Solar times are computed in UTC, and an
 # angler reading "sunrise 11:37" would rightly stop trusting the page.

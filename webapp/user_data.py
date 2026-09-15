@@ -88,6 +88,16 @@ def ensure_schema(conn: sqlite3.Connection) -> None:
             user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
             submitted_at TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            event_type TEXT NOT NULL,
+            page_path TEXT,
+            referrer TEXT,
+            session_id TEXT NOT NULL,
+            occurred_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_events_session ON events(session_id, occurred_at);
+        CREATE INDEX IF NOT EXISTS idx_events_type_time ON events(event_type, occurred_at);
         """
     )
     conn.commit()
@@ -100,6 +110,19 @@ def _now() -> str:
 # ---------------------------------------------------------------------------
 # Feedback
 # ---------------------------------------------------------------------------
+
+def record_event(conn, *, event_type, page_path, referrer, session_id) -> int:
+    """Deliberately takes no IP address or user-agent parameter -- there
+    is nothing for a caller to accidentally pass through. Enough to
+    compute pageviews, save rate, and return-within-7-days without
+    identifying anyone."""
+    cur = conn.execute(
+        "INSERT INTO events (event_type, page_path, referrer, session_id, occurred_at) VALUES (?, ?, ?, ?, ?)",
+        (event_type, page_path, referrer, session_id, _now()),
+    )
+    conn.commit()
+    return cur.lastrowid
+
 
 def create_feedback(conn, *, page_path, message, contact, user_id) -> int:
     cur = conn.execute(
