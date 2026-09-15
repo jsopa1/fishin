@@ -6,7 +6,7 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![386 tests passing](https://img.shields.io/badge/tests-386%20passing-brightgreen.svg)](#tests)
+[![438 tests passing](https://img.shields.io/badge/tests-438%20passing-brightgreen.svg)](#tests)
 
 ---
 
@@ -109,12 +109,39 @@ Every one of the 3,272 real access points has its own `/spot` page — click a m
 | **Stocking history** | 23,870 real WDNR records — year, species, stage, number, average length. |
 | **Regulations** | Live from WDNR's own layer, matched **point-in-polygon** rather than by name, shown in their wording with a retrieval time and a verify link. |
 | **Consumption advisories** | WDNR site-specific advice, with the stricter limits for women and children kept visually separate. |
+| **Wind & barometric pressure** | Live from the same NWS station lookup as the temperature proxy, shown as plain current-conditions text — never scored or compared to a threshold. Peer-reviewed research finds no reliable direct link between pressure and freshwater fish behavior, and this project's own V0 phase found no validated catch-rate signal from weather variables, so this stays informational only, labeled "not used in the match above." |
 
 The coordinate matching is not incidental. Wisconsin has eleven unrelated waters named "Devils Lake" with different walleye rules, so name matching could attach one lake's regulations to another — the app resolves by geometry, and where more than one water is in range it names them and refuses to choose.
 
 Full plan and what shipped: [`docs/v2_fish_intelligence_platform_plan.md`](docs/v2_fish_intelligence_platform_plan.md) · bait research: [`docs/v1_bait_technique_research_report.md`](docs/v1_bait_technique_research_report.md) · redesign: [`docs/v2_ux_redesign_report.md`](docs/v2_ux_redesign_report.md).
 
 Full write-up, including real data sources that were investigated and deliberately *not* shipped (with the reasoning behind each): [`docs/v2_access_points_report.md`](docs/v2_access_points_report.md).
+
+## Becoming a product, not just a reference
+
+A later pass closed the gap between "an honest data tool" and "something people come back to":
+
+- **A catch/trip log, behind an optional account.** Log a species, spot, date, and notes; it
+  follows you across devices. The pre-existing anonymous "Save this spot" bookmark (localStorage
+  only, no account, never uploaded — [`test_saved_spots_never_leave_the_browser`](webapp/tests/test_app_routes.py))
+  is untouched and stays fully usable without ever creating an account.
+- **A separate user database** (`webapp/user_data.py`), deliberately apart from the committed,
+  pipeline-generated content database — the content DB gets wholesale-overwritten by the scheduled
+  temperature-refresh Action roughly every 4 hours, so any account, catch, or feedback row living
+  there would be silently destroyed on that schedule.
+- **Installable as a PWA** — a real `/manifest.json` and home-screen icons, so it's an app on a
+  phone rather than a bookmark.
+- **Tag onboarding.** Every evidence-tier tag (`survey_confirmed`, `proxy`, a confidence level…)
+  is now tap/click-explainable at the point of use, wired entirely by JS reading the tag's existing
+  CSS class — no template changes needed across the 27 places tags already appeared.
+- **In-app feedback**, replacing a bare GitHub-issue link that was a dead end for anyone without a
+  GitHub account.
+- **Minimal, self-hosted analytics** — no third-party service, no IP address or user-agent ever
+  logged (enforced by a schema-level regression test), just enough to see pages-per-visit, save
+  rate, and 7-day return.
+- **A privacy policy and terms of service**, written to literally describe what the app's code
+  does rather than generic boilerplate — and explicitly flagged as a drafted starting point, not a
+  substitute for professional review.
 
 ## Built with Claude Code
 
@@ -203,7 +230,7 @@ render.yaml               One-file Render deployment blueprint
 python -m pytest
 ```
 
-**386 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
+**438 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
 
 ## Tech stack
 
