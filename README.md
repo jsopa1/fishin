@@ -6,7 +6,7 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![438 tests passing](https://img.shields.io/badge/tests-438%20passing-brightgreen.svg)](#tests)
+[![419 tests passing](https://img.shields.io/badge/tests-419%20passing-brightgreen.svg)](#tests)
 
 ---
 
@@ -75,7 +75,7 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 | **V1 (considered)** | Pivot to real-time acoustic telemetry (GLATOS) for salmon tracking | Investigated and **deferred** — retrospective-only data, confounded coverage — [`DECISIONS.md` #011](DECISIONS.md) |
 | **V1 (shipped)** | Stop trying to predict catch rate. Report real conditions vs. real biology instead | The app in this repo. Scaled statewide, validated at 2,296-waterbody scale, polished, and deployed. |
 
-Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 32 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
+Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 33 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
 
 ## What the app actually does
 
@@ -121,14 +121,16 @@ Full write-up, including real data sources that were investigated and deliberate
 
 A later pass closed the gap between "an honest data tool" and "something people come back to":
 
-- **A catch/trip log, behind an optional account.** Log a species, spot, date, and notes; it
-  follows you across devices. The pre-existing anonymous "Save this spot" bookmark (localStorage
-  only, no account, never uploaded — [`test_saved_spots_never_leave_the_browser`](webapp/tests/test_app_routes.py))
-  is untouched and stays fully usable without ever creating an account.
+- **No accounts, no login.** The anonymous "Save this spot" bookmark
+  (localStorage only, never uploaded — [`test_saved_spots_never_leave_the_browser`](webapp/tests/test_app_routes.py))
+  is the entire "remembering" this app does, deliberately — an account/login system was built,
+  tested, and verified live in an earlier pass of this same session, then removed on direct
+  product direction that it added more auth surface (passwords, sessions, lockout tuning) than
+  this product needs right now.
 - **A separate user database** (`webapp/user_data.py`), deliberately apart from the committed,
   pipeline-generated content database — the content DB gets wholesale-overwritten by the scheduled
-  temperature-refresh Action roughly every 4 hours, so any account, catch, or feedback row living
-  there would be silently destroyed on that schedule.
+  temperature-refresh Action roughly every 4 hours, so a feedback or analytics row living there
+  would be silently destroyed on that schedule.
 - **Installable as a PWA** — a real `/manifest.json` and home-screen icons, so it's an app on a
   phone rather than a bookmark.
 - **Tag onboarding.** Every evidence-tier tag (`survey_confirmed`, `proxy`, a confidence level…)
@@ -147,7 +149,7 @@ A later pass closed the gap between "an honest data tool" and "something people 
 
 This entire project — research, statistical evaluation, data pipelines, the desktop review tool, this web app, and its deployment — was built through iterative sessions with **[Claude Code](https://claude.com/claude-code)**, Anthropic's agentic CLI. A few things about *how* it was built are worth calling out for anyone evaluating this as a development-process sample, not just a code sample:
 
-- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 32 numbered decisions, each with its own rationale, including the ones that reversed course.
+- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 33 numbered decisions, each with its own rationale, including the ones that reversed course.
 - **Negative results were kept, not massaged.** Four independent statistical research cycles came back null. All four shipped in full, because that's what actually happened.
 - **Real bugs were found by actually running the thing at scale**, not just code review. Running the model across all 2,296 waterbodies (not a handful of demo cases) surfaced two silent, previously-undetected defects — a species-name casing mismatch that meant survey-confirmed matches had *never* actually fired in any prior demo, and a county-naming inconsistency that produced duplicate lake entries (caught by literally looking at the app's own output afterward and noticing "Devils Lake" listed twice). Both are documented, fixed, and regression-tested — see [`docs/v1_full_run_report.md`](docs/v1_full_run_report.md).
 - **The UI polish pass was criteria-driven and verified, not vibes-based** — 7 explicit criteria (responsive layout, functional correctness, error handling, performance, honesty of framing, accessibility, attribution), each checked with a real measurement (`scrollWidth` diffs across 3 real viewport widths, WCAG contrast ratios computed and one failure fixed, all 516 interactive elements confirmed keyboard-focusable, live-database query timings) before being marked done. See [`docs/v1_polish_report.md`](docs/v1_polish_report.md).
@@ -230,7 +232,7 @@ render.yaml               One-file Render deployment blueprint
 python -m pytest
 ```
 
-**438 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
+**419 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
 
 ## Tech stack
 

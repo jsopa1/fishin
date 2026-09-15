@@ -1257,3 +1257,47 @@ than let either side clobber the other, the two were reconciled at the
 table level -- the fresher temperatures kept as the base, the three new
 `wdnr_*` tables copied in on top -- and the full test suite re-run
 against the merged database before it was pushed.
+
+## 033 — Accounts and a per-account catch log, built and then removed
+
+CEO direction, in sequence across one extended session: first "act as
+product manager and point out missing pieces," which surfaced no
+accounts/no retention loop as a real gap; then an explicit priority
+list to implement, with accounts and a catch log at the top; then,
+after it shipped -- signup, login, session-based auth, login-lockout,
+a per-account catch log, all tested and verified live -- a direct
+reversal: "let's REMOVE THE LOGIN. LOGIN IS NOT NEEDED."
+
+The removal is not a bug fix or a walk-back of bad work -- the feature
+worked. It's a scope call: an auth system is a standing liability
+(passwords to protect, sessions to manage, lockout thresholds to tune)
+that this product doesn't need yet, and it never got the one thing that
+would have justified carrying that liability -- a real user actually
+asking for cross-device catch history. Building it first and removing
+it after, rather than debating it in the abstract, is what made the
+removal a confident one-line instruction instead of a hard call: the
+CEO could see exactly what the feature cost in the codebase before
+deciding it wasn't worth keeping.
+
+What came out: `webapp/accounts.py` (the Blueprint), `signup.html`,
+`login.html`, `account.html`, their two test files, the `users` /
+`catches` / `login_attempts` tables and every function touching them in
+`webapp/user_data.py`, `security.py`'s `login_required`, the nav's
+Log in/My Catches link, and the account-specific sections of `/privacy`
+and `/terms`.
+
+What stayed, because it never depended on accounts existing: the
+anonymous, localStorage-only "Save this spot" feature (unchanged
+throughout both the build and the removal -- same test,
+`test_saved_spots_never_leave_the_browser`, passing before, during, and
+after); `webapp/user_data.py` itself, now holding only feedback
+messages and anonymous analytics events, still kept in a database
+separate from the content DB for the same reason as before (the
+scheduled refresh Action would otherwise wipe it); PWA installability;
+tag onboarding; wind/pressure.
+
+**Rationale:**
+- An auth system is easy to add back later if real demand shows up; it
+  is not free to carry indefinitely on a hunch
+- Verifying a feature live before deciding whether to keep it produced
+  a better decision than any amount of debating it would have

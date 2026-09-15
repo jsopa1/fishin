@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Minimal CSRF protection and a login-required decorator.
+Minimal CSRF protection for the app's mutating forms (feedback).
 
 No Flask-WTF dependency added -- this project's webapp/requirements.txt
 is deliberately two lines (flask, gunicorn), and a one-token-per-session
@@ -12,7 +12,7 @@ extra plumbing for multi-tab use and isn't justified here.
 import secrets
 from functools import wraps
 
-from flask import redirect, render_template, request, session, url_for
+from flask import render_template, request, session
 
 
 def get_csrf_token() -> str:
@@ -34,14 +34,5 @@ def csrf_protect(view):
                     "error.html", code=400,
                     message="Your form session expired. Please reload the page and try again.",
                 ), 400
-        return view(*args, **kwargs)
-    return wrapped
-
-
-def login_required(view):
-    @wraps(view)
-    def wrapped(*args, **kwargs):
-        if "user_id" not in session:
-            return redirect(url_for("accounts.login", next=request.path))
         return view(*args, **kwargs)
     return wrapped

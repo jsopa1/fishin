@@ -23,7 +23,8 @@ under Render's exact start command (`gunicorn --chdir webapp app:app`).
 3. Confirm. First build takes 2-3 minutes.
 
 There is nothing else to configure: no database to provision, no manual
-secrets. The content SQLite file ships in the repo, and the app only
+secrets, no accounts system to stand up — there is no login anywhere in
+this app. The content SQLite file ships in the repo, and the app only
 ever reads it.
 
 **Check it worked** — visit `/healthz`. A healthy deploy returns:
@@ -64,38 +65,7 @@ The workflow needs no secrets — it uses the built-in `GITHUB_TOKEN`.
 
 ---
 
-## 3. Attach a persistent disk before real signups (~5 minutes)
-
-Skip this step and the app itself works fine — but every account, logged
-catch, and feedback submission will be **silently destroyed** on the next
-scheduled redeploy (step 2 triggers one roughly every 4 hours). Do this
-before telling anyone to create an account, not after.
-
-Why: `webapp/user_data.py` deliberately keeps accounts/catches/feedback in
-a *separate* SQLite file from the content database, specifically so the
-temperature-refresh Action doesn't overwrite them. That separation solves
-half the problem — but Render's free tier has no persistent disk by
-default, so that separate file still only exists on the current
-container's local storage, gone on every redeploy regardless.
-
-1. Render → your service → **Disks** → **Add Disk**. A small disk (1 GB
-   is overkill for this) is enough — this is Render's cheapest paid
-   add-on, not the free tier.
-2. Mount it at, e.g., `/var/data`.
-3. Add an environment variable: `FISHIN_USER_DB_PATH` = `/var/data/user_data.db`.
-4. Redeploy. Confirm by creating a test account, then manually
-   redeploying again (**Manual Deploy → Deploy latest commit**) — log
-   back in with that test account afterward to confirm it survived.
-
-If you'd rather not pay for a disk yet, that's a reasonable call — just
-don't advertise the account/catch-log feature publicly until this is
-done. Everything else in the app (conditions, species, regulations, the
-anonymous localStorage "Save this spot" bookmark) works with no account
-and isn't affected either way.
-
----
-
-## 4. Point a domain at it (needs a purchase)
+## 3. Point a domain at it (needs a purchase)
 
 `fishin` is not a searchable name — it cannot be spelled reliably from
 hearing it, and it competes with every other fishing app for the word.
@@ -108,18 +78,18 @@ TLS is issued automatically.
 
 ---
 
-## 5. Before posting anywhere public
+## 4. Before posting anywhere public
 
 - [ ] `/healthz` returns `"status": "ok"` on the real URL
 - [ ] The refresh workflow has completed at least one successful run
-- [ ] If accounts are going live, step 3's disk is attached and verified
-      to survive a redeploy
 - [ ] Paste the URL into the [Facebook sharing debugger](https://developers.facebook.com/tools/debug/)
       and confirm the share card renders — the launch channels are all
       link-card surfaces, and a bare link reads as spam there
 - [ ] Open a spot page on an actual phone, not a resized browser window
 - [ ] Try "Add to Home Screen" on that phone — `/manifest.json` and the
       icons are already wired up
+- [ ] Confirm the `/feedback` form actually submits — it's the real
+      report-a-problem channel now, not the GitHub issue link
 - [ ] Read `/privacy` and `/terms` once yourself — both are a drafted
       starting point, not reviewed by a professional; decide whether
       that's good enough for this launch's scale
@@ -130,13 +100,20 @@ TLS is issued automatically.
 
 Honest list, so none of this is discovered publicly:
 
-- **The name.** See step 4.
-- **A persistent disk for accounts.** See step 3 — the one infrastructure
-  gap that can cause real, silent data loss if skipped.
-- **Password-reset email.** No email-sending infrastructure exists, so a
-  forgotten password currently has no recovery path. Needs a
-  transactional email provider (Postmark, SES, Resend — a real account
-  you'd create) before this is safe to rely on at any real scale.
+- **The name.** See step 3.
 - **Real legal review** of `/privacy` and `/terms`. Both describe the
   app's actual behavior accurately, but neither has been reviewed by a
   qualified professional.
+
+## Why there's no accounts step here
+
+An account system with a per-account catch/trip log was built, tested,
+and verified live earlier in this project's development — then removed
+on direct product direction that it added more permanent complexity
+(password storage, session handling, login-lockout tuning, and a
+production dependency on a persistent disk this deploy target doesn't
+have) than this product needs before it has real users. `webapp/user_data.py`
+still exists as a separate database from the content DB, but now holds
+only feedback messages and anonymous analytics events — nothing that
+identifies a person, and nothing that requires durable per-user storage
+to be meaningful if a redeploy resets it.
