@@ -99,10 +99,5 @@ Honest list, so none of this is discovered publicly:
   was deliberately left to you.
 - **No privacy policy or terms.** Worth an hour with someone qualified
   before a public launch rather than a judgement call made at 2am.
-- **Fishing regulations are absent.** Bag limits, length limits and
-  season dates are the most-wanted thing this app does not have, and the
-  one place WDNR's own free Fishing Finder genuinely beats it on
-  substance.
-- **No bait or technique guidance.** This is the real moat (nobody else
-  ties lure choice to cited physiology) and it is a research task, not an
-  engineering one.
+- **The name.** "fishin" cannot be spelled reliably from hearing it and
+  competes with every other fishing app for the word — see step 3.
