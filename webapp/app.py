@@ -16,7 +16,7 @@ import sys
 import zoneinfo
 from pathlib import Path
 
-from flask import Flask, Response, jsonify, render_template, request, url_for
+from flask import Flask, Response, jsonify, render_template, request, session, url_for
 
 REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
@@ -25,6 +25,10 @@ import v1_review_data as data  # noqa: E402
 import v2_fishing_regulations as fishing_regulations  # noqa: E402
 import v3_current_conditions as current_conditions  # noqa: E402
 
+sys.path.insert(0, str(Path(__file__).parent))
+import user_data as udata  # noqa: E402
+from security import csrf_protect, get_csrf_token  # noqa: E402
+
 # Water temperature is the only thing here that ages in hours. Six hours
 # is roughly how long a real reading stays representative in open water --
 # and it is reachable, since refresh_temperatures.py takes minutes.
@@ -32,6 +36,15 @@ TEMPERATURE_STALE_HOURS = 6
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True  # templates are cheap to re-check per request; keeps local dev iteration fast without needing debug mode
+
+app.secret_key = os.environ.get("FISHIN_SECRET_KEY", "dev-only-insecure-secret-key-change-me")
+if app.secret_key == "dev-only-insecure-secret-key-change-me" and not app.testing:
+    print(
+        "WARNING: FISHIN_SECRET_KEY not set -- using an insecure development "
+        "fallback. Set FISHIN_SECRET_KEY before any real user data exists.",
+        file=sys.stderr,
+    )
+app.context_processor(lambda: {"csrf_token": get_csrf_token})
 
 # Wisconsin is entirely Central. Solar times are computed in UTC, and an
 # angler reading "sunrise 11:37" would rightly stop trusting the page.
@@ -437,6 +450,25 @@ def sitemap():
     urls = "".join(f"<url><loc>{p}</loc><changefreq>daily</changefreq></url>" for p in pages)
     xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>'
     return Response(xml, mimetype="application/xml")
+
+
+@app.route("/feedback", methods=["GET", "POST"])
+@csrf_protect
+def feedback():
+    if request.method == "POST":
+        message = request.form.get("message", "").strip()
+        page = request.form.get("page", "").strip()[:500] or None
+        if not message:
+            return render_template("feedback.html", error="Please enter a message.", page=page or ""), 400
+        conn = udata.connect()
+        udata.create_feedback(
+            conn, page_path=page, message=message[:5000],
+            contact=request.form.get("contact", "").strip()[:200] or None,
+            user_id=session.get("user_id"),
+        )
+        conn.close()
+        return render_template("feedback.html", submitted=True)
+    return render_template("feedback.html", page=request.args.get("page", ""))
 
 
 @app.route("/manifest.json")

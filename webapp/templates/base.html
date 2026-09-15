@@ -204,7 +204,7 @@
         <li><a href="{{ url_for('summary') }}">Data Summary</a></li>
         <li><a href="{{ url_for('failures') }}">Data Health / Failures</a></li>
         <li><a href="{{ url_for('home') }}#about">About</a></li>
-        <li><a href="https://github.com/jsopa1/fishin/issues/new" target="_blank" rel="noopener">Report a problem</a></li>
+        <li><a href="{{ url_for('feedback') }}?page={{ request.path }}">Report a problem</a></li>
       </ul>
       <p><strong>Data sources &amp; attribution:</strong></p>
       <ul>

@@ -23,3 +23,7 @@ build/
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Runtime user data (accounts, catches, feedback) -- separate from the
+# committed content DB, never itself committed. See webapp/user_data.py.
+data/v1/user_data.db
