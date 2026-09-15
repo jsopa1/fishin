@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Terms of Service{% endblock %}
+{% block content %}
+<h1>Terms of Service</h1>
+<p class="form-errors" style="background: var(--stocking-bg); color: var(--stocking);">
+  <strong>This is a drafted starting point — it is not a substitute for review by a qualified
+  professional before this app is relied on commercially.</strong>
+</p>
+
+<p>Last updated 15 September 2026.</p>
+
+<h2>What this is</h2>
+<p>
+  fishin is an informational tool that reports real, current water conditions compared against
+  published fish-physiology research, for species documented as present in a given water. Full
+  detail on what it is and — just as importantly — what it is <strong>not</strong> is on the
+  <a href="{{ url_for('home') }}#about">home page</a>: it is not a validated catch-rate prediction,
+  it does not estimate how many fish are in a water, and nothing it says is a guarantee you will
+  catch anything.
+</p>
+
+<h2>Use at your own judgment</h2>
+<p>
+  Every reading and every statement here carries its own source and evidentiary tier, shown in
+  full — real, estimated, proxy, survey-confirmed, stocking-only. Treat these as inputs to your
+  own judgment, not as a substitute for it. Regulations and consumption advisories are shown from
+  WDNR's own live service with a retrieval time, but <strong>you are responsible for verifying
+  current rules directly with WDNR</strong> before keeping any fish — a page here reflecting a
+  cached or delayed reading is possible, and rules change.
+</p>
+
+<h2>Accounts</h2>
+<p>
+  Creating an account is optional. You're responsible for keeping your password confidential and
+  for anything done under your account. You must be able to legally agree to these terms in your
+  jurisdiction to create one. We may suspend or remove an account used to abuse the service — for
+  example, submitting false feedback at volume, or attempting to access another user's account or
+  data.
+</p>
+
+<h2>No warranty</h2>
+<p>
+  This service is provided "as is." Water temperature, species, and regulation data ultimately
+  come from third-party government sources (WDNR, USGS, NOAA, NWS) that can be delayed, wrong, or
+  temporarily unavailable, and this app's own interpolation and estimates carry explicitly labeled
+  uncertainty. We make no guarantee the service will be available at any given time, or that any
+  reading is current or error-free.
+</p>
+
+<h2>Changes</h2>
+<p>
+  This is an actively developed, non-commercial project. Features, and these terms, may change;
+  material changes will update the "last updated" date above.
+</p>
+
+<h2>Questions</h2>
+<p>Use the <a href="{{ url_for('feedback') }}">feedback form</a> for any question about these terms.</p>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy{% endblock %}
+{% block content %}
+<h1>Privacy Policy</h1>
+<p class="form-errors" style="background: var(--stocking-bg); color: var(--stocking);">
+  <strong>This is a drafted starting point, written by describing exactly what this app's code
+  actually does — it is not a substitute for review by a qualified professional before this app
+  is relied on commercially.</strong>
+</p>
+
+<p>Last updated 15 September 2026.</p>
+
+<h2>The short version</h2>
+<p>
+  You can use every core feature of this app — browsing waterbodies, checking conditions, viewing
+  a spot report, and saving spots — with no account and nothing sent to a server beyond the page
+  requests needed to show you the page. Creating an account is optional, and only needed if you
+  want to log catches and have them follow you across devices.
+</p>
+
+<h2>Saved spots (no account)</h2>
+<p>
+  The "Save this spot" button on a spot page stores your saved spots in your browser's
+  <code>localStorage</code> only. This data is never sent to our server, never included in any
+  request we make, and never visible to us in any form. Clearing your browser's site data for
+  this app deletes it permanently, and we have no copy.
+</p>
+
+<h2>If you create an account</h2>
+<p>We store:</p>
+<ul>
+  <li><strong>Your email address</strong> and a <strong>hashed password</strong> (we never store
+    or can recover your actual password — see below).</li>
+  <li><strong>Catches you log</strong>: species, the coordinate and spot name of where you logged
+    it, the date, any notes you write, and whether you kept or released the fish.</li>
+</ul>
+<p>
+  Passwords are hashed with a standard, one-way algorithm (Werkzeug's password hashing, built on
+  PBKDF2) before being stored — we cannot look up or recover your password, only verify a login
+  attempt against the hash.
+</p>
+
+<h2>Feedback</h2>
+<p>
+  If you use the <a href="{{ url_for('feedback') }}">feedback form</a>, we store the message you
+  write, the page you were on, and an email address only if you choose to include one. If you're
+  logged in, your submission is linked to your account so we can follow up; if not, it's
+  anonymous.
+</p>
+
+<h2>Anonymous analytics</h2>
+<p>
+  We log page views and spot-saves against a random token stored in the same session cookie used
+  to keep you logged in — not a separate tracking cookie, and not shared with or sold to anyone.
+  This lets us see roughly how many pages someone visits and whether they return, without knowing
+  who they are. We never record an IP address or browser/device identifying string in this data,
+  by design — an automated test in this project's own test suite fails if that ever changes
+  without a deliberate decision to do so.
+</p>
+
+<h2>Live third-party data</h2>
+<p>
+  Every time you view a spot or waterbody page, the app fetches live data on your behalf from the
+  Wisconsin DNR, USGS, NOAA, and the National Weather Service — water temperature, regulations,
+  consumption advisories, and current weather. These are server-to-server calls; your personal
+  information is never included in them.
+</p>
+
+<h2>What we don't do</h2>
+<ul>
+  <li>No third-party analytics, ad networks, or tracking pixels of any kind.</li>
+  <li>No selling or sharing of your data with anyone.</li>
+  <li>No cookies beyond the one first-party session cookie described above.</li>
+</ul>
+
+<h2>Deleting your data</h2>
+<p>
+  We don't yet have a self-service delete-my-account flow. Contact us through the
+  <a href="{{ url_for('feedback') }}">feedback form</a> and include the email your account uses,
+  and we'll delete your account, your logged catches, and any feedback tied to your account.
+</p>
+
+<h2>Questions</h2>
+<p>Use the <a href="{{ url_for('feedback') }}">feedback form</a> for any privacy question.</p>
+{% endblock %}

@@ -530,6 +530,16 @@ def feedback():
     return render_template("feedback.html", page=request.args.get("page", ""))
 
 
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+
+@app.route("/terms")
+def terms():
+    return render_template("terms.html")
+
+
 @app.route("/manifest.json")
 def manifest():
     """At the root, not under /static, so the PWA's default scope covers

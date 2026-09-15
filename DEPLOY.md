@@ -94,10 +94,30 @@ TLS is issued automatically.
 
 Honest list, so none of this is discovered publicly:
 
-- **No analytics.** If users arrive, you will learn nothing about what
-  they did. Adding this needs an account and a privacy decision, so it
-  was deliberately left to you.
-- **No privacy policy or terms.** Worth an hour with someone qualified
-  before a public launch rather than a judgement call made at 2am.
 - **The name.** "fishin" cannot be spelled reliably from hearing it and
   competes with every other fishing app for the word — see step 3.
+- **A persistent disk for user accounts.** Accounts, logged catches, and
+  feedback now live in a separate database (`webapp/user_data.py`,
+  `FISHIN_USER_DB_PATH`) specifically so they survive the temperature
+  refresh Action's redeploys -- but on Render's free tier that database
+  still only exists on the current container's local disk. Attach a
+  persistent disk (or an external DB) and point `FISHIN_USER_DB_PATH` at
+  it before treating real signups as durable.
+
+## Before enabling real user accounts
+
+`webapp/user_data.py` — the database behind signups, logged catches, and
+feedback — is a separate file from the content database specifically so
+the scheduled temperature-refresh Action's redeploys don't wipe it. That
+separation alone is not enough on Render's free tier: without a
+persistent disk, that file still lives only on the current container's
+local storage and is destroyed on every redeploy, including that
+automated one roughly every 4 hours. Attach a Render persistent disk (or
+point `FISHIN_USER_DB_PATH` at an external database) before real people
+create accounts — otherwise every account, catch, and feedback
+submission is silently lost on a fixed schedule.
+
+Analytics (self-hosted, no third-party service, no IP/user-agent logged
+— see `webapp/user_data.py`'s `events` table) and a drafted privacy
+policy/terms of service (`/privacy`, `/terms` — explicitly not a
+substitute for professional legal review) both now ship in the app.

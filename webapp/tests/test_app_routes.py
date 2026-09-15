@@ -678,3 +678,43 @@ class TagOnboardingTests(unittest.TestCase):
 
         with open(js_path, encoding="utf-8") as f:
             self.assertIn('indexOf("confidence-")', f.read(), msg="confidence-* tags must stay handled as a prefix case")
+
+
+class LegalPagesTests(unittest.TestCase):
+    """The privacy/terms pages are a drafted starting point, not a
+    substitute for real review -- but what they claim about the app's
+    own behavior must actually be true, checked here rather than trusted
+    to stay in sync by hand."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def test_privacy_and_terms_pages_load(self):
+        self.assertEqual(self.client.get("/privacy").status_code, 200)
+        self.assertEqual(self.client.get("/terms").status_code, 200)
+
+    def test_privacy_and_terms_linked_from_every_page(self):
+        for path in ("/", "/map", "/browse"):
+            body = self.client.get(path).data
+            self.assertIn(b'href="/privacy"', body)
+            self.assertIn(b'href="/terms"', body)
+
+    def test_privacy_page_states_it_is_a_draft_not_a_review(self):
+        body = self.client.get("/privacy").data.decode().lower()
+        self.assertIn("not a substitute for review", body)
+
+    def test_privacy_pages_localstorage_claim_matches_actual_save_spot_behavior(self):
+        # The privacy page claims saved spots never leave the browser --
+        # this is the same guarantee test_saved_spots_never_leave_the_browser
+        # (RegulationsPointerTests-adjacent, in ProductLoopTests below)
+        # already enforces server-side. Re-assert both sides here so the
+        # two can't silently drift apart.
+        points = self.client.get("/map/data").get_json()["points"]
+        p = points[0]
+        spot_body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+        self.assertIn("localStorage", spot_body)
+        privacy_body = self.client.get("/privacy").data.decode().lower()
+        self.assertIn("localstorage", privacy_body)
+        self.assertIn("never sent to our server", privacy_body)
