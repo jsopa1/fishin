@@ -566,6 +566,43 @@ table td a:hover { text-decoration: underline; }
 .citizen-observed-link { font-size: var(--text-xs); font-weight: 600; display: inline-flex; align-items: center; gap: 3px; }
 .citizen-observed-note { margin: 0; font-size: var(--text-sm); color: var(--muted); }
 
+/* Species dashboard: two honest buckets at the top of the spot page --
+   Confirmed Sightings (a survey or a real citizen observation actually
+   documented the species) vs. Likely species to find (stocking or
+   county-level evidence only). Colors deliberately mirror the existing
+   survey-green / stocking-amber convention used everywhere else. */
+.species-dashboard { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-6); }
+@media (min-width: 768px) {
+  .species-dashboard { grid-template-columns: 1fr 1fr; }
+  .species-dashboard-note { grid-column: 1 / -1; }
+}
+.species-category {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: var(--space-5); box-shadow: var(--shadow-sm);
+}
+.species-category-confirmed { border-left: 3px solid var(--survey); }
+.species-category-likely { border-left: 3px solid var(--stocking); }
+.species-category-title {
+  display: flex; align-items: center; gap: 6px; margin: 0 0 var(--space-4);
+  font-size: var(--text-md); font-weight: 700;
+}
+.species-category-confirmed .species-category-title { color: var(--survey); }
+.species-category-likely .species-category-title { color: var(--stocking); }
+.species-category-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.species-category-item { border-bottom: 1px solid var(--border-soft); padding-bottom: var(--space-3); }
+.species-category-item:last-child { border-bottom: none; padding-bottom: 0; }
+.species-category-item-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+.species-category-name { font-weight: 600; font-size: var(--text-base); }
+.species-category-sources { margin: 4px 0 0; font-size: var(--text-xs); color: var(--muted); }
+.species-category-empty { margin: 0; font-size: var(--text-sm); color: var(--muted); font-style: italic; }
+.activity-badge {
+  font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;
+  padding: 2px 9px; border-radius: var(--radius-full); white-space: nowrap;
+}
+.activity-active { background: var(--survey-bg); color: var(--survey); }
+.activity-outside { background: var(--border-soft); color: var(--muted); }
+.species-dashboard-note { margin: 0; font-size: var(--text-sm); color: var(--muted); }
+
 /* Consumption advisory. The two audiences are kept visually separate
    because the limits genuinely differ -- large walleye can be "one meal
    per month" for most people and "do not eat" for women of childbearing

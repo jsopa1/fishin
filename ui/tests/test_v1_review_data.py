@@ -979,3 +979,124 @@ class TestCitizenObservedSpecies(unittest.TestCase):
         result = rd.get_citizen_observed_species(self.conn, 45.0, -89.0, radius_km=8.0)
         self.assertEqual(result[0]["recorded_by"], "realangler42")
         self.assertTrue(result[0]["gbif_url"].startswith("https://"))
+
+
+class TestBuildSpeciesCategories(unittest.TestCase):
+    """The property that matters most: a species with real confirming
+    evidence (survey or citizen sighting) is never also listed as merely
+    "likely" -- the stronger evidence wins and it appears exactly once."""
+
+    def test_survey_confirmed_waterbody_puts_species_in_confirmed_bucket(self):
+        preds = [{"species": "WALLEYE"}]
+        waterbody = {"presence_tier": "survey_confirmed"}
+        result = rd.build_species_categories(preds, waterbody, None, [], None)
+        self.assertEqual([s["species"] for s in result["confirmed_sightings"]], ["WALLEYE"])
+        self.assertEqual(result["likely_species"], [])
+        self.assertIn("WDNR fisheries survey", result["confirmed_sightings"][0]["sources"])
+
+    def test_stocking_only_waterbody_puts_species_in_likely_bucket(self):
+        preds = [{"species": "NORTHERN PIKE"}]
+        waterbody = {"presence_tier": "stocking_only"}
+        result = rd.build_species_categories(preds, waterbody, None, [], None)
+        self.assertEqual(result["confirmed_sightings"], [])
+        self.assertEqual([s["species"] for s in result["likely_species"]], ["NORTHERN PIKE"])
+        self.assertIn("WDNR stocking record", result["likely_species"][0]["sources"])
+
+    def test_citizen_sighting_alone_lands_in_confirmed(self):
+        citizen = [{"species": "MUSKELLUNGE", "observed_date": "2024-06-01", "recorded_by": "x", "gbif_url": "https://gbif.org/1"}]
+        result = rd.build_species_categories([], None, None, citizen, None)
+        self.assertEqual([s["species"] for s in result["confirmed_sightings"]], ["MUSKELLUNGE"])
+        self.assertTrue(any("citizen sighting" in s for s in result["confirmed_sightings"][0]["sources"]))
+
+    def test_citizen_sighting_promotes_a_stocking_only_species_out_of_likely(self):
+        # The same species is both stocked (weak) and really sighted
+        # (strong) -- it must end up ONLY in confirmed, never duplicated.
+        preds = [{"species": "WALLEYE"}]
+        waterbody = {"presence_tier": "stocking_only"}
+        citizen = [{"species": "WALLEYE", "observed_date": "2024-06-01", "recorded_by": "x", "gbif_url": "https://gbif.org/1"}]
+        result = rd.build_species_categories(preds, waterbody, None, citizen, None)
+        confirmed_species = [s["species"] for s in result["confirmed_sightings"]]
+        likely_species = [s["species"] for s in result["likely_species"]]
+        self.assertEqual(confirmed_species, ["WALLEYE"])
+        self.assertNotIn("WALLEYE", likely_species)
+
+    def test_county_species_never_overrides_an_already_confirmed_species(self):
+        preds = [{"species": "WALLEYE"}]
+        waterbody = {"presence_tier": "survey_confirmed"}
+        county = {"county": "Vilas", "waterbodies_in_county": 10,
+                  "species": [{"species": "WALLEYE", "waterbody_count": 5, "survey_confirmed": False}]}
+        result = rd.build_species_categories(preds, waterbody, county, [], None)
+        self.assertEqual([s["species"] for s in result["confirmed_sightings"]], ["WALLEYE"])
+        self.assertEqual(result["likely_species"], [])
+
+    def test_county_species_lands_in_likely_when_nothing_stronger_exists(self):
+        county = {"county": "Vilas", "waterbodies_in_county": 10,
+                  "species": [{"species": "YELLOW PERCH", "waterbody_count": 5, "survey_confirmed": False}]}
+        result = rd.build_species_categories([], None, county, [], None)
+        self.assertEqual([s["species"] for s in result["likely_species"]], ["YELLOW PERCH"])
+
+    def test_activity_is_attached_when_temperature_is_inside_the_documented_window(self):
+        preds = [{"species": "WALLEYE"}]
+        waterbody = {"presence_tier": "survey_confirmed"}
+        # Walleye's documented activity window comfortably includes 18C.
+        result = rd.build_species_categories(preds, waterbody, None, [], 18.0)
+        activity = result["confirmed_sightings"][0]["activity"]
+        self.assertIsNotNone(activity)
+        self.assertIn("inside_window", activity)
+
+    def test_no_temperature_means_no_activity_claim_at_all(self):
+        preds = [{"species": "WALLEYE"}]
+        waterbody = {"presence_tier": "survey_confirmed"}
+        result = rd.build_species_categories(preds, waterbody, None, [], None)
+        self.assertIsNone(result["confirmed_sightings"][0]["activity"])
+
+    def test_empty_everything_returns_empty_buckets_not_an_error(self):
+        result = rd.build_species_categories([], None, None, [], None)
+        self.assertEqual(result, {"confirmed_sightings": [], "likely_species": []})
+
+
+class TestApplyCategoriesToVerdict(unittest.TestCase):
+    """The verdict headline must never say "No species data" one section
+    above a dashboard that's showing real species -- this is what fixes
+    that specific contradiction."""
+
+    def test_upgrades_no_species_data_headline_when_categories_have_a_match(self):
+        verdict = {"headline": "No species data for this spot", "detail": "x", "matching": []}
+        categories = {
+            "confirmed_sightings": [],
+            "likely_species": [{"species": "WALLEYE", "sources": ["regional (county) record"],
+                                 "activity": {"inside_window": True, "distance_f": 0.0, "direction": "inside"}}],
+        }
+        rd._apply_categories_to_verdict(verdict, categories)
+        self.assertIn("1 species in its documented window", verdict["headline"])
+        self.assertIn("Walleye", verdict["detail"])
+        self.assertTrue(verdict["matching"])
+
+    def test_upgrades_to_closest_when_nothing_is_inside_its_window(self):
+        verdict = {"headline": "No species data for this spot", "detail": "x", "matching": []}
+        categories = {
+            "confirmed_sightings": [],
+            "likely_species": [{"species": "WALLEYE", "sources": ["regional (county) record"],
+                                 "activity": {"inside_window": False, "distance_f": 5.0, "direction": "below"}}],
+        }
+        rd._apply_categories_to_verdict(verdict, categories)
+        self.assertEqual(verdict["headline"], "Nothing is inside its window right now")
+        self.assertIn("Closest is Walleye", verdict["detail"])
+        self.assertIn("5.0", verdict["detail"])
+
+    def test_leaves_no_species_data_alone_when_categories_are_genuinely_empty(self):
+        verdict = {"headline": "No species data for this spot", "detail": "x", "matching": []}
+        categories = {"confirmed_sightings": [], "likely_species": []}
+        rd._apply_categories_to_verdict(verdict, categories)
+        self.assertEqual(verdict["headline"], "No species data for this spot")
+
+    def test_leaves_no_species_data_alone_when_entries_exist_but_have_no_activity(self):
+        # e.g. temperature was unavailable, so activity couldn't be computed --
+        # nothing honest to upgrade the headline to.
+        verdict = {"headline": "No species data for this spot", "detail": "x", "matching": []}
+        categories = {
+            "confirmed_sightings": [],
+            "likely_species": [{"species": "WALLEYE", "sources": ["regional (county) record"], "activity": None}],
+        }
+        rd._apply_categories_to_verdict(verdict, categories)
+        self.assertEqual(verdict["headline"], "No species data for this spot")

@@ -587,6 +587,45 @@ class CitizenObservedSpeciesTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
+class SpeciesDashboardTests(unittest.TestCase):
+    """The two-category dashboard (Confirmed Sightings / Likely species to
+    find) at the top of the spot page. The property that matters: a
+    species never appears in both buckets, and the honesty caveats stay
+    attached."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def test_dashboard_renders_both_category_headings_on_a_real_spot_with_data(self):
+        # Merton Millpond Access -- verified elsewhere in this suite to
+        # have real WDNR and citizen-sighting data nearby.
+        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data
+        self.assertIn(b"Confirmed Sightings", body)
+        self.assertIn(b"Likely species to find", body)
+
+    def test_dashboard_never_lists_the_same_species_in_both_buckets(self):
+        p = self.client.get("/map/data").get_json()["points"][0]
+        conn = flask_app_module.get_conn()
+        detail = flask_app_module.data.get_spot_detail(conn, p["lat"], p["lon"])
+        conn.close()
+        cats = detail["species_categories"]
+        confirmed = {s["species"] for s in cats["confirmed_sightings"]}
+        likely = {s["species"] for s in cats["likely_species"]}
+        self.assertEqual(confirmed & likely, set())
+
+    def test_dashboard_note_explains_what_confirmed_and_likely_actually_mean(self):
+        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data
+        self.assertIn(b"actually documented the species", body)
+        self.assertIn(b"never a catch guarantee", body)
+
+    def test_every_spot_page_still_loads_with_the_dashboard_wired_in(self):
+        p = self.client.get("/map/data").get_json()["points"][0]
+        resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
+        self.assertEqual(resp.status_code, 200)
+
+
 class ProductLoopTests(unittest.TestCase):
     """The things that make this a product someone returns to, rather
     than a data reference they read once."""

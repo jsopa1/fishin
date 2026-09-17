@@ -1207,6 +1207,133 @@ def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: in
     }
 
 
+def _activity_for_species(species_name: str, temp_c) -> dict | None:
+    """The same distance-to-documented-window math the spot verdict
+    already uses, reusable per-species so every evidence tier can carry
+    its own honest activity read rather than duplicating this logic."""
+    if temp_c is None:
+        return None
+    try:
+        thresholds_all = v1.load_thresholds()["species"]
+    except Exception:  # noqa: BLE001
+        return None
+    entry = thresholds_all.get(species_name.upper())
+    if not entry:
+        return None
+    measured = _window_distance_c(entry.get("thresholds", []), temp_c)
+    if measured is None:
+        return None
+    distance_c, direction, window_c = measured
+    return {
+        "inside_window": direction == "inside",
+        "distance_f": round(distance_c * 9 / 5, 1),
+        "direction": direction,
+        "window_c": window_c,
+    }
+
+
+def build_species_categories(species_predictions: list, waterbody: dict | None,
+                              county_species: dict | None, citizen_observed: list,
+                              temp_c) -> dict:
+    """Consolidates every species-level evidence source into two honest
+    buckets instead of scattering them across separate boxes:
+
+    - **Confirmed Sightings**: a WDNR fisheries survey actually documented
+      this species here, OR a real person logged a community-ID-verified
+      sighting of it nearby (GBIF/iNaturalist). Either way, someone or
+      something actually observed the fish.
+    - **Likely species to find**: positive but indirect evidence only --
+      WDNR stocked it here (stocking is not proof of a current
+      population), or it's documented somewhere else in this county.
+
+    A species with real confirming evidence is never also listed as
+    merely "likely" -- the stronger evidence wins and the entry is not
+    duplicated.
+
+    WDNR's own per-lake category list (Panfish, Largemouth Bass, ...) is
+    deliberately NOT folded into either bucket: it is coarser than
+    species, and turning "Panfish (Common)" into a specific species entry
+    here would be exactly the category-to-species expansion this project
+    has refused to do since the WDNR lake-species ingest (#032). It stays
+    its own separate box.
+
+    Each entry carries an `activity` read (inside its documented window,
+    or how far below/above) computed against the current temperature --
+    the same math the spot's headline verdict already uses -- so "is this
+    species actually favoured right now" travels with it into both
+    buckets, not just the confirmed one."""
+    confirmed: dict = {}
+    likely: dict = {}
+
+    survey_confirmed = bool(waterbody and waterbody.get("presence_tier") == "survey_confirmed")
+    for p in species_predictions:
+        species = p["species"]
+        bucket = confirmed if survey_confirmed else likely
+        entry = bucket.setdefault(species, {
+            "species": species, "sources": [], "activity": _activity_for_species(species, temp_c),
+        })
+        source = "WDNR fisheries survey" if survey_confirmed else "WDNR stocking record"
+        if source not in entry["sources"]:
+            entry["sources"].append(source)
+
+    for o in citizen_observed:
+        species = o["species"]
+        likely.pop(species, None)  # a real sighting supersedes mere "likely"
+        entry = confirmed.setdefault(species, {
+            "species": species, "sources": [], "activity": _activity_for_species(species, temp_c),
+        })
+        date = (o.get("observed_date") or "")[:10]
+        source = f"citizen sighting{' (' + date + ')' if date else ''}"
+        entry["sources"].append(source)
+        entry["citizen_detail"] = o
+
+    if county_species:
+        for s in county_species["species"]:
+            species = s["species"]
+            if species in confirmed:
+                continue
+            entry = likely.setdefault(species, {
+                "species": species, "sources": [], "activity": _activity_for_species(species, temp_c),
+            })
+            if "regional (county) record" not in entry["sources"]:
+                entry["sources"].append("regional (county) record")
+
+    return {
+        "confirmed_sightings": sorted(confirmed.values(), key=lambda x: x["species"]),
+        "likely_species": sorted(likely.values(), key=lambda x: x["species"]),
+    }
+
+
+def _apply_categories_to_verdict(verdict: dict, species_categories: dict) -> None:
+    """Mutates verdict in place -- only ever called when the original
+    verdict had nothing to say (no waterbody match at all), so there is
+    no existing claim here to contradict, only a blank to honestly fill
+    from the WDNR-category / county / citizen-sighting evidence the
+    dashboard above already shows."""
+    all_entries = species_categories["confirmed_sightings"] + species_categories["likely_species"]
+    with_activity = [e for e in all_entries if e.get("activity")]
+    if not with_activity:
+        return  # genuinely nothing to say -- leave "No species data" as-is
+
+    inside = [e for e in with_activity if e["activity"]["inside_window"]]
+    if inside:
+        names = ", ".join(e["species"].title() for e in inside[:3])
+        more = len(inside) - 3
+        verdict["headline"] = (
+            f"{len(inside)} species in their documented window"
+            if len(inside) > 1 else "1 species in its documented window"
+        )
+        verdict["detail"] = names + (f", and {more} more" if more > 0 else "")
+        verdict["matching"] = inside  # so the verdict box's own good/quiet styling matches this headline
+    else:
+        closest = min(with_activity, key=lambda e: e["activity"]["distance_f"])
+        verdict["headline"] = "Nothing is inside its window right now"
+        verdict["detail"] = (
+            f"Closest is {closest['species'].title()}, "
+            f"{closest['activity']['distance_f']}°F {closest['activity']['direction']} its documented window."
+        )
+
+
 def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str = None) -> dict | None:
     """The full one-stop-shop payload for a single spot: its own real
     access-point fields, an honestly-resolved temperature (see
@@ -1267,6 +1394,18 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
 
     verdict = build_spot_verdict(species_predictions, temperature, activity_window)
     citizen_observed = get_citizen_observed_species(conn, lat, lon)
+    species_categories = build_species_categories(
+        species_predictions, waterbody, county_species, citizen_observed,
+        temperature.get("value_c") if temperature else None,
+    )
+    # build_spot_verdict only ever sees species_predictions -- for the
+    # ~46% of spots with no waterbody match, that leaves it saying "No
+    # species data" even when the dashboard above (WDNR category list,
+    # county fallback, or a real citizen sighting) has real entries.
+    # Recompute the headline from that fuller picture rather than let the
+    # page contradict itself one section down.
+    if verdict["headline"] == "No species data for this spot":
+        _apply_categories_to_verdict(verdict, species_categories)
 
     return {
         "point": point,
@@ -1280,4 +1419,5 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         "stocking": stocking,
         "wdnr_species": wdnr_species,
         "citizen_observed": citizen_observed,
+        "species_categories": species_categories,
     }

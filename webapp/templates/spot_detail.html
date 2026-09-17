@@ -68,14 +68,6 @@
   <div class="verdict-main">
     <p class="verdict-headline">{{ verdict.headline }}</p>
     {% if verdict.detail %}<p class="verdict-detail">{{ verdict.detail }}</p>{% endif %}
-    {% if verdict.matching %}
-      <ul class="verdict-species">
-        {% for m in verdict.matching[:4] %}
-          <li><span class="verdict-species-name">{{ m.species.title() }}</span>
-          {% if m.diel_active %}<span class="verdict-diel"><svg class="icon" aria-hidden="true"><use href="#icon-moon"/></svg> dawn/dusk</span>{% endif %}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
   </div>
   <div class="verdict-side">
     {% if verdict.temp_c is not none %}
@@ -111,6 +103,72 @@
       </div>
     {% endif %}
   </div>
+</div>
+{% endif %}
+
+{% if species_categories and (species_categories.confirmed_sightings or species_categories.likely_species) %}
+<div class="species-dashboard">
+  <div class="species-category species-category-confirmed">
+    <h3 class="species-category-title">
+      <svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg>
+      Confirmed Sightings
+    </h3>
+    {% if species_categories.confirmed_sightings %}
+      <ul class="species-category-list">
+        {% for s in species_categories.confirmed_sightings %}
+          <li class="species-category-item">
+            <div class="species-category-item-head">
+              <span class="species-category-name">{{ s.species.title() }}</span>
+              {% if s.activity %}
+                {% if s.activity.inside_window %}
+                  <span class="activity-badge activity-active">in documented window now</span>
+                {% else %}
+                  <span class="activity-badge activity-outside">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</span>
+                {% endif %}
+              {% endif %}
+            </div>
+            <p class="species-category-sources">{{ s.sources | join(' · ') }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="species-category-empty">No confirmed sighting — a WDNR survey or a real citizen observation — exists for this spot.</p>
+    {% endif %}
+  </div>
+
+  <div class="species-category species-category-likely">
+    <h3 class="species-category-title">
+      <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg>
+      Likely species to find
+    </h3>
+    {% if species_categories.likely_species %}
+      <ul class="species-category-list">
+        {% for s in species_categories.likely_species %}
+          <li class="species-category-item">
+            <div class="species-category-item-head">
+              <span class="species-category-name">{{ s.species.title() }}</span>
+              {% if s.activity %}
+                {% if s.activity.inside_window %}
+                  <span class="activity-badge activity-active">in documented window now</span>
+                {% else %}
+                  <span class="activity-badge activity-outside">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</span>
+                {% endif %}
+              {% endif %}
+            </div>
+            <p class="species-category-sources">{{ s.sources | join(' · ') }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="species-category-empty">No indirect evidence (stocking records or county-level data) either.</p>
+    {% endif %}
+  </div>
+  <p class="species-dashboard-note">
+    <strong>Confirmed</strong> means a WDNR survey or a real, dated citizen sighting actually documented the species here.
+    <strong>Likely</strong> means positive but indirect evidence only — stocked here, or recorded elsewhere in the county.
+    Neither is a promise; "in documented window now" only means today's temperature sits inside that species' published
+    feeding/activity range, never a catch guarantee.
+  </p>
 </div>
 {% endif %}
 

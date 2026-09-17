@@ -1367,3 +1367,58 @@ since there's no lake-polygon layer to join against for arbitrary ponds.
   checking actual records before committing to a source is what caught
   both, the same discipline that's caught every other false lead in this
   project
+
+## 035 — A two-category species dashboard at the top of the spot page, and the honesty bug it exposed
+
+CEO direction: "at the top of our dashboard, we should have categories:
+Confirmed Sightings / Likely species to find, and then have information
+on activity for those categories."
+
+Consolidated all four species-evidence sources into two buckets instead
+of the growing pile of separate boxes each one had accumulated:
+
+- **Confirmed Sightings**: a WDNR fisheries survey documented the
+  species at this exact waterbody, OR a real citizen sighting
+  (`citizen_observed`, #034) exists nearby. Either way, something
+  actually observed the fish.
+- **Likely species to find**: positive but indirect evidence only --
+  WDNR stocked it here, or it's documented elsewhere in the county.
+
+A species with real confirming evidence is never also listed as merely
+likely -- a citizen sighting of an otherwise stocking-only species
+promotes it out of the weaker bucket rather than appearing in both.
+WDNR's own per-lake category list stays a separate box, unchanged: it is
+coarser than species, and folding "Panfish (Common)" into a named-species
+bucket here would be the exact category-to-species expansion already
+ruled out in #032.
+
+Every entry carries an **activity** read -- inside its documented
+window, or how far below/above -- computed against the current
+temperature with the same distance-to-window math the page's headline
+verdict already used, reused rather than duplicated.
+
+**Building this exposed a real, pre-existing dishonesty bug.** The
+headline verdict only ever looked at `species_predictions` (the
+waterbody-matched pipeline), so for the ~46% of spots with no waterbody
+match, it said "No species data for this spot" -- directly above a new
+dashboard now proving that false whenever WDNR's category list, county
+data, or a citizen sighting had something. Merton Millpond Access is the
+clearest example: the page said "no species data" one line above a
+dashboard listing 13 real species. Fixed by having `get_spot_detail`
+recompute the headline from the fuller picture whenever the original
+verdict had nothing -- never overriding a verdict that already said
+something, only filling an honest blank. Merton Millpond's headline now
+correctly reads "4 species in their documented window."
+
+17 new tests. Verified live against two independently-checked real spots
+(Merton Millpond, Ada Lake) plus one of the 10 genuinely-blank spots
+identified in the prior pass, confirmed to still render nothing rather
+than empty boxes.
+
+**Rationale:**
+- Four separate boxes asked the reader to synthesize evidence tiers
+  themselves; two clearly-labeled buckets with the "why" attached does
+  that synthesis for them, honestly
+- A feature is a good forcing function for finding a bug like this one --
+  the contradiction was there before, it just wasn't visible next to
+  anything to contradict
