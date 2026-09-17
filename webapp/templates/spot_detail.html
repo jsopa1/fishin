@@ -103,6 +103,13 @@
         <span class="verdict-stat-label">wind &amp; pressure now — not used in the match above</span>
       </div>
     {% endif %}
+    {% if moon %}
+      <div class="verdict-stat verdict-stat-moon">
+        <span class="verdict-stat-value">{{ moon.emoji }} {{ moon.phase_name }}</span>
+        <span class="verdict-stat-value-sub">{{ moon.illumination_pct }}% illuminated</span>
+        <span class="verdict-stat-label">a traditional angling reference — evidence for a fish-activity effect is mixed, not used in the match above</span>
+      </div>
+    {% endif %}
   </div>
 </div>
 {% endif %}

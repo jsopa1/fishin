@@ -25,6 +25,7 @@ sys.path.insert(0, str(REPO_ROOT / "analysis"))
 import v1_review_data as data  # noqa: E402
 import v2_fishing_regulations as fishing_regulations  # noqa: E402
 import v3_current_conditions as current_conditions  # noqa: E402
+import v3_moon_phase as moon_phase  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).parent))
 import user_data as udata  # noqa: E402
@@ -430,7 +431,7 @@ def spot_detail():
     detail = data.get_spot_detail(conn, lat, lon, name=name)
     # Live, cached 24h, and allowed to fail: regulations are valuable but
     # never worth a blank page if WDNR's service is slow or down.
-    regulations = advisory = conditions = None
+    regulations = advisory = conditions = moon = None
     if detail is not None:
         try:
             regulations = fishing_regulations.get_regulations(conn, lat, lon)
@@ -444,6 +445,10 @@ def spot_detail():
             conditions = current_conditions.get_current_conditions(conn, lat, lon)
         except Exception:  # noqa: BLE001
             conditions = None
+        try:
+            moon = moon_phase.get_moon_phase()
+        except Exception:  # noqa: BLE001
+            moon = None
     conn.close()
     if detail is None:
         return render_template(
@@ -456,7 +461,7 @@ def spot_detail():
         county_species=detail["county_species"], activity_window=detail["activity_window"],
         diel_species=detail["diel_species"], stocking=detail["stocking"],
         wdnr_species=detail["wdnr_species"], verdict=detail["verdict"],
-        regulations=regulations, advisory=advisory, conditions=conditions,
+        regulations=regulations, advisory=advisory, conditions=conditions, moon=moon,
     )
 
 

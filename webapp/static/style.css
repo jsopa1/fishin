@@ -506,6 +506,8 @@ table td a:hover { text-decoration: underline; }
 .verdict-stat-label { font-size: var(--text-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; margin-top: 2px; }
 .verdict-stat-conditions .verdict-stat-value { font-size: 1.1rem; font-weight: 700; }
 .verdict-stat-value-sub { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-top: 1px; }
+.verdict-stat-moon .verdict-stat-value { font-size: 1.1rem; font-weight: 700; white-space: nowrap; }
+.verdict-stat-moon .verdict-stat-label { max-width: 160px; }
 
 /* WDNR's own published fish list, with abundance. Visually distinct from
    the species cards below it because it answers a different question --

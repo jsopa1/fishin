@@ -530,6 +530,34 @@ class CurrentConditionsTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
+class MoonPhaseTests(unittest.TestCase):
+    """Requested directly by a real customer. Shown as plain astronomical
+    fact -- evidence for a fish-activity effect is mixed at best (mostly
+    tidal/saltwater mechanisms that don't apply to Wisconsin's inland
+    waters), so this must never read as a match input or a score."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def _a_spot(self):
+        points = self.client.get("/map/data").get_json()["points"]
+        return points[0]
+
+    def test_moon_phase_shown_with_illumination_and_disclaimer(self):
+        p = self._a_spot()
+        body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+        self.assertIn("illuminated", body)
+        self.assertIn("evidence for a fish-activity effect is mixed", body)
+        self.assertIn("not used in the match above", body)
+
+    def test_moon_phase_never_breaks_the_page(self):
+        p = self._a_spot()
+        resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
+        self.assertEqual(resp.status_code, 200)
+
+
 class ProductLoopTests(unittest.TestCase):
     """The things that make this a product someone returns to, rather
     than a data reference they read once."""

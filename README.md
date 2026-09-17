@@ -6,7 +6,7 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![419 tests passing](https://img.shields.io/badge/tests-419%20passing-brightgreen.svg)](#tests)
+[![435 tests passing](https://img.shields.io/badge/tests-435%20passing-brightgreen.svg)](#tests)
 
 ---
 
@@ -110,6 +110,7 @@ Every one of the 3,272 real access points has its own `/spot` page — click a m
 | **Regulations** | Live from WDNR's own layer, matched **point-in-polygon** rather than by name, shown in their wording with a retrieval time and a verify link. |
 | **Consumption advisories** | WDNR site-specific advice, with the stricter limits for women and children kept visually separate. |
 | **Wind & barometric pressure** | Live from the same NWS station lookup as the temperature proxy, shown as plain current-conditions text — never scored or compared to a threshold. Peer-reviewed research finds no reliable direct link between pressure and freshwater fish behavior, and this project's own V0 phase found no validated catch-rate signal from weather variables, so this stays informational only, labeled "not used in the match above." |
+| **Moon phase** | Requested directly by a real customer. Computed locally (no external API — moon phase is a deterministic function of the date), shown with illumination %. "Solunar theory" has a real following among anglers, but the evidence for a fish-activity effect is mixed and mostly describes tidal/saltwater mechanisms that don't apply to Wisconsin's inland waters — so like wind/pressure, it's labeled a traditional reference, never blended into the match. |
 
 The coordinate matching is not incidental. Wisconsin has eleven unrelated waters named "Devils Lake" with different walleye rules, so name matching could attach one lake's regulations to another — the app resolves by geometry, and where more than one water is in range it names them and refuses to choose.
 
@@ -232,7 +233,7 @@ render.yaml               One-file Render deployment blueprint
 python -m pytest
 ```
 
-**419 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
+**435 tests** across `tests/`, `analysis/tests/`, `mvp/tests/`, `ui/tests/`, and `webapp/tests/` — statistical helper functions, real-data-quality regression tests (the exact duplicate-lake and species-casing bugs described above), Flask route tests, and error-handling paths. CI runs the full suite on every push via GitHub Actions.
 
 ## Tech stack
 
