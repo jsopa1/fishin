@@ -1172,6 +1172,13 @@ def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: in
     if not county:
         return None
     try:
+        # Case-insensitive on purpose: access_points.county is raw WDNR
+        # source text and mixes "WAUKESHA" and "Waukesha" for the same
+        # real county, while species_predictions/waterbody_results use a
+        # single consistent casing. An exact match silently returned
+        # nothing for 144 real access points across 54 counties -- caught
+        # by checking why spots with a real WDNR-documented county still
+        # showed no county-level fallback at all.
         rows = conn.execute(
             """SELECT sp.species AS species,
                       COUNT(DISTINCT sp.waterbody_name) AS waterbody_count,
@@ -1179,14 +1186,14 @@ def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: in
                FROM species_predictions sp
                JOIN waterbody_results wr
                  ON wr.waterbody_name = sp.waterbody_name AND wr.county = sp.county
-               WHERE sp.county = ?
+               WHERE UPPER(sp.county) = UPPER(?)
                GROUP BY sp.species
                ORDER BY waterbody_count DESC, sp.species
                LIMIT ?""",
             (county, limit),
         ).fetchall()
         total = conn.execute(
-            "SELECT COUNT(DISTINCT waterbody_name) FROM waterbody_results WHERE county = ?", (county,)
+            "SELECT COUNT(DISTINCT waterbody_name) FROM waterbody_results WHERE UPPER(county) = UPPER(?)", (county,)
         ).fetchone()[0]
     except sqlite3.OperationalError:
         return None

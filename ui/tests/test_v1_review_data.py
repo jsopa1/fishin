@@ -571,6 +571,22 @@ class TestCountySpeciesEvidence(DataTestBase):
         self.assertEqual(ev["species"][0]["species"], "WALLEYE")
         self.assertEqual(ev["species"][0]["waterbody_count"], 2)
 
+    def test_matches_regardless_of_case_difference_from_access_points(self):
+        # access_points.county is raw WDNR source text and mixes
+        # "WAUKESHA" / "Waukesha" for the same real county, while
+        # species_predictions/waterbody_results use one consistent
+        # casing. This silently returned nothing for 144 real access
+        # points across 54 counties before the UPPER() fix -- caught by
+        # checking why spots with a real WDNR-documented county still
+        # showed no county-level fallback at all.
+        self._insert_waterbody("Pewaukee Lake", "Waukesha")
+        self._insert_species_prediction("Pewaukee Lake", "Waukesha", "WALLEYE")
+
+        ev = rd.get_county_species_evidence(self.conn, "WAUKESHA")
+        self.assertIsNotNone(ev)
+        self.assertEqual(ev["species"][0]["species"], "WALLEYE")
+        self.assertEqual(ev["waterbodies_in_county"], 1)
+
     def test_county_with_no_records_returns_none_not_an_empty_shell(self):
         self.assertIsNone(rd.get_county_species_evidence(self.conn, "Nowhere"))
 

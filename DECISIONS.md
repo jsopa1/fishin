@@ -1422,3 +1422,42 @@ than empty boxes.
 - A feature is a good forcing function for finding a bug like this one --
   the contradiction was there before, it just wasn't visible next to
   anything to contradict
+
+## 036 — A county-casing bug found by asking "what data still has blank spots," and closing the last one for real
+
+CEO direction, immediately after #035 shipped: "what data still has
+blank spots?" Ran the new dashboard's own logic (`build_species_categories`)
+against all 3,272 access points to answer that authoritatively rather
+than by inspection.
+
+**First run: 13 spots with neither Confirmed Sightings nor Likely
+species.** Checking why turned up a real bug, not a data gap: 12 of the
+13 had a real WDNR-documented county with real `species_predictions`
+rows -- `get_county_species_evidence`'s SQL did an exact string match on
+`county`, and `access_points.county` mixes raw-source casing
+("ASHLAND") against `species_predictions.county`'s consistent casing
+("Ashland") for the same real county. The exact match silently returned
+nothing. 144 real access points across 54 counties were affected --
+county-level fallback was quietly missing far beyond just the 12 fully
+blank ones. `get_wdnr_lake_species` and `get_stocking_history` already
+compared counties with `UPPER(...) = UPPER(...)`; `get_county_species_evidence`
+was the one place that hadn't been. Fixed to match.
+
+**Second run, after the fix: 1 spot left** -- Christie Lake Boat Access,
+county literally stored as the four-letter string `"Null"`, not a
+missing value. Looked up its real county from its real coordinate via
+the FCC's public Census geocoding API: Oconto County. Corrected the
+record directly rather than leaving a placeholder.
+
+**Third run: 0.** Every one of the 3,272 real access points now
+resolves to at least one entry in Confirmed Sightings or Likely species
+to find.
+
+**Rationale:**
+- Asking "what's still broken" right after shipping a feature, and
+  answering it by actually running the feature's own logic rather than
+  reasoning about it, is what turned up a bug affecting 144 points, not
+  just the 13 that happened to be totally blank
+- A real public government API (FCC's geocoder) resolving one bad county
+  value beats leaving "Null" in place or guessing -- consistent with
+  this project's real-data-only rule even for a one-record fix
