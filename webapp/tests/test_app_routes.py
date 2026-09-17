@@ -558,6 +558,35 @@ class MoonPhaseTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
+class CitizenObservedSpeciesTests(unittest.TestCase):
+    """GBIF/iNaturalist sightings (analysis/v3_gbif_species_observations.py)
+    are a real but weaker tier than a WDNR survey -- must never appear
+    without its disclaimer, and must never be silently present in the
+    same list as WDNR-sourced species."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def test_citizen_sightings_always_carry_their_disclaimer(self):
+        # Merton Millpond Access (Waukesha County) is a real access point
+        # verified, at test-writing time, to sit within 5km of a real
+        # ingested GBIF observation -- picked directly via the database
+        # rather than scanning hundreds of live spot pages hoping for a
+        # hit, which was slow enough to time out.
+        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data
+        self.assertIn(b"Recently reported nearby", body)
+        self.assertIn(b"not a WDNR survey", body)
+        self.assertIn(b"never used to drive the temperature matching", body)
+        self.assertIn(b"gbif.org", body)
+
+    def test_every_spot_page_still_loads_regardless_of_citizen_data(self):
+        p = self.client.get("/map/data").get_json()["points"][0]
+        resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
+        self.assertEqual(resp.status_code, 200)
+
+
 class ProductLoopTests(unittest.TestCase):
     """The things that make this a product someone returns to, rather
     than a data reference they read once."""

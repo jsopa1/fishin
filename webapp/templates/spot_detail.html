@@ -335,6 +335,30 @@
   </div>
   {% endif %}
 
+  {% if citizen_observed %}
+  <div class="citizen-observed-box">
+    <p class="citizen-observed-label">
+      <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg>
+      Recently reported nearby (citizen sightings)
+    </p>
+    <ul class="citizen-observed-list">
+      {% for o in citizen_observed %}
+        <li>
+          <span class="citizen-observed-name">{{ o.species.title() }}</span>
+          <span class="citizen-observed-meta">{{ o.observed_date[:10] if o.observed_date else 'undated' }} · {{ o.distance_km }} km away · reported by {{ o.recorded_by or 'an unnamed observer' }}</span>
+          <a href="{{ o.gbif_url }}" target="_blank" rel="noopener" class="citizen-observed-link">verify on GBIF <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg></a>
+        </li>
+      {% endfor %}
+    </ul>
+    <p class="citizen-observed-note">
+      Real, dated sightings logged by anglers and naturalists via iNaturalist, ID-checked by that
+      community and aggregated through <a href="https://www.gbif.org/" target="_blank" rel="noopener">GBIF</a> —
+      <strong>not a WDNR survey, and never used to drive the temperature matching below.</strong>
+      Misidentification is possible even at this tier, especially between visually similar species.
+    </p>
+  </div>
+  {% endif %}
+
   {% if species_predictions %}
     {% include "_species_cards.html" %}
   {% elif county_species %}

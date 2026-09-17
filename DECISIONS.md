@@ -1301,3 +1301,69 @@ tag onboarding; wind/pressure.
   is not free to carry indefinitely on a hunch
 - Verifying a feature live before deciding whether to keep it produced
   a better decision than any amount of debating it would have
+
+## 034 — GBIF/iNaturalist citizen sightings, a fourth species-presence tier
+
+CEO direction: "research any other source we could use" for species
+presence, followed by "yes find all other data sources for species
+which is reliable and implement them."
+
+Checked three real candidates before building anything:
+
+- **WDNR's lake-classification layer** (`FM_WFF_LAKE_CLASSIFICATIONS_WTM_EXT`)
+  looked promising -- a `FISHERIES` field with real prose -- until the
+  actual records were pulled: the text is identical across every lake in
+  the same class (e.g. every "Simple - Warm - Dark" lake gets the exact
+  same boilerplate about crappie and bluegill). It describes the lake
+  *type*, not that specific lake. Rejected for the same reason WDNR's own
+  9-category fish list is never expanded into species (#032) -- using it
+  would have reintroduced exactly the guessing already ruled out once.
+- **WDNR's stocking-summary map layer** (`FH_ANNUAL_STOCKING_SUMMARY`)
+  appears to be the same underlying stocking data already ingested via a
+  different access path. Not chased further -- it wouldn't close a real
+  gap.
+- **GBIF** (Global Biodiversity Information Facility), aggregating
+  iNaturalist's "Research Grade" observations -- a real person's
+  sighting with community-verified species ID, not one person's guess.
+  Checked live before building: thousands of real, dated, geotagged
+  Wisconsin records per species. Bison (USGS) was also checked and ruled
+  out as a separate integration -- it's literally the US gateway *into*
+  GBIF, so querying it directly would just be querying GBIF a second way.
+
+**Built `analysis/v3_gbif_species_observations.py`** against GBIF's
+public API (no key needed): resolves each of this app's 27 species to a
+GBIF taxon key via an exact-match check (a fuzzy or wrong-rank match is
+refused, not silently accepted), then pulls real Wisconsin sightings from
+the last 10 years, `basisOfRecord=HUMAN_OBSERVATION` only (excludes
+museum specimens and bulk samples, which are a different kind of
+evidence). 9,317 real observations stored across 27 species.
+
+**A real bug caught before shipping:** the first pass filtered by GBIF's
+`stateProvince` field and got zero recent Largemouth Bass sightings --
+looked like the species just wasn't there. Checking the raw facets
+showed the one genuinely recent Wisconsin sighting had no `stateProvince`
+value at all (that field is free-text, entered per observation, and
+often blank or wrong). Switched to filtering by a real geographic
+bounding box instead, re-ran, and total coverage went from 5,421 to
+9,317 observations -- a text-field filter was silently dropping real
+data across many species, not just the one that happened to hit zero.
+
+**This is a fourth, explicitly weaker tier -- `citizen_observed` -- never
+merged with the other three.** Shown on the spot page as "Recently
+reported nearby," separately styled (amber, not survey-green), always
+carrying the observer's name (required for the CC-BY-NC license these
+records carry), a live link back to the GBIF occurrence record, and the
+same disclaimer every time: not a WDNR survey, never used to drive the
+temperature match. Matched to a spot by real distance (8km), the same
+nearest-neighbor approach already used for temperature interpolation,
+since there's no lake-polygon layer to join against for arbitrary ponds.
+
+**Rationale:**
+- A real citizen sighting is genuinely different evidence from a
+  stocking record -- it says the fish was seen recently, not merely that
+  WDNR once released some -- and deserves its own tier rather than being
+  folded into either existing one
+- Two of three candidate sources looked usable at a glance and weren't;
+  checking actual records before committing to a source is what caught
+  both, the same discipline that's caught every other false lead in this
+  project

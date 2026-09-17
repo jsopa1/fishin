@@ -1109,6 +1109,52 @@ def get_current_highlights(conn: sqlite3.Connection, limit: int = 3) -> list:
     return highlights
 
 
+def get_citizen_observed_species(conn: sqlite3.Connection, lat: float, lon: float,
+                                  radius_km: float = 8.0, limit: int = 10) -> list:
+    """Real, dated, geotagged fish sightings from GBIF (see
+    analysis/v3_gbif_species_observations.py for the ingest, and why this
+    is a distinct, weaker tier than a WDNR survey). Matched to a spot by
+    real distance, the same nearest-neighbor approach already used for
+    temperature interpolation -- there is no lake-polygon layer to join
+    against for arbitrary ponds, so proximity is the honest option.
+
+    Returns the single most recent sighting per species within
+    radius_km, nearest-first is not the goal here -- most recent is,
+    since "is this species still around" is the actual question. Never
+    merged into species_predictions or the verdict: this is its own
+    tier, `citizen_observed`, shown separately."""
+    if lat is None or lon is None:
+        return []
+    try:
+        rows = conn.execute(
+            """SELECT common_name, lat, lon, observed_date, recorded_by, gbif_url
+               FROM gbif_species_observations"""
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return []
+
+    nearby_by_species = {}
+    for r in rows:
+        distance = _haversine_km(lat, lon, r["lat"], r["lon"])
+        if distance > radius_km:
+            continue
+        species = r["common_name"]
+        existing = nearby_by_species.get(species)
+        # Most recent wins -- "is this species still around" is the
+        # question, not "which sighting happened to be closest."
+        if existing is None or (r["observed_date"] or "") > (existing["observed_date"] or ""):
+            nearby_by_species[species] = {
+                "species": species,
+                "distance_km": round(distance, 1),
+                "observed_date": r["observed_date"],
+                "recorded_by": r["recorded_by"],
+                "gbif_url": r["gbif_url"],
+            }
+
+    results = sorted(nearby_by_species.values(), key=lambda x: x["observed_date"] or "", reverse=True)
+    return results[:limit]
+
+
 def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: int = 8) -> dict | None:
     """Real, county-level species evidence for a spot that has no record of
     its own -- 45% of access points are in that position, and an empty page
@@ -1220,6 +1266,7 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         wdnr_species = get_wdnr_lake_species(conn, point.get("waterbody_name"), point.get("county"))
 
     verdict = build_spot_verdict(species_predictions, temperature, activity_window)
+    citizen_observed = get_citizen_observed_species(conn, lat, lon)
 
     return {
         "point": point,
@@ -1232,4 +1279,5 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         "diel_species": diel_species,
         "stocking": stocking,
         "wdnr_species": wdnr_species,
+        "citizen_observed": citizen_observed,
     }

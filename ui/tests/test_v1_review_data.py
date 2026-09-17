@@ -903,3 +903,79 @@ class TestSpotVerdict(unittest.TestCase):
         v = rd.build_spot_verdict(preds, {"value_c": 10.8, "is_real": True}, None)
         self.assertEqual(v["matching"], [])
         self.assertNotIn("biting", (v["detail"] or "").lower())
+
+
+class TestCitizenObservedSpecies(unittest.TestCase):
+    """GBIF/iNaturalist sightings are a real but distinct evidence tier --
+    the tests that matter most are about distance filtering and never
+    silently blending this into anything WDNR-sourced."""
+
+    def setUp(self):
+        self.conn = sqlite3.connect(":memory:")
+        self.conn.row_factory = sqlite3.Row
+        self.conn.executescript(
+            """
+            CREATE TABLE gbif_species_observations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                common_name TEXT NOT NULL,
+                scientific_name TEXT NOT NULL,
+                lat REAL NOT NULL,
+                lon REAL NOT NULL,
+                observed_date TEXT,
+                recorded_by TEXT,
+                license_url TEXT,
+                gbif_occurrence_key INTEGER NOT NULL UNIQUE,
+                gbif_url TEXT NOT NULL,
+                fetched_at TEXT NOT NULL
+            );
+            """
+        )
+
+    def _insert(self, common_name, lat, lon, observed_date, key, recorded_by="tester"):
+        self.conn.execute(
+            """INSERT INTO gbif_species_observations
+               (common_name, scientific_name, lat, lon, observed_date, recorded_by,
+                license_url, gbif_occurrence_key, gbif_url, fetched_at)
+               VALUES (?, 'Testus fishus', ?, ?, ?, ?, NULL, ?, 'https://gbif.org/x', '2026-01-01')""",
+            (common_name, lat, lon, observed_date, recorded_by, key),
+        )
+        self.conn.commit()
+
+    def test_returns_empty_list_with_no_coordinates(self):
+        self.assertEqual(rd.get_citizen_observed_species(self.conn, None, None), [])
+
+    def test_returns_empty_list_when_table_does_not_exist(self):
+        conn = sqlite3.connect(":memory:")
+        conn.row_factory = sqlite3.Row
+        self.assertEqual(rd.get_citizen_observed_species(conn, 45.0, -89.0), [])
+
+    def test_a_nearby_observation_is_included(self):
+        self._insert("WALLEYE", 45.001, -89.001, "2024-06-01", 1)
+        result = rd.get_citizen_observed_species(self.conn, 45.0, -89.0, radius_km=8.0)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["species"], "WALLEYE")
+        self.assertLess(result[0]["distance_km"], 1.0)
+
+    def test_a_far_away_observation_is_excluded(self):
+        self._insert("WALLEYE", 46.5, -90.5, "2024-06-01", 2)  # well over 8km away
+        result = rd.get_citizen_observed_species(self.conn, 45.0, -89.0, radius_km=8.0)
+        self.assertEqual(result, [])
+
+    def test_only_the_most_recent_sighting_per_species_is_kept(self):
+        self._insert("WALLEYE", 45.001, -89.001, "2020-01-01", 3)
+        self._insert("WALLEYE", 45.002, -89.002, "2024-06-01", 4)
+        result = rd.get_citizen_observed_species(self.conn, 45.0, -89.0, radius_km=8.0)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["observed_date"], "2024-06-01")
+
+    def test_different_species_are_both_kept(self):
+        self._insert("WALLEYE", 45.001, -89.001, "2024-06-01", 5)
+        self._insert("MUSKELLUNGE", 45.001, -89.001, "2024-06-01", 6)
+        result = rd.get_citizen_observed_species(self.conn, 45.0, -89.0, radius_km=8.0)
+        self.assertEqual({r["species"] for r in result}, {"WALLEYE", "MUSKELLUNGE"})
+
+    def test_result_carries_attribution_fields_for_license_compliance(self):
+        self._insert("WALLEYE", 45.001, -89.001, "2024-06-01", 7, recorded_by="realangler42")
+        result = rd.get_citizen_observed_species(self.conn, 45.0, -89.0, radius_km=8.0)
+        self.assertEqual(result[0]["recorded_by"], "realangler42")
+        self.assertTrue(result[0]["gbif_url"].startswith("https://"))

@@ -461,6 +461,7 @@ def spot_detail():
         county_species=detail["county_species"], activity_window=detail["activity_window"],
         diel_species=detail["diel_species"], stocking=detail["stocking"],
         wdnr_species=detail["wdnr_species"], verdict=detail["verdict"],
+        citizen_observed=detail["citizen_observed"],
         regulations=regulations, advisory=advisory, conditions=conditions, moon=moon,
     )
 
