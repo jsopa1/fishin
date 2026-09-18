@@ -563,6 +563,43 @@ class TestUsgsGenericSiteMatching(TempDataMixin, unittest.TestCase):
         ])
         self.assertEqual(v1.find_usgs_site_matches("Fox"), [])  # too short to substring-match safely
 
+    def test_a_fragment_buried_inside_a_different_water_bodys_name_is_rejected(self):
+        """Regression test for a real bug: 'MILL CREEK' matched inside
+        'BADGER MILL CREEK AT VERONA, WI' and was returned as 6 different
+        counties' own real reading, none of them near Verona (see
+        DECISIONS.md #040). A plain substring match can't tell 'Mill
+        Creek' apart from being a fragment of the unrelated 'Badger Mill
+        Creek'; requiring the target to be a PREFIX of the station's own
+        name (before its location marker) can."""
+        self._set_usgs_sites([
+            {"site_no": "1", "station_nm": "BADGER MILL CREEK AT VERONA, WI", "site_type": "ST", "lat": "1", "lon": "1"},
+            {"site_no": "2", "station_nm": "WILSON PARK CREEK @ GMIA OUTFALL 7 @ MILWAUKEE,WI", "site_type": "ST", "lat": "1", "lon": "1"},
+        ])
+        self.assertEqual(v1.find_usgs_site_matches("Mill Creek"), [])
+        self.assertEqual(v1.find_usgs_site_matches("Park Creek"), [])
+
+    def test_the_water_bodys_own_name_still_matches_when_it_is_the_full_prefix(self):
+        self._set_usgs_sites([
+            {"site_no": "1", "station_nm": "BADGER MILL CREEK AT VERONA, WI", "site_type": "ST", "lat": "1", "lon": "1"},
+        ])
+        matches = v1.find_usgs_site_matches("Badger Mill Creek")
+        self.assertEqual(len(matches), 1)
+        self.assertEqual(matches[0]["site_no"], "1")
+
+    def test_matches_using_an_at_sign_location_marker(self):
+        self._set_usgs_sites([
+            {"site_no": "1", "station_nm": "BADGER MILL CREEK @ HIGHWAYS 18 & 151 @ MADISON,WI", "site_type": "ST", "lat": "1", "lon": "1"},
+        ])
+        matches = v1.find_usgs_site_matches("Badger Mill Creek")
+        self.assertEqual(len(matches), 1)
+
+    def test_matches_using_the_nr_abbreviation_for_near(self):
+        self._set_usgs_sites([
+            {"site_no": "1", "station_nm": "STEVENSON CREEK @ CT HWY M NR BOULDER JUNCTION, WI", "site_type": "ST", "lat": "1", "lon": "1"},
+        ])
+        matches = v1.find_usgs_site_matches("Stevenson Creek")
+        self.assertEqual(len(matches), 1)
+
 
 class TestUsgsSentinelValuesRejected(unittest.TestCase):
     """Real bug: USGS NWIS reports missing data as the sentinel -999999

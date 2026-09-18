@@ -1657,3 +1657,50 @@ gauge's 20.1/20.0C; confirmed on a real Door County spot page ("65.3°F
 - Deliberately investigating before rubber-stamping the requested
   feature (Green Bay buoy coverage) found a real bug the pull request
   would otherwise have shipped past unnoticed
+
+## 041 — USGS name matching fixed statewide: prefix, not substring
+
+#040 fixed the Green Bay false-positive as a special case (buoys now
+take priority for Great Lakes names). This entry is the general fix: an
+audit of all 20 waterbody names currently backed by a real USGS match
+found the same failure mode outside the Great Lakes too --
+`find_usgs_site_matches()`'s plain substring test let "MILL CREEK"
+match inside "BADGER MILL CREEK AT VERONA, WI" (Dane County) and get
+returned as the real reading for Buffalo, Calumet, Iowa, Jackson,
+Richland, AND Wood counties' own "Mill Creek" entries -- six different,
+unrelated creeks statewide, none of them anywhere near Verona, all
+confidently showing the same wrong number. "PARK CREEK" (Douglas
+County, near Superior) matched the same way inside "WILSON PARK CREEK
+@ GMIA OUTFALL 7 @ MILWAUKEE, WI" -- creeks over 300 miles apart.
+
+Fixed at the root: `find_usgs_site_matches()` now requires the target
+waterbody name to be a PREFIX of the station's own name -- the part of
+"FOX RIVER AT BERLIN, WI"-style station names before their location
+marker (AT/NEAR/NR/@/ABOVE/BELOW/OUTLET/INLET), not a substring
+anywhere in the raw string. Verified against all 20 currently-real USGS
+matches before shipping: the 18 legitimate ones (Wolf River, Kewaunee
+River, Root River, Black Earth Creek, etc.) still match exactly as
+before: Mill Creek and Park Creek are the only two that stop matching,
+which is the correct outcome -- neither has a real USGS gauge at all.
+Applied directly to the 7 affected rows (refresh_temperatures.py
+deliberately refuses to downgrade a real reading to a proxy, by design,
+to protect against a sensor's temporary outage -- the right behavior
+for that job, the wrong tool for a permanent match correction, so this
+used the same direct rewrite_waterbody() path as #040 instead). Verified
+live: Mill Creek (Iowa County) now honestly reads "estimated" instead of
+a confidently-wrong "real measurement" borrowed from a creek 40+ miles
+away in a different county.
+
+**Rationale:**
+- The same bug class Green Bay exposed (#040) was checked for
+  systematically rather than assumed to be a one-off, and it wasn't --
+  6 more counties were affected by the same root cause
+- A tool built to protect against transient sensor outages
+  (refresh_temperatures.py's real-never-downgrades-to-proxy rule) is
+  not automatically the right tool for a permanent data-quality
+  correction; recognizing which invariant actually applies mattered
+  here
+- Verifying the fix against every currently-real match, not just the
+  two known-bad ones, before shipping caught that all 18 legitimate
+  matches were preserved -- a prefix-based fix that accidentally broke
+  real coverage would have been a worse outcome than the bug it fixed

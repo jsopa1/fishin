@@ -36,6 +36,7 @@ import argparse
 import csv
 import datetime
 import json
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -469,19 +470,43 @@ def load_usgs_sites() -> list:
     return _read_csv_cached(USGS_SITES_CSV)
 
 
+_USGS_LOCATION_MARKER_RE = re.compile(r"\s+(AT|NEAR|NR|ABOVE|BELOW|OUTLET|INLET)\s+|\s*@\s*", re.IGNORECASE)
+
+
+def _usgs_station_own_name(station_nm: str) -> str:
+    """USGS station names are formatted like "FOX RIVER AT BERLIN, WI" or
+    "BADGER MILL CREEK @ HIGHWAYS 18 & 151 @ MADISON,WI" -- the part
+    before the first location marker (AT/NEAR/NR/@/ABOVE/BELOW/OUTLET/
+    INLET) is the actual water body's own name; everything after is
+    where the sensor sits. Splitting it out matters because a plain
+    substring match against the whole string is a real bug, not a
+    theoretical one: "MILL CREEK" matched inside "BADGER MILL CREEK AT
+    VERONA, WI" and was returned as 6 different counties' own real
+    reading, none of them anywhere near Verona; "GREEN BAY" matched
+    inside "FOX RIVER AT OIL TANK DEPOT AT GREEN BAY, WI" the same way
+    (see DECISIONS.md #040)."""
+    return _USGS_LOCATION_MARKER_RE.split(_norm(station_nm), maxsplit=1)[0].strip()
+
+
 def find_usgs_site_matches(waterbody_name: str) -> list:
     """Real, generic name match against the 185-site USGS WI water-
-    temperature reference table (Part 2/3: 177 streams + 8 lakes). USGS
-    station names are formatted like "FOX RIVER AT BERLIN, WI" -- matches
-    if the waterbody name is a substring of the station name. Returns
-    every match (there can be several sites on the same named river);
-    the caller tries them in order until one yields real live data."""
+    temperature reference table (Part 2/3: 177 streams + 8 lakes).
+    Matches if the waterbody name is a PREFIX of the station's own name
+    (the part before its location marker -- see _usgs_station_own_name),
+    not merely a substring anywhere in the raw station name string; the
+    latter let an unrelated water body's name (e.g. "Badger Mill Creek")
+    falsely match a target that's only a fragment of it (e.g. "Mill
+    Creek") rather than the same water body under a shorter/informal
+    name (e.g. target "Wolf River" against station "WOLF RIVER AT NEW
+    LONDON, WI", still correctly matched here). Returns every match
+    (there can be several sites on the same named river); the caller
+    tries them in order until one yields real live data."""
     target = _norm(waterbody_name.split("(")[0].strip())
     if len(target) < 4:
         return []
     matches = []
     for site in load_usgs_sites():
-        if target in _norm(site["station_nm"]):
+        if _usgs_station_own_name(site["station_nm"]).startswith(target):
             matches.append(site)
     return matches
 
