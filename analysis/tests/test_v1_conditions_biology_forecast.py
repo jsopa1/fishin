@@ -48,6 +48,7 @@ class TempDataMixin:
             "WATER_TEMP_CSV": v1.WATER_TEMP_CSV,
             "USGS_SITES_CSV": v1.USGS_SITES_CSV,
             "LAKE_MICHIGAN_BUOY_CSV": v1.LAKE_MICHIGAN_BUOY_CSV,
+            "LAKE_SUPERIOR_BUOY_CSV": v1.LAKE_SUPERIOR_BUOY_CSV,
             "THRESHOLDS_JSON": v1.THRESHOLDS_JSON,
         }
         # Point batch2 and the USGS sites table at nonexistent temp paths by
@@ -56,6 +57,7 @@ class TempDataMixin:
         v1.SURVEY_CSV_BATCH2 = Path(self._tmpdir) / "no_batch2.csv"
         v1.USGS_SITES_CSV = Path(self._tmpdir) / "no_usgs_sites.csv"
         v1.LAKE_MICHIGAN_BUOY_CSV = Path(self._tmpdir) / "no_buoy_sites.csv"
+        v1.LAKE_SUPERIOR_BUOY_CSV = Path(self._tmpdir) / "no_superior_buoy_sites.csv"
 
     def tearDown(self):
         for name, path in self._orig_paths.items():
@@ -70,6 +72,11 @@ class TempDataMixin:
         path = os.path.join(self._tmpdir, "buoy_sites.csv")
         _write_csv(path, rows, ["station_id", "station_name", "lat", "lon"])
         v1.LAKE_MICHIGAN_BUOY_CSV = Path(path)
+
+    def _set_superior_buoy_sites(self, rows):
+        path = os.path.join(self._tmpdir, "superior_buoy_sites.csv")
+        _write_csv(path, rows, ["station_id", "station_name", "lat", "lon"])
+        v1.LAKE_SUPERIOR_BUOY_CSV = Path(path)
 
     def _set_survey(self, rows):
         path = os.path.join(self._tmpdir, "survey.csv")
@@ -648,6 +655,20 @@ class TestFindNearestBuoys(TempDataMixin, unittest.TestCase):
         self._set_buoy_sites([])
         self.assertEqual(v1.find_nearest_buoys(43.0, -87.9), [])
 
+    def test_lake_superior_uses_its_own_site_table_not_michigans(self):
+        self._set_buoy_sites([
+            {"station_id": "MICH", "station_name": "Michigan buoy", "lat": "46.8", "lon": "-91.9"},
+        ])
+        self._set_superior_buoy_sites([
+            {"station_id": "SUP", "station_name": "Superior buoy", "lat": "46.81", "lon": "-91.91"},
+        ])
+        result = v1.find_nearest_buoys(46.8, -91.9, lake_name="LAKE SUPERIOR")
+        self.assertEqual([r["station_id"] for r in result], ["SUP"])
+
+    def test_unknown_lake_name_returns_empty_list(self):
+        self._set_buoy_sites([{"station_id": "X", "station_name": "X", "lat": "43.0", "lon": "-87.9"}])
+        self.assertEqual(v1.find_nearest_buoys(43.0, -87.9, lake_name="LAKE ERIE"), [])
+
 
 class TestParseNdbcRealtime2(unittest.TestCase):
     """Pure parsing of NDBC's real, public realtime2.txt format -- see
@@ -719,6 +740,23 @@ class TestLakeMichiganTemperatureRouting(TempDataMixin, unittest.TestCase):
         self._set_water_temp([])
         result = v1.get_current_temperature("LAKE MICHIGAN", county="Milwaukee", live_refresh=False)
         self.assertEqual(result["method"], "no_data")
+
+    def test_lake_superior_also_routes_to_the_buoy_path(self):
+        self._set_superior_buoy_sites([
+            {"station_id": "X", "station_name": "Test buoy", "lat": "46.8", "lon": "-91.9"},
+        ])
+        self._set_water_temp([])
+        result = v1.get_current_temperature("LAKE SUPERIOR", county="Bayfield", live_refresh=False)
+        self.assertEqual(result["method"], "no_data")  # live_refresh disabled, but must not error
+
+    def test_lake_superior_buoy_table_does_not_affect_lake_michigan_routing(self):
+        self._set_buoy_sites([])
+        self._set_superior_buoy_sites([
+            {"station_id": "X", "station_name": "Test buoy", "lat": "46.8", "lon": "-91.9"},
+        ])
+        self._set_water_temp([])
+        result = v1.get_current_temperature("Devils Lake", county="Sauk", live_refresh=False)
+        self.assertNotEqual(result["method"], "ndbc_buoy_live")
 
 
 if __name__ == "__main__":

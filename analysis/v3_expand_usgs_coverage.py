@@ -22,6 +22,14 @@ Rivers, and Black Earth Creek. Verified live (Wolf River returned a real
 17.5C reading) before adding them to the CSV. This script is what makes
 that addition actually count for something instead of sitting unused.
 
+Also covers the same middle-ground gap for Lake Michigan/Lake Superior's
+NDBC-buoy path (get_current_temperature's step 1b): Lake Superior was
+entirely on the NWS air-temperature proxy across its 4 WI counties until
+data/v1/lake_superior_buoy_sites.csv was added this pass, mirroring the
+already-shipped Lake Michigan buoy coverage. Verified live: Ashland
+County's Lake Superior entry returned a real 16.3C reading from NDBC
+buoy 45028 (Western Lake Superior), a few hours old at check time.
+
 Usage:
     python analysis/v3_expand_usgs_coverage.py --dry-run   # show matches, change nothing
     python analysis/v3_expand_usgs_coverage.py             # apply real, plausible matches
@@ -56,13 +64,15 @@ def proxy_waterbodies(conn: sqlite3.Connection) -> list:
 
 def find_candidates(conn: sqlite3.Connection) -> list:
     """Proxy waterbodies whose name matches ANY real USGS site in the
-    current CSV -- not just the 8 newly added ones, so this script stays
-    useful the next time the CSV grows rather than needing a hardcoded
-    site list re-edited each time."""
+    current CSV, or that are Lake Michigan/Lake Superior (routed to the
+    NDBC-buoy path instead) -- not just today's specific additions, so
+    this script stays useful the next time either CSV grows rather than
+    needing a hardcoded site list re-edited each time."""
     candidates = []
     for row in proxy_waterbodies(conn):
-        matches = v1.find_usgs_site_matches(row["waterbody_name"])
-        if matches:
+        if v1.find_usgs_site_matches(row["waterbody_name"]):
+            candidates.append(row)
+        elif v1._norm(row["waterbody_name"]) in v1.GREAT_LAKES_WITH_BUOYS:
             candidates.append(row)
     return candidates
 
@@ -76,7 +86,7 @@ def refresh(dry_run: bool = False) -> int:
     thresholds = v1.load_thresholds()
     checked = upgraded = 0
 
-    print(f"Checking {len(candidates)} proxy waterbodies with a plausible USGS site name match...", file=sys.stderr)
+    print(f"Checking {len(candidates)} proxy waterbodies with a plausible USGS/buoy match...", file=sys.stderr)
 
     for row in candidates:
         name, county = row["waterbody_name"], row["county"]

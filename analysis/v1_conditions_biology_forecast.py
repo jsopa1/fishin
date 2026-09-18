@@ -50,6 +50,8 @@ STOCKING_CSV = DATA_V1 / "wi_stocking_statewide_2011_2025.csv"
 WATER_TEMP_CSV = DATA_V1 / "wi_lake_water_temp_current.csv"
 USGS_SITES_CSV = DATA_V1 / "usgs_wi_water_temp_sites.csv"
 LAKE_MICHIGAN_BUOY_CSV = DATA_V1 / "lake_michigan_buoy_sites.csv"
+LAKE_SUPERIOR_BUOY_CSV = DATA_V1 / "lake_superior_buoy_sites.csv"
+GREAT_LAKES_WITH_BUOYS = {"LAKE MICHIGAN", "LAKE SUPERIOR"}
 THRESHOLDS_JSON = DATA_V1 / "physiology_thresholds_v1.json"
 
 USER_AGENT = "fishin-v1-conditions-forecast/0.1 (research prototype; contact via project repo)"
@@ -488,9 +490,23 @@ def load_lake_michigan_buoy_sites() -> list:
     return _read_csv_cached(LAKE_MICHIGAN_BUOY_CSV)
 
 
+def load_great_lakes_buoy_sites(lake_name: str) -> list:
+    """Looks up LAKE_MICHIGAN_BUOY_CSV/LAKE_SUPERIOR_BUOY_CSV as live
+    module globals (not a dict frozen at import time), so tests that
+    monkeypatch either path to an isolated fixture are honored here too."""
+    normed = _norm(lake_name)
+    if normed == "LAKE MICHIGAN":
+        csv_path = LAKE_MICHIGAN_BUOY_CSV
+    elif normed == "LAKE SUPERIOR":
+        csv_path = LAKE_SUPERIOR_BUOY_CSV
+    else:
+        return []
+    return _read_csv_cached(csv_path)
+
+
 def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     """Great-circle distance in km -- used only to pick the nearest real
-    NDBC buoy to a real, geocoded Lake Michigan coordinate, never to
+    NDBC buoy to a real, geocoded Great Lakes coordinate, never to
     estimate or interpolate a temperature value itself."""
     import math
 
@@ -502,14 +518,14 @@ def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 2 * r * math.asin(math.sqrt(a))
 
 
-def find_nearest_buoys(lat: float, lon: float) -> list:
-    """Every real NDBC/Lake Michigan buoy in the reference table
-    (see data/v1/lake_michigan_buoy_sites.csv), nearest first. Returns
-    all of them so the caller can try each in turn until one has a
-    real, fresh reading -- some real buoys go stale or offline
-    seasonally (verified: station 45014 was reporting nothing newer
-    than a week old during this project's own live testing)."""
-    sites = load_lake_michigan_buoy_sites()
+def find_nearest_buoys(lat: float, lon: float, lake_name: str = "LAKE MICHIGAN") -> list:
+    """Every real NDBC buoy in the reference table for this Great Lake
+    (see data/v1/lake_michigan_buoy_sites.csv, data/v1/lake_superior_buoy_sites.csv),
+    nearest first. Returns all of them so the caller can try each in turn
+    until one has a real, fresh reading -- some real buoys go stale or
+    offline seasonally (verified: station 45014 was reporting nothing
+    newer than a week old during this project's own live testing)."""
+    sites = load_great_lakes_buoy_sites(lake_name)
     return sorted(sites, key=lambda s: _haversine_km(lat, lon, float(s["lat"]), float(s["lon"])))
 
 
@@ -615,16 +631,20 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
          reference table (177 streams + 8 lakes), tried in order until one
          returns real current data. This is the PRIMARY real source for
          streams, which have far richer live USGS coverage than lakes do.
-      1b. For Lake Michigan specifically: a live NOAA NDBC buoy water-
-          temperature reading (real water measurement, not an air proxy)
-          from the nearest of 15 real Lake Michigan buoys, tried in
-          distance order until one has a fresh reading. USGS stream
-          gauges don't cover the open lake, so this is Lake Michigan's
-          own equivalent of step 1 -- inserted here, before falling back
-          to an air-temperature proxy, specifically because a huge,
+      1b. For Lake Michigan or Lake Superior specifically: a live NOAA
+          NDBC buoy water-temperature reading (real water measurement,
+          not an air proxy) from the nearest of 15 real Lake Michigan
+          buoys or 4 real Lake Superior buoys (western end, off WI's
+          Ashland/Bayfield/Douglas shoreline -- Lake Superior's other WI
+          counties have no working buoy nearer), tried in distance order
+          until one has a fresh reading. USGS stream gauges don't cover
+          the open lake, so this is each Great Lake's own equivalent of
+          step 1 -- inserted here, before falling back to an
+          air-temperature proxy, specifically because a huge,
           thermally-buffered lake makes air temperature a poor stand-in
           for water temperature (verified: every Lake Michigan entry was
-          using the air proxy before this was added).
+          using the air proxy before this was added; Lake Superior was
+          the same before this addition).
       2. Pre-pulled real CLMN/USGS reading from the original 22-lake pull
          -- used AS-IS with its true observed date (real, dated data, not
          stale-and-hidden; CLMN itself is periodic, not a live feed).
@@ -649,10 +669,10 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
                     "observed_at": obs_time,
                 }
 
-    if live_refresh and _norm(lake_name) == "LAKE MICHIGAN":
+    if live_refresh and _norm(lake_name) in GREAT_LAKES_WITH_BUOYS:
         coords = geocode_live(lake_name, county) or (geocode_live(county, None) if county else None)
         if coords:
-            for buoy in find_nearest_buoys(*coords):
+            for buoy in find_nearest_buoys(*coords, lake_name=lake_name):
                 try:
                     value_c, obs_time = get_ndbc_buoy_water_temp_c(buoy["station_id"])
                 except (urllib.error.HTTPError, urllib.error.URLError):

@@ -1544,3 +1544,71 @@ NWS air-temperature proxy.
 - Matching by name against the existing CSV format (rather than adding
   a parallel discovery mechanism) keeps this script useful for any
   future CSV growth, not just this one addition
+
+## 039 — CEO reliability bar rejects the CLMN expansion; Lake Superior gets real buoy coverage instead
+
+CEO, mid-build: "if it can't be up to date at least week by week then I
+dont want it in our system." This came up while expanding WDNR's Citizen
+Lake Monitoring Network (CLMN) water-temperature readings from the 9
+lakes in the original pull to potentially hundreds more, statewide.
+
+**The CLMN expansion was built and then rejected, not silently
+abandoned.** Phase 1 (`analysis/v3_clmn_station_directory.py`) solved a
+real technical problem -- WDNR's station listing paginates via ASP.NET
+WebForms postback behind an F5 load balancer; a POST that doesn't carry
+the session-affinity cookies from its initial GET can land on a
+different backend than generated the page's ViewState and silently
+redirect to a generic error page, which this project's own repeated
+requests reproduced before a shared cookie jar fixed it -- and found
+7,081 real stations across all 72 counties. Phase 2
+(`analysis/v3_clmn_temperature_pull.py`) downloaded and parsed real
+`.xlsx` reports (pure stdlib, no new dependency) and caught two real
+defects before they reached production: some rows report Fahrenheit
+under a "DEGREES F" units column rather than the Celsius the rest of the
+file uses, and one Barron County station parsed to a physically
+impossible -6.1C that a plausibility check (reusing
+`v1.is_plausible_water_temp_c`, the same guard already protecting
+USGS's `-999999` sentinel bug) caught and rejected.
+
+None of that changes the underlying problem: CLMN is volunteer-collected
+on an unpredictable cadence -- real gaps in this pull ranged from 11 days
+to 822 days between a lake's samples, with no mechanism guaranteeing the
+next reading arrives within a week of the last. Tightening the recency
+filter (tried: 3 years down to 1 year) only changes how stale a
+currently-accepted reading is allowed to be; it can't make the *next*
+update arrive on any predictable schedule, because that's a property of
+the source, not the filter. The CEO's bar is a cadence requirement, not
+a freshness-at-pull-time requirement, and CLMN cannot meet it. The two
+scripts and `data/v1/clmn_station_directory.csv` are being kept
+uncommitted, locally, in case the standard or the source changes later,
+but were never wired into the app.
+
+**What does clear the bar and shipped instead:** Lake Superior, which
+borders 4 WI counties (Ashland, Bayfield, Douglas, Iron), was entirely
+on the NWS air-temperature proxy -- the exact gap Lake Michigan had
+before this project added its 15-buoy NDBC coverage. NOAA's live NDBC
+feed has 4 real, currently-reporting water-temperature buoys relevant to
+WI's Lake Superior waters (Wisconsin Point, Western Lake Superior,
+McQuade Harbor Nearshore, and the Duluth Harbor NOS station) -- the same
+generic buoy-routing code Lake Michigan already used, extended to a
+second Great Lake via `GREAT_LAKES_WITH_BUOYS` and a per-lake site CSV
+rather than a hardcoded Michigan-only branch. NDBC readings are rejected
+outright if older than `NDBC_BUOY_MAX_AGE_HOURS` (48h) -- comfortably
+inside a weekly bar. Verified live: all 4 WI counties upgraded from
+proxy to real (Ashland/Bayfield/Iron: 16.3C via buoy 45028; Douglas:
+16.7C via buoy 45217, Wisconsin Point), each reading a few hours old at
+verification time.
+
+**Rationale:**
+- A reliability bar stated as a cadence requirement ("week by week")
+  should be evaluated as a property of the source's own update
+  mechanism, not worked around by tuning how old an individual reading
+  is allowed to be
+- Real, tested infrastructure that fails a later-stated standard is
+  still worth keeping (uncommitted) rather than deleting outright -- the
+  ASP.NET pagination fix in particular has value independent of CLMN
+  specifically
+- Generalizing the existing Lake Michigan buoy code to accept a lake
+  name (rather than a Michigan-specific branch) made adding Lake
+  Superior a small, low-risk change instead of a parallel
+  implementation

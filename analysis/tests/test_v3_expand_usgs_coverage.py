@@ -127,6 +127,19 @@ class FindCandidatesTests(ExpandUsgsCoverageTestBase):
         names = {c["waterbody_name"] for c in candidates}
         self.assertEqual(names, {"Matches Site River"})
 
+    def test_also_includes_lake_michigan_and_lake_superior_for_the_buoy_path(self):
+        _insert_waterbody(expand.DB_PATH, "LAKE MICHIGAN", "Milwaukee")
+        _insert_waterbody(expand.DB_PATH, "LAKE SUPERIOR", "Ashland")
+        _insert_waterbody(expand.DB_PATH, "No Match Creek", "Dane")
+        conn = sqlite3.connect(str(expand.DB_PATH))
+        conn.row_factory = sqlite3.Row
+
+        with mock.patch.object(expand.v1, "find_usgs_site_matches", return_value=[]):
+            candidates = expand.find_candidates(conn)
+        conn.close()
+        names = {c["waterbody_name"] for c in candidates}
+        self.assertEqual(names, {"LAKE MICHIGAN", "LAKE SUPERIOR"})
+
 
 class RefreshTests(ExpandUsgsCoverageTestBase):
     def _patch_common(self, temp_info):
