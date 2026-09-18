@@ -1535,6 +1535,505 @@
           ]
         }
       ]
+    },
+    "SAUGER": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "sauger-rivers-murky",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Saugers are mostly riverine: they prefer larger rivers and spend much of their life there, are not picky about clear water and are often found in muddy rivers; their eyesight helps them thrive in deeper, murkier water. In spawning season they ascend tributaries or enter backwaters.",
+          "tier": "well-established",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "Saugers' eyesight helps them thrive in deeper and murkier haunts. They are native to much of the eastern United States and southern Canada in mostly riverine habitats.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - Sauger. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/fishiowa/fishdetails/SAR",
+              "quote": "The Sauger is not picky in its choice of clear waters and is often found in muddy rivers. It prefers larger rivers and spends much of its life there, except during the spawning season, when it ascends tributary streams or enters backwaters in search of suitable spawning habitat.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "sauger-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Sauger spawn in spring (April through early May), typically just after walleye and in slightly deeper water; like walleye they build no nest - eggs are broadcast over gravel or rock and left unattended.",
+          "tier": "well-established",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "Spawning occurs in spring, typically just after the walleye spawn and in slightly deeper water. Like walleyes, saugers do not create nests; females broadcast eggs over gravel or rock substrates",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - Sauger. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/fishiowa/fishdetails/SAR",
+              "quote": "Spawning takes place in April through early May. Their spawning habits are very similar to Walleye. Eggs are deposited at random, fertilized and left unattended.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "sauger-forage",
+          "field": "forage",
+          "season_or_life_stage": "young and adult",
+          "text": "Adults eat mostly fish, crayfish, other crustaceans and insects (shiners, shad and yellow perch named); young feed on zooplankton and midge fly larvae, then mayflies.",
+          "tier": "well-established",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - Sauger. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/fishiowa/fishdetails/SAR",
+              "quote": "Adult Sauger eat mostly fish, crayfish, other crustaceans and insects. The young feed extensively on midge fly larvae and, as they become older, on immature and adult mayflies.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "As they grow, their diet broadens to include larger invertebrates as well as crustaceans and fish such as shiners, shad, and yellow perch.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "sauger-where-to-fish",
+          "field": "structure",
+          "season_or_life_stage": "angling",
+          "text": "Most sauger are caught near the bottom below a dam, around large instream structures that divert flow; they often occupy deeper, darker places in rivers and lakes, and in early spring gather below dams while trying to migrate to spawn.",
+          "tier": "well-established",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - Sauger. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/fishiowa/fishdetails/SAR",
+              "quote": "Most sauger are caught near the bottom below a dam. Look for large instream structures that divert flow and you will find fish.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "saugers often occupy deeper, darker places in rivers and lakes. In early spring, find saugers below Mississippi River dams as they attempt to migrate for the spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "WHITE BASS": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "whitebass-mobile-school",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "White bass live in a variety of habitat types, school and feed by sight; they are very mobile (can travel over 100 miles) with strong spawning-site fidelity.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. White bass (Morone chrysops), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/white-bass",
+              "quote": "White bass live in a variety of habitat types, where they school and feed by visual orientation. White bass are a very mobile species, capable of traveling over 100 miles and have strong spawning site fidelity.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "whitebass-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "White bass migrate through tributary streams to spawn (May to early June depending on winter); spawning begins as water approaches 60 F and can continue for several weeks.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. White bass (Morone chrysops), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/white-bass",
+              "quote": "The best time to catch white bass is as they migrate through tributary streams to spawn which occurs from May until early June depending on how long winter persists. ... Spawning activity occurs in the spring, beginning as water temperatures approach 60° Fahrenheit and can continue for several weeks.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "whitebass-feeding",
+          "field": "forage",
+          "season_or_life_stage": "young and adult",
+          "text": "Most feeding is in early morning or late evening; young eat insects, insect larvae, crustaceans and small fish, and adults depend mainly on minnow species.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. White bass (Morone chrysops), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/white-bass",
+              "quote": "Most feeding occurs during early morning or late evening hours ... The young grow rapidly on a diet of insects and insect larva, crustaceans, and small fish. As they grow they depend on a fish diet, mainly consisting of minnow species.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "ROCK BASS": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "rockbass-diet-feeding",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Rock bass are carnivores: smaller fish (yellow perch, minnows, sometimes their own young), insects and crustaceans; they sometimes take food from the surface and may feed heavily in the evening and early morning.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. Rock bass (Ambloplites rupestris), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/rock-bass",
+              "quote": "Rock bass are carnivorous, and their diet consists of smaller fish, including their own young at times, yellow perch, and minnows, as well as insects, and crustaceans. Rock bass are occasionally known to take food from the surface. Adult rock bass may eat heavily, particularly in the evening and early in the morning.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "rockbass-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Spawn April to early June in warm water of 12-15 C (about 54-59 F); the male digs a nest near the lake shallows and aggressively guards it, often in a crowded spawning area.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. Rock bass (Ambloplites rupestris), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/rock-bass",
+              "quote": "Spawning occurs from April to early June in warm waters ranging from 12 to 15 degrees Celsius ... The male will dig a nest near the lake shallows, and will aggressively guard it.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "not_yet_documented": [
+        "structure, depth and water type (this source does not state them)"
+      ]
+    },
+    "LAKE WHITEFISH": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "whitefish-schools-depth",
+          "field": "depth_and_light",
+          "season_or_life_stage": "adult, Great Lakes",
+          "text": "Lake whitefish school with other whitefish in the Great Lakes at depths of up to 200 feet and deeper as summer's heat climbs.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. Lake whitefish (Coregonus clupeaformis), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/lake-whitefish",
+              "quote": "The reclusive lake whitefish prefers to swim in the company of a school of fellow whitefish in the Great Lakes at depths of up to 200 feet and deeper as summer's heat climbs.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "whitefish-diet",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "With a small, delicate mouth they eat insects, freshwater shrimp, small fish and fish eggs, and bottom organisms, mostly on or near the lake bottom.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. Lake whitefish (Coregonus clupeaformis), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/lake-whitefish",
+              "quote": "it is therefore confined to dining on insects, freshwater shrimp, small fish and fish eggs, and bottom organisms. Most feeding takes place on or near lake-bottoms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "whitefish-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Lake whitefish spawn in early winter in shallow rock- or sand-bottomed lake water less than 25 feet deep; young hatch the next spring and move to deeper water by early summer.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Michigan DNR. Lake whitefish (Coregonus clupeaformis), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/lake-whitefish",
+              "quote": "The whitefish spawns in early winter in shallow rock or sand bottomed lake waters less than 25 feet deep. The young hatch the following spring, and grow large enough to leave the protective shallows for deeper waters by early summer.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "not_yet_documented": [
+        "baits: the source says special techniques are required but names none"
+      ]
+    },
+    "BURBOT": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "burbot-cool-waters",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Burbot frequent cool waters of large rivers, the lower reaches of their tributaries, and lakes - particularly in northern Wisconsin. Minnesota DNR adds that they typically require summer water temperatures below 70 F, are a bottom hugger, and are most active in winter.",
+          "tier": "well-established",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Burbot, in 'Burbot, bowfin and snakehead', Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/snakehead.html",
+              "quote": "The burbot frequents cool waters of large rivers, and the lower reaches of their tributaries, and lakes -- particularly in northern Wisconsin.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "Typically they require water temps lower than 70 degrees during the summer and are a rare catch, but come winter-time, these predators come alive and are most active.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "burbot-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Burbot eat mostly other fish such as small yellow perch and walleyes, but also fish eggs, clams, crayfish, mayfly larvae and other aquatic insects.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "They eat mostly other fish such as small yellow perch and walleyes, but also consume fish eggs, clams, crayfish, mayfly larvae and other aquatic insects.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "burbot-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning, mid-winter to early spring",
+          "text": "Burbot spawn from mid-winter into early spring, before ice-out, in shallow water over sand or gravel bottoms, in pairs or groups of dozens or hundreds; no nest is built.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "It spawns during mid-winter into early spring, before the ice is off the lake or river. Reproduction occurs in pairs or sometimes in groups of dozens or even in the hundreds, in shallow water over sand or gravel bottoms. There is no nest built",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "burbot-winter-lowlight-bottom",
+          "field": "depth_and_light",
+          "season_or_life_stage": "winter, angling",
+          "text": "Most burbot are caught accidentally by anglers after other fish; they are especially active in low light in winter, and the bait should sit within inches of a deep, muddy river or lake bottom.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "Most burbots are accidentally caught by anglers targeting other fish like walleyes ... They are especially active during low light conditions during the winter months. ... locating the bait within inches of a deep muddy river- or lake-bottom",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "FRESHWATER DRUM": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "drum-pools-depth",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "In streams freshwater drum are usually found in large pools and reservoirs at depths of 30 feet or more; they avoid strong currents but tolerate turbid water. They live mainly on the bottom.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Indiana Division of Fish and Wildlife. Animal Information Series: Freshwater Drum (Aplodinotus grunniens), 2012. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.in.gov/dnr/fish-and-wildlife/files/fw-freshwater_drum.pdf",
+              "quote": "In streams freshwater drum are usually found in large pools and reservoirs they are found at depths of 30 feet or more. Freshwater drum avoid strong currents but can tolerate turbid (or murky) waters. ... Freshwater drum live mainly on the bottom",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "drum-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Drum move rocks with their snouts to find food and eat fish, crayfish and aquatic insects.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Indiana Division of Fish and Wildlife. Animal Information Series: Freshwater Drum (Aplodinotus grunniens), 2012. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.in.gov/dnr/fish-and-wildlife/files/fw-freshwater_drum.pdf",
+              "quote": "move rocks with their snouts to find food. They eat fish, crayfish, and aquatic insects.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "drum-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Spawn in late April or May in open water (eggs float one to two days); adults move from large rivers and reservoirs into tributary streams to spawn.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Indiana Division of Fish and Wildlife. Animal Information Series: Freshwater Drum (Aplodinotus grunniens), 2012. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.in.gov/dnr/fish-and-wildlife/files/fw-freshwater_drum.pdf",
+              "quote": "Freshwater drum spawn in late April or May and they make the drumming noise during spawning activities. They spawn in open water and the eggs float for one to two days until hatching. The adults move out of large rivers and reservoirs into tributary streams to spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "CISCO": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "cisco-depth-range",
+          "field": "depth_and_light",
+          "season_or_life_stage": "adult, Great Lakes",
+          "text": "Cisco inhabit the full range of depths in the Great Lakes depending on time of year, time of day and life stage; found in shallow water (3 to 10 feet) during spawning and feeding in surface waters in winter and spring.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "U.S. Fish & Wildlife Service. Cisco (Coregonus artedi), species profile. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.fws.gov/species/cisco-coregonus-artedi",
+              "quote": "Cisco inhabit the full range of depths in the Great Lakes, depending on time of year, time of day and life stage. ... cisco also are found in shallower water from 1 to 3 meters (3 to 10 feet) during spawning, and they are found feeding in surface waters in winter and spring.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "cisco-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Adults feed mostly in open water on zooplankton such as copepods and amphipods, and sometimes on other young fish.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "U.S. Fish & Wildlife Service. Cisco (Coregonus artedi), species profile. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.fws.gov/species/cisco-coregonus-artedi",
+              "quote": "Adults feed mostly in the pelagic , or open water, areas of the lake on a wide variety of zooplankton, like copepods and amphipods. ... sometimes, they feed on other young fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "cisco-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Spawning occurs in fall and winter at depths of 3 to 420 feet (1 to 140 meters).",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "U.S. Fish & Wildlife Service. Cisco (Coregonus artedi), species profile. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.fws.gov/species/cisco-coregonus-artedi",
+              "quote": "Spawning occurs in fall and winter at depths of 1 to 140 meters (3 to 420 feet).",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "WHITE SUCKER": {
+      "angling_target": false,
+      "claims": [
+        {
+          "id": "whitesucker-adaptable-spawning",
+          "field": "water_type",
+          "season_or_life_stage": "adult, spawning",
+          "text": "White suckers are highly adaptable and tolerate turbid and polluted water. Spring migratory runs begin the spawning; spawning is in late spring at 57-68 F in swift or flowing water over rubble or gravel.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - White Sucker. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/fishiowa/fishdetails/WHS",
+              "quote": "White Suckers are highly adaptable to differing habitats and changing environmental influences, it is tolerant of turbid and polluted waters. Spawning starts with migratory spring runs that may be started by runoff from early snow-melt. Actual spawning occurs in late spring when water temperatures are 57 to 68 degrees. ... Spawning takes place in swift or flowing water over bottom substrates of rubble or gravel.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "whitesucker-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Bottom feeders on aquatic insect larvae, small mollusks, crustaceans and worms.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - White Sucker. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/fishiowa/fishdetails/WHS",
+              "quote": "Variety of bottom organisms such as aquatic insect larvae, small mollusks, crustaceans, and various terrestrial worms",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "not_documented_reason": "Not an angling target: Iowa DNR says most white suckers are caught accidentally by anglers fishing with worms on the stream bottom, and that they are often sold as bait fish."
+    },
+    "FATHEAD MINNOW": {
+      "angling_target": false,
+      "claims": [
+        {
+          "id": "fathead-habitat",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Most abundant in sluggish, intermittent streams, ditches and ponds with soft, silty mud or firm clay substrates, or backwaters and muck-bottomed pools of larger rivers; adapted to stagnant pools and to low oxygen, high turbidity and high temperatures.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - Fathead Minnow. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/FishIowa/FishDetails/FHM",
+              "quote": "most abundant in sluggish, intermittent streams, ditches and ponds with soft, silty mud or firm clay substrates or backwaters and muck-bottomed pools of larger rivers. ... uniquely adapted to stagnant pools, acid bog-ponds, and alkaline streams where extremes in pH, low oxygen levels, high turbidity, and high temperatures decrease fish diversity",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "fathead-forage-spawning",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Eats microscopic plants, small insects and larvae, and occasionally fish. Spawns early May through August; adhesive eggs are laid on the under surface of floating objects and guarded by the male.",
+          "tier": "agency-tier",
+          "wi_applicable": false,
+          "sources": [
+            {
+              "citation": "Iowa DNR. Fish Iowa - Fish Species - Fathead Minnow. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://programs.iowadnr.gov/lakemanagement/FishIowa/FishDetails/FHM",
+              "quote": "Microscopic plants, small insects and larvae, and occasionally fish. ... Fathead Minnows spawn from early May through August. The adhesive eggs are deposited on the under surface of floating objects, and the male guards them.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "not_documented_reason": "Not an angling target: a forage fish and bait fish - Iowa DNR calls it the best baitfish available."
     }
   }
 }

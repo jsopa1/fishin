@@ -295,6 +295,24 @@
       "category": "live bait",
       "description": "Small live minnows sold as crappie minnows.",
       "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "jigging_spoons": {
+      "name": "Bright, shiny jigging spoons",
+      "category": "hard bait",
+      "description": "Jigging spoons used through the ice.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "finesse_tubes": {
+      "name": "Small finesse tubes (lightweight internal jighead)",
+      "category": "soft plastic",
+      "description": "Small soft-plastic tube baits with a lightweight internal jighead.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "crawfish_imitators": {
+      "name": "Small crawfish imitators",
+      "category": "soft plastic",
+      "description": "Small artificial crawfish imitations.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
     }
   }
 }

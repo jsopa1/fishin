@@ -3,9 +3,7 @@
 Enforces the rules in docs/v4_ux_goal_loop_spec.md Phase 0: every claim has
 a real citation, verbatim quote and allowed tier; every bait link points at
 a catalog item; every catalog item has a Wisconsin regulation note or an
-explicit NOT_YET_RESEARCHED reason. Coverage of all 27 species is checked
-separately (test_all_species_covered) and is expected to fail until the
-research batches finish -- it is marked as an expected failure until then.
+explicit NOT_YET_RESEARCHED reason. Coverage of all 27 species is enforced by test_all_species_covered.
 """
 
 import json
@@ -110,13 +108,17 @@ class TestBaitData(unittest.TestCase):
 
 
 class TestCoverage(unittest.TestCase):
-    @unittest.expectedFailure
     def test_all_species_covered(self):
         physiology = set(_load("physiology_thresholds_v1.json")["species"])
         habitat = set(_load("habitat_reference_v1.json")["species"])
         baits = set(_load("species_bait_map_v1.json")["species"])
         self.assertEqual(physiology - habitat, set())
         self.assertEqual(physiology - baits, set())
+
+    def test_a_target_species_with_no_baits_says_why(self):
+        for species, entry in _load("species_bait_map_v1.json")["species"].items():
+            if entry.get("angling_target", True) and not entry.get("links"):
+                self.assertTrue(entry.get("reason_no_links", "").strip(), species)
 
 
 if __name__ == "__main__":

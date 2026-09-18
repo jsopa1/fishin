@@ -2375,6 +2375,451 @@
           ]
         }
       ]
+    },
+    "SAUGER": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: jigs tipped with minnows and live bait rigs fished at or near the bottom; live minnows through the ice.",
+          "how_to_use": "Fish at or near the bottom; through the ice use live minnows.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "Throughout the open-water season, live bait rigs and jigs tipped with minnows fished at or near the bottom are solid choices.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "Use live minnows or bright and shiny jigging spoons to increase your odds",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: jigs tipped with minnows fished at or near the bottom.",
+          "how_to_use": "Tip with a minnow; fish at or near the bottom.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "Throughout the open-water season, live bait rigs and jigs tipped with minnows fished at or near the bottom are solid choices.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "live_bait_unspecified",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: live bait rigs fished at or near the bottom.",
+          "how_to_use": "Fish at or near the bottom.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "Throughout the open-water season, live bait rigs and jigs tipped with minnows fished at or near the bottom are solid choices.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigging_spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: bright and shiny jigging spoons for ice fishing.",
+          "how_to_use": "Ice fishing.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "Use live minnows or bright and shiny jigging spoons to increase your odds",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "sauger-walleye-methods",
+          "text": "Tackle and methods commonly used for walleye are appropriate for sauger; adjust location, since saugers often sit in deeper, darker places.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Minnesota DNR. Minnesota Profile: Sauger (Sander canadensis). Minnesota Conservation Volunteer, May-June 2022. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/mcvmagazine/issues/2022/may-jun/sauger.html",
+              "quote": "When targeting saugers, tackle and methods commonly used to land walleyes are appropriate. Anglers will likely need to adjust location, however, as saugers often occupy deeper, darker places in rivers and lakes.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "WHITE BASS": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR: white bass hit anything flashy, such as spoons.",
+          "how_to_use": "Flashy spoons; at night use floating or submerged lights (June to mid-September).",
+          "sources": [
+            {
+              "citation": "Michigan DNR. White bass (Morone chrysops), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/white-bass",
+              "quote": "They will hit anything flashy, such as spoons, spinners, and minnows.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Michigan DNR. White bass (Morone chrysops), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/white-bass",
+              "quote": "Night fishing from June to Mid-September can also be very effective when using floating or submerged lights using flashy spoons or spinners.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR: white bass hit anything flashy, such as spinners.",
+          "how_to_use": "Flashy spinners; at night use lights.",
+          "sources": [
+            {
+              "citation": "Michigan DNR. White bass (Morone chrysops), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/white-bass",
+              "quote": "They will hit anything flashy, such as spoons, spinners, and minnows.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR: white bass hit minnows.",
+          "how_to_use": "Not yet documented to our standard beyond the agency statement.",
+          "sources": [
+            {
+              "citation": "Michigan DNR. White bass (Morone chrysops), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/white-bass",
+              "quote": "They will hit anything flashy, such as spoons, spinners, and minnows.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "ROCK BASS": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "finesse_tubes",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR: one of the best ways to catch rock bass.",
+          "how_to_use": "Small finesse tube with a lightweight internal jighead.",
+          "sources": [
+            {
+              "citation": "Michigan DNR. Rock bass (Ambloplites rupestris), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/rock-bass",
+              "quote": "One of the best ways to catch them is with a small, finesse tube with a lightweight internal jighead. Rock bass also respond well to live bait presentations, with nightcrawlers, wax worms (bee moths), or even small minnows.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "crawfish_imitators",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR suggests a small crawfish imitator (rock bass eat crayfish).",
+          "how_to_use": "Not yet documented to our standard beyond the agency suggestion.",
+          "sources": [
+            {
+              "citation": "Michigan DNR. Rock bass (Ambloplites rupestris), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/rock-bass",
+              "quote": "Try a small crawfish imitator.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "nightcrawlers",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR: rock bass respond well to nightcrawlers.",
+          "how_to_use": "Live bait presentation.",
+          "sources": [
+            {
+              "citation": "Michigan DNR. Rock bass (Ambloplites rupestris), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/rock-bass",
+              "quote": "One of the best ways to catch them is with a small, finesse tube with a lightweight internal jighead. Rock bass also respond well to live bait presentations, with nightcrawlers, wax worms (bee moths), or even small minnows.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insect_larvae",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR: rock bass respond well to wax worms.",
+          "how_to_use": "Live bait presentation.",
+          "sources": [
+            {
+              "citation": "Michigan DNR. Rock bass (Ambloplites rupestris), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/rock-bass",
+              "quote": "One of the best ways to catch them is with a small, finesse tube with a lightweight internal jighead. Rock bass also respond well to live bait presentations, with nightcrawlers, wax worms (bee moths), or even small minnows.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "Michigan DNR: rock bass respond well to small minnows.",
+          "how_to_use": "Live bait presentation.",
+          "sources": [
+            {
+              "citation": "Michigan DNR. Rock bass (Ambloplites rupestris), Michigan species: fish. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.michigan.gov/dnr/education/michigan-species/fish-species/rock-bass",
+              "quote": "One of the best ways to catch them is with a small, finesse tube with a lightweight internal jighead. Rock bass also respond well to live bait presentations, with nightcrawlers, wax worms (bee moths), or even small minnows.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "LAKE WHITEFISH": {
+      "angling_target": true,
+      "links": [],
+      "reason_no_links": "The Michigan DNR page says special techniques are required but names no bait; no bait is listed rather than guessed."
+    },
+    "BURBOT": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: your bait of choice can be just about any minnows.",
+          "how_to_use": "Place the bait within inches of a deep, muddy bottom; use tip-ups or walleye-style jigging gear on 4-8 lb line.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "Tip-ups or walleye style jigging equipment, spooled with 4 to 8 lb line will provide the necessary gear needed to land these unique creatures. Your bait of choice can be just about any minnows",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "tip_ups",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: tip-ups or walleye-style jigging equipment.",
+          "how_to_use": "4 to 8 lb line.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "Tip-ups or walleye style jigging equipment, spooled with 4 to 8 lb line will provide the necessary gear needed to land these unique creatures. Your bait of choice can be just about any minnows",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: walleye-style jigging equipment.",
+          "how_to_use": "4 to 8 lb line.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "Tip-ups or walleye style jigging equipment, spooled with 4 to 8 lb line will provide the necessary gear needed to land these unique creatures. Your bait of choice can be just about any minnows",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "burbot-sensitive-bite",
+          "text": "Burbot have a very sensitive bite: wait too long to set the hook and the hook ends up in the gullet.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Minnesota DNR MinnAqua. Species Profile - Burbot. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/burbot.html",
+              "quote": "Burbot have very sensitive bite. Wait too long to set the hook and you'll be fishing-out your hook from the gullet",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "FRESHWATER DRUM": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "worms",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "Indiana DNR: worms are a favorite bait; most drum are taken on live bait fished on the bottom.",
+          "how_to_use": "Fish on the bottom.",
+          "sources": [
+            {
+              "citation": "Indiana Division of Fish and Wildlife. Animal Information Series: Freshwater Drum (Aplodinotus grunniens), 2012. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.in.gov/dnr/fish-and-wildlife/files/fw-freshwater_drum.pdf",
+              "quote": "Most drum are taken on live bait fished on the bottom; worms, crayfish, and small minnows are favorite baits. Occasionally they can be taken on small artificial lures like spinners and fly-and-spinner combinations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "crayfish_live",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Indiana DNR: crayfish are a favorite bait. In Wisconsin live crayfish possession while fishing is restricted on inland waters - see the regulation note.",
+          "how_to_use": "Fish on the bottom, where legal.",
+          "sources": [
+            {
+              "citation": "Indiana Division of Fish and Wildlife. Animal Information Series: Freshwater Drum (Aplodinotus grunniens), 2012. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.in.gov/dnr/fish-and-wildlife/files/fw-freshwater_drum.pdf",
+              "quote": "Most drum are taken on live bait fished on the bottom; worms, crayfish, and small minnows are favorite baits. Occasionally they can be taken on small artificial lures like spinners and fly-and-spinner combinations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Indiana DNR: small minnows are a favorite bait.",
+          "how_to_use": "Fish on the bottom.",
+          "sources": [
+            {
+              "citation": "Indiana Division of Fish and Wildlife. Animal Information Series: Freshwater Drum (Aplodinotus grunniens), 2012. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.in.gov/dnr/fish-and-wildlife/files/fw-freshwater_drum.pdf",
+              "quote": "Most drum are taken on live bait fished on the bottom; worms, crayfish, and small minnows are favorite baits. Occasionally they can be taken on small artificial lures like spinners and fly-and-spinner combinations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Indiana DNR: occasionally taken on small spinners and fly-and-spinner combinations.",
+          "how_to_use": "Small artificial lures.",
+          "sources": [
+            {
+              "citation": "Indiana Division of Fish and Wildlife. Animal Information Series: Freshwater Drum (Aplodinotus grunniens), 2012. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+              "url": "https://www.in.gov/dnr/fish-and-wildlife/files/fw-freshwater_drum.pdf",
+              "quote": "Most drum are taken on live bait fished on the bottom; worms, crayfish, and small minnows are favorite baits. Occasionally they can be taken on small artificial lures like spinners and fly-and-spinner combinations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "CISCO": {
+      "angling_target": true,
+      "links": [],
+      "reason_no_links": "The USFWS profile names no angling method or bait; no bait is listed rather than guessed."
+    },
+    "WHITE SUCKER": {
+      "angling_target": false,
+      "links": [],
+      "reason": "Not an angling target: caught accidentally while fishing worms on the bottom; sold as bait fish.",
+      "sources": [
+        {
+          "citation": "Iowa DNR. Fish Iowa - Fish Species - White Sucker. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+          "url": "https://programs.iowadnr.gov/lakemanagement/fishiowa/fishdetails/WHS",
+          "quote": "Most White Suckers are caught accidentally by anglers fishing with worms on the bottom of streams. ... They are often sold as bait fish",
+          "retrieved": "2026-09-18"
+        }
+      ]
+    },
+    "FATHEAD MINNOW": {
+      "angling_target": false,
+      "links": [],
+      "reason": "Not an angling target: a forage fish and bait fish.",
+      "sources": [
+        {
+          "citation": "Iowa DNR. Fish Iowa - Fish Species - Fathead Minnow. (Non-Wisconsin agency source: describes the species generally / in that state; not a Wisconsin-specific statement.)",
+          "url": "https://programs.iowadnr.gov/lakemanagement/FishIowa/FishDetails/FHM",
+          "quote": "Besides being an important forage fish in most waters, it is the best baitfish available, and millions are sold in bait shops each year.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     }
   }
 }
