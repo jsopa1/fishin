@@ -1,0 +1,725 @@
+{
+  "_purpose": "Provenance for every image shipped in webapp/static/img. Each entry was checked against the Wikimedia Commons file page: the license field must read Public domain (or CC0) AND a public-domain template must be present in the page wikitext.",
+  "_retrieved": "2026-09-18",
+  "species": {
+    "WALLEYE": {
+      "commons_title": "File:Sander vitreus.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ASander_vitreus.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Sander_vitreus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Sander_vitreus.jpg/960px-Sander_vitreus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2760,
+        1568
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Engbretson, Eric / U.S. Fish and Wildlife Service",
+      "credit": "[1]",
+      "date": "2004-05-04",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/walleye.jpg"
+    },
+    "SAUGER": {
+      "commons_title": "File:Saugernctc.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ASaugernctc.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Saugernctc.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Saugernctc.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "original_size": [
+        793,
+        317
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Duane Raver",
+      "credit": "USFWS",
+      "date": "",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/sauger.jpg"
+    },
+    "YELLOW PERCH": {
+      "commons_title": "File:Yellow perch fish perca flavescens.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AYellow_perch_fish_perca_flavescens.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Yellow_perch_fish_perca_flavescens.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Yellow_perch_fish_perca_flavescens.jpg/960px-Yellow_perch_fish_perca_flavescens.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2990,
+        1376
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
+      "credit": "http://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/fauna-animals-public-domain-images-pictures/fishes-public-domain-images-pictures/yellow-perch-fish-perca-flavescens.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-25",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/yellow_perch.jpg"
+    },
+    "LARGEMOUTH BASS": {
+      "commons_title": "File:Largemouth bass fish art work micropterus salmoides.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ALargemouth_bass_fish_art_work_micropterus_salmoides.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Largemouth_bass_fish_art_work_micropterus_salmoides.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Largemouth_bass_fish_art_work_micropterus_salmoides.jpg/960px-Largemouth_bass_fish_art_work_micropterus_salmoides.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        3408,
+        2208
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
+      "credit": "http://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/fauna-animals-public-domain-images-pictures/fishes-public-domain-images-pictures/bass-fishes-pictures/largemouth-bass-fish-art-work-micropterus-salmoides.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-25",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/largemouth_bass.jpg"
+    },
+    "SMALLMOUTH BASS": {
+      "commons_title": "File:Micropterus dolomieu smallmouth bass fish.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AMicropterus_dolomieu_smallmouth_bass_fish.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Micropterus_dolomieu_smallmouth_bass_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Micropterus_dolomieu_smallmouth_bass_fish.jpg/960px-Micropterus_dolomieu_smallmouth_bass_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2136,
+        1320
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
+      "credit": "http://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/fauna-animals-public-domain-images-pictures/fishes-public-domain-images-pictures/bass-fishes-pictures/micropterus-dolomieu-smallmouth-bass-fish.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-25",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/smallmouth_bass.jpg"
+    },
+    "NORTHERN PIKE": {
+      "commons_title": "File:Esox lucius1.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AEsox_lucius1.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Esox_lucius1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Esox_lucius1.jpg/960px-Esox_lucius1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2247,
+        825
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Drawing by Timothy Knepp",
+      "credit": "U.S. Fish &amp; Wildlife Service National Image Library",
+      "date": "first upload in en wikipedia on 21:18, 4 December 2004 by Tkinias",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/northern_pike.jpg"
+    },
+    "MUSKELLUNGE": {
+      "commons_title": "File:Muskellunge (Duane Raver).png",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AMuskellunge_%28Duane_Raver%29.png",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Muskellunge_%28Duane_Raver%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Muskellunge_%28Duane_Raver%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "original_size": [
+        738,
+        232
+      ],
+      "mime": "image/png",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
+      "credit": "[1]",
+      "date": "20??",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/muskellunge.png"
+    },
+    "BLUEGILL": {
+      "commons_title": "File:Bluegill.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ABluegill.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Bluegill.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Bluegill.jpg/960px-Bluegill.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        5760,
+        3840
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "United States Fish and Wildlife Services",
+      "credit": "https://digitalmedia.fws.gov/digital/",
+      "date": "2016-01-01",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/bluegill.jpg"
+    },
+    "PUMPKINSEED": {
+      "commons_title": "File:Pumpkinseed fish lepomis gibbosus.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3APumpkinseed_fish_lepomis_gibbosus.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Pumpkinseed_fish_lepomis_gibbosus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Pumpkinseed_fish_lepomis_gibbosus.jpg/960px-Pumpkinseed_fish_lepomis_gibbosus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        3480,
+        2097
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
+      "credit": "http://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/fauna-animals-public-domain-images-pictures/fishes-public-domain-images-pictures/pumpkinseed-fish-lepomis-gibbosus.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-25",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/pumpkinseed.jpg"
+    },
+    "BLACK CRAPPIE": {
+      "commons_title": "File:Black crappie.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ABlack_crappie.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Black_crappie.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Black_crappie.jpg/960px-Black_crappie.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        4426,
+        2951
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "United States Fish and Wildlife Services",
+      "credit": "https://digitalmedia.fws.gov/digital/",
+      "date": "2016-01-01",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/black_crappie.jpg"
+    },
+    "WHITE CRAPPIE": {
+      "commons_title": "File:White crappie pomoxis annularis.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AWhite_crappie_pomoxis_annularis.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/White_crappie_pomoxis_annularis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/White_crappie_pomoxis_annularis.jpg/960px-White_crappie_pomoxis_annularis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2352,
+        1500
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
+      "credit": "http://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/fauna-animals-public-domain-images-pictures/fishes-public-domain-images-pictures/white-crappie-pomoxis-annularis.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-25",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/white_crappie.jpg"
+    },
+    "ROCK BASS": {
+      "commons_title": "File:Rock Bass (Ambloplites rupestris).jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ARock_Bass_%28Ambloplites_rupestris%29.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Rock_Bass_%28Ambloplites_rupestris%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Rock_Bass_%28Ambloplites_rupestris%29.jpg/960px-Rock_Bass_%28Ambloplites_rupestris%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        5584,
+        3125
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "USFWS Mountain Prairie",
+      "credit": "https://www.flickr.com/photos/51986662@N05/51779701826/",
+      "date": "2021-12-27 13:42:26",
+      "pd_templates_on_page": [
+        "PD-author-FlickrPDM"
+      ],
+      "file": "webapp/static/img/species/rock_bass.jpg"
+    },
+    "WHITE BASS": {
+      "commons_title": "File:Morone chrysops white bass fish.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AMorone_chrysops_white_bass_fish.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Morone_chrysops_white_bass_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Morone_chrysops_white_bass_fish.jpg/960px-Morone_chrysops_white_bass_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        3480,
+        2129
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
+      "credit": "http://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/fauna-animals-public-domain-images-pictures/fishes-public-domain-images-pictures/bass-fishes-pictures/morone-chrysops-white-bass-fish.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-25",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/white_bass.jpg"
+    },
+    "CHANNEL CATFISH": {
+      "commons_title": "File:Ictalurus punctatus.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AIctalurus_punctatus.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Ictalurus_punctatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Ictalurus_punctatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "original_size": [
+        834,
+        348
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Duane Raver",
+      "credit": "U.S. Fish and Wildlife Service ( https://digitalmedia.fws.gov/digital/collection/natdiglib/id/25296 )",
+      "date": "",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS",
+        "PD-USGov-Interior-FWS"
+      ],
+      "file": "webapp/static/img/species/channel_catfish.jpg"
+    },
+    "LAKE STURGEON": {
+      "commons_title": "File:Lakesturgeon public U.S.Fish&Wildlife.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ALakesturgeon_public_U.S.Fish%26Wildlife.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Lakesturgeon_public_U.S.Fish%26Wildlife.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Lakesturgeon_public_U.S.Fish%26Wildlife.jpg/960px-Lakesturgeon_public_U.S.Fish%26Wildlife.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1050,
+        750
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Engbretson, Eric",
+      "credit": "This image originates from the National Digital Library of the United States Fish and Wildlife Service at this page\nThis tag does not indicate the copyright status of the attached work. A normal copyright tag is still required. See Commons:Licensing.See Category:Images from the United States Fish an",
+      "date": "",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/lake_sturgeon.jpg"
+    },
+    "BROOK TROUT": {
+      "commons_title": "File:Brook trout freshwater fish.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ABrook_trout_freshwater_fish.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Brook_trout_freshwater_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Brook_trout_freshwater_fish.jpg/960px-Brook_trout_freshwater_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1184,
+        750
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Duane Raver, U.S. Fish and Wildlife Service",
+      "credit": "http://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/fauna-animals-public-domain-images-pictures/fishes-public-domain-images-pictures/brook-trout-freshwater-fish.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-25",
+      "pd_templates_on_page": [
+        "PD-author"
+      ],
+      "file": "webapp/static/img/species/brook_trout.jpg"
+    },
+    "BROWN TROUT": {
+      "commons_title": "File:Brown trout FWS white background.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ABrown_trout_FWS_white_background.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Brown_trout_FWS_white_background.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Brown_trout_FWS_white_background.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "original_size": [
+        856,
+        336
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "U.S. Fish and Wildlife Service",
+      "credit": "small version, modified version: [1], [2]",
+      "date": "Unknown date",
+      "pd_templates_on_page": [
+        "PD-USGov-Interior-FWS"
+      ],
+      "file": "webapp/static/img/species/brown_trout.jpg"
+    },
+    "RAINBOW TROUT": {
+      "commons_title": "File:Oncorhynchus mykiss mid res 150dpi whiteBG.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AOncorhynchus_mykiss_mid_res_150dpi_whiteBG.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Oncorhynchus_mykiss_mid_res_150dpi_whiteBG.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Oncorhynchus_mykiss_mid_res_150dpi_whiteBG.jpg/960px-Oncorhynchus_mykiss_mid_res_150dpi_whiteBG.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1098,
+        409
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Raver, Duane, US Fish &amp; Wildlife Service",
+      "credit": "http://images.fws.gov/ , WVDR-54-Raver, NATIONAL CONSERVATION TRAINING CENTER-PUBLICATIONS AND TRAINING MATERIALS",
+      "date": "2015-02-16 15:38:09",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/rainbow_trout.jpg"
+    },
+    "LAKE TROUT": {
+      "commons_title": "File:Lake trout 01.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ALake_trout_01.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Lake_trout_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Lake_trout_01.jpg/960px-Lake_trout_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        3000,
+        2400
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "United States Fish and Wildlife Services",
+      "credit": "https://digitalmedia.fws.gov/digital/",
+      "date": "2016-01-01",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/lake_trout.jpg"
+    },
+    "CHINOOK SALMON": {
+      "commons_title": "File:Chinook salmon fish.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AChinook_salmon_fish.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Chinook_salmon_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Chinook_salmon_fish.jpg/960px-Chinook_salmon_fish.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2692,
+        1749
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "U.S. Fish and Wildlife Service",
+      "credit": "https://www.public-domain-image.com/public-domain-images-pictures-free-stock-photos/nature-landscapes-public-domain-images-pictures/bay-public-domain-images-pictures/chinook-salmon-fish.jpg",
+      "date": "Not given\n\nTransferred by Fæ on 2013-02-27",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/chinook_salmon.jpg"
+    },
+    "COHO SALMON": {
+      "commons_title": "File:Coho salmon.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ACoho_salmon.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Coho_salmon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Coho_salmon.jpg/960px-Coho_salmon.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2048,
+        1536
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "United States Fish and Wildlife Services",
+      "credit": "https://digitalmedia.fws.gov/digital/",
+      "date": "2016-01-01",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/coho_salmon.jpg"
+    },
+    "BURBOT": {
+      "commons_title": "File:Burbot (Lota lota) (50976357127).jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ABurbot_%28Lota_lota%29_%2850976357127%29.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Burbot_%28Lota_lota%29_%2850976357127%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Burbot_%28Lota_lota%29_%2850976357127%29.jpg/960px-Burbot_%28Lota_lota%29_%2850976357127%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        4000,
+        2000
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "USFWS Mountain Prairie",
+      "credit": "Burbot (Lota lota)",
+      "date": "Taken on 3 February 2021, 09:28:04",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/burbot.jpg"
+    },
+    "FRESHWATER DRUM": {
+      "commons_title": "File:Freshwaterdrum (white background).png",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AFreshwaterdrum_%28white_background%29.png",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Freshwaterdrum_%28white_background%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Freshwaterdrum_%28white_background%29.png/960px-Freshwaterdrum_%28white_background%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2412,
+        1155
+      ],
+      "mime": "image/png",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Drawing by Dunana Raver",
+      "credit": "[1]",
+      "date": "",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/freshwater_drum.png"
+    },
+    "LAKE WHITEFISH": {
+      "commons_title": "File:Coregonus clupeaformis illustration.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ACoregonus_clupeaformis_illustration.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Coregonus_clupeaformis_illustration.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Coregonus_clupeaformis_illustration.jpg/960px-Coregonus_clupeaformis_illustration.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        996,
+        480
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "H. L. Todd",
+      "credit": "National Oceanic and Atmospheric Administration",
+      "date": "circa 1880date QS:P,+1880-00-00T00:00:00Z/9,P1480,Q5727902",
+      "pd_templates_on_page": [
+        "PD-US"
+      ],
+      "file": "webapp/static/img/species/lake_whitefish.jpg"
+    },
+    "CISCO": {
+      "commons_title": "File:Cisco 1.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ACisco_1.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Cisco_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Cisco_1.jpg/960px-Cisco_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2448,
+        3264
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "USFWS Fish and Aquatic Conservation",
+      "credit": "https://www.flickr.com/photos/eddiesfisheriesfws/49588444628/",
+      "date": "2015-12-02 09:17:27",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/cisco.jpg"
+    },
+    "WHITE SUCKER": {
+      "commons_title": "File:White sucker 01.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AWhite_sucker_01.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/White_sucker_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/White_sucker_01.jpg/960px-White_sucker_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        7360,
+        4912
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "USFWS",
+      "credit": "https://digitalmedia.fws.gov/",
+      "date": "2016-01-01",
+      "pd_templates_on_page": [
+        "PD-USGov-FWS"
+      ],
+      "file": "webapp/static/img/species/white_sucker.jpg"
+    },
+    "FATHEAD MINNOW": {
+      "commons_title": "File:Pimephales promelas2.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3APimephales_promelas2.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Pimephales_promelas2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Pimephales_promelas2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "original_size": [
+        668,
+        268
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Duane Raver/U. S. Fish and Wildlife Service",
+      "credit": "This image originates from the National Digital Library of the United States Fish and Wildlife Service at this page\nThis tag does not indicate the copyright status of the attached work. A normal copyright tag is still required. See Commons:Licensing.See Category:Images from the United States Fish an",
+      "date": "",
+      "pd_templates_on_page": [
+        "PD-USGov-Interior-FWS"
+      ],
+      "file": "webapp/static/img/species/fathead_minnow.jpg"
+    }
+  },
+  "baits": {
+    "spoons": {
+      "commons_title": "File:Spoon-bait 2008 G1.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3ASpoon-bait_2008_G1.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Spoon-bait_2008_G1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Spoon-bait_2008_G1.jpg/960px-Spoon-bait_2008_G1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        2460,
+        1600
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "George Chernilevsky",
+      "credit": "Own work",
+      "date": "2008-12-28",
+      "pd_templates_on_page": [
+        "PD-self"
+      ],
+      "file": "webapp/static/img/baits/spoons.jpg"
+    },
+    "jigs": {
+      "commons_title": "File:Jig-Twister lure 2009 G1.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AJig-Twister_lure_2009_G1.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Jig-Twister_lure_2009_G1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Jig-Twister_lure_2009_G1.jpg/960px-Jig-Twister_lure_2009_G1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1500,
+        1000
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "George Chernilevsky",
+      "credit": "Own work",
+      "date": "2009-06-03",
+      "pd_templates_on_page": [
+        "PD-self"
+      ],
+      "file": "webapp/static/img/baits/jigs.jpg"
+    },
+    "streamer_flies_poppers": {
+      "commons_title": "File:Alexandra Fly Bates Tie.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AAlexandra_Fly_Bates_Tie.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Alexandra_Fly_Bates_Tie.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Alexandra_Fly_Bates_Tie.jpg/960px-Alexandra_Fly_Bates_Tie.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        3072,
+        2304
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Mike Cline",
+      "credit": "Own work",
+      "date": "2008-02",
+      "pd_templates_on_page": [
+        "PD-self"
+      ],
+      "file": "webapp/static/img/baits/streamer_flies_poppers.jpg"
+    },
+    "crayfish_live": {
+      "commons_title": "File:Usfws-guyandotte-river-crayfish-large.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AUsfws-guyandotte-river-crayfish-large.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Usfws-guyandotte-river-crayfish-large.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Usfws-guyandotte-river-crayfish-large.jpg/960px-Usfws-guyandotte-river-crayfish-large.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1200,
+        788
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "USFWS",
+      "credit": "https://www.fws.gov/media/guyandotte-river-crayfish",
+      "date": "11-02-2021",
+      "pd_templates_on_page": [
+        "PD-USGov"
+      ],
+      "file": "webapp/static/img/baits/crayfish_live.jpg"
+    },
+    "alewives": {
+      "commons_title": "File:Alewife school Deer Park Maryland 10 April 2019.png",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AAlewife_school_Deer_Park_Maryland_10_April_2019.png",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Alewife_school_Deer_Park_Maryland_10_April_2019.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Alewife_school_Deer_Park_Maryland_10_April_2019.png/960px-Alewife_school_Deer_Park_Maryland_10_April_2019.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1410,
+        939
+      ],
+      "mime": "image/png",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Ryan Hagerty/USFWS",
+      "credit": "https://www.fws.gov/media/alewife-85",
+      "date": "2019-04-10",
+      "pd_templates_on_page": [
+        "PD-USFWS"
+      ],
+      "file": "webapp/static/img/baits/alewives.png"
+    },
+    "clams": {
+      "commons_title": "File:Freshwater mussels 1 October 2015.png",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AFreshwater_mussels_1_October_2015.png",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Freshwater_mussels_1_October_2015.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Freshwater_mussels_1_October_2015.png/960px-Freshwater_mussels_1_October_2015.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1418,
+        940
+      ],
+      "mime": "image/png",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Ryan Hagerty/USFWS",
+      "credit": "https://www.fws.gov/media/freshwater-mussels-8",
+      "date": "2015-10-01",
+      "pd_templates_on_page": [
+        "PD-USFWS"
+      ],
+      "file": "webapp/static/img/baits/clams.png"
+    },
+    "grasshoppers": {
+      "commons_title": "File:Oxya yezoensis November 2007 WUXGA.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File%3AOxya_yezoensis_November_2007_WUXGA.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Oxya_yezoensis_November_2007_WUXGA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Oxya_yezoensis_November_2007_WUXGA.jpg/960px-Oxya_yezoensis_November_2007_WUXGA.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "original_size": [
+        1920,
+        1200
+      ],
+      "mime": "image/jpeg",
+      "license_short": "Public domain",
+      "license_url": "",
+      "artist": "Laitche",
+      "credit": "Own work",
+      "date": "2007-11-07",
+      "pd_templates_on_page": [
+        "PD-user"
+      ],
+      "file": "webapp/static/img/baits/grasshoppers.jpg"
+    },
+    "minnows_live": {
+      "reuse_species_image": "FATHEAD MINNOW",
+      "note": "Illustration/photo of the fish species this bait is (a common bait fish); not a picture of a packaged bait."
+    },
+    "minnows_crappie": {
+      "reuse_species_image": "FATHEAD MINNOW",
+      "note": "Illustration/photo of the fish species this bait is (a common bait fish); not a picture of a packaged bait."
+    },
+    "dead_minnows": {
+      "reuse_species_image": "FATHEAD MINNOW",
+      "note": "Illustration/photo of the fish species this bait is (a common bait fish); not a picture of a packaged bait."
+    },
+    "suckers_chubs_live": {
+      "reuse_species_image": "WHITE SUCKER",
+      "note": "Illustration/photo of the fish species this bait is (a common bait fish); not a picture of a packaged bait."
+    },
+    "suckers_live_large": {
+      "reuse_species_image": "WHITE SUCKER",
+      "note": "Illustration/photo of the fish species this bait is (a common bait fish); not a picture of a packaged bait."
+    },
+    "wet_dry_flies": {
+      "reuse_bait_image": "streamer_flies_poppers",
+      "note": "Generic fly photo shared across fly-type baits."
+    },
+    "artificial_flies": {
+      "reuse_bait_image": "streamer_flies_poppers",
+      "note": "Generic fly photo shared across fly-type baits."
+    }
+  },
+  "_rejected_after_review": {
+    "nightcrawlers": "File:Lumbricus terrestris (YPM IZ 097999).jpeg - a microscope cross-section, not a usable picture of the bait",
+    "hellgrammites": "File:Andrea Leslie holds a hellgrammite (8696544382).jpg - the hellgrammite is not visible; shows people sampling a stream",
+    "dragonfly_larvae": "File:Dragonfly-nymph-exoskeleton.jpg - a shed skin (exuvia), not the larva",
+    "worms": "File:Earthworm T-Kaung.jpg - CC0 by license metadata but no license template found in the page wikitext, so it failed the double check",
+    "small_plugs": "File:Verschiedene Crankbaits.jpg - same: CC0 by metadata, no template on the page"
+  },
+  "_ui_rule": "An entry with a 'file' is an image to show. 'reuse_species_image'/'reuse_bait_image' entries point at another verified entry. Any bait or species with no entry shows an explicit no-image state."
+}

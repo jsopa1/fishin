@@ -1,6 +1,6 @@
 # V4 Habitat & Bait Research (Phase 0 of the UX redesign)
 
-**Status: species research complete for all 27 of 27 species; Wisconsin bait-regulation pass done for most baits; public-domain images still open.**
+**Status: species research complete for all 27 of 27 species; Wisconsin bait-regulation pass done for most baits; public-domain images done for all 27 species and 7 baits.**
 Spec: [v4_ux_goal_loop_spec.md](v4_ux_goal_loop_spec.md). Data:
 [habitat_reference_v1.json](../data/v1/habitat_reference_v1.json),
 [bait_catalog_v1.json](../data/v1/bait_catalog_v1.json),
@@ -100,6 +100,24 @@ Admin. Code NR 20.06, each with verbatim quotes (`wi_regulation_sources` in the 
 Still `NOT_YET_RESEARCHED` (11 items, each with its reason): crayfish tails, shrimp, tip-ups (line/tip-up
 count rules), stink bait, meat strips, dough balls, frogs, grasshoppers, clams, and the two
 unspecified-live-bait entries. Fish Detail must show these with no "cleared for use" claim.
+
+## Public-domain images
+
+`data/v1/image_manifest_v1.json` records every shipped image (files under `webapp/static/img/species/` and
+`.../baits/`): Commons file page, original URL, author/credit, date, license string, and the public-domain
+template found on the page. **Double check applied to each image:** the Commons license field must read
+"Public domain" or CC0 *and* a public-domain template must exist in the page wikitext. Result: all 27 species
+and 7 baits pass (`analysis/verify_v4_images.py`: 34 checked, 0 failing). Species images are US Fish & Wildlife
+Service illustrations (Duane Raver, Timothy Knepp) or USFWS photographs (US government works), except Lake
+Whitefish, a pre-1929 engraving (H. L. Todd, PD-US). Files are the 800px versions Commons serves.
+
+Every image was viewed after download. Three bait images were **rejected after review** and not shipped: a
+microscope slide of an earthworm, a photo of students sampling a stream (no hellgrammite visible) and a shed
+dragonfly skin; two more (earthworm, crankbaits) failed the template check. Baits with no verified image
+(worms, nightcrawlers, leeches, plugs, spinners, shrimp, frogs, stink bait, spawn, tip-ups and others) show an
+explicit no-image state. Bait-fish entries (minnows, suckers) reuse the fathead-minnow / white-sucker species
+image and say so. The Chinook, Coho and Cisco pictures are USFWS-identified photos of fish in the hand;
+species identity rests on the USFWS file title.
 
 ## Failed retrievals (logged, nothing claimed from them)
 
