@@ -3,6 +3,11 @@
 // `.tag` element already carries its evidentiary meaning as a CSS class
 // -- this just reads that class back and shows what it means in plain
 // English. Vanilla JS, no framework, no new dependency.
+//
+// The same popover also drives any element carrying a `data-explain`
+// attribute directly (e.g. a species name or an activity badge on the
+// spot dashboard) -- one shared click/keyboard/dismiss mechanism instead
+// of a second UI pattern for per-instance, server-rendered text.
 (function () {
   "use strict";
 
@@ -59,40 +64,51 @@
     pop.style.left = left + "px";
   }
 
+  function wireExplainable(el, text) {
+    // A button-worthy element is often nested inside a card/row <a>
+    // (e.g. the browse and explore list views) -- without preventDefault
+    // the click still follows that link even though this listener runs
+    // first.
+    if (el.tagName !== "BUTTON") {
+      el.setAttribute("tabindex", "0");
+      el.setAttribute("role", "button");
+    }
+    var baseLabel = el.getAttribute("aria-label") || el.textContent.trim();
+    el.setAttribute("aria-label", baseLabel + ". " + text);
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      showPopoverFor(el, text);
+    });
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        e.stopPropagation();
+        showPopoverFor(el, text);
+      } else if (e.key === "Escape") {
+        hidePopover();
+      }
+    });
+  }
+
   function wireTags() {
     var tags = document.querySelectorAll(".tag");
     tags.forEach(function (tagEl) {
       var text = explanationFor(tagEl);
       if (!text) return;
-      tagEl.setAttribute("tabindex", "0");
-      tagEl.setAttribute("role", "button");
-      tagEl.setAttribute("aria-label", tagEl.textContent.trim() + ". " + text);
-      tagEl.addEventListener("click", function (e) {
-        // A tag is often nested inside a card/row <a> (e.g. the browse
-        // and explore list views) -- without preventDefault the click
-        // still follows that link even though this listener runs first.
-        e.preventDefault();
-        e.stopPropagation();
-        showPopoverFor(tagEl, text);
-      });
-      tagEl.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          e.stopPropagation();
-          showPopoverFor(tagEl, text);
-        } else if (e.key === "Escape") {
-          hidePopover();
-        }
-      });
+      wireExplainable(tagEl, text);
     });
-    if (tags.length) {
-      document.addEventListener("click", hidePopover);
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") hidePopover();
-      });
-      window.addEventListener("scroll", hidePopover, { passive: true });
-    }
     return tags.length;
+  }
+
+  function wireDataExplain() {
+    var els = document.querySelectorAll("[data-explain]");
+    els.forEach(function (el) {
+      var text = el.getAttribute("data-explain");
+      if (!text) return;
+      wireExplainable(el, text);
+    });
+    return els.length;
   }
 
   function wireIntroBanner(tagCount) {
@@ -111,6 +127,14 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     var tagCount = wireTags();
+    var explainCount = wireDataExplain();
     wireIntroBanner(tagCount);
+    if (tagCount + explainCount > 0) {
+      document.addEventListener("click", hidePopover);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") hidePopover();
+      });
+      window.addEventListener("scroll", hidePopover, { passive: true });
+    }
   });
 })();

@@ -790,8 +790,12 @@ def _window_distance_c(thresholds: list, temp_c: float):
     """How far the current temperature sits from the nearest documented
     feeding/activity window, and which way. Zero means inside it.
 
-    Returns (distance_c, direction, window_range_c) or None when the
-    species has no activity window to measure against."""
+    Returns (distance_c, direction, threshold) or None when the species
+    has no activity window to measure against. `threshold` is the full
+    winning entry from data/v1/physiology_thresholds_v1.json (range_c,
+    range_f, description, evidence, ...), not just the numeric range --
+    a caller that wants to show its reasoning needs the citation, not
+    just the number."""
     best = None
     for threshold in thresholds:
         if threshold.get("type") not in ("activity_window", "growth_optimum", "physiological_optimum"):
@@ -801,11 +805,11 @@ def _window_distance_c(thresholds: list, temp_c: float):
             continue
         low, high = low_high
         if low <= temp_c <= high:
-            return (0.0, "inside", low_high)
+            return (0.0, "inside", threshold)
         distance = (low - temp_c) if temp_c < low else (temp_c - high)
         direction = "below" if temp_c < low else "above"
         if best is None or distance < best[0]:
-            best = (distance, direction, low_high)
+            best = (distance, direction, threshold)
     return best
 
 
@@ -837,14 +841,14 @@ def rank_species_by_proximity(species_predictions: list, temp_c: float) -> list:
         measured = _window_distance_c(entry.get("thresholds", []), temp_c)
         if measured is None:
             continue
-        distance_c, direction, window = measured
+        distance_c, direction, threshold = measured
         ranked.append({
             "species": prediction["species"],
             "any_match": bool(prediction.get("any_match")),
             "distance_c": distance_c,
             "distance_f": distance_c * 9 / 5,
             "direction": direction,
-            "window_c": window,
+            "window_c": threshold.get("range_c"),
             "diel_active": bool(prediction.get("diel_active")),
         })
 
@@ -1214,6 +1218,28 @@ def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: in
     }
 
 
+_THRESHOLD_TYPE_LABELS = {
+    "activity_window": "active range",
+    "growth_optimum": "growth range",
+    "physiological_optimum": "optimal range",
+    "spawning_trigger": "spawning range",
+    "avoidance_above": "avoidance threshold",
+}
+
+
+def _short_evidence_label(evidence: str | None) -> str:
+    """The raw evidence strings in physiology_thresholds_v1.json are
+    written for this project's own research trail ("agency-tier, scatter
+    disclosed") -- accurate, but not something a reader clicking a badge
+    on their phone should have to parse. Collapsed to the two tiers that
+    actually matter to them. Already sentence-start-cased (note "WDNR"
+    keeps its real casing) -- callers should not title-case this further.
+    """
+    if evidence and evidence.startswith("well-established"):
+        return "Peer-reviewed research"
+    return "WDNR/agency data"
+
+
 def _activity_for_species(species_name: str, temp_c) -> dict | None:
     """The same distance-to-documented-window math the spot verdict
     already uses, reusable per-species so every evidence tier can carry
@@ -1230,12 +1256,29 @@ def _activity_for_species(species_name: str, temp_c) -> dict | None:
     measured = _window_distance_c(entry.get("thresholds", []), temp_c)
     if measured is None:
         return None
-    distance_c, direction, window_c = measured
+    distance_c, direction, threshold = measured
+    window_f = threshold.get("range_f")
+    type_label = _THRESHOLD_TYPE_LABELS.get(threshold.get("type"), "documented range")
+    current_f = round(temp_c * 9 / 5 + 32)
+    if direction == "inside":
+        state = "inside range"
+    else:
+        state = f"{round(distance_c * 9 / 5, 1)}°F {direction} range"
+    short_text = (
+        f"{type_label.capitalize()}: {window_f[0]}–{window_f[1]}°F. "
+        f"Currently {current_f}°F — {state}. {_short_evidence_label(threshold.get('evidence'))}."
+        if window_f else None
+    )
     return {
         "inside_window": direction == "inside",
         "distance_f": round(distance_c * 9 / 5, 1),
         "direction": direction,
-        "window_c": window_c,
+        "window_c": threshold.get("range_c"),
+        "window_f": window_f,
+        "threshold_type": threshold.get("type"),
+        "description": threshold.get("description"),
+        "evidence": threshold.get("evidence"),
+        "short_text": short_text,
     }
 
 

@@ -1116,3 +1116,69 @@ class TestApplyCategoriesToVerdict(unittest.TestCase):
         }
         rd._apply_categories_to_verdict(verdict, categories)
         self.assertEqual(verdict["headline"], "No species data for this spot")
+
+
+class TestActivityForSpeciesDetail(unittest.TestCase):
+    """The activity badge is about to become clickable to show the
+    documented window behind it -- these fields are what that popover
+    needs, so they must actually be present, not just the pass/fail
+    distance."""
+
+    def test_carries_the_full_window_and_its_citation(self):
+        import unittest.mock as mock
+        fake_thresholds = {"species": {"WALLEYE": {"thresholds": [{
+            "type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75],
+            "description": "general feeding/activity range; field-measured WI preference point 20.6C",
+            "evidence": "agency/peer-reviewed",
+        }]}}}
+        with mock.patch.object(rd.v1, "load_thresholds", return_value=fake_thresholds):
+            activity = rd._activity_for_species("WALLEYE", 18.0)
+        self.assertEqual(activity["window_c"], [12.8, 23.9])
+        self.assertEqual(activity["window_f"], [55, 75])
+        self.assertEqual(activity["threshold_type"], "activity_window")
+        self.assertIn("field-measured WI preference point", activity["description"])
+        self.assertEqual(activity["evidence"], "agency/peer-reviewed")
+
+    def test_unknown_species_returns_none_not_a_guess(self):
+        self.assertIsNone(rd._activity_for_species("NOT A REAL FISH", 18.0))
+
+
+class TestShortActivityText(unittest.TestCase):
+    """The popover text must be readable at a glance -- no citations, no
+    research-trail language, just the number and what it means."""
+
+    def _thresholds(self, evidence="agency-tier"):
+        return {"species": {"WALLEYE": {"thresholds": [{
+            "type": "activity_window", "range_c": [12.8, 23.9], "range_f": [55, 75],
+            "description": "WI field value (Lake Monona, Coutant 1977a) -- upgraded from V0's undergraduate-report source",
+            "evidence": evidence,
+        }]}}}
+
+    def test_inside_window_text_is_short_and_has_no_citation(self):
+        import unittest.mock as mock
+        with mock.patch.object(rd.v1, "load_thresholds", return_value=self._thresholds()):
+            activity = rd._activity_for_species("WALLEYE", 18.0)
+        self.assertIn("55", activity["short_text"])
+        self.assertIn("75", activity["short_text"])
+        self.assertIn("inside range", activity["short_text"])
+        self.assertNotIn("Coutant", activity["short_text"])
+        self.assertNotIn("Lake Monona", activity["short_text"])
+        self.assertLess(len(activity["short_text"]), 120)
+
+    def test_outside_window_text_states_distance_and_direction(self):
+        import unittest.mock as mock
+        with mock.patch.object(rd.v1, "load_thresholds", return_value=self._thresholds()):
+            activity = rd._activity_for_species("WALLEYE", 10.8)
+        self.assertIn("below range", activity["short_text"])
+
+    def test_well_established_evidence_reads_as_peer_reviewed(self):
+        import unittest.mock as mock
+        with mock.patch.object(rd.v1, "load_thresholds", return_value=self._thresholds(evidence="well-established, multiple LM field readings")):
+            activity = rd._activity_for_species("WALLEYE", 18.0)
+        self.assertIn("Peer-reviewed research", activity["short_text"])
+
+    def test_agency_tier_evidence_reads_as_wdnr_agency_data(self):
+        import unittest.mock as mock
+        with mock.patch.object(rd.v1, "load_thresholds", return_value=self._thresholds(evidence="agency-tier, scatter disclosed")):
+            activity = rd._activity_for_species("WALLEYE", 18.0)
+        self.assertIn("WDNR/agency data", activity["short_text"])

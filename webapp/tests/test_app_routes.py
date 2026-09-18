@@ -625,6 +625,19 @@ class SpeciesDashboardTests(unittest.TestCase):
         resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
         self.assertEqual(resp.status_code, 200)
 
+    def test_activity_badge_and_species_name_both_carry_the_real_window_data(self):
+        # Both are wired by the shared tags-explainer.js popover (same
+        # data-explain mechanism the evidence tags already use), not a
+        # page-specific widget -- so what matters here is that the real
+        # window data actually reaches the markup, short and citation-free.
+        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data.decode()
+        self.assertIn('<button type="button" class="activity-badge', body)
+        self.assertIn('class="species-category-name species-category-name-explainable" data-explain=', body)
+        self.assertIn("range", body)
+        self.assertIn("°F", body)
+        self.assertNotIn("Coutant", body)
+        self.assertNotIn("undergraduate", body)
+
 
 class ProductLoopTests(unittest.TestCase):
     """The things that make this a product someone returns to, rather

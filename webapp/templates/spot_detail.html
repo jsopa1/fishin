@@ -118,13 +118,15 @@
         {% for s in species_categories.confirmed_sightings %}
           <li class="species-category-item">
             <div class="species-category-item-head">
-              <span class="species-category-name">{{ s.species.title() }}</span>
-              {% if s.activity %}
+              {% if s.activity and s.activity.short_text %}
+                <span class="species-category-name species-category-name-explainable" data-explain="{{ s.activity.short_text }}">{{ s.species.title() }}</span>
                 {% if s.activity.inside_window %}
-                  <span class="activity-badge activity-active">in documented window now</span>
+                  <button type="button" class="activity-badge activity-active" data-explain="{{ s.activity.short_text }}">in documented window now</button>
                 {% else %}
-                  <span class="activity-badge activity-outside">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</span>
+                  <button type="button" class="activity-badge activity-outside" data-explain="{{ s.activity.short_text }}">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</button>
                 {% endif %}
+              {% else %}
+                <span class="species-category-name">{{ s.species.title() }}</span>
               {% endif %}
             </div>
             <p class="species-category-sources">{{ s.sources | join(' · ') }}</p>
@@ -146,13 +148,15 @@
         {% for s in species_categories.likely_species %}
           <li class="species-category-item">
             <div class="species-category-item-head">
-              <span class="species-category-name">{{ s.species.title() }}</span>
-              {% if s.activity %}
+              {% if s.activity and s.activity.short_text %}
+                <span class="species-category-name species-category-name-explainable" data-explain="{{ s.activity.short_text }}">{{ s.species.title() }}</span>
                 {% if s.activity.inside_window %}
-                  <span class="activity-badge activity-active">in documented window now</span>
+                  <button type="button" class="activity-badge activity-active" data-explain="{{ s.activity.short_text }}">in documented window now</button>
                 {% else %}
-                  <span class="activity-badge activity-outside">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</span>
+                  <button type="button" class="activity-badge activity-outside" data-explain="{{ s.activity.short_text }}">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</button>
                 {% endif %}
+              {% else %}
+                <span class="species-category-name">{{ s.species.title() }}</span>
               {% endif %}
             </div>
             <p class="species-category-sources">{{ s.sources | join(' · ') }}</p>

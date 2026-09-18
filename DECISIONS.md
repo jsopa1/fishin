@@ -1461,3 +1461,42 @@ to find.
 - A real public government API (FCC's geocoder) resolving one bad county
   value beats leaving "Null" in place or guessing -- consistent with
   this project's real-data-only rule even for a one-record fix
+
+## 037 — Species name and activity badge share the app's existing popover, and the citation gets translated into plain English
+
+CEO feedback on #035/#036's dashboard, in three parts: make the species
+name clickable too, not just the badge; the detail shown should be
+short and not assume the reader wants to parse this project's research
+citations; and it should match the app's existing UI rather than
+introduce a new pattern.
+
+The first pass (an inline expand/collapse panel under each row) was
+replaced entirely rather than patched. What shipped instead reuses
+`tags-explainer.js`'s existing tag popover verbatim -- the same
+click/keyboard/dismiss mechanism already driving the evidence tags
+throughout the app -- generalized to also read a `data-explain`
+attribute directly, so a species name or an activity badge can supply
+its own per-instance text through the identical shared component
+instead of a second widget.
+
+The text itself no longer echoes physiology_thresholds_v1.json's raw
+`description` field verbatim -- real lines like "WI field value (Lake
+Monona, Coutant 1977a) -- upgraded from V0's undergraduate-report
+source" are accurate research provenance, not something a reader
+tapping a badge on a boat ramp should have to parse. A short sentence is
+built server-side instead: the window, the current temperature, and
+where it sits relative to that window, e.g. "Active range: 55-75°F.
+Currently 65°F -- inside range. Peer-reviewed research." The `evidence`
+field's dozen real variants ("agency-tier, scatter disclosed",
+"agency-tier, wide range disclosed", ...) collapse to the two tiers that
+actually change what a reader should trust: peer-reviewed research, or
+WDNR/agency data.
+
+**Rationale:**
+- Reusing an existing, already-tested UI component is both the more
+  consistent choice and the cheaper one -- no second popover
+  implementation to maintain
+- Shortening research-trail language for display is not the same as
+  weakening the evidence discipline: the full citation still lives in
+  the underlying data and DECISIONS.md, just not in a tooltip aimed at
+  someone standing at a boat ramp
