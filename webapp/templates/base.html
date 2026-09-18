@@ -137,7 +137,7 @@
 
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="{{ url_for('home') }}">
+      <a class="brand" href="{{ url_for('home') }}" aria-label="fishin - Recommended">
         <svg class="icon icon-lg brand-mark" aria-hidden="true"><use href="#icon-fish"/></svg>
         fishin <span class="brand-sub">Wisconsin Fishing Intelligence</span>
       </a>
@@ -148,7 +148,10 @@
         <a href="{{ url_for('browse') }}" class="{{ 'active' if request.endpoint == 'browse' else '' }}">
           <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg> Waterbody Directory
         </a>
-        <a href="{{ url_for('home') }}#about" class="{{ 'active' if request.endpoint == 'home' else '' }}">About</a>
+        <a href="{{ url_for('profile') }}" class="{{ 'active' if request.endpoint == 'profile' else '' }}">
+          <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg> Profile
+        </a>
+        <a href="{{ url_for('home') }}#about" class="">About</a>
         <a class="nav-source" href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">
           Source <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg>
         </a>
@@ -157,22 +160,31 @@
   </header>
 
   <nav class="bottom-nav" aria-label="Primary">
-    <a href="{{ url_for('home') }}" class="bottom-nav-item {{ 'active' if request.endpoint == 'home' else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg><span>Home</span>
+    <a href="{{ url_for('home') }}" id="nav-spot" class="bottom-nav-item {{ 'active' if request.endpoint == 'spot_detail' else '' }}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg><span>My spot</span>
     </a>
-    <a href="{{ url_for('map_view') }}" class="bottom-nav-item {{ 'active' if request.endpoint == 'map_view' else '' }}">
+    <a href="{{ url_for('map_view') }}" class="bottom-nav-item {{ 'active' if request.endpoint in ('map_view', 'browse') else '' }}">
       <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg><span>Explore</span>
     </a>
-    <a href="{{ url_for('map_view') }}#explore-search" class="bottom-nav-fab" aria-label="Search waterbodies and spots">
-      <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
-    </a>
-    <a href="{{ url_for('browse') }}" class="bottom-nav-item {{ 'active' if request.endpoint == 'browse' else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg><span>Directory</span>
-    </a>
-    <a href="{{ url_for('home') }}#about" class="bottom-nav-item">
-      <svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg><span>About</span>
+    <a href="{{ url_for('profile') }}" class="bottom-nav-item {{ 'active' if request.endpoint == 'profile' else '' }}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg><span>Profile</span>
     </a>
   </nav>
+  <script>
+    // "My spot" goes back to the last spot page this visitor opened. That is
+    // remembered on this device only (localStorage) and never sent anywhere; with
+    // none yet, the link just leads to the Recommended screen.
+    (function () {
+      try {
+        var s = JSON.parse(localStorage.getItem("fishin.lastSpot.v1"));
+        var lat = Number(s && s.lat), lon = Number(s && s.lon);
+        if (s && isFinite(lat) && isFinite(lon) && typeof s.name === "string") {
+          document.getElementById("nav-spot").href =
+            "{{ url_for('spot_detail') }}?lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon) + "&name=" + encodeURIComponent(s.name);
+        }
+      } catch (e) { /* no stored spot, or storage blocked: keep the default link */ }
+    })();
+  </script>
 
   {% if run_row is none %}
   <div class="banner stale">

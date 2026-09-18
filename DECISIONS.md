@@ -1882,3 +1882,64 @@ received an unlimited radius; blank and absent values now map to the 50-mile def
 
 "Avoid" removes a spot type from recommendations and "Prefer" only breaks ties (Phase 4), so a
 preference can never leave a visitor with an empty list.
+
+## 049 — Recommended: a disclosed, deterministic ranking that runs on the visitor's device
+
+The Recommended home screen orders spots with a fixed rule, not a score. Each spot is compared on, in
+priority order (each key only breaks ties in the one before it): (1) how many species are inside
+their documented temperature range right now - the visitor's target species if any are set in the
+Profile, otherwise all documented species; (2) how many of those are Confirmed (survey or dated
+sighting) rather than Likely; (3) whether the spot type is marked Prefer; (4) reading quality, real
+over estimated over air-temperature proxy; (5) distance, only when location is known; (6) waterbody
+and facility name, a stable final tiebreak. There are no weights to tune and no randomness, so the
+same inputs always give the same list, and a test runs the module under Node against fixed vectors to
+prove it, including that input order does not matter.
+
+Rules fixed in advance for the awkward cases, each with a test: spawning-range matches are shown on a
+card but never counted, because many Wisconsin seasons are closed then; "Avoid" removes a spot type
+and "Prefer" only breaks ties; if too few spots are inside the travel radius it widens (the visitor's
+distance, then 100 and 200 miles, then statewide) and says which radius it used; if none of the
+visitor's target species is in range anywhere it ranks by all species and says so, so a preference
+can never produce an empty list; if nothing is in range anywhere (winter) it ranks by how close a
+species is to its window and the card says "closest to its range"; saved spots use the same key with
+no radius and are never hidden by "Avoid". Wind, pressure, moon, sunrise and regulations are
+deliberately not inputs. Card wording is "in range now", never "likely to bite" (#005), and the
+disclosure - which always states that this is not a prediction of catch success, which preferences
+were applied and which radius was used - is in the page HTML, not added by script.
+
+This decision changes the approved spec's transport (see #047): the server publishes one
+non-personal feed at /recommend/feed.json (per spot: species in range, their evidence tier, reading
+quality; about 3,270 spots, roughly 110 KB gzipped, ETag-cached, rebuilt only when the database file
+changes) and the browser ranks it. Location, saved spots and preferences never leave the device, the
+feed request carries no parameters, and tests fail if any of those scripts gain another network call.
+Each feed row is produced by the same function as the spot page (get_spot_species_picture), and a
+test compares a deterministic sample of rows against get_spot_detail so a card cannot disagree with
+the page it links to.
+
+Measured cost, and one incident. A spot page took about 220 ms; building the feed for every spot at
+that rate would have taken minutes. The cost was three repeated computations: the temperature anchors
+rebuilt per call, a full-table scan of citizen sightings per call, and the physiology JSON re-read
+several times per species row. They are now cached per database version, bounding-boxed in SQL and
+parsed once, which took the whole feed from 65 s to 17 s and a spot page to about 50 ms, with
+byte-identical output. While doing this a missing import made the threshold loader raise inside a
+function that swallows errors, so every species silently lost its window and every card read "no
+species in range". The feed-versus-spot-page comparison test and a manual look at real rows caught it;
+the lesson recorded here is that a swallowed exception can look exactly like a valid empty answer.
+
+## 050 — Three-icon navigation, "My spot", and Explore sharing the ranking
+
+The bottom bar is now three icons - My spot, Explore, Profile - and the fish logo returns to
+Recommended, as in the wireframes. "My spot" goes to the last spot page the visitor opened, remembered
+in localStorage on the device (validated as numbers and URL-encoded before use); before any spot has
+been opened it falls back to Recommended. The old Directory and About tabs are not lost: both remain
+in the desktop header and the directory is linked from Explore. The search shortcut button went with
+the old five-item bar; search lives in Explore's filters.
+
+Explore's list gains a Best match / Nearest / A-Z control. Best match reuses the Recommended ranking
+on the spots the visitor's filters already chose, in a "rank only" mode: preferences and location may
+order those spots but may never hide one the visitor searched for, and the travel radius does not
+apply. A visible "Using your preferences" chip, which can be cleared, appears whenever preferences
+affect the order, and the disclosure line sits above the list. The card layout is one shared function
+so a spot reads the same on both screens. Filters, view and sort now survive a trip through the bottom
+nav using sessionStorage (this tab only), with a "Reset filters" link. A-Z folds case, since WDNR
+names arrive in both ALL-CAPS and mixed case and a code-point sort put "CHEROKEE" ahead of "Crystal".

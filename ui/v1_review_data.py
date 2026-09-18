@@ -9,7 +9,10 @@ result -- every function returns exactly what's stored, including
 no_data/None values, so the UI can present them honestly.
 """
 
+import copy
 import datetime
+import math
+import os
 import sqlite3
 import sys
 from pathlib import Path
@@ -455,7 +458,39 @@ def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 2 * r * math.asin(math.sqrt(a))
 
 
+_ANCHOR_CACHE: dict = {}
+
+
+def _db_fingerprint(conn: sqlite3.Connection):
+    """Identity of the on-disk database behind `conn`: (path, mtime_ns, size).
+    Any data refresh rewrites the file, so the fingerprint changes and cached
+    derived data is rebuilt. None for in-memory / unknown databases, which are
+    never cached (their contents can change without the fingerprint moving)."""
+    try:
+        path = conn.execute("PRAGMA database_list").fetchone()[2]
+        if not path:
+            return None
+        st = os.stat(path)
+        return (path, st.st_mtime_ns, st.st_size)
+    except (sqlite3.Error, OSError, IndexError, TypeError):
+        return None
+
+
 def build_temperature_anchors(conn: sqlite3.Connection) -> list:
+    """Cached per database file version (see _db_fingerprint): the anchors are
+    a pure function of the latest run's stored readings, and rebuilding them
+    per spot cost ~70 ms of a ~210 ms spot page."""
+    key = _db_fingerprint(conn)
+    if key is not None and key in _ANCHOR_CACHE:
+        return _ANCHOR_CACHE[key]
+    anchors = _build_temperature_anchors_uncached(conn)
+    if key is not None:
+        _ANCHOR_CACHE.clear()  # only the current file version is ever useful
+        _ANCHOR_CACHE[key] = anchors
+    return anchors
+
+
+def _build_temperature_anchors_uncached(conn: sqlite3.Connection) -> list:
     """Every REAL (non-proxy) water-temperature reading from the latest
     V1 run, paired with a real coordinate -- the anchor pool for
     spot-level interpolation. A real-temp waterbody with no available
@@ -1129,10 +1164,19 @@ def get_citizen_observed_species(conn: sqlite3.Connection, lat: float, lon: floa
     tier, `citizen_observed`, shown separately."""
     if lat is None or lon is None:
         return []
+    # Bounding-box prefilter in SQL so a spot page (and the recommendation feed,
+    # which builds thousands of them) doesn't scan every sighting statewide. The
+    # box is a strict superset of the radius, so the haversine test below still
+    # decides membership and results are unchanged. 111 km per degree of
+    # latitude; longitude degrees shrink with cos(lat).
+    dlat = radius_km / 111.0
+    dlon = radius_km / (111.0 * max(math.cos(math.radians(lat)), 0.01))
     try:
         rows = conn.execute(
             """SELECT common_name, lat, lon, observed_date, recorded_by, gbif_url
-               FROM gbif_species_observations"""
+               FROM gbif_species_observations
+               WHERE lat BETWEEN ? AND ? AND lon BETWEEN ? AND ?""",
+            (lat - dlat, lat + dlat, lon - dlon, lon + dlon),
         ).fetchall()
     except sqlite3.OperationalError:
         return []
@@ -1159,7 +1203,25 @@ def get_citizen_observed_species(conn: sqlite3.Connection, lat: float, lon: floa
     return results[:limit]
 
 
+_COUNTY_EVIDENCE_CACHE: dict = {}
+
+
 def get_county_species_evidence(conn: sqlite3.Connection, county: str, limit: int = 8) -> dict | None:
+    """Cached per (database file version, county, limit): the result is the same
+    for every spot in a county (72 counties, 3,000+ spots) and costs ~12 ms to
+    compute. Callers get their own copy."""
+    fingerprint = _db_fingerprint(conn)
+    if fingerprint is None:
+        return _get_county_species_evidence_uncached(conn, county, limit)
+    key = (fingerprint, county, limit)
+    if key not in _COUNTY_EVIDENCE_CACHE:
+        if len(_COUNTY_EVIDENCE_CACHE) > 400 or any(k[0] != fingerprint for k in _COUNTY_EVIDENCE_CACHE):
+            _COUNTY_EVIDENCE_CACHE.clear()
+        _COUNTY_EVIDENCE_CACHE[key] = _get_county_species_evidence_uncached(conn, county, limit)
+    return copy.deepcopy(_COUNTY_EVIDENCE_CACHE[key])
+
+
+def _get_county_species_evidence_uncached(conn: sqlite3.Connection, county: str, limit: int = 8) -> dict | None:
     """Real, county-level species evidence for a spot that has no record of
     its own -- 45% of access points are in that position, and an empty page
     is a dead end for the user.
@@ -1447,21 +1509,17 @@ def _apply_categories_to_verdict(verdict: dict, species_categories: dict) -> Non
         )
 
 
-def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str = None) -> dict | None:
-    """The full one-stop-shop payload for a single spot: its own real
-    access-point fields, an honestly-resolved temperature (see
-    get_spot_temperature), and -- only when matched to a known V1
-    waterbody -- that waterbody's full record (including the generated
-    narrative_text) and species predictions (Phase 2: reused unchanged,
-    never guessed for an unmatched point). A matched spot's own page
-    carries everything a separate /waterbody page would have shown, so
-    a user never has to leave the spot page to see the full conditions
-    picture. Returns None only when the coordinate doesn't resolve to
-    any real access point at all."""
-    point = find_access_point_by_coords(conn, lat, lon, name=name)
-    if point is None:
-        return None
+def get_spot_species_picture(conn: sqlite3.Connection, point: dict, lat: float, lon: float) -> dict:
+    """The "which documented species are in range here right now" picture for
+    one already-resolved access point: temperature, waterbody record, species
+    evidence buckets and their Active / Inactive split.
 
+    This is the single place that answers the question. The spot page
+    (get_spot_detail) and the recommendation feed both call it, so a
+    recommendation card is computed by the same code as the page it links to
+    and cannot disagree with it. It deliberately excludes everything the feed
+    does not need (stocking history, WDNR category list, dawn/dusk window,
+    verdict), which is most of a spot page's cost."""
     temperature = get_spot_temperature(
         conn, lat, lon,
         matched_waterbody=point.get("matched_waterbody_name"),
@@ -1480,12 +1538,51 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
     # instead of a dead end. Never merged with the above -- a spot either has
     # its own documented species or it honestly has regional context, never
     # both presented as one thing.
-    if species_predictions and temperature:
-        attach_bait_guidance(species_predictions, temperature.get("value_c"))
-
     county_species = None
     if not species_predictions:
         county_species = get_county_species_evidence(conn, point.get("county"))
+
+    temp_c = temperature.get("value_c") if temperature else None
+    citizen_observed = get_citizen_observed_species(conn, lat, lon)
+    species_categories = build_species_categories(
+        species_predictions, waterbody, county_species, citizen_observed, temp_c,
+    )
+    return {
+        "temperature": temperature,
+        "waterbody": waterbody,
+        "species_predictions": species_predictions,
+        "county_species": county_species,
+        "citizen_observed": citizen_observed,
+        "species_categories": species_categories,
+        "species_activity": bucket_species_by_activity(species_categories, temp_c),
+    }
+
+
+def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str = None) -> dict | None:
+    """The full one-stop-shop payload for a single spot: its own real
+    access-point fields, an honestly-resolved temperature (see
+    get_spot_temperature), and -- only when matched to a known V1
+    waterbody -- that waterbody's full record (including the generated
+    narrative_text) and species predictions (Phase 2: reused unchanged,
+    never guessed for an unmatched point). A matched spot's own page
+    carries everything a separate /waterbody page would have shown, so
+    a user never has to leave the spot page to see the full conditions
+    picture. Returns None only when the coordinate doesn't resolve to
+    any real access point at all."""
+    point = find_access_point_by_coords(conn, lat, lon, name=name)
+    if point is None:
+        return None
+
+    picture = get_spot_species_picture(conn, point, lat, lon)
+    temperature = picture["temperature"]
+    waterbody = picture["waterbody"]
+    species_predictions = picture["species_predictions"]
+    county_species = picture["county_species"]
+    citizen_observed = picture["citizen_observed"]
+    species_categories = picture["species_categories"]
+
+    if species_predictions and temperature:
+        attach_bait_guidance(species_predictions, temperature.get("value_c"))
 
     # Low-light timing only matters if something here is documented as a
     # dawn/dusk feeder, so it is attached conditionally rather than shown
@@ -1506,11 +1603,6 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         wdnr_species = get_wdnr_lake_species(conn, point.get("waterbody_name"), point.get("county"))
 
     verdict = build_spot_verdict(species_predictions, temperature, activity_window)
-    citizen_observed = get_citizen_observed_species(conn, lat, lon)
-    species_categories = build_species_categories(
-        species_predictions, waterbody, county_species, citizen_observed,
-        temperature.get("value_c") if temperature else None,
-    )
     # build_spot_verdict only ever sees species_predictions -- for the
     # ~46% of spots with no waterbody match, that leaves it saying "No
     # species data" even when the dashboard above (WDNR category list,
@@ -1533,6 +1625,5 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         "wdnr_species": wdnr_species,
         "citizen_observed": citizen_observed,
         "species_categories": species_categories,
-        "species_activity": bucket_species_by_activity(
-            species_categories, temperature.get("value_c") if temperature else None),
+        "species_activity": picture["species_activity"],
     }

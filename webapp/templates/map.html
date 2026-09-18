@@ -57,6 +57,9 @@
       </label>
     </div>
   </form>
+  {% if filters.waterbody or filters.county or filters.species or (filters.source_type and filters.source_type != 'all') %}
+  <p class="explore-reset"><a href="{{ url_for('map_view') }}?reset=1">Reset filters</a></p>
+  {% endif %}
 </div>
 </details>
 
@@ -76,6 +79,18 @@
     <div class="map-pane" id="access-map" data-county="{{ filters.county or '' }}" data-source-type="{{ filters.source_type or 'all' }}" data-waterbody="{{ filters.waterbody or '' }}" data-species="{{ filters.species or '' }}" role="application" aria-label="Map of Wisconsin boat access and shore fishing sites"></div>
   </div>
   <div class="explore-panel list-panel">
+    <div class="explore-sort" id="explore-sort">
+      <label class="explore-sort-label">Sort
+        <select id="sort-select" aria-label="Sort the list">
+          <option value="ranked">Best match</option>
+          <option value="nearest" disabled>Nearest first</option>
+          <option value="az">A&ndash;Z</option>
+        </select>
+      </label>
+      <span class="tag evidence" id="prefs-chip" hidden>Using your preferences
+        <button type="button" id="prefs-chip-clear" class="chip-clear" aria-label="Stop using my preferences for this list">&times;</button></span>
+    </div>
+    <p class="section-note explore-disclosure" id="explore-disclosure" hidden></p>
     <div class="list-pane list-pane-scroll" id="access-list"></div>
   </div>
 </div>
@@ -106,8 +121,33 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.min.css" integrity="sha512-fYyZwU1wU0QWB4Yutd/Pvhy5J1oWAwFXun1pt+Bps04WSe4Aq6tyHlT4+MHSJhD8JlLfgLuC4CbCnX5KHSjyCg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js" integrity="sha512-TiMWaqipFi2Vqt4ugRzsF8oRoGFlFFuqIi30FFxEPNw58Ov9mOy6LgC05ysfkxwLE0xVeZtmr92wVg9siAFRWA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>window.FISHIN_FEED_URL = {{ url_for('recommend_feed') | tojson }};</script>
+<script src="{{ url_for('static', filename='prefs.js') }}"></script>
+<script src="{{ url_for('static', filename='recommend.js') }}"></script>
 <script>
 (function () {
+  // Filters, view and sort survive a trip through the bottom nav (this tab's
+  // session only - sessionStorage). "Reset filters" clears them.
+  var STATE_KEY = 'fishin.explore.v1';
+  function readState() {
+    try { return JSON.parse(sessionStorage.getItem(STATE_KEY)) || {}; } catch (e) { return {}; }
+  }
+  function writeState(patch) {
+    try { sessionStorage.setItem(STATE_KEY, JSON.stringify(Object.assign(readState(), patch))); } catch (e) { /* ignore */ }
+  }
+  var savedState = readState();
+  var q = new URLSearchParams(window.location.search);
+  if (q.has('reset')) {
+    try { sessionStorage.removeItem(STATE_KEY); } catch (e) { /* ignore */ }
+    savedState = {};
+    window.history.replaceState(null, '', window.location.pathname);
+  } else if (!window.location.search && savedState.query) {
+    window.location.replace(window.location.pathname + '?' + savedState.query);
+    return;
+  } else if (window.location.search) {
+    writeState({ query: window.location.search.slice(1) });
+  }
+
   var el = document.getElementById('access-map');
   var listEl = document.getElementById('access-list');
   var status = document.getElementById('map-status');
@@ -170,45 +210,91 @@
     return html;
   }
 
+  var R = window.FishinRecommend, P = window.FishinPrefs;
+  var sortSelect = document.getElementById('sort-select');
+  var prefsChip = document.getElementById('prefs-chip');
+  var disclosureEl = document.getElementById('explore-disclosure');
+  var feedByName = null;          // name -> [feed rows], filled when the feed arrives
+  var sortMode = savedState.sort === 'az' ? 'az' : 'ranked';
+  var usePrefs = true;            // the chip's x turns this off for this page view only
+  var RANKED_CAP = 60;
+
+  function feedRowFor(p) {
+    var rows = feedByName && feedByName[p.n];
+    if (rows) {
+      for (var k = 0; k < rows.length; k++) {
+        if (Math.abs(rows[k].lat - p.lat) < 0.0002 && Math.abs(rows[k].lon - p.lon) < 0.0002) return rows[k];
+      }
+    }
+    return { n: p.n, w: p.w, c: p.c, t: p.t, lat: p.lat, lon: p.lon, q: null, a: [], s: [], i: [] };
+  }
+
+  function legacyCard(p) {
+    var typeLabel = labels[p.t] || p.t;
+    var species = p.sp ? '<p><strong>Species (WDNR-listed):</strong> ' + escapeHtml(p.sp) + '</p>' : '';
+    // Note: no nested <a> here -- the whole card is already a link, and
+    // an <a> inside an <a> is invalid HTML that browsers silently
+    // reparent, which used to break the card's box entirely.
+    return '<a class="list-card" href="' + spotUrl(p) + '">'
+      + '<div class="list-card-head">'
+      + '<div><p class="list-card-title">' + escapeHtml(p.n || typeLabel) + '</p>'
+      + '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + escapeHtml(p.w) + ' (' + escapeHtml(p.c) + ')</p></div>'
+      + '<span class="access-type-tag type-' + p.t + '">' + escapeHtml(typeLabel) + '</span>'
+      + '</div>'
+      + (p._km !== undefined
+          ? '<p class="list-card-distance">' + (p._km < 1.6
+              ? (p._km * 0.621371).toFixed(1) + ' mi away'
+              : Math.round(p._km * 0.621371) + ' mi away') + '</p>'
+          : '')
+      + '<div class="list-card-body">' + species + '</div>'
+      + '<span class="list-card-link">Full spot report <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></span>'
+      + '</a>';
+  }
+
   function renderList(pts) {
     lastPoints = pts;
+    prefsChip.hidden = true;
+    disclosureEl.hidden = true;
     if (pts.length === 0) {
       listEl.innerHTML = '<p class="empty-state">No access points match these filters.</p>';
       return;
     }
-    // Once the angler has shared a location, nearest-first is the only
-    // ordering that makes sense; alphabetical is useless standing at a
-    // ramp. Capped so the list stays scannable rather than 3,272 long.
-    if (userPosition) {
-      pts = pts.map(function (p) {
-        return Object.assign({}, p, {
-          _km: haversineKm(userPosition.lat, userPosition.lon, p.lat, p.lon)
-        });
-      }).sort(function (a, b) { return a._km - b._km; }).slice(0, 60);
+
+    // Best match: the same deterministic ranking as the Recommended screen, run
+    // here on the spots the filters already selected (recommend.js). Preferences
+    // only order them - they never hide a spot the visitor searched for.
+    if (sortMode === 'ranked' && feedByName) {
+      var prefs = usePrefs ? P.load(null) : P.defaults();
+      var res = R.rank(pts.map(feedRowFor), { prefs: prefs, location: userPosition, rankOnly: true, limit: RANKED_CAP });
+      disclosureEl.textContent = res.disclosure + (pts.length > RANKED_CAP
+        ? ' Showing the top ' + RANKED_CAP + ' of ' + pts.length.toLocaleString() + '; narrow the filters or sort A–Z to see more.' : '');
+      disclosureEl.hidden = false;
+      prefsChip.hidden = !(usePrefs && P.hasAnyPreference(prefs));
+      listEl.innerHTML = '<div class="card-list">' + res.recommended.map(R.cardHtml).join('') + '</div>';
+      if (window.FishinTags) window.FishinTags.wire(listEl);
+      return;
     }
-    var cards = pts.map(function (p) {
-      var typeLabel = labels[p.t] || p.t;
-      var species = p.sp ? '<p><strong>Species (WDNR-listed):</strong> ' + escapeHtml(p.sp) + '</p>' : '';
-      // Note: no nested <a> here -- the whole card is already a link, and
-      // an <a> inside an <a> is invalid HTML that browsers silently
-      // reparent, which used to break the card's box entirely.
-      return '<a class="list-card" href="' + spotUrl(p) + '">'
-        + '<div class="list-card-head">'
-        + '<div><p class="list-card-title">' + escapeHtml(p.n || typeLabel) + '</p>'
-        + '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + escapeHtml(p.w) + ' (' + escapeHtml(p.c) + ')</p></div>'
-        + '<span class="access-type-tag type-' + p.t + '">' + escapeHtml(typeLabel) + '</span>'
-        + '</div>'
-        + (p._km !== undefined
-            ? '<p class="list-card-distance">' + (p._km < 1.6
-                ? (p._km * 0.621371).toFixed(1) + ' mi away'
-                : Math.round(p._km * 0.621371) + ' mi away') + '</p>'
-            : '')
-        + '<div class="list-card-body">' + species + '</div>'
-        + '<span class="list-card-link">Full spot report <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></span>'
-        + '</a>';
-    }).join('');
-    listEl.innerHTML = '<div class="card-list">' + cards + '</div>';
+
+    if (sortMode === 'nearest' && userPosition) {
+      // Capped so the list stays scannable rather than 3,272 long.
+      pts = pts.map(function (p) {
+        return Object.assign({}, p, { _km: haversineKm(userPosition.lat, userPosition.lon, p.lat, p.lon) });
+      }).sort(function (a, b) { return a._km - b._km; }).slice(0, RANKED_CAP);
+    } else if (sortMode === 'az') {
+      pts = R.sortAlphabetical(pts);
+    }
+    listEl.innerHTML = '<div class="card-list">' + pts.map(legacyCard).join('') + '</div>';
   }
+
+  function setSort(mode) {
+    sortMode = mode;
+    sortSelect.value = mode;
+    if (mode !== 'nearest') writeState({ sort: mode });
+    renderList(lastPoints);
+  }
+  sortSelect.value = sortMode;
+  sortSelect.addEventListener('change', function () { setSort(sortSelect.value); });
+  document.getElementById('prefs-chip-clear').addEventListener('click', function () { usePrefs = false; renderList(lastPoints); });
 
   function setMobileView(view) {
     layout.setAttribute('data-mobile-view', view);
@@ -221,8 +307,9 @@
       mapBtn.classList.remove('active');
     }
   }
-  mapBtn.addEventListener('click', function () { setMobileView('map'); });
-  listBtn.addEventListener('click', function () { setMobileView('list'); });
+  mapBtn.addEventListener('click', function () { setMobileView('map'); writeState({ view: 'map' }); });
+  listBtn.addEventListener('click', function () { setMobileView('list'); writeState({ view: 'list' }); });
+  if (savedState.view === 'list') setMobileView('list');
 
   // Chips and the species select auto-submit; text inputs (search,
   // county) keep the explicit Search button as their submit path.
@@ -260,12 +347,13 @@
         userPosition = { lat: pos.coords.latitude, lon: pos.coords.longitude };
         locateBtn.classList.add('active');
         locateBtn.disabled = false;
-        locateLabel.textContent = 'Nearest first';
+        locateLabel.textContent = 'Location on';
+        sortSelect.querySelector('option[value="nearest"]').disabled = false;
         map.setView([userPosition.lat, userPosition.lon], 11);
         L.circleMarker([userPosition.lat, userPosition.lon], {
           radius: 7, color: '#2456d6', fillColor: '#2456d6', fillOpacity: 0.9, weight: 3
         }).addTo(map).bindPopup('You are here');
-        renderList(lastPoints);
+        setSort('nearest');
         setMobileView('list');
       }, function () {
         locateBtn.disabled = false;
@@ -315,6 +403,20 @@
       });
       map.addLayer(clusters);
       renderList(pts);
+
+      // The ranked list needs the current-conditions feed; until it arrives (or
+      // if it cannot load) the list simply stays A-Z.
+      fetch(window.FISHIN_FEED_URL, { headers: { Accept: 'application/json' } })
+        .then(function (r) { if (!r.ok) throw new Error('feed'); return r.json(); })
+        .then(function (feed) {
+          feedByName = {};
+          (feed.spots || []).forEach(function (row) { (feedByName[row.n] = feedByName[row.n] || []).push(row); });
+          renderList(lastPoints);
+        })
+        .catch(function () {
+          sortSelect.querySelector('option[value="ranked"]').disabled = true;
+          if (sortMode === 'ranked') { sortMode = 'az'; sortSelect.value = 'az'; renderList(lastPoints); }
+        });
 
       if (pts.length === 0) {
         status.textContent = 'No access points match these filters.';

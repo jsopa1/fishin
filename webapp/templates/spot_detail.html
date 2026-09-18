@@ -510,6 +510,21 @@
 </div>
 
 <script>
+// Remember the last spot opened so the "My spot" tab can return to it. Same
+// rule as saved spots: this device only, never sent anywhere.
+(function () {
+  var btn = document.getElementById('save-spot');
+  if (!btn) return;
+  try {
+    localStorage.setItem('fishin.lastSpot.v1', JSON.stringify({
+      lat: btn.dataset.lat, lon: btn.dataset.lon, name: btn.dataset.name,
+      water: btn.dataset.water, county: btn.dataset.county
+    }));
+  } catch (e) { /* storage blocked: the tab just falls back to Recommended */ }
+})();
+</script>
+
+<script>
 // Saved spots. Kept in this browser only -- no account, no server, and
 // nothing about where someone fishes ever leaves their device, which for
 // anglers is the whole point: a spot is not something you want uploaded.

@@ -1,8 +1,35 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
+<section class="rec-section" id="recommended" aria-labelledby="rec-heading">
+  <h1 id="rec-heading">Recommended</h1>
+  <p class="rec-intro">Spots where the water temperature is inside a documented range for fish, matched to the preferences in your <a href="{{ url_for('profile') }}">Profile</a>.</p>
+
+  <div class="rec-controls">
+    <button type="button" class="btn btn-secondary btn-sm" id="rec-locate">
+      <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> Use my location
+    </button>
+    <span class="rec-status" id="rec-status" aria-live="polite"></span>
+  </div>
+  <p class="rec-prefs" id="rec-prefs"></p>
+
+  <p class="section-note" id="rec-loading">Loading current conditions&hellip;</p>
+  <noscript><p class="section-note">Recommendations are ranked on your device, so they need JavaScript. You can still <a href="{{ url_for('map_view') }}">explore the map</a>.</p></noscript>
+
+  <div id="saved-section" hidden>
+    <h2 class="highlights-head">Your saved spots</h2>
+    <p class="highlights-sub">Kept in this browser only &mdash; never uploaded anywhere.</p>
+    <div class="card-list" id="saved-list"></div>
+  </div>
+
+  <h2 class="highlights-head" id="rec-list-heading" hidden>Recommended spots</h2>
+  <div class="card-list" id="rec-list"></div>
+
+  <p class="section-note rec-disclosure" id="rec-disclosure">Ranked by how many species are inside their documented temperature range right now, then evidence strength, spot-type preference, reading quality and distance. This is not a prediction of catch success.</p>
+</section>
+
 <div class="hero">
-  <h1>Other apps tell you where people caught fish. This one tells you why they're biting.</h1>
+  <h2>Other apps tell you where people caught fish. This one tells you why they're biting.</h2>
   <p>
     Live water temperature from real Wisconsin sensors, checked against published fish-physiology
     research — so you can see which species are inside their documented feeding or spawning range
@@ -34,12 +61,6 @@
   </div>
   {% endif %}
 </div>
-
-<section class="saved-section" id="saved-section" hidden>
-  <h2 class="highlights-head">Your saved spots</h2>
-  <p class="highlights-sub">Kept in this browser only — never uploaded anywhere.</p>
-  <div class="card-list" id="saved-list"></div>
-</section>
 
 {% if highlights %}
 <section class="highlights">
@@ -113,35 +134,11 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>window.FISHIN_FEED_URL = {{ url_for('recommend_feed') | tojson }};</script>
+<script src="{{ url_for('static', filename='prefs.js') }}"></script>
+<script src="{{ url_for('static', filename='recommend.js') }}"></script>
+<script src="{{ url_for('static', filename='recommended.js') }}"></script>
 <script>
-// Saved spots, read back from this browser. The reason to return.
-(function () {
-  var wrap = document.getElementById('saved-section');
-  var list = document.getElementById('saved-list');
-  if (!wrap || !list) return;
-  var saved = [];
-  try { saved = JSON.parse(localStorage.getItem('fishin.saved.v1')) || []; } catch (e) { saved = []; }
-  if (!saved.length) return;
-
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-
-  list.innerHTML = saved.slice(0, 8).map(function (s) {
-    var url = '{{ url_for("spot_detail") }}?lat=' + encodeURIComponent(s.lat)
-      + '&lon=' + encodeURIComponent(s.lon) + '&name=' + encodeURIComponent(s.name || '');
-    return '<a class="list-card" href="' + url + '">'
-      + '<div class="list-card-head"><div>'
-      + '<p class="list-card-title">' + esc(s.name) + '</p>'
-      + '<p class="list-card-sub">' + esc(s.water) + (s.county ? ' (' + esc(s.county) + ')' : '') + '</p>'
-      + '</div></div>'
-      + '<span class="list-card-link">Open spot report &rarr;</span></a>';
-  }).join('');
-  wrap.hidden = false;
-})();
-
 (function () {
   var el = document.getElementById('home-map-preview');
   if (!el || !window.L) return;

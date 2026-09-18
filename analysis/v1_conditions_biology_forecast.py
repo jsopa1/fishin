@@ -36,6 +36,7 @@ import argparse
 import csv
 import datetime
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -71,9 +72,26 @@ STREAM_KEYWORDS = ("CREEK", "RIVER", "BROOK", "STREAM", "BRANCH")
 # Data loading (local files -- real, pre-pulled per Parts 2-3 of this cycle)
 # ---------------------------------------------------------------------------
 
+_THRESHOLDS_CACHE: dict = {}
+
+
 def load_thresholds() -> dict:
+    """Parsed once per file version (path + mtime): the web app asks for these
+    several times per species row, and re-parsing the JSON each time was ~5 ms
+    per row. Callers treat the result as read-only."""
+    path = str(THRESHOLDS_JSON)
+    try:
+        stamp = (path, os.stat(path).st_mtime_ns)
+    except OSError:
+        stamp = None
+    if stamp is not None and stamp in _THRESHOLDS_CACHE:
+        return _THRESHOLDS_CACHE[stamp]
     with open(THRESHOLDS_JSON, "r", encoding="utf-8") as f:
-        return json.load(f)
+        loaded = json.load(f)
+    if stamp is not None:
+        _THRESHOLDS_CACHE.clear()
+        _THRESHOLDS_CACHE[stamp] = loaded
+    return loaded
 
 
 def _norm(name: str) -> str:

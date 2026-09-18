@@ -14,6 +14,7 @@ import json
 import os
 import secrets
 import sys
+import threading
 import zoneinfo
 from pathlib import Path
 
@@ -23,6 +24,7 @@ REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 import v1_review_data as data  # noqa: E402
+import v4_recommend_feed as recommend_feed_module  # noqa: E402
 import v4_species_detail as species_detail  # noqa: E402
 import v2_fishing_regulations as fishing_regulations  # noqa: E402
 import v3_current_conditions as current_conditions  # noqa: E402
@@ -72,7 +74,7 @@ app.jinja_env.globals.update(
 # pages per visit, save rate, and return within 7 days.
 # ---------------------------------------------------------------------------
 EXCLUDED_PAGEVIEW_PATHS = {"/healthz", "/manifest.json", "/robots.txt", "/sitemap.xml", "/events/save"}
-EXCLUDED_PAGEVIEW_PREFIXES = ("/static", "/map/data", "/map/invasive-species-data")
+EXCLUDED_PAGEVIEW_PREFIXES = ("/static", "/map/data", "/map/invasive-species-data", "/recommend/feed")
 
 
 def _analytics_session_id() -> str:
@@ -385,6 +387,50 @@ def map_data():
         ],
         "data_unavailable": False,
     })
+
+
+@app.route("/recommend/feed.json")
+def recommend_feed():
+    """Non-personal data for the Recommended screen: which documented species
+    are in range at each spot right now (see ui/v4_recommend_feed.py). Takes no
+    parameters and reads no visitor data - the browser does the ranking, so
+    location, saved spots and Profile preferences never reach the server."""
+    conn = get_conn()
+    if conn is None:
+        return jsonify({"spots": [], "data_unavailable": True}), 503
+    try:
+        payload = recommend_feed_module.get_payload(conn)
+    finally:
+        conn.close()
+    if request.headers.get("If-None-Match") == payload["etag"]:
+        resp = app.response_class(status=304)
+    elif "gzip" in request.headers.get("Accept-Encoding", ""):
+        resp = app.response_class(payload["gzip"], mimetype="application/json")
+        resp.headers["Content-Encoding"] = "gzip"
+    else:
+        resp = app.response_class(payload["json"], mimetype="application/json")
+    resp.headers["ETag"] = payload["etag"]
+    resp.headers["Cache-Control"] = "public, max-age=300"
+    resp.headers["Vary"] = "Accept-Encoding"
+    return resp
+
+
+def _warm_recommend_feed():
+    """Build the feed in the background at startup so the first visitor does not
+    wait ~15 s for it. Best effort: on failure the route builds it on demand."""
+    try:
+        conn = get_conn()
+        if conn is not None:
+            try:
+                recommend_feed_module.get_payload(conn)
+            finally:
+                conn.close()
+    except Exception:  # noqa: BLE001
+        pass
+
+
+if "pytest" not in sys.modules and os.environ.get("FISHIN_NO_WARM") != "1":
+    threading.Thread(target=_warm_recommend_feed, daemon=True).start()
 
 
 @app.route("/map/invasive-species-data")

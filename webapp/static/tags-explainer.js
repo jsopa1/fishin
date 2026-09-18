@@ -98,15 +98,21 @@
     });
   }
 
-  function wireTags() {
-    var tags = document.querySelectorAll(".tag");
+  function wireTags(root) {
+    var tags = (root || document).querySelectorAll(".tag");
     tags.forEach(function (tagEl) {
+      if (tagEl.getAttribute("data-explain-wired")) return;
       var text = explanationFor(tagEl);
       if (!text) return;
+      tagEl.setAttribute("data-explain-wired", "1");
       wireExplainable(tagEl, text);
     });
     return tags.length;
   }
+
+  // Pages that build cards after load (Recommended, Explore list) call this on
+  // the new nodes so their tags explain themselves like server-rendered ones.
+  window.FishinTags = { wire: wireTags };
 
   function wireDataExplain() {
     var els = document.querySelectorAll("[data-explain]");

@@ -206,7 +206,7 @@ p { color: var(--gray-700); }
   margin-bottom: var(--space-7);
   box-shadow: var(--shadow-md);
 }
-.hero h1 { font-size: var(--text-2xl); max-width: 720px; }
+.hero h1, .hero h2 { font-size: var(--text-2xl); max-width: 720px; }
 .hero p { max-width: 640px; color: var(--muted); font-size: var(--text-md); }
 .hero .cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-4); }
 
@@ -1043,7 +1043,7 @@ table td a:hover { text-decoration: underline; }
 
 @media (min-width: 768px) {
   .hero { padding: var(--space-8); }
-  .hero h1 { font-size: 2.4rem; }
+  .hero h1, .hero h2 { font-size: 2.4rem; }
   .explore-layout { flex-direction: row; align-items: flex-start; }
   .explore-panel.map-panel { flex: 1 1 55%; position: sticky; top: calc(var(--header-h) + 64px); }
   .explore-panel.list-panel { flex: 1 1 45%; max-width: 460px; }
@@ -1060,7 +1060,7 @@ table td a:hover { text-decoration: underline; }
   .primary-nav { display: none !important; }
   .brand-sub { display: none; }
   .hero { padding: var(--space-5); }
-  .hero h1 { font-size: 1.5rem; }
+  .hero h1, .hero h2 { font-size: 1.5rem; }
   .badge-row { gap: 6px; }
   form.filters { padding: var(--space-4); gap: var(--space-3); }
   form.filters input, form.filters select { min-width: 0; flex: 1 1 140px; }
@@ -1093,15 +1093,6 @@ table td a:hover { text-decoration: underline; }
   }
   .bottom-nav-item .icon { width: 1.25em; height: 1.25em; }
   .bottom-nav-item.active { color: var(--accent); }
-  .bottom-nav-fab {
-    display: flex; align-items: center; justify-content: center;
-    width: 50px; height: 50px; border-radius: 50%;
-    background: var(--accent); color: white;
-    margin-top: -24px; box-shadow: var(--shadow-lg);
-    border: 3px solid var(--bg); flex-shrink: 0;
-  }
-  .bottom-nav-fab .icon { width: 1.3em; height: 1.3em; }
-  .bottom-nav-fab:hover { background: var(--accent-dark); }
 }
 
 /* ---- Fish Detail page (docs/v4_ux_goal_loop_spec.md, Phase 1) ---- */
@@ -1185,6 +1176,26 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
 @media (min-width: 960px) { .species-pick { grid-template-columns: 1fr 1fr 1fr; } }
 .species-pick-item { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
 .species-pick-item:has(input:checked) { border-color: var(--accent); background: var(--accent-light); }
+
+/* ---- Recommended (V4 Phase 4) ---- */
+.rec-section { margin-bottom: var(--space-7); }
+.rec-intro { color: var(--muted); max-width: 640px; margin: 0 0 var(--space-3); }
+.rec-controls { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-2); }
+.rec-status { font-size: var(--text-sm); color: var(--muted); }
+.rec-prefs { font-size: var(--text-sm); color: var(--gray-700); margin: 0 0 var(--space-4); }
+.rec-line { margin: var(--space-2) 0 0; font-size: var(--text-sm); color: var(--gray-800); }
+.rec-line .tag { margin-left: 4px; }
+.rec-note { margin: 4px 0 0; font-size: var(--text-xs); color: var(--muted); }
+.rec-disclosure { margin-top: var(--space-4); border-left: 3px solid var(--accent); padding-left: var(--space-3); }
+.rec-empty { color: var(--muted); }
+
+/* ---- Explore: sort + preference chip ---- */
+.explore-sort { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); margin-bottom: var(--space-2); }
+.explore-sort-label { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 600; color: var(--gray-700); }
+.explore-sort select { font: inherit; padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); }
+.explore-disclosure { margin: 0 0 var(--space-3); font-size: var(--text-xs); }
+.chip-clear { border: none; background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer; padding: 0 0 0 6px; }
+.explore-reset { margin: var(--space-2) 0 0; font-size: var(--text-sm); }
 
 /* ---- Dark theme (V4 Phase 3). Chosen explicitly via <html data-theme="dark">, or
    follows the device when no choice is saved. Tokens and the few hard-coded
