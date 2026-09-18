@@ -23,6 +23,7 @@ REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
 sys.path.insert(0, str(REPO_ROOT / "analysis"))
 import v1_review_data as data  # noqa: E402
+import v4_species_detail as species_detail  # noqa: E402
 import v2_fishing_regulations as fishing_regulations  # noqa: E402
 import v3_current_conditions as current_conditions  # noqa: E402
 import v3_moon_phase as moon_phase  # noqa: E402
@@ -466,6 +467,39 @@ def spot_detail():
     )
 
 
+@app.route("/fish/<species_slug>")
+def fish_detail(species_slug):
+    """Full documented report for one species (habitat, activity, baits).
+    Optional ?lat=&lon=&name= carry the spot the visitor came from, so the
+    page can say where the fish stands against today's temperature there and
+    link back to it; both are best-effort and never block the page."""
+    name = species_detail.species_from_slug(species_slug)
+    if name is None:
+        return render_template("fish_detail.html", fish=None), 404
+    temp_c = None
+    back_spot = None
+    try:
+        lat = float(request.args.get("lat", ""))
+        lon = float(request.args.get("lon", ""))
+    except ValueError:
+        lat = lon = None
+    if lat is not None:
+        conn = get_conn()
+        if conn is not None:
+            try:
+                spot = data.get_spot_detail(conn, lat, lon, name=request.args.get("name") or None)
+            except Exception:  # noqa: BLE001 -- context is an enhancement, never a blocker
+                spot = None
+            conn.close()
+            if spot:
+                point = spot["point"]
+                label = point.get("facility_name") or point.get("waterbody_name") or "this spot"
+                back_spot = {"name": label, "url": url_for("spot_detail", lat=lat, lon=lon, name=request.args.get("name") or "")}
+                if spot.get("temperature"):
+                    temp_c = spot["temperature"]["value_c"]
+    return render_template("fish_detail.html", fish=species_detail.get_species_detail(name, temp_c), back_spot=back_spot)
+
+
 @app.route("/healthz")
 def healthz():
     """Liveness plus a real readiness check. A 200 here means the process
@@ -508,10 +542,11 @@ def robots():
 
 @app.route("/sitemap.xml")
 def sitemap():
-    """Only the pages worth indexing. Spot pages are deliberately excluded:
+    """Only the pages worth indexing (including the durable species reports). Spot pages are deliberately excluded:
     there are 3,272 of them, they are keyed by coordinate, and their value
     is current conditions rather than durable content."""
     pages = [url_for(e, _external=True) for e in ("home", "map_view", "browse")]
+    pages += [url_for("fish_detail", species_slug=s["slug"], _external=True) for s in species_detail.list_species()]
     urls = "".join(f"<url><loc>{p}</loc><changefreq>daily</changefreq></url>" for p in pages)
     xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>'
     return Response(xml, mimetype="application/xml")

@@ -19,6 +19,11 @@
     proxy: "A regional air-temperature stand-in, used only when no water-temperature reading is available nearby. Air and water temperature can diverge, especially in spring and fall.",
     no_data: "No real, estimated, or proxy temperature reading is currently available here.",
     evidence: "How strong the source data is behind this specific statement.",
+    "tier-well-established": "Two or more independent sources agree on this statement.",
+    "tier-agency-tier": "Stated by a state or federal fisheries agency, or found in one solid peer-reviewed study.",
+    "tier-single-source-speculative": "Only one source, and not specific to this species or water - use cautiously.",
+    "reg-stated": "A Wisconsin rule that applies to this bait, quoted from the agency source below.",
+    "reg-unreviewed": "Wisconsin rules for this bait have not been reviewed here. This is not a statement that it is allowed.",
   };
 
   function explanationFor(tagEl) {

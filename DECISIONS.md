@@ -1739,3 +1739,68 @@ confident-but-unverified "real" one.
 - An honest proxy is a better outcome than an unverified real-label
   extension, especially right after fixing two cases where exactly that
   kind of extension turned out to be wrong
+
+## 043 — Habitat and bait research: verbatim-quote-or-nothing
+
+Phase 0 of the UX redesign needed habitat and bait content for all 27 species "as
+deep as the species research was". The method that made that trustworthy rather than
+fast: read each agency's full document (WDNR species fact sheets, PDFs, where they
+exist; other state/federal agency pages where WDNR publishes none), and let a claim
+into the data only if its quote is found word-for-word in the extracted source text --
+the builder aborts on any mismatch. A search-result or fetch-tool summary is never
+treated as verification (an earlier fetch of WDNR species pages returned "no
+information" for four species whose PDFs held pages of it). `analysis/verify_v4_research_quotes.py`
+re-fetches every source and re-checks every quote (366 of 366 found across 33 sources; a
+negative control confirmed it can fail).
+
+Judgment calls made along the way, each visible in the data rather than smoothed over:
+- Bait `states` is `["any"]`. An earlier version tagged baits with thermal states; no
+  source supports that, so it was removed rather than kept as plausible-sounding.
+- Wisconsin bait rules are attached only where a WDNR page or NR 20.06 states them, with
+  the quote; 11 baits stay `NOT_YET_RESEARCHED` with a reason, and the page never presents
+  them as cleared. Whether NR 20.06(11)'s 8-inch-minnow rule covers 10-14 inch live suckers
+  (which WDNR's own musky sheet describes) was not determinable from the pages read, so
+  the catalog says exactly that.
+- Species with a non-Wisconsin source only are marked `wi_applicable: false`; White Sucker
+  and Fathead Minnow are recorded as not angling targets instead of being given invented
+  baits; Cisco and Lake Whitefish list no baits because their sources name none.
+- Disagreements are disclosed, not resolved (yellow perch spawning 44 vs 45 F between two
+  WDNR pages; brown trout's 65-75 F preferred range against 48-57 F for the other Lake
+  Michigan salmonids).
+
+**Rationale:** the CEO's standing rule (#005, and the weekly-freshness bar) is that the app
+never states more than its sources support. For research content that means the proof of
+"supports" must be mechanical and re-runnable, not a claim in a commit message.
+
+## 044 — Images: two-part public-domain check, and viewing what we ship
+
+Images must be public domain and verifiable. Each candidate is accepted only if the
+Wikimedia Commons license field reads Public domain/CC0 AND a public-domain template exists
+in the file page's own wikitext; `data/v1/image_manifest_v1.json` records the file page,
+author, date, license and template for every shipped image, and
+`analysis/verify_v4_images.py` re-checks them live (34 checked, 0 failing). Species pictures
+are USFWS illustrations and photographs (US government works) plus one pre-1929 engraving.
+
+Every image was also opened and looked at, which the license check cannot do: three bait
+images that passed both license checks were rejected because they did not show the bait (a
+microscope slide of an earthworm, students sampling a stream with no hellgrammite visible, a
+shed dragonfly skin). Two more (earthworm, crankbaits) failed the template check and were
+dropped rather than trusting metadata alone. Baits with no verified image show an explicit
+no-image state; minnow and sucker baits reuse the species picture and say so.
+
+## 045 — Fish Detail page (Phase 1): deterministic, source-first, honest empty states
+
+`/fish/<species>` (data assembly in `ui/v4_species_detail.py`, pure functions over the
+committed research files) shows documented activity, cited habitat, and bait cards. Decisions:
+- Bait card order is fixed by data, never chosen at runtime: stronger evidence tier, then
+  more independent source documents, then the stored editorial rank. The same species always
+  shows the same order (unit-tested).
+- Every claim and bait offers its sources and verbatim quote in the page itself; the tier
+  tags use the existing popover.
+- Non-targets show no bait section; a target whose source names no bait says so; a bait
+  with unreviewed Wisconsin rules is tagged "Rules not reviewed" and says it is not a
+  statement that it is allowed; the section states it is angling practice, not tested
+  research, and not a promise of a bite.
+- Reached from a spot via `?lat=&lon=&name=`, which adds a back link and today's
+  temperature read; a bad or missing context never blocks the page.
+- The species pages are durable content, so they are in the sitemap (spot pages still are not).

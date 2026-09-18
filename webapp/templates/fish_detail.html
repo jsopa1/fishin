@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}{{ fish.title if fish else "Not found" }} — Fish{% endblock %}
+{% block content %}
+{% if not fish %}
+<h1>Not found</h1>
+<p class="empty-state">No documented fish matches that address. <a href="{{ url_for('map_view') }}">Back to Explore</a>.</p>
+{% else %}
+{% if back_spot %}
+<a class="back-link" href="{{ back_spot.url }}">
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to {{ back_spot.name }}
+</a>
+{% else %}
+<a class="back-link" href="{{ url_for('map_view') }}">
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to Explore
+</a>
+{% endif %}
+
+<div class="detail-hero fish-hero">
+  <div class="detail-hero-kicker"><svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Fish</div>
+  <h1>{{ fish.title }}</h1>
+  {% if fish.image %}
+  <figure class="fish-figure">
+    <img src="{{ url_for('static', filename=fish.image.static_path) }}" alt="{{ fish.title }}" loading="lazy">
+    <figcaption>{{ fish.image.credit }} · <a href="{{ fish.image.page_url }}" target="_blank" rel="noopener">source</a></figcaption>
+  </figure>
+  {% else %}
+  <p class="fish-noimage">No verified public-domain picture yet.</p>
+  {% endif %}
+  {% if not fish.angling_target %}
+    <p class="detail-hero-sub">Not an angling target. {{ fish.not_target_reason }}</p>
+  {% endif %}
+</div>
+
+{% if fish.current %}
+<section class="fish-section" id="fish-now">
+  <h2>Right now{% if back_spot %} at {{ back_spot.name }}{% endif %}</h2>
+  <p class="fish-now"><span class="tag {{ 'real' if fish.current.inside_window else 'proxy' }}">{{ 'in documented range' if fish.current.inside_window else 'outside documented range' }}</span>
+     {{ fish.current.short_text }}</p>
+</section>
+{% endif %}
+
+<section class="fish-section" id="fish-activity">
+  <h2>Documented activity</h2>
+  <p class="section-note">Temperature ranges from published research, not a prediction of whether the fish will bite.</p>
+  <ul class="fish-list">
+    {% for t in fish.thresholds %}
+    <li>
+      <strong>{{ t.label }}:</strong> {{ t.value }}
+      <span class="tag evidence">{{ t.evidence }}</span>
+      {% if t.source_note %}<details class="source-list"><summary>Source note</summary><p>{{ t.source_note }}</p></details>{% endif %}
+    </li>
+    {% endfor %}
+    {% if fish.diel_active %}<li>Documented as a dawn, dusk and night feeder.</li>{% endif %}
+  </ul>
+</section>
+
+<section class="fish-section" id="fish-habitat">
+  <h2>Documented habitat</h2>
+  {% if fish.habitat %}
+    {% for group in fish.habitat %}
+    <h3>{{ group.label }}</h3>
+    <ul class="fish-list">
+      {% for c in group.claims %}
+      <li>
+        {{ c.text }}
+        <span class="tag tier-{{ c.tier.key }}">{{ c.tier.label }}</span>
+        {% if not c.wi_applicable %}<span class="fish-flag">source is not Wisconsin-specific</span>{% endif %}
+        <details class="source-list"><summary>Sources ({{ c.stage }})</summary>
+          {% for s in c.sources %}<p><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.citation }}</a><br><q>{{ s.quote }}</q></p>{% endfor %}
+        </details>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  {% else %}
+    <p class="empty-state">Not yet documented to our standard.</p>
+  {% endif %}
+  {% if fish.habitat_not_documented %}
+    <p class="section-note">Not yet documented: {{ fish.habitat_not_documented|join('; ') }}.</p>
+  {% endif %}
+</section>
+
+{% if fish.angling_target %}
+<section class="fish-section" id="fish-bait">
+  <h2>Recommended bait</h2>
+  <p class="section-note">What state agencies report anglers use for this fish. This is angling practice, not tested research, and it is not a promise of a bite. Only rules shown below were reviewed; always check the current Wisconsin fishing regulations.</p>
+  {% if fish.baits %}
+  <div class="bait-grid">
+    {% for b in fish.baits %}
+    <article class="bait-card">
+      {% if b.image %}
+        <figure class="bait-figure"><img src="{{ url_for('static', filename=b.image.static_path) }}" alt="{{ b.name }}" loading="lazy">
+          <figcaption>{{ b.image.credit }}{% if b.image.note %} · {{ b.image.note }}{% endif %}</figcaption></figure>
+      {% else %}
+        <div class="bait-noimage">No picture yet</div>
+      {% endif %}
+      <h3>{{ b.name }}</h3>
+      <p class="bait-meta">{{ b.category }} <span class="tag tier-{{ b.tier.key }}">{{ b.tier.label }}</span></p>
+      <p>{{ b.description }}</p>
+      <p><strong>How to use:</strong> {{ b.how_to_use }}</p>
+      <p class="bait-reg"><span class="tag {{ 'reg-stated' if b.regulation.reviewed else 'reg-unreviewed' }}">{{ 'Wisconsin rule stated' if b.regulation.reviewed else 'Rules not reviewed' }}</span>
+         {{ b.regulation.text }}</p>
+      <details class="source-list"><summary>Why this bait, and sources</summary>
+        <p>{{ b.basis }}</p>
+        {% for s in b.sources %}<p><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.citation }}</a><br><q>{{ s.quote }}</q></p>{% endfor %}
+        {% for s in b.regulation.sources %}<p><strong>Rule source:</strong> <a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.citation }}</a><br><q>{{ s.quote }}</q></p>{% endfor %}
+      </details>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+    <p class="empty-state">{{ fish.no_baits_reason or "No bait documented to our standard yet." }}</p>
+  {% endif %}
+  {% if fish.technique %}
+  <h3>Technique notes</h3>
+  <ul class="fish-list">
+    {% for t in fish.technique %}
+    <li>{{ t.text }} <span class="tag tier-{{ t.tier.key }}">{{ t.tier.label }}</span>
+      <details class="source-list"><summary>Sources</summary>{% for s in t.sources %}<p><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.citation }}</a><br><q>{{ s.quote }}</q></p>{% endfor %}</details></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>
+{% endif %}
+{% endif %}
+{% endblock %}
