@@ -1,0 +1,106 @@
+{
+  "_purpose": "Species -> bait links. 'rank' is the fixed editorial order used to break ties after evidence tier and independent-source count. The number of links per species is whatever the research supports.",
+  "_link_fields": [
+    "bait_id",
+    "states",
+    "rank",
+    "tier",
+    "basis",
+    "sources"
+  ],
+  "species": {
+    "WALLEYE": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "in_activity_window",
+            "below_activity_window"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "Wisconsin DNR states walleyes are primarily minnow feeders and lists minnows first among baits.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
+              "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
+              "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "leeches",
+          "states": [
+            "in_activity_window",
+            "below_activity_window"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
+              "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
+              "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "nightcrawlers",
+          "states": [
+            "in_activity_window",
+            "below_activity_window"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
+              "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
+              "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_bullheads",
+          "states": [
+            "in_activity_window"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
+              "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
+              "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "in_activity_window"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
+              "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
+              "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

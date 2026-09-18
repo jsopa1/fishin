@@ -1,0 +1,41 @@
+{
+  "_purpose": "Shared catalog of baits/lures for the Fish Detail page. Species link to these by id in species_bait_map_v1.json. Count per species is whatever the research supports, never padded.",
+  "_regulation_note_policy": "Every item has a wi_regulation_note. Where Wisconsin bait rules (live baitfish, invasive-species, NR 19/20) have not yet been researched for the item, the value is the literal string 'NOT_YET_RESEARCHED' plus a reason, and the UI must not present the item as cleared for use on all waters.",
+  "baits": {
+    "minnows_live": {
+      "name": "Live minnows",
+      "category": "live bait",
+      "description": "Live baitfish, the forage walleye feed on most.",
+      "how_to_use": "Not yet documented to our standard beyond the agency statement that walleyes are primarily minnow feeders.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin live-baitfish and invasive-species rules not yet reviewed."
+    },
+    "leeches": {
+      "name": "Leeches",
+      "category": "live bait",
+      "description": "Live leeches.",
+      "how_to_use": "Not yet documented to our standard.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed."
+    },
+    "nightcrawlers": {
+      "name": "Nightcrawlers",
+      "category": "live bait",
+      "description": "Live earthworms.",
+      "how_to_use": "Not yet documented to our standard.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed."
+    },
+    "small_plugs": {
+      "name": "Small plugs (crankbait-type lures)",
+      "category": "hard bait",
+      "description": "Small hard plug lures.",
+      "how_to_use": "Not yet documented to our standard.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: no known live-bait restriction, but lure rules not yet reviewed."
+    },
+    "small_bullheads": {
+      "name": "Small bullheads",
+      "category": "live bait",
+      "description": "Small live bullheads (a catfish relative).",
+      "how_to_use": "Not yet documented to our standard.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on using bullheads as bait not yet reviewed."
+    }
+  }
+}

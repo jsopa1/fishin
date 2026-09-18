@@ -1,0 +1,74 @@
+{
+  "_purpose": "Documented habitat per species for the Fish Detail page (docs/v4_ux_goal_loop_spec.md, Phase 0). Every claim carries its own citation(s), evidence tier, and a verbatim quote from the source page so a later QA pass can re-check it against the source.",
+  "_tiers": {
+    "well-established": "Two or more independent sources agree.",
+    "agency-tier": "A state/federal fisheries agency statement, or a single solid peer-reviewed field study.",
+    "single-source-speculative": "One source only and not species/system-specific; use cautiously.",
+    "excluded-as-folklore": "Checked, no primary support found; never shown."
+  },
+  "_claim_fields": ["id", "field", "season_or_life_stage", "text", "tier", "wi_applicable", "sources"],
+  "_retrieval_failures": [
+    {
+      "species": "WALLEYE",
+      "source": "Knight, R.L. 1984. Piscivory by Walleyes and Yellow Perch in Western Lake Erie. Transactions of the American Fisheries Society 113:677-693 (https://onlinelibrary.wiley.com/doi/abs/10.1577/1548-8659(1984)113%3C677:PBWAYP%3E2.0.CO;2)",
+      "outcome": "HTTP 403 Forbidden on fetch; abstract could not be read directly. Nothing from this paper is used as a claim. Search-result summaries of it were NOT treated as verification.",
+      "date": "2026-09-18"
+    }
+  ],
+  "species": {
+    "WALLEYE": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "walleye-daytime-depth",
+          "field": "depth_and_light",
+          "season_or_life_stage": "adult, all open-water seasons",
+          "text": "In clear water walleye usually stay in deeper areas during the day and move into the shallows at night; in more turbid water they can be caught throughout the day.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
+              "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
+              "quote": "In clear waters, walleyes usually stay in deeper areas during the day, moving into the shallows at night. In more turbid waters, they can be caught throughout the day.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-spawning-timing-temp",
+          "field": "spawning_timing_and_temperature",
+          "season_or_life_stage": "spawning",
+          "text": "Wisconsin spawning generally runs mid-April to early May (can span early April to mid-May); the migration begins soon after ice-out at 38-44 F, and spawning peaks at 42-50 F.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Spawning section.",
+              "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
+              "quote": "Spawning in Wisconsin generally occurs between mid-April and early May, although it may extend from the beginning of April to the middle of May. ... The spawning migration of walleye begins soon after the ice goes out, at water temperatures of 38 - 44º F. ... Walleye spawning ordinarily reaches a peak when water temperatures are 42 - 50º F.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-spawning-substrate-depth",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "In one northern Wisconsin lake (Big Crooked Lake) walleyes spawned very close to shore in shallow water (mean egg-deposition depth 0.3 m) over gravel, cobble and rubble substrates, and used only about 14% of the shoreline; 39% of the shoreline was gravel/cobble or coarser. One lake, one study - a single-lake result, not a statewide rule.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Raabe, J.K., and Bozek, M.A. 2012. Quantity, structure, and habitat selection of natural spawning reefs by walleyes in a north temperate lake: A multiscale analysis. Transactions of the American Fisheries Society. https://doi.org/10.1080/00028487.2012.679017",
+              "url": "https://www.usgs.gov/publications/quantity-structure-and-habitat-selection-natural-spawning-reefs-walleyes-a-north",
+              "quote": "close to shore ... outer egg deposition polygon boundary mean depth = 0.3 m ... over gravel substrate (percent coverage mean = 64.3) ... gravel, cobble, and rubble (150.0-303.9-mm) substrates ... only 14% of the entire lake shoreline and 39% of the shoreline comprised of gravel (6.4-76.0 mm), cobble (76.1-149.9 mm), or coarser substrates",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "not_yet_documented": ["summer and winter structure preference", "river habitat", "lake-class suitability"]
+    }
+  }
+}
