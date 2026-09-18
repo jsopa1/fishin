@@ -67,9 +67,11 @@ class TestBaitData(unittest.TestCase):
             if note.startswith("NOT_YET_RESEARCHED"):
                 self.assertIn(":", note, f"{bid}: needs a reason after NOT_YET_RESEARCHED")
             else:
-                src = bait.get("wi_regulation_source")
-                self.assertTrue(src and src["quote"].strip() and src["url"].startswith("http"),
-                                f"{bid}: a stated regulation must carry a sourced quote")
+                srcs = bait.get("wi_regulation_sources")
+                self.assertTrue(srcs, f"{bid}: a stated regulation must carry sources")
+                for src in srcs:
+                    self.assertTrue(src["quote"].strip() and src["url"].startswith("http"),
+                                    f"{bid}: a stated regulation must carry a sourced quote")
 
     def test_every_link_points_at_a_real_bait_and_is_cited(self):
         for species, entry in self.map.items():

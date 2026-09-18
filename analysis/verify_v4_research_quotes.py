@@ -79,8 +79,7 @@ def collect() -> list:
                 out.append((f"{sp}/{t['id']}", s["url"], s["quote"]))
     cat = json.loads((DATA / "bait_catalog_v1.json").read_text(encoding="utf-8"))
     for bid, b in cat["baits"].items():
-        s = b.get("wi_regulation_source")
-        if s:
+        for s in b.get("wi_regulation_sources", []):
             out.append((f"bait/{bid}", s["url"], s["quote"]))
     return out
 

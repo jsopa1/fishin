@@ -6,67 +6,221 @@
       "name": "Live minnows",
       "category": "live bait",
       "description": "Live baitfish; the main forage of walleye.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Wild-caught minnows may be used only on the water they were collected from and may not be moved away live. Minnows bought from a Wisconsin bait dealer can be reused on the same water, or elsewhere if no lake or river water was added to the container (up to 2 gallons of water, no other fish in it). Minnow harvest is closed on VHS known and suspect waters. A minnow 8 inches or longer may only be fished with a quick-strike rig or a non-offset circle hook (NR 20.06(11)).",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "On non-VHS waters, you can collect minnows for personal use as long as you only use them for bait on the water you collected them from, but it is illegal to transport any such live minnows away from the water body where you caught them.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Anglers can take minnows bought from a Wisconsin bait dealer (which includes Wisconsin registered fish farms) away from a lake or river and use them again on that same waterbody. Anglers can also take minnows bought from a Wisconsin bait dealer (which includes Wisconsin registered fish farms) away from a waterbody and use them elsewhere if no lake or river water was added to the bait container. In both of these instances, you can move the amount of water needed to keep the minnows alive, up to 2 gallons. No other fish may be held in the minnow container.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No person may harvest minnows from these waters, except that suckers may be harvested but may not be transported away live.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with a minnow 8 inches or longer unless using a quick-strike rig that the person attempts to hook immediately into the mouth of a fish upon indication of a bite or unless using a non-offset circle hook.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "leeches": {
       "name": "Leeches",
       "category": "live bait",
       "description": "Live leeches.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Worms, leeches, insects and larvae are generally legal bait, but all water must be drained from fishing equipment and containers when you leave the water (except up to 2 gallons holding minnows), including containers holding leeches or aquatic insects.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No, other types of live baits such as worms, leeches, insects, larvae, are generally still legal to use. However, under the rules, all water is required to be drained from all equipment and containers used for fishing when you leave the water (except for the up to 2 gallons holding minnows).",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "nightcrawlers": {
       "name": "Nightcrawlers",
       "category": "live bait",
       "description": "Live earthworms (night crawlers).",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Worms, leeches, insects and larvae are generally legal bait, but all water must be drained from fishing equipment and containers when you leave the water (except up to 2 gallons holding minnows), including containers holding leeches or aquatic insects.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No, other types of live baits such as worms, leeches, insects, larvae, are generally still legal to use. However, under the rules, all water is required to be drained from all equipment and containers used for fishing when you leave the water (except for the up to 2 gallons holding minnows).",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "small_plugs": {
       "name": "Plugs (crankbait-type lures)",
       "category": "hard bait",
       "description": "Hard plug lures.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "small_bullheads": {
       "name": "Small bullheads",
       "category": "live bait",
       "description": "Small live bullheads.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Fish other than minnows may be used as bait, but only fish caught in that water may be used on that water unless dead and preserved without refrigeration or freezing; live game or rough fish generally cannot be moved away from the water; fish used as bait count toward your daily bag limit; suckers may not be transported away live. NR 20.06(11) limits fishing with a 'minnow' 8 inches or longer to quick-strike rigs or non-offset circle hooks - the pages read do not say whether it applies to suckers, so check the current regulations for large live bait.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. Using fish as bait.",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/questions/fishasbait.html",
+          "quote": "Fish other than minnows may be used as bait.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. Using fish as bait.",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/questions/fishasbait.html",
+          "quote": "Only fish caught in that water can be used as bait on that water, unless they are dead and have been preserved by a method that does not require refrigeration or freezing. Live games or rough fish cannot be moved away from water, with a few very limited exceptions. Also, keep in mind that any fish that are caught and used as bait must be counted towards your daily bag limit.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "suckers may be harvested but may not be transported away live",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with a minnow 8 inches or longer unless using a quick-strike rig that the person attempts to hook immediately into the mouth of a fish upon indication of a bite or unless using a non-offset circle hook.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "spoons": {
       "name": "Spoons",
       "category": "hard bait",
       "description": "Metal spoon lures.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "spinners_trolling": {
       "name": "Spinners / Wolf River rigs (trolled)",
       "category": "hard bait",
       "description": "Spinner rigs pulled behind a moving boat; WDNR names Wolf River rigs and Little John spinners.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "jigs": {
       "name": "Jigs",
       "category": "hard bait",
       "description": "Weighted jig heads, used on open water and through the ice.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "streamer_flies_poppers": {
       "name": "Streamer flies and poppers (fly rod)",
       "category": "fly",
       "description": "Fly-rod streamers or poppers.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "worms": {
       "name": "Worms",
       "category": "live bait",
       "description": "Live worms (garden worms / earthworms).",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Worms, leeches, insects and larvae are generally legal bait, but all water must be drained from fishing equipment and containers when you leave the water (except up to 2 gallons holding minnows), including containers holding leeches or aquatic insects.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No, other types of live baits such as worms, leeches, insects, larvae, are generally still legal to use. However, under the rules, all water is required to be drained from all equipment and containers used for fishing when you leave the water (except for the up to 2 gallons holding minnows).",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "insect_larvae": {
       "name": "Insect larvae (wax worms, mousies)",
       "category": "live bait",
       "description": "Grubs such as wax worms, or mousies (larvae of flying insects).",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Worms, leeches, insects and larvae are generally legal bait, but all water must be drained from fishing equipment and containers when you leave the water (except up to 2 gallons holding minnows), including containers holding leeches or aquatic insects.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No, other types of live baits such as worms, leeches, insects, larvae, are generally still legal to use. However, under the rules, all water is required to be drained from all equipment and containers used for fishing when you leave the water (except for the up to 2 gallons holding minnows).",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "crayfish_tails": {
       "name": "Crayfish tails",
@@ -84,19 +238,73 @@
       "name": "Pieces of fish",
       "category": "natural bait",
       "description": "Cut pieces of fish as bait.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Dead fish may be used as bait only if caught on the water being fished or preserved without refrigeration or freezing (commercially produced dead bait that needs no refrigeration is allowed); dead bait of any type may be used on Lake Michigan and Green Bay. Frozen fish may not be used on other waters unless thawed and preserved, except on Lake Michigan and its tributaries.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Only if they were caught on the water you are fishing or have been preserved in a manner that does not require refrigeration or freezing. ... You can also use commercially produced dead baits as long as they do not require refrigeration. Dead bait of any type can be used on Lake Michigan and waters of Green Bay or on the water where the bait was harvested.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Frozen fish CANNOT be used on any water other than where they were caught (EXCEPTION: frozen bait can be used on Lake Michigan and its tributaries upstream to the first barrier impassable to fish) unless they are first thawed and then preserved in a method that does not require refrigeration or freezing for long term storage.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "jigs_ice_teardrop": {
       "name": "Small tear-shaped ice jigs (baited with grubs)",
       "category": "hard bait",
       "description": "Small, colorful tear-shaped jigs baited with wax worms or mousies for ice fishing.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure with live grub bait; bait rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "suckers_chubs_live": {
       "name": "Small suckers and chubs (live, up to 8 in.)",
       "category": "live bait",
       "description": "Live small suckers or chubs up to 8 inches long.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Fish other than minnows may be used as bait, but only fish caught in that water may be used on that water unless dead and preserved without refrigeration or freezing; live game or rough fish generally cannot be moved away from the water; fish used as bait count toward your daily bag limit; suckers may not be transported away live. NR 20.06(11) limits fishing with a 'minnow' 8 inches or longer to quick-strike rigs or non-offset circle hooks - the pages read do not say whether it applies to suckers, so check the current regulations for large live bait.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. Using fish as bait.",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/questions/fishasbait.html",
+          "quote": "Fish other than minnows may be used as bait.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. Using fish as bait.",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/questions/fishasbait.html",
+          "quote": "Only fish caught in that water can be used as bait on that water, unless they are dead and have been preserved by a method that does not require refrigeration or freezing. Live games or rough fish cannot be moved away from water, with a few very limited exceptions. Also, keep in mind that any fish that are caught and used as bait must be counted towards your daily bag limit.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "suckers may be harvested but may not be transported away live",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with a minnow 8 inches or longer unless using a quick-strike rig that the person attempts to hook immediately into the mouth of a fish upon indication of a bite or unless using a non-offset circle hook.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "tip_ups": {
       "name": "Tip-ups (ice fishing)",
@@ -108,37 +316,107 @@
       "name": "Live suckers (10-14 in.)",
       "category": "live bait",
       "description": "Large live suckers, 10 to 14 inches long.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Fish other than minnows may be used as bait, but only fish caught in that water may be used on that water unless dead and preserved without refrigeration or freezing; live game or rough fish generally cannot be moved away from the water; fish used as bait count toward your daily bag limit; suckers may not be transported away live. NR 20.06(11) limits fishing with a 'minnow' 8 inches or longer to quick-strike rigs or non-offset circle hooks - the pages read do not say whether it applies to suckers, so check the current regulations for large live bait.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. Using fish as bait.",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/questions/fishasbait.html",
+          "quote": "Fish other than minnows may be used as bait.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. Using fish as bait.",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/questions/fishasbait.html",
+          "quote": "Only fish caught in that water can be used as bait on that water, unless they are dead and have been preserved by a method that does not require refrigeration or freezing. Live games or rough fish cannot be moved away from water, with a few very limited exceptions. Also, keep in mind that any fish that are caught and used as bait must be counted towards your daily bag limit.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "suckers may be harvested but may not be transported away live",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with a minnow 8 inches or longer unless using a quick-strike rig that the person attempts to hook immediately into the mouth of a fish upon indication of a bite or unless using a non-offset circle hook.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "bucktail_spinners": {
       "name": "Bucktail spinners",
       "category": "hard bait",
       "description": "Large bucktail spinner lures.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "insects_live": {
       "name": "Insects and other small invertebrates",
       "category": "live bait",
       "description": "Small live insects or other invertebrates.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Worms, leeches, insects and larvae are generally legal bait, but all water must be drained from fishing equipment and containers when you leave the water (except up to 2 gallons holding minnows), including containers holding leeches or aquatic insects.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No, other types of live baits such as worms, leeches, insects, larvae, are generally still legal to use. However, under the rules, all water is required to be drained from all equipment and containers used for fishing when you leave the water (except for the up to 2 gallons holding minnows).",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "wet_dry_flies": {
       "name": "Wet or dry flies",
       "category": "fly",
       "description": "Fly-rod wet or dry flies.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "small_artificial_lures": {
       "name": "Small artificial lures",
       "category": "hard bait",
       "description": "Small artificial lures.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
-    },
-    "leeches_small": {
-      "name": "Leeches",
-      "category": "live bait",
-      "description": "Live leeches.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "stink_bait": {
       "name": "Stink bait",
@@ -180,31 +458,95 @@
       "name": "Spinners",
       "category": "hard bait",
       "description": "Spinner lures.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "plastic_worms": {
       "name": "Plastic worms",
       "category": "soft plastic",
       "description": "Plastic worm lures.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "dead_minnows": {
       "name": "Dead minnows",
       "category": "natural bait",
       "description": "Dead minnows.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Dead fish may be used as bait only if caught on the water being fished or preserved without refrigeration or freezing (commercially produced dead bait that needs no refrigeration is allowed); dead bait of any type may be used on Lake Michigan and Green Bay. Frozen fish may not be used on other waters unless thawed and preserved, except on Lake Michigan and its tributaries.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Only if they were caught on the water you are fishing or have been preserved in a manner that does not require refrigeration or freezing. ... You can also use commercially produced dead baits as long as they do not require refrigeration. Dead bait of any type can be used on Lake Michigan and waters of Green Bay or on the water where the bait was harvested.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Frozen fish CANNOT be used on any water other than where they were caught (EXCEPTION: frozen bait can be used on Lake Michigan and its tributaries upstream to the first barrier impassable to fish) unless they are first thawed and then preserved in a method that does not require refrigeration or freezing for long term storage.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "artificial_flies": {
       "name": "Artificial flies",
       "category": "fly",
       "description": "Artificial fly-rod flies.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "spawn": {
       "name": "Spawn (fish eggs)",
       "category": "natural bait",
       "description": "Fish eggs (spawn).",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on egg baits not reviewed."
+      "wi_regulation_note": "Fish eggs (spawn) from Lake Michigan and its tributaries may be used on Lake Superior only if first preserved without refrigeration or freezing (WDNR suggests not using Lake Michigan spawn on Lake Superior at all); only Lake Superior spawn may be used fresh there. Lake Michigan and Lake Superior system spawn may be used on Lake Michigan and its tributaries without preserving. Commercial artificial and preserved spawn are options.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Fish eggs, or spawn from Lake Michigan and its tributaries, can only be used on Lake Superior if it is first preserved by a method that does not require refrigeration or freezing. ... ONLY spawn collected from Lake Superior and its tributaries may be used to fish Lake Superior and its tributaries without being preserved. ... Lake Michigan and Lake Superior system spawn may be used on Lake Michigan and its tributaries without being preserved. Anglers have reported good success using commercially produced artificial and preserved spawn on Great Lakes waters.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "live_bait_unspecified": {
       "name": "Live bait (type not specified)",
@@ -216,61 +558,157 @@
       "name": "Spawn bag",
       "category": "prepared bait",
       "description": "Fish spawn (eggs) tied in a small ball using veil material.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on egg baits not reviewed."
+      "wi_regulation_note": "Fish eggs (spawn) from Lake Michigan and its tributaries may be used on Lake Superior only if first preserved without refrigeration or freezing (WDNR suggests not using Lake Michigan spawn on Lake Superior at all); only Lake Superior spawn may be used fresh there. Lake Michigan and Lake Superior system spawn may be used on Lake Michigan and its tributaries without preserving. Commercial artificial and preserved spawn are options.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Fish eggs, or spawn from Lake Michigan and its tributaries, can only be used on Lake Superior if it is first preserved by a method that does not require refrigeration or freezing. ... ONLY spawn collected from Lake Superior and its tributaries may be used to fish Lake Superior and its tributaries without being preserved. ... Lake Michigan and Lake Superior system spawn may be used on Lake Michigan and its tributaries without being preserved. Anglers have reported good success using commercially produced artificial and preserved spawn on Great Lakes waters.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "flatfish": {
       "name": "Flatfish",
       "category": "hard bait",
       "description": "Flatfish-type lures.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "dodger_fly_combo": {
       "name": "Dodger and fly combinations (trolled)",
       "category": "hard bait",
       "description": "A dodger (flashing attractor) trailed by a fly, trolled.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "alewives": {
       "name": "Alewives (fish bait)",
       "category": "natural bait",
       "description": "Alewife baitfish.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on alewife as bait not reviewed."
+      "wi_regulation_note": "Dead fish may be used as bait only if caught on the water being fished or preserved without refrigeration or freezing (commercially produced dead bait that needs no refrigeration is allowed); dead bait of any type may be used on Lake Michigan and Green Bay. Frozen fish may not be used on other waters unless thawed and preserved, except on Lake Michigan and its tributaries.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Only if they were caught on the water you are fishing or have been preserved in a manner that does not require refrigeration or freezing. ... You can also use commercially produced dead baits as long as they do not require refrigeration. Dead bait of any type can be used on Lake Michigan and waters of Green Bay or on the water where the bait was harvested.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Frozen fish CANNOT be used on any water other than where they were caught (EXCEPTION: frozen bait can be used on Lake Michigan and its tributaries upstream to the first barrier impassable to fish) unless they are first thawed and then preserved in a method that does not require refrigeration or freezing for long term storage.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "yarn_flies": {
       "name": "Yarn flies",
       "category": "fly",
       "description": "Yarn flies used in tributaries.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "crayfish_live": {
       "name": "Crayfish (live)",
       "category": "live bait",
       "description": "Live crayfish; a favorite smallmouth food.",
       "wi_regulation_note": "Illegal to possess live crayfish while fishing or possessing angling equipment on any inland Wisconsin water except the Mississippi River (per WDNR smallmouth bass page).",
-      "wi_regulation_source": {
-        "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
-        "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
-        "quote": "it is illegal to possess live crayfish while fishing or while possessing angling equipment on any inland water, except the Mississippi River",
-        "retrieved": "2026-09-18"
-      }
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+          "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+          "quote": "it is illegal to possess live crayfish while fishing or while possessing angling equipment on any inland water, except the Mississippi River",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "hellgrammites": {
       "name": "Hellgrammites",
       "category": "live bait",
       "description": "Hellgrammites (dobsonfly larvae).",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Worms, leeches, insects and larvae are generally legal bait, but all water must be drained from fishing equipment and containers when you leave the water (except up to 2 gallons holding minnows), including containers holding leeches or aquatic insects.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No, other types of live baits such as worms, leeches, insects, larvae, are generally still legal to use. However, under the rules, all water is required to be drained from all equipment and containers used for fishing when you leave the water (except for the up to 2 gallons holding minnows).",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "dragonfly_larvae": {
       "name": "Dragonfly larvae",
       "category": "live bait",
       "description": "Dragonfly larvae.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Worms, leeches, insects and larvae are generally legal bait, but all water must be drained from fishing equipment and containers when you leave the water (except up to 2 gallons holding minnows), including containers holding leeches or aquatic insects.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No, other types of live baits such as worms, leeches, insects, larvae, are generally still legal to use. However, under the rules, all water is required to be drained from all equipment and containers used for fishing when you leave the water (except for the up to 2 gallons holding minnows).",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "surface_baits": {
       "name": "Surface artificial baits",
       "category": "hard bait",
       "description": "Artificial baits worked on the surface.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "live_bait_lmb": {
       "name": "Live baits",
@@ -282,37 +720,133 @@
       "name": "Surface plugs",
       "category": "hard bait",
       "description": "Plugs worked on the surface.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "jigs_light": {
       "name": "Light jigs (with small minnows)",
       "category": "hard bait",
       "description": "Light jigs, often paired with small minnows.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "minnows_crappie": {
       "name": "Small 'crappie minnows'",
       "category": "live bait",
       "description": "Small live minnows sold as crappie minnows.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+      "wi_regulation_note": "Wild-caught minnows may be used only on the water they were collected from and may not be moved away live. Minnows bought from a Wisconsin bait dealer can be reused on the same water, or elsewhere if no lake or river water was added to the container (up to 2 gallons of water, no other fish in it). Minnow harvest is closed on VHS known and suspect waters. A minnow 8 inches or longer may only be fished with a quick-strike rig or a non-offset circle hook (NR 20.06(11)).",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "On non-VHS waters, you can collect minnows for personal use as long as you only use them for bait on the water you collected them from, but it is illegal to transport any such live minnows away from the water body where you caught them.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "Anglers can take minnows bought from a Wisconsin bait dealer (which includes Wisconsin registered fish farms) away from a lake or river and use them again on that same waterbody. Anglers can also take minnows bought from a Wisconsin bait dealer (which includes Wisconsin registered fish farms) away from a waterbody and use them elsewhere if no lake or river water was added to the bait container. In both of these instances, you can move the amount of water needed to keep the minnows alive, up to 2 gallons. No other fish may be held in the minnow container.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin DNR. How VHS rules affect anglers (Q&A).",
+          "url": "https://dnr.wisconsin.gov/topic/Fishing/vhs/vhs_qaanglers.html",
+          "quote": "No person may harvest minnows from these waters, except that suckers may be harvested but may not be transported away live.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with a minnow 8 inches or longer unless using a quick-strike rig that the person attempts to hook immediately into the mouth of a fish upon indication of a bite or unless using a non-offset circle hook.",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "jigging_spoons": {
       "name": "Bright, shiny jigging spoons",
       "category": "hard bait",
       "description": "Jigging spoons used through the ice.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "finesse_tubes": {
       "name": "Small finesse tubes (lightweight internal jighead)",
       "category": "soft plastic",
       "description": "Small soft-plastic tube baits with a lightweight internal jighead.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     },
     "crawfish_imitators": {
       "name": "Small crawfish imitators",
       "category": "soft plastic",
       "description": "Small artificial crawfish imitations.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+      "wi_regulation_note": "Artificial lure: the only bait allowed on waters restricted to artificial lures only. No more than 3 hooks, baits or lures may be fished per angler (NR 20.06). No lure-specific rule was found on the pages read. Where a lure is tipped with live bait or grubs, that bait's own rules also apply.",
+      "wi_regulation_sources": [
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Fish with more than 3 hooks, baits or lures.",
+          "retrieved": "2026-09-18"
+        },
+        {
+          "citation": "Wisconsin Administrative Code, Chapter NR 20, s. NR 20.06 (as published on the Wisconsin Legislature website).",
+          "url": "https://docs.legis.wisconsin.gov/code/admin_code/nr/001/20/ii/07/2/b",
+          "quote": "Possess or control any live bait or any other baits, hooks or lures other than artificial lures while on the waters, banks or shores of waters where only the use of artificial lures is authorized in subch. III",
+          "retrieved": "2026-09-18"
+        }
+      ]
     }
   }
 }

@@ -1,13 +1,13 @@
 # V4 Habitat & Bait Research (Phase 0 of the UX redesign)
 
-**Status: species research complete for all 27 of 27 species; Wisconsin bait-regulation pass and public-domain images still open.**
+**Status: species research complete for all 27 of 27 species; Wisconsin bait-regulation pass done for most baits; public-domain images still open.**
 Spec: [v4_ux_goal_loop_spec.md](v4_ux_goal_loop_spec.md). Data:
 [habitat_reference_v1.json](../data/v1/habitat_reference_v1.json),
 [bait_catalog_v1.json](../data/v1/bait_catalog_v1.json),
 [species_bait_map_v1.json](../data/v1/species_bait_map_v1.json). Guards:
 `analysis/tests/test_v4_habitat_bait_data.py` (structure, coverage of all 27 species) and
 `analysis/verify_v4_research_quotes.py` (re-fetches every source and confirms every stored quote is present verbatim;
-last run: **289 of 289 quotes found across 30 sources**; a negative control confirmed it fails on an altered quote).
+last run: **366 of 366 quotes found across 33 sources**; a negative control confirmed it fails on an altered quote).
 
 ## Method
 
@@ -79,13 +79,27 @@ Bait catalog: 51 items.
 - The Channel Catfish PDF text has OCR spacing artifacts (e.g. "7 5 degrees"); quoted as extracted.
 - Raabe & Bozek 2012 (walleye spawning) is one Wisconsin lake.
 
-## Wisconsin bait regulations - still open
+## Wisconsin bait regulations
 
-Only rules stated on the pages read are recorded, each with a quote: live crayfish may not be
-possessed while fishing on inland waters except the Mississippi River (Smallmouth Bass page).
-Every other bait is explicitly `NOT_YET_RESEARCHED`. A dedicated regulations pass (NR 19/20: live
-baitfish, egg and animal-part baits, invasive-species rules) is required before Fish Detail may
-present any live bait as usable on all waters.
+Sourced from WDNR's "How VHS rules affect anglers" Q&A, WDNR's "Using fish as bait" page and Wis.
+Admin. Code NR 20.06, each with verbatim quotes (`wi_regulation_sources` in the catalog):
+
+- Live minnows: wild-caught minnows only on the water they came from; bought minnows reusable under
+  conditions (up to 2 gallons, no lake water, no other fish); minnow harvest closed on VHS waters;
+  NR 20.06(11) - a minnow 8 inches or longer needs a quick-strike rig or non-offset circle hook.
+- Other fish as bait (suckers, chubs, bullheads): only fish caught in that water, unless dead and
+  preserved; live game/rough fish generally cannot be moved; counts toward bag limit. Whether
+  NR 20.06(11) covers 10-14 inch live suckers (as WDNR's musky sheet describes) is *not* determined
+  by the pages read - the catalog says so and tells the reader to check current regulations.
+- Dead/frozen bait: caught on that water or preserved without refrigeration; exceptions for Lake
+  Michigan/Green Bay. Spawn: Lake Michigan spawn on Lake Superior only if preserved.
+- Worms, leeches, insects, larvae: generally legal; drain all water from containers when leaving.
+- Live crayfish: not to be possessed while fishing on inland waters except the Mississippi River.
+- Artificial lures: NR 20.06 limits (3 hooks/baits/lures; artificial-only waters).
+
+Still `NOT_YET_RESEARCHED` (11 items, each with its reason): crayfish tails, shrimp, tip-ups (line/tip-up
+count rules), stink bait, meat strips, dough balls, frogs, grasshoppers, clams, and the two
+unspecified-live-bait entries. Fish Detail must show these with no "cleared for use" claim.
 
 ## Failed retrievals (logged, nothing claimed from them)
 
