@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="detail-hero profile-hero">
+  <div class="profile-avatar" aria-hidden="true"><svg class="icon icon-lg"><use href="#icon-user"/></svg></div>
+  <div>
+    <h1>Guest</h1>
+    <p class="detail-hero-sub">No account &mdash; your preferences are saved in this browser only.</p>
+  </div>
+</div>
+
+<nav class="profile-links" aria-label="Help and feedback">
+  <a class="profile-link" href="{{ url_for('feedback') }}?page=/profile"><svg class="icon" aria-hidden="true"><use href="#icon-star"/></svg> Rate us</a>
+  <a class="profile-link" href="{{ url_for('home') }}#about"><svg class="icon" aria-hidden="true"><use href="#icon-message"/></svg> Help</a>
+  <a class="profile-link" href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg> Documentation</a>
+</nav>
+
+<section class="fish-section" id="pref-appearance">
+  <h2>Appearance</h2>
+  <div class="view-toggle pref-seg" role="radiogroup" aria-label="Theme" data-pref="theme">
+    <button type="button" class="view-toggle-btn" role="radio" data-value="system">Match device</button>
+    <button type="button" class="view-toggle-btn" role="radio" data-value="light">Light</button>
+    <button type="button" class="view-toggle-btn" role="radio" data-value="dark">Dark</button>
+  </div>
+</section>
+
+<section class="fish-section" id="pref-spots">
+  <h2>Fishing preferences</h2>
+  <p class="section-note">Where you like to fish. These shape the order of your recommended spots. &ldquo;Avoid&rdquo; hides that kind of spot from recommendations; &ldquo;Prefer&rdquo; only breaks ties.</p>
+  {% for value, label in spot_types %}
+  <div class="pref-row">
+    <span class="pref-label">{{ label }}</span>
+    <div class="view-toggle pref-seg" role="radiogroup" aria-label="{{ label }}" data-pref="spot" data-type="{{ value }}">
+      <button type="button" class="view-toggle-btn" role="radio" data-value="prefer">Prefer</button>
+      <button type="button" class="view-toggle-btn" role="radio" data-value="ok">OK</button>
+      <button type="button" class="view-toggle-btn" role="radio" data-value="avoid">Avoid</button>
+    </div>
+  </div>
+  {% endfor %}
+  <div class="pref-row">
+    <label class="pref-label" for="pref-distance">How far will you travel?</label>
+    <select id="pref-distance" data-pref="distance">
+      <option value="10">Within 10 miles</option><option value="25">Within 25 miles</option><option value="50">Within 50 miles</option>
+      <option value="100">Within 100 miles</option><option value="200">Within 200 miles</option><option value="0">Any distance</option>
+    </select>
+  </div>
+</section>
+
+<section class="fish-section" id="pref-species">
+  <h2>Species</h2>
+  <p class="section-note">Tick the fish you go after. With none ticked, every documented species counts. <span id="species-count" aria-live="polite"></span>
+    <button type="button" class="btn btn-secondary btn-sm" id="species-clear">Clear all</button></p>
+  <ul class="species-pick">
+    {% for s in species %}
+    <li>
+      <label class="species-pick-item">
+        <input type="checkbox" value="{{ s.name }}" data-pref="species">
+        {% set img = species_image(s.name) %}
+        {% if img %}<img class="fish-thumb" src="{{ url_for('static', filename=img.static_path) }}" alt="" loading="lazy">{% else %}<span class="fish-thumb fish-thumb-empty" aria-hidden="true"></span>{% endif %}
+        <span>{{ s.title }}</span>
+      </label>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<p class="section-note" id="pref-saved-note">Saved on this device as you change things. Nothing here is sent to our servers &mdash; see the <a href="{{ url_for('privacy') }}">privacy policy</a>.</p>
+
+<script src="{{ url_for('static', filename='prefs.js') }}"></script>
+<script>window.FISHIN_SPECIES = {{ species | map(attribute='name') | list | tojson }};</script>
+<script src="{{ url_for('static', filename='profile.js') }}"></script>
+{% endblock %}

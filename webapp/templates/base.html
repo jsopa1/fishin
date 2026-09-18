@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // Apply the saved theme before first paint (no light flash in dark mode).
+    // Stored on this device only; see static/prefs.js.
+    try { var t = localStorage.getItem("fishin.prefs.theme.v1"); if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  </script>
   {% set meta_title = self.title() ~ " — fishin" %}
   {% set meta_description = "Live Wisconsin water temperatures checked against published fish-physiology research, so you can see which species are inside their documented feeding or spawning range right now — with the reasoning and the source for every answer." %}
   <meta name="description" content="{{ meta_description }}">
@@ -115,6 +120,18 @@
   <symbol id="icon-info" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/>
     <circle cx="12" cy="8" r="0.9" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24">
+    <polygon points="12 3 14.9 9 21.5 9.8 16.6 14.3 17.9 21 12 17.7 6.1 21 7.4 14.3 2.5 9.8 9.1 9"/>
+  </symbol>
+  <symbol id="icon-message" viewBox="0 0 24 24">
+    <path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4V6a1 1 0 0 1 1-1z"/>
+  </symbol>
+  <symbol id="icon-book" viewBox="0 0 24 24">
+    <path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>
+  </symbol>
+  <symbol id="icon-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
   </symbol>
 </svg>
 

@@ -1855,3 +1855,30 @@ fishing preferences to rank spots would have quietly broken that posture. So ins
 Measuring get_spot_detail (211 ms per spot, 3,272 spots) showed the feed needs the temperature
 anchors cached per data refresh and a bounding-box prefilter on citizen sightings, which also
 speeds every spot page; that is part of Phase 4.
+
+## 048 — Anonymous Profile and dark theme (Phase 3)
+
+The Profile screen is anonymous by design: a "Guest" header, no account, no sign-in. It stores
+four things on the device only - theme (match device / light / dark), Prefer / OK / Avoid for each
+spot type, a maximum travel distance (default 50 miles, "any distance" allowed) and the species
+the visitor targets (default none, meaning every documented species counts). Nothing is sent to
+the server; a test fails if the Profile scripts ever gain a network call, and the privacy page now
+says so in its own words. Rate us / Help / Documentation link to the feedback form, the About
+section and the public repository, which are the real equivalents that exist today.
+
+Two things the approved spec assumed turned out not to exist, so they were built rather than
+"reused": there was no dark theme at all (the spec said to override an existing
+`prefers-color-scheme` style), and the location feature was client-only (see #047). The dark theme
+is a set of colour tokens applied either by an explicit choice or by the device setting, with an
+explicit "Light" beating a dark device. A tiny script in the page head applies the saved choice
+before first paint so a dark-mode visitor never sees a light flash. Every dark rule is scoped
+under the theme selector and a test rejects any that is not, since an unscoped rule would leak
+into light mode.
+
+The saved values are sanitised on the way in and again on the way out, so a corrupted or hand-edited
+value falls back to the default instead of breaking the page. One bug caught in testing: a missing
+stored distance read as 0, which means "any distance", so new visitors would have silently
+received an unlimited radius; blank and absent values now map to the 50-mile default.
+
+"Avoid" removes a spot type from recommendations and "Prefer" only breaks ties (Phase 4), so a
+preference can never leave a visitor with an empty list.

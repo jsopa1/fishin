@@ -515,6 +515,16 @@ def fish_detail(species_slug):
     return render_template("fish_detail.html", fish=species_detail.get_species_detail(name, temp_c), back_spot=back_spot)
 
 
+@app.route("/profile")
+def profile():
+    """Anonymous profile: everything on this page is read and written by
+    static/profile.js in the visitor's own browser (localStorage). The server
+    only supplies the list of species and the page; it never sees, stores or
+    is sent a preference."""
+    spot_types = [("boat_ramp", "Boat launches"), ("boat_carry_in", "Carry-ins"), ("shore_fishing", "Shore spots")]
+    return render_template("profile.html", species=species_detail.list_species(), spot_types=spot_types)
+
+
 @app.route("/healthz")
 def healthz():
     """Liveness plus a real readiness check. A 200 here means the process

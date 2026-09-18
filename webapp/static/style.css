@@ -1167,5 +1167,67 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
 .view-toggle { width: 100%; margin: var(--space-3) 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--card); }
 .view-toggle-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); border: none; background: transparent; color: var(--muted); font: inherit; font-weight: 600; cursor: pointer; }
 .view-toggle-btn + .view-toggle-btn { border-left: 1px solid var(--border); }
-.view-toggle-btn.active { background: var(--accent); color: var(--gray-0); }
+.view-toggle-btn.active { background: var(--accent); color: #fff; }
 .view-toggle-btn:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: -2px; }
+
+/* ---- Profile page (V4 Phase 3) ---- */
+.profile-hero { display: flex; align-items: center; gap: var(--space-4); }
+.profile-hero h1 { margin: 0; }
+.profile-avatar { width: 64px; height: 64px; border-radius: var(--radius-full); background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; flex: none; }
+.profile-links { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-6); }
+.profile-link { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; font-weight: 600; color: var(--ink); }
+.profile-link:hover { border-color: var(--accent); }
+.pref-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--border-soft); }
+.pref-label { font-weight: 600; }
+.pref-seg { width: auto; margin: 0; }
+.species-pick { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: var(--space-2); }
+@media (min-width: 640px) { .species-pick { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 960px) { .species-pick { grid-template-columns: 1fr 1fr 1fr; } }
+.species-pick-item { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; }
+.species-pick-item:has(input:checked) { border-color: var(--accent); background: var(--accent-light); }
+
+/* ---- Dark theme (V4 Phase 3). Chosen explicitly via <html data-theme="dark">, or
+   follows the device when no choice is saved. Tokens and the few hard-coded
+   colors are overridden; map tiles stay light; fish pictures keep a white
+   mat so light-background illustrations do not glow. Every selector below is
+   individually scoped so nothing leaks into the light theme. ---- */
+:root[data-theme="dark"] {
+  --gray-0: #181c23; --gray-50: #12151a; --gray-100: #1d222b; --gray-200: #272d38; --gray-300: #39404d;
+  --gray-400: #5d6675; --gray-500: #8b93a1; --gray-600: #a9b0bc; --gray-700: #c4cad3; --gray-800: #dde1e7; --gray-900: #eef1f5;
+  --accent: #5b86f5; --accent-dark: #9db6ff; --accent-light: #1d2a4d; --accent-100: #2a3d75;
+  --fresh: #4cc38a; --stale: #ff6b7d; --stale-light: #3a1a20;
+  --stocking: #e8c766; --stocking-bg: #3a3016; --survey: #5fd39a; --survey-bg: #153a2a; --water: #6ec3ee; --water-bg: #15323f;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4); --shadow-md: 0 2px 8px rgba(0,0,0,.45); --shadow-lg: 0 12px 32px rgba(0,0,0,.55);
+  color-scheme: dark;
+}
+:root[data-theme="dark"] .banner.tag-intro { background: #2a3140; }
+:root[data-theme="dark"] .site-header { background: rgba(18, 21, 26, 0.94); }
+:root[data-theme="dark"] .bottom-nav { background: rgba(18, 21, 26, 0.97); }
+:root[data-theme="dark"] .disclaimer { background: linear-gradient(180deg, #2a2412, #241f10); border-bottom-color: #4a3f1c; color: #e8d9a6; }
+:root[data-theme="dark"] .disclaimer a, :root[data-theme="dark"] .regs-note a { color: #e8c766; }
+:root[data-theme="dark"] .regs-note { border-color: #4a3f1c; color: #e8d9a6; }
+:root[data-theme="dark"] .advisory-box { border-color: #5a2a33; }
+:root[data-theme="dark"] .tag.no_data, :root[data-theme="dark"] .match-badge.none, :root[data-theme="dark"] .form-errors { color: #ff9aa8; }
+:root[data-theme="dark"] .btn-primary:hover, :root[data-theme="dark"] form.filters button:hover { background: #4a76e6; }
+:root[data-theme="dark"] .fish-thumb, :root[data-theme="dark"] .fish-figure img, :root[data-theme="dark"] .bait-figure img { background: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --gray-0: #181c23; --gray-50: #12151a; --gray-100: #1d222b; --gray-200: #272d38; --gray-300: #39404d;
+  --gray-400: #5d6675; --gray-500: #8b93a1; --gray-600: #a9b0bc; --gray-700: #c4cad3; --gray-800: #dde1e7; --gray-900: #eef1f5;
+  --accent: #5b86f5; --accent-dark: #9db6ff; --accent-light: #1d2a4d; --accent-100: #2a3d75;
+  --fresh: #4cc38a; --stale: #ff6b7d; --stale-light: #3a1a20;
+  --stocking: #e8c766; --stocking-bg: #3a3016; --survey: #5fd39a; --survey-bg: #153a2a; --water: #6ec3ee; --water-bg: #15323f;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4); --shadow-md: 0 2px 8px rgba(0,0,0,.45); --shadow-lg: 0 12px 32px rgba(0,0,0,.55);
+  color-scheme: dark;
+  }
+  :root:not([data-theme="light"]) .banner.tag-intro { background: #2a3140; }
+  :root:not([data-theme="light"]) .site-header { background: rgba(18, 21, 26, 0.94); }
+  :root:not([data-theme="light"]) .bottom-nav { background: rgba(18, 21, 26, 0.97); }
+  :root:not([data-theme="light"]) .disclaimer { background: linear-gradient(180deg, #2a2412, #241f10); border-bottom-color: #4a3f1c; color: #e8d9a6; }
+  :root:not([data-theme="light"]) .disclaimer a, :root:not([data-theme="light"]) .regs-note a { color: #e8c766; }
+  :root:not([data-theme="light"]) .regs-note { border-color: #4a3f1c; color: #e8d9a6; }
+  :root:not([data-theme="light"]) .advisory-box { border-color: #5a2a33; }
+  :root:not([data-theme="light"]) .tag.no_data, :root:not([data-theme="light"]) .match-badge.none, :root:not([data-theme="light"]) .form-errors { color: #ff9aa8; }
+  :root:not([data-theme="light"]) .btn-primary:hover, :root:not([data-theme="light"]) form.filters button:hover { background: #4a76e6; }
+  :root:not([data-theme="light"]) .fish-thumb, :root:not([data-theme="light"]) .fish-figure img, :root:not([data-theme="light"]) .bait-figure img { background: #fff; }
+}
