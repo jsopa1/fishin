@@ -2,7 +2,7 @@
 
 Approved by the CEO after review. Companion to [v4_ux_redesign_plan.md](v4_ux_redesign_plan.md) (the original plan); where the two differ, **this spec wins** — it resolves the open decisions the plan flagged (ranking = disclosed deterministic heuristic using Profile preferences; anonymous Profile; deep habitat/bait research; public-domain images; variable bait count; Explore screen built as its own phase).
 
-Wireframes: [../UX/](../UX/) (image files still to be added).
+Wireframes: [../UX/](../UX/) (all five wireframes are in that folder).
 
 ---
 
