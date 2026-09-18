@@ -1804,3 +1804,27 @@ committed research files) shows documented activity, cited habitat, and bait car
 - Reached from a spot via `?lat=&lon=&name=`, which adds a back link and today's
   temperature read; a bad or missing context never blocks the page.
 - The species pages are durable content, so they are in the sitemap (spot pages still are not).
+
+## 046 — Spot Detail: Active / Inactive fish, with evidence tier and spawning kept honest
+
+The two-category dashboard (Confirmed Sightings / Likely species, #035-#037) split fish by how
+strong the *evidence they are here* is. The wireframe's Active / Inactive split is a different
+axis: is today's temperature inside a documented window. Both are real and both stay:
+- Fish are bucketed **Active / Inactive** (plus a third, explicit "No documented temperature
+  window" list), and every row keeps its **Confirmed / Likely** tier as a badge and its source
+  line, so the evidence work is not lost in the reshuffle. A test proves no species
+  disappears and none lands in two lists, across 40 real spots.
+- **Spawning ranges count as Active.** A fish inside its documented spawning range is a fish
+  in a documented behavior window. This produced a real wording bug caught by looking at the
+  page rather than the tests: Bluegill sat under "Active fish" beside "18.7 F below range"
+  (its feeding window). Such rows now lead with the spawning range, then state where the feeding
+  window is, and add the note that many Wisconsin seasons are restricted while fish spawn. A
+  regression test forbids "below/above range" text inside the Active box. The Fish Detail page
+  reports the same spawning state, so the two pages agree.
+- Ordering is fixed, never chosen at runtime: Confirmed before Likely, then name; inactive
+  fish by distance to their window first.
+- Each fish links to its Fish Detail page carrying the spot, so the back link returns to it.
+  Only species that have a page link (a stocked species outside the 27 shows as plain text).
+- The per-row activity popover from #037 is replaced: the short window text is now visible in
+  the row itself. The Stocking / Regulations / Consumption advisory buttons jump to the
+  existing sections and appear only when that section exists.

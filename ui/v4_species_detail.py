@@ -211,6 +211,7 @@ def get_species_detail(species_name: str, temp_c: float | None = None) -> dict |
         "diel_active": physiology[name].get("diel_active"),
         "thresholds": [describe_threshold(t) for t in physiology[name].get("thresholds", [])],
         "current": data._activity_for_species(name, temp_c) if temp_c is not None else None,
+        "spawning_now": (data._spawning_match(name, temp_c) or {}).get("range_f") if temp_c is not None else None,
         "habitat": habitat,
         "habitat_not_documented": habitat_entry.get("not_yet_documented", []),
         "baits": cards,

@@ -49,6 +49,20 @@ if app.secret_key == "dev-only-insecure-secret-key-change-me" and not app.testin
     )
 app.context_processor(lambda: {"csrf_token": get_csrf_token})
 
+
+def _fish_link_args(species_name: str):
+    """Slug for a species that has a Fish Detail page, else None (a stocked
+    or sighted species outside the 27 documented ones is shown as plain text
+    rather than linking to a page that does not exist)."""
+    candidate = species_detail.slug(species_name)
+    return candidate if species_detail.species_from_slug(candidate) else None
+
+
+app.jinja_env.globals.update(
+    fish_slug=_fish_link_args,
+    species_image=lambda name: species_detail.image_for("species", (name or "").upper()),
+)
+
 # ---------------------------------------------------------------------------
 # Minimal, self-hosted analytics. No third-party service (none is signed
 # up for on anyone's behalf), no tracking cookie beyond the same signed
@@ -463,6 +477,7 @@ def spot_detail():
         diel_species=detail["diel_species"], stocking=detail["stocking"],
         wdnr_species=detail["wdnr_species"], verdict=detail["verdict"],
         citizen_observed=detail["citizen_observed"], species_categories=detail["species_categories"],
+        species_activity=detail["species_activity"],
         regulations=regulations, advisory=advisory, conditions=conditions, moon=moon,
     )
 

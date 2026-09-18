@@ -1182,3 +1182,60 @@ class TestShortActivityText(unittest.TestCase):
         with mock.patch.object(rd.v1, "load_thresholds", return_value=self._thresholds(evidence="agency-tier, scatter disclosed")):
             activity = rd._activity_for_species("WALLEYE", 18.0)
         self.assertIn("WDNR/agency data", activity["short_text"])
+
+
+class TestBucketSpeciesByActivity(unittest.TestCase):
+    """Phase 2 of the UX redesign: re-cutting the evidence buckets by whether
+    today's temperature is inside a documented window."""
+
+    def _cats(self, temp_c, confirmed=(), likely=()):
+        def entry(name):
+            return {"species": name, "sources": ["x"], "activity": rd._activity_for_species(name, temp_c)}
+        return {"confirmed_sightings": [entry(n) for n in confirmed], "likely_species": [entry(n) for n in likely]}
+
+    def test_inside_window_is_active_and_outside_is_inactive(self):
+        b = rd.bucket_species_by_activity(self._cats(20.0, confirmed=["WALLEYE"], likely=["YELLOW PERCH"]), 20.0)
+        self.assertEqual([r["species"] for r in b["active"]], ["WALLEYE"])
+        self.assertEqual([r["species"] for r in b["inactive"]], ["YELLOW PERCH"])
+
+    def test_evidence_tier_travels_with_each_row(self):
+        b = rd.bucket_species_by_activity(self._cats(20.0, confirmed=["WALLEYE"], likely=["YELLOW PERCH"]), 20.0)
+        tiers = {r["species"]: r["evidence_tier"] for r in b["active"] + b["inactive"]}
+        self.assertEqual(tiers["WALLEYE"], "confirmed")
+        self.assertEqual(tiers["YELLOW PERCH"], "likely")
+
+    def test_a_species_inside_its_spawning_range_but_outside_its_feeding_window_is_active(self):
+        # Largemouth bass at 20C: outside its feeding window, inside its spawning range.
+        b = rd.bucket_species_by_activity(self._cats(20.0, likely=["LARGEMOUTH BASS"]), 20.0)
+        self.assertEqual([r["species"] for r in b["active"]], ["LARGEMOUTH BASS"])
+        self.assertFalse(b["active"][0]["activity"]["inside_window"])
+        self.assertIsNotNone(b["active"][0]["spawning_range_f"])
+        self.assertEqual(b["active"][0]["current_f"], 68)
+
+    def test_a_species_inside_its_spawning_range_is_active_and_flagged(self):
+        # Walleye spawning trigger is 4.4-11.1C; its feeding window starts at 12.8C.
+        b = rd.bucket_species_by_activity(self._cats(8.0, confirmed=["WALLEYE"]), 8.0)
+        self.assertEqual([r["species"] for r in b["active"]], ["WALLEYE"])
+        self.assertEqual(b["active"][0]["spawning_range_f"], [40, 52])
+
+    def test_a_species_with_no_documented_window_is_kept_not_dropped(self):
+        cats = {"confirmed_sightings": [{"species": "MYSTERY FISH", "sources": ["x"], "activity": None}], "likely_species": []}
+        b = rd.bucket_species_by_activity(cats, 20.0)
+        self.assertEqual([r["species"] for r in b["no_window"]], ["MYSTERY FISH"])
+
+    def test_ordering_is_fixed_confirmed_first_then_name(self):
+        # At 20C walleye, northern pike and brook trout are all inside their windows.
+        b = rd.bucket_species_by_activity(
+            self._cats(20.0, confirmed=["WALLEYE", "NORTHERN PIKE"], likely=["BROOK TROUT"]), 20.0)
+        self.assertEqual([r["species"] for r in b["active"]], ["NORTHERN PIKE", "WALLEYE", "BROOK TROUT"])
+
+    def test_inactive_species_are_ordered_closest_to_window_first(self):
+        b = rd.bucket_species_by_activity(self._cats(5.0, confirmed=["LARGEMOUTH BASS", "NORTHERN PIKE"]), 5.0)
+        distances = [r["activity"]["distance_f"] for r in b["inactive"]]
+        self.assertEqual(distances, sorted(distances))
+
+    def test_no_temperature_means_nothing_is_active(self):
+        cats = self._cats(None, confirmed=["WALLEYE"])
+        b = rd.bucket_species_by_activity(cats, None)
+        self.assertEqual(b["active"], [])
+        self.assertEqual([r["species"] for r in b["no_window"]], ["WALLEYE"])

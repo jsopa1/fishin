@@ -106,75 +106,72 @@
 </div>
 {% endif %}
 
-{% if species_categories and (species_categories.confirmed_sightings or species_categories.likely_species) %}
-<div class="species-dashboard">
-  <div class="species-category species-category-confirmed">
-    <h3 class="species-category-title">
-      <svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg>
-      Confirmed Sightings
-    </h3>
-    {% if species_categories.confirmed_sightings %}
-      <ul class="species-category-list">
-        {% for s in species_categories.confirmed_sightings %}
-          <li class="species-category-item">
-            <div class="species-category-item-head">
-              {% if s.activity and s.activity.short_text %}
-                <span class="species-category-name species-category-name-explainable" data-explain="{{ s.activity.short_text }}">{{ s.species.title() }}</span>
-                {% if s.activity.inside_window %}
-                  <button type="button" class="activity-badge activity-active" data-explain="{{ s.activity.short_text }}">in documented window now</button>
-                {% else %}
-                  <button type="button" class="activity-badge activity-outside" data-explain="{{ s.activity.short_text }}">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</button>
-                {% endif %}
-              {% else %}
-                <span class="species-category-name">{{ s.species.title() }}</span>
-              {% endif %}
-            </div>
-            <p class="species-category-sources">{{ s.sources | join(' · ') }}</p>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p class="species-category-empty">No confirmed sighting — a WDNR survey or a real citizen observation — exists for this spot.</p>
-    {% endif %}
-  </div>
+{% macro fish_row(s) %}
+  {% set fslug = fish_slug(s.species) %}
+  {% set img = species_image(s.species) %}
+  {% set spawn_only = s.spawning_range_f and not (s.activity and s.activity.inside_window) %}
+  <li class="fish-row">
+    <div class="fish-row-head">
+      {% if fslug %}<a class="fish-row-main" href="{{ url_for('fish_detail', species_slug=fslug, lat=spot.latitude, lon=spot.longitude, name=spot.facility_name or '') }}">{% else %}<div class="fish-row-main">{% endif %}
+        {% if img %}<img class="fish-thumb" src="{{ url_for('static', filename=img.static_path) }}" alt="" loading="lazy">{% else %}<span class="fish-thumb fish-thumb-empty" aria-hidden="true"></span>{% endif %}
+        <span class="fish-row-name">{{ s.species.title() }}</span>
+      {% if fslug %}</a>{% else %}</div>{% endif %}
+      <span class="tag evidence-{{ s.evidence_tier }}" tabindex="0">{{ 'Confirmed' if s.evidence_tier == 'confirmed' else 'Likely' }}</span>
+    </div>
+    <p class="fish-row-why">
+      {% if spawn_only %}
+        Currently {{ s.current_f }}°F &mdash; inside its <strong>spawning range</strong> ({{ s.spawning_range_f[0] }}&ndash;{{ s.spawning_range_f[1] }}°F).
+        {% if s.activity and s.activity.window_f %}Its feeding window is {{ s.activity.window_f[0] }}&ndash;{{ s.activity.window_f[1] }}°F ({{ s.activity.distance_f }}°F {{ s.activity.direction }} it).{% endif %}
+        <span class="fish-row-spawn">Many Wisconsin seasons are restricted while fish spawn; check the regulations.</span>
+      {% elif s.activity and s.activity.short_text %}
+        {{ s.activity.short_text }}
+        {% if s.spawning_range_f %}<span class="fish-row-spawn">Also inside its spawning range ({{ s.spawning_range_f[0] }}&ndash;{{ s.spawning_range_f[1] }}°F) &mdash; many Wisconsin seasons are restricted then; check the regulations.</span>{% endif %}
+      {% else %}
+        No documented temperature window for this species.
+      {% endif %}
+    </p>
+    <p class="species-category-sources">Found here by: {{ s.sources | join(' · ') }}</p>
+  </li>
+{% endmacro %}
 
-  <div class="species-category species-category-likely">
-    <h3 class="species-category-title">
-      <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg>
-      Likely species to find
-    </h3>
-    {% if species_categories.likely_species %}
-      <ul class="species-category-list">
-        {% for s in species_categories.likely_species %}
-          <li class="species-category-item">
-            <div class="species-category-item-head">
-              {% if s.activity and s.activity.short_text %}
-                <span class="species-category-name species-category-name-explainable" data-explain="{{ s.activity.short_text }}">{{ s.species.title() }}</span>
-                {% if s.activity.inside_window %}
-                  <button type="button" class="activity-badge activity-active" data-explain="{{ s.activity.short_text }}">in documented window now</button>
-                {% else %}
-                  <button type="button" class="activity-badge activity-outside" data-explain="{{ s.activity.short_text }}">{{ s.activity.distance_f }}°F {{ s.activity.direction }} window</button>
-                {% endif %}
-              {% else %}
-                <span class="species-category-name">{{ s.species.title() }}</span>
-              {% endif %}
-            </div>
-            <p class="species-category-sources">{{ s.sources | join(' · ') }}</p>
-          </li>
-        {% endfor %}
-      </ul>
+{% if species_activity and (species_activity.active or species_activity.inactive or species_activity.no_window) %}
+<div class="fish-buckets" id="fish-buckets">
+  <section class="fish-bucket fish-bucket-active" aria-labelledby="bucket-active-title">
+    <h3 id="bucket-active-title" class="fish-bucket-title"><svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> Active fish</h3>
+    {% if species_activity.active %}
+      <ul class="fish-row-list">{% for s in species_activity.active %}{{ fish_row(s) }}{% endfor %}</ul>
     {% else %}
-      <p class="species-category-empty">No indirect evidence (stocking records or county-level data) either.</p>
+      <p class="species-category-empty">No documented species is inside its temperature window here right now.</p>
     {% endif %}
-  </div>
+  </section>
+  <section class="fish-bucket fish-bucket-inactive" aria-labelledby="bucket-inactive-title">
+    <h3 id="bucket-inactive-title" class="fish-bucket-title"><svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Inactive fish</h3>
+    {% if species_activity.inactive %}
+      <ul class="fish-row-list">{% for s in species_activity.inactive %}{{ fish_row(s) }}{% endfor %}</ul>
+    {% else %}
+      <p class="species-category-empty">Every documented species here is inside its temperature window.</p>
+    {% endif %}
+  </section>
+  {% if species_activity.no_window %}
+  <section class="fish-bucket fish-bucket-nowindow" aria-labelledby="bucket-nowindow-title">
+    <h3 id="bucket-nowindow-title" class="fish-bucket-title">No documented temperature window</h3>
+    <ul class="fish-row-list">{% for s in species_activity.no_window %}{{ fish_row(s) }}{% endfor %}</ul>
+  </section>
+  {% endif %}
   <p class="species-dashboard-note">
     <strong>Confirmed</strong> means a WDNR survey or a real, dated citizen sighting actually documented the species here.
-    <strong>Likely</strong> means positive but indirect evidence only — stocked here, or recorded elsewhere in the county.
-    Neither is a promise; "in documented window now" only means today's temperature sits inside that species' published
-    feeding/activity range, never a catch guarantee.
+    <strong>Likely</strong> means positive but indirect evidence only &mdash; stocked here, or recorded elsewhere in the county.
+    <strong>Active</strong> only means today's temperature sits inside that species' published feeding, growth or spawning range
+    &mdash; never a catch guarantee. Tap a fish for its documented habitat and baits.
   </p>
 </div>
 {% endif %}
+
+<nav class="spot-quicklinks" aria-label="More about this water">
+  {% if stocking %}<a class="btn btn-secondary" href="#stocking-history" data-jump="panel-conditions">Stocking history</a>{% endif %}
+  <a class="btn btn-secondary" href="#regulations" data-jump="panel-conditions">Regulations</a>
+  {% if advisory and advisory.status == 'site_specific' %}<a class="btn btn-secondary" href="#consumption-advisory" data-jump="panel-conditions">Consumption advisory</a>{% endif %}
+</nav>
 
 <div class="section-tabs" id="spot-tabs" role="tablist">
   <button type="button" class="section-tab active" data-target="panel-conditions" role="tab" aria-selected="true">
@@ -258,7 +255,7 @@
 
   {% if stocking %}
   <div class="detail-box">
-    <h3>What WDNR has stocked here</h3>
+    <h3 id="stocking-history">What WDNR has stocked here</h3>
     <p class="stocking-intro">
       <strong>{{ "{:,}".format(stocking.total_stocked) }} fish</strong> across
       {{ stocking.species_count }} species since {{ stocking.since_year }}, most recently in
@@ -294,7 +291,7 @@
 
   {% if regulations and regulations.status == 'ok' %}
   <div class="detail-box">
-    <h3>Regulations for this water</h3>
+    <h3 id="regulations">Regulations for this water</h3>
     {% set water = regulations.waters[0] %}
     <p class="regs-intro">
       WDNR's published rules for <strong>{{ water.waterbody_name }}</strong>{% if water.wbic %}
@@ -316,7 +313,7 @@
     </p>
   </div>
   {% else %}
-  <div class="regs-note">
+  <div class="regs-note" id="regulations">
     <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
     <p>
       <strong>Check the regulations before you keep anything.</strong>
@@ -334,7 +331,7 @@
   {% endif %}
 
   {% if advisory and advisory.status == 'site_specific' %}
-  <div class="advisory-box">
+  <div class="advisory-box" id="consumption-advisory">
     <p class="advisory-label">
       <svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg>
       Fish consumption advisory for this water
@@ -580,6 +577,15 @@
   }
   tabs.forEach(function (t) { t.addEventListener('click', function () { activate(t.dataset.target); }); });
   activate('panel-conditions');
+  document.querySelectorAll('.spot-quicklinks [data-jump]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;  // e.g. no advisory exists for this water: leave the page as it is
+      e.preventDefault();
+      activate(a.dataset.jump);
+      target.scrollIntoView({ block: 'start' });
+    });
+  });
 })();
 </script>
 {% endif %}

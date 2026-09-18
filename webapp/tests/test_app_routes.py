@@ -588,9 +588,9 @@ class CitizenObservedSpeciesTests(unittest.TestCase):
 
 
 class SpeciesDashboardTests(unittest.TestCase):
-    """The two-category dashboard (Confirmed Sightings / Likely species to
-    find) at the top of the spot page. The property that matters: a
-    species never appears in both buckets, and the honesty caveats stay
+    """The evidence buckets behind the Active / Inactive fish lists at the
+    top of the spot page. The property that matters: a species never
+    appears in both evidence buckets, and the honesty caveats stay
     attached."""
 
     @classmethod
@@ -598,12 +598,12 @@ class SpeciesDashboardTests(unittest.TestCase):
         flask_app_module.app.testing = True
         cls.client = flask_app_module.app.test_client()
 
-    def test_dashboard_renders_both_category_headings_on_a_real_spot_with_data(self):
+    def test_dashboard_renders_both_bucket_headings_on_a_real_spot_with_data(self):
         # Merton Millpond Access -- verified elsewhere in this suite to
         # have real WDNR and citizen-sighting data nearby.
         body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data
-        self.assertIn(b"Confirmed Sightings", body)
-        self.assertIn(b"Likely species to find", body)
+        self.assertIn(b"Active fish", body)
+        self.assertIn(b"Inactive fish", body)
 
     def test_dashboard_never_lists_the_same_species_in_both_buckets(self):
         p = self.client.get("/map/data").get_json()["points"][0]
@@ -625,18 +625,92 @@ class SpeciesDashboardTests(unittest.TestCase):
         resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
         self.assertEqual(resp.status_code, 200)
 
-    def test_activity_badge_and_species_name_both_carry_the_real_window_data(self):
-        # Both are wired by the shared tags-explainer.js popover (same
-        # data-explain mechanism the evidence tags already use), not a
-        # page-specific widget -- so what matters here is that the real
-        # window data actually reaches the markup, short and citation-free.
+    def test_each_fish_row_states_its_real_window_short_and_citation_free(self):
         body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data.decode()
-        self.assertIn('<button type="button" class="activity-badge', body)
-        self.assertIn('class="species-category-name species-category-name-explainable" data-explain=', body)
+        self.assertIn('class="fish-row-why"', body)
         self.assertIn("range", body)
         self.assertIn("°F", body)
         self.assertNotIn("Coutant", body)
         self.assertNotIn("undergraduate", body)
+
+
+class SpotActiveInactiveTests(unittest.TestCase):
+    """Phase 2 of the UX redesign: fish bucketed Active / Inactive by
+    whether today's temperature is inside a documented window, with the
+    Confirmed / Likely evidence tier kept on every row."""
+
+    SPOT = "/spot?lat=43.14873839628315&lon=-88.30695699204537"
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def _body(self):
+        return self.client.get(self.SPOT).data.decode()
+
+    def test_active_box_comes_before_inactive_box(self):
+        body = self._body()
+        self.assertLess(body.index("Active fish"), body.index("Inactive fish"))
+
+    def test_every_fish_row_keeps_its_evidence_tier(self):
+        body = self._body()
+        rows = body.count('class="fish-row"')
+        tiers = body.count('class="tag evidence-confirmed"') + body.count('class="tag evidence-likely"')
+        self.assertGreater(rows, 0)
+        self.assertEqual(rows, tiers)
+
+    def test_a_documented_species_links_to_its_fish_page_carrying_the_spot(self):
+        body = self._body()
+        self.assertRegex(body, r'href="/fish/[a-z-]+\?lat=43\.148[^"]*lon=-88\.306')
+
+    def test_the_link_target_actually_loads_and_links_back(self):
+        import re as _re
+        href = _re.search(r'href="(/fish/[a-z-]+\?[^"]+)"', self._body()).group(1).replace("&amp;", "&")
+        resp = self.client.get(href)
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn(b"Back to", resp.data)
+
+    def test_no_species_disappears_in_the_reshuffle(self):
+        conn = flask_app_module.get_conn()
+        points = self.client.get("/map/data").get_json()["points"][:40]
+        checked = 0
+        for p in points:
+            detail = flask_app_module.data.get_spot_detail(conn, p["lat"], p["lon"])
+            if not detail:
+                continue
+            cats = detail["species_categories"]
+            before = {s["species"] for s in cats["confirmed_sightings"]} | {s["species"] for s in cats["likely_species"]}
+            act = detail["species_activity"]
+            after = [r["species"] for k in ("active", "inactive", "no_window") for r in act[k]]
+            self.assertEqual(set(after), before)
+            self.assertEqual(len(after), len(set(after)), "a species landed in two lists")
+            checked += 1
+        conn.close()
+        self.assertGreater(checked, 10)
+
+    def test_quick_links_jump_to_sections_that_exist(self):
+        import re as _re
+        body = self._body()
+        for anchor in _re.findall(r'class="btn btn-secondary" href="#([a-z-]+)" data-jump', body):
+            self.assertIn(f'id="{anchor}"', body, anchor)
+
+    def test_the_active_box_never_contradicts_itself(self):
+        # A fish can be Active via its spawning range while its feeding window
+        # is far away; the row must lead with the spawning range rather than
+        # print "X F below range" under an "Active" heading.
+        body = self._body()
+        active = body[body.index('id="bucket-active-title"'):body.index('id="bucket-inactive-title"')]
+        self.assertNotIn(" below range", active)
+        self.assertNotIn(" above range", active)
+
+    def test_regulations_quick_link_is_always_present(self):
+        self.assertIn('href="#regulations"', self._body())
+
+    def test_the_honesty_note_survives_the_redesign(self):
+        body = self._body()
+        self.assertIn("never a catch guarantee", body)
+        self.assertIn("actually documented the species", body)
 
 
 class ProductLoopTests(unittest.TestCase):

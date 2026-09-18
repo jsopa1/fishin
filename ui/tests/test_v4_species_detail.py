@@ -101,6 +101,14 @@ class TestSpeciesDetail(unittest.TestCase):
                 self.assertIn("reviewed", b["regulation"])
                 self.assertTrue(b["how_to_use"].strip())
 
+    def test_spawning_range_is_reported_when_the_temperature_is_inside_it(self):
+        # Bluegill at 20C (68F): feeding window is 85-88F, spawning range is 65-80F.
+        d = sd.get_species_detail("BLUEGILL", temp_c=20.0)
+        self.assertFalse(d["current"]["inside_window"])
+        self.assertEqual(d["spawning_now"], [65, 80])
+        self.assertIsNone(sd.get_species_detail("BLUEGILL", temp_c=5.0)["spawning_now"])
+        self.assertIsNone(sd.get_species_detail("BLUEGILL")["spawning_now"])
+
     def test_current_state_is_only_computed_when_a_temperature_is_given(self):
         self.assertIsNone(sd.get_species_detail("WALLEYE")["current"])
         self.assertIsNotNone(sd.get_species_detail("WALLEYE", temp_c=20.0)["current"])

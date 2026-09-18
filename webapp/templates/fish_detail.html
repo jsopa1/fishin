@@ -31,11 +31,17 @@
   {% endif %}
 </div>
 
-{% if fish.current %}
+{% if fish.current or fish.spawning_now %}
 <section class="fish-section" id="fish-now">
   <h2>Right now{% if back_spot %} at {{ back_spot.name }}{% endif %}</h2>
-  <p class="fish-now"><span class="tag {{ 'real' if fish.current.inside_window else 'proxy' }}">{{ 'in documented range' if fish.current.inside_window else 'outside documented range' }}</span>
+  {% if fish.current %}
+  <p class="fish-now"><span class="tag {{ 'real' if fish.current.inside_window else 'proxy' }}">{{ 'in documented range' if fish.current.inside_window else 'outside its feeding range' }}</span>
      {{ fish.current.short_text }}</p>
+  {% endif %}
+  {% if fish.spawning_now %}
+  <p class="fish-now"><span class="tag real">in spawning range</span>
+     Also inside its documented spawning range ({{ fish.spawning_now[0] }}&ndash;{{ fish.spawning_now[1] }}&deg;F). Many Wisconsin seasons are restricted while fish spawn; check the regulations.</p>
+  {% endif %}
 </section>
 {% endif %}
 

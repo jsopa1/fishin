@@ -1132,3 +1132,29 @@ table td a:hover { text-decoration: underline; }
 .tag.tier-single-source-speculative { background: var(--gray-100); color: var(--gray-700); }
 .tag.reg-stated { background: var(--survey-bg); color: var(--survey); }
 .tag.reg-unreviewed { background: var(--stocking-bg); color: var(--stocking); }
+
+/* ---- Spot Detail: Active / Inactive fish (docs/v4_ux_goal_loop_spec.md, Phase 2) ---- */
+.fish-buckets { display: grid; grid-template-columns: 1fr; gap: var(--space-4); margin-bottom: var(--space-6); }
+@media (min-width: 768px) { .fish-buckets { grid-template-columns: 1fr 1fr; } .fish-bucket-nowindow, .fish-buckets .species-dashboard-note { grid-column: 1 / -1; } }
+.fish-bucket { background: var(--card); border: 2px solid var(--border); border-radius: var(--radius); padding: var(--space-4); }
+.fish-bucket-active { border-color: var(--survey); }
+.fish-bucket-inactive { border-color: #d4a72c; }
+.fish-bucket-nowindow { border-style: dashed; }
+.fish-bucket-title { display: flex; align-items: center; gap: var(--space-2); margin: 0 0 var(--space-3); font-size: var(--text-base); }
+.fish-bucket-active .fish-bucket-title { color: var(--survey); }
+.fish-bucket-inactive .fish-bucket-title { color: var(--stocking); }
+.fish-row-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.fish-row { border-bottom: 1px solid var(--border-soft); padding-bottom: var(--space-3); }
+.fish-row:last-child { border-bottom: none; padding-bottom: 0; }
+.fish-row-main { display: inline-flex; align-items: center; gap: var(--space-3); text-decoration: none; color: inherit; }
+a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
+.fish-thumb { width: 64px; height: 40px; object-fit: contain; background: var(--gray-0); border: 1px solid var(--border-soft); border-radius: 6px; flex: none; }
+.fish-thumb-empty { display: inline-block; background: var(--gray-50); }
+.fish-row-name { font-weight: 600; font-size: var(--text-base); }
+.fish-row-why { margin: var(--space-2) 0 0; font-size: var(--text-sm); }
+.fish-row-spawn { display: block; margin-top: var(--space-1); color: var(--stocking); }
+.fish-row-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; }
+.tag.evidence-confirmed { background: var(--survey-bg); color: var(--survey); }
+.tag.evidence-likely { background: var(--stocking-bg); color: var(--stocking); }
+.spot-quicklinks { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
+#stocking-history, #regulations, #consumption-advisory { scroll-margin-top: 84px; }

@@ -1354,6 +1354,69 @@ def build_species_categories(species_predictions: list, waterbody: dict | None,
     }
 
 
+def _spawning_match(species_name: str, temp_c) -> dict | None:
+    """If the current temperature sits inside this species' documented
+    spawning-trigger range, return that threshold; otherwise None. Kept apart
+    from _activity_for_species because spawning ranges are deliberately not
+    part of the feeding/activity window math, yet they are a documented
+    behavior state a reader should see (and Wisconsin often restricts
+    seasons for spawning fish)."""
+    if temp_c is None:
+        return None
+    try:
+        entry = v1.load_thresholds()["species"].get(species_name.upper())
+    except Exception:  # noqa: BLE001
+        return None
+    for threshold in (entry or {}).get("thresholds", []):
+        if threshold.get("type") == "spawning_trigger" and threshold.get("range_c"):
+            low, high = threshold["range_c"]
+            if low <= temp_c <= high:
+                return threshold
+    return None
+
+
+def bucket_species_by_activity(species_categories: dict, temp_c) -> dict:
+    """Re-cuts the evidence buckets (Confirmed / Likely) along the other axis a
+    reader cares about: is this species inside a documented temperature window
+    right now. Every species from either evidence bucket lands in exactly one
+    of three lists, so nothing disappears in the reshuffle:
+
+    - active: inside a documented activity/growth/optimum window, or inside a
+      documented spawning range (flagged, since many Wisconsin seasons are
+      restricted then)
+    - inactive: has a documented window, and the temperature is outside it
+    - no_window: no documented window for this species at this temperature
+
+    The evidence tier travels with each row as `evidence_tier`, and ordering is
+    fixed (Confirmed before Likely, then by distance-to-window for inactive,
+    then by name) so the same spot always renders the same page."""
+    rows = []
+    for tier, entries in (("confirmed", species_categories["confirmed_sightings"]),
+                          ("likely", species_categories["likely_species"])):
+        for entry in entries:
+            row = dict(entry)
+            row["evidence_tier"] = tier
+            spawning = _spawning_match(entry["species"], temp_c)
+            row["spawning_range_f"] = spawning.get("range_f") if spawning else None
+            row["current_f"] = round(temp_c * 9 / 5 + 32) if temp_c is not None else None
+            rows.append(row)
+
+    tier_order = {"confirmed": 0, "likely": 1}
+    active, inactive, no_window = [], [], []
+    for row in rows:
+        act = row.get("activity")
+        if (act and act["inside_window"]) or row["spawning_range_f"]:
+            active.append(row)
+        elif act:
+            inactive.append(row)
+        else:
+            no_window.append(row)
+    active.sort(key=lambda r: (tier_order[r["evidence_tier"]], r["species"]))
+    inactive.sort(key=lambda r: (r["activity"]["distance_f"], tier_order[r["evidence_tier"]], r["species"]))
+    no_window.sort(key=lambda r: (tier_order[r["evidence_tier"]], r["species"]))
+    return {"active": active, "inactive": inactive, "no_window": no_window}
+
+
 def _apply_categories_to_verdict(verdict: dict, species_categories: dict) -> None:
     """Mutates verdict in place -- only ever called when the original
     verdict had nothing to say (no waterbody match at all), so there is
@@ -1470,4 +1533,6 @@ def get_spot_detail(conn: sqlite3.Connection, lat: float, lon: float, name: str 
         "wdnr_species": wdnr_species,
         "citizen_observed": citizen_observed,
         "species_categories": species_categories,
+        "species_activity": bucket_species_by_activity(
+            species_categories, temperature.get("value_c") if temperature else None),
     }
