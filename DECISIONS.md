@@ -1500,3 +1500,47 @@ WDNR/agency data.
   weakening the evidence discipline: the full citation still lives in
   the underlying data and DECISIONS.md, just not in a tooltip aimed at
   someone standing at a boat ramp
+
+## 038 — Eight new USGS gauges added, plus a targeted script so newly-added gauges actually get used
+
+Comparing USGS's live statewide site inventory against this project's
+185-site `data/v1/usgs_wi_water_temp_sites.csv` turned up 8 real,
+currently-reporting gauges never added: Menominee River (Marinette),
+Peshtigo River (Wabeno), Oconto River (Gillett), Wolf River (New
+London), Kewaunee River, Root River (both 60th St and W. Eight Mile Rd,
+Caledonia), and Black Earth Creek. Each was verified live before being
+added -- e.g. the Wolf River gauge returned a real 17.5C reading at
+verification time.
+
+Adding rows to the CSV alone would not have changed anything the site
+shows: `refresh_temperatures.py` (the fast, 4-hourly job) only
+re-checks waterbodies already flagged `temp_is_real=1`, so it has no
+way to discover a newly-matchable site on its own, and the only other
+path that walks every waterbody against the site CSV is the full batch
+(`v1_full_run.py`), which takes hours. `analysis/v3_expand_usgs_coverage.py`
+is the missing middle ground: it re-checks only the waterbodies
+currently on the NWS air-temperature proxy whose name plausibly matches
+*any* site in the current CSV (not a hardcoded list of the 8 new ones,
+so it stays useful the next time the CSV grows), and upgrades the ones
+that resolve to a real, plausible live reading.
+
+Run for real, it upgraded 7 waterbodies from proxy to real: Kewaunee
+River, Root River (Racine), and Wolf River in five different counties
+(Langlade, Winnebago, Menominee, Waupaca, Chippewa) -- all five
+resolving to the single New London gauge, because
+`find_usgs_site_matches()`'s substring-match approach (already the
+behavior for all 185 original sites) matches by name, not by location,
+and Wisconsin has multiple same-named rivers in different counties.
+This is a pre-existing characteristic of the matching approach, not a
+new bug introduced here; a real fix would need per-county gauge
+geocoding, which is out of scope for this pass. Verified live in the
+browser: Kewaunee Boat Landing's spot page now reads "59.7°F / 15.4°C
+-- real measurement -- usgs_live" where it previously showed an
+NWS air-temperature proxy.
+
+**Rationale:**
+- A newly-added data source only counts if there's a path for it to
+  actually reach production between the infrequent full runs
+- Matching by name against the existing CSV format (rather than adding
+  a parallel discovery mechanism) keeps this script useful for any
+  future CSV growth, not just this one addition
