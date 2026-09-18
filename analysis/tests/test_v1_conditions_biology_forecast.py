@@ -669,6 +669,13 @@ class TestFindNearestBuoys(TempDataMixin, unittest.TestCase):
         self._set_buoy_sites([{"station_id": "X", "station_name": "X", "lat": "43.0", "lon": "-87.9"}])
         self.assertEqual(v1.find_nearest_buoys(43.0, -87.9, lake_name="LAKE ERIE"), [])
 
+    def test_green_bay_shares_the_lake_michigan_site_table(self):
+        self._set_buoy_sites([
+            {"station_id": "GB", "station_name": "South Green Bay buoy", "lat": "44.794", "lon": "-87.758"},
+        ])
+        result = v1.find_nearest_buoys(44.794, -87.758, lake_name="GREEN BAY")
+        self.assertEqual([r["station_id"] for r in result], ["GB"])
+
 
 class TestParseNdbcRealtime2(unittest.TestCase):
     """Pure parsing of NDBC's real, public realtime2.txt format -- see
@@ -748,6 +755,36 @@ class TestLakeMichiganTemperatureRouting(TempDataMixin, unittest.TestCase):
         self._set_water_temp([])
         result = v1.get_current_temperature("LAKE SUPERIOR", county="Bayfield", live_refresh=False)
         self.assertEqual(result["method"], "no_data")  # live_refresh disabled, but must not error
+
+    def test_green_bay_also_routes_to_the_buoy_path(self):
+        self._set_buoy_sites([
+            {"station_id": "X", "station_name": "Test buoy", "lat": "44.8", "lon": "-87.7"},
+        ])
+        self._set_water_temp([])
+        result = v1.get_current_temperature("GREEN BAY", county="Door", live_refresh=False)
+        self.assertEqual(result["method"], "no_data")  # live_refresh disabled, but must not error
+
+    def test_a_real_buoy_reading_wins_over_a_false_positive_usgs_name_match(self):
+        """Regression test for a real bug: 'FOX RIVER AT OIL TANK DEPOT AT
+        GREEN BAY, WI' matched the substring 'GREEN BAY' and was returned
+        as Green Bay's own reading, for two counties 60+ miles apart,
+        before the buoy path was moved ahead of the generic USGS match
+        for Great Lakes names."""
+        self._set_usgs_sites([
+            {"site_no": "999", "station_nm": "FOX RIVER AT OIL TANK DEPOT AT GREEN BAY, WI",
+             "site_type": "ST", "lat": "44.5", "lon": "-88.0"},
+        ])
+        self._set_superior_buoy_sites([])
+        with mock.patch.object(v1, "LAKE_MICHIGAN_BUOY_CSV", v1.LAKE_MICHIGAN_BUOY_CSV):
+            self._set_buoy_sites([
+                {"station_id": "GB", "station_name": "South Green Bay buoy", "lat": "44.794", "lon": "-87.758"},
+            ])
+            with mock.patch.object(v1, "geocode_live", return_value=(44.794, -87.758)), \
+                 mock.patch.object(v1, "get_ndbc_buoy_water_temp_c", return_value=(16.6, "2026-09-18T13:00:00Z")), \
+                 mock.patch.object(v1, "get_usgs_live_water_temp_c", return_value=(20.0, "2026-09-18T10:00:00Z")):
+                result = v1.get_current_temperature("GREEN BAY", county="Door", live_refresh=True)
+        self.assertEqual(result["method"], "ndbc_buoy_live")
+        self.assertEqual(result["value_c"], 16.6)
 
     def test_lake_superior_buoy_table_does_not_affect_lake_michigan_routing(self):
         self._set_buoy_sites([])

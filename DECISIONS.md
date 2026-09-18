@@ -1612,3 +1612,48 @@ verification time.
   name (rather than a Michigan-specific branch) made adding Lake
   Superior a small, low-risk change instead of a parallel
   implementation
+
+## 040 — Green Bay gets real buoy coverage too, which surfaces and fixes a pre-existing false-positive match
+
+Investigating whether Green Bay (a large open sub-basin of Lake
+Michigan, not a separate lake, with its own real NDBC buoy already in
+`data/v1/lake_michigan_buoy_sites.csv`: 45014, "South Green Bay WI")
+should get the same buoy routing as Lake Michigan and Lake Superior
+(#039) surfaced a real, pre-existing bug: `GREEN BAY` (Door and
+Marinette counties) was already marked `temp_is_real=1` -- not via a
+legitimate Green Bay sensor, but because `find_usgs_site_matches()`'s
+generic substring match found "GREEN BAY" inside "FOX RIVER AT OIL TANK
+DEPOT AT GREEN BAY, WI", a river discharge-monitoring gauge named for
+its location in the city of Green Bay, not a bay-water sensor. Both
+counties -- 60+ miles apart on opposite sides of the bay -- were showing
+the identical value from that one river gauge, confidently labeled
+"real measurement." This is worse than an honest proxy: a reader has no
+way to tell a confidently-wrong reading from a correct one.
+
+Deliberately considered and rejected the tempting fix of only adding
+Green Bay's own buoy alongside the existing false match (which would
+have left the bug's root cause -- generic USGS matching running before,
+and independently of, the curated buoy path -- in place for any other
+Great Lakes place name that happens to also be a real WI town or river
+segment name). Instead, `get_current_temperature()`'s step order was
+changed: for Lake Michigan, Green Bay, and Lake Superior specifically,
+the curated NDBC buoy lookup now runs BEFORE the generic USGS substring
+match, and the USGS step is skipped entirely for those three names
+(the only way it could ever match one of them is the same class of
+false positive this fixes). Verified live: both Door and Marinette
+Green Bay entries now read 18.5C via buoy 45014 instead of the river
+gauge's 20.1/20.0C; confirmed on a real Door County spot page ("65.3°F
+/ 18.5°C -- real measurement").
+
+**Rationale:**
+- A confidently-wrong "real measurement" is a worse reliability failure
+  than an honest proxy label, because nothing in the UI distinguishes a
+  correct real reading from an incorrect one -- both this project's
+  established practice and the CEO's stated reliability bar treat
+  correctness as the point, not just freshness
+- Fixing the ordering (curated source before generic match) closes the
+  whole class of false positive for these three names, not just the one
+  instance this investigation happened to find
+- Deliberately investigating before rubber-stamping the requested
+  feature (Green Bay buoy coverage) found a real bug the pull request
+  would otherwise have shipped past unnoticed

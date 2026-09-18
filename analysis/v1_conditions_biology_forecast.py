@@ -51,7 +51,7 @@ WATER_TEMP_CSV = DATA_V1 / "wi_lake_water_temp_current.csv"
 USGS_SITES_CSV = DATA_V1 / "usgs_wi_water_temp_sites.csv"
 LAKE_MICHIGAN_BUOY_CSV = DATA_V1 / "lake_michigan_buoy_sites.csv"
 LAKE_SUPERIOR_BUOY_CSV = DATA_V1 / "lake_superior_buoy_sites.csv"
-GREAT_LAKES_WITH_BUOYS = {"LAKE MICHIGAN", "LAKE SUPERIOR"}
+GREAT_LAKES_WITH_BUOYS = {"LAKE MICHIGAN", "LAKE SUPERIOR", "GREEN BAY"}
 THRESHOLDS_JSON = DATA_V1 / "physiology_thresholds_v1.json"
 
 USER_AGENT = "fishin-v1-conditions-forecast/0.1 (research prototype; contact via project repo)"
@@ -493,9 +493,14 @@ def load_lake_michigan_buoy_sites() -> list:
 def load_great_lakes_buoy_sites(lake_name: str) -> list:
     """Looks up LAKE_MICHIGAN_BUOY_CSV/LAKE_SUPERIOR_BUOY_CSV as live
     module globals (not a dict frozen at import time), so tests that
-    monkeypatch either path to an isolated fixture are honored here too."""
+    monkeypatch either path to an isolated fixture are honored here too.
+    GREEN BAY shares Lake Michigan's table rather than getting its own --
+    it's a large open sub-basin of Lake Michigan, not a separate lake,
+    and the existing table already has a buoy sited inside the bay
+    itself (45014, "South Green Bay WI"), not just nearby open-lake
+    water borrowed for a different basin."""
     normed = _norm(lake_name)
-    if normed == "LAKE MICHIGAN":
+    if normed in ("LAKE MICHIGAN", "GREEN BAY"):
         csv_path = LAKE_MICHIGAN_BUOY_CSV
     elif normed == "LAKE SUPERIOR":
         csv_path = LAKE_SUPERIOR_BUOY_CSV
@@ -627,24 +632,31 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
     Resolution order, real sources only, honest no_data if all fail
     (Part 2/3: this now applies to ANY Wisconsin waterbody, lake or
     stream, not just the original 22 survey lakes):
-      1. Live USGS gauge -- generic match against the 185-site real
-         reference table (177 streams + 8 lakes), tried in order until one
-         returns real current data. This is the PRIMARY real source for
-         streams, which have far richer live USGS coverage than lakes do.
-      1b. For Lake Michigan or Lake Superior specifically: a live NOAA
-          NDBC buoy water-temperature reading (real water measurement,
-          not an air proxy) from the nearest of 15 real Lake Michigan
-          buoys or 4 real Lake Superior buoys (western end, off WI's
-          Ashland/Bayfield/Douglas shoreline -- Lake Superior's other WI
-          counties have no working buoy nearer), tried in distance order
-          until one has a fresh reading. USGS stream gauges don't cover
-          the open lake, so this is each Great Lake's own equivalent of
-          step 1 -- inserted here, before falling back to an
-          air-temperature proxy, specifically because a huge,
-          thermally-buffered lake makes air temperature a poor stand-in
-          for water temperature (verified: every Lake Michigan entry was
-          using the air proxy before this was added; Lake Superior was
-          the same before this addition).
+      1. For Lake Michigan, Green Bay, or Lake Superior specifically: a
+         live NOAA NDBC buoy water-temperature reading (real water
+         measurement, not an air proxy) from the nearest of 15 real Lake
+         Michigan buoys (shared with Green Bay -- a large open sub-basin
+         of Lake Michigan, not a separate lake, with its own in-bay buoy
+         already in that table) or 4 real Lake Superior buoys (western
+         end, off WI's Ashland/Bayfield/Douglas shoreline -- Lake
+         Superior's other WI counties have no working buoy nearer),
+         tried in distance order until one has a fresh reading. Tried
+         BEFORE the generic USGS match below, not after, for these
+         names specifically -- a river gauge's name can innocently
+         contain a Great Lakes place name (verified: "FOX RIVER AT OIL
+         TANK DEPOT AT GREEN BAY, WI" matched "GREEN BAY" on substring
+         and was returned as that waterbody's real reading for two
+         counties 60+ miles apart, before this ordering fixed it), and a
+         confidently-wrong match is worse than an honest proxy.
+      1b. Live USGS gauge -- generic match against the 185-site real
+          reference table (177 streams + 8 lakes), tried in order until
+          one returns real current data. This is the PRIMARY real source
+          for streams, which have far richer live USGS coverage than
+          lakes do. Skipped entirely for the three names in step 1
+          (see above) rather than tried as a fallback after a failed
+          buoy lookup, since the only way it can match one of those
+          names at all is the same kind of false-positive substring
+          collision step 1 exists to avoid.
       2. Pre-pulled real CLMN/USGS reading from the original 22-lake pull
          -- used AS-IS with its true observed date (real, dated data, not
          stale-and-hidden; CLMN itself is periodic, not a live feed).
@@ -654,22 +666,17 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
       4. Honest no_data -- returned, never raised and never silently
          dropped; the narrative builder reports this plainly.
     """
-    if live_refresh:
-        for site in find_usgs_site_matches(lake_name):
-            try:
-                value_c, obs_time = get_usgs_live_water_temp_c(site["site_no"])
-            except (urllib.error.HTTPError, urllib.error.URLError):
-                continue
-            if value_c is not None:
-                return {
-                    "value_c": value_c,
-                    "is_real_water_measurement": True,
-                    "method": "usgs_live",
-                    "source": f"USGS live gauge {site['site_no']} ({site['station_nm']})",
-                    "observed_at": obs_time,
-                }
+    is_great_lake = _norm(lake_name) in GREAT_LAKES_WITH_BUOYS
 
-    if live_refresh and _norm(lake_name) in GREAT_LAKES_WITH_BUOYS:
+    if live_refresh and is_great_lake:
+        # Curated real Great Lakes buoys are tried BEFORE the generic USGS
+        # substring match, not after: a river gauge's name can innocently
+        # contain a Great Lakes place name (verified -- "FOX RIVER AT OIL
+        # TANK DEPOT AT GREEN BAY, WI" matched "GREEN BAY" and was
+        # returned as that waterbody's real reading for two counties 60+
+        # miles apart, before this reordering), and that kind of false
+        # positive is worse than a proxy because it's confidently wrong,
+        # not honestly uncertain.
         coords = geocode_live(lake_name, county) or (geocode_live(county, None) if county else None)
         if coords:
             for buoy in find_nearest_buoys(*coords, lake_name=lake_name):
@@ -685,6 +692,21 @@ def get_current_temperature(lake_name: str, county: str | None = None, live_refr
                         "source": f"NOAA NDBC buoy {buoy['station_id']} ({buoy['station_name']})",
                         "observed_at": obs_time,
                     }
+
+    if live_refresh and not is_great_lake:
+        for site in find_usgs_site_matches(lake_name):
+            try:
+                value_c, obs_time = get_usgs_live_water_temp_c(site["site_no"])
+            except (urllib.error.HTTPError, urllib.error.URLError):
+                continue
+            if value_c is not None:
+                return {
+                    "value_c": value_c,
+                    "is_real_water_measurement": True,
+                    "method": "usgs_live",
+                    "source": f"USGS live gauge {site['site_no']} ({site['station_nm']})",
+                    "observed_at": obs_time,
+                }
 
     row = load_prepulled_water_temp(lake_name, county)
     if row is not None:
