@@ -1704,3 +1704,38 @@ away in a different county.
   two known-bad ones, before shipping caught that all 18 legitimate
   matches were preserved -- a prefix-based fix that accidentally broke
   real coverage would have been a worse outcome than the bug it fixed
+
+## 042 — Milwaukee/Port Washington Harbor, Sturgeon Bay, and Little Sturgeon Bay stay on the proxy
+
+Closing out a question #039/#040 raised but didn't resolve: should
+named Great Lakes harbors and bays (MILWAUKEE HARBOR, PORT WASHINGTON
+HARBOR, STURGEON BAY, LITTLE STURGEON BAY, BUSKEY BAY) get routed to the
+nearest real buoy the same way LAKE MICHIGAN/LAKE SUPERIOR/GREEN BAY
+now are? Checked for a better option first: NOAA's CO-OPS water-temp
+station network (the same family DULM5/Duluth already uses for Lake
+Superior) has no dedicated in-harbor sensor for any of Wisconsin's Lake
+Michigan or Lake Superior harbors -- only Holland MI, Menominee MI, and
+Duluth MN/WI, none of which sit inside these specific harbors.
+
+Decided against borrowing an open-lake buoy reading for them. Green Bay
+was a defensible extension of the same buoy data because it's a large,
+open sub-basin with its own dedicated in-bay buoy (45014) actually
+sited inside it -- not water borrowed from somewhere else. A harbor
+behind a breakwater, or a bay narrow enough to be meaningfully warmer
+or stiller than open water nearby, is a materially different water body
+from the nearest offshore buoy; presenting that borrowed reading as
+"real measurement" would repeat the exact failure mode #040/#041 just
+fixed (a confidently-wrong reading standing in for a different, nearby
+water body), just introduced deliberately this time instead of by a
+matching bug. These waterbodies keep their honest NWS air-temperature
+proxy label rather than trade an honest "estimated" tag for a
+confident-but-unverified "real" one.
+
+**Rationale:**
+- The same standard applied to catch #040/#041's bugs (a "real"
+  reading should represent the water body it's labeled as, not a
+  geographically nearby stand-in) also has to govern which new sources
+  get added, not just which existing bugs get fixed
+- An honest proxy is a better outcome than an unverified real-label
+  extension, especially right after fixing two cases where exactly that
+  kind of extension turned out to be wrong
