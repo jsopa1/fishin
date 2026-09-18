@@ -7,10 +7,21 @@
 {% else %}
 <div class="explore-head">
   <h1>Explore</h1>
-  <p>Tap any spot for water temperature, likely species, and why — {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }} real Wisconsin access points.</p>
+  <p>Tap any spot for water temperature, likely species, and why — {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }} real Wisconsin access points. <a href="{{ url_for('browse') }}">Browse the waterbody directory instead</a>.</p>
 </div>
 
-<div class="explore-toolbar">
+<div class="explore-view-toggle view-toggle" role="group" aria-label="Switch between map and list view">
+  <button type="button" id="toggle-map-btn" class="view-toggle-btn active">
+    <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> Map
+  </button>
+  <button type="button" id="toggle-list-btn" class="view-toggle-btn">
+    <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg> List
+  </button>
+</div>
+
+<details class="explore-filter-panel" id="explore-filter-panel"{% if filters.waterbody or filters.county or filters.species or (filters.source_type and filters.source_type != 'all') %} open{% endif %}>
+  <summary class="explore-filter-summary"><svg class="icon" aria-hidden="true"><use href="#icon-filter"/></svg> Filters{% if filters.waterbody or filters.county or filters.species or (filters.source_type and filters.source_type != 'all') %} <span class="tag evidence">active</span>{% endif %}</summary>
+  <div class="explore-toolbar">
   <form class="explore-filters" method="get" action="{{ url_for('map_view') }}">
     <div class="search-bar" id="explore-search">
       <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
@@ -47,15 +58,9 @@
     </div>
   </form>
 </div>
+</details>
 
-<div class="explore-view-toggle view-toggle" role="group" aria-label="Switch between map and list view">
-  <button type="button" id="toggle-map-btn" class="view-toggle-btn active">
-    <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> Map
-  </button>
-  <button type="button" id="toggle-list-btn" class="view-toggle-btn">
-    <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg> List
-  </button>
-</div>
+
 
 <div class="map-legend">
   <span><i class="map-dot dot-ramp"></i> Boat ramp</span>
@@ -271,7 +276,10 @@
 
   // The bottom-nav search shortcut links here as #explore-search --
   // focus the field so a tap lands ready to type.
+  var filterPanel = document.getElementById('explore-filter-panel');
+  if (filterPanel && window.matchMedia('(min-width: 768px)').matches) filterPanel.open = true;
   if (window.location.hash === '#explore-search') {
+    if (filterPanel) filterPanel.open = true;
     var nameInput = document.querySelector('.explore-filters input[name="waterbody"]');
     if (nameInput) nameInput.focus();
   }

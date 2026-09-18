@@ -1158,3 +1158,14 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
 .tag.evidence-likely { background: var(--stocking-bg); color: var(--stocking); }
 .spot-quicklinks { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
 #stocking-history, #regulations, #consumption-advisory { scroll-margin-top: 84px; }
+
+/* ---- Explore: Map|List toggle first, then collapsible Filters (Phase 2b) ---- */
+.explore-filter-panel { margin: var(--space-3) 0; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
+.explore-filter-summary { cursor: pointer; padding: var(--space-3) var(--space-4); font-weight: 600; display: flex; align-items: center; gap: var(--space-2); list-style: none; }
+.explore-filter-summary::-webkit-details-marker { display: none; }
+.explore-filter-panel .explore-toolbar { position: static; padding: 0 var(--space-4) var(--space-4); background: transparent; }
+.view-toggle { width: 100%; margin: var(--space-3) 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--card); }
+.view-toggle-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); border: none; background: transparent; color: var(--muted); font: inherit; font-weight: 600; cursor: pointer; }
+.view-toggle-btn + .view-toggle-btn { border-left: 1px solid var(--border); }
+.view-toggle-btn.active { background: var(--accent); color: var(--gray-0); }
+.view-toggle-btn:focus-visible { outline: 2px solid var(--accent-dark); outline-offset: -2px; }

@@ -1828,3 +1828,30 @@ axis: is today's temperature inside a documented window. Both are real and both 
 - The per-row activity popover from #037 is replaced: the short window text is now visible in
   the row itself. The Stocking / Regulations / Consumption advisory buttons jump to the
   existing sections and appear only when that section exists.
+
+## 047 — Explore layout (Phase 2b), and a design change for the recommendation feature: rank in the browser
+
+**Explore.** The screen now follows wireframe 5 on phones: the Map | List toggle first (styled
+as a real segmented control - it previously had no styles at all), then the Filters, then the map
+or list. The filters moved into a collapsible panel, closed on phones so the map gets the screen,
+open on desktop and whenever a filter is active (flagged with an "active" tag). Every control and
+`/map?...` deep link is unchanged and covered by tests, the bottom-nav search shortcut opens the
+panel and focuses the field, and the waterbody directory stays one link away. Desktop keeps its
+side-by-side split, where a toggle would only hide half of what is already visible.
+
+**Design change for Phase 4 (found while reading this code).** The approved spec had
+`POST /recommend` send the visitor's rounded location and preferences to the server. Explore
+already has a "Spots near me" button whose code promises the coordinate is "never sent anywhere",
+and the privacy page promises saved spots never reach the server. Sending location and stated
+fishing preferences to rank spots would have quietly broken that posture. So instead:
+- the server publishes one non-personal, cacheable feed (per spot: which documented species are
+  in range now, their evidence tier, reading quality), built by the *same code path as the spot
+  page* so a recommendation card can never disagree with the page it links to;
+- the ranking runs in the browser (`webapp/static/recommend.js`), where the location, saved spots
+  and Profile preferences already live, and none of them leave the device;
+- the lexicographic ranking rule in the spec is unchanged. It is implemented once, in that JS
+  module, and tested by running it under Node against fixed vectors, rather than duplicated in
+  Python and JavaScript where the two could drift.
+Measuring get_spot_detail (211 ms per spot, 3,272 spots) showed the feed needs the temperature
+anchors cached per data refresh and a bounding-box prefilter on citizen sightings, which also
+speeds every spot page; that is part of Phase 4.
