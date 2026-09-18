@@ -6,7 +6,15 @@
     "single-source-speculative": "One source only and not species/system-specific; use cautiously.",
     "excluded-as-folklore": "Checked, no primary support found; never shown."
   },
-  "_claim_fields": ["id", "field", "season_or_life_stage", "text", "tier", "wi_applicable", "sources"],
+  "_claim_fields": [
+    "id",
+    "field",
+    "season_or_life_stage",
+    "text",
+    "tier",
+    "wi_applicable",
+    "sources"
+  ],
   "_retrieval_failures": [
     {
       "species": "WALLEYE",
@@ -52,23 +60,1481 @@
           ]
         },
         {
-          "id": "walleye-spawning-substrate-depth",
-          "field": "spawning_habitat",
-          "season_or_life_stage": "spawning",
-          "text": "In one northern Wisconsin lake (Big Crooked Lake) walleyes spawned very close to shore in shallow water (mean egg-deposition depth 0.3 m) over gravel, cobble and rubble substrates, and used only about 14% of the shoreline; 39% of the shoreline was gravel/cobble or coarser. One lake, one study - a single-lake result, not a statewide rule.",
+          "id": "walleye-lake-types",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Walleye are generally associated with large rivers and lakes; good populations also occur in smaller landlocked lakes and large impoundments, and they live in all lake types (bog, clear softwater, fertile hardwater).",
           "tier": "agency-tier",
           "wi_applicable": true,
           "sources": [
             {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "The walleye is generally associated with large rivers and lakes, although excellent populations are sometimes found in smaller, landlocked lakes; many large impoundments also contain substantial walleye populations. Walleyes can be found in all types of lakes: dystrophic, or bog lakes; oligotrophic, or clear, softwater lakes; and eutrophic, or fertile, hardwater lakes.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-bottom-schools",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "Walleye live near or on the lake bottom and travel through open water in loosely formed schools.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Walleyes live near or on the lake bottom and travel through open water in loosely formed schools.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-diel-movement",
+          "field": "depth_and_light",
+          "season_or_life_stage": "adult, daily",
+          "text": "Because their eyes are highly light-sensitive, walleye stay in deeper, darker water by day and move to shallower water near bars, shoals and weed beds at sunset to feed; they may feed in daytime if the water is muddy or the sky is cloudy.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Because their eyes are highly sensitive to light, walleye linger in deeper, darker water during the day and move to shallower water near bars, shoals and weed beds to feed as the sun sets. The fish may be active in the daytime if the water is muddy or the sky is cloudy.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-summer-winter",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "adult, midsummer and winter",
+          "text": "In midsummer walleye stay in deep, cool water and feed in the depths; they also feed actively through winter, especially at first ice and just before spring break-up.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "In midsummer, walleye will remain in deep, cool water and seek their prey in the depths; the species also feeds actively throughout the winter, especially when the ice first forms and just before spring break-up.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Favorite prey are bullheads, freshwater drum, yellow perch, darters and minnows; crayfish, insects and worms round out the diet. Walleye follow the food supply and seldom stay in one spot long.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Bullheads, freshwater drum, yellow perch, darters and minnows are favorite walleye prey; crayfish, insects and worms round out the diet. Walleyes are vigorous swimmers and will follow the food supply rather than wait for a midnight snack to drift into range; they seldom congregate in any particular spot for long",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-spawning-substrate-depth",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Walleye spawn in shallow water over gravel/rock: WDNR describes wind-swept rocky shorelines, flooded wetlands or inlet streams with gravel bottoms, usually in water 4 ft deep or less; a peer-reviewed study of one northern Wisconsin lake (Big Crooked Lake) found spawning very close to shore (mean egg-deposition depth 0.3 m) over gravel, cobble and rubble, using only about 14% of the shoreline.",
+          "tier": "well-established",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Between mid-April and early May, walleye migrate to wind-swept, rocky shorelines, flooded wetlands or inlet streams with gravel bottoms to spawn. ... usually in shallow water 4 or less feet deep",
+              "retrieved": "2026-09-18"
+            },
+            {
               "citation": "Raabe, J.K., and Bozek, M.A. 2012. Quantity, structure, and habitat selection of natural spawning reefs by walleyes in a north temperate lake: A multiscale analysis. Transactions of the American Fisheries Society. https://doi.org/10.1080/00028487.2012.679017",
               "url": "https://www.usgs.gov/publications/quantity-structure-and-habitat-selection-natural-spawning-reefs-walleyes-a-north",
-              "quote": "close to shore ... outer egg deposition polygon boundary mean depth = 0.3 m ... over gravel substrate (percent coverage mean = 64.3) ... gravel, cobble, and rubble (150.0-303.9-mm) substrates ... only 14% of the entire lake shoreline and 39% of the shoreline comprised of gravel (6.4-76.0 mm), cobble (76.1-149.9 mm), or coarser substrates",
+              "quote": "close to shore ... outer egg deposition polygon boundary mean depth = 0.3 m ... over gravel substrate (percent coverage mean = 64.3) ... only 14% of the entire lake shoreline and 39% of the shoreline comprised of gravel (6.4-76.0 mm), cobble (76.1-149.9 mm), or coarser substrates",
               "retrieved": "2026-09-18"
             }
           ]
         }
       ],
-      "not_yet_documented": ["summer and winter structure preference", "river habitat", "lake-class suitability"]
+      "not_yet_documented": [
+        "river-specific structure",
+        "lake-class suitability beyond the lake types above"
+      ]
+    },
+    "YELLOW PERCH": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "yperch-water-tolerance",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Yellow perch prefer clear, fertile water but tolerate a wide range of conditions, including low oxygen (so they can live in deep water and survive winterkill that suffocates bluegill, bass and walleye), turbid water and a wide temperature range.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "While they prefer clear, fertile water (water supporting moderate to large amounts of plant growth), yellow perch can adjust to a variety of conditions. This hardy species is renowned for its ability to survive low oxygen levels. ... Perch are also tolerant of eutrophic (nutrient rich) and turbid (containing suspended solids) water and a wide temperature range.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "yperch-schools-daily",
+          "field": "structure",
+          "season_or_life_stage": "adult, daily",
+          "text": "Yellow perch form day-active schools of about 50 to 200 or more fish, usually of similar size; smaller fish stay shallower than larger fish. At night schools move toward shore, then disperse and sit motionless on the bottom; at daybreak they re-form and move back out to deeper water.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "A gregarious fish, yellow perch are active during the day when they form spindle-shaped schools numbering 50 to 200 or more fish ... Schools of smaller fish tend to stay in shallower water than schools of larger fish. As night approaches the schools move in toward shore. After dark, when they can no longer see each other, yellow perch disperse, move to the bottom and remain motionless. At daybreak they again form schools before moving back out to deeper water.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "yperch-seasonal-movement",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "adult, seasonal",
+          "text": "Seasonal pattern: in toward shore in spring to spawn, out to deeper water as temperatures rise in summer, and into very deep water in winter (some lakes are fished for winter perch in 40 to 60 feet of water).",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Generally, yellow perch follow a seasonal migratory pattern that brings them in toward shore in the spring to spawn, out to deeper water as temperatures rise in summer and into very deep water during the winter. ... In winter, perch often move down to the lake depths, feeding exclusively off the bottom. On some lakes, anglers fish in 40 to 60 feet of water to catch yellow perch in the winter.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "yperch-forage",
+          "field": "forage",
+          "season_or_life_stage": "small and large adults",
+          "text": "Small perch feed along the bottom on small aquatic insects and zooplankton; minnows and small fish become the preferred prey and a large part of the diet as perch grow.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "When feeding, small yellow perch swim along the bottom picking off small aquatic insects ... Minnows and small fish become the preferred prey and make up a large portion of their diet as yellow perch grow in size.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "yperch-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Perch spawn early in spring soon after ice-out, about April to early May. WDNR's fact sheet gives 44-52 F (its species web page gives 45-52 F; both WDNR, a one-degree difference disclosed here, not resolved). They prefer vegetation or submerged brush but also use gravel, sand or rubble; in the Great Lakes, mainly sandy bottoms.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Yellow perch spawn early in the spring shortly after the ice goes out. Spawning lasts approximately from April to early May, when the water temperature ranges between 44 and 52 ... Perch prefer vegetation or submerged brush for spawning but will also spawn on gravel, sand or rubble bottoms. In the Great Lakes, perch spawn primarily on sandy bottoms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "not_yet_documented": [
+        "river habitat",
+        "summer structure beyond 'deeper water as temperatures rise'"
+      ]
+    },
+    "NORTHERN PIKE": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "pike-structure-cool-shallow",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "Northern pike prefer shallow, cool water and are most abundant in shallow lakes with extensive weed beds. In summer they often seek cooler water near inlet streams or springs.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "Northern pike prefer shallow, cool water and are most abundant in shallow lakes with extensive weed beds. As lake waters warm during summer, northern pike often seek cooler waters near inlet streams or springs;",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "pike-cold-active-oxygen",
+          "field": "temperature_behavior",
+          "season_or_life_stage": "adult, seasonal",
+          "text": "Pike are most active in cold water and are caught more easily in winter than summer; they tolerate low oxygen and are less often a victim of winterkill than other game fish. In hot weather they seek cooler, deeper water.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "this species is most active in cold water, and northern pike are caught more easily in winter than in summer. The hardy northern pike tolerates low oxygen levels and is less often a victim of winterkill (low oxygen and/or low temperature) conditions than other game fish. ... fish also seek cooler, deeper waters in very hot weather and consequently are harder to reach.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "pike-ambush-feeding",
+          "field": "feeding_behavior",
+          "season_or_life_stage": "adult",
+          "text": "Pike feed by sight, lurking alone amid weed beds until prey swims by, then lunging from cover; prey ranges from perch, sucker, frog to shrew - any living vertebrate that fits down the gullet.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "The secretive predator feeds by sight, lurking alone amid weed beds until unsuspecting prey swims by, then lunging out from under cover and snatching the prey with its powerful jaws. ... the northern pike is a carnivore capable of eating any living vertebrate that can fit down its gullet.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "pike-august-lull",
+          "field": "seasonal_behavior",
+          "season_or_life_stage": "adult, late summer",
+          "text": "Pike bite less often in the summer 'dog days': with food supplies at a peak in August they are generally well fed and less inclined to bite.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "Because northern pike bite less frequently in the \"dog days\" of summer ... With food supplies at a peak in August, the northern pike is generally well-fed and less inclined to bite;",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "pike-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Pike spawn as soon as ice begins to break up (late March or early April) in marshes and flooded wetlands with grasses, sedges, rushes or aquatic plants; females move into flooded areas 12 inches deep or less.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "Northern pike begin to spawn as soon as the ice begins to break up in the spring, in late March or early April. ... Marshes with grasses, sedges, rushes or aquatic plants and flooded wetlands are prime spawning habitat for northern pike. Mature females move into flooded areas where the water is 12 or less inches deep",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "MUSKELLUNGE": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "musky-structure-water",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "Muskellunge are solitary and stay close to a home range. They prefer larger lakes with both deep and shallow basins and large beds of aquatic plants (arrowleaf, cattail, pickerel weed, water lilies), and medium to large rivers with deep pools and slow water; occasionally very clear lakes with few weeds.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "The muskellunge is a solitary fish that stays close to its home range, roaming only when food is in short supply. It prefers larger lakes that have both deep and shallow basins and large beds of aquatic plants such as arrowleaf, cattail, pickerel weed, and water lilies, and medium to large rivers with deep pools and slow-moving water. The fish is occasionally found in very clear lakes with few weeds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "musky-temperature",
+          "field": "temperature_tolerance",
+          "season_or_life_stage": "adult",
+          "text": "Most comfortable in cool water (33 to 78 F); can withstand up to 90 F for short periods. (Muskellunge's thermal optimum is a disputed number in this app's physiology data; this is WDNR's stated comfort range, shown alongside that disagreement, not as a resolution of it.)",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "Most comfortable in cool water temperatures (33 to 78°F), the muskellunge can withstand temperatures up to 90°F for short periods.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "musky-ambush-cover",
+          "field": "feeding_behavior",
+          "season_or_life_stage": "adult",
+          "text": "Muskellunge lurk around stumps, rocky ledges or shoals, or hide among broadleaved pond weeds or other vegetation and ambush prey; they depend mainly on sight and have difficulty feeding in turbid water.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "Lurking around stumps, rocky ledges or shoals, hiding among broadleaved pond weeds or other vegetation, the sedentary muskellunge waits patiently to attack ... This superlative predator depends primarily on sight to capture prey. Muskellunge have difficulty feeding in waters where turbidity",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "musky-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Any fish will do (gamefish, minnows, other muskellunge), with suckers and perch particular favorites; muskrats, ducks, shrews, mice and frogs also appear in stomachs. Feeding habits are generally unpredictable, and prey size scales with muskellunge size.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "any species will do, from gamefish to minnows to other muskellunge, with suckers and perch particular favorites ... Muskrats, ducks, shrews, mice and frogs also appear in the stomachs of muskellunge from time to time. Muskellunge feeding habits are generally unpredictable.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "musky-where-found",
+          "field": "structure",
+          "season_or_life_stage": "adult, angling",
+          "text": "Muskellunge lurk near drop-offs from rock or sand bars in the middle of lakes, along weed beds, in small weed-covered bays, and in shady waters near shores fringed with overhanging trees.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "Muskellunge lurk near the drop-offs from rock or sand bars in the middle of lakes; along weed beds; in small weed-covered bays; and in shady waters close to shores that are fringed with overhanging trees.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "musky-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Muskellunge spawn from mid-April to late May at 50-60 F in shallow bays with muck bottoms covered by dead vegetation, over several hundred yards of shoreline, and return to the same area each year.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "Muskellunge spawn from mid- April to late May, when the water temperature rises to between 50 and 60°F. The males and females seek shallow bays with muck bottoms covered by dead vegetation ... Muskellunge return to the same area each year to spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BLUEGILL": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "bluegill-warm-cover",
+          "field": "temperature_and_cover",
+          "season_or_life_stage": "adult",
+          "text": "Bluegills prefer warm water (85 to 88 F; tolerate up to 95 F), which makes them fond of shallow lakes and, in winter, warm-water discharges; in spring they seek slow streams and marshy channels that warm sooner. They avoid direct sun and prefer aquatic vegetation and submerged brush. (WDNR's 85-88 F matches the activity-window range already used in this app's physiology data.)",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "These heat-craving sunfish prefer water temperatures of 85 to 88°F, and can tolerate temperatures up to 95°F. Their quest for warm water makes them particularly fond of shallow lakes and, especially in winter, attracts them to sources of warm-water discharge, such as power plants. In the spring they seek the warmth of slow-flowing streams or marshy channels that heat up sooner than lakes. While they like warm water, they avoid direct sun, preferring the cover of aquatic vegetation and submerged brush.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "bluegill-schools-home-range",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "Bluegills stay in small schools of about 10 to 20, often with other sunfish, and keep a home range, especially while spawning.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Bluegills generally stay together in small schools of 10 to 20 fish. ... Bluegills tend to have a home range (an area within which they remain), especially during spawning.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "bluegill-daily-pattern",
+          "field": "depth_and_light",
+          "season_or_life_stage": "adult, daily",
+          "text": "Bluegills feed mainly at dawn and dusk (and through the day), and move closer to shore at night and into open water by day.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Bluegills feed primarily at dawn and dusk, though they will feed throughout the day. ... Bluegills follow a daily migratory pattern that tends to bring them closer to shore at night and into open water during the day.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "bluegill-diet",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Sight feeders that graze on whatever catches their eye; in late June and early July, when mayflies and other insects emerge on the surface, they take insects from the surface (audible as a 'popping' sound). In summer they can eat up to 35% of their body weight weekly, dropping to about 1% in winter.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Bluegills are sight- feeders, moving around and grazing on anything that catches their eye. ... In late June and early July when mayflies and other insects are emerging and swimming on lake surfaces, bluegills will go to the surface and suck insects in ... During the summer when food is abundant bluegills may consume up to 35 percent of their own body weight weekly. In winter that rate can drop to 1 percent.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "bluegill-oxygen",
+          "field": "oxygen_tolerance",
+          "season_or_life_stage": "adult, winter",
+          "text": "Bluegills are intolerant of low oxygen and among the first to die off in winterkill.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Bluegills are intolerant of low oxygen levels and are among the first to die off from winterkill conditions",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "bluegill-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Males move into shallow water when it approaches 67 F to claim spawning grounds and build nests in colonies in shallow sand or gravel beds.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "when the water temperature approaches 67°F, to claim spawning grounds. ... Males normally build nests in colonies in shallow sand or gravel beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "bluegill-angling-depth",
+          "field": "depth_and_light",
+          "season_or_life_stage": "adult, summer and winter (angler-reported)",
+          "text": "WDNR: in summer anglers likely do best fishing from a boat in 5 to 15 feet of water; in winter, ice anglers usually do best among the weeds in deeper water.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "During the summer, anglers will likely have the best luck fishing from a boat in water between 5 and 15 feet deep. ... During the winter, ice anglers usually have the best fishing among the weeds in deeper water.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "PUMPKINSEED": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "pumpkinseed-shallow-weeds",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "Pumpkinseeds like shallow water and are active through the day; the shallow weed beds are their preferred habitat, and they feed at all levels from the surface to the bottom.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "With their fondness for hanging out in shallow water and their tendency to remain active throughout the day ... getting bait into the shallow weed beds preferred by pumpkinseeds ... Pumpkinseeds feed at all water levels from the surface to the bottom.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "pumpkinseed-diet",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Small mouth, small food, but a wide menu: insects, insect larvae, mollusks, snails, other crustaceans and small fish.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "including insects, insect larvae, mollusks, snails, other crustaceans and small fish",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "pumpkinseed-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Males build nests in late spring or early summer when water reaches 55 to 63 F, in shallow water (6 inches to several feet deep) on sand or gravel bottoms, in colonies; males guard the nests.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Males are responsible for nest building, a chore they take on in late spring or early summer when water temperature reaches 55 to 63 degrees Fahrenheit. Nest sites are generally in shallow water, anywhere from 6 inches to several feet deep, on sand or gravel bottoms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "pumpkinseed-seasonal-activity",
+          "field": "seasonal_behavior",
+          "season_or_life_stage": "adult, spring to winter",
+          "text": "Especially active in spring and summer when defending nests; they hit grubs early in winter but are less active from mid to late winter.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Pumpkinseeds are particularly active in the spring and summer when they are aggressively defending their nests. Pumpkinseeds will hit at grubs -the larvae of insects -early in the winter, but they are less active from mid to late winter.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "CHANNEL CATFISH": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "channelcat-water-pools",
+          "field": "structure",
+          "season_or_life_stage": "adult, daytime",
+          "text": "Channel and flathead catfish tolerate turbid water (better than many game fish) but prefer clear, slow-moving water. By day they seek dark, deep pools such as below rock dams, wing dams or the aprons of larger dams; pools with submerged logs, rocks or debris are prime habitat.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Catfish, especially channels, are more tolerant of turbid water than many game fish, with the exception of bullheads and carp. While they tolerate turbidity, catfish prefer clear, slow-moving water. During the day, both species seek out dark, deep pools, such as those below rock dams, wing dams or below the concrete aprons of larger dams. Pools with submerged logs, rocks or other debris offer prime habitat.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "channelcat-night-movement",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "adult, daily and seasonal",
+          "text": "Channel catfish make extensive upstream migrations in spring to spawn and then tend to move downstream through the year. After resting most of the day, catfish move into shallows and muddy backwaters at night to feed.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel catfish, on the other hand, don't have strong homing tendencies. They make extensive upstream migrations in spring to spawn and then tend to move downstream throughout the year. After resting for most of the day, catfish move into shallows and muddy backwaters at night to feed.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "channelcat-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Channel catfish are primarily scavengers, feeding along shore on any vegetable or animal matter that floats by, but are also swift swimmers and larger channel cats may feed heavily on small forage fish. They feed heavily after rains, when they search turbid water with their barbels for food washed into the river.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "channel catfish are primarily scavengers, moving along shore feeding on any type of vegetable or animal matter that floats by; but they are also swift swimmers, and larger channel cats may feed heavily on small forage fish. ... Channel cats feed heavily following rains when they search the turbid water with their barbels for food washed into the river.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "channelcat-winter",
+          "field": "seasonal_behavior",
+          "season_or_life_stage": "winter",
+          "text": "Neither channel nor flathead catfish feeds in winter; they gather in deep pools, settle into the muddy bottom and go into semihibernation.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Neither species feeds in the winter, when they congregate in deep pools, settling in the muddy bottom and going into semihibernation.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "channelcat-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Catfish spawn May through July at about 75 F (WDNR text reads '7 5 degrees Fahrenheit'). The male finds an obscure spot - hollow river banks, rock overhangs and ledges, submerged tree roots, hollow logs - and clears it to a sand or gravel bottom. Channel catfish move upstream to shallower, warmer water to find nesting spots.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Catfish spawn from May through July, when the water temperature reaches about 7 5 degrees Fahrenheit. Channel catfish make extensive upstream excursions to shallower, warmer water in search of prime nesting spots. ... hollow river banks, rock overhangs and ledges, submerged tree roots and hollow logs ... Catfish use a vigorous fanning motion with their tails to clear away debris down to a sand or gravel bottom.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "LAKE STURGEON": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "sturgeon-bottom-habitat",
+          "field": "structure",
+          "season_or_life_stage": "adult",
+          "text": "Lake sturgeon linger on the bottom of lakes with extensive shallow water (less than 30 feet) and in deep river pools, foraging by dragging sensitive barbels over the bottom and sucking up food with silt and gravel.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Sturgeon (Acipenser fulvescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lakesturgeon.pdf",
+              "quote": "the lake sturgeon must linger at the bottom of lakes with extensive areas of shallow water (less than 30 feet) and in deep river pools ... When it is searching for food, a lake sturgeon will drag its barbels lightly over the bottom.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "sturgeon-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult",
+          "text": "Toothless suction feeders restricted to small organisms: snails, insect larvae, leeches, small clams and other invertebrates (and the occasional crayfish).",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Sturgeon (Acipenser fulvescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lakesturgeon.pdf",
+              "quote": "Because they rely on suction to feed, lake sturgeons are restricted to living on small organisms--snails, insect larvae, leeches, small clams and other invertebrates.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "sturgeon-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Migrate to spawning grounds between late April and early June, preferring shallow, rocky areas along river banks. Spawning starts at 53 F when flow is high and temperatures rise slowly, but not until 58-59 F in low-flow, fast-warming seasons.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Sturgeon (Acipenser fulvescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lakesturgeon.pdf",
+              "quote": "Lake sturgeon migrate to their annual spawning grounds between late April and early June, preferring to spawn in shallow, rocky areas along river banks. During seasons when water flow is high and water temperatures rise slowly, spawning begins when the water temperature reaches 53°F; during seasons of low water flow and more rapid water temperature rise, spawning does not begin until water temperatures reach 58-59°F.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BROOK TROUT": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "brook-stream-and-lake",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Brook trout is the only stream trout native to Wisconsin, but is not restricted to streams and is frequently found in lakes.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "the brook trout is the only stream trout native to this area. Brook trout, however, are not restricted to living in streams and can frequently be found in lakes.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brook-preferred-temp",
+          "field": "temperature_preference",
+          "season_or_life_stage": "adult",
+          "text": "WDNR lists a preferred temperature range of 53-57 F (12-14 C).",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Preferred Temperature Range: 53-57 °F, 12-14 °C",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brook-lake-diet",
+          "field": "forage",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "In Lake Michigan brook trout feed on insects, crayfish, leeches and small fish.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Once in Lake Michigan, the brook trout feast on a diet of insects, crayfish, leeches, and small fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brook-spawning-and-warmth",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning, Lake Michigan",
+          "text": "Brook trout spawn in streams, or rarely along shoreline areas near stocking locations; little natural reproduction occurs in Lake Michigan because tributary streams are too warm in summer to rear juveniles.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "spawn in streams or rarely along shoreline areas adjacent to stocking locations. ... Little successful natural reproduction occurs in Lake Michigan because tributary streams are too warm in the summer to rear juveniles.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brook-where-caught",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "Lake Michigan, by season",
+          "text": "Caught from piers and rocky shores in spring and summer; stream fishing from Sheboygan north in spring and autumn; ice fishing in bays and especially river mouths in winter.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Brook trout are caught from piers and rocky shores in the spring and summer. Stream fishing for brook trout occurs from Sheboygan north in the spring and autumn. ... Ice fishing in bays and especially in river mouths is popular during the winter months",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BROWN TROUT": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "brown-temp-depth",
+          "field": "temperature_and_depth",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "WDNR lists a preferred temperature range of 65-75 F (18-24 C) for brown trout and says they live in warmer, shallower water than other trout or salmon in Lake Michigan.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Preferred Temperature Range: 65-75 °F, 18-24 °C ... These fish live in water that is warmer and shallower that that preferred by other trout or salmon.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brown-wary",
+          "field": "behavior",
+          "season_or_life_stage": "adult",
+          "text": "Brown trout are wary and often easy to spook.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "brown trout are wary and often easy to \"spook.\"",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brown-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "After stocking into Lake Michigan brown trout grow fast, feeding on crayfish, insects and small fish.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "brown trout grow fast, feeding on crayfish, insects, and small fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brown-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Brown trout spawn in shallow, gravelly stream headwaters or on rocky reefs near shore, returning to stocking sites in autumn.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Spawning takes place in shallow, gravelly headwaters of streams or on rocky reefs near the shore.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "brown-where-when",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "Lake Michigan, by season",
+          "text": "Caught year-round; in summer trolled in Green Bay 2 to 5 miles offshore at 15-30 ft in 50-70 ft of water; October to June brown trout gather in the cooling-water discharge plumes of power plants from Kewaunee south.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Brown trout can be caught by anglers on a year-round basis. ... Small spoons and plugs are trolled 2 to 5 miles offshore, at depths of 15-30 feet in water 50-70 feet deep. Between October and June, brown trout provide an excellent sport fishery in the cooling water discharge plumes of power plants from Kewaunee south.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "RAINBOW TROUT": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "rainbow-temp",
+          "field": "temperature_preference",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "WDNR lists a preferred temperature range of 53-57 F (12-14 C).",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Preferred Temperature Range: 53-57 °F, 12-14 °C",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "rainbow-forage-range",
+          "field": "forage",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "Rainbow trout feed on small fish, insects and crayfish and wander extensively, moving along shore up to 50 miles from where they were stocked.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Once in Lake Michigan, rainbow trout feed on small fish, insects, and crayfish. They wander extensively, moving along the shore up to 50 miles from their place of stocking",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "rainbow-stream-runs",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "steelhead runs",
+          "text": "Steelhead are caught in streams from March through May and from July through December during times of high water discharge; pier and shore fishing also contribute in spring, summer and fall.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Steelhead are caught in streams from March through May and from July through December during times of high water discharges. ... pier and shore fishing also contribute significantly to the rainbow trout catch in the spring, summer, and fall.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "rainbow-power-plants",
+          "field": "structure",
+          "season_or_life_stage": "October to May, Lake Michigan",
+          "text": "Between October and May an excellent rainbow fishery exists in the cooling-water discharges of power plants; in mid-summer some steelhead are caught trolling, often far from shore near the surface.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "During mid-summer, some steelhead are caught while trolling, with the best catches often occurring far from shore on spoons or plugs near the surface. Between October and May, an excellent rainbow fishery exists in the cooling water discharges of power plants.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "LAKE TROUT": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "laketrout-temp",
+          "field": "temperature_preference",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "WDNR lists a preferred temperature range of 48-52 F (9-11 C), the coldest of the Lake Michigan trout and salmon sheets.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "Preferred Temperature Range: 48-52 °F, 9-11 °C",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "laketrout-forage",
+          "field": "forage",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "Adult lake trout feed mainly on alewife, smelt and sculpin.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "During their adult life, lake trout feed mainly on alewife, smelt, and sculpin.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "laketrout-depth-season",
+          "field": "depth_and_season",
+          "season_or_life_stage": "May to October, Lake Michigan",
+          "text": "Lures are trolled at 80 or more feet. Fishing is good from May to October, starting closer to shore in spring and moving offshore to deeper water as the water temperature increases. Shore/pier catches come from shallow water most likely during a west/northwest wind, especially early and late in the season.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "To catch lake trout, lures should be trolled at 80 or more feet. ... Trolling produces good returns on lake trout from May to October, starting closer to shore in the spring and moving offshore to deeper water as the water temperature increases. ... Fish are most likely to be taken from the shallow waters during a west/northwest wind and especially in the early and late parts of the season.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "CHINOOK SALMON": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "chinook-temp",
+          "field": "temperature_preference",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "WDNR lists a preferred temperature range of 50-57 F (10-14 C).",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "Preferred Temperature Range: 50-57 °F, 10-14 °C",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "chinook-open-lake-forage",
+          "field": "structure",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "Chinook spend their life in the open lake, usually in water less than 100 feet deep, preying on alewife and smelt.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "The fast-growing chinook spend their life in the open lake, usually in water less than 100 feet deep, preying on alewife and smelt.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "chinook-wind-upwelling",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "summer, Lake Michigan",
+          "text": "A westerly wind often pushes cold, deeper water up near the Wisconsin shore; when this happens chinook follow forage fish into the shallows, where shore and pier anglers catch many.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "Quite often a westerly wind causes cold, deeper water to up well near the Wisconsin shore. When this occurs, chinook tend to follow forage fish into the shallow waters.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "chinook-season-time",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "Lake Michigan, by season",
+          "text": "Fishing generally begins in early June and is good through October; usually best in the early morning or evening. Mature salmon enter tributary streams from September to November to spawn.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "Chinook fishing generally begins in early June and is good through October ... Fishing is usually best in the early morning or lake evening hours. ... The mature salmon usually enter tributary streams from September to November to attempt to spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "COHO SALMON": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "coho-temp",
+          "field": "temperature_preference",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "WDNR lists a preferred temperature range of 54-57 F (12-14 C).",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "Preferred Temperature Range: 54-57 °F, 12-14 °C",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "coho-forage-run",
+          "field": "forage",
+          "season_or_life_stage": "adult, Lake Michigan",
+          "text": "Coho feed mainly on alewife and smelt in the lake and run into their stocking streams in autumn (September through December).",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "Once in the lake, the coho grow rapidly, feeding mainly on alewife and smelt. ... As the cohos enter the tributaries, from September through December",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "coho-timing",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "Lake Michigan, by season",
+          "text": "Angling begins in mid-April in southern Wisconsin (Kenosha) and moves north as the season progresses; evening and early morning seem to find the fish most active.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "Angling for coho begins in mid-April in southern Wisconsin (Kenosha) and moves northward as the season progresses. ... Evening and early morning hours seem to find the fish most active.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "SMALLMOUTH BASS": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "smallmouth-water-rocky",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Smallmouth bass are common in medium to large streams and in large, clearwater lakes throughout Wisconsin, usually in a rocky stream or lake environment where crayfish, their favorite food, are abundant.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "The smallmouth bass is common in medium to large streams and in large, clearwater lakes throughout Wisconsin. ... It is usually associated with a rocky stream or lake environment where its favorite food, the crayfish, is abundant.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "smallmouth-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Spawning usually occurs at 62-64 F (found spawning as low as 53 F); in southern Wisconsin mid-May through June at 55-75 F. The nest is usually a large, perfectly circular, clean gravel structure, guarded by the male.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "In Wisconsin, smallmouth bass spawning usually occurs at water temperatures between 62 - 64º F, but they have been found spawning at 53º F. In southern Wisconsin, the smallmouth spawns from the middle of May through June (water temperatures between 55 - 75º F). ... The nest is usually a large, perfectly circular, clean gravel structure. The male bass protects the nest against intruders of his own and other species.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "smallmouth-best-seasons",
+          "field": "seasonal_behavior",
+          "season_or_life_stage": "adult",
+          "text": "Some of the best lake fishing is in June during and just after spawning, and in early fall.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "Some of the best lake fishing takes place in June during and just after the spawning season, and in early fall.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "LARGEMOUTH BASS": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "lmb-water-temp-depth",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Largemouth bass live in warm, shallow, weedy lakes and ponds and calm river backwaters; they are seldom found in water more than 20 feet deep and prefer 80-85 F.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Warm, shallow, weedy lakes and ponds, calm river backwaters--these are the waters where largemouth bass live. They are seldom ... found in water more than 20 feet deep and prefer temperatures of 80-85°F.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "lmb-ambush-forage",
+          "field": "feeding_behavior",
+          "season_or_life_stage": "adult",
+          "text": "Sight feeders that ambush prey from behind logs and rip-rap, below boat docks and at weed lines dropping into deeper water; they take crayfish, frogs, large insects and fish (golden shiners, bluegills, other bass) - anything not too wide to swallow. Small schools of 5 to 10 cruise the shallows, most often in the early morning or later in the day.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Largemouth bass feed by sight and hunt for their food, ambushing unwary prey from behind logs and rip-rap, below boat docks, and at weed lines that drop into deeper water. ... most often in the early morning hours or later in the day; they'll be on the lookout for crayfish, frogs, large insects, fish--including golden shiners, bluegills and other largemouth bass--basically, anything that's not too wide to slide into their cavernous mouths.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "lmb-daily-shade-depth",
+          "field": "depth_and_light",
+          "season_or_life_stage": "adult, daily",
+          "text": "By day largemouth bass are found under lily pads or in the shade of overhanging trees, piers or brush; after an evening feeding they head for deeper water and rest on the bottom under logs or trees. They are seldom deeper than the deepest rooted vegetation.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "During the daytime, largemouth bass can be found under lily pads or in the shade of overhanging trees, piers or brush. After an evening feeding, the fish head for deeper water, where they rest on the bottom under logs or trees ... They are seldom found at depths greater than the deepest water in which rooted vegetation grows.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "lmb-winter",
+          "field": "seasonal_behavior",
+          "season_or_life_stage": "late fall and winter",
+          "text": "Feeding slows as temperatures drop in late fall; in winter the fish are relatively inactive and stay in deep water until shallow bays, channels and streams warm in spring. They are often winterkill victims in the shallow, weedy waters they prefer.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Feeding slows when temperatures begin to drop in late fall. During winter, the fish are relatively inactive and will remain in deep water until the shallow bays, channels and streams warm up in the spring. Largemouth bass are often victims of winterkill",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "lmb-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning",
+          "text": "Spawn late April to early July (northern fish about two weeks later than southern); nest sites chosen at 60 F, eggs laid at 62-65 F, on sand or gravel in about 18 inches of water in sheltered bays or quiet stream areas; nests at least 30 feet apart, guarded by the male.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Largemouth bass spawn from late April until early July; fish in the northern part of the state spawn about two weeks later than those in the south. Generally, the fish select nest sites when water temperatures reach 60°F, and ... egg laying occurs at temperatures of 62-65°F. The male largemouth bass usually selects a sand or gravel bottom on which to build a nest in about 18 inches of water. ... largemouth bass choose to build their nests at least 30 feet apart. As a rule, the nests are constructed in sheltered lake bays or quiet water areas in streams.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "lmb-structure-and-best-times",
+          "field": "structure",
+          "season_or_life_stage": "angling, seasonal",
+          "text": "'Structure' is what largemouth bass call home: inflowing or outflowing streams, points, reefs, submerged trees, docks, rafts, stumps, vegetation beds, sunken islands, rock and rip-rap, dropoffs. Fishing is generally best from early May to late June and again from early September to mid-October when the water is 55-75 F.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Largemouth bass fishing is generally best from early May to lateJune and again from early September to mid-October when the water temperature ranges between 55 and 75 degrees. ... \"Structure\" is what the largemouth bass calls home: inflowing or out flowing streams, points, reefs, submerged trees, docks, rafts, tree stumps, beds of vegetation, sunken islands, rock and rip-rap, dropoffs.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BLACK CRAPPIE": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "black-crappie-clear-water",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "Black crappies prefer clearer, quieter water than white crappies and are common in the clear, cool lakes of Wisconsin's North Woods, habitat where white crappies are not found.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "black crappies prefer clearer, quieter water than white crappies. White crappies flourish ... in warmer, siltier, more turbid (containing suspended solids) water. Black crappies are common in the clear, cool lakes of Wisconsin's North Woods",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "black-crappie-structure",
+          "field": "structure",
+          "season_or_life_stage": "adult (both crappies)",
+          "text": "Crappies like open water but also structure - submerged stumps and logs, rocks and rocky ledges, deep pools in rivers, and emergent vegetation if not too dense. They travel and feed in loose schools.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies like open water but they also like structure, such as submerged stumps and logs, rocks and rocky ledges, deep pools in rivers, and emergent aquatic vegetation if it is not too dense. ... A gregarious fish, crappies travel and feed in loose schools for much of the year.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "black-crappie-seasonal",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "adult (both crappies)",
+          "text": "Crappies inhabit shallows during the spring spawn and move to deeper water in summer; depths vary in winter. In summer they are often in the thermocline, where water is cooler but still has dissolved oxygen.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies inhabit shallows during their spring spawn, moving to deeper water during the summer. They are found at varying depths during the winter. ... In the summer this means they are often found in the thermocline (a depth at which water temperature changes rapidly), where the water is cooler but still contains dissolved oxygen.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "black-crappie-forage",
+          "field": "forage",
+          "season_or_life_stage": "small and older crappies (both species)",
+          "text": "Small crappies eat mostly zooplankton and aquatic insects and larvae living on or near structure; older crappies feed primarily on small fish like minnows and immature bass, sunfish and perch.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies feed on small aquatic organisms called zooplankton, and aquatic insects and insect larvae that live on or near such structures. ... older crappies feed primarily on small fish like minnows and immature bass, sunfish and perch.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "black-crappie-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning (both crappies)",
+          "text": "Spawning peaks in May and June at 61-68 F (may continue into July). Crappies nest in deeper water than other sunfish (about 1.5 to 6 feet or deeper) in colonies near emergent vegetation.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappie spawning activity peaks in May and June when water temperatures are between 61 and 68 degrees, though spawning may continue into July. ... Crappies search out nest spots in deeper water than any other sunfish between 1.5to 6 feet deep or deeper. ... Males construct disc-shaped nests near emergent vegetation",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "black-crappie-angling-where",
+          "field": "depth_and_light",
+          "season_or_life_stage": "angling (both crappies)",
+          "text": "Best success is near submerged structure: near emergent vegetation close to shore during spring spawning; deep holes, river channels, sunken logs or brush piles in summer. Crappies feed all day with peaks in the evening and early morning; summer and fall fishing is harder as they seek deep holes or brush.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "During spring spawning, fish near emergent vegetation close to shore. In summer try deep holes or river channels, especially if you find one with sunken logs or brush piles. ... Crappies feed throughout the day with peaks in the evening and early morning. ... Crappie fishing during the summer and fall is more difficult, as crappies seek out deep holes or deep submerged brush for shelter.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "WHITE CRAPPIE": {
+      "angling_target": true,
+      "claims": [
+        {
+          "id": "white-crappie-turbid-water",
+          "field": "water_type",
+          "season_or_life_stage": "adult",
+          "text": "White crappies flourish in warmer, siltier, more turbid water than black crappies, which prefer clearer, quieter water; white crappies are not found in the clear, cool North Woods lakes where black crappies are common.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "black crappies prefer clearer, quieter water than white crappies. White crappies flourish ... in warmer, siltier, more turbid (containing suspended solids) water. Black crappies are common in the clear, cool lakes of Wisconsin's North Woods",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "white-crappie-structure",
+          "field": "structure",
+          "season_or_life_stage": "adult (both crappies)",
+          "text": "Crappies like open water but also structure - submerged stumps and logs, rocks and rocky ledges, deep pools in rivers, and emergent vegetation if not too dense. They travel and feed in loose schools.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies like open water but they also like structure, such as submerged stumps and logs, rocks and rocky ledges, deep pools in rivers, and emergent aquatic vegetation if it is not too dense. ... A gregarious fish, crappies travel and feed in loose schools for much of the year.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "white-crappie-seasonal",
+          "field": "seasonal_movement",
+          "season_or_life_stage": "adult (both crappies)",
+          "text": "Crappies inhabit shallows during the spring spawn and move to deeper water in summer; depths vary in winter. In summer they are often in the thermocline, where water is cooler but still has dissolved oxygen.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies inhabit shallows during their spring spawn, moving to deeper water during the summer. They are found at varying depths during the winter. ... In the summer this means they are often found in the thermocline (a depth at which water temperature changes rapidly), where the water is cooler but still contains dissolved oxygen.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "white-crappie-forage",
+          "field": "forage",
+          "season_or_life_stage": "small and older crappies (both species)",
+          "text": "Small crappies eat mostly zooplankton and aquatic insects and larvae living on or near structure; older crappies feed primarily on small fish like minnows and immature bass, sunfish and perch.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies feed on small aquatic organisms called zooplankton, and aquatic insects and insect larvae that live on or near such structures. ... older crappies feed primarily on small fish like minnows and immature bass, sunfish and perch.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "white-crappie-spawning",
+          "field": "spawning_habitat",
+          "season_or_life_stage": "spawning (both crappies)",
+          "text": "Spawning peaks in May and June at 61-68 F (may continue into July). Crappies nest in deeper water than other sunfish (about 1.5 to 6 feet or deeper) in colonies near emergent vegetation.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappie spawning activity peaks in May and June when water temperatures are between 61 and 68 degrees, though spawning may continue into July. ... Crappies search out nest spots in deeper water than any other sunfish between 1.5to 6 feet deep or deeper. ... Males construct disc-shaped nests near emergent vegetation",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "white-crappie-angling-where",
+          "field": "depth_and_light",
+          "season_or_life_stage": "angling (both crappies)",
+          "text": "Best success is near submerged structure: near emergent vegetation close to shore during spring spawning; deep holes, river channels, sunken logs or brush piles in summer. Crappies feed all day with peaks in the evening and early morning; summer and fall fishing is harder as they seek deep holes or brush.",
+          "tier": "agency-tier",
+          "wi_applicable": true,
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "During spring spawning, fish near emergent vegetation close to shore. In summer try deep holes or river channels, especially if you find one with sunken logs or brush piles. ... Crappies feed throughout the day with peaks in the evening and early morning. ... Crappie fishing during the summer and fall is more difficult, as crappies seek out deep holes or deep submerged brush for shelter.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
     }
   }
 }

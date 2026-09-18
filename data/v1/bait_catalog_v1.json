@@ -5,37 +5,296 @@
     "minnows_live": {
       "name": "Live minnows",
       "category": "live bait",
-      "description": "Live baitfish, the forage walleye feed on most.",
-      "how_to_use": "Not yet documented to our standard beyond the agency statement that walleyes are primarily minnow feeders.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin live-baitfish and invasive-species rules not yet reviewed."
+      "description": "Live baitfish; the main forage of walleye.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
     },
     "leeches": {
       "name": "Leeches",
       "category": "live bait",
       "description": "Live leeches.",
-      "how_to_use": "Not yet documented to our standard.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed."
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
     },
     "nightcrawlers": {
       "name": "Nightcrawlers",
       "category": "live bait",
-      "description": "Live earthworms.",
-      "how_to_use": "Not yet documented to our standard.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed."
+      "description": "Live earthworms (night crawlers).",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
     },
     "small_plugs": {
-      "name": "Small plugs (crankbait-type lures)",
+      "name": "Plugs (crankbait-type lures)",
       "category": "hard bait",
-      "description": "Small hard plug lures.",
-      "how_to_use": "Not yet documented to our standard.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: no known live-bait restriction, but lure rules not yet reviewed."
+      "description": "Hard plug lures.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
     },
     "small_bullheads": {
       "name": "Small bullheads",
       "category": "live bait",
-      "description": "Small live bullheads (a catfish relative).",
-      "how_to_use": "Not yet documented to our standard.",
-      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on using bullheads as bait not yet reviewed."
+      "description": "Small live bullheads.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "spoons": {
+      "name": "Spoons",
+      "category": "hard bait",
+      "description": "Metal spoon lures.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+    },
+    "spinners_trolling": {
+      "name": "Spinners / Wolf River rigs (trolled)",
+      "category": "hard bait",
+      "description": "Spinner rigs pulled behind a moving boat; WDNR names Wolf River rigs and Little John spinners.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+    },
+    "jigs": {
+      "name": "Jigs",
+      "category": "hard bait",
+      "description": "Weighted jig heads, used on open water and through the ice.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+    },
+    "streamer_flies_poppers": {
+      "name": "Streamer flies and poppers (fly rod)",
+      "category": "fly",
+      "description": "Fly-rod streamers or poppers.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; no live-bait restriction expected but lure rules not reviewed."
+    },
+    "worms": {
+      "name": "Worms",
+      "category": "live bait",
+      "description": "Live worms (garden worms / earthworms).",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "insect_larvae": {
+      "name": "Insect larvae (wax worms, mousies)",
+      "category": "live bait",
+      "description": "Grubs such as wax worms, or mousies (larvae of flying insects).",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "crayfish_tails": {
+      "name": "Crayfish tails",
+      "category": "natural bait",
+      "description": "Pieces of crayfish tail.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: WDNR states live crayfish possession while fishing is illegal on inland waters (see 'Crayfish (live)'); whether tails/dead crayfish are treated differently was not reviewed."
+    },
+    "shrimp": {
+      "name": "Shrimp",
+      "category": "natural bait",
+      "description": "Shrimp as bait.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "fish_pieces": {
+      "name": "Pieces of fish",
+      "category": "natural bait",
+      "description": "Cut pieces of fish as bait.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "jigs_ice_teardrop": {
+      "name": "Small tear-shaped ice jigs (baited with grubs)",
+      "category": "hard bait",
+      "description": "Small, colorful tear-shaped jigs baited with wax worms or mousies for ice fishing.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure with live grub bait; bait rules not reviewed."
+    },
+    "suckers_chubs_live": {
+      "name": "Small suckers and chubs (live, up to 8 in.)",
+      "category": "live bait",
+      "description": "Live small suckers or chubs up to 8 inches long.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "tip_ups": {
+      "name": "Tip-ups (ice fishing)",
+      "category": "technique",
+      "description": "Ice-fishing tip-ups rigged so the fish can run with the bait.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin limits on the number of lines/tip-ups not reviewed."
+    },
+    "suckers_live_large": {
+      "name": "Live suckers (10-14 in.)",
+      "category": "live bait",
+      "description": "Large live suckers, 10 to 14 inches long.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "bucktail_spinners": {
+      "name": "Bucktail spinners",
+      "category": "hard bait",
+      "description": "Large bucktail spinner lures.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "insects_live": {
+      "name": "Insects and other small invertebrates",
+      "category": "live bait",
+      "description": "Small live insects or other invertebrates.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "wet_dry_flies": {
+      "name": "Wet or dry flies",
+      "category": "fly",
+      "description": "Fly-rod wet or dry flies.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "small_artificial_lures": {
+      "name": "Small artificial lures",
+      "category": "hard bait",
+      "description": "Small artificial lures.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "leeches_small": {
+      "name": "Leeches",
+      "category": "live bait",
+      "description": "Live leeches.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "stink_bait": {
+      "name": "Stink bait",
+      "category": "prepared bait",
+      "description": "Odorous prepared baits (cheese, meat, animal or fowl blood, oats, flour, anise), homemade or bought.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: whether any Wisconsin rule limits animal-blood/entrail baits not reviewed."
+    },
+    "meat_strips": {
+      "name": "Strips of fish or meat",
+      "category": "natural bait",
+      "description": "Strips of fish or meat.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "dough_balls": {
+      "name": "Dough balls",
+      "category": "prepared bait",
+      "description": "Dough balls.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "frogs": {
+      "name": "Frogs",
+      "category": "live bait",
+      "description": "Frogs as bait.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on frogs as bait not reviewed."
+    },
+    "grasshoppers": {
+      "name": "Grasshoppers",
+      "category": "live bait",
+      "description": "Grasshoppers.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "clams": {
+      "name": "Clams",
+      "category": "natural bait",
+      "description": "Clams.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "spinners": {
+      "name": "Spinners",
+      "category": "hard bait",
+      "description": "Spinner lures.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "plastic_worms": {
+      "name": "Plastic worms",
+      "category": "soft plastic",
+      "description": "Plastic worm lures.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "dead_minnows": {
+      "name": "Dead minnows",
+      "category": "natural bait",
+      "description": "Dead minnows.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "artificial_flies": {
+      "name": "Artificial flies",
+      "category": "fly",
+      "description": "Artificial fly-rod flies.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "spawn": {
+      "name": "Spawn (fish eggs)",
+      "category": "natural bait",
+      "description": "Fish eggs (spawn).",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on egg baits not reviewed."
+    },
+    "live_bait_unspecified": {
+      "name": "Live bait (type not specified)",
+      "category": "live bait",
+      "description": "Live bait; the source does not name the kind.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: kind of bait unspecified by the source; Wisconsin bait rules not reviewed."
+    },
+    "spawn_bag": {
+      "name": "Spawn bag",
+      "category": "prepared bait",
+      "description": "Fish spawn (eggs) tied in a small ball using veil material.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on egg baits not reviewed."
+    },
+    "flatfish": {
+      "name": "Flatfish",
+      "category": "hard bait",
+      "description": "Flatfish-type lures.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "dodger_fly_combo": {
+      "name": "Dodger and fly combinations (trolled)",
+      "category": "hard bait",
+      "description": "A dodger (flashing attractor) trailed by a fly, trolled.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "alewives": {
+      "name": "Alewives (fish bait)",
+      "category": "natural bait",
+      "description": "Alewife baitfish.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin rules on alewife as bait not reviewed."
+    },
+    "yarn_flies": {
+      "name": "Yarn flies",
+      "category": "fly",
+      "description": "Yarn flies used in tributaries.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "crayfish_live": {
+      "name": "Crayfish (live)",
+      "category": "live bait",
+      "description": "Live crayfish; a favorite smallmouth food.",
+      "wi_regulation_note": "Illegal to possess live crayfish while fishing or possessing angling equipment on any inland Wisconsin water except the Mississippi River (per WDNR smallmouth bass page).",
+      "wi_regulation_source": {
+        "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+        "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+        "quote": "it is illegal to possess live crayfish while fishing or while possessing angling equipment on any inland water, except the Mississippi River",
+        "retrieved": "2026-09-18"
+      }
+    },
+    "hellgrammites": {
+      "name": "Hellgrammites",
+      "category": "live bait",
+      "description": "Hellgrammites (dobsonfly larvae).",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "dragonfly_larvae": {
+      "name": "Dragonfly larvae",
+      "category": "live bait",
+      "description": "Dragonfly larvae.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
+    },
+    "surface_baits": {
+      "name": "Surface artificial baits",
+      "category": "hard bait",
+      "description": "Artificial baits worked on the surface.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "live_bait_lmb": {
+      "name": "Live baits",
+      "category": "live bait",
+      "description": "Live baits (kind not specified by the source).",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: kind of bait unspecified by the source; Wisconsin bait rules not reviewed."
+    },
+    "surface_plugs": {
+      "name": "Surface plugs",
+      "category": "hard bait",
+      "description": "Plugs worked on the surface.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "jigs_light": {
+      "name": "Light jigs (with small minnows)",
+      "category": "hard bait",
+      "description": "Light jigs, often paired with small minnows.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: artificial lure; rules not reviewed."
+    },
+    "minnows_crappie": {
+      "name": "Small 'crappie minnows'",
+      "category": "live bait",
+      "description": "Small live minnows sold as crappie minnows.",
+      "wi_regulation_note": "NOT_YET_RESEARCHED: Wisconsin bait rules not yet reviewed for this item."
     }
   }
 }

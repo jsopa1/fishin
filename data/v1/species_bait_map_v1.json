@@ -15,17 +15,29 @@
         {
           "bait_id": "minnows_live",
           "states": [
-            "in_activity_window",
-            "below_activity_window"
+            "any"
           ],
           "rank": 1,
           "tier": "agency-tier",
-          "basis": "Wisconsin DNR states walleyes are primarily minnow feeders and lists minnows first among baits.",
+          "basis": "WDNR: walleyes are primarily minnow feeders; minnows are listed first among baits and are a listed favorite prey.",
+          "how_to_use": "Bait-cast, or still fish from an anchored boat with live bait.",
           "sources": [
             {
               "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
               "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
               "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Bait-cast with minnows, worms, night crawlers, spoons and plugs.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Some anglers advocate still fishing from an anchored boat with live bait",
               "retrieved": "2026-09-18"
             }
           ]
@@ -33,12 +45,12 @@
         {
           "bait_id": "leeches",
           "states": [
-            "in_activity_window",
-            "below_activity_window"
+            "any"
           ],
           "rank": 2,
           "tier": "agency-tier",
-          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "basis": "Named as a favorite bait by WDNR.",
+          "how_to_use": "Not yet documented to our standard beyond being a named favorite bait.",
           "sources": [
             {
               "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
@@ -51,17 +63,23 @@
         {
           "bait_id": "nightcrawlers",
           "states": [
-            "in_activity_window",
-            "below_activity_window"
+            "any"
           ],
           "rank": 3,
           "tier": "agency-tier",
-          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "basis": "Named as a favorite bait by WDNR and in the fact sheet's bait-casting list.",
+          "how_to_use": "Bait-cast.",
           "sources": [
             {
               "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
               "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
               "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Bait-cast with minnows, worms, night crawlers, spoons and plugs.",
               "retrieved": "2026-09-18"
             }
           ]
@@ -69,11 +87,12 @@
         {
           "bait_id": "small_bullheads",
           "states": [
-            "in_activity_window"
+            "any"
           ],
           "rank": 4,
           "tier": "agency-tier",
-          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "basis": "Named as a favorite bait by WDNR; bullheads are also a favorite walleye prey.",
+          "how_to_use": "Not yet documented to our standard beyond being a named favorite bait.",
           "sources": [
             {
               "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
@@ -86,16 +105,2271 @@
         {
           "bait_id": "small_plugs",
           "states": [
-            "in_activity_window"
+            "any"
           ],
           "rank": 5,
           "tier": "agency-tier",
-          "basis": "Named as a favorite bait by Wisconsin DNR.",
+          "basis": "Named by WDNR as a favorite bait.",
+          "how_to_use": "Bait-cast.",
           "sources": [
             {
               "citation": "Wisconsin DNR. Walleye, Fishes of Wisconsin (species page), Angling section.",
               "url": "https://dnr.wisconsin.gov/topic/Fishing/species/walleye.html",
               "quote": "Walleyes are primarily minnow feeders, but leeches, small bullheads, nightcrawlers, and various small plugs are favorite baits.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Bait-cast with minnows, worms, night crawlers, spoons and plugs.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR for bait-casting.",
+          "how_to_use": "Bait-cast.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Bait-cast with minnows, worms, night crawlers, spoons and plugs.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners_trolling",
+          "states": [
+            "any"
+          ],
+          "rank": 7,
+          "tier": "agency-tier",
+          "basis": "WDNR: others recommend trolling with spinners; traditional Wisconsin anglers troll Wolf River rigs and Little John spinners.",
+          "how_to_use": "Troll, or drift with the wind or current.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "others recommend trolling with spinners, drifting with the wind or current (traditional Wisconsin anglers will tell you that trolling for walleye with Wolf River rigs and Little John spinners is the only way to go)",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs",
+          "states": [
+            "any"
+          ],
+          "rank": 8,
+          "tier": "agency-tier",
+          "basis": "WDNR lists jigs for ice fishing.",
+          "how_to_use": "Ice fishing (with tip-ups or jigs).",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Ice fish with tip-ups or jigs.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "streamer_flies_poppers",
+          "states": [
+            "any"
+          ],
+          "rank": 9,
+          "tier": "agency-tier",
+          "basis": "WDNR suggests fly casting on quiet nights near rocky bars or weed beds.",
+          "how_to_use": "Fly cast on quiet, calm nights near the edges of rocky bars or weed beds.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Try fly casting with streamer flies or poppers on quiet, calm nights near the edges of rocky bars or weed beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "walleye-slow-near-bottom",
+          "text": "Keep the lure or bait near the bottom and reel it in slowly; walleye are slow, deliberate biters, so give them a chance to swallow the bait before setting the hook.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Keep the lure or bait near the bottom and reel it in slowly--walleye are slow, deliberate biters and it's best to give them a chance to swallow the ... bait before setting the hook.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "walleye-best-times",
+          "text": "Dawn, dusk and after dark in May, June and October are the best times to fish for walleye.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Walleye (Stizostedion vitreum vitreum), fact sheet PUBL-FM-708 08, July 2008, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_walleye.pdf",
+              "quote": "Dawn, dusk and after dark in May, June and October are the best times to fish for this underwater night owl.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "YELLOW PERCH": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "worms",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: perch are much more likely to be caught with worms on the hook.",
+          "how_to_use": "Live bait on a small, fine wire hook under a small bobber.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Of course, you're much more likely to be successful with worms on the hook. Other common baits include small minnows, insect larvae, crayfish tails, shrimp and pieces of fish.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Use a small, fine wire hook with live bait; and a small bobber with just enough buoyancy to break water will signal even the lightest bites.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR as a common perch bait; minnows are also the preferred prey of larger perch.",
+          "how_to_use": "Small minnows on a small, fine wire hook.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Of course, you're much more likely to be successful with worms on the hook. Other common baits include small minnows, insect larvae, crayfish tails, shrimp and pieces of fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insect_larvae",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR as a common perch bait; grubs are the bait of choice on ice jigs.",
+          "how_to_use": "Used on small ice jigs in winter; on open water as live bait.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Of course, you're much more likely to be successful with worms on the hook. Other common baits include small minnows, insect larvae, crayfish tails, shrimp and pieces of fish.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "baited with different types of grubs, such as wax worms or mousies",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "crayfish_tails",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR as a common perch bait.",
+          "how_to_use": "Not yet documented to our standard beyond being a listed common bait.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Of course, you're much more likely to be successful with worms on the hook. Other common baits include small minnows, insect larvae, crayfish tails, shrimp and pieces of fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "shrimp",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR as a common perch bait.",
+          "how_to_use": "Not yet documented to our standard beyond being a listed common bait.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Of course, you're much more likely to be successful with worms on the hook. Other common baits include small minnows, insect larvae, crayfish tails, shrimp and pieces of fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "fish_pieces",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR as a common perch bait.",
+          "how_to_use": "Not yet documented to our standard beyond being a listed common bait.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Of course, you're much more likely to be successful with worms on the hook. Other common baits include small minnows, insect larvae, crayfish tails, shrimp and pieces of fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs_ice_teardrop",
+          "states": [
+            "any"
+          ],
+          "rank": 7,
+          "tier": "agency-tier",
+          "basis": "WDNR: small, colorful, tear-shaped jigs baited with grubs are the bait of choice among many Wisconsin ice anglers.",
+          "how_to_use": "Ice fishing with short jig poles; in winter perch feed on the bottom in deep water.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Small, colorful, tear-shaped jigs, baited with different types of grubs, such as wax worms or mousies",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "yperch-find-the-school",
+          "text": "Move around to find a school: start on the bottom (perch feed mainly there), pull the bait up a few feet if nothing bites, and try a new spot after a few minutes with no strikes. Once found, mark the school's depth with a bobber; schools are usually one size, so move on if only small perch bite.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Because perch feed primarily near the bottom, start looking for schools there. If you have no success on the bottom, pull your bait up a few feet before moving to a new location because ... If you have no strikes after a few minutes, try a new location. Once you've located a school, mark the depth of the school with a bobber on the line. Since schools usually contain fish of about the same size, if only small perch are biting, look for a school of larger fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "yperch-light-bite",
+          "text": "Perch nibble rather than strike, so most anglers set the hook with a swift jerk at the slightest nibble; they are notorious bait thieves.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Because they don't have canines, yellow perch nibble at food rather than hitting with a solid strike. With such a light bite, most anglers set the hook with a swift jerk at even the slightest indication of a nibble, or they may end up pulling up a bare hook. Perch are notorious bait thieves.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "id": "yperch-when",
+          "text": "Yellow perch feed during the day, especially early morning and late afternoon, and are inactive at night.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Yellow Perch (Perca flavescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_yellowperch.pdf",
+              "quote": "Yellow perch feed during the day, especially early morning and late afternoon, and become inactive at night.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "NORTHERN PIKE": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR advises a full complement of spoon-type lures.",
+          "how_to_use": "Keep the bait moving; use a wire leader.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "come equipped with a sturdy rod; medium-weight line with a wire leader (to avoid severing a line on the northern pike's sharp teeth); a full complement of spoon-type lures, streamer flies, and other bait impostors",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "Northern pike feed by sight and bite best during the daylight hours; keep the bait moving and you're sure to get a strike.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "streamer_flies_poppers",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR lists streamer flies among the lures.",
+          "how_to_use": "Not yet documented to our standard beyond being a listed lure.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "come equipped with a sturdy rod; medium-weight line with a wire leader (to avoid severing a line on the northern pike's sharp teeth); a full complement of spoon-type lures, streamer flies, and other bait impostors",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "suckers_chubs_live",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR: if live bait is preferred, small suckers and chubs up to 8 inches.",
+          "how_to_use": "With minnows, wait until the pike runs a short distance and swallows the bait before setting the hook (but use quick-strike rigs when practicing catch-and-release).",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "if live bait is preferred, small suckers and chubs up to 8 inches in length. ... After a northern pike takes the bait, it will usually run a short distance, then swallow the bait. When using minnows, anglers should wait for this to happen before they set the hook.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "tip_ups",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: tip-ups rigged so the fish can run with the bait work well in ice season.",
+          "how_to_use": "Rig so the fish can run with the bait.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "Tip-ups rigged so the fish can run with the bait work well during the ice fishing season.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "pike-where-when",
+          "text": "Fish marshy areas or weed beds when the water is cool - late spring and early summer, late summer and early fall, and winter soon after ice forms. If you want pike when the water is warm, fish the cool depths.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Northern Pike (Esox lucius) fact sheet, by Terrance Dehring and Charles C. Krueger.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_northernpike.pdf",
+              "quote": "Fish for northern pike in marshy areas or weed beds when the water is cool ... If you're hoping to hook a northern when the water is warm, fish the cool depths.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "MUSKELLUNGE": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR names large plugs first among the artificial lures for muskellunge.",
+          "how_to_use": "Keep the bait moving; set the hook immediately and firmly.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "a variety of large artificial lures such as plugs, bucktail spinners, and spoons",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "Muskellunge generally strike a bait that has considerable \"action,\" so keep the bait moving and don't let it rest.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "bucktail_spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Named by WDNR among the large artificial lures.",
+          "how_to_use": "Keep the bait moving.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "a variety of large artificial lures such as plugs, bucktail spinners, and spoons",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Named by WDNR among the large artificial lures.",
+          "how_to_use": "Keep the bait moving.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "a variety of large artificial lures such as plugs, bucktail spinners, and spoons",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "suckers_live_large",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: some anglers cast or troll with live bait, usually a sucker 10-14 inches long.",
+          "how_to_use": "Cast or troll.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "Some anglers prefer to cast or troll with live bait--usually a sucker 10-14 inches long.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "musky-gear-and-hookset",
+          "text": "Traditional gear is a heavy bait-casting rod, a substantial level-wind reel and 20-35 lb test line. When a muskellunge hits, set the hook immediately and firmly in its hard, bony jaws and keep a taut line. Patience is probably the most important item in the tackle box.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Muskellunge (Esox masquinongy) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_muskellunge.pdf",
+              "quote": "Patience is probably the most important item in a muskellunge angler's tackle box. Other elements of traditional muskellunge gear include a heavy bait-casting rod; substantial level-wind reel; 20-35 pound test line ... When a muskellunge hits, set the hook immediately and firmly in its hard, bony jaws, keep a taut line",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BLUEGILL": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "worms",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: worms are probably the most common bluegill bait.",
+          "how_to_use": "Small hook under a bobber; bluegills suck in prey rather than striking.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Although worms are probably the most common bait, bluegills are not fussy and will bite at almost any small bait like insects, insect larvae or other invertebrates. Because of their small mouths, anglers should use small hooks.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Bluegills suck in their prey rather than striking at it, so a bobber helps signal a bite. Setting the hook at the first sign of a bite is usually successful as long as the bait and hook are small.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insects_live",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: bluegills will bite almost any small bait such as insects or other invertebrates.",
+          "how_to_use": "Small hook.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Although worms are probably the most common bait, bluegills are not fussy and will bite at almost any small bait like insects, insect larvae or other invertebrates. Because of their small mouths, anglers should use small hooks.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insect_larvae",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR lists insect larvae, and grubs are the standard ice-fishing bait.",
+          "how_to_use": "Small hook; on ice jigs in winter.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Although worms are probably the most common bait, bluegills are not fussy and will bite at almost any small bait like insects, insect larvae or other invertebrates. Because of their small mouths, anglers should use small hooks.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "wet_dry_flies",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: fly-fishing with wet or dry flies is at its best during insect hatches in late spring and early summer.",
+          "how_to_use": "Fly fish during late-spring and early-summer insect hatches.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "Fly-fishing for bluegills with either a wet or dry fly is at its best during insect hatches in late spring and early summer.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs_ice_teardrop",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "WDNR: ice anglers use small tear-shaped jigs, usually baited with grubs.",
+          "how_to_use": "Short, light jig poles and light line, fishing among weeds in deeper water.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Bluegill (Lepomis macrochirus) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_bluegill.pdf",
+              "quote": "light jig poles, light-weight line and small tear- shaped jigs. The small hooks are usually baited with grubs, which are the larvae of flying insects",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "PUMPKINSEED": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "worms",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: garden worm makes an excellent pumpkinseed bait.",
+          "how_to_use": "A simple cane pole or inexpensive rod and reel is enough for shallow weed beds.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Garden worm makes an excellent bait, but pumpkinseeds will bite at almost any small bait, such as insects, leeches or pieces of fish.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "A simple cane pole, or an inexpensive rod and reel are sufficient",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insects_live",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: pumpkinseeds bite almost any small bait such as insects.",
+          "how_to_use": "Small bait in shallow weed beds.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Garden worm makes an excellent bait, but pumpkinseeds will bite at almost any small bait, such as insects, leeches or pieces of fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "leeches",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR lists leeches among the small baits pumpkinseeds take.",
+          "how_to_use": "Small bait in shallow weed beds.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Garden worm makes an excellent bait, but pumpkinseeds will bite at almost any small bait, such as insects, leeches or pieces of fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "fish_pieces",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR lists pieces of fish among the small baits pumpkinseeds take.",
+          "how_to_use": "Small bait in shallow weed beds.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Garden worm makes an excellent bait, but pumpkinseeds will bite at almost any small bait, such as insects, leeches or pieces of fish.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_artificial_lures",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "WDNR: pumpkinseeds will also hit small artificial lures.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Pumpkinseeds will also hit small artificial lures",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insect_larvae",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "WDNR: pumpkinseeds hit grubs (insect larvae) early in winter.",
+          "how_to_use": "Early winter.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Pumpkinseed (Lepomis gibbosus) fact sheet.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_pumpkinseed.pdf",
+              "quote": "Pumpkinseeds will hit at grubs -the larvae of insects -early in the winter",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "CHANNEL CATFISH": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "stink_bait",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: a popular bait on the Wisconsin and Mississippi rivers.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "A popular bait on the Wisconsin and Mississippi rivers is the \"stink bait,\" which can be homemade or purchased at bait shops.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "meat_strips",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR among channel catfish baits.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "worms",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR (worms and night crawlers).",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "nightcrawlers",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR (worms and night crawlers).",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "dough_balls",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR among channel catfish baits.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "frogs",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR among channel catfish baits.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "grasshoppers",
+          "states": [
+            "any"
+          ],
+          "rank": 7,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR among channel catfish baits.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "clams",
+          "states": [
+            "any"
+          ],
+          "rank": 8,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR among channel catfish baits.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "crayfish_tails",
+          "states": [
+            "any"
+          ],
+          "rank": 9,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR among channel catfish baits.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel cats will also hit on strips of fish or meat, ... worms and night crawlers, fish or animal entrails, soap, dough balls, frogs, grasshoppers, clams, crayfish tails and the list goes on",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 10,
+          "tier": "agency-tier",
+          "basis": "WDNR: channel catfish will strike artificial plugs.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel catfish will also strike at artificial baits such as plugs, spoons, jigs, spinners and even plastic worms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 11,
+          "tier": "agency-tier",
+          "basis": "WDNR: channel catfish will strike spoons.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel catfish will also strike at artificial baits such as plugs, spoons, jigs, spinners and even plastic worms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs",
+          "states": [
+            "any"
+          ],
+          "rank": 12,
+          "tier": "agency-tier",
+          "basis": "WDNR: channel catfish will strike jigs.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel catfish will also strike at artificial baits such as plugs, spoons, jigs, spinners and even plastic worms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 13,
+          "tier": "agency-tier",
+          "basis": "WDNR: channel catfish will strike spinners.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel catfish will also strike at artificial baits such as plugs, spoons, jigs, spinners and even plastic worms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "plastic_worms",
+          "states": [
+            "any"
+          ],
+          "rank": 14,
+          "tier": "agency-tier",
+          "basis": "WDNR: channel catfish will strike plastic worms.",
+          "how_to_use": "Fish the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "Channel catfish will also strike at artificial baits such as plugs, spoons, jigs, spinners and even plastic worms.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "channelcat-bottom-night-bite",
+          "text": "Fish the bottom - especially by day, when catfish sit in a river's deepest holes (below dams and power plants), which usually means fishing from boats or bridges. At night, fish from riverbanks or backwaters. Wait until the line moves, showing the catfish has fully taken the bait, before setting the hook. Channel catfish fishing is often excellent the first few days after a rain.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Catfish (channel and flathead) fact sheet. (Text extracted from a PDF with some OCR spacing artifacts, e.g. '7 5 degrees'; quoted as extracted.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_catfish.pdf",
+              "quote": "The trick to catching catfish is to fish the bottom. That is especially important during the day, when catfish are hiding in a river's deepest holes. ... Nighttime anglers have good success fishing from riverbanks or in river backwaters. ... Wait until the line starts to move, indicating the catfish has completely taken the bait, before setting the hook. Channel catfish fishing is often excellent the first few days after a rain",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "LAKE STURGEON": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "nightcrawlers",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: bait a 2/0 short-shank hook with night crawlers, dead minnows or other natural food items.",
+          "how_to_use": "Keep the bait on the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Sturgeon (Acipenser fulvescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lakesturgeon.pdf",
+              "quote": "Bait a 2/0 short-shank hook with night crawlers, dead minnows or other natural food items, and keep the bait on the bottom.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "dead_minnows",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: bait a 2/0 short-shank hook with night crawlers, dead minnows or other natural food items.",
+          "how_to_use": "Keep the bait on the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Sturgeon (Acipenser fulvescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lakesturgeon.pdf",
+              "quote": "Bait a 2/0 short-shank hook with night crawlers, dead minnows or other natural food items, and keep the bait on the bottom.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "sturgeon-gear-and-limits",
+          "text": "Use a fairly stiff casting rod and plenty of 40- to 50-pound test line. Lake sturgeon have strict bag, size and length-of-season limits - check the current regulations before fishing for them.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Sturgeon (Acipenser fulvescens) fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lakesturgeon.pdf",
+              "quote": "use a fairly stiff casting rod and plenty of 40- to 50-pound test line. ... There are strict bag, size and length-of-season limits to prevent depletion of sturgeon stocks.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BROOK TROUT": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "artificial_flies",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: favorite baits for all types of brook trout fishing.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Favorite baits for all types of fishing are artificial flies, small spoons, spinners, night crawlers, and spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR names small spoons as a favorite.",
+          "how_to_use": "Small spoons; trolling also occasionally produces brook trout in Lake Michigan.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Favorite baits for all types of fishing are artificial flies, small spoons, spinners, night crawlers, and spawn.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Trolling also occasionally produces catches of brook trout during the spring and summer",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR names spinners as a favorite.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Favorite baits for all types of fishing are artificial flies, small spoons, spinners, night crawlers, and spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "nightcrawlers",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR names night crawlers as a favorite.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Favorite baits for all types of fishing are artificial flies, small spoons, spinners, night crawlers, and spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spawn",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "WDNR names spawn as a favorite.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brook Trout (Salvelinus fontinalis), fact sheet PUBL-FM-103 08, July 2008, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet; statements about stream fishing are Wisconsin-general, lake statements are Lake Michigan.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_brooktrout.pdf",
+              "quote": "Favorite baits for all types of fishing are artificial flies, small spoons, spinners, night crawlers, and spawn.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BROWN TROUT": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: minnow-type plugs are a favorite technique.",
+          "how_to_use": "Troll or cast; in summer troll small plugs 2-5 miles offshore in Green Bay.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Favorite techniques include trolling or casting minnow-type plugs and spoons.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Live bait, small spoons, jigs, and plugs are most often used in these areas.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: spoons are a favorite technique.",
+          "how_to_use": "Troll or cast; small spoons at power-plant discharges in cooler months.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Favorite techniques include trolling or casting minnow-type plugs and spoons.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Live bait, small spoons, jigs, and plugs are most often used in these areas.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Used at power-plant discharge plumes October-June.",
+          "how_to_use": "Power-plant discharge plumes.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Live bait, small spoons, jigs, and plugs are most often used in these areas.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "live_bait_unspecified",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Used at power-plant discharge plumes October-June.",
+          "how_to_use": "Power-plant discharge plumes.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Brown Trout (Salmo trutta) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_browntrout.pdf",
+              "quote": "Live bait, small spoons, jigs, and plugs are most often used in these areas.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "RAINBOW TROUT": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "spawn_bag",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: by far the most popular bait for stream fishing is a spawn bag.",
+          "how_to_use": "Stream fishing during high-water runs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "By far the most popular bait for stream fishing is a \"spawn bag,\" which is fish spawn (eggs) tied in a small ball using veil material.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Productive in streams, at piers/shore, and trolled in mid-summer.",
+          "how_to_use": "Streams: fish close to the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Other productive baits used in the steams are spoons, spinners, flatfish, and flies fished close to the bottom.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Spawn, night crawlers, spoons, and flies are often productive baits at these locations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Productive in streams and at power-plant discharges.",
+          "how_to_use": "Streams: fish close to the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Other productive baits used in the steams are spoons, spinners, flatfish, and flies fished close to the bottom.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Spawn, spoons, spinners, jigs, and minnows are most frequently used in these areas.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "flatfish",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Productive in streams.",
+          "how_to_use": "Fish close to the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Other productive baits used in the steams are spoons, spinners, flatfish, and flies fished close to the bottom.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "artificial_flies",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "Productive in streams and at piers/shore.",
+          "how_to_use": "Streams: fish close to the bottom.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Other productive baits used in the steams are spoons, spinners, flatfish, and flies fished close to the bottom.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Spawn, night crawlers, spoons, and flies are often productive baits at these locations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spawn",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "Often productive at piers/shore and power-plant discharges.",
+          "how_to_use": "Piers, shore and power-plant discharges.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Spawn, night crawlers, spoons, and flies are often productive baits at these locations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "nightcrawlers",
+          "states": [
+            "any"
+          ],
+          "rank": 7,
+          "tier": "agency-tier",
+          "basis": "Often productive at piers/shore.",
+          "how_to_use": "Piers and shore.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Spawn, night crawlers, spoons, and flies are often productive baits at these locations.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs",
+          "states": [
+            "any"
+          ],
+          "rank": 8,
+          "tier": "agency-tier",
+          "basis": "Used at power-plant discharges.",
+          "how_to_use": "Power-plant discharges, October-May.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Spawn, spoons, spinners, jigs, and minnows are most frequently used in these areas.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "minnows_live",
+          "states": [
+            "any"
+          ],
+          "rank": 9,
+          "tier": "agency-tier",
+          "basis": "Used at power-plant discharges.",
+          "how_to_use": "Power-plant discharges, October-May.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "Spawn, spoons, spinners, jigs, and minnows are most frequently used in these areas.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 10,
+          "tier": "agency-tier",
+          "basis": "Plugs are used when trolling in mid-summer.",
+          "how_to_use": "Trolled far from shore near the surface.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Rainbow Trout (Oncorhynchus mykiss) / steelhead fact sheet, by Terrence Dehring, Charles C. Krueger and Michael J. Hansen. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_rainbowtrout.pdf",
+              "quote": "on spoons or plugs near the surface",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "LAKE TROUT": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "dodger_fly_combo",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: baits most often used when trolling.",
+          "how_to_use": "Troll at 80 or more feet (trolling is 95% of the lake trout catch).",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "Baits most often used are dodger and fly combinations, plugs, and spoons.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "accounting for 95% of the total lake trout catch",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: baits most often used when trolling.",
+          "how_to_use": "Troll at 80 or more feet.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "Baits most often used are dodger and fly combinations, plugs, and spoons.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Used for trolling; favorite casting bait from shore and piers.",
+          "how_to_use": "Troll deep; or cast from shore/piers.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "Baits most often used are dodger and fly combinations, plugs, and spoons.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "Favorite casting baits include spinners and spoons.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: a favorite casting bait from shore and piers.",
+          "how_to_use": "Cast from shore or piers.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Lake Trout (Salvelinus namaycush) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_laketrout.pdf",
+              "quote": "Favorite casting baits include spinners and spoons.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "CHINOOK SALMON": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: one of the best methods is trolling with a plug or spoon using a down rigger; shore and pier anglers cast spoons.",
+          "how_to_use": "Troll with a downrigger to get the lure down to the fish; cast from shore/piers when fish are shallow.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "One of the best methods to catch these fish is by trolling with a plug or spoon, using a down rigger to get the lure down to where the fish are. ... Many Chinook are caught there by shore and pier anglers casting with spoons or fishing with alewives.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: trolling with a plug is one of the best methods.",
+          "how_to_use": "Troll with a downrigger.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "trolling with a plug or spoon, using a down rigger",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "alewives",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR: shore and pier anglers fish with alewives.",
+          "how_to_use": "Shore and pier fishing when chinook follow forage into the shallows.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "fishing with alewives",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spawn_bag",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: a favorite bait once salmon move upstream in autumn.",
+          "how_to_use": "Autumn stream runs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "Favorite baits include spawn bags (small bags of fish eggs), yarn flies, and streamer flies.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "yarn_flies",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "WDNR: a favorite bait for autumn stream runs.",
+          "how_to_use": "Autumn stream runs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "Favorite baits include spawn bags (small bags of fish eggs), yarn flies, and streamer flies.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "streamer_flies_poppers",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "WDNR: streamer flies are a favorite for autumn stream runs.",
+          "how_to_use": "Autumn stream runs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Chinook Salmon (Oncorhynchus tschawytscha) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_chinooksalmon.pdf",
+              "quote": "Favorite baits include spawn bags (small bags of fish eggs), yarn flies, and streamer flies.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "COHO SALMON": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: favored trolling bait (trolling is about 90% of the coho creeled).",
+          "how_to_use": "Troll.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "By far, the most successful method used to catch coho salmon is trolling. This accounts for about 90% of the coho creeled. Favored trolling baits include plugs, spoons, and dodgers with flies.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Favored trolling bait; casting a spoon from pier or shore also works.",
+          "how_to_use": "Troll; or cast from a pier or shore.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "By far, the most successful method used to catch coho salmon is trolling. This accounts for about 90% of the coho creeled. Favored trolling baits include plugs, spoons, and dodgers with flies.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "Pier and shore fishing can also provide some good action, especially casting with a spoon.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "dodger_fly_combo",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR: dodgers with flies are a favored trolling bait.",
+          "how_to_use": "Troll.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "By far, the most successful method used to catch coho salmon is trolling. This accounts for about 90% of the coho creeled. Favored trolling baits include plugs, spoons, and dodgers with flies.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spawn_bag",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: among the best baits once cohos enter the tributaries.",
+          "how_to_use": "Autumn stream runs (September-December).",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "Spawn bags, spinners and streamers are the best baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "WDNR: among the best baits once cohos enter the tributaries.",
+          "how_to_use": "Autumn stream runs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "Spawn bags, spinners and streamers are the best baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "streamer_flies_poppers",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "WDNR: streamers are among the best baits in the tributaries.",
+          "how_to_use": "Autumn stream runs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Coho Salmon (Oncorhynchus kisutch) fact sheet, by Terrance Dehring and Charles C. Krueger. (A Lake Michigan sport-fish sheet: statements about Lake Michigan are specific to it; inland fishing is not covered.)",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_cohosalmon.pdf",
+              "quote": "Spawn bags, spinners and streamers are the best baits.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "SMALLMOUTH BASS": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "hellgrammites",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: natural baits are especially effective in early morning or late evening.",
+          "how_to_use": "Early morning or late evening.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "Natural baits like hellgrammites, dragonfly larvae and crayfish are especially effective during early morning or late evening.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "dragonfly_larvae",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: natural baits are especially effective in early morning or late evening.",
+          "how_to_use": "Early morning or late evening.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "Natural baits like hellgrammites, dragonfly larvae and crayfish are especially effective during early morning or late evening.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "crayfish_live",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR names crayfish as an especially effective natural bait, and as the smallmouth's favorite food. Live crayfish possession is restricted - see the regulation note.",
+          "how_to_use": "Early morning or late evening, where legal.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "Natural baits like hellgrammites, dragonfly larvae and crayfish are especially effective during early morning or late evening.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "it is illegal to possess live crayfish while fishing or while possessing angling equipment on any inland water, except the Mississippi River",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "surface_baits",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: probably the best artificial baits are those used on the surface.",
+          "how_to_use": "Fish quietly, casting toward rocks or logs, rod tip up and line taut.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "Probably the best artificial baits are those used on the surface. ... Fish quietly, casting toward rocks or logs, keeping the rod tip up and the line taut.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "smallmouth-light-quiet",
+          "text": "Light tackle is ideal. Fish quietly, casting toward rocks or logs, keeping the rod tip up and the line taut.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR. Smallmouth bass, Fishes of Wisconsin (species page).",
+              "url": "https://dnr.wisconsin.gov/topic/fishing/species/smbass.html",
+              "quote": "Light tackle is ideal. Fish quietly, casting toward rocks or logs, keeping the rod tip up and the line taut.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "LARGEMOUTH BASS": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "live_bait_lmb",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: almost any type of bait will attract largemouth bass when they're hungry.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Live baits, surface plugs, underwater plugs, poppers on a fly rod, streamers: almost any type of bait will attract largemouth bass when they're hungry",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "surface_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Listed by WDNR among baits for largemouth bass.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Live baits, surface plugs, underwater plugs, poppers on a fly rod, streamers: almost any type of bait will attract largemouth bass when they're hungry",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "small_plugs",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR lists underwater plugs.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Live baits, surface plugs, underwater plugs, poppers on a fly rod, streamers: almost any type of bait will attract largemouth bass when they're hungry",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "streamer_flies_poppers",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR lists poppers on a fly rod and streamers.",
+          "how_to_use": "Fly rod.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "Live baits, surface plugs, underwater plugs, poppers on a fly rod, streamers: almost any type of bait will attract largemouth bass when they're hungry",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "lmb-find-the-pattern",
+          "text": "Find the pattern: experiment, note what worked (lure, cast angle, light, structure), and repeat it in similar spots; if the bite stops, change one thing at a time. When fishing shallow, visible structure, look for spots slightly different from the rest of the cover, such as pockets or points in cattails.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management. Largemouth Bass fact sheet, by Maureen Mecozzi.",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_lmbass.pdf",
+              "quote": "\"Finding the pattern\" requires that the angler be willing to experiment and be able to interpret the results of the test. ... When fishing shallow, visible structure, look for spots slightly different from the rest of the cover--in cattails along shore, for example, cast near pockets or points of cattails",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "BLACK CRAPPIE": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "minnows_crappie",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: small minnows are the most popular crappie bait.",
+          "how_to_use": "Often used with a light jig; light tackle; crappies gently suck in the bait rather than striking hard.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Small minnows, sometimes called \"crappie minnows,\" are the most popular crappie bait, often used in combination with a light jig.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies don't strike baits hard; they sort of gently suck the bait into their mouths.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs_light",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: small minnows are often used in combination with a light jig.",
+          "how_to_use": "Combined with a small minnow.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Small minnows, sometimes called \"crappie minnows,\" are the most popular crappie bait, often used in combination with a light jig.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "worms",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will also hit worms.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insect_larvae",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will hit insect larvae; grubs are used with small tear-shaped ice hooks in winter.",
+          "how_to_use": "Winter: small tear-shaped hooks with grubs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Small, tearshaped hooks make good winter bait used alone or",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will hit spinners.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will hit spoons.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "wet_dry_flies",
+          "states": [
+            "any"
+          ],
+          "rank": 7,
+          "tier": "agency-tier",
+          "basis": "WDNR: wet and dry flies are popular when crappies are on their spawning beds.",
+          "how_to_use": "Spawning beds, spring.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "crappie-light-tackle",
+          "text": "Light tackle is almost universally preferred: crappies have a paper-thin mouth membrane (heavy tackle rips hooks out), and a sensitive rod helps detect the light bite. If one area fails, try another - crappies move around freely.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Light tackle is almost universally preferred for fishing crappies ... it is easier to rip the hook out of the mouth with heavy tackle. The more sensitive the rod the easier it is to detect a crappie's light bite. ... If you have no success in one area, try another spot because crappies move around freely.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ]
+    },
+    "WHITE CRAPPIE": {
+      "angling_target": true,
+      "links": [
+        {
+          "bait_id": "minnows_crappie",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "WDNR: small minnows are the most popular crappie bait.",
+          "how_to_use": "Often used with a light jig; light tackle; crappies gently suck in the bait rather than striking hard.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Small minnows, sometimes called \"crappie minnows,\" are the most popular crappie bait, often used in combination with a light jig.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies don't strike baits hard; they sort of gently suck the bait into their mouths.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs_light",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "WDNR: small minnows are often used in combination with a light jig.",
+          "how_to_use": "Combined with a small minnow.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Small minnows, sometimes called \"crappie minnows,\" are the most popular crappie bait, often used in combination with a light jig.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "worms",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will also hit worms.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "insect_larvae",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will hit insect larvae; grubs are used with small tear-shaped ice hooks in winter.",
+          "how_to_use": "Winter: small tear-shaped hooks with grubs.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            },
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Small, tearshaped hooks make good winter bait used alone or",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will hit spinners.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 6,
+          "tier": "agency-tier",
+          "basis": "WDNR: crappies will hit spoons.",
+          "how_to_use": "Not yet documented to our standard beyond the WDNR statement.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        },
+        {
+          "bait_id": "wet_dry_flies",
+          "states": [
+            "any"
+          ],
+          "rank": 7,
+          "tier": "agency-tier",
+          "basis": "WDNR: wet and dry flies are popular when crappies are on their spawning beds.",
+          "how_to_use": "Spawning beds, spring.",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Crappies will also hit on worms, insect larvae and a wide variety of artificial lures such as spinners and spoons. Wet and dry flies are popular when crappies are on their spawning beds.",
+              "retrieved": "2026-09-18"
+            }
+          ]
+        }
+      ],
+      "general_technique": [
+        {
+          "id": "crappie-light-tackle",
+          "text": "Light tackle is almost universally preferred: crappies have a paper-thin mouth membrane (heavy tackle rips hooks out), and a sensitive rod helps detect the light bite. If one area fails, try another - crappies move around freely.",
+          "tier": "agency-tier",
+          "sources": [
+            {
+              "citation": "Wisconsin DNR, Bureau of Fisheries Management and Habitat Protection. Crappies (black crappie Pomoxis nigromaculatus and white crappie P. annularis), PUBL-FH-71297, July 1997, by Paul ... (author line garbled in the PDF text).",
+              "url": "https://dnr.wisconsin.gov/sites/default/files/topic/Fishing/Species_crappie.pdf",
+              "quote": "Light tackle is almost universally preferred for fishing crappies ... it is easier to rip the hook out of the mouth with heavy tackle. The more sensitive the rod the easier it is to detect a crappie's light bite. ... If you have no success in one area, try another spot because crappies move around freely.",
               "retrieved": "2026-09-18"
             }
           ]

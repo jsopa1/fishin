@@ -14,7 +14,7 @@ from pathlib import Path
 
 DATA = Path(__file__).resolve().parents[2] / "data" / "v1"
 TIERS = {"well-established", "agency-tier", "single-source-speculative"}
-STATES = {"in_activity_window", "below_activity_window", "in_spawning_trigger", "above_avoidance"}
+STATES = {"any", "in_activity_window", "below_activity_window", "in_spawning_trigger", "above_avoidance"}
 
 
 def _load(name):
@@ -68,6 +68,10 @@ class TestBaitData(unittest.TestCase):
             self.assertTrue(note.strip(), bid)
             if note.startswith("NOT_YET_RESEARCHED"):
                 self.assertIn(":", note, f"{bid}: needs a reason after NOT_YET_RESEARCHED")
+            else:
+                src = bait.get("wi_regulation_source")
+                self.assertTrue(src and src["quote"].strip() and src["url"].startswith("http"),
+                                f"{bid}: a stated regulation must carry a sourced quote")
 
     def test_every_link_points_at_a_real_bait_and_is_cited(self):
         for species, entry in self.map.items():
@@ -79,6 +83,20 @@ class TestBaitData(unittest.TestCase):
                 for src in link["sources"]:
                     self.assertTrue(src["quote"].strip())
                     self.assertTrue(src["url"].startswith("http"))
+
+    def test_every_link_says_how_to_use_it_or_admits_it_does_not_know(self):
+        for species, entry in self.map.items():
+            for link in entry.get("links", []):
+                self.assertTrue(link.get("how_to_use", "").strip(), f"{species}/{link['bait_id']}")
+
+    def test_general_technique_is_cited_and_tiered(self):
+        for species, entry in self.map.items():
+            for tech in entry.get("general_technique", []):
+                self.assertIn(tech["tier"], TIERS, species)
+                self.assertTrue(tech["text"].strip(), species)
+                self.assertTrue(tech["sources"], f"{species}/{tech['id']}")
+                for src in tech["sources"]:
+                    self.assertTrue(src["quote"].strip() and src["url"].startswith("http"))
 
     def test_ranks_are_unique_per_species(self):
         for species, entry in self.map.items():
