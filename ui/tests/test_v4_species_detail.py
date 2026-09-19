@@ -79,10 +79,19 @@ class TestSpeciesDetail(unittest.TestCase):
             self.assertTrue(d["not_target_reason"], name)
 
     def test_species_whose_source_names_no_bait_says_why(self):
-        for name in ("LAKE WHITEFISH", "CISCO"):
-            d = sd.get_species_detail(name)
-            self.assertEqual(d["baits"], [], name)
-            self.assertTrue(d["no_baits_reason"], name)
+        # Cisco: the agency page consulted has no angling content at all.
+        d = sd.get_species_detail("CISCO")
+        self.assertEqual(d["baits"], [])
+        self.assertTrue(d["no_baits_reason"])
+
+    def test_lake_whitefish_baits_come_from_the_minnesota_dna_profile_and_say_where(self):
+        d = sd.get_species_detail("LAKE WHITEFISH")
+        self.assertGreaterEqual(len(d["baits"]), 4)
+        self.assertEqual(d["baits"][0]["id"], "minnows_crappie")
+        for b in d["baits"]:
+            self.assertEqual(b["tier"]["key"], "agency-tier")
+            self.assertTrue(any("minnesota" in s["citation"].lower() for s in b["sources"]), b["id"])
+            self.assertTrue(any("no Wisconsin-specific" in s["citation"] for s in b["sources"]), b["id"])
 
     def test_unreviewed_regulation_is_never_presented_as_cleared(self):
         frogs = next(b for b in sd.get_species_detail("CHANNEL CATFISH")["baits"] if b["id"] == "frogs")

@@ -2636,8 +2636,98 @@
     },
     "LAKE WHITEFISH": {
       "angling_target": true,
-      "links": [],
-      "reason_no_links": "The Michigan DNR page says special techniques are required but names no bait; no bait is listed rather than guessed."
+      "links": [
+        {
+          "bait_id": "minnows_crappie",
+          "states": [
+            "any"
+          ],
+          "rank": 1,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: crappie minnows suspended under a bobber anywhere in the water column will bring strikes.",
+          "how_to_use": "Suspend it under a bobber; fish sometimes swim by right under the ice, so any depth in the water column can produce.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR, MinnAqua Fishing Education. Species Profile - Lake Whitefish, 'Fishing and Handling'. (Minnesota inland waters and Lake Superior; no Wisconsin-specific bait guidance was found)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/lake_whitefish.html",
+              "quote": "Crappie minnows suspended under a bobber anywhere in the water column will bring strikes.",
+              "retrieved": "2026-09-19"
+            }
+          ]
+        },
+        {
+          "bait_id": "jigs",
+          "states": [
+            "any"
+          ],
+          "rank": 2,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: below a flasher, put on a white colored jig or small minnow.",
+          "how_to_use": "In winter, tie a flasher about 1-2 feet below the ice, then 1-2 feet of line below it and a white jig.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR, MinnAqua Fishing Education. Species Profile - Lake Whitefish, 'Fishing and Handling'. (Minnesota inland waters and Lake Superior; no Wisconsin-specific bait guidance was found)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/lake_whitefish.html",
+              "quote": "put on a white colored jig or small minnow",
+              "retrieved": "2026-09-19"
+            }
+          ]
+        },
+        {
+          "bait_id": "spoons",
+          "states": [
+            "any"
+          ],
+          "rank": 3,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: in the winter, a spoon and a jig combination work well.",
+          "how_to_use": "Fished together with a jig in winter.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR, MinnAqua Fishing Education. Species Profile - Lake Whitefish, 'Fishing and Handling'. (Minnesota inland waters and Lake Superior; no Wisconsin-specific bait guidance was found)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/lake_whitefish.html",
+              "quote": "In the winter, a spoon and a jig combination work well.",
+              "retrieved": "2026-09-19"
+            }
+          ]
+        },
+        {
+          "bait_id": "spinners",
+          "states": [
+            "any"
+          ],
+          "rank": 4,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: in spring, small spinners work during insect hatches.",
+          "how_to_use": "Small spinners during spring insect hatches.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR, MinnAqua Fishing Education. Species Profile - Lake Whitefish, 'Fishing and Handling'. (Minnesota inland waters and Lake Superior; no Wisconsin-specific bait guidance was found)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/lake_whitefish.html",
+              "quote": "In spring, try using flies, small spinners, and jigs during insect hatches.",
+              "retrieved": "2026-09-19"
+            }
+          ]
+        },
+        {
+          "bait_id": "artificial_flies",
+          "states": [
+            "any"
+          ],
+          "rank": 5,
+          "tier": "agency-tier",
+          "basis": "Minnesota DNR: in spring, flies work during insect hatches.",
+          "how_to_use": "Flies during spring insect hatches.",
+          "sources": [
+            {
+              "citation": "Minnesota DNR, MinnAqua Fishing Education. Species Profile - Lake Whitefish, 'Fishing and Handling'. (Minnesota inland waters and Lake Superior; no Wisconsin-specific bait guidance was found)",
+              "url": "https://www.dnr.state.mn.us/minnaqua/speciesprofile/lake_whitefish.html",
+              "quote": "In spring, try using flies, small spinners, and jigs during insect hatches.",
+              "retrieved": "2026-09-19"
+            }
+          ]
+        }
+      ]
     },
     "BURBOT": {
       "angling_target": true,

@@ -73,8 +73,13 @@ class FishDetailRouteTests(unittest.TestCase):
             self.assertNotIn("Recommended bait", body)
 
     def test_species_with_no_documented_bait_say_why(self):
+        body = self._page("cisco")
+        self.assertIn("no bait is listed rather than guessed", body)
+
+    def test_lake_whitefish_now_lists_its_sourced_baits(self):
         body = self._page("lake-whitefish")
-        self.assertIn("names no bait", body)
+        self.assertIn("Recommended bait", body)
+        self.assertNotIn("no bait is listed rather than guessed", body)
 
     def test_page_states_it_is_not_a_prediction_and_never_promises_a_bite(self):
         for slug in ("walleye", "yellow-perch", "muskellunge"):

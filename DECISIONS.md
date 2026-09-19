@@ -2022,3 +2022,28 @@ One known limit: the per-waterbody match flags and narratives stored in the data
 predate these windows. The spot pages and the Recommended feed compute activity live from the thresholds
 file and are correct now; the stored flags catch up at the next full run (the four-hourly sensor refresh
 already recomputes them for real-sensor waterbodies).
+
+## 054 — Bait gaps: Lake Whitefish gains five sourced baits; Cisco stays honestly empty
+
+Of the 27 species, four had no bait entries. Two are not angling targets (Fathead Minnow, White Sucker),
+which is a documented state and not a gap. The other two, Lake Whitefish and Cisco, are angling targets
+whose first sources named no bait.
+
+A second agency source settled Lake Whitefish. The Minnesota DNR MinnAqua species profile ("Fishing and
+Handling") names small "crappie minnows" under a bobber, a white jig or small minnow below a flasher, a
+spoon and jig combination in winter, and flies, small spinners and jigs during spring insect hatches. Five
+entries were added, each with its verbatim sentence, tiered agency-tier, and each source citation states
+that the guidance is from Minnesota inland waters and Lake Superior and that no Wisconsin-specific bait
+guidance was found. The builder (analysis/v4_add_whitefish_baits.py) fetches the live page and writes
+nothing unless every quote is present; the existing live verifier re-confirms all five; the file change is
+text-level so the CRLF layout and every other species are untouched.
+
+Cisco is not given entries. The Minnesota DNR cisco page contains no angling content, and a search turned up
+only a general statement about ice-fishing jigs and wax worms that is not about cisco. Attaching that to
+Cisco would be exactly the "guess dressed as research" this project refuses to publish, so the fish page keeps
+saying that no bait is listed rather than guessed. The bait catalog's Wisconsin-regulation notes apply to
+every entry as before.
+
+After this, of the 27 species: 24 have at least one sourced bait, 2 are marked not an angling target, and 1
+(Cisco) is an angling target with an honest "none documented". Lake Sturgeon (2) and White Bass (3) have the
+fewest, which reflects their sources, not a gap in the search.
