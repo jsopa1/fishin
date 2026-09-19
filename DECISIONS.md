@@ -1998,3 +1998,27 @@ fetch), with tests that a weather write leaves the key unchanged and a real refr
 Also noted for the record: the 2,225 existing waterbody proxy readings are 1-10 days old, because only
 the full batch run refreshes them, not the four-hourly job. That is inside the weekly bar today but
 with little margin, and is the next freshness item to close.
+
+## 053 — Fish gaps: three species gain a sourced feeding/growth window; earlier "not found" claims corrected
+
+Of 3,272 spots, every one already had some species evidence, so the fish gap that remained was not
+missing fish but missing thresholds: six species (Pumpkinseed, Channel Catfish, Fathead Minnow, Cisco, Lake
+Sturgeon, Burbot) had only a spawning range and so showed under "No documented temperature window",
+Pumpkinseed alone at about 1,180 spots and Channel Catfish at about 500.
+
+Re-reading the local GLFC Sp87-3 text showed three earlier "not found in the source" statements were
+wrong: the tables exist under the Latin species name, which is what the earlier searches missed. Windows
+were added for Pumpkinseed (27-32 C, from Wisconsin Lake Monona field preferenda), Channel Catfish
+(28-30 C growth optimum, laboratory values, disclosed as not measured in Wisconsin) and Burbot
+(15.6-18.3 C growth optimum, single source, disclosed). The builder aborts unless every quote is found
+verbatim in its stated lines, a test re-checks every quote on every run, and the data-file diff is three
+lines (the builder inserts text rather than re-serialising the hand-formatted file).
+
+Three species were deliberately not filled: Cisco (ambiguous OCR'd columns, and a single growth point is not
+a window), Fathead Minnow (forage fish, not an angling target) and Lake Sturgeon (not in this source). The
+gap is recorded in docs/v1_physiology_research_candidates.md rather than closed with a guess.
+
+One known limit: the per-waterbody match flags and narratives stored in the database by the full batch run
+predate these windows. The spot pages and the Recommended feed compute activity live from the thresholds
+file and are correct now; the stored flags catch up at the next full run (the four-hourly sensor refresh
+already recomputes them for real-sensor waterbodies).

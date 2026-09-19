@@ -882,3 +882,35 @@ without explicit CEO approval). It supersedes
 `docs/v0_physiology_research_candidates.md` for all future reference —
 that V0 document should be treated as historical/superseded, not as an
 independent second source.*
+
+
+---
+
+## V4 gap fill: feeding/growth windows for species that had only a spawning range (DECISIONS #053)
+
+Six species had only a spawning range, so at most spots they landed in "No documented temperature
+window": Pumpkinseed (about 1,180 spots), Channel Catfish (about 500), Fathead Minnow, Cisco, Lake
+Sturgeon and Burbot. Re-reading the local GLFC Sp87-3 text, **three earlier "not found" statements above
+were wrong**: the compilation does contain a preferred-temperature table for Pumpkinseed, preferred and
+growth tables for Channel Catfish, and a growth optimum for Burbot (which section 26 above even quotes
+as 15.6-18.3 C but never entered in the data file). The earlier passes searched by common name, and the
+OCR'd table headers use the Latin name. Corrections, each entered by `analysis/v4_add_gap_thresholds.py`,
+which writes nothing unless every quote is found verbatim in the stated line range:
+
+| Species | Window added | Type | Tier | What it rests on |
+|---|---|---|---|---|
+| Pumpkinseed | 27.0-32.0 C (80.6-89.6 F) | activity window | agency-tier, WI-specific | Final preferendum of large adults: 28.5-32 C by day in Lake Monona, Wisconsin (Coutant 1977a); 27.7 C in summer in Lake Monona (Brown 1974); 27-29 C at night in the laboratory (Coutant 1977a). |
+| Channel Catfish | 28.0-30.0 C (82.4-86.0 F) | growth optimum | well-established | 29 C and 30 C (Jobling 1981) and 28-30 C (Brown 1974) for the same quantity. Laboratory/aquaculture values, not measured in Wisconsin; adult preferendum is cooler (25.2 C), so just below the window is not necessarily inactive. |
+| Burbot | 15.6-18.3 C (60.1-64.9 F) | growth optimum | agency-tier | 15.6-18.3 C (Scott and Crossman 1973), a single source; the burbot preferred-temperature table is empty in the compilation itself. |
+
+Deliberately left out, and why:
+
+- **Cisco.** The extracted preferred-temperature columns are ambiguous (a number can be an avoidance
+  limit or a preferendum) and the growth optimum is one point (18.1 C), which is not a window. Not guessed.
+- **Fathead Minnow.** A forage and bait fish, not an angling target; a feeding window would not help an angler.
+- **Lake Sturgeon.** Absent from this source altogether (see section 28); needs a separately verified source.
+- **A Pumpkinseed spring value of 24.2 C** appears in the same table, but its location is not legible in the
+  extracted text, so it is not used.
+
+Effect: at a typical summer spot Pumpkinseed, Channel Catfish and Burbot now appear as Active or Inactive with
+their documented range and reasoning, instead of under "No documented temperature window".
