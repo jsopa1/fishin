@@ -502,6 +502,20 @@ def spot_detail():
     )
 
 
+@app.route("/about")
+def about():
+    """What the app is and isn't, data sources and attribution, freshness and
+    the legal pages -- everything that used to crowd the footer and home page."""
+    return render_template("about.html")
+
+
+@app.route("/fish")
+def fish_index():
+    """A browsable list of every documented species, so the fish pages are
+    reachable without first opening a spot."""
+    return render_template("fish_index.html", species=species_detail.list_species())
+
+
 @app.route("/fish/<species_slug>")
 def fish_detail(species_slug):
     """Full documented report for one species (habitat, activity, baits).
@@ -590,7 +604,7 @@ def sitemap():
     """Only the pages worth indexing (including the durable species reports). Spot pages are deliberately excluded:
     there are 3,272 of them, they are keyed by coordinate, and their value
     is current conditions rather than durable content."""
-    pages = [url_for(e, _external=True) for e in ("home", "map_view")]
+    pages = [url_for(e, _external=True) for e in ("home", "map_view", "fish_index", "about")]
     pages += [url_for("fish_detail", species_slug=s["slug"], _external=True) for s in species_detail.list_species()]
     urls = "".join(f"<url><loc>{p}</loc><changefreq>daily</changefreq></url>" for p in pages)
     xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>'

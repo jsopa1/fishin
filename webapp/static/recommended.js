@@ -60,6 +60,8 @@
       : '<p class="rec-empty">No saved spots yet. Open any spot and tap &ldquo;Save this spot&rdquo;.</p>';
 
     els.recHead.hidden = false;
+    var more = document.getElementById("rec-more");
+    if (more) more.hidden = false;
     els.recList.innerHTML = result.recommended.length
       ? result.recommended.map(R.cardHtml).join("")
       : '<p class="rec-empty">No spots match right now. Try widening your travel distance in your <a href="/profile">Profile</a>, or <a href="/map">explore the map</a>.</p>';

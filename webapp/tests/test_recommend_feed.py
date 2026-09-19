@@ -43,7 +43,7 @@ class FeedContentTests(unittest.TestCase):
     def test_rows_use_only_the_documented_keys_and_values(self):
         allowed_types = {"boat_ramp", "boat_carry_in", "shore_fishing"}
         for row in self.spots[::25]:
-            self.assertEqual(set(row), {"n", "w", "c", "t", "lat", "lon", "q", "a", "s", "i"})
+            self.assertEqual(set(row), {"n", "w", "c", "t", "lat", "lon", "q", "v", "a", "s", "i"})
             self.assertIn(row["t"], allowed_types)
             self.assertIn(row["q"], ("real", "estimated", "proxy", None))
             for species, tier in row["a"]:
@@ -150,8 +150,9 @@ class RecommendedScreenTests(unittest.TestCase):
         flask_app_module.app.testing = True
         cls.body = flask_app_module.app.test_client().get("/").data.decode()
 
-    def test_the_home_page_leads_with_recommended(self):
-        self.assertLess(self.body.index('id="recommended"'), self.body.index('class="hero"'))
+    def test_the_home_page_leads_with_search_and_quick_links_then_recommended(self):
+        self.assertLess(self.body.index('id="quick-links"'), self.body.index('id="recommended"'))
+        self.assertLess(self.body.index('role="search"'), self.body.index('id="quick-links"'))
         self.assertEqual(len(re.findall(r"<h1[ >]", self.body)), 1)
 
     def test_saved_spots_come_first_then_recommended_spots_as_in_the_wireframe(self):

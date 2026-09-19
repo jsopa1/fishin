@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ spot.facility_name if spot else "Not found" }} — Spot Detail{% endblock %}
+{% block here %}Spot report{% endblock %}
 {% block content %}
 <a class="back-link" href="{{ url_for('map_view') }}">
   <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to Explore

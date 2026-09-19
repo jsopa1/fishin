@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Fish{% endblock %}
+{% block here %}Fish{% endblock %}
+{% block content %}
+<div class="explore-head">
+  <h1>Fish</h1>
+  <p>{{ species|length }} Wisconsin species. Open one for its documented habitat, temperature ranges and recommended bait.</p>
+</div>
+<ul class="species-pick fish-index">
+  {% for s in species %}
+  <li>
+    <a class="species-pick-item" href="{{ url_for('fish_detail', species_slug=s.slug) }}">
+      {% set img = species_image(s.name) %}
+      {% if img %}<img class="fish-thumb" src="{{ url_for('static', filename=img.static_path) }}" alt="" loading="lazy">{% else %}<span class="fish-thumb fish-thumb-empty" aria-hidden="true"></span>{% endif %}
+      <span>{{ s.title }}</span>
+      <svg class="icon fish-index-chev" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+<p class="section-note">Want spots ranked for the fish you target? Pick them in your <a href="{{ url_for('profile') }}">Profile</a>.</p>
+{% endblock %}

@@ -26,51 +26,42 @@ class BottomNavTests(unittest.TestCase):
         flask_app_module.app.testing = True
         cls.client = flask_app_module.app.test_client()
 
-    def test_every_page_has_exactly_three_bottom_icons(self):
-        for path in ("/", "/map", "/profile", "/fish/walleye", "/privacy"):
+    def test_every_page_has_exactly_four_labelled_tabs(self):
+        for path in ("/", "/map", "/profile", "/fish", "/fish/walleye", "/privacy"):
             nav = bottom_nav(self.client.get(path).data.decode())
-            self.assertEqual(len(re.findall(r'class="bottom-nav-item', nav)), 3, path)
-            self.assertNotIn("bottom-nav-fab", nav, path)
+            self.assertEqual(len(re.findall(r'class="bottom-nav-item', nav)), 4, path)
 
-    def test_the_three_destinations_are_my_spot_explore_and_profile(self):
+    def test_the_four_destinations_are_home_explore_fish_and_profile_with_visible_labels(self):
         nav = bottom_nav(self.client.get("/").data.decode())
-        self.assertEqual(re.findall(r'<span class="sr-only">([^<]+)</span>', nav), ["My spot", "Explore", "Profile"])
-        self.assertIn('href="/map"', nav)
-        self.assertIn('href="/profile"', nav)
+        self.assertEqual(re.findall(r'<span class="bottom-nav-label">([^<]+)</span>', nav), ["Home", "Explore", "Fish", "Profile"])
+        for href in ("/", "/map", "/fish", "/profile"):
+            self.assertIn('href="' + href + '"', nav)
 
-    def test_the_bar_is_icons_only_with_a_larger_explore_icon_as_in_the_wireframe(self):
-        nav = bottom_nav(self.client.get("/").data.decode())
-        self.assertEqual(re.findall(r'<use href="#(icon-[a-z-]+)"', nav), ["#icon-list".lstrip("#"), "icon-explore", "icon-user"])
-        self.assertEqual(len(re.findall("bottom-nav-primary", nav)), 1)
-        self.assertNotRegex(re.sub(r'<span class="sr-only">[^<]*</span>', "", nav), r"<span>")
+    def test_detail_pages_light_up_their_parent_tab(self):
+        def current(path):
+            nav = bottom_nav(self.client.get(path).data.decode())
+            return re.findall(r'<a href="([^"]+)"[^>]*aria-current="page"', nav)
 
-    def test_on_a_phone_the_header_is_only_the_fish(self):
+        self.assertEqual(current("/"), ["/"])
+        self.assertEqual(current("/map"), ["/map"])
+        self.assertEqual(current("/fish"), ["/fish"])
+        self.assertEqual(current("/fish/walleye"), ["/fish"])
+        self.assertEqual(current("/profile"), ["/profile"])
+        self.assertEqual(current("/privacy"), [])
+
+    def test_the_header_names_the_current_section(self):
+        for path, label in (("/", "Home"), ("/map", "Explore"), ("/fish", "Fish"), ("/profile", "Profile"), ("/privacy", "Privacy")):
+            self.assertRegex(self.client.get(path).data.decode(), r'class="header-here"[^>]*>' + label + "<", path)
+
+    def test_on_a_phone_the_header_is_the_fish_and_the_section_name(self):
         css = (Path(__file__).resolve().parents[1] / "static" / "style.css").read_text(encoding="utf-8")
         mobile = css[css.index("@media (max-width: 767px)"):]
         self.assertIn(".brand-sub, .brand-word { display: none; }", mobile)
 
-    def test_the_fish_logo_leads_to_recommended(self):
+    def test_the_fish_logo_leads_home(self):
         for path in ("/", "/map", "/profile", "/fish/walleye"):
             body = self.client.get(path).data.decode()
             self.assertRegex(body, r'<a class="brand" href="/"[^>]*>', path)
-
-    def test_the_active_tab_matches_the_page(self):
-        def active_hrefs(path):
-            nav = bottom_nav(self.client.get(path).data.decode())
-            return re.findall(r'<a href="([^"]+)"[^>]*class="bottom-nav-item[^"]* active', nav)
-
-        self.assertEqual(active_hrefs("/profile"), ["/profile"])
-        self.assertEqual(active_hrefs("/map"), ["/map"])
-
-    def test_my_spot_defaults_to_recommended_and_is_pointed_at_the_last_spot_by_script(self):
-        body = self.client.get("/").data.decode()
-        self.assertIn('id="nav-spot"', body)
-        self.assertIn("fishin.lastSpot.v1", body)
-
-    def test_the_last_spot_script_only_trusts_numbers_and_encodes_the_name(self):
-        body = self.client.get("/").data.decode()
-        self.assertIn("isFinite(lat)", body)
-        self.assertIn("encodeURIComponent(s.name)", body)
 
     def test_a_spot_page_records_itself_as_the_last_spot_on_this_device_only(self):
         conn = flask_app_module.get_conn()
@@ -85,7 +76,7 @@ class BottomNavTests(unittest.TestCase):
             self.assertEqual(self.client.get(path).status_code, 200, path)
         header = self.client.get("/").data.decode()
         header = header[header.index("primary-nav"): header.index("</header>")]
-        for href in ("/map", "/profile", "/#about"):
+        for href in ("/map", "/fish", "/profile"):
             self.assertIn('href="' + href + '"', header)
 
 
@@ -121,31 +112,73 @@ class DirectoryRetiredTests(unittest.TestCase):
         self.assertFalse((Path(__file__).resolve().parents[1] / "templates" / "browse.html").exists())
 
 
-class OneLayoutAtEveryWidth(unittest.TestCase):
-    """The wide view is the phone view: one centred column, fish-only header, three-icon bar."""
+class ResponsiveLayouts(unittest.TestCase):
+    """Phones and tablets get one centred column with the labelled bottom bar; from 1024px up the
+    app uses the full width with the top nav and multi-column grids."""
 
     CSS = (Path(__file__).resolve().parents[1] / "static" / "style.css").read_text(encoding="utf-8")
 
-    def wide(self):
-        i = self.CSS.index("/* ---- One layout at every width")
+    def tablet(self):
+        i = self.CSS.index("/* ---- Tablet: the phone column")
+        return self.CSS[i:self.CSS.index("/* ---- Wayfinding", i)]
+
+    def desktop(self):
+        i = self.CSS.index("/* ---- Desktop (1024px+)")
         return self.CSS[i:self.CSS.index("/* ---- Dark theme", i)]
 
-    def test_the_wide_block_reuses_the_mobile_pieces(self):
-        block = self.wide()
-        self.assertIn("@media (min-width: 768px)", block)
-        for piece in (".wrap { max-width: 560px; }", ".primary-nav { display: none !important; }", ".brand-sub, .brand-word { display: none; }",
-                      ".bottom-nav {", "display: flex;", ".explore-view-toggle { display: inline-flex; }"):
+    def test_the_tablet_block_reuses_the_mobile_pieces_and_stops_before_desktop(self):
+        block = self.tablet()
+        self.assertIn("@media (min-width: 768px) and (max-width: 1023px)", block)
+        for piece in (".wrap { max-width: 560px; }", ".primary-nav { display: none !important; }", ".bottom-nav {",
+                      "display: flex;", ".explore-view-toggle { display: inline-flex; }", ".explore-layout { display: block; }"):
             self.assertIn(piece, block)
+        self.assertIn("width: 560px", block)
 
-    def test_no_multi_column_grid_survives_on_wide_screens(self):
-        block = self.wide()
-        self.assertIn(".bait-grid, .fish-buckets, .species-dashboard, .species-pick { grid-template-columns: 1fr; }", block)
-        self.assertIn(".explore-layout { display: block; }", block)
+    def test_desktop_uses_the_top_nav_and_multi_column_grids_and_no_bottom_bar(self):
+        block = self.desktop()
+        self.assertIn("@media (min-width: 1024px)", block)
+        self.assertIn(".quick-links { grid-template-columns: repeat(4, 1fr); }", block)
+        self.assertIn("#rec-list, #saved-list { display: grid; grid-template-columns: repeat(2, 1fr)", block)
+        self.assertNotIn(".primary-nav { display: none", block)
+        self.assertNotIn(".bottom-nav {", block)
+        # the base rule that hides the bottom bar outside phone/tablet widths is still there
+        self.assertIn(".bottom-nav { display: none; }", self.CSS)
 
-    def test_the_bottom_bar_is_the_same_width_as_the_column(self):
-        self.assertIn("width: 560px", self.wide())
+    def test_the_top_nav_has_the_same_four_destinations_as_the_bottom_bar(self):
+        body = self.client_body()
+        header = body[body.index('id="primary-nav"'): body.index("</header>")]
+        for href in ("/", "/map", "/fish", "/profile"):
+            self.assertIn('href="' + href + '"', header)
+
+    def client_body(self):
+        flask_app_module.app.testing = True
+        return flask_app_module.app.test_client().get("/").data.decode()
 
     def test_explore_starts_collapsed_like_on_a_phone(self):
         html = (Path(__file__).resolve().parents[1] / "templates" / "map.html").read_text(encoding="utf-8")
         self.assertNotIn("matchMedia('(min-width: 768px)')", html)
 
+
+
+class HowItWorksExplainerTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.body = flask_app_module.app.test_client().get("/about").data.decode()
+
+    def test_the_about_page_leads_with_the_three_step_picture_and_the_worked_example(self):
+        self.assertLess(self.body.index('id="how"'), self.body.index('id="what"'))
+        self.assertEqual(self.body.count('class="how-step"'), 3)
+        self.assertIn('class="how-chart"', self.body)
+
+    def test_the_example_marks_who_is_in_range_from_the_real_windows(self):
+        # 68F sits inside walleye 55-75F and brook trout 66-68F, outside pike 55-65F and bass 80-86F.
+        rows = re.findall(r'<span class="how-fish">([^<]+)</span>\s*<span class="how-status (in|out)"', self.body)
+        self.assertEqual(rows, [("Walleye", "in"), ("Northern pike", "out"), ("Brook trout", "in"), ("Largemouth bass", "out")])
+
+    def test_the_explainer_says_in_range_is_not_biting(self):
+        self.assertIn("is not", self.body[self.body.index('class="how-caveat"'):])
+        self.assertRegex(self.body, r"can&rsquo;t tell you whether you&rsquo;ll catch one")
+
+    def test_the_chart_has_a_text_alternative(self):
+        self.assertRegex(self.body, r'class="how-plot" role="img"\s+aria-label="Example at 68')

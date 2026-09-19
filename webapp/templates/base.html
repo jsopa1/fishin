@@ -156,25 +156,30 @@
   <symbol id="icon-fog" viewBox="0 0 24 24">
     <path d="M4 9h16M2 13h16M6 17h16"/>
   </symbol>
+  <symbol id="icon-home" viewBox="0 0 24 24">
+    <path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>
+  </symbol>
   <symbol id="icon-user" viewBox="0 0 24 24">
     <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
   </symbol>
 </svg>
 
+  {# Which tab a page belongs to. Detail pages light up their parent tab so the
+     visitor always knows where they are. #}
+  {% set tab = {'home': 'home', 'map_view': 'explore', 'spot_detail': 'explore', 'waterbody_detail': 'explore',
+                'fish_index': 'fish', 'fish_detail': 'fish', 'profile': 'profile', 'about': 'profile'}.get(request.endpoint) %}
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="{{ url_for('home') }}" aria-label="fishin - Recommended">
+      <a class="brand" href="{{ url_for('home') }}" aria-label="fishin - Home">
         <svg class="icon icon-lg brand-mark" aria-hidden="true"><use href="#icon-fish"/></svg>
         <span class="brand-word">fishin</span> <span class="brand-sub">Wisconsin Fishing Intelligence</span>
       </a>
-      <nav class="primary-nav" id="primary-nav">
-        <a href="{{ url_for('map_view') }}" class="{{ 'active' if request.endpoint == 'map_view' else '' }}">
-          <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> Explore
-        </a>
-        <a href="{{ url_for('profile') }}" class="{{ 'active' if request.endpoint == 'profile' else '' }}">
-          <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg> Profile
-        </a>
-        <a href="{{ url_for('home') }}#about" class="">About</a>
+      <span class="header-here" aria-hidden="true">{% block here %}{% endblock %}</span>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+        <a href="{{ url_for('home') }}" class="{{ 'active' if tab == 'home' else '' }}"{% if tab == 'home' %} aria-current="page"{% endif %}>Home</a>
+        <a href="{{ url_for('map_view') }}" class="{{ 'active' if tab == 'explore' else '' }}"{% if tab == 'explore' %} aria-current="page"{% endif %}>Explore</a>
+        <a href="{{ url_for('fish_index') }}" class="{{ 'active' if tab == 'fish' else '' }}"{% if tab == 'fish' %} aria-current="page"{% endif %}>Fish</a>
+        <a href="{{ url_for('profile') }}" class="{{ 'active' if tab == 'profile' else '' }}"{% if tab == 'profile' %} aria-current="page"{% endif %}>Profile</a>
         <a class="nav-source" href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">
           Source <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg>
         </a>
@@ -183,31 +188,19 @@
   </header>
 
   <nav class="bottom-nav" aria-label="Primary">
-    <a href="{{ url_for('home') }}" id="nav-spot" title="Last visited spot report" class="bottom-nav-item {{ 'active' if request.endpoint == 'spot_detail' else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg><span class="sr-only">My spot</span>
+    <a href="{{ url_for('home') }}" class="bottom-nav-item {{ 'active' if tab == 'home' else '' }}"{% if tab == 'home' %} aria-current="page"{% endif %}>
+      <svg class="icon" aria-hidden="true"><use href="#icon-home"/></svg><span class="bottom-nav-label">Home</span>
     </a>
-    <a href="{{ url_for('map_view') }}" title="Explore" class="bottom-nav-item bottom-nav-primary {{ 'active' if request.endpoint == 'map_view' else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-explore"/></svg><span class="sr-only">Explore</span>
+    <a href="{{ url_for('map_view') }}" class="bottom-nav-item {{ 'active' if tab == 'explore' else '' }}"{% if tab == 'explore' %} aria-current="page"{% endif %}>
+      <svg class="icon" aria-hidden="true"><use href="#icon-explore"/></svg><span class="bottom-nav-label">Explore</span>
     </a>
-    <a href="{{ url_for('profile') }}" title="Profile" class="bottom-nav-item {{ 'active' if request.endpoint == 'profile' else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg><span class="sr-only">Profile</span>
+    <a href="{{ url_for('fish_index') }}" class="bottom-nav-item {{ 'active' if tab == 'fish' else '' }}"{% if tab == 'fish' %} aria-current="page"{% endif %}>
+      <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg><span class="bottom-nav-label">Fish</span>
+    </a>
+    <a href="{{ url_for('profile') }}" class="bottom-nav-item {{ 'active' if tab == 'profile' else '' }}"{% if tab == 'profile' %} aria-current="page"{% endif %}>
+      <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg><span class="bottom-nav-label">Profile</span>
     </a>
   </nav>
-  <script>
-    // "My spot" goes back to the last spot page this visitor opened. That is
-    // remembered on this device only (localStorage) and never sent anywhere; with
-    // none yet, the link just leads to the Recommended screen.
-    (function () {
-      try {
-        var s = JSON.parse(localStorage.getItem("fishin.lastSpot.v1"));
-        var lat = Number(s && s.lat), lon = Number(s && s.lon);
-        if (s && isFinite(lat) && isFinite(lon) && typeof s.name === "string") {
-          document.getElementById("nav-spot").href =
-            "{{ url_for('spot_detail') }}?lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon) + "&name=" + encodeURIComponent(s.name);
-        }
-      } catch (e) { /* no stored spot, or storage blocked: keep the default link */ }
-    })();
-  </script>
 
   {% if run_row is none %}
   <div class="banner stale">
@@ -240,10 +233,8 @@
   <footer class="site-footer">
     <div class="wrap">
       <p class="footer-scope">
-        <strong>What this is:</strong> real water temperature compared against published fish-physiology
-        research, for species WDNR documents as present. It reports conditions and the reasoning behind
-        them — it does not predict whether you'll catch anything.
-        <a href="{{ url_for('home') }}#about">How it works</a>
+        Real water temperature compared against published fish-physiology research. It reports conditions
+        and the reasoning behind them — it does not predict whether you'll catch anything.
       </p>
       {% if run_row %}
       <p class="footer-freshness">
@@ -251,22 +242,11 @@
       </p>
       {% endif %}
       <ul class="footer-links">
-        <li><a href="{{ url_for('map_view') }}">Explore</a></li>
-        <li><a href="{{ url_for('summary') }}">Data Summary</a></li>
-        <li><a href="{{ url_for('failures') }}">Data Health / Failures</a></li>
-        <li><a href="{{ url_for('home') }}#about">About</a></li>
+        <li><a href="{{ url_for('about') }}">About &amp; data sources</a></li>
         <li><a href="{{ url_for('feedback') }}?page={{ request.path }}">Report a problem</a></li>
-        <li><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>
-        <li><a href="{{ url_for('terms') }}">Terms of Service</a></li>
+        <li><a href="{{ url_for('privacy') }}">Privacy</a></li>
+        <li><a href="{{ url_for('terms') }}">Terms</a></li>
       </ul>
-      <p><strong>Data sources &amp; attribution:</strong></p>
-      <ul>
-        <li>Fish species presence, stocking records, and fisheries survey data: courtesy of the <a href="https://dnr.wisconsin.gov/" target="_blank" rel="noopener">Wisconsin Department of Natural Resources (WDNR)</a>. Reused here for non-commercial, informational purposes; not an official WDNR product, not endorsed by WDNR.</li>
-        <li>Live and historical water-temperature gauge data: courtesy of the <a href="https://www.usgs.gov/" target="_blank" rel="noopener">U.S. Geological Survey (USGS)</a>, a public-domain source.</li>
-        <li>Current weather / air-temperature proxy data: courtesy of the <a href="https://www.weather.gov/" target="_blank" rel="noopener">National Weather Service (NWS)</a>, a public-domain source. This site is not affiliated with or endorsed by NOAA/NWS.</li>
-        <li>Fish physiology/behavior reference thresholds: compiled from peer-reviewed literature and Wismer &amp; Christie 1987 (Great Lakes Fishery Commission Special Publication 87-3) — see <a href="https://github.com/jsopa1/fishin/blob/main/docs/v1_physiology_research_candidates.md" target="_blank" rel="noopener">docs/v1_physiology_research_candidates.md</a>.</li>
-      </ul>
-      <p>Project source and full documentation: <a href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">github.com/jsopa1/fishin</a></p>
     </div>
   </footer>
   <script src="{{ url_for('static', filename='tags-explainer.js') }}"></script>

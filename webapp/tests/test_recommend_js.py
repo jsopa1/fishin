@@ -160,18 +160,22 @@ const plain = R.rank(ex, { prefs: P(), rankOnly: true, limit: 60 });
 out.rankOnlyEqualsNormalWhenNothingIsHidden = JSON.stringify(names(plain)) === JSON.stringify(names(R.rank(ex, { prefs: P() })));
 
 // 18. Shared card markup: escapes, names tiers, and never claims a bite.
-const html = R.cardHtml(R.rank([spot('<img src=x onerror=alert(1)>', { w: 'A & B', a: [["WALLEYE", "c"], ["BLUEGILL", "l"]], s: ["MUSKELLUNGE"], q: "proxy" })], { prefs: P() }).recommended[0]);
+const html = R.cardHtml(R.rank([spot('<img src=x onerror=alert(1)>', { w: 'A & B', a: [["WALLEYE", "c"], ["BLUEGILL", "l"]], s: ["MUSKELLUNGE"], q: "proxy", v: 20 })], { prefs: P() }).recommended[0]);
 out.cardHtml = {
   escaped: html.indexOf("<img") === -1 && html.indexOf("&lt;img") !== -1,
   ampersand: html.indexOf("A &amp; B") !== -1,
-  confirmed: /evidence-confirmed">Confirmed/.test(html), likely: /evidence-likely">Likely/.test(html),
-  inRangeWording: html.indexOf("In range now:") !== -1, noBiteClaim: !/bite|catch|likely to/i.test(html.replace(/evidence-likely">Likely/, "")),
-  titled: html.indexOf("<strong>Walleye</strong>") !== -1 && html.indexOf("Muskellunge") !== -1 && html.indexOf("WALLEYE") === -1,
+  confirmed: /sp-confirmed/.test(html) && /\(confirmed\)/.test(html), likely: /sp-likely/.test(html) && /\(likely\)/.test(html),
+  inRangeWording: html.indexOf("species in range now") !== -1, noBiteClaim: !/bite|catch/i.test(html.replace(/Likely present/g, "").replace(/\(likely\)/g, "")),
+  titled: />Walleye</.test(html) && html.indexOf("Muskellunge") !== -1 && html.indexOf("WALLEYE") === -1,
   spawn: html.indexOf("check regulations") !== -1, proxy: html.indexOf("air-temperature proxy") !== -1,
 };
 const iceHtml = R.cardHtml(R.rank([spot("cold", { i: [["WALLEYE", "c", 3.2]] })], { prefs: P() }).recommended[0]);
 const away = R.cardHtml(R.rank([spot("nearby", { a: [["WALLEYE", "c"]] })], { prefs: P(), location: { lat: 43.0, lon: -89.0 } }).recommended[0]);
-out.distanceBesideName = /<p class="list-card-title">nearby <span class="list-card-away">\d+ mi away<\/span><\/p>/.test(away);
+out.distanceBesideName = /card-metric metric-away"><span class="card-metric-num">\d+<small>mi<\/small>/.test(away);
+const withTemp = R.cardHtml(R.rank([spot("warm", { a: [["WALLEYE", "c"]], q: "real", v: 22.2 })], { prefs: P() }).recommended[0]);
+const proxyTemp = R.cardHtml(R.rank([spot("air", { a: [["WALLEYE", "c"]], q: "proxy", v: 22.2 })], { prefs: P() }).recommended[0]);
+out.tempChip = /72<small>&deg;F<\/small><\/span><span class="card-metric-label">water temp<\/span>/.test(withTemp) && /1 confirmed/.test(withTemp) && /air-temperature proxy/.test(proxyTemp) && !/>water temp<\//.test(proxyTemp);
+out.locationLine = /<p class="list-card-sub"><svg[^>]*><use href="#icon-map-pin"\/><\/svg> /.test(withTemp);
 out.iceHtml = /Closest to its range/.test(iceHtml) && /3\.2&deg;F outside it/.test(iceHtml);
 console.log(JSON.stringify(out));
 """
@@ -304,8 +308,12 @@ class RecommendJsTests(unittest.TestCase):
         self.assertTrue(n["avoid"])
         self.assertFalse(n["vague"])
 
-    def test_distance_sits_beside_the_spot_name_like_the_wireframe(self):
+    def test_distance_is_one_of_the_big_metrics_on_the_card(self):
         self.assertTrue(self.out["distanceBesideName"])
+
+    def test_the_card_shows_temperature_labelled_by_source_and_the_in_range_count_and_location(self):
+        self.assertTrue(self.out["tempChip"])
+        self.assertTrue(self.out["locationLine"])
 
     def test_the_nothing_in_range_card_says_how_far_outside_the_window(self):
         self.assertTrue(self.out["iceHtml"])

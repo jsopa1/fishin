@@ -104,8 +104,8 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertIn(b'class="banner', resp.data)
         self.assertIn(b"Water temperatures last updated", resp.data)
 
-    def test_attribution_footer_present(self):
-        resp = self.client.get("/")
+    def test_attribution_is_on_the_about_page(self):
+        resp = self.client.get("/about")
         self.assertIn(b"Wisconsin Department of Natural Resources", resp.data)
         self.assertIn(b"U.S. Geological Survey", resp.data)
         self.assertIn(b"National Weather Service", resp.data)

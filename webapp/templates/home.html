@@ -1,8 +1,52 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
+{% block here %}Home{% endblock %}
 {% block content %}
+<section class="home-intro" aria-labelledby="home-heading">
+  <h1 id="home-heading">Wisconsin fishing conditions</h1>
+  <p>Live water temperature checked against fish research, at {% if meta %}{{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }}{% else %}3,272{% endif %} public access points.
+     <a href="{{ url_for('about') }}#how">How it works</a></p>
+  <form class="search-bar" method="get" action="{{ url_for('map_view') }}" role="search">
+    <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
+    <input type="text" name="waterbody" placeholder="Search lakes & rivers…" aria-label="Search a waterbody by name">
+    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+  </form>
+</section>
+
+<nav class="quick-links" id="quick-links" aria-label="What would you like to do?">
+  <a class="quick-link" href="{{ url_for('map_view') }}">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-explore"/></svg>
+    <span class="quick-link-title">Explore the map</span>
+    <span class="quick-link-desc">Browse and filter every access point</span>
+  </a>
+  <a class="quick-link" href="#recommended">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-map-pin"/></svg>
+    <span class="quick-link-title">Spots for you</span>
+    <span class="quick-link-desc">Ranked by what&rsquo;s in range now</span>
+  </a>
+  <a class="quick-link" href="{{ url_for('fish_index') }}">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-fish"/></svg>
+    <span class="quick-link-title">Fish guide</span>
+    <span class="quick-link-desc">Habitat, temperatures and bait</span>
+  </a>
+  <a class="quick-link" href="{{ url_for('profile') }}">
+    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-user"/></svg>
+    <span class="quick-link-title">My fish &amp; settings</span>
+    <span class="quick-link-desc">Tailor the spots you see</span>
+  </a>
+</nav>
+
+<a class="continue-card" id="continue-card" href="#" hidden>
+  <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-map-pin"/></svg>
+  <span>
+    <span class="continue-kicker">Pick up where you left off</span>
+    <span class="continue-name" id="continue-name"></span>
+  </span>
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
+</a>
+
 <section class="rec-section" id="recommended" aria-labelledby="rec-heading">
-  <h1 id="rec-heading" class="sr-only">Recommended</h1>
+  <h2 id="rec-heading" class="sr-only">Your spots</h2>
 
   <div class="rec-controls">
     <button type="button" class="btn btn-secondary btn-sm" id="rec-locate">
@@ -22,41 +66,12 @@
   </div>
 
   <h2 class="highlights-head" id="rec-list-heading" hidden>Recommended Spots</h2>
+  <p class="card-legend">Species with a &#10003; are confirmed present by survey or sighting; dashed ones are likely present.</p>
   <div class="card-list" id="rec-list"></div>
+  <p class="rec-more" id="rec-more" hidden><a href="{{ url_for('map_view') }}">See more spots on the map <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></a></p>
 
   <p class="section-note rec-disclosure" id="rec-disclosure">Ranked by how many species are inside their documented temperature range right now, then evidence strength, spot-type preference, reading quality and distance. This is not a prediction of catch success.</p>
 </section>
-
-<div class="hero">
-  <h2>Other apps tell you where people caught fish. This one tells you why they're biting.</h2>
-  <p>
-    Live water temperature from real Wisconsin sensors, checked against published fish-physiology
-    research — so you can see which species are inside their documented feeding or spawning range
-    right now, at {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) if meta else "3,272" }}
-    real public access points. Every answer shows its reasoning and its source.
-  </p>
-
-  <form class="search-bar" style="max-width: 480px;" method="get" action="{{ url_for('map_view') }}">
-    <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
-    <input type="text" name="waterbody" placeholder="Search a waterbody to start exploring…" aria-label="Search a waterbody">
-    <button type="submit" class="btn btn-primary btn-sm">Search</button>
-  </form>
-
-  <div class="cta-row">
-    <a class="btn btn-primary" href="{{ url_for('map_view') }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> Open Explore
-    </a>
-  </div>
-
-  {% if counts %}
-  <div class="badge-row">
-    <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ "{:,}".format(counts.total_waterbodies) }} waterbodies</span>
-    {% if meta %}<span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-anchor"/></svg> {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }} real access points</span>{% endif %}
-    <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> {{ "{:,}".format(counts.total_species_predictions) }} physiology comparisons</span>
-    <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> {{ "{:,}".format(counts.by_tier.get('survey_confirmed', 0)) }} survey-confirmed</span>
-  </div>
-  {% endif %}
-</div>
 
 {% if highlights %}
 <section class="highlights">
@@ -90,43 +105,11 @@
 
 <a href="{{ url_for('map_view') }}" class="map-preview-link" aria-label="Open Explore — the live statewide map" style="display:block; text-decoration:none; margin-bottom: var(--space-7);">
   <div id="home-map-preview" class="map-pane" style="height: 280px; pointer-events: none;" aria-hidden="true"></div>
+  <span class="map-preview-cta">Open the live statewide map <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></span>
 </a>
 
-<h2 id="about">What this is — and isn't</h2>
-<p>
-  <strong>This is NOT a validated catch-rate prediction tool.</strong> It does not tell you whether
-  you will catch a fish, how many fish are in a given waterbody, or estimate a "fishing score" of
-  any kind. Every statement it generates is a factual comparison — is the current water temperature
-  inside a documented physiological window for a species known to be present here — never a forecast
-  of angler success.
-</p>
-<p>
-  This distinction is deliberate and load-bearing. An earlier phase of this project (V0) tested
-  whether real catch-rate data from Wisconsin lakes could be statistically predicted from weather,
-  water conditions, and fish physiology. The honest answer, after several independent research
-  cycles, was <strong>no</strong> — not with the public data available today. Rather than force a
-  predictive claim the evidence doesn't support, this tool reports a different, honestly-scoped
-  kind of information: real conditions, compared against real biology, for a real, sourced list of
-  species — nothing more.
-</p>
-<p>
-  Every prediction record shown here also honestly discloses its evidentiary tier: whether a
-  species' presence at a waterbody is <span class="tag survey_confirmed">survey-confirmed</span>
-  (an actual WDNR fisheries survey observed it there) or only
-  <span class="tag stocking_only">stocking-only</span> (WDNR has stocked it there, which is
-  positive evidence but not proof of a complete species list — a species can be genuinely present
-  without ever having been stocked). Temperature readings are labeled
-  <span class="tag real">real</span> when they come from an actual sensor,
-  <span class="tag estimated">estimated</span> when interpolated from nearby real readings, or
-  <span class="tag proxy">proxy</span> when they're an approximate regional air-temperature
-  stand-in. Where sources genuinely disagree on a physiological threshold (for example,
-  Muskellunge's documented thermal optimum), that disagreement is shown in full, not resolved to a
-  single convenient number.
-</p>
-<p>
-  Full technical documentation, source data, and every research report behind this tool are public
-  in the project repository: <a href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">github.com/jsopa1/fishin</a>.
-</p>
+<p class="section-note home-scope"><strong>This is NOT a validated catch-rate prediction.</strong> It compares real water temperature with published fish research; it does not tell you whether you will catch anything.</p>
+<p class="home-about-link"><a href="{{ url_for('about') }}#how">See how it works &mdash; a quick picture, what it is and isn&rsquo;t, and where the data comes from <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></a></p>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -135,6 +118,18 @@
 <script src="{{ url_for('static', filename='recommend.js') }}"></script>
 <script src="{{ url_for('static', filename='recommended.js') }}"></script>
 <script>
+// "Pick up where you left off": the last spot page opened on this device (localStorage only).
+(function () {
+  try {
+    var s = JSON.parse(localStorage.getItem("fishin.lastSpot.v1"));
+    var lat = Number(s && s.lat), lon = Number(s && s.lon);
+    if (!(s && isFinite(lat) && isFinite(lon) && typeof s.name === "string")) return;
+    var a = document.getElementById("continue-card");
+    a.href = {{ url_for('spot_detail') | tojson }} + "?lat=" + encodeURIComponent(lat) + "&lon=" + encodeURIComponent(lon) + "&name=" + encodeURIComponent(s.name);
+    document.getElementById("continue-name").textContent = s.name;
+    a.hidden = false;
+  } catch (e) { /* nothing stored, or storage blocked: the card stays hidden */ }
+})();
 (function () {
   var el = document.getElementById('home-map-preview');
   if (!el || !window.L) return;

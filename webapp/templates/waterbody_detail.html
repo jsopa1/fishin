@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ wb.waterbody_name if wb else "Not found" }} — Detail{% endblock %}
+{% block here %}Waterbody{% endblock %}
 {% block content %}
 <a class="back-link" href="{{ url_for('map_view') }}">
   <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to Explore

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Profile{% endblock %}
+{% block here %}Profile{% endblock %}
 {% block content %}
 <div class="detail-hero profile-hero">
   <div class="profile-avatar" aria-hidden="true"><svg class="icon icon-lg"><use href="#icon-user"/></svg></div>
@@ -9,9 +10,9 @@
   </div>
 </div>
 
-<nav class="profile-links" aria-label="Help and feedback">
+<nav class="profile-links" aria-label="About and feedback">
   <a class="profile-link" href="{{ url_for('feedback') }}?page=/profile"><svg class="icon" aria-hidden="true"><use href="#icon-star"/></svg> Rate us</a>
-  <a class="profile-link" href="{{ url_for('home') }}#about"><svg class="icon" aria-hidden="true"><use href="#icon-message"/></svg> Help</a>
+  <a class="profile-link" href="{{ url_for('about') }}"><svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg> <span>About fishin <span class="profile-link-sub">How it works, data sources, privacy &amp; terms</span></span></a>
   <a class="profile-link" href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg> Documentation</a>
 </nav>
 

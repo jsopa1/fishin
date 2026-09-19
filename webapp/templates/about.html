@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% block here %}About{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('profile') }}">
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Profile
+</a>
+<h1>About fishin</h1>
+
+<nav class="about-toc" aria-label="On this page">
+  <a href="#how">How it works</a>
+  <a href="#what">What this is</a>
+  <a href="#sources">Data sources</a>
+  <a href="#freshness">Data freshness</a>
+  <a href="#transparency">Data health</a>
+  <a href="#legal">Help &amp; legal</a>
+</nav>
+
+{% include "_how_it_works.html" %}
+
+<section id="what">
+<h2>What this is &mdash; and isn&rsquo;t</h2>
+{% if counts %}
+<div class="badge-row">
+  <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ "{:,}".format(counts.total_waterbodies) }} waterbodies</span>
+  {% if meta %}<span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-anchor"/></svg> {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }} access points</span>{% endif %}
+  <span class="pill"><svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> {{ "{:,}".format(counts.by_tier.get('survey_confirmed', 0)) }} survey-confirmed</span>
+</div>
+{% endif %}
+
+<div class="is-isnt">
+  <div class="is-isnt-col is">
+    <h3><svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> It does</h3>
+    <ul>
+      <li>Show the current water temperature</li>
+      <li>Compare it to each fish&rsquo;s researched range</li>
+      <li>Say where every answer came from</li>
+    </ul>
+  </div>
+  <div class="is-isnt-col isnt">
+    <h3><svg class="icon" aria-hidden="true"><use href="#icon-x"/></svg> It doesn&rsquo;t</h3>
+    <ul>
+      <li>Predict whether you&rsquo;ll catch a fish</li>
+      <li>Count fish in a lake</li>
+      <li>Give a &ldquo;fishing score&rdquo;</li>
+    </ul>
+  </div>
+</div>
+<p class="about-line"><strong>This is NOT a validated catch-rate prediction tool.</strong> We tested that idea and the public data couldn&rsquo;t support it, so we report conditions instead.</p>
+
+<h3 class="about-sub">What the tags mean</h3>
+<dl class="tag-key">
+  <dt><span class="tag survey_confirmed">survey-confirmed</span></dt><dd>A WDNR survey found this fish here</dd>
+  <dt><span class="tag stocking_only">stocking-only</span></dt><dd>WDNR has stocked it here; the list may be incomplete</dd>
+  <dt><span class="tag real">real</span></dt><dd>Temperature from an actual sensor</dd>
+  <dt><span class="tag estimated">estimated</span></dt><dd>Worked out from nearby sensors</dd>
+  <dt><span class="tag proxy">proxy</span></dt><dd>Air temperature standing in for water</dd>
+</dl>
+<p class="about-line">Where research disagrees on a range, we show both views rather than pick one.
+   <a href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener">Full documentation on GitHub</a></p>
+</section>
+
+<section id="sources">
+<h2>Data sources &amp; attribution</h2>
+<ul>
+  <li>Fish species presence, stocking records, and fisheries survey data: courtesy of the <a href="https://dnr.wisconsin.gov/" target="_blank" rel="noopener">Wisconsin Department of Natural Resources (WDNR)</a>. Reused here for non-commercial, informational purposes; not an official WDNR product, not endorsed by WDNR.</li>
+  <li>Live and historical water-temperature gauge data: courtesy of the <a href="https://www.usgs.gov/" target="_blank" rel="noopener">U.S. Geological Survey (USGS)</a>, a public-domain source.</li>
+  <li>Current weather / air-temperature proxy data: courtesy of the <a href="https://www.weather.gov/" target="_blank" rel="noopener">National Weather Service (NWS)</a>, a public-domain source. This site is not affiliated with or endorsed by NOAA/NWS.</li>
+  <li>Fish physiology/behavior reference thresholds: compiled from peer-reviewed literature and Wismer &amp; Christie 1987 (Great Lakes Fishery Commission Special Publication 87-3) — see <a href="https://github.com/jsopa1/fishin/blob/main/docs/v1_physiology_research_candidates.md" target="_blank" rel="noopener">docs/v1_physiology_research_candidates.md</a>.</li>
+  <li>Map tiles: &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.</li>
+</ul>
+</section>
+
+<section id="freshness">
+<h2>Data freshness</h2>
+{% if run_row %}
+<p>Water temperatures updated {{ temp_age_text }}. Species &amp; stocking records from WDNR surveys, loaded {{ survey_age_text }}.</p>
+{% else %}
+<p>No completed data run was found, so there is nothing to date yet.</p>
+{% endif %}
+</section>
+
+<section id="transparency">
+<h2>Data health</h2>
+<p>Nothing is silently dropped. These pages show the live counts and every place a result could not be produced.</p>
+<div class="profile-links">
+  <a class="profile-link" href="{{ url_for('summary') }}"><svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg> Data summary</a>
+  <a class="profile-link" href="{{ url_for('failures') }}"><svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg> Data health &amp; failures</a>
+</div>
+</section>
+
+<section id="legal">
+<h2>Help &amp; legal</h2>
+<div class="profile-links">
+  <a class="profile-link" href="{{ url_for('feedback') }}?page=/about"><svg class="icon" aria-hidden="true"><use href="#icon-message"/></svg> Report a problem</a>
+  <a class="profile-link" href="{{ url_for('privacy') }}"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg> Privacy policy</a>
+  <a class="profile-link" href="{{ url_for('terms') }}"><svg class="icon" aria-hidden="true"><use href="#icon-book"/></svg> Terms of service</a>
+  <a class="profile-link" href="https://github.com/jsopa1/fishin" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg> Project source &amp; documentation</a>
+</div>
+</section>
+{% endblock %}

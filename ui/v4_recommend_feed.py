@@ -14,6 +14,8 @@ page it links to.
 Row keys (short, because there are ~3,300 of them on a phone connection):
   n name, w waterbody, c county, t source_type, lat/lon
   q  temperature quality: "real" | "estimated" | "proxy" | None
+  v  temperature in degrees C behind that reading, 1 decimal (None if none);
+     its meaning depends on q, so it is never shown without the q label
   a  species inside their documented window now: [[SPECIES, "c"|"l"], ...]
      ("c" = confirmed by survey/sighting, "l" = likely)
   s  species inside a documented *spawning* range only: [SPECIES, ...]
@@ -65,6 +67,7 @@ def build_row(conn, point: dict) -> dict:
         "lat": round(lat, 5),
         "lon": round(lon, 5),
         "q": _QUALITY.get(temperature.get("resolution")) if temperature else None,
+        "v": round(temperature["value_c"], 1) if temperature and temperature.get("value_c") is not None else None,
         "a": in_window,
         "s": spawn_only,
         "i": outside,

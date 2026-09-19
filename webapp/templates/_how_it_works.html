@@ -1,0 +1,68 @@
+{# Visual explainer. The ranges are the real documented activity windows from
+   data/v1/physiology_thresholds_v1.json; the 68°F temperature is a sample. #}
+{% set example_f = 68 %}
+{% set lo, hi = 40, 90 %}
+{% set demo = [
+  ("Walleye", 55, 75),
+  ("Northern pike", 55, 65),
+  ("Brook trout", 66.2, 68.5),
+  ("Largemouth bass", 79.7, 86),
+] %}
+<section id="how" class="how" aria-labelledby="how-heading">
+  <h2 id="how-heading">How it works</h2>
+
+  <ol class="how-steps">
+    <li class="how-step">
+      <span class="how-num" aria-hidden="true">1</span>
+      <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-thermometer"/></svg>
+      <h3>Read the water</h3>
+      <p>We take the current temperature from real Wisconsin gauges, or the closest estimate when a lake has none.</p>
+    </li>
+    <li class="how-arrow" aria-hidden="true"><svg class="icon"><use href="#icon-chevron-right"/></svg></li>
+    <li class="how-step">
+      <span class="how-num" aria-hidden="true">2</span>
+      <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-book"/></svg>
+      <h3>Check the research</h3>
+      <p>Published studies give each fish a temperature range where it is most active and feeding.</p>
+    </li>
+    <li class="how-arrow" aria-hidden="true"><svg class="icon"><use href="#icon-chevron-right"/></svg></li>
+    <li class="how-step">
+      <span class="how-num" aria-hidden="true">3</span>
+      <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-fish"/></svg>
+      <h3>See what&rsquo;s in range</h3>
+      <p>Fish WDNR records show at that spot, and whose range matches the water right now, are listed.</p>
+    </li>
+  </ol>
+
+  <figure class="how-chart">
+    <figcaption>
+      <strong>Example:</strong> the water is <strong>{{ example_f }}&deg;F</strong>. Each bar is one fish&rsquo;s documented active range.
+      Where the line crosses a bar, that fish is <span class="how-key how-key-in">in range</span>; otherwise it is <span class="how-key how-key-out">outside its range</span>.
+    </figcaption>
+    <div class="how-plot" role="img"
+         aria-label="Example at {{ example_f }} degrees Fahrenheit: walleye and brook trout are in their active range; northern pike and largemouth bass are outside theirs.">
+      <div class="how-line" style="left: {{ ((example_f - lo) / (hi - lo) * 100)|round(1) }}%;"><span>{{ example_f }}&deg;F now</span></div>
+      {% for name, a, b in demo %}
+      {% set inside = a <= example_f <= b %}
+      <div class="how-row">
+        <div class="how-row-head">
+          <span class="how-fish">{{ name }}</span>
+          <span class="how-status {{ 'in' if inside else 'out' }}">
+            {% if inside %}<svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> In range now{% else %}{{ 'Too warm' if example_f > b else 'Too cold' }} for its range{% endif %}
+          </span>
+        </div>
+        <div class="how-track">
+          <span class="how-band {{ 'in' if inside else 'out' }}" style="left: {{ ((a - lo) / (hi - lo) * 100)|round(1) }}%; width: {{ ((b - a) / (hi - lo) * 100)|round(1) }}%;"></span>
+        </div>
+        <div class="how-range">{{ a }}&ndash;{{ b }}&deg;F</div>
+      </div>
+      {% endfor %}
+      <div class="how-axis" aria-hidden="true"><span>{{ lo }}&deg;F</span><span>{{ ((lo + hi) / 2)|int }}&deg;F</span><span>{{ hi }}&deg;F</span></div>
+    </div>
+  </figure>
+
+  <p class="how-caveat">
+    <svg class="icon" aria-hidden="true"><use href="#icon-info"/></svg>
+    <span><strong>&ldquo;In range&rdquo; is not &ldquo;biting.&rdquo;</strong> It can&rsquo;t tell you whether you&rsquo;ll catch one.</span>
+  </p>
+</section>

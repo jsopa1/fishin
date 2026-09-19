@@ -156,7 +156,7 @@
   function card(item) {
     var sp = item.spot;
     return {
-      name: sp.n, water: sp.w, county: sp.c, type: sp.t, quality: sp.q || null,
+      name: sp.n, water: sp.w, county: sp.c, type: sp.t, quality: sp.q || null, tempC: sp.v === undefined ? null : sp.v,
       count: item.counted.length,
       confirmed: item.counted.filter(function (c) { return c.tier === "confirmed"; }).length,
       inRange: item.counted,
@@ -275,30 +275,48 @@
   function cardHtml(c) {
     var sub = [c.water ? esc(c.water) + (c.county ? " (" + esc(c.county) + ")" : "") : "", TYPE_LABEL[c.type] || ""]
       .filter(Boolean).join(" &middot; ");
-    var away = c.distanceKm !== null && c.distanceKm !== undefined
-      ? ' <span class="list-card-away">' + Math.round(c.distanceKm / KM_PER_MILE) + " mi away</span>" : "";
-    var q = c.quality && QUALITY_TAG[c.quality]
-      ? '<span class="tag ' + QUALITY_TAG[c.quality][0] + '">' + QUALITY_TAG[c.quality][1] + "</span>" : "";
+
+    // The three numbers people scan for, big and first. How much to trust the
+    // temperature is stated in words under it, not in a coloured badge.
+    function metric(num, unit, label, sub2, cls) {
+      return '<div class="card-metric ' + cls + '"><span class="card-metric-num">' + num + (unit ? '<small>' + unit + "</small>" : "") + "</span>" +
+        '<span class="card-metric-label">' + label + "</span>" + (sub2 ? '<span class="card-metric-sub">' + sub2 + "</span>" : "") + "</div>";
+    }
+    var metrics = [];
+    metrics.push(metric(c.count, "", "species in range now", c.count > 0 ? c.confirmed + " confirmed" : "", "metric-range"));
+    if (c.tempC !== null && c.tempC !== undefined) {
+      var tLabel = c.quality === "proxy" ? "air-temperature proxy" : c.quality === "estimated" ? "estimated water temp" : "water temp";
+      metrics.push(metric(Math.round(c.tempC * 9 / 5 + 32), "&deg;F", tLabel, "", "metric-temp metric-" + (c.quality || "none")));
+    } else {
+      metrics.push(metric("&ndash;", "", "no temperature reading", "", "metric-temp metric-none"));
+    }
+    if (c.distanceKm !== null && c.distanceKm !== undefined) {
+      metrics.push(metric(Math.round(c.distanceKm / KM_PER_MILE), "mi", "away", "", "metric-away"));
+    }
 
     var line;
     if (c.count > 0) {
-      line = "In range now: " + c.inRange.slice(0, 4).map(function (e) {
+      line = c.inRange.slice(0, 4).map(function (e) {
         var confirmed = e.tier === "confirmed";
-        return "<strong>" + esc(title(e.species)) + '</strong><span class="tag evidence-' + (confirmed ? "confirmed" : "likely") + '">' + (confirmed ? "Confirmed" : "Likely") + "</span>";
-      }).join(", ") + (c.inRange.length > 4 ? " and " + (c.inRange.length - 4) + " more" : "");
+        return '<span class="card-sp ' + (confirmed ? "sp-confirmed" : "sp-likely") + '" title="' + (confirmed ? "Confirmed by survey or sighting" : "Likely present (documented, not surveyed)") + '">' +
+          esc(title(e.species)) + (confirmed ? '<svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg><span class="sr-only"> (confirmed)</span>' : '<span class="sr-only"> (likely)</span>') + "</span>";
+      }).join("") + (c.inRange.length > 4 ? '<span class="card-sp-more">+' + (c.inRange.length - 4) + " more</span>" : "");
+      line = '<p class="rec-line card-species">' + line + "</p>";
     } else if (c.nearest) {
-      line = "Nothing is in range right now. Closest to its range: <strong>" + esc(title(c.nearest.species)) + "</strong>, " + c.nearest.distanceF + "&deg;F outside it.";
+      line = '<p class="rec-line">Nothing is in range right now. Closest to its range: <strong>' + esc(title(c.nearest.species)) + "</strong>, " + c.nearest.distanceF + "&deg;F outside it.</p>";
     } else if (!c.quality) {
-      line = "No current conditions are available for this spot.";
+      line = '<p class="rec-line">No current conditions are available for this spot.</p>';
     } else {
-      line = "No documented species are in range here right now.";
+      line = '<p class="rec-line">No documented species are in range here right now.</p>';
     }
     var note = c.spawning && c.spawning.length
       ? '<p class="rec-note">Also in a spawning range: ' + esc(c.spawning.slice(0, 3).map(title).join(", ")) + " &mdash; check regulations before fishing.</p>" : "";
 
     return '<a class="list-card" href="' + esc(c.url) + '">' +
-      '<div class="list-card-head"><div><p class="list-card-title">' + esc(c.name) + away + '</p><p class="list-card-sub">' + sub + "</p></div>" + q + "</div>" +
-      '<p class="rec-line">' + line + "</p>" + note +
+      '<p class="list-card-title">' + esc(c.name) + '</p>' +
+      '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + sub + "</p>" +
+      '<div class="card-metrics">' + metrics.join("") + "</div>" +
+      line + note +
       '<span class="list-card-link">Open spot report &rarr;</span></a>';
   }
 

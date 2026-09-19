@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ fish.title if fish else "Not found" }} — Fish{% endblock %}
+{% block here %}Fish{% endblock %}
 {% block content %}
 {% if not fish %}
 <h1>Not found</h1>
@@ -10,8 +11,8 @@
   <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to {{ back_spot.name }}
 </a>
 {% else %}
-<a class="back-link" href="{{ url_for('map_view') }}">
-  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to Explore
+<a class="back-link" href="{{ url_for('fish_index') }}">
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> All fish
 </a>
 {% endif %}
 

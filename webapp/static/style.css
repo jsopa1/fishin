@@ -726,6 +726,8 @@ table td a:hover { text-decoration: underline; }
 .list-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); }
 .list-card-title { font-weight: 700; font-size: var(--text-md); margin: 0; color: var(--ink); }
 .list-card-sub { font-size: var(--text-sm); color: var(--muted); margin: 2px 0 0; }
+.list-card-sub .icon { color: var(--accent); }
+.list-card-stats + .rec-line { margin-top: var(--space-3); }
 .list-card-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--space-3); }
 .list-card-body { margin-top: var(--space-3); font-size: var(--text-sm); color: var(--gray-700); }
 .list-card-body p { margin: 4px 0; color: inherit; }
@@ -1062,7 +1064,6 @@ table td a:hover { text-decoration: underline; }
   .primary-nav { display: none !important; }
   .brand-sub, .brand-word { display: none; }
   /* Wireframe: the mobile header is just the fish, centred. It is the way home. */
-  .site-header .wrap { justify-content: center; }
   .brand-mark { width: 2.1em; height: 2.1em; }
   .hero { padding: var(--space-5); }
   .hero h1, .hero h2 { font-size: 1.5rem; }
@@ -1097,8 +1098,7 @@ table td a:hover { text-decoration: underline; }
     padding: 4px 6px; border-radius: var(--radius-sm); flex: 1; min-width: 0;
   }
   .bottom-nav-item { padding: 8px 6px; }
-  .bottom-nav-item .icon { width: 1.9em; height: 1.9em; }
-  .bottom-nav-primary .icon { width: 2.6em; height: 2.6em; }
+  .bottom-nav-item .icon { width: 1.5em; height: 1.5em; }
   .bottom-nav-item.active { color: var(--accent); }
 }
 
@@ -1224,14 +1224,13 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
 .spot-more { margin-top: var(--space-4); }
 .spot-quicklinks .btn.active { border-color: var(--accent); color: var(--accent-dark); }
 
-/* ---- One layout at every width: the phone column ----
-   The wide view is the mobile view: a single centred column, the fish-only header, and the
-   same three-icon bottom bar. (Wide screens previously got a different, two-column design.) */
-@media (min-width: 768px) {
+/* ---- Tablet: the phone column ----
+   Between phone and desktop widths the app stays one centred column with the fish-only header
+   and the labelled bottom bar. From 1024px up the desktop layout below takes over. */
+@media (min-width: 768px) and (max-width: 1023px) {
   .wrap { max-width: 560px; }
   .primary-nav { display: none !important; }
   .brand-sub, .brand-word { display: none; }
-  .site-header .wrap { justify-content: center; }
   .brand-mark { width: 2.1em; height: 2.1em; }
   body { padding-bottom: 76px; }
   .bottom-nav {
@@ -1245,8 +1244,7 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
     display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--muted); text-decoration: none;
     padding: 8px 6px; border-radius: var(--radius-sm); flex: 1; min-width: 0;
   }
-  .bottom-nav-item .icon { width: 1.9em; height: 1.9em; }
-  .bottom-nav-primary .icon { width: 2.6em; height: 2.6em; }
+  .bottom-nav-item .icon { width: 1.5em; height: 1.5em; }
   .bottom-nav-item.active { color: var(--accent); }
   .hero { padding: var(--space-5); }
   .hero h1, .hero h2 { font-size: 1.5rem; }
@@ -1262,6 +1260,137 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
   /* every multi-column grid becomes one column, as on a phone */
   .bait-grid, .fish-buckets, .species-dashboard, .species-pick { grid-template-columns: 1fr; }
   .fish-bucket-nowindow, .fish-buckets .species-dashboard-note { grid-column: auto; }
+}
+
+/* ---- Wayfinding: header section label, labelled tab bar, home layout ---- */
+.header-here { font-weight: 700; color: var(--ink); font-size: var(--text-md); margin-right: auto; padding-left: var(--space-3); border-left: 1px solid var(--border); }
+.header-here:empty { display: none; }
+.primary-nav { margin-left: auto; }
+.bottom-nav-label { font-size: 0.72rem; font-weight: 600; line-height: 1.1; }
+.bottom-nav-item { position: relative; }
+.bottom-nav-item.active { color: var(--accent); }
+.bottom-nav-item.active::before { content: ""; position: absolute; top: 0; left: 30%; right: 30%; height: 3px; border-radius: 0 0 3px 3px; background: var(--accent); }
+
+.home-intro { margin-bottom: var(--space-5); }
+.home-intro h1 { margin-bottom: var(--space-2); }
+.home-intro p { margin: 0 0 var(--space-4); color: var(--muted); }
+.quick-links { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin-bottom: var(--space-6); }
+.quick-link { display: flex; flex-direction: column; gap: 2px; padding: var(--space-4); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: var(--ink); box-shadow: var(--shadow-sm); }
+.quick-link:hover { border-color: var(--accent); color: var(--ink); }
+.quick-link .icon { color: var(--accent); margin-bottom: var(--space-2); }
+.quick-link-title { font-weight: 700; }
+.quick-link-desc { font-size: var(--text-sm); color: var(--muted); }
+.continue-card { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-6); background: var(--accent-light); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: var(--ink); }
+.continue-card[hidden] { display: none; }
+.continue-card > span { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.continue-card .icon:first-child { color: var(--accent); }
+.continue-kicker { font-size: var(--text-xs, 12px); font-weight: 600; color: var(--muted); }
+.continue-name { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rec-more { margin: var(--space-3) 0 0; font-weight: 600; }
+.rec-more[hidden] { display: none; }
+.map-preview-cta { display: flex; align-items: center; justify-content: center; gap: 4px; padding: var(--space-2); font-weight: 600; }
+.fish-index .species-pick-item { text-decoration: none; color: var(--ink); }
+.fish-index .species-pick-item:hover { border-color: var(--accent); }
+.fish-index-chev { margin-left: auto; color: var(--muted); }
+
+/* ---- About page, slim footer ---- */
+.about-toc { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-5); }
+.about-toc a { padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius-full); background: var(--card); font-size: var(--text-sm); font-weight: 600; text-decoration: none; }
+section[id] { scroll-margin-top: calc(var(--header-h) + 8px); }
+.profile-link-sub { display: block; font-weight: 400; font-size: var(--text-sm); color: var(--muted); }
+.home-about-link { margin: 0 0 var(--space-6); font-weight: 600; }
+.site-footer { padding: var(--space-4) 0 var(--space-5); margin-top: var(--space-6); }
+.site-footer .footer-links { margin-bottom: 0; }
+
+/* ---- How it works explainer ---- */
+.how { margin-bottom: var(--space-7); }
+.how h2 { margin-top: 0; }
+.how-steps { list-style: none; margin: 0 0 var(--space-5); padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.how-step { position: relative; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-4) var(--space-4) var(--space-4) 64px; box-shadow: var(--shadow-sm); }
+.how-step .icon-lg { position: absolute; left: var(--space-4); top: var(--space-4); width: 2em; height: 2em; color: var(--accent); }
+.how-step h3 { margin: 0 0 2px; font-size: var(--text-md); }
+.how-step p { margin: 0; font-size: var(--text-sm); color: var(--muted); }
+.how-num { position: absolute; right: var(--space-3); top: var(--space-2); font-weight: 800; font-size: 1.6rem; color: var(--border); }
+.how-arrow { display: flex; justify-content: center; color: var(--muted); }
+.how-arrow .icon { transform: rotate(90deg); }
+.how-chart { margin: 0 0 var(--space-4); padding: var(--space-4); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
+.how-chart figcaption { font-size: var(--text-sm); color: var(--gray-700); margin-bottom: var(--space-4); }
+.how-key { font-weight: 700; padding: 1px 7px; border-radius: var(--radius-full); white-space: nowrap; }
+.how-key-in { background: var(--survey-bg); color: var(--survey); }
+.how-key-out { background: var(--border-soft); color: var(--muted); }
+.how-plot { position: relative; padding-top: 22px; }
+.how-line { position: absolute; top: 0; bottom: 22px; width: 0; border-left: 2px dashed var(--accent); z-index: 2; pointer-events: none; }
+.how-line span { position: absolute; top: -2px; left: 50%; transform: translate(-50%, -100%); background: var(--accent); color: #fff; font-size: var(--text-xs, 12px); font-weight: 700; padding: 1px 8px; border-radius: var(--radius-full); white-space: nowrap; }
+.how-row { margin-bottom: var(--space-3); }
+.how-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2); margin-bottom: 4px; }
+.how-fish { font-weight: 700; }
+.how-status { font-size: var(--text-sm); display: inline-flex; align-items: center; gap: 4px; }
+.how-status.in { color: var(--survey); font-weight: 700; }
+.how-status.out { color: var(--muted); }
+.how-track { position: relative; height: 14px; background: var(--border-soft); border-radius: 7px; }
+.how-band { position: absolute; top: 0; bottom: 0; min-width: 8px; border-radius: 7px; }
+.how-band.in { background: var(--survey); }
+.how-band.out { background: var(--gray-300); }
+.how-range { font-size: var(--text-xs, 12px); color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.how-axis { display: flex; justify-content: space-between; font-size: var(--text-xs, 12px); color: var(--muted); border-top: 1px solid var(--border); padding-top: 4px; }
+.how-caveat { display: flex; gap: var(--space-2); align-items: flex-start; padding: var(--space-3) var(--space-4); border-left: 3px solid var(--accent); background: var(--accent-light); border-radius: var(--radius-sm); margin: 0; color: var(--ink); }
+.how-caveat .icon { margin-top: 3px; color: var(--accent); }
+@media (min-width: 1024px) {
+  .how-steps { flex-direction: row; align-items: stretch; }
+  .how-step { flex: 1; }
+  .how-arrow { align-items: center; }
+  .how-arrow .icon { transform: none; }
+  .how-chart { max-width: 760px; }
+}
+
+/* ---- About: short, scannable blocks ---- */
+.is-isnt { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); margin: var(--space-4) 0; }
+.is-isnt-col { padding: var(--space-3) var(--space-4); background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
+.is-isnt-col h3 { display: flex; align-items: center; gap: 6px; margin: 0 0 var(--space-2); font-size: var(--text-md); }
+.is-isnt-col.is h3 { color: var(--survey); }
+.is-isnt-col.isnt h3 { color: var(--muted); }
+.is-isnt-col ul { margin: 0; padding-left: 18px; font-size: var(--text-sm); }
+.is-isnt-col li { margin-bottom: 4px; }
+.about-line { font-size: var(--text-sm); margin: var(--space-3) 0; }
+.about-sub { margin: var(--space-5) 0 var(--space-2); font-size: var(--text-md); }
+.tag-key { display: grid; grid-template-columns: auto 1fr; gap: var(--space-2) var(--space-3); align-items: center; margin: 0; }
+.tag-key dt, .tag-key dd { margin: 0; }
+.tag-key dd { font-size: var(--text-sm); color: var(--gray-700); }
+@media (max-width: 420px) { .is-isnt { grid-template-columns: 1fr; } }
+
+/* ---- Spot cards: the numbers people scan for come first ---- */
+.list-card-title { font-size: var(--text-lg); line-height: 1.25; }
+.list-card-sub { display: flex; align-items: center; gap: 5px; }
+.card-metrics { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: var(--space-2); margin: var(--space-3) 0; padding: var(--space-3) 0; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+.card-metric { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.card-metric + .card-metric { padding-left: var(--space-3); border-left: 1px solid var(--border-soft); }
+.card-metric-num { font-size: 1.75rem; font-weight: 800; line-height: 1; letter-spacing: -0.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.card-metric-num small { font-size: 0.9rem; font-weight: 700; margin-left: 2px; color: var(--muted); }
+.card-metric-label { font-size: var(--text-xs, 12px); color: var(--muted); line-height: 1.2; }
+.card-metric-sub { font-size: var(--text-xs, 12px); font-weight: 600; color: var(--survey); }
+.metric-range .card-metric-num { color: var(--accent); }
+.metric-estimated .card-metric-label, .metric-proxy .card-metric-label { font-style: italic; }
+.card-species { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
+.card-sp { display: inline-flex; align-items: center; gap: 3px; padding: 2px 9px; border-radius: var(--radius-full); background: var(--border-soft); font-weight: 600; font-size: var(--text-sm); color: var(--ink); }
+.card-sp .icon { width: 0.95em; height: 0.95em; color: var(--survey); }
+.card-sp.sp-likely { background: transparent; border: 1px dashed var(--border); font-weight: 500; color: var(--gray-700); }
+.card-sp-more { font-size: var(--text-sm); color: var(--muted); }
+.card-legend { font-size: var(--text-xs, 12px); color: var(--muted); margin: 0 0 var(--space-3); }
+
+/* ---- Desktop (1024px+): full-width layout with the top nav ---- */
+@media (min-width: 1024px) {
+  .header-here { display: none; }
+  .primary-nav { margin-left: auto; }
+  .home-intro { max-width: 680px; }
+  .home-intro h1 { font-size: 2.2rem; }
+  .quick-links { grid-template-columns: repeat(4, 1fr); }
+  #rec-list, #saved-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+  #rec-list .rec-empty, #saved-list .rec-empty { grid-column: 1 / -1; }
+  .highlight-grid { grid-template-columns: repeat(3, 1fr); }
+  .card-metric-num { font-size: 2rem; }
+}
+@media (min-width: 1400px) {
+  #rec-list, #saved-list { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ---- Dark theme (V4 Phase 3). Chosen explicitly via <html data-theme="dark">, or
@@ -1311,3 +1440,4 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
   :root:not([data-theme="light"]) .btn-primary:hover, :root:not([data-theme="light"]) form.filters button:hover { background: #4a76e6; }
   :root:not([data-theme="light"]) .fish-thumb, :root:not([data-theme="light"]) .fish-figure img, :root:not([data-theme="light"]) .bait-figure img { background: #fff; }
 }
+

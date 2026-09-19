@@ -35,8 +35,8 @@ class ProfilePageTests(unittest.TestCase):
     def test_help_links_exist_and_point_at_real_places(self):
         self.assertIn("Rate us", self.body)
         self.assertIn('href="/feedback?page=/profile"', self.body)
-        self.assertIn("Help", self.body)
-        self.assertIn('href="/#about"', self.body)
+        self.assertIn("About fishin", self.body)
+        self.assertIn('href="/about"', self.body)
         self.assertIn("Documentation", self.body)
         self.assertIn("https://github.com/jsopa1/fishin", self.body)
 

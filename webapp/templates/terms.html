@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Terms of Service{% endblock %}
+{% block here %}Terms{% endblock %}
 {% block content %}
 <h1>Terms of Service</h1>
 <p class="form-errors" style="background: var(--stocking-bg); color: var(--stocking);">
@@ -14,7 +15,7 @@
   fishin is an informational tool that reports real, current water conditions compared against
   published fish-physiology research, for species documented as present in a given water. Full
   detail on what it is and — just as importantly — what it is <strong>not</strong> is on the
-  <a href="{{ url_for('home') }}#about">home page</a>: it is not a validated catch-rate prediction,
+  <a href="{{ url_for('about') }}">About page</a>: it is not a validated catch-rate prediction,
   it does not estimate how many fish are in a water, and nothing it says is a guarantee you will
   catch anything.
 </p>
