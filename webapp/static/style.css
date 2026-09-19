@@ -401,6 +401,8 @@ table td a:hover { text-decoration: underline; }
 .tag[tabindex] { cursor: help; }
 .tag-popover {
   position: fixed;
+  border: 1px solid var(--gray-400);
+  box-shadow: var(--shadow-lg);
   z-index: 1000;
   max-width: 260px;
   padding: 10px 12px;
@@ -1209,6 +1211,59 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
 
 .list-card-away { font-weight: 500; font-size: var(--text-sm); color: var(--muted); margin-left: var(--space-2); white-space: nowrap; }
 
+/* ---- Spot page, as drawn: name, location, water / air / wind / moon ---- */
+.spot-head { margin: var(--space-3) 0 var(--space-5); }
+.spot-head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); }
+.spot-head h1 { margin: 0; }
+.spot-loc { margin: 4px 0 0; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.spot-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-top: var(--space-4); }
+.spot-stat { background: var(--gray-0); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-3) var(--space-4); display: flex; flex-direction: column; gap: 4px; }
+.spot-stat-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.spot-stat-value { font-size: var(--text-lg, 1.25rem); font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.spot-stat-sub { font-size: var(--text-sm); color: var(--muted); }
+.spot-more { margin-top: var(--space-4); }
+.spot-quicklinks .btn.active { border-color: var(--accent); color: var(--accent-dark); }
+
+/* ---- One layout at every width: the phone column ----
+   The wide view is the mobile view: a single centred column, the fish-only header, and the
+   same three-icon bottom bar. (Wide screens previously got a different, two-column design.) */
+@media (min-width: 768px) {
+  .wrap { max-width: 560px; }
+  .primary-nav { display: none !important; }
+  .brand-sub, .brand-word { display: none; }
+  .site-header .wrap { justify-content: center; }
+  .brand-mark { width: 2.1em; height: 2.1em; }
+  body { padding-bottom: 76px; }
+  .bottom-nav {
+    display: flex; position: fixed; bottom: 0; left: 50%; width: 560px; max-width: 100%; transform: translateX(-50%);
+    z-index: 40; background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: saturate(180%) blur(10px); -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border: 1px solid var(--border); border-bottom: none; border-radius: 18px 18px 0 0;
+    padding: 6px var(--space-2) 6px; justify-content: space-around; align-items: center;
+  }
+  .bottom-nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--muted); text-decoration: none;
+    padding: 8px 6px; border-radius: var(--radius-sm); flex: 1; min-width: 0;
+  }
+  .bottom-nav-item .icon { width: 1.9em; height: 1.9em; }
+  .bottom-nav-primary .icon { width: 2.6em; height: 2.6em; }
+  .bottom-nav-item.active { color: var(--accent); }
+  .hero { padding: var(--space-5); }
+  .hero h1, .hero h2 { font-size: 1.5rem; }
+  .detail-hero { padding: var(--space-5); }
+  .detail-box { padding: var(--space-4); }
+  .explore-view-toggle { display: inline-flex; }
+  .explore-layout[data-mobile-view="map"] .list-panel { display: none; }
+  .explore-layout[data-mobile-view="list"] .map-panel { display: none; }
+  .map-pane { height: 62vh; }
+  .explore-layout { display: block; }
+  .explore-panel.map-panel { position: static; }
+  .list-pane-scroll { max-height: none; overflow: visible; padding-right: 0; }
+  /* every multi-column grid becomes one column, as on a phone */
+  .bait-grid, .fish-buckets, .species-dashboard, .species-pick { grid-template-columns: 1fr; }
+  .fish-bucket-nowindow, .fish-buckets .species-dashboard-note { grid-column: auto; }
+}
+
 /* ---- Dark theme (V4 Phase 3). Chosen explicitly via <html data-theme="dark">, or
    follows the device when no choice is saved. Tokens and the few hard-coded
    colors are overridden; map tiles stay light; fish pictures keep a white
@@ -1224,6 +1279,7 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
   color-scheme: dark;
 }
 :root[data-theme="dark"] .banner.tag-intro { background: #2a3140; }
+:root[data-theme="dark"] .tag-popover { background: #2a3140; color: #eef1f5; border-color: #5d6675; }
 :root[data-theme="dark"] .site-header { background: rgba(18, 21, 26, 0.94); }
 :root[data-theme="dark"] .bottom-nav { background: rgba(18, 21, 26, 0.97); }
 :root[data-theme="dark"] .disclaimer { background: linear-gradient(180deg, #2a2412, #241f10); border-bottom-color: #4a3f1c; color: #e8d9a6; }
@@ -1244,6 +1300,7 @@ a.fish-row-main:hover .fish-row-name { text-decoration: underline; }
   color-scheme: dark;
   }
   :root:not([data-theme="light"]) .banner.tag-intro { background: #2a3140; }
+  :root:not([data-theme="light"]) .tag-popover { background: #2a3140; color: #eef1f5; border-color: #5d6675; }
   :root:not([data-theme="light"]) .site-header { background: rgba(18, 21, 26, 0.94); }
   :root:not([data-theme="light"]) .bottom-nav { background: rgba(18, 21, 26, 0.97); }
   :root:not([data-theme="light"]) .disclaimer { background: linear-gradient(180deg, #2a2412, #241f10); border-bottom-color: #4a3f1c; color: #e8d9a6; }

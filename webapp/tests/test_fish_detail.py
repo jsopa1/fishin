@@ -62,9 +62,11 @@ class FishDetailRouteTests(unittest.TestCase):
         self.assertIn("have not been reviewed", body)
         self.assertNotIn("legal to use everywhere", body)
 
-    def test_a_bait_without_a_picture_says_so_instead_of_a_placeholder_image(self):
-        body = self._page("walleye")
-        self.assertIn("No picture yet", body)
+    def test_every_bait_card_has_a_picture(self):
+        for slug in ("walleye", "channel-catfish", "lake-whitefish", "muskellunge"):
+            body = self._page(slug)
+            self.assertNotIn("No picture yet", body, slug)
+            self.assertIn("bait-figure", body, slug)
 
     def test_non_targets_show_no_bait_section(self):
         for slug in ("white-sucker", "fathead-minnow"):

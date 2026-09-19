@@ -13,6 +13,7 @@ import os
 import re
 import sys
 import unittest
+from pathlib import Path
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -33,22 +34,6 @@ class WebAppRouteTests(unittest.TestCase):
     def test_home_page_states_not_a_prediction(self):
         resp = self.client.get("/")
         self.assertIn(b"NOT a validated catch-rate prediction", resp.data)
-
-    def test_browse_page_loads_with_no_filters(self):
-        resp = self.client.get("/browse")
-        self.assertEqual(resp.status_code, 200)
-
-    def test_browse_filters_by_name(self):
-        resp = self.client.get("/browse?name=Devils+Lake")
-        self.assertEqual(resp.status_code, 200)
-        # Real dedup fix verification: exactly the distinct real waterbodies,
-        # not a duplicate "Devils Lake" entry under two county spellings.
-        self.assertEqual(resp.data.count(b'class="list-card"'), 3)
-
-    def test_browse_filters_by_tier(self):
-        resp = self.client.get("/browse?tier=survey_confirmed")
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"survey_confirmed", resp.data)
 
     def test_waterbody_detail_shows_full_narrative(self):
         resp = self.client.get("/waterbody?name=Big+Moon+Lake&county=Barron")
@@ -99,7 +84,7 @@ class WebAppRouteTests(unittest.TestCase):
         # full-width banner when nothing is actually stale -- the two clocks
         # (fast-moving temperature, annual survey data) are reported
         # separately in the footer instead.
-        for path in ("/", "/browse", "/failures", "/summary", "/map"):
+        for path in ("/", "/failures", "/summary", "/map"):
             resp = self.client.get(path)
             self.assertIn(b"Water temperatures updated", resp.data, msg=f"freshness missing on {path}")
             self.assertIn(b"species &amp; stocking records", resp.data, msg=f"survey age missing on {path}")
@@ -107,7 +92,7 @@ class WebAppRouteTests(unittest.TestCase):
     def test_scope_statement_present_on_every_page(self):
         # The honest framing moved out of the full-width bar, but it must
         # still appear on every page -- quieter, not gone.
-        for path in ("/", "/browse", "/map"):
+        for path in ("/", "/map"):
             resp = self.client.get(path)
             self.assertIn(b"does not predict whether you", resp.data, msg=f"scope note missing on {path}")
 
@@ -264,35 +249,29 @@ class WebAppRouteTests(unittest.TestCase):
         self.assertIn(matched["w"].encode(), resp.data)
 
     def test_spot_report_loads_for_an_unmatched_real_point_honest_gaps(self):
-        map_resp = self.client.get("/map/data")
-        points = map_resp.get_json()["points"]
+        points = self.client.get("/map/data").get_json()["points"]
         unmatched = next(p for p in points if not p["mw"])
-
         resp = self.client.get(
             "/spot?lat={}&lon={}&name={}".format(unmatched["lat"], unmatched["lon"], unmatched["n"] or "")
         )
         self.assertEqual(resp.status_code, 200)
-        # A spot with no record of its own now shows real county-level
-        # evidence instead of a dead end -- but it must say plainly that
-        # this is regional context, not this water's species list.
-        self.assertIn(b"Regional guide", resp.data)
-        self.assertIn(b"not a species list for this water", resp.data)
-        self.assertIn(b"no fisheries-survey or stocking record tied to this specific spot", resp.data)
-
+        # No record of its own: the page still shows fish, each attributed to the
+        # regional record it came from rather than presented as this water's list.
+        self.assertIn(b"regional (county) record", resp.data)
+        self.assertIn(b"Likely", resp.data)
     def test_regional_evidence_never_claims_species_are_in_this_water(self):
-        # The honesty property that makes the county fallback defensible:
-        # counts are always attributed to county waterbodies, and the page
-        # never asserts presence at the spot itself.
-        map_resp = self.client.get("/map/data")
-        points = map_resp.get_json()["points"]
+        # The honesty property that makes the county fallback defensible: every
+        # row says HOW it is known, and regional records are tagged "Likely",
+        # never "Confirmed".
+        points = self.client.get("/map/data").get_json()["points"]
         unmatched = next(p for p in points if not p["mw"])
-        resp = self.client.get("/spot?lat={}&lon={}".format(unmatched["lat"], unmatched["lon"]))
-        body = resp.data.decode()
-
-        self.assertIn("documented in", body)
-        self.assertIn("waterbod", body)
-        self.assertIn("isn't evidence", body)  # absence-is-not-proof caveat
-
+        body = self.client.get("/spot?lat={}&lon={}".format(unmatched["lat"], unmatched["lon"])).data.decode()
+        self.assertIn("Found here by:", body)
+        self.assertIn("regional (county) record", body)
+        for row in re.findall(r'<li class="fish-row">.*?</li>', body, re.S):
+            if "regional (county) record" in row and "citizen sighting" not in row:
+                self.assertIn("evidence-likely", row)
+                self.assertNotIn("evidence-confirmed", row)
     def test_interpolated_temperature_carries_a_measured_confidence_signal(self):
         map_resp = self.client.get("/map/data")
         points = map_resp.get_json()["points"]
@@ -333,13 +312,6 @@ class WebAppErrorHandlingTests(unittest.TestCase):
         flask_app_module.app.testing = True
         cls.client = flask_app_module.app.test_client()
 
-    def test_invalid_tier_falls_back_to_all_with_a_visible_note(self):
-        resp = self.client.get("/browse?tier=not_a_real_tier")
-        self.assertEqual(resp.status_code, 200)  # degrades gracefully, doesn't error
-        self.assertIn(b"not a recognized presence tier", resp.data)
-        # Falling back to "all" means real results still show, not zero.
-        self.assertGreater(resp.data.count(b'class="list-card"'), 0)
-
     def test_waterbody_detail_missing_params_returns_400_not_crash(self):
         resp = self.client.get("/waterbody")
         self.assertEqual(resp.status_code, 400)
@@ -352,12 +324,6 @@ class WebAppErrorHandlingTests(unittest.TestCase):
         self.assertNotIn(b"Traceback", resp.data)
         self.assertNotIn(b"werkzeug", resp.data.lower())
 
-    def test_percent_and_underscore_in_search_do_not_crash_or_wildcard_match(self):
-        # Regression check at the route level for the LIKE-escaping fix.
-        resp = self.client.get("/browse?name=" + "%25%25%25")  # literal "%%%"
-        self.assertEqual(resp.status_code, 200)
-        self.assertIn(b"0 results shown", resp.data)
-
     def test_data_unavailable_state_never_shows_bare_empty_page(self):
         # Simulates a failed data load (Criterion 3) without touching the
         # real database file -- patches find_db_path to return a path
@@ -368,7 +334,7 @@ class WebAppErrorHandlingTests(unittest.TestCase):
         original = rd.find_db_path
         rd.find_db_path = lambda start=None: Path("/nonexistent/does-not-exist.db")
         try:
-            resp = self.client.get("/browse")
+            resp = self.client.get("/map")
             self.assertEqual(resp.status_code, 503)
             self.assertIn(b"currently unavailable", resp.data)
 
@@ -434,7 +400,7 @@ class ProductionReadinessTests(unittest.TestCase):
     def test_sitemap_lists_the_real_pages(self):
         body = self.client.get("/sitemap.xml").data.decode()
         self.assertIn("/map", body)
-        self.assertIn("/browse", body)
+        self.assertNotIn("/browse", body)
 
     def test_share_preview_tags_present_so_shared_links_render_a_card(self):
         body = self.client.get("/").data.decode()
@@ -447,7 +413,7 @@ class ProductionReadinessTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_feedback_route_is_reachable_from_every_page(self):
-        for path in ("/", "/map", "/browse"):
+        for path in ("/", "/map"):
             self.assertIn(b"Report a problem", self.client.get(path).data)
 
 
@@ -474,7 +440,7 @@ class RegulationsPointerTests(unittest.TestCase):
         self.assertIn(b"apps.dnr.wi.gov/fisheriesmanagement/Public/LakeRegulation", body)
         self.assertTrue(
             b"Check the regulations before you keep anything" in body
-            or b"Regulations for this water" in body,
+            or b'id="regulations"' in body,
             msg="spot page showed neither resolved regulations nor the fallback pointer",
         )
 
@@ -518,12 +484,12 @@ class CurrentConditionsTests(unittest.TestCase):
         points = self.client.get("/map/data").get_json()["points"]
         return points[0]
 
-    def test_wind_and_pressure_are_labeled_as_not_used_in_the_match(self):
+    def test_wind_is_shown_plainly_without_disclaimers(self):
+        # Wind, air and moon are context, shown as drawn: no "not used in the
+        # match" footnotes, and they never appear as a ranking input on the page.
         p = self._a_spot()
         body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data
-        if b"mph" in body and b"not used in the match" not in body:
-            self.fail("a wind reading appeared without its informational-only disclaimer")
-
+        self.assertNotIn(b"not used in the match", body)
     def test_missing_conditions_never_break_the_page(self):
         p = self._a_spot()
         resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
@@ -547,23 +513,22 @@ class AirTemperatureAndSkyTests(unittest.TestCase):
     def test_air_temperature_and_a_sky_icon_are_shown_and_labelled_as_not_used(self):
         body = self._spot_body({"status": "ok", "air_temp_f": 68, "sky": "Partly Cloudy", "sky_kind": "partly",
                                 "wind_speed_mph": 4.0, "wind_direction_compass": "N", "pressure_inhg": 30.0})
-        block = body[body.index("verdict-stat-sky"):][:700]
+        block = body[body.index("spot-stat-label\">Air"):][:500]
         self.assertIn("68°F", block)
         self.assertIn("Partly Cloudy", block)
         self.assertIn("#icon-partly", block)
-        self.assertIn("not used in the match", block)
+        self.assertNotIn("not used in the match", body)
 
     def test_an_unrecognised_sky_shows_the_temperature_without_an_icon(self):
         body = self._spot_body({"status": "ok", "air_temp_f": 50, "sky": "Odd Weather", "sky_kind": None,
                                 "wind_speed_mph": None, "wind_direction_compass": None, "pressure_inhg": None})
-        block = body[body.index("verdict-stat-sky"):][:500]
+        block = body[body.index("spot-stat-label\">Air"):][:400]
         self.assertIn("50°F", block)
         self.assertNotIn("#icon-", block)
 
     def test_an_older_cached_reading_without_air_temperature_shows_no_empty_block(self):
         body = self._spot_body({"status": "ok", "wind_speed_mph": 4.0, "wind_direction_compass": "N", "pressure_inhg": 30.0})
-        self.assertNotIn('class="verdict-stat verdict-stat-sky"', body)
-        self.assertNotIn("°F | air temperature", body)
+        self.assertNotIn('spot-stat-label">Air', body)
 
 
 class MoonPhaseTests(unittest.TestCase):
@@ -581,13 +546,12 @@ class MoonPhaseTests(unittest.TestCase):
         points = self.client.get("/map/data").get_json()["points"]
         return points[0]
 
-    def test_moon_phase_shown_with_illumination_and_disclaimer(self):
+    def test_moon_phase_is_shown_by_name(self):
         p = self._a_spot()
         body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
-        self.assertIn("illuminated", body)
-        self.assertIn("evidence for a fish-activity effect is mixed", body)
-        self.assertIn("not used in the match above", body)
-
+        self.assertIn("spot-stat-label\">Moon", body)
+        self.assertRegex(body, r"(New Moon|Waxing Crescent|First Quarter|Waxing Gibbous|Full Moon|Waning Gibbous|Last Quarter|Waning Crescent)")
+        self.assertNotIn("not used in the match", body)
     def test_moon_phase_never_breaks_the_page(self):
         p = self._a_spot()
         resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
@@ -605,18 +569,11 @@ class CitizenObservedSpeciesTests(unittest.TestCase):
         flask_app_module.app.testing = True
         cls.client = flask_app_module.app.test_client()
 
-    def test_citizen_sightings_always_carry_their_disclaimer(self):
-        # Merton Millpond Access (Waukesha County) is a real access point
-        # verified, at test-writing time, to sit within 5km of a real
-        # ingested GBIF observation -- picked directly via the database
-        # rather than scanning hundreds of live spot pages hoping for a
-        # hit, which was slow enough to time out.
-        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data
-        self.assertIn(b"Recently reported nearby", body)
-        self.assertIn(b"not a WDNR survey", body)
-        self.assertIn(b"never used to drive the temperature matching", body)
-        self.assertIn(b"gbif.org", body)
-
+    def test_citizen_sightings_are_attributed_as_sightings_with_their_date(self):
+        # Merton Millpond Access (Waukesha County) sits within 5 km of a real GBIF observation.
+        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data.decode()
+        self.assertIn("citizen sighting (", body)
+        self.assertIn("evidence-confirmed", body)
     def test_every_spot_page_still_loads_regardless_of_citizen_data(self):
         p = self.client.get("/map/data").get_json()["points"][0]
         resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
@@ -651,11 +608,12 @@ class SpeciesDashboardTests(unittest.TestCase):
         likely = {s["species"] for s in cats["likely_species"]}
         self.assertEqual(confirmed & likely, set())
 
-    def test_dashboard_note_explains_what_confirmed_and_likely_actually_mean(self):
-        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data
-        self.assertIn(b"actually documented the species", body)
-        self.assertIn(b"never a catch guarantee", body)
-
+    def test_confirmed_and_likely_are_explained_on_tap_not_in_a_footnote(self):
+        body = self.client.get("/spot?lat=43.14873839628315&lon=-88.30695699204537").data.decode()
+        self.assertIn('class="tag evidence-', body)
+        js = (Path(flask_app_module.app.static_folder) / "tags-explainer.js").read_text(encoding="utf-8")
+        self.assertIn("actually documented this species", js)
+        self.assertIn("Not proof it is here now", js)
     def test_every_spot_page_still_loads_with_the_dashboard_wired_in(self):
         p = self.client.get("/map/data").get_json()["points"][0]
         resp = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"]))
@@ -740,14 +698,17 @@ class SpotActiveInactiveTests(unittest.TestCase):
         self.assertNotIn(" below range", active)
         self.assertNotIn(" above range", active)
 
-    def test_regulations_quick_link_is_always_present(self):
-        self.assertIn('href="#regulations"', self._body())
-
-    def test_the_honesty_note_survives_the_redesign(self):
+    def test_the_three_buttons_are_always_present_with_their_sections(self):
         body = self._body()
-        self.assertIn("never a catch guarantee", body)
-        self.assertIn("actually documented the species", body)
-
+        for panel, label in (("panel-stocking", "Stocking history"), ("panel-regulations", "Regulations"),
+                             ("panel-advisory", "Consumption advisory")):
+            self.assertIn('data-open="%s"' % panel, body)
+            self.assertIn(label, body)
+            self.assertIn('id="%s"' % panel, body)
+    def test_every_fish_row_still_says_how_it_is_known(self):
+        body = self._body()
+        self.assertIn("Found here by:", body)
+        self.assertIn("evidence-", body)
 
 class ProductLoopTests(unittest.TestCase):
     """The things that make this a product someone returns to, rather
@@ -761,26 +722,24 @@ class ProductLoopTests(unittest.TestCase):
     def _a_spot(self):
         return self.client.get("/map/data").get_json()["points"][0]
 
-    def test_spot_page_opens_with_an_answer_not_a_data_dump(self):
+    def test_spot_page_follows_the_drawing_header_then_fish_then_three_buttons(self):
         p = self._a_spot()
         body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
-        self.assertIn('class="verdict', body)
-        # The verdict must precede the evidence tabs.
-        self.assertLess(body.index('class="verdict'), body.index('id="spot-tabs"'))
-
-    def test_every_spot_gets_a_verdict_headline(self):
-        # Never a blank answer, whatever the conditions.
+        head, fish, buttons = body.index('class="spot-head"'), body.index('id="fish-buckets"'), body.index('class="spot-quicklinks"')
+        self.assertLess(head, fish)
+        self.assertLess(fish, buttons)
+        for gone in ('id="spot-tabs"', 'class="verdict', "Site info", "Full conditions narrative", "species-dashboard-note"):
+            self.assertNotIn(gone, body)
+    def test_every_spot_shows_a_water_reading_or_says_there_is_none(self):
         points = self.client.get("/map/data").get_json()["points"]
         for p in points[:12]:
             body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
-            self.assertIn("verdict-headline", body, msg=f"no verdict at {p['lat']},{p['lon']}")
-
-    def test_spot_page_offers_save_and_directions(self):
+            self.assertIn('class="spot-head"', body, msg=f"no header at {p['lat']},{p['lon']}")
+            self.assertTrue("spot-stat-value" in body or "no temperature data" in body)
+    def test_spot_page_offers_save(self):
         p = self._a_spot()
         body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
         self.assertIn('id="save-spot"', body)
-        self.assertIn("google.com/maps/dir", body)
-
     def test_saved_spots_never_leave_the_browser(self):
         # No endpoint accepts saved spots, and the page says so. Where
         # someone fishes is exactly the data not to upload.
@@ -867,7 +826,7 @@ class TagOnboardingTests(unittest.TestCase):
 
     def test_tags_explainer_script_loaded_on_pages_with_tags(self):
         p = self._a_spot()
-        for path in ("/", "/browse", "/spot?lat={}&lon={}".format(p["lat"], p["lon"])):
+        for path in ("/", "/map", "/spot?lat={}&lon={}".format(p["lat"], p["lon"])):
             body = self.client.get(path).data
             self.assertIn(b"tags-explainer.js", body, msg=f"{path} did not load the tags explainer")
 
@@ -915,7 +874,7 @@ class LegalPagesTests(unittest.TestCase):
         self.assertEqual(self.client.get("/terms").status_code, 200)
 
     def test_privacy_and_terms_linked_from_every_page(self):
-        for path in ("/", "/map", "/browse"):
+        for path in ("/", "/map"):
             body = self.client.get(path).data
             self.assertIn(b'href="/privacy"', body)
             self.assertIn(b'href="/terms"', body)

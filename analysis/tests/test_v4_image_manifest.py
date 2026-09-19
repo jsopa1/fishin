@@ -33,6 +33,8 @@ class TestImageManifest(unittest.TestCase):
             if "file" not in e:
                 continue
             self.assertTrue(e["license_short"].lower().startswith(("public domain", "cc0")), f"{group}/{key}")
+            if e.get("original"):
+                continue  # drawn for this project; checked in TestOriginalIllustrations
             self.assertTrue(e["pd_templates_on_page"], f"{group}/{key}: no public-domain template recorded")
             self.assertTrue(urllib.parse.unquote(e["page_url"]).startswith("https://commons.wikimedia.org/wiki/File:"), f"{group}/{key}")
             self.assertTrue(e["artist"].strip() or e["credit"].strip(), f"{group}/{key}: no author/credit")
@@ -59,6 +61,65 @@ class TestImageManifest(unittest.TestCase):
         physiology = json.loads((ROOT / "data" / "v1" / "physiology_thresholds_v1.json").read_text(encoding="utf-8"))["species"]
         for sp in physiology:
             self.assertIn("file", self.m["species"].get(sp, {}), sp)
+
+
+class TestEveryBaitHasAPicture(unittest.TestCase):
+    def test_all_50_baits_resolve_to_an_image(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "ui"))
+        sys.path.insert(0, str(ROOT / "analysis"))
+        import v4_species_detail as sd
+        catalog = json.loads((ROOT / "data" / "v1" / "bait_catalog_v1.json").read_text(encoding="utf-8"))["baits"]
+        self.assertEqual(len(catalog), 50)
+        self.assertEqual([k for k in catalog if not sd.image_for("baits", k)], [])
+
+    def test_illustrations_are_labelled_as_illustrations_not_as_commons_photos(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "ui"))
+        sys.path.insert(0, str(ROOT / "analysis"))
+        import v4_species_detail as sd
+        img = sd.image_for("baits", "leeches")
+        self.assertTrue(img["illustration"])
+        self.assertTrue(img["credit"].startswith("Illustration by"))
+        self.assertNotIn("Wikimedia", img["credit"])
+        photo = sd.image_for("baits", "spoons")
+        self.assertFalse(photo["illustration"])
+        self.assertIn("Wikimedia Commons", photo["credit"])
+
+
+class TestOriginalIllustrations(unittest.TestCase):
+    def setUp(self):
+        self.m = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        self.originals = {k: e for _, k, e in _entries(self.m) if e.get("original")}
+
+    def test_there_are_36_and_each_is_cc0_with_a_generator(self):
+        self.assertEqual(len(self.originals), 36)
+        for key, e in self.originals.items():
+            self.assertTrue(e["license_short"].startswith("CC0"), key)
+            self.assertEqual(e["license_url"], "https://creativecommons.org/publicdomain/zero/1.0/", key)
+            self.assertEqual(e["generator"], "analysis/v4_draw_bait_illustrations.py", key)
+            self.assertTrue(e["file"].endswith(".svg"), key)
+
+    def test_each_file_is_well_formed_svg(self):
+        import xml.dom.minidom as minidom
+        for key, e in self.originals.items():
+            doc = minidom.parse(str(ROOT / e["file"]))
+            self.assertEqual(doc.documentElement.tagName, "svg", key)
+            self.assertEqual(doc.documentElement.getAttribute("viewBox"), "0 0 320 200", key)
+
+    def test_no_two_baits_share_the_same_drawing(self):
+        import hashlib
+        digests = {}
+        for key, e in self.originals.items():
+            digests.setdefault(hashlib.sha256((ROOT / e["file"]).read_bytes()).hexdigest(), []).append(key)
+        self.assertEqual([v for v in digests.values() if len(v) > 1], [])
+
+    def test_the_generator_reproduces_the_committed_files(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "analysis"))
+        import v4_draw_bait_illustrations as gen
+        for key, fn in gen.DRAWERS.items():
+            self.assertEqual(fn(), (ROOT / "webapp" / "static" / "img" / "baits" / f"{key}.svg").read_text(encoding="utf-8"), key)
 
 
 if __name__ == "__main__":

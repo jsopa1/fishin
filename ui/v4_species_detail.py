@@ -111,9 +111,15 @@ def image_for(kind: str, key: str) -> dict | None:
     if not entry or "file" not in entry:
         return None
     author = entry.get("artist") or entry.get("credit") or "unknown author"
+    if entry.get("original"):
+        # Drawn for this project (analysis/v4_draw_bait_illustrations.py), not a photograph.
+        credit = f"Illustration by {author} - {entry['license_short']}"
+    else:
+        credit = f"{author} - {entry['license_short']}, via Wikimedia Commons"
     return {
         "static_path": entry["file"].split("webapp/static/", 1)[1],
-        "credit": f"{author} - {entry['license_short']}, via Wikimedia Commons",
+        "credit": credit,
+        "illustration": bool(entry.get("original")),
         "page_url": entry["page_url"],
         "note": note,
     }

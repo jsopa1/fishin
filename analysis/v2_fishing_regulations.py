@@ -143,13 +143,28 @@ def _shape(features: list) -> dict:
                 "rules": rules,
             })
 
-    if not waters:
+    return _normalise({"waters": waters})
+
+
+def _normalise(shaped: dict) -> dict:
+    """Merge exact duplicates and set the status from what is left.
+
+    WDNR sometimes lists one water twice (two records both named "Lake Michigan"
+    with identical rules). Those are one water, not an ambiguity. When distinct
+    waters remain, none is picked for the visitor - all are returned, each with its
+    own name and rules, and the page shows every one. Also applied to cached rows
+    written before this merge existed."""
+    unique, seen = [], set()
+    for water in shaped.get("waters", []):
+        key = ((water.get("waterbody_name") or "").strip().lower(),
+               tuple((r["label"], r["text"]) for r in water.get("rules", [])))
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(water)
+    if not unique:
         return {"status": "none", "waters": []}
-    if len(waters) > 1:
-        # Several regulated waters within the buffer. Picking one would be
-        # exactly the mistake this module exists to avoid.
-        return {"status": "ambiguous", "waters": waters}
-    return {"status": "ok", "waters": waters}
+    return {"status": "ok" if len(unique) == 1 else "ambiguous", "waters": unique}
 
 
 def get_regulations(conn: sqlite3.Connection, lat: float, lon: float) -> dict | None:
@@ -172,7 +187,7 @@ def get_regulations(conn: sqlite3.Connection, lat: float, lon: float) -> dict | 
     if row:
         fetched_at = datetime.datetime.fromisoformat(row[0])
         if (now - fetched_at) < datetime.timedelta(hours=CACHE_TTL_HOURS):
-            cached = json.loads(row[1])
+            cached = _normalise(json.loads(row[1]))
             cached["fetched_at"] = fetched_at
             cached["source_url"] = PUBLIC_LOOKUP_URL
             return cached
@@ -183,7 +198,7 @@ def get_regulations(conn: sqlite3.Connection, lat: float, lon: float) -> dict | 
         # Fall back to a stale cache entry rather than showing nothing --
         # last week's regulations plus a visible date beats a blank space.
         if row:
-            cached = json.loads(row[1])
+            cached = _normalise(json.loads(row[1]))
             cached["fetched_at"] = datetime.datetime.fromisoformat(row[0])
             cached["source_url"] = PUBLIC_LOOKUP_URL
             cached["stale"] = True

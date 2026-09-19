@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import app as flask_app_module  # noqa: E402
 import v4_species_detail as sd  # noqa: E402
 
-PAGES = ["/", "/browse", "/map", "/profile", "/summary", "/failures", "/feedback", "/privacy", "/terms"]
+PAGES = ["/", "/map", "/profile", "/summary", "/failures", "/feedback", "/privacy", "/terms"]
 DATA_ROUTES = ["/sitemap.xml", "/robots.txt", "/manifest.json", "/healthz", "/recommend/feed.json", "/map/data"]
 ARTIFACT = re.compile(r"\{\{|\{%|Traceback|UndefinedError")
 

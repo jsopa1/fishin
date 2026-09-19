@@ -27,7 +27,7 @@ class BottomNavTests(unittest.TestCase):
         cls.client = flask_app_module.app.test_client()
 
     def test_every_page_has_exactly_three_bottom_icons(self):
-        for path in ("/", "/map", "/browse", "/profile", "/fish/walleye", "/privacy"):
+        for path in ("/", "/map", "/profile", "/fish/walleye", "/privacy"):
             nav = bottom_nav(self.client.get(path).data.decode())
             self.assertEqual(len(re.findall(r'class="bottom-nav-item', nav)), 3, path)
             self.assertNotIn("bottom-nav-fab", nav, path)
@@ -61,7 +61,6 @@ class BottomNavTests(unittest.TestCase):
 
         self.assertEqual(active_hrefs("/profile"), ["/profile"])
         self.assertEqual(active_hrefs("/map"), ["/map"])
-        self.assertEqual(active_hrefs("/browse"), ["/map"])  # the directory lives under Explore
 
     def test_my_spot_defaults_to_recommended_and_is_pointed_at_the_last_spot_by_script(self):
         body = self.client.get("/").data.decode()
@@ -82,13 +81,71 @@ class BottomNavTests(unittest.TestCase):
 
     def test_every_old_destination_is_still_reachable(self):
         # The five-item nav is gone from the bottom bar; nothing it linked to was removed.
-        for path in ("/", "/map", "/browse", "/privacy", "/profile"):
+        for path in ("/", "/map", "/privacy", "/profile"):
             self.assertEqual(self.client.get(path).status_code, 200, path)
         header = self.client.get("/").data.decode()
         header = header[header.index("primary-nav"): header.index("</header>")]
-        for href in ("/map", "/browse", "/profile", "/#about"):
+        for href in ("/map", "/profile", "/#about"):
             self.assertIn('href="' + href + '"', header)
 
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DirectoryRetiredTests(unittest.TestCase):
+    """The waterbody directory was outdated once Explore replaced it. No page links to it and the
+    old URL still lands somewhere useful instead of a 404."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def test_the_old_url_redirects_permanently_to_explore(self):
+        for path in ("/browse", "/browse?name=Devils+Lake"):
+            resp = self.client.get(path)
+            self.assertEqual(resp.status_code, 301, path)
+            self.assertTrue(resp.headers["Location"].endswith("/map"), path)
+
+    def test_no_page_links_to_the_directory(self):
+        for path in ("/", "/map", "/profile", "/fish/walleye", "/privacy", "/terms"):
+            body = self.client.get(path).data.decode()
+            self.assertNotIn("Waterbody Directory", body, path)
+            self.assertNotIn('href="/browse"', body, path)
+
+    def test_the_sitemap_no_longer_lists_it(self):
+        self.assertNotIn("/browse", self.client.get("/sitemap.xml").data.decode())
+
+    def test_the_template_is_gone(self):
+        self.assertFalse((Path(__file__).resolve().parents[1] / "templates" / "browse.html").exists())
+
+
+class OneLayoutAtEveryWidth(unittest.TestCase):
+    """The wide view is the phone view: one centred column, fish-only header, three-icon bar."""
+
+    CSS = (Path(__file__).resolve().parents[1] / "static" / "style.css").read_text(encoding="utf-8")
+
+    def wide(self):
+        i = self.CSS.index("/* ---- One layout at every width")
+        return self.CSS[i:self.CSS.index("/* ---- Dark theme", i)]
+
+    def test_the_wide_block_reuses_the_mobile_pieces(self):
+        block = self.wide()
+        self.assertIn("@media (min-width: 768px)", block)
+        for piece in (".wrap { max-width: 560px; }", ".primary-nav { display: none !important; }", ".brand-sub, .brand-word { display: none; }",
+                      ".bottom-nav {", "display: flex;", ".explore-view-toggle { display: inline-flex; }"):
+            self.assertIn(piece, block)
+
+    def test_no_multi_column_grid_survives_on_wide_screens(self):
+        block = self.wide()
+        self.assertIn(".bait-grid, .fish-buckets, .species-dashboard, .species-pick { grid-template-columns: 1fr; }", block)
+        self.assertIn(".explore-layout { display: block; }", block)
+
+    def test_the_bottom_bar_is_the_same_width_as_the_column(self):
+        self.assertIn("width: 560px", self.wide())
+
+    def test_explore_starts_collapsed_like_on_a_phone(self):
+        html = (Path(__file__).resolve().parents[1] / "templates" / "map.html").read_text(encoding="utf-8")
+        self.assertNotIn("matchMedia('(min-width: 768px)')", html)
+

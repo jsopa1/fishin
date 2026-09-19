@@ -171,9 +171,6 @@
         <a href="{{ url_for('map_view') }}" class="{{ 'active' if request.endpoint == 'map_view' else '' }}">
           <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> Explore
         </a>
-        <a href="{{ url_for('browse') }}" class="{{ 'active' if request.endpoint == 'browse' else '' }}">
-          <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg> Waterbody Directory
-        </a>
         <a href="{{ url_for('profile') }}" class="{{ 'active' if request.endpoint == 'profile' else '' }}">
           <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg> Profile
         </a>
@@ -189,7 +186,7 @@
     <a href="{{ url_for('home') }}" id="nav-spot" title="Last visited spot report" class="bottom-nav-item {{ 'active' if request.endpoint == 'spot_detail' else '' }}">
       <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg><span class="sr-only">My spot</span>
     </a>
-    <a href="{{ url_for('map_view') }}" title="Explore map and directory" class="bottom-nav-item bottom-nav-primary {{ 'active' if request.endpoint in ('map_view', 'browse') else '' }}">
+    <a href="{{ url_for('map_view') }}" title="Explore" class="bottom-nav-item bottom-nav-primary {{ 'active' if request.endpoint == 'map_view' else '' }}">
       <svg class="icon" aria-hidden="true"><use href="#icon-explore"/></svg><span class="sr-only">Explore</span>
     </a>
     <a href="{{ url_for('profile') }}" title="Profile" class="bottom-nav-item {{ 'active' if request.endpoint == 'profile' else '' }}">
@@ -255,7 +252,6 @@
       {% endif %}
       <ul class="footer-links">
         <li><a href="{{ url_for('map_view') }}">Explore</a></li>
-        <li><a href="{{ url_for('browse') }}">Waterbody Directory</a></li>
         <li><a href="{{ url_for('summary') }}">Data Summary</a></li>
         <li><a href="{{ url_for('failures') }}">Data Health / Failures</a></li>
         <li><a href="{{ url_for('home') }}#about">About</a></li>

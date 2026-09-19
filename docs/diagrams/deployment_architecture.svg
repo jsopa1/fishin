@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" font-family="Inter, Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2456d6"/></marker>
+  </defs>
+  <rect width="960" height="600" fill="#f8fafc"/>
+  <text x="30" y="38" font-size="20" font-weight="700" fill="#0f172a">fishin: cloud deployment</text>
+  <text x="30" y="60" font-size="12" fill="#475569">Solid = running today · dashed = recommended next step</text>
+
+  <!-- data sources -->
+  <rect x="30" y="90" width="190" height="300" rx="12" fill="#eef2ff" stroke="#c7d2fe"/>
+  <text x="46" y="116" font-size="13" font-weight="700" fill="#1e3a8a">Public data sources</text>
+  <g font-size="12" fill="#1e293b">
+    <text x="46" y="146">USGS water-temp gauges</text>
+    <text x="46" y="172">NOAA NDBC buoys</text>
+    <text x="46" y="198">NWS air temp &amp; weather</text>
+    <text x="46" y="224">WDNR surveys, stocking,</text><text x="46" y="240">regulations, advisories</text>
+    <text x="46" y="266">GBIF sightings</text>
+    <text x="46" y="292">Wikimedia (images, once)</text>
+  </g>
+  <text x="46" y="330" font-size="11" fill="#475569">Every source refreshes at least</text>
+  <text x="46" y="345" font-size="11" fill="#475569">weekly, or it is excluded.</text>
+
+  <!-- GitHub -->
+  <rect x="270" y="90" width="230" height="170" rx="12" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="286" y="116" font-size="13" font-weight="700" fill="#0f172a">GitHub · jsopa1/fishin</text>
+  <rect x="286" y="132" width="198" height="46" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <text x="298" y="152" font-size="12" fill="#1e293b">Actions: refresh every 4 h</text>
+  <text x="298" y="168" font-size="11" fill="#475569">sensors + 60 air-proxy cells</text>
+  <rect x="286" y="188" width="198" height="52" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <text x="298" y="208" font-size="12" fill="#1e293b">Actions: tests on every push</text>
+  <text x="298" y="224" font-size="11" fill="#475569">741 tests must pass</text>
+
+  <!-- Render -->
+  <rect x="550" y="90" width="230" height="300" rx="12" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="566" y="116" font-size="13" font-weight="700" fill="#065f46">Render web service</text>
+  <rect x="566" y="132" width="198" height="60" rx="8" fill="#fff" stroke="#a7f3d0"/>
+  <text x="578" y="152" font-size="12" fill="#1e293b">gunicorn + Flask app</text>
+  <text x="578" y="168" font-size="11" fill="#475569">pages, /recommend/feed.json</text>
+  <text x="578" y="182" font-size="11" fill="#475569">/healthz reads the database</text>
+  <rect x="566" y="202" width="198" height="52" rx="8" fill="#fff" stroke="#a7f3d0"/>
+  <text x="578" y="222" font-size="12" fill="#1e293b">Results database (SQLite)</text>
+  <text x="578" y="238" font-size="11" fill="#475569">read-mostly, ships with deploy</text>
+  <rect x="566" y="264" width="198" height="52" rx="8" fill="#fff" stroke="#f59e0b" stroke-dasharray="5 4"/>
+  <text x="578" y="284" font-size="12" fill="#1e293b">Persistent disk (analytics)</text>
+  <text x="578" y="300" font-size="11" fill="#475569">FISHIN_USER_DB_PATH here</text>
+  <text x="566" y="346" font-size="11" fill="#475569">Auto-deploys on each push,</text>
+  <text x="566" y="361" font-size="11" fill="#475569">incl. the refresh commits.</text>
+
+  <!-- edge -->
+  <rect x="550" y="430" width="230" height="70" rx="12" fill="#fff7ed" stroke="#f59e0b" stroke-dasharray="5 4"/>
+  <text x="566" y="456" font-size="13" font-weight="700" fill="#9a3412">Cloudflare (free) + domain</text>
+  <text x="566" y="474" font-size="11" fill="#475569">TLS, CDN for static + feed,</text>
+  <text x="566" y="488" font-size="11" fill="#475569">absorbs launch-day bursts</text>
+
+  <!-- user -->
+  <rect x="820" y="90" width="112" height="410" rx="12" fill="#faf5ff" stroke="#e9d5ff"/>
+  <text x="836" y="116" font-size="13" font-weight="700" fill="#6b21a8">Angler's</text>
+  <text x="836" y="132" font-size="13" font-weight="700" fill="#6b21a8">phone</text>
+  <g font-size="11" fill="#1e293b">
+    <text x="832" y="164">Ranks spots</text><text x="832" y="178">in the browser</text>
+    <text x="832" y="204">Preferences,</text><text x="832" y="218">saved spots,</text><text x="832" y="232">last spot,</text><text x="832" y="246">location:</text>
+    <text x="832" y="266" font-weight="700">never leave</text><text x="832" y="280" font-weight="700">the device</text>
+  </g>
+
+  <!-- arrows -->
+  <path d="M220 200 H270" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text x="222" y="192" font-size="10" fill="#475569">pull</text>
+  <path d="M500 175 H550" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <text x="500" y="167" font-size="10" fill="#475569">deploy</text>
+  <path d="M220 320 C 400 400, 480 400, 550 330" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#a)" stroke-dasharray="2 0"/>
+  <text x="330" y="398" font-size="10" fill="#475569">live per-visit: weather, regulations</text>
+  <path d="M780 250 H820" stroke="#2456d6" stroke-width="2" fill="none" marker-end="url(#b)"/>
+  <path d="M820 300 H780 V465 " stroke="#f59e0b" stroke-width="2" fill="none" stroke-dasharray="5 4"/>
+  <path d="M780 465 H780" stroke="#f59e0b"/>
+  <text x="640" y="418" font-size="10" fill="#9a3412">browser → CDN → Render</text>
+
+  <!-- next steps -->
+  <rect x="30" y="430" width="470" height="140" rx="12" fill="#fff" stroke="#e2e8f0"/>
+  <text x="46" y="456" font-size="13" font-weight="700" fill="#0f172a">Next steps, in order</text>
+  <g font-size="12" fill="#1e293b">
+    <text x="46" y="480">1. Persistent disk for analytics (a refresh redeploys every 4 h)</text>
+    <text x="46" y="500">2. Starter plan: no 30-60 s cold start after idle</text>
+    <text x="46" y="520">3. Custom domain + Cloudflare in front</text>
+    <text x="46" y="540">4. Ship the DB via object storage, not git commits (repo grows ~MBs/commit)</text>
+    <text x="46" y="560">5. Uptime monitor on /healthz + error alerts</text>
+  </g>
+</svg>

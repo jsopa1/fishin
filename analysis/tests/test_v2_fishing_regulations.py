@@ -127,5 +127,39 @@ class TestConsumptionAdvisory(unittest.TestCase):
         self.assertEqual(result["status"], "statewide")
 
 
+class TestDuplicateWatersAreMergedNotRefused(unittest.TestCase):
+    """Two records for the same water (e.g. two "Lake Michigan" rows with identical rules)
+    are one water, not an ambiguity. Genuinely different waters are all returned so the
+    page can show each one's rules; none is picked for the visitor."""
+
+    @staticmethod
+    def feature(name, wbic, text):
+        return {"attributes": {"WBIC": wbic, "WATERBODY_NAME": name, "ALL_SPECIES": text}}
+
+    def test_identical_duplicates_collapse_to_one_water(self):
+        shaped = regs._shape([self.feature("Lake Michigan", 1, "Daily bag 5"), self.feature("Lake Michigan", 2, "Daily bag 5")])
+        self.assertEqual(shaped["status"], "ok")
+        self.assertEqual(len(shaped["waters"]), 1)
+
+    def test_different_rules_for_the_same_name_are_kept_apart(self):
+        shaped = regs._shape([self.feature("Lake Michigan", 1, "Daily bag 5"), self.feature("Lake Michigan", 2, "Daily bag 3")])
+        self.assertEqual(shaped["status"], "ambiguous")
+        self.assertEqual(len(shaped["waters"]), 2)
+
+    def test_different_waters_are_all_returned(self):
+        shaped = regs._shape([self.feature("Big Lake", 1, "Daily bag 5"), self.feature("Little Creek", 2, "Daily bag 2")])
+        self.assertEqual(shaped["status"], "ambiguous")
+        self.assertEqual({w["waterbody_name"] for w in shaped["waters"]}, {"Big Lake", "Little Creek"})
+
+    def test_an_old_cached_row_is_merged_on_read(self):
+        old = {"status": "ambiguous", "waters": [
+            {"wbic": 1, "waterbody_name": "Lake Michigan", "rules": [{"label": "All species", "text": "x"}]},
+            {"wbic": 2, "waterbody_name": "Lake Michigan", "rules": [{"label": "All species", "text": "x"}]}]}
+        self.assertEqual(regs._normalise(old)["status"], "ok")
+
+    def test_nothing_matched_stays_none(self):
+        self.assertEqual(regs._shape([])["status"], "none")
+
+
 if __name__ == "__main__":
     unittest.main()

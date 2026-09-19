@@ -129,8 +129,13 @@ class TestImages(unittest.TestCase):
         self.assertIn("Public domain", img["credit"])
         self.assertTrue(img["page_url"].startswith("https://commons.wikimedia.org/"))
 
-    def test_a_bait_with_no_verified_image_has_none(self):
-        self.assertIsNone(sd.image_for("baits", "leeches"))
+    def test_a_bait_without_a_photograph_gets_an_original_illustration(self):
+        img = sd.image_for("baits", "leeches")
+        self.assertTrue(img["illustration"])
+        self.assertTrue(img["static_path"].endswith("leeches.svg"))
+
+    def test_an_unknown_bait_has_no_image(self):
+        self.assertIsNone(sd.image_for("baits", "no_such_bait"))
 
     def test_bait_fish_reuse_the_species_image_and_say_so(self):
         img = sd.image_for("baits", "minnows_live")

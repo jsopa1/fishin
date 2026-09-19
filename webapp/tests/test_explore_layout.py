@@ -59,7 +59,8 @@ class ExploreLayoutTests(unittest.TestCase):
         self.assertIn('data-source-type="boat_ramp"', body)
 
     def test_the_directory_is_still_reachable_from_explore(self):
-        self.assertIn('href="/browse"', self._body())
+        self.assertNotIn("/browse", self._body())
+        self.assertNotIn("Waterbody Directory", self._body())
 
     def test_the_bottom_nav_search_shortcut_still_has_something_to_focus(self):
         body = self._body()

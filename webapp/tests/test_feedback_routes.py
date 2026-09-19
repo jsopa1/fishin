@@ -84,7 +84,7 @@ class FeedbackRouteTests(unittest.TestCase):
         self.assertEqual(self._feedback_count(), before)
 
     def test_footer_report_a_problem_link_still_present_on_every_page(self):
-        for path in ("/", "/map", "/browse"):
+        for path in ("/", "/map"):
             body = self.client.get(path).data
             self.assertIn(b"Report a problem", body)
 

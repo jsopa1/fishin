@@ -2070,3 +2070,47 @@ which do not describe a wild adult and fall below this project's sourcing bar, s
 page says so in plain words. The test allows such spots only when every documented species there is one of the
 three not-yet-researched species (Lake Sturgeon, Cisco, Fathead Minnow) and caps the count, so a new unexplained
 gap cannot appear quietly. Lake Sturgeon also lacks a window at about 185 spots where other species do have one.
+
+## 056 — The spot page as drawn; one layout at every width; the directory retired
+
+**Spot page.** The page now follows the wireframe and nothing else: name, location, then Water, Air
+(with its sun / cloud / rain icon), Wind and Moon, then the green Active box, the yellow Inactive box, and
+three buttons - Stocking history, Regulations, Consumption advisory - each opening its own section. Removed:
+the verdict banner, the Conditions / Species / Site-info tabs, the temperature-method write-up, dawn and dusk
+windows, the narrative dump, the WDNR category lists, Directions, and every "not used in the match" footnote.
+The honesty those footnotes carried now lives where it is read: every fish row says how it is known ("Found
+here by: citizen sighting (date)" or "regional (county) record"), every Confirmed / Likely tag explains itself
+when tapped, and the water reading keeps its real / estimated / air-temperature-proxy label. Wind, air and moon
+still never influence any ranking.
+
+**Regulations, ready instead of refused.** Where two regulated waters sat within 100 m the page used to decline to
+show any rules. Exact duplicates (two "Lake Michigan" records with identical rules) are now merged into one
+water, and where genuinely different waters remain, every one is shown with its own name and rules, so nothing is
+guessed and nothing is withheld. Old cached rows are merged on read. Still to do for "ready before the visitor asks":
+regulations and advisories are fetched live on the first visit to a spot (about 2 s) and cached; a weekly pre-fetch
+of all 3,272 spots would remove even that wait.
+
+**The Confirmed tag looked dead.** The popover is position: fixed but the script added the page's scroll offset, so
+anywhere but the top of a long page it opened off-screen. Fixed to viewport coordinates with flip-above and edge
+clamping, verified live at two scroll depths, plus a visible edge and lighter surface in dark mode (the tag text
+itself already met 4.5:1 everywhere, measured).
+
+**Every bait has a picture.** All 27 fish already had verified public-domain photos; 36 of 50 baits had none, because
+the photo search kept rejecting images that did not show the bait and no honest photograph exists for things like stink
+bait or "live bait". Each of the 36 now has an original illustration drawn for this project (one flat style, generated
+by analysis/v4_draw_bait_illustrations.py), dedicated to the public domain under CC0, and credited on the page as
+"Illustration by the fishin project", never as a Commons photo. Tests pin all 50 covered, every file well-formed and
+distinct, and the generator reproducing the committed files.
+
+**One layout at every width.** Wide screens now show the phone design: a single centred 560 px column, the fish-only
+header, the same three-icon bottom bar, the Map | List toggle with collapsed filters on Explore, and one-column
+grids everywhere. The earlier two-column desktop design is gone.
+
+**Waterbody Directory removed.** It was outdated once Explore replaced it. Every link to it (header, footer, home,
+Explore, the old waterbody page's back-link, the sitemap) is gone, the template is deleted, and /browse redirects
+permanently to Explore so old bookmarks still land somewhere useful.
+
+**Not done, and why.** Species with no documented temperature window (for example Chinook and Coho, which have only
+a single preferred point) still sit under "No documented temperature window". Giving them a "likely to bite" reading
+from time of year would be a catch prediction, which #005 and the V0 result rule out; that is a decision for the CEO,
+not something to slip in, and options are laid out in the hand-off.

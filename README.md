@@ -6,7 +6,7 @@ Real government data, real statistical rigor, an honest negative result that res
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![741 tests passing](https://img.shields.io/badge/tests-741%20passing-brightgreen.svg)](#tests)
+[![762 tests passing](https://img.shields.io/badge/tests-762%20passing-brightgreen.svg)](#tests)
 
 ---
 
@@ -48,21 +48,27 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 
 ## Screenshots
 
-**Explore** — a split map/list of 3,272 real WDNR access points, filterable by species, county and access type. Clustered so the statewide view stays usable on a phone.
+The five screens, as they run today (dark theme shown; light and "match my device" are in Profile):
 
 <p align="center">
-  <img src="docs/screenshots/explore.png" alt="Split map and list view of Wisconsin fishing access points, with filter chips for county, access type and species" width="820">
+  <img src="docs/screenshots/v4_recommended.png" alt="Recommended: saved spots, then spots ranked by species in range" width="180">
+  <img src="docs/screenshots/v4_explore.png" alt="Explore: map or list, then filters" width="180">
+  <img src="docs/screenshots/v4_spot.png" alt="Spot: water and air temperature, active and inactive fish" width="180">
+  <img src="docs/screenshots/v4_fish.png" alt="Fish: documented activity, habitat and bait" width="180">
+  <img src="docs/screenshots/v4_profile.png" alt="Profile: preferences stored only on the device" width="180">
 </p>
 
-**A spot report** — the one-stop answer for a single access point: water temperature and how it was obtained, today's low-light windows computed for that exact coordinate, WDNR's stocking record, and the regulations covering that water.
+<p align="center"><b>Recommended · Explore · Spot · Fish · Profile</b></p>
+
+How they connect (the fish logo always returns to Recommended; the bottom bar is My spot · Explore · Profile):
 
 <p align="center">
-  <img src="docs/screenshots/spot.png" alt="Spot detail page showing water temperature, dawn and dusk windows, and WDNR stocking records" width="820">
+  <img src="docs/diagrams/screen_map.svg" alt="Diagram of the five screens and how they link" width="900">
 </p>
 
-| Landing | Waterbody Directory | Mobile |
-|---|---|---|
-| ![Landing page leading with live species matches](docs/screenshots/home.png) | ![Waterbody directory card list with presence tiers](docs/screenshots/browse.png) | ![Mobile spot report with bottom tab navigation](docs/screenshots/mobile.png) |
+- **Launch film:** [`videos/fishin-launch/renders/fishin-launch.mp4`](videos/fishin-launch/renders/fishin-launch.mp4) (47 s, source in [`videos/fishin-launch`](videos/fishin-launch))
+- **Feature messaging and launch copy:** [`docs/marketing/feature_messaging.md`](docs/marketing/feature_messaging.md)
+- **How it is deployed in the cloud:** [`docs/deployment_architecture.md`](docs/deployment_architecture.md), with the launch checklist in [`DEPLOY.md`](DEPLOY.md)
 
 ## The Story: V0 → V1
 
@@ -75,7 +81,7 @@ Deployment-ready for [Render](https://render.com)'s free tier out of the box —
 | **V1 (considered)** | Pivot to real-time acoustic telemetry (GLATOS) for salmon tracking | Investigated and **deferred** — retrospective-only data, confounded coverage — [`DECISIONS.md` #011](DECISIONS.md) |
 | **V1 (shipped)** | Stop trying to predict catch rate. Report real conditions vs. real biology instead | The app in this repo. Scaled statewide, validated at 2,296-waterbody scale, polished, and deployed. |
 
-Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 55 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
+Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 56 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
 
 ## What the app actually does
 
@@ -151,7 +157,7 @@ A later pass closed the gap between "an honest data tool" and "something people 
 
 This entire project — research, statistical evaluation, data pipelines, the desktop review tool, this web app, and its deployment — was built through iterative sessions with **[Claude Code](https://claude.com/claude-code)**, Anthropic's agentic CLI. A few things about *how* it was built are worth calling out for anyone evaluating this as a development-process sample, not just a code sample:
 
-- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 55 numbered decisions, each with its own rationale, including the ones that reversed course.
+- **Every phase was scoped, executed, and gated behind explicit review** before the next began — [`DECISIONS.md`](DECISIONS.md) is the literal, unedited audit trail: 56 numbered decisions, each with its own rationale, including the ones that reversed course.
 - **Negative results were kept, not massaged.** Four independent statistical research cycles came back null. All four shipped in full, because that's what actually happened.
 - **Real bugs were found by actually running the thing at scale**, not just code review. Running the model across all 2,296 waterbodies (not a handful of demo cases) surfaced two silent, previously-undetected defects — a species-name casing mismatch that meant survey-confirmed matches had *never* actually fired in any prior demo, and a county-naming inconsistency that produced duplicate lake entries (caught by literally looking at the app's own output afterward and noticing "Devils Lake" listed twice). Both are documented, fixed, and regression-tested — see [`docs/v1_full_run_report.md`](docs/v1_full_run_report.md).
 - **The UI polish pass was criteria-driven and verified, not vibes-based** — 7 explicit criteria (responsive layout, functional correctness, error handling, performance, honesty of framing, accessibility, attribution), each checked with a real measurement (`scrollWidth` diffs across 3 real viewport widths, WCAG contrast ratios computed and one failure fixed, all 516 interactive elements confirmed keyboard-focusable, live-database query timings) before being marked done. See [`docs/v1_polish_report.md`](docs/v1_polish_report.md).

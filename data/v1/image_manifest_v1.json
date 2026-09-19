@@ -712,6 +712,366 @@
     "artificial_flies": {
       "reuse_bait_image": "streamer_flies_poppers",
       "note": "Generic fly photo shared across fly-type baits."
+    },
+    "leeches": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/leeches.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/leeches.svg"
+    },
+    "nightcrawlers": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/nightcrawlers.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/nightcrawlers.svg"
+    },
+    "small_plugs": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/small_plugs.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/small_plugs.svg"
+    },
+    "small_bullheads": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/small_bullheads.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/small_bullheads.svg"
+    },
+    "spinners_trolling": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/spinners_trolling.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/spinners_trolling.svg"
+    },
+    "worms": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/worms.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/worms.svg"
+    },
+    "insect_larvae": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/insect_larvae.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/insect_larvae.svg"
+    },
+    "crayfish_tails": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/crayfish_tails.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/crayfish_tails.svg"
+    },
+    "shrimp": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/shrimp.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/shrimp.svg"
+    },
+    "fish_pieces": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/fish_pieces.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/fish_pieces.svg"
+    },
+    "jigs_ice_teardrop": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/jigs_ice_teardrop.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/jigs_ice_teardrop.svg"
+    },
+    "tip_ups": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/tip_ups.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/tip_ups.svg"
+    },
+    "bucktail_spinners": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/bucktail_spinners.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/bucktail_spinners.svg"
+    },
+    "insects_live": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/insects_live.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/insects_live.svg"
+    },
+    "small_artificial_lures": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/small_artificial_lures.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/small_artificial_lures.svg"
+    },
+    "stink_bait": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/stink_bait.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/stink_bait.svg"
+    },
+    "meat_strips": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/meat_strips.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/meat_strips.svg"
+    },
+    "dough_balls": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/dough_balls.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/dough_balls.svg"
+    },
+    "frogs": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/frogs.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/frogs.svg"
+    },
+    "spinners": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/spinners.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/spinners.svg"
+    },
+    "plastic_worms": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/plastic_worms.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/plastic_worms.svg"
+    },
+    "spawn": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/spawn.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/spawn.svg"
+    },
+    "live_bait_unspecified": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/live_bait_unspecified.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/live_bait_unspecified.svg"
+    },
+    "spawn_bag": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/spawn_bag.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/spawn_bag.svg"
+    },
+    "flatfish": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/flatfish.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/flatfish.svg"
+    },
+    "dodger_fly_combo": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/dodger_fly_combo.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/dodger_fly_combo.svg"
+    },
+    "yarn_flies": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/yarn_flies.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/yarn_flies.svg"
+    },
+    "hellgrammites": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/hellgrammites.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/hellgrammites.svg"
+    },
+    "dragonfly_larvae": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/dragonfly_larvae.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/dragonfly_larvae.svg"
+    },
+    "surface_baits": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/surface_baits.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/surface_baits.svg"
+    },
+    "live_bait_lmb": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/live_bait_lmb.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/live_bait_lmb.svg"
+    },
+    "surface_plugs": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/surface_plugs.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/surface_plugs.svg"
+    },
+    "jigs_light": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/jigs_light.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/jigs_light.svg"
+    },
+    "jigging_spoons": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/jigging_spoons.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/jigging_spoons.svg"
+    },
+    "finesse_tubes": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/finesse_tubes.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/finesse_tubes.svg"
+    },
+    "crawfish_imitators": {
+      "original": true,
+      "kind": "illustration",
+      "artist": "the fishin project",
+      "license_short": "CC0 1.0 (public domain dedication)",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "page_url": "https://github.com/jsopa1/fishin/blob/main/webapp/static/img/baits/crawfish_imitators.svg",
+      "generator": "analysis/v4_draw_bait_illustrations.py",
+      "file": "webapp/static/img/baits/crawfish_imitators.svg"
     }
   },
   "_rejected_after_review": {

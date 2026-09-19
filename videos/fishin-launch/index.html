@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, height=1080" />
+  <title>fishin launch film</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-500.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 700; src: url("assets/fonts/inter-700.woff2") format("woff2"); }
+    @font-face { font-family: "Inter"; font-weight: 800; src: url("assets/fonts/inter-800.woff2") format("woff2"); }
+    @font-face { font-family: "JetBrains Mono"; font-weight: 500; src: url("assets/fonts/jbmono-500.woff2") format("woff2"); }
+
+    :root {
+      --ink: #070a11; --panel: #0e1424; --line: #232c45; --text: #eef1f7; --muted: #8b95ad;
+      --blue: #5b86f5; --mint: #4cc38a; --amber: #e8c766;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--ink); font-family: "Inter", sans-serif; color: var(--text); }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ink); }
+
+    /* backdrop: soft blue glow + faint grid, shared by every scene */
+    .bg { position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(900px 700px at 78% 30%, rgba(91,134,245,.20), transparent 60%),
+        radial-gradient(800px 600px at 12% 90%, rgba(76,195,138,.10), transparent 60%),
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 80px 80px,
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 80px 80px; }
+
+    .clip { position: absolute; inset: 0; }
+    .scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 150px; }
+    .col { width: 820px; }
+    .tag { font-family: "JetBrains Mono", monospace; font-weight: 500; font-size: 26px; letter-spacing: .18em; color: var(--blue); text-transform: uppercase; }
+    h1, h2 { margin: 0; font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; }
+    h2 { font-size: 104px; margin-top: 26px; }
+    .sub { font-size: 38px; line-height: 1.35; color: var(--muted); margin-top: 34px; font-weight: 500; }
+    .accent { color: var(--blue); } .mint { color: var(--mint); } .amber { color: var(--amber); }
+
+    .pill { display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px; border-radius: 999px; font-size: 30px; font-weight: 700;
+      border: 1.5px solid var(--line); background: rgba(14,20,36,.85); margin: 12px 14px 0 0; }
+    .pill i { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+
+    /* phone frame */
+    .phone { width: 452px; height: 924px; border-radius: 68px; padding: 14px; background: #0b1020; border: 2px solid #2a3557; flex: none;
+      box-shadow: 0 0 0 1px rgba(91,134,245,.25), 0 70px 140px rgba(0,0,0,.65), 0 0 180px rgba(91,134,245,.28); }
+    .screen { position: relative; width: 100%; height: 100%; border-radius: 54px; overflow: hidden; background: #12151a; }
+    .shot { position: absolute; left: 0; top: 0; width: 100%; display: block; }
+
+    /* scene 1 */
+    #s1 .scene { flex-direction: column; gap: 0; text-align: center; }
+    #s1 .mark { width: 190px; height: 190px; }
+    #s1 h1 { font-size: 132px; margin-top: 46px; max-width: 1500px; }
+    #s1 .tag { margin-top: 44px; color: var(--muted); }
+    .w { display: inline-block; }
+
+    /* scene 3: rule cards */
+    #s3 .scene { flex-direction: column; gap: 0; }
+    #s3 h2 { text-align: center; margin-top: 18px; }
+    #s3 .tag { text-align: center; }
+    .steps { display: flex; gap: 26px; margin-top: 70px; }
+    .step { width: 330px; height: 300px; border-radius: 30px; padding: 34px; background: linear-gradient(180deg, #111a30, #0b1122); border: 1.5px solid var(--line); }
+    .step b { font-family: "JetBrains Mono", monospace; font-size: 30px; color: var(--blue); font-weight: 500; }
+    .step p { margin: 22px 0 0; font-size: 40px; font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+    .step small { display: block; margin-top: 16px; font-size: 24px; color: var(--muted); font-weight: 500; }
+    #s3 .foot { margin-top: 56px; font-size: 40px; font-weight: 700; color: var(--amber); text-align: center; }
+
+    /* scene 6: big number */
+    .big { font-size: 300px; font-weight: 800; letter-spacing: -0.06em; line-height: .95; color: var(--text); }
+
+    /* scene 8 */
+    #s8 .scene { flex-direction: column; gap: 0; text-align: center; }
+    #s8 .mark { width: 150px; height: 150px; }
+    #s8 h1 { font-size: 170px; margin-top: 30px; }
+    #s8 .sub { margin-top: 20px; }
+    .url { margin-top: 54px; font-family: "JetBrains Mono", monospace; font-size: 36px; color: var(--blue); letter-spacing: .04em; }
+    .fine { position: absolute; left: 0; right: 0; bottom: 42px; text-align: center; font-size: 22px; color: #8b95ad; letter-spacing: .04em; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="47">
+    <div class="bg"></div>
+
+    <!-- 1 HOOK -->
+    <section id="s1" class="clip" data-start="0" data-duration="4.6">
+      <div class="scene" id="s1-in">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="#5b86f5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+          <path id="m1a" pathLength="1" style="stroke-dasharray:1" d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/>
+          <path id="m1b" pathLength="1" style="stroke-dasharray:1" d="M3 12L1 8M3 12l-2 4M20 9v6"/>
+          <circle id="m1c" cx="15" cy="10.2" r="0.8" fill="#5b86f5" stroke="none"/>
+        </svg>
+        <h1 id="hook"><span class="w">Which</span> <span class="w">fish</span> <span class="w">are</span> <span class="w">in</span> <span class="w">their</span> <span class="w accent">range</span> <span class="w">right</span> <span class="w">now?</span></h1>
+        <div class="tag" id="hooktag">Wisconsin · 3,272 public access points</div>
+      </div>
+    </section>
+
+    <!-- 2 RECOMMENDED -->
+    <section id="s2" class="clip" data-start="4.6" data-duration="7.2">
+      <div class="scene" id="s2-in">
+        <div class="col">
+          <div class="tag" id="s2-tag">01 · Recommended</div>
+          <h2 id="s2-h">Your spots, <span class="accent">ranked on your phone.</span></h2>
+          <div class="sub" id="s2-sub">Saved spots first. Then the places where the most of your species are in range right now.</div>
+          <div id="s2-pills"><span class="pill"><i style="background:var(--mint)"></i>Confirmed</span><span class="pill"><i style="background:var(--amber)"></i>Likely</span><span class="pill">Air-temp proxy, labelled</span></div>
+        </div>
+        <div class="phone" id="ph2"><div class="screen"><img class="shot" id="sh2" src="assets/screens/recommended_tall_dark.png" alt="Recommended screen" /></div></div>
+      </div>
+    </section>
+
+    <!-- 3 THE RULE -->
+    <section id="s3" class="clip" data-start="11.8" data-duration="6">
+      <div class="scene" id="s3-in">
+        <div class="tag">The ranking, in full</div>
+        <h2 id="s3-h">A fixed rule. <span class="accent">Not a prediction.</span></h2>
+        <div class="steps">
+          <div class="step" id="st1"><b>01</b><p>Species in range now</p><small>your targets, if you set any</small></div>
+          <div class="step" id="st2"><b>02</b><p>Evidence strength</p><small>confirmed before likely</small></div>
+          <div class="step" id="st3"><b>03</b><p>Spot type you prefer</p><small>from your Profile</small></div>
+          <div class="step" id="st4"><b>04</b><p>Reading quality</p><small>real, estimated, proxy</small></div>
+          <div class="step" id="st5"><b>05</b><p>Distance</p><small>only if you allow location</small></div>
+        </div>
+        <div class="foot" id="s3-foot">Ranks conditions. Never promises a catch.</div>
+      </div>
+    </section>
+
+    <!-- 4 SPOT -->
+    <section id="s4" class="clip" data-start="17.8" data-duration="7.6">
+      <div class="scene" id="s4-in">
+        <div class="phone" id="ph4"><div class="screen"><img class="shot" id="sh4" src="assets/screens/spot_tall_dark.png" alt="Spot screen" /></div></div>
+        <div class="col">
+          <div class="tag" id="s4-tag">02 · Spot</div>
+          <h2 id="s4-h"><span class="mint">Active</span> fish. <span class="amber">Inactive</span> fish. <span class="accent">And why.</span></h2>
+          <div class="sub" id="s4-sub">Each species sits inside or outside its documented temperature window, with the evidence behind it.</div>
+          <div id="s4-pills"><span class="pill">Water &amp; air temp</span><span class="pill">Wind</span><span class="pill">Moon</span><span class="pill">Regulations</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 FISH -->
+    <section id="s5" class="clip" data-start="25.4" data-duration="7.4">
+      <div class="scene" id="s5-in">
+        <div class="col">
+          <div class="tag" id="s5-tag">03 · Fish</div>
+          <h2 id="s5-h">Every fish, <span class="accent">fully sourced.</span></h2>
+          <div class="sub" id="s5-sub">Documented activity, habitat and the baits agencies recommend, with how to use them.</div>
+          <div id="s5-pills"><span class="pill">27 species</span><span class="pill">Public-domain photos</span><span class="pill">Every claim cited</span></div>
+        </div>
+        <div class="phone" id="ph5"><div class="screen"><img class="shot" id="sh5" src="assets/screens/fish_tall_dark.png" alt="Fish screen" /></div></div>
+      </div>
+    </section>
+
+    <!-- 6 EXPLORE -->
+    <section id="s6" class="clip" data-start="32.8" data-duration="5.2">
+      <div class="scene" id="s6-in">
+        <div class="phone" id="ph6"><div class="screen"><img class="shot" id="sh6" src="assets/screens/explore_dark.png" alt="Explore screen" /></div></div>
+        <div class="col">
+          <div class="tag" id="s6-tag">04 · Explore</div>
+          <div class="big" id="s6-num">0</div>
+          <div class="sub" id="s6-sub" style="margin-top:14px">real public access points. Map or list, then filter.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 PROFILE -->
+    <section id="s7" class="clip" data-start="38" data-duration="5.2">
+      <div class="scene" id="s7-in">
+        <div class="col">
+          <div class="tag" id="s7-tag">05 · Profile</div>
+          <h2 id="s7-h">Tuned to how you fish. <span class="accent">Kept on your device.</span></h2>
+          <div id="s7-pills"><span class="pill">No account</span><span class="pill">Location never leaves your phone</span><span class="pill">Light or dark</span></div>
+        </div>
+        <div class="phone" id="ph7"><div class="screen"><img class="shot" id="sh7" src="assets/screens/profile_tall_dark.png" alt="Profile screen" /></div></div>
+      </div>
+    </section>
+
+    <!-- 8 CLOSE -->
+    <section id="s8" class="clip" data-start="43.2" data-duration="3.8">
+      <div class="scene" id="s8-in">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="#5b86f5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+          <path id="m8a" pathLength="1" style="stroke-dasharray:1" d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/>
+          <path id="m8b" pathLength="1" style="stroke-dasharray:1" d="M3 12L1 8M3 12l-2 4M20 9v6"/>
+          <circle cx="15" cy="10.2" r="0.8" fill="#5b86f5" stroke="none"/>
+        </svg>
+        <h1 id="s8-h">fishin</h1>
+        <div class="sub" id="s8-sub">Wisconsin fishing intelligence</div>
+        <div class="url" id="s8-url">Open source · github.com/jsopa1/fishin</div>
+      </div>
+      <div class="fine">Conditions and research, not a catch prediction. Sensors refresh every four hours.</div>
+    </section>
+  </div>
+
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const SW = 424 / 1000; // screen width / screenshot width: converts screenshot px to on-screen px
+    const scenes = [
+      ["s1-in", 0, 4.6], ["s2-in", 4.6, 7.2], ["s3-in", 11.8, 6], ["s4-in", 17.8, 7.6],
+      ["s5-in", 25.4, 7.4], ["s6-in", 32.8, 5.2], ["s7-in", 38, 5.2], ["s8-in", 43.2, 3.8],
+    ];
+    // whole-scene fades (children only: the framework owns clip visibility)
+    scenes.forEach(([id, t, d], i) => {
+      if (i > 0) tl.fromTo("#" + id, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, t);
+      if (i < scenes.length - 1) tl.to("#" + id, { opacity: 0, duration: 0.4, ease: "power2.in" }, t + d - 0.4);
+    });
+
+    const rise = (sel, t, y = 40, d = 0.7) => tl.fromTo(sel, { y, opacity: 0 }, { y: 0, opacity: 1, duration: d, ease: "power3.out" }, t);
+    const phoneIn = (sel, t, x) => tl.fromTo(sel, { x, opacity: 0, scale: 0.94 }, { x: 0, opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, t);
+    const scroll = (sel, t, from, to, d, ease = "power2.inOut") =>
+      tl.fromTo(sel, { y: -from * SW }, { y: -to * SW, duration: d, ease }, t);
+
+    /* 1 hook */
+    tl.fromTo("#m1a", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.inOut" }, 0.15);
+    tl.fromTo("#m1b", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 0.7);
+    tl.fromTo("#m1c", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.1);
+    tl.fromTo("#hook .w", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.09 }, 0.9);
+    tl.fromTo("#hooktag", { opacity: 0 }, { opacity: 1, duration: 0.7 }, 2.3);
+
+    /* 2 recommended */
+    rise("#s2-tag", 4.9); rise("#s2-h", 5.05, 50, 0.8); rise("#s2-sub", 5.5); rise("#s2-pills", 5.9, 30);
+    phoneIn("#ph2", 4.9, 120);
+    scroll("#sh2", 5.7, 0, 760, 4.6);
+
+    /* 3 rule */
+    rise("#s3-in .tag", 12.1); rise("#s3-h", 12.2, 50, 0.8);
+    ["#st1", "#st2", "#st3", "#st4", "#st5"].forEach((s, i) => rise(s, 13.0 + i * 0.32, 60, 0.7));
+    rise("#s3-foot", 15.7, 30, 0.7);
+
+    /* 4 spot */
+    phoneIn("#ph4", 18.1, -120);
+    rise("#s4-tag", 18.3); rise("#s4-h", 18.45, 50, 0.8); rise("#s4-sub", 18.9); rise("#s4-pills", 19.3, 30);
+    scroll("#sh4", 18.9, 0, 1790, 2.6);
+    scroll("#sh4", 22.0, 1790, 3420, 2.3);
+
+    /* 5 fish */
+    rise("#s5-tag", 25.7); rise("#s5-h", 25.85, 50, 0.8); rise("#s5-sub", 26.3); rise("#s5-pills", 26.7, 30);
+    phoneIn("#ph5", 25.7, 120);
+    scroll("#sh5", 26.4, 0, 1110, 1.7);
+    scroll("#sh5", 28.4, 1110, 1900, 1.4);
+    scroll("#sh5", 30.2, 1900, 5060, 2.3);
+
+    /* 6 explore */
+    phoneIn("#ph6", 33.1, -120);
+    rise("#s6-tag", 33.3); rise("#s6-num", 33.45, 60, 0.8); rise("#s6-sub", 34.0);
+    const n = { v: 0 };
+    tl.to(n, { v: 3272, duration: 1.9, ease: "power3.out", onUpdate() { document.getElementById("s6-num").textContent = Math.round(n.v).toLocaleString("en-US"); } }, 33.5);
+    tl.fromTo("#sh6", { scale: 1.0, transformOrigin: "50% 0%" }, { scale: 1.06, duration: 4.4, ease: "none" }, 33.2);
+
+    /* 7 profile */
+    rise("#s7-tag", 38.3); rise("#s7-h", 38.45, 50, 0.8); rise("#s7-pills", 39.2, 30);
+    phoneIn("#ph7", 38.3, 120);
+    scroll("#sh7", 39.0, 0, 1300, 3.6);
+
+    /* 8 close */
+    tl.fromTo("#m8a", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, 43.5);
+    tl.fromTo("#m8b", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.6, ease: "power2.inOut" }, 43.9);
+    rise("#s8-h", 44.0, 40, 0.8); rise("#s8-sub", 44.4, 30, 0.7); rise("#s8-url", 44.9, 24, 0.7);
+
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>

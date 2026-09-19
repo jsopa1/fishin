@@ -87,7 +87,7 @@ class AnalyticsTests(unittest.TestCase):
 
     def test_pageviews_share_a_session_id_across_requests_in_one_browser_session(self):
         self.client.get("/")
-        self.client.get("/browse")
+        self.client.get("/map")
         rows = self._events("pageview")
         session_ids = {r["session_id"] for r in rows[-2:]}
         self.assertEqual(len(session_ids), 1)

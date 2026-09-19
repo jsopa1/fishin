@@ -57,16 +57,20 @@
     if (popover) popover.hidden = true;
   }
 
+  // The popover is position: fixed, so it is placed in VIEWPORT coordinates. (It
+  // used to add the page scroll offset, which pushed it off-screen anywhere but
+  // the top of a long page - the tag looked dead.) It opens below the tag, flips
+  // above when there is no room, and is clamped inside the viewport.
   function showPopoverFor(tagEl, text) {
     var pop = ensurePopover();
     pop.textContent = text;
     pop.hidden = false;
     var rect = tagEl.getBoundingClientRect();
-    var top = rect.bottom + window.scrollY + 6;
-    var left = rect.left + window.scrollX;
-    // Measure after making visible so offsetWidth is real, then clamp to viewport.
-    var maxLeft = window.scrollX + document.documentElement.clientWidth - pop.offsetWidth - 8;
-    if (left > maxLeft) left = Math.max(8, maxLeft);
+    var vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    var w = pop.offsetWidth, h = pop.offsetHeight;
+    var top = rect.bottom + 8;
+    if (top + h > vh - 8) top = Math.max(8, rect.top - h - 8);
+    var left = Math.min(Math.max(8, rect.left), Math.max(8, vw - w - 8));
     pop.style.top = top + "px";
     pop.style.left = left + "px";
   }

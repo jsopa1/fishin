@@ -7,7 +7,7 @@
 {% else %}
 <div class="explore-head">
   <h1>Explore</h1>
-  <p>Tap any spot for water temperature, likely species, and why — {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }} real Wisconsin access points. <a href="{{ url_for('browse') }}">Browse the waterbody directory instead</a>.</p>
+  <p>Tap any spot for water temperature, likely species, and why — {{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }} real Wisconsin access points.</p>
 </div>
 
 <div class="explore-view-toggle view-toggle" role="group" aria-label="Switch between map and list view">
@@ -365,7 +365,6 @@
   // The bottom-nav search shortcut links here as #explore-search --
   // focus the field so a tap lands ready to type.
   var filterPanel = document.getElementById('explore-filter-panel');
-  if (filterPanel && window.matchMedia('(min-width: 768px)').matches) filterPanel.open = true;
   if (window.location.hash === '#explore-search') {
     if (filterPanel) filterPanel.open = true;
     var nameInput = document.querySelector('.explore-filters input[name="waterbody"]');

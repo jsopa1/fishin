@@ -18,7 +18,7 @@ import threading
 import zoneinfo
 from pathlib import Path
 
-from flask import Flask, Response, jsonify, render_template, request, session, url_for
+from flask import Flask, Response, jsonify, redirect, render_template, request, session, url_for
 
 REPO_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(REPO_ROOT / "ui"))
@@ -220,35 +220,9 @@ def home():
 
 @app.route("/browse")
 def browse():
-    conn = get_conn()
-    if conn is None:
-        return render_template(
-            "browse.html", results=[], species_list=[], tier_choices=data.TIER_CHOICES, filters={},
-            data_unavailable=True, counts=None,
-        ), 503
-
-    raw_tier = request.args.get("tier", "all")
-    tier_note = None
-    if raw_tier not in data.TIER_CHOICES:
-        tier_note = f'"{raw_tier}" is not a recognized presence tier -- showing all tiers instead.'
-        raw_tier = "all"
-
-    filters = {
-        "name": request.args.get("name", "").strip() or None,
-        "county": request.args.get("county", "").strip() or None,
-        "species": request.args.get("species", "").strip() or None,
-        "tier": raw_tier,
-    }
-    results = data.search_waterbodies(
-        conn, name=filters["name"], county=filters["county"], species=filters["species"], tier=filters["tier"]
-    )
-    species_list = data.list_distinct_species(conn)
-    counts = data.get_summary_counts(conn)
-    conn.close()
-    return render_template(
-        "browse.html", results=results, species_list=species_list, tier_choices=data.TIER_CHOICES, counts=counts,
-        filters=filters, tier_note=tier_note, data_unavailable=False,
-    )
+    """The waterbody directory was retired (the Explore screen replaced it). Old links
+    and bookmarks land on Explore instead of a 404."""
+    return redirect(url_for("map_view"), code=301)
 
 
 @app.route("/waterbody")
@@ -616,7 +590,7 @@ def sitemap():
     """Only the pages worth indexing (including the durable species reports). Spot pages are deliberately excluded:
     there are 3,272 of them, they are keyed by coordinate, and their value
     is current conditions rather than durable content."""
-    pages = [url_for(e, _external=True) for e in ("home", "map_view", "browse")]
+    pages = [url_for(e, _external=True) for e in ("home", "map_view")]
     pages += [url_for("fish_detail", species_slug=s["slug"], _external=True) for s in species_detail.list_species()]
     urls = "".join(f"<url><loc>{p}</loc><changefreq>daily</changefreq></url>" for p in pages)
     xml = f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>'
