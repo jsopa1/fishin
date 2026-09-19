@@ -137,6 +137,8 @@ const c0 = R.rank([spot("x", { a: [["WALLEYE", "c"], ["BLUEGILL", "l"]], s: ["MU
 out.card = { count: c0.count, confirmed: c0.confirmed, inRange: c0.inRange.map((e) => e.species + ":" + e.tier), spawning: c0.spawning, quality: c0.quality, url: c0.url };
 
 // 16. Alphabetical sort is independent of the ranking.
+const named = R.rank([spot("x", { a: [["WALLEYE", "c"]] })], { prefs: P({ spotTypes: { boat_ramp: "prefer", boat_carry_in: "ok", shore_fishing: "avoid" } }) }).disclosure;
+out.namedTypes = { prefer: /preferring boat launches/.test(named), avoid: /avoiding shore spots/.test(named), vague: /spot type\(s\)/.test(named) };
 out.alpha = R.sortAlphabetical([spot("b", { w: "Zed" }), spot("a", { w: "Alpha" })]).map((s) => s.w);
 out.alphaCase = R.sortAlphabetical([spot("x", { w: "Zed" }), spot("CHEROKEE", { w: "Lake", n: "CHEROKEE PARK" }), spot("c", { w: "Lake", n: "Crystal Lake" })]).map((s) => s.n);
 // 17. Explore (rankOnly): preferences order but never hide, the radius does not apply, and the
@@ -295,6 +297,12 @@ class RecommendJsTests(unittest.TestCase):
         c = self.out["cardHtml"]
         for key, value in c.items():
             self.assertTrue(value, key)
+
+    def test_the_disclosure_names_the_preferred_and_avoided_spot_types(self):
+        n = self.out["namedTypes"]
+        self.assertTrue(n["prefer"])
+        self.assertTrue(n["avoid"])
+        self.assertFalse(n["vague"])
 
     def test_distance_sits_beside_the_spot_name_like_the_wireframe(self):
         self.assertTrue(self.out["distanceBesideName"])

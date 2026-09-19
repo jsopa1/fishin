@@ -74,10 +74,30 @@ class FeedContentTests(unittest.TestCase):
             self.assertEqual(sorted(x[0] for x in row["i"]), sorted(r["species"] for r in activity["inactive"]), row["n"])
             resolution = (detail["temperature"] or {}).get("resolution")
             expected_q = {"matched_waterbody_real": "real", "interpolated_nearby": "estimated",
-                          "matched_waterbody_proxy": "proxy"}.get(resolution)
+                          "matched_waterbody_proxy": "proxy", "spot_air_proxy": "proxy"}.get(resolution)
             self.assertEqual(row["q"], expected_q, row["n"])
             checked += 1
         self.assertGreaterEqual(checked, 40)
+
+    def test_no_spot_is_left_without_a_temperature(self):
+        self.assertEqual([r["n"] for r in self.spots if r["q"] is None], [])
+
+    def test_a_spot_without_any_windowed_species_is_only_ever_for_a_documented_reason(self):
+        # Every spot has species evidence. A spot can still show no windowed species
+        # when everything documented there is a species whose feeding window has not
+        # been researched to the project's standard (Lake Sturgeon: only aquaculture
+        # rearing studies exist; Cisco: ambiguous source table; Fathead Minnow: not a
+        # target). Those spots say so on their page; this pins the list so a new
+        # unexplained gap cannot appear unnoticed.
+        unresearched = {"LAKE STURGEON", "CISCO", "FATHEAD MINNOW"}
+        gaps = [r for r in self.spots if not (r["a"] or r["s"] or r["i"])]
+        self.assertLessEqual(len(gaps), 5)
+        for r in gaps:
+            detail = data.get_spot_detail(self.conn, r["lat"], r["lon"], r["n"])
+            cats = detail["species_categories"]
+            names = {e["species"] for e in cats["confirmed_sightings"] + cats["likely_species"]}
+            self.assertTrue(names, r["n"])
+            self.assertTrue(names <= unresearched, (r["n"], names))
 
     def test_the_feed_contains_nothing_about_a_visitor(self):
         blob = json.dumps(self.feed).lower()

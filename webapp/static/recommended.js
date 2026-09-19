@@ -7,7 +7,6 @@
   var P = window.FishinPrefs, R = window.FishinRecommend;
   if (!P || !R) return;
 
-  var TYPE_LABEL = { boat_ramp: "Boat launch", boat_carry_in: "Carry-in", shore_fishing: "Shore spot" };
   var els = {
     loading: document.getElementById("rec-loading"),
     status: document.getElementById("rec-status"),
@@ -39,8 +38,8 @@
     }
     var bits = [];
     if (prefs.species.length) bits.push(prefs.species.length + " target species");
-    var prefer = P.SPOT_TYPES.filter(function (t) { return prefs.spotTypes[t] === "prefer"; }).map(function (t) { return TYPE_LABEL[t].toLowerCase() + "s"; });
-    var avoid = P.SPOT_TYPES.filter(function (t) { return prefs.spotTypes[t] === "avoid"; }).map(function (t) { return TYPE_LABEL[t].toLowerCase() + "s"; });
+    var prefer = P.SPOT_TYPES.filter(function (t) { return prefs.spotTypes[t] === "prefer"; }).map(function (t) { return R.TYPE_PLURAL[t]; });
+    var avoid = P.SPOT_TYPES.filter(function (t) { return prefs.spotTypes[t] === "avoid"; }).map(function (t) { return R.TYPE_PLURAL[t]; });
     if (prefer.length) bits.push("prefer " + prefer.join(", "));
     if (avoid.length) bits.push("avoid " + avoid.join(", "));
     bits.push(prefs.maxMiles ? "within " + prefs.maxMiles + " miles" : "any distance");

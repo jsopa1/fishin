@@ -2047,3 +2047,26 @@ every entry as before.
 After this, of the 27 species: 24 have at least one sourced bait, 2 are marked not an angling target, and 1
 (Cisco) is an angling target with an honest "none documented". Lake Sturgeon (2) and White Bass (3) have the
 fewest, which reflects their sources, not a gap in the search.
+
+## 055 — Data populated, every page verified, and the one gap deliberately left
+
+The spot air-proxy table (#052) was populated in the committed database by running the refresh against the
+live National Weather Service API (60 cells, 60 succeeded, about 76 s). Result: all 3,272 access points now
+resolve a temperature, checked by a test on the feed itself rather than only asserted here.
+
+Every page was crawled: 547 URLs (every route, all 27 fish pages, a sample of spot pages, and every linked
+image, stylesheet and script) returned 200 with no template errors, and every spot page carries a fish section.
+The crawl is kept as a test (webapp/tests/test_every_page_works.py), minus spot pages, which call live services.
+Recommended and Profile were also exercised as a user would: preferences set through the real Profile controls
+(two target species, prefer boat launches, avoid shore spots, 100 miles, light theme), then a location placed in
+Vilas County, one of the areas that previously had no temperature. Results were boat launches only, distances in
+miles, confirmed target species first, and the disclosure naming exactly the preferences applied. This surfaced
+two wording flaws, now fixed: "boat launchs" and a vague "avoiding 1 spot type(s)" (types are now named).
+
+One fish gap remains by design, and a test pins it. Of 3,272 spots exactly one (Mistwood Public Access, Lincoln
+County) has no species with a temperature window, because its only documented species is Lake Sturgeon. The only
+sources found for a Lake Sturgeon feeding or growth temperature are hatchery rearing studies on juvenile fish,
+which do not describe a wild adult and fall below this project's sourcing bar, so no window was invented. The spot
+page says so in plain words. The test allows such spots only when every documented species there is one of the
+three not-yet-researched species (Lake Sturgeon, Cisco, Fathead Minnow) and caps the count, so a new unexplained
+gap cannot appear quietly. Lake Sturgeon also lacks a window at about 185 spots where other species do have one.

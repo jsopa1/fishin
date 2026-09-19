@@ -25,6 +25,7 @@
   "use strict";
 
   var KM_PER_MILE = 1.609344;
+  var TYPE_PLURAL = { boat_ramp: "boat launches", boat_carry_in: "carry-ins", shore_fishing: "shore spots" };
   var LADDER_MILES = [50, 100, 200]; // then statewide
   var MIN_RESULTS = 5;               // fewer candidates than this inside the radius -> widen it
   var DISPLAY = 10;
@@ -175,8 +176,9 @@
     ];
     var applied = [];
     if (meta.preferencesApplied.species.length) applied.push("target species: " + meta.preferencesApplied.species.length + " selected");
-    if (meta.preferencesApplied.preferTypes.length) applied.push("preferred spot types");
-    if (meta.preferencesApplied.avoidTypes.length) applied.push("avoiding " + meta.preferencesApplied.avoidTypes.length + " spot type(s)");
+    var plural = function (t) { return TYPE_PLURAL[t] || t; };
+    if (meta.preferencesApplied.preferTypes.length) applied.push("preferring " + meta.preferencesApplied.preferTypes.map(plural).join(", "));
+    if (meta.preferencesApplied.avoidTypes.length) applied.push("avoiding " + meta.preferencesApplied.avoidTypes.map(plural).join(", "));
     lines.push(applied.length ? "Your Profile preferences applied: " + applied.join(", ") + "." : "No Profile preferences set, so every species and spot type counts equally.");
     if (meta.rankOnly) {
       lines.push("Your filters decide which spots are listed; preferences only change their order.");
@@ -313,6 +315,6 @@
 
   return {
     rank: rank, cardHtml: cardHtml, sortAlphabetical: sortAlphabetical, haversineKm: haversineKm,
-    KM_PER_MILE: KM_PER_MILE, MIN_RESULTS: MIN_RESULTS, DISPLAY: DISPLAY, MAX_SAVED: MAX_SAVED,
+    KM_PER_MILE: KM_PER_MILE, TYPE_PLURAL: TYPE_PLURAL, MIN_RESULTS: MIN_RESULTS, DISPLAY: DISPLAY, MAX_SAVED: MAX_SAVED,
   };
 });
