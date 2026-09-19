@@ -530,6 +530,42 @@ class CurrentConditionsTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
 
 
+class AirTemperatureAndSkyTests(unittest.TestCase):
+    """Wireframe 2 shows air temperature with a sun/rain icon in the spot header.
+    It is informational only, like wind and pressure."""
+
+    @classmethod
+    def setUpClass(cls):
+        flask_app_module.app.testing = True
+        cls.client = flask_app_module.app.test_client()
+
+    def _spot_body(self, conditions):
+        p = self.client.get("/map/data").get_json()["points"][0]
+        with mock.patch.object(flask_app_module.current_conditions, "get_current_conditions", return_value=conditions):
+            return self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+
+    def test_air_temperature_and_a_sky_icon_are_shown_and_labelled_as_not_used(self):
+        body = self._spot_body({"status": "ok", "air_temp_f": 68, "sky": "Partly Cloudy", "sky_kind": "partly",
+                                "wind_speed_mph": 4.0, "wind_direction_compass": "N", "pressure_inhg": 30.0})
+        block = body[body.index("verdict-stat-sky"):][:700]
+        self.assertIn("68°F", block)
+        self.assertIn("Partly Cloudy", block)
+        self.assertIn("#icon-partly", block)
+        self.assertIn("not used in the match", block)
+
+    def test_an_unrecognised_sky_shows_the_temperature_without_an_icon(self):
+        body = self._spot_body({"status": "ok", "air_temp_f": 50, "sky": "Odd Weather", "sky_kind": None,
+                                "wind_speed_mph": None, "wind_direction_compass": None, "pressure_inhg": None})
+        block = body[body.index("verdict-stat-sky"):][:500]
+        self.assertIn("50°F", block)
+        self.assertNotIn("#icon-", block)
+
+    def test_an_older_cached_reading_without_air_temperature_shows_no_empty_block(self):
+        body = self._spot_body({"status": "ok", "wind_speed_mph": 4.0, "wind_direction_compass": "N", "pressure_inhg": 30.0})
+        self.assertNotIn('class="verdict-stat verdict-stat-sky"', body)
+        self.assertNotIn("°F | air temperature", body)
+
+
 class MoonPhaseTests(unittest.TestCase):
     """Requested directly by a real customer. Shown as plain astronomical
     fact -- evidence for a fish-activity effect is mixed at best (mostly

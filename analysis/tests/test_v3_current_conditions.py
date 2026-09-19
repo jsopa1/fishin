@@ -72,6 +72,65 @@ class TestUnitConversion(unittest.TestCase):
         self.assertEqual(result["station"], "KMSN")
 
 
+class TestSkyKind(unittest.TestCase):
+    def test_common_station_descriptions_map_to_an_icon(self):
+        cases = {
+            "Clear": "sun", "Sunny": "sun", "Fair": "sun",
+            "Partly Cloudy": "partly", "Mostly Cloudy": "cloud", "Overcast": "cloud",
+            "Light Rain": "rain", "Rain Showers": "rain", "Drizzle": "rain",
+            "Thunderstorm in Vicinity": "storm", "Thunderstorm with Rain": "storm",
+            "Light Snow": "snow", "Freezing Rain": "rain", "Fog/Mist": "fog", "Haze": "fog",
+        }
+        for text, kind in cases.items():
+            self.assertEqual(conditions.sky_kind(text), kind, text)
+
+    def test_unrecognised_or_missing_text_gives_no_icon_not_a_guess(self):
+        self.assertIsNone(conditions.sky_kind("Tornado Watch"))
+        self.assertIsNone(conditions.sky_kind(""))
+        self.assertIsNone(conditions.sky_kind(None))
+
+
+class TestAirTemperatureParsing(unittest.TestCase):
+    def _run(self, props):
+        import json
+
+        class R:
+            def __init__(self, p):
+                self.p = p
+
+            def read(self):
+                return json.dumps(self.p).encode("utf-8")
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+        seq = iter([
+            {"properties": {"observationStations": "https://api.weather.gov/stations"}},
+            {"features": [{"id": "https://api.weather.gov/stations/KMSN"}]},
+            {"properties": props},
+        ])
+        with mock.patch.object(conditions.urllib.request, "urlopen", side_effect=lambda *a, **k: R(next(seq))):
+            return conditions._query_nws(43.0, -89.0)
+
+    def test_air_temperature_and_sky_are_reported_from_the_observation(self):
+        r = self._run({"temperature": {"value": 20.0}, "textDescription": "Partly Cloudy",
+                       "windSpeed": {"value": None}, "barometricPressure": {"value": None}})
+        self.assertEqual(r["status"], "ok")
+        self.assertEqual(r["air_temp_f"], 68)
+        self.assertEqual(r["air_temp_c"], 20.0)
+        self.assertEqual(r["sky"], "Partly Cloudy")
+        self.assertEqual(r["sky_kind"], "partly")
+
+    def test_an_observation_with_only_a_temperature_is_still_usable(self):
+        self.assertEqual(self._run({"temperature": {"value": 10.0}})["status"], "ok")
+
+    def test_an_observation_with_nothing_to_show_is_skipped(self):
+        self.assertEqual(self._run({})["status"], "none")
+
+
 class TestCurrentConditionsLookup(unittest.TestCase):
     def setUp(self):
         self.conn = sqlite3.connect(":memory:")

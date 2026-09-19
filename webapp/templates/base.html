@@ -130,6 +130,32 @@
   <symbol id="icon-book" viewBox="0 0 24 24">
     <path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4z"/><path d="M20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>
   </symbol>
+  <symbol id="icon-explore" viewBox="0 0 24 24">
+    <path d="M9 4L3 6v14l6-2 6 2 6-2V4l-3 1"/><path d="M9 4v14M15 20v-5"/>
+    <path d="M17 11s3-2.9 3-5a3 3 0 0 0-6 0c0 2.1 3 5 3 5z"/><circle cx="17" cy="6" r="1"/>
+  </symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+  </symbol>
+  <symbol id="icon-cloud" viewBox="0 0 24 24">
+    <path d="M7 18a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 9.5a4.25 4.25 0 0 1 .5 8.5z"/>
+  </symbol>
+  <symbol id="icon-partly" viewBox="0 0 24 24">
+    <circle cx="8" cy="8" r="2.6"/><path d="M8 2v1.6M2 8h1.6M3.8 3.8l1.1 1.1M12.2 3.8l-1.1 1.1"/>
+    <path d="M9 20a3.5 3.5 0 0 1-.4-7 4.8 4.8 0 0 1 9.2 1.2A3.4 3.4 0 0 1 17.5 20z"/>
+  </symbol>
+  <symbol id="icon-rain" viewBox="0 0 24 24">
+    <path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/>
+  </symbol>
+  <symbol id="icon-snow" viewBox="0 0 24 24">
+    <path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/>
+  </symbol>
+  <symbol id="icon-storm" viewBox="0 0 24 24">
+    <path d="M7 14a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 5.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M12 13l-2.5 4h3L11 21"/>
+  </symbol>
+  <symbol id="icon-fog" viewBox="0 0 24 24">
+    <path d="M4 9h16M2 13h16M6 17h16"/>
+  </symbol>
   <symbol id="icon-user" viewBox="0 0 24 24">
     <circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>
   </symbol>
@@ -139,7 +165,7 @@
     <div class="wrap">
       <a class="brand" href="{{ url_for('home') }}" aria-label="fishin - Recommended">
         <svg class="icon icon-lg brand-mark" aria-hidden="true"><use href="#icon-fish"/></svg>
-        fishin <span class="brand-sub">Wisconsin Fishing Intelligence</span>
+        <span class="brand-word">fishin</span> <span class="brand-sub">Wisconsin Fishing Intelligence</span>
       </a>
       <nav class="primary-nav" id="primary-nav">
         <a href="{{ url_for('map_view') }}" class="{{ 'active' if request.endpoint == 'map_view' else '' }}">
@@ -160,14 +186,14 @@
   </header>
 
   <nav class="bottom-nav" aria-label="Primary">
-    <a href="{{ url_for('home') }}" id="nav-spot" class="bottom-nav-item {{ 'active' if request.endpoint == 'spot_detail' else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg><span>My spot</span>
+    <a href="{{ url_for('home') }}" id="nav-spot" title="Last visited spot report" class="bottom-nav-item {{ 'active' if request.endpoint == 'spot_detail' else '' }}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-list"/></svg><span class="sr-only">My spot</span>
     </a>
-    <a href="{{ url_for('map_view') }}" class="bottom-nav-item {{ 'active' if request.endpoint in ('map_view', 'browse') else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg><span>Explore</span>
+    <a href="{{ url_for('map_view') }}" title="Explore map and directory" class="bottom-nav-item bottom-nav-primary {{ 'active' if request.endpoint in ('map_view', 'browse') else '' }}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-explore"/></svg><span class="sr-only">Explore</span>
     </a>
-    <a href="{{ url_for('profile') }}" class="bottom-nav-item {{ 'active' if request.endpoint == 'profile' else '' }}">
-      <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg><span>Profile</span>
+    <a href="{{ url_for('profile') }}" title="Profile" class="bottom-nav-item {{ 'active' if request.endpoint == 'profile' else '' }}">
+      <svg class="icon" aria-hidden="true"><use href="#icon-user"/></svg><span class="sr-only">Profile</span>
     </a>
   </nav>
   <script>

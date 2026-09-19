@@ -1943,3 +1943,28 @@ affect the order, and the disclosure line sits above the list. The card layout i
 so a spot reads the same on both screens. Filters, view and sort now survive a trip through the bottom
 nav using sessionStorage (this tab only), with a "Reset filters" link. A-Z folds case, since WDNR
 names arrive in both ALL-CAPS and mixed case and a code-point sort put "CHEROKEE" ahead of "Crystal".
+
+## 051 — Closing the gaps between the built UI and the wireframes
+
+A side-by-side pass of the five wireframes against the running app found four differences, all
+fixed. (1) The bottom bar is now icons only, as drawn: a list icon for the last visited spot, a
+larger folded-map-with-pin icon for Explore, a person icon for Profile; the words remain as
+screen-reader text and tooltips. (2) On a phone the header is just the centred fish, which is the
+way home; the wordmark and tagline remain on desktop. (3) Recommended opens with "Saved Spots" then
+"Recommended Spots" as drawn, the saved section is always present (with an empty-state hint rather
+than vanishing), the distance sits beside the spot name, and the page title is kept for screen
+readers only. (4) The spot header now shows air temperature with a sun / cloud / rain / snow / storm
+/ fog icon, as drawn.
+
+The air reading comes from the same National Weather Service observation already fetched for wind
+and pressure, so it adds no new source and no new freshness burden. The icon is chosen from the
+station's own text description by a fixed keyword list ("thunder" wins over "rain", and so on); text
+it does not recognise shows the temperature with no icon rather than a guessed one. Like wind,
+pressure and moon phase, it is labelled "not used in the match" and never influences ranking or the
+verdict. A cached reading saved before this change has no air temperature, so the block is simply
+omitted until the cache refreshes; a template guard and a test cover that case, since an undefined
+Jinja value passes an "is not none" check and would otherwise render an empty box.
+
+Noted, not changed: the weather cache table lives in the same SQLite file as the results, which is
+why the committed database shows as modified after the app has run. It is runtime cache, not a data
+change, and is deliberately left out of commits.

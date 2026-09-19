@@ -134,6 +134,13 @@ class RecommendedScreenTests(unittest.TestCase):
         self.assertLess(self.body.index('id="recommended"'), self.body.index('class="hero"'))
         self.assertEqual(len(re.findall(r"<h1[ >]", self.body)), 1)
 
+    def test_saved_spots_come_first_then_recommended_spots_as_in_the_wireframe(self):
+        self.assertLess(self.body.index("Saved Spots"), self.body.index("Recommended Spots"))
+
+    def test_the_saved_section_is_always_shown_with_an_empty_state(self):
+        self.assertNotRegex(self.body, r'id="saved-section"[^>]*hidden')
+        self.assertIn("No saved spots yet", self.body)
+
     def test_the_disclosure_is_in_the_html_not_only_added_by_script(self):
         self.assertIn("This is not a prediction of catch success.", self.body)
 

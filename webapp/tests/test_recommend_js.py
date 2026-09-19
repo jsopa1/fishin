@@ -168,6 +168,8 @@ out.cardHtml = {
   spawn: html.indexOf("check regulations") !== -1, proxy: html.indexOf("air-temperature proxy") !== -1,
 };
 const iceHtml = R.cardHtml(R.rank([spot("cold", { i: [["WALLEYE", "c", 3.2]] })], { prefs: P() }).recommended[0]);
+const away = R.cardHtml(R.rank([spot("nearby", { a: [["WALLEYE", "c"]] })], { prefs: P(), location: { lat: 43.0, lon: -89.0 } }).recommended[0]);
+out.distanceBesideName = /<p class="list-card-title">nearby <span class="list-card-away">\d+ mi away<\/span><\/p>/.test(away);
 out.iceHtml = /Closest to its range/.test(iceHtml) && /3\.2&deg;F outside it/.test(iceHtml);
 console.log(JSON.stringify(out));
 """
@@ -293,6 +295,9 @@ class RecommendJsTests(unittest.TestCase):
         c = self.out["cardHtml"]
         for key, value in c.items():
             self.assertTrue(value, key)
+
+    def test_distance_sits_beside_the_spot_name_like_the_wireframe(self):
+        self.assertTrue(self.out["distanceBesideName"])
 
     def test_the_nothing_in_range_card_says_how_far_outside_the_window(self):
         self.assertTrue(self.out["iceHtml"])

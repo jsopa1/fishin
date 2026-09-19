@@ -71,6 +71,29 @@ def _compass(degrees) -> str:
     return COMPASS_16[idx]
 
 
+# Icon kind for the spot header, from the station's own text description
+# ("Mostly Cloudy", "Light Rain", ...). Order matters: the most specific
+# hazard wins ("Thunderstorm with rain" is a storm, not rain). Unrecognised
+# text gives no icon rather than a guessed one.
+_SKY_RULES = (
+    ("storm", ("thunder", "t-storm", "tstorm")),
+    ("rain", ("rain", "shower", "drizzle")),
+    ("snow", ("snow", "sleet", "flurr", "freezing", "ice pellets", "blizzard")),
+    ("fog", ("fog", "mist", "haze", "smoke")),
+    ("partly", ("partly", "mostly sunny", "mostly clear", "few clouds", "scattered clouds")),
+    ("cloud", ("cloud", "overcast")),
+    ("sun", ("clear", "sunny", "fair")),
+)
+
+
+def sky_kind(description) -> str | None:
+    text = (description or "").lower()
+    for kind, needles in _SKY_RULES:
+        if any(n in text for n in needles):
+            return kind
+    return None
+
+
 def _query_nws(lat: float, lon: float) -> dict:
     points = _http_get_json(f"https://api.weather.gov/points/{lat},{lon}")
     stations = _http_get_json(points["properties"]["observationStations"])
@@ -84,10 +107,12 @@ def _query_nws(lat: float, lon: float) -> dict:
         wind_speed_kmh = props.get("windSpeed", {}).get("value")
         wind_dir_deg = props.get("windDirection", {}).get("value")
         pressure_pa = props.get("barometricPressure", {}).get("value")
+        air_temp_c = (props.get("temperature") or {}).get("value")
+        sky = (props.get("textDescription") or "").strip() or None
 
         # A station can report a partial observation (e.g. wind sensor
         # down); only accept one that actually has something to show.
-        if wind_speed_kmh is None and pressure_pa is None:
+        if wind_speed_kmh is None and pressure_pa is None and air_temp_c is None:
             continue
 
         station_name = feature["id"].rsplit("/", 1)[-1]
@@ -97,6 +122,10 @@ def _query_nws(lat: float, lon: float) -> dict:
             "wind_direction_deg": wind_dir_deg,
             "wind_direction_compass": _compass(wind_dir_deg),
             "pressure_inhg": round(pressure_pa / 3386.39, 2) if pressure_pa is not None else None,
+            "air_temp_c": round(air_temp_c, 1) if air_temp_c is not None else None,
+            "air_temp_f": round(air_temp_c * 9 / 5 + 32) if air_temp_c is not None else None,
+            "sky": sky,
+            "sky_kind": sky_kind(sky),
             "observed_at": props.get("timestamp"),
             "station": station_name,
         }

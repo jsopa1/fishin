@@ -273,7 +273,8 @@
   function cardHtml(c) {
     var sub = [c.water ? esc(c.water) + (c.county ? " (" + esc(c.county) + ")" : "") : "", TYPE_LABEL[c.type] || ""]
       .filter(Boolean).join(" &middot; ");
-    if (c.distanceKm !== null && c.distanceKm !== undefined) sub += " &middot; " + Math.round(c.distanceKm / KM_PER_MILE) + " mi away";
+    var away = c.distanceKm !== null && c.distanceKm !== undefined
+      ? ' <span class="list-card-away">' + Math.round(c.distanceKm / KM_PER_MILE) + " mi away</span>" : "";
     var q = c.quality && QUALITY_TAG[c.quality]
       ? '<span class="tag ' + QUALITY_TAG[c.quality][0] + '">' + QUALITY_TAG[c.quality][1] + "</span>" : "";
 
@@ -294,7 +295,7 @@
       ? '<p class="rec-note">Also in a spawning range: ' + esc(c.spawning.slice(0, 3).map(title).join(", ")) + " &mdash; check regulations before fishing.</p>" : "";
 
     return '<a class="list-card" href="' + esc(c.url) + '">' +
-      '<div class="list-card-head"><div><p class="list-card-title">' + esc(c.name) + '</p><p class="list-card-sub">' + sub + "</p></div>" + q + "</div>" +
+      '<div class="list-card-head"><div><p class="list-card-title">' + esc(c.name) + away + '</p><p class="list-card-sub">' + sub + "</p></div>" + q + "</div>" +
       '<p class="rec-line">' + line + "</p>" + note +
       '<span class="list-card-link">Open spot report &rarr;</span></a>';
   }

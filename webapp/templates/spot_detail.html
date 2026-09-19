@@ -84,6 +84,16 @@
         <span class="verdict-stat-label">dusk window opens</span>
       </div>
     {% endif %}
+    {% if conditions and conditions.status == 'ok' and conditions.air_temp_f is defined and conditions.air_temp_f is not none %}
+      <div class="verdict-stat verdict-stat-sky">
+        <span class="verdict-stat-value">
+          {% if conditions.sky_kind %}<svg class="icon icon-sky" aria-hidden="true"><use href="#icon-{{ conditions.sky_kind }}"/></svg>{% endif %}
+          {{ conditions.air_temp_f }}°F
+        </span>
+        <span class="verdict-stat-value-sub">{{ conditions.sky or 'air temperature' }}</span>
+        <span class="verdict-stat-label">air now — not used in the match above</span>
+      </div>
+    {% endif %}
     {% if conditions and conditions.status == 'ok' and (conditions.wind_speed_mph is not none or conditions.pressure_inhg is not none) %}
       <div class="verdict-stat verdict-stat-conditions">
         {% if conditions.wind_speed_mph is not none %}

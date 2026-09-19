@@ -8,6 +8,7 @@ import os
 import re
 import sys
 import unittest
+from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -33,9 +34,20 @@ class BottomNavTests(unittest.TestCase):
 
     def test_the_three_destinations_are_my_spot_explore_and_profile(self):
         nav = bottom_nav(self.client.get("/").data.decode())
-        self.assertEqual(re.findall(r"<span>([^<]+)</span>", nav), ["My spot", "Explore", "Profile"])
+        self.assertEqual(re.findall(r'<span class="sr-only">([^<]+)</span>', nav), ["My spot", "Explore", "Profile"])
         self.assertIn('href="/map"', nav)
         self.assertIn('href="/profile"', nav)
+
+    def test_the_bar_is_icons_only_with_a_larger_explore_icon_as_in_the_wireframe(self):
+        nav = bottom_nav(self.client.get("/").data.decode())
+        self.assertEqual(re.findall(r'<use href="#(icon-[a-z-]+)"', nav), ["#icon-list".lstrip("#"), "icon-explore", "icon-user"])
+        self.assertEqual(len(re.findall("bottom-nav-primary", nav)), 1)
+        self.assertNotRegex(re.sub(r'<span class="sr-only">[^<]*</span>', "", nav), r"<span>")
+
+    def test_on_a_phone_the_header_is_only_the_fish(self):
+        css = (Path(__file__).resolve().parents[1] / "static" / "style.css").read_text(encoding="utf-8")
+        mobile = css[css.index("@media (max-width: 767px)"):]
+        self.assertIn(".brand-sub, .brand-word { display: none; }", mobile)
 
     def test_the_fish_logo_leads_to_recommended(self):
         for path in ("/", "/map", "/profile", "/fish/walleye"):
@@ -43,10 +55,13 @@ class BottomNavTests(unittest.TestCase):
             self.assertRegex(body, r'<a class="brand" href="/"[^>]*>', path)
 
     def test_the_active_tab_matches_the_page(self):
-        self.assertRegex(bottom_nav(self.client.get("/profile").data.decode()),
-                         r'href="/profile" class="bottom-nav-item active"')
-        self.assertRegex(bottom_nav(self.client.get("/map").data.decode()),
-                         r'href="/map" class="bottom-nav-item active"')
+        def active_hrefs(path):
+            nav = bottom_nav(self.client.get(path).data.decode())
+            return re.findall(r'<a href="([^"]+)"[^>]*class="bottom-nav-item[^"]* active', nav)
+
+        self.assertEqual(active_hrefs("/profile"), ["/profile"])
+        self.assertEqual(active_hrefs("/map"), ["/map"])
+        self.assertEqual(active_hrefs("/browse"), ["/map"])  # the directory lives under Explore
 
     def test_my_spot_defaults_to_recommended_and_is_pointed_at_the_last_spot_by_script(self):
         body = self.client.get("/").data.decode()

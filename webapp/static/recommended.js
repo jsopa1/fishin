@@ -56,8 +56,9 @@
     els.prefs.innerHTML = prefsSummary(prefs);
     els.disclosure.textContent = result.disclosure;
 
-    els.savedWrap.hidden = !result.saved.length;
-    els.savedList.innerHTML = result.saved.map(R.cardHtml).join("");
+    els.savedList.innerHTML = result.saved.length
+      ? result.saved.map(R.cardHtml).join("")
+      : '<p class="rec-empty">No saved spots yet. Open any spot and tap &ldquo;Save this spot&rdquo;.</p>';
 
     els.recHead.hidden = false;
     els.recList.innerHTML = result.recommended.length
@@ -102,7 +103,6 @@
       els.loading.textContent = "Current conditions couldn't be loaded. You can still explore the map or your saved spots.";
       var saved = loadSaved();
       if (saved.length) {
-        els.savedWrap.hidden = false;
         els.savedList.innerHTML = saved.slice(0, 8).map(function (s) {
           return R.cardHtml({ name: s.name, water: s.water, county: s.county, type: null, quality: null, count: 0, inRange: [], spawning: [], nearest: null, distanceKm: null,
             url: "/spot?lat=" + encodeURIComponent(s.lat) + "&lon=" + encodeURIComponent(s.lon) + "&name=" + encodeURIComponent(s.name || "") });
