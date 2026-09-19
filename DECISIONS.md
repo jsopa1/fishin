@@ -1968,3 +1968,33 @@ Jinja value passes an "is not none" check and would otherwise render an empty bo
 Noted, not changed: the weather cache table lives in the same SQLite file as the results, which is
 why the committed database shows as modified after the app has run. It is runtime cache, not a data
 change, and is deliberately left out of commits.
+
+## 052 — Every spot gets a temperature: a refreshed, labelled air proxy for the last 292
+
+A measurement of the gaps found 292 of 3,272 access points (9%) with no temperature at all: every
+one is matched to no waterbody, and the nearest real reading is 60-121 km away, just beyond the
+60 km reach that measured error justified (#026). Widening that reach would have filled the gap with
+numbers whose error approaches the width of a species window, which is worse than saying nothing.
+
+Instead these spots get what every other proxy spot already gets - the current National Weather
+Service air temperature - stored once per quarter-degree cell (about 27 km; about 60 cells cover every
+gap spot), labelled "air-temperature proxy" on the spot page, in the tag popover vocabulary and in
+the Recommended feed, and worded on the spot page as air, not water. It is the lowest tier: it
+ranks below real and estimated readings (#049 key 4) and is never blended with them.
+
+Freshness, under the standing weekly rule: the cells are refreshed by the existing four-hourly sensor
+job (about 80 s added), and a reading older than 36 hours is dropped at lookup rather than shown, so a
+stalled job degrades to "no data" instead of to a stale number. A failed fetch keeps the previous
+row, which ages out on its own; implausible values are rejected; and a failure in this step can never
+fail the sensor refresh. The definition of "gap" is the spot page's own resolver with this step
+switched off, so the two cannot drift apart.
+
+A performance defect found on the way: the caches added for the feed (#049) were keyed on the database
+file's modification time, but the weather cache lives in the same file and is written whenever a visitor
+opens a spot, so in production every cache, including the ~15 s feed, would have been invalidated
+almost constantly. They are now keyed on the data (latest run, latest sensor refresh, latest proxy
+fetch), with tests that a weather write leaves the key unchanged and a real refresh changes it.
+
+Also noted for the record: the 2,225 existing waterbody proxy readings are 1-10 days old, because only
+the full batch run refreshes them, not the four-hourly job. That is inside the weekly bar today but
+with little margin, and is the next freshness item to close.

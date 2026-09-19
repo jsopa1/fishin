@@ -33,6 +33,7 @@ _QUALITY = {
     "matched_waterbody_real": "real",
     "interpolated_nearby": "estimated",
     "matched_waterbody_proxy": "proxy",
+    "spot_air_proxy": "proxy",
 }
 _TIER = {"confirmed": "c", "likely": "l"}
 

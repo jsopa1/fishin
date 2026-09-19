@@ -29,7 +29,7 @@
         <span class="tag real">real measurement</span>
       {% elif temperature.resolution == "interpolated_nearby" %}
         <span class="tag estimated">estimated</span>
-      {% elif temperature.resolution == "matched_waterbody_proxy" %}
+      {% elif temperature.resolution in ("matched_waterbody_proxy", "spot_air_proxy") %}
         <span class="tag proxy">air-temperature proxy</span>
       {% endif %}
     {% endif %}
@@ -226,6 +226,14 @@
           <li>{{ a.waterbody_name }} ({{ a.county }}) — {{ "%.1f"|format(a.distance_km) }}km away</li>
         {% endfor %}
       </ul>
+    {% elif temperature.resolution == "spot_air_proxy" %}
+      <p>
+        {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C
+        <span class="tag proxy">air-temperature proxy</span>
+        &mdash; no water-temperature reading exists for this water or within 60&nbsp;km, so this is the current
+        <em>air</em> temperature nearby ({{ temperature.source }}{% if temperature.observed_at %}, observed {{ temperature.observed_at }}{% endif %}).
+        It is not a water measurement; water usually runs cooler than air in spring and warmer in fall.
+      </p>
     {% elif temperature.resolution == "matched_waterbody_proxy" %}
       <p>
         {{ "%.1f"|format(temperature.value_c * 9/5 + 32) }}°F / {{ "%.1f"|format(temperature.value_c) }}°C

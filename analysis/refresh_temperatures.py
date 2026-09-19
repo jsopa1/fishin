@@ -36,7 +36,9 @@ import urllib.error
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).parent.parent / "ui"))
 import v1_conditions_biology_forecast as v1  # noqa: E402
+import v4_spot_air_proxy as spot_air_proxy  # noqa: E402
 
 DB_PATH = Path(__file__).parent.parent / "data" / "v1" / "v1_full_run_results.db"
 THROTTLE_SECONDS = 0.4  # courtesy pause between live sensor calls
@@ -187,6 +189,16 @@ def refresh(dry_run: bool = False, limit: int | None = None) -> int:
         rewrite_waterbody(conn, row, temp_info, presence, thresholds)
         updated += 1
         print(f"  + {name} ({county}): {delta}", file=sys.stderr)
+
+    # Spots with no water reading of any kind get a current air-temperature proxy
+    # (ui/v4_spot_air_proxy.py). Best effort: a failure here must never fail or
+    # delay the sensor refresh above, and old proxy rows age out on their own.
+    if not dry_run and limit is None:
+        try:
+            proxy = spot_air_proxy.refresh(conn)
+            print(f"Spot air proxy: {proxy['updated']}/{proxy['cells']} cells refreshed, {proxy['failed']} failed", file=sys.stderr)
+        except Exception as e:  # noqa: BLE001
+            print(f"Spot air proxy skipped: {type(e).__name__}: {e}", file=sys.stderr)
 
     finished_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
     if not dry_run:

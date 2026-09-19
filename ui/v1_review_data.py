@@ -20,6 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "analysis"))
 import v1_bait_technique as bait  # noqa: E402
 import v1_conditions_biology_forecast as v1  # noqa: E402
+import v4_spot_air_proxy as spot_air_proxy  # noqa: E402
 
 DEFAULT_STALE_HOURS = 24
 
@@ -462,17 +463,29 @@ _ANCHOR_CACHE: dict = {}
 
 
 def _db_fingerprint(conn: sqlite3.Connection):
-    """Identity of the on-disk database behind `conn`: (path, mtime_ns, size).
-    Any data refresh rewrites the file, so the fingerprint changes and cached
-    derived data is rebuilt. None for in-memory / unknown databases, which are
-    never cached (their contents can change without the fingerprint moving)."""
+    """Identity of the DATA in the database behind `conn`, for cache keys: the
+    file path plus the timestamps that change only when the data does (latest
+    full run, latest sensor refresh, latest spot air-proxy fetch). It is
+    deliberately not the file's mtime: the weather cache table lives in the same
+    file and is written whenever a visitor opens a spot, which would invalidate
+    every derived cache (including the ~15 s recommendation feed) constantly.
+    None for in-memory / unknown databases, which are never cached."""
     try:
         path = conn.execute("PRAGMA database_list").fetchone()[2]
         if not path:
             return None
-        st = os.stat(path)
-        return (path, st.st_mtime_ns, st.st_size)
-    except (sqlite3.Error, OSError, IndexError, TypeError):
+        stamps = []
+        for sql in (
+            "SELECT MAX(finished_at) FROM runs",
+            "SELECT MAX(finished_at) FROM temperature_refreshes",
+            "SELECT MAX(fetched_at) FROM spot_air_proxy",
+        ):
+            try:
+                stamps.append(conn.execute(sql).fetchone()[0])
+            except sqlite3.OperationalError:
+                stamps.append(None)  # table absent (older database)
+        return (path, tuple(stamps))
+    except (sqlite3.Error, IndexError, TypeError):
         return None
 
 
@@ -734,7 +747,8 @@ def find_access_point_by_coords(conn: sqlite3.Connection, lat: float, lon: float
 
 
 def get_spot_temperature(
-    conn: sqlite3.Connection, lat: float, lon: float, matched_waterbody: str = None, matched_county: str = None
+    conn: sqlite3.Connection, lat: float, lon: float, matched_waterbody: str = None, matched_county: str = None,
+    use_spot_proxy: bool = True,
 ) -> dict | None:
     """Resolves one spot's water temperature, honestly, in priority order:
       1. A real (non-proxy) V1 measurement, when this spot is matched to
@@ -744,7 +758,12 @@ def get_spot_temperature(
          generic air-temperature proxy when a real reading exists nearby.
       3. The matched waterbody's own proxy temperature, only if nothing
          better was found.
-      4. None (honest no-data) if none of the above resolves.
+      4. For a spot matched to no waterbody and too far from any real reading:
+         the current NWS air temperature for its ~27 km cell, labelled as an
+         air-temperature proxy (ui/v4_spot_air_proxy.py; dropped once 36 h old).
+         `use_spot_proxy=False` skips this step, which is how that module finds
+         which spots still need one.
+      5. None (honest no-data) if none of the above resolves.
     Every branch is labeled distinctly (`resolution`) so the UI never
     conflates a real measurement, an estimate, and a proxy."""
     matched_row = None
@@ -788,6 +807,18 @@ def get_spot_temperature(
             "observed_at": matched_row["temp_observed_at"],
             "resolution": "matched_waterbody_proxy",
         }
+
+    if use_spot_proxy:
+        spot_proxy = spot_air_proxy.lookup(conn, lat, lon)
+        if spot_proxy is not None:
+            return {
+                "value_c": spot_proxy["value_c"],
+                "is_real": False,
+                "method": "nws_air_proxy_spot",
+                "source": "NWS current air temperature [station {}]".format(spot_proxy["station"]),
+                "observed_at": spot_proxy["observed_at"],
+                "resolution": "spot_air_proxy",
+            }
 
     return None
 
