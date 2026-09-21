@@ -1,0 +1,205 @@
+<!doctype html><meta charset=utf-8><title>Photo-first system</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Figtree:wght@400;500;600;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box} body{margin:0;background:#0d0f12;font-family:Inter,sans-serif;color:#e8ecf4}
+.lab{display:grid;grid-template-columns:repeat(3,400px);gap:34px 30px;padding:34px 30px;justify-content:center}
+.cell{display:flex;flex-direction:column;align-items:center}.cap{margin-top:14px;text-align:center;max-width:380px}.cap b{font-size:17px}.cap p{margin:4px 0 0;color:#93a0b8;font-size:12.5px;line-height:1.4}
+.phone{position:relative;width:380px;height:820px;border-radius:38px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 8px #1a1e26;padding:0 16px 64px}
+.topbar{display:flex;justify-content:center;padding:14px 0 4px}.mark{width:26px;height:26px}
+.crumb{font-size:11px;margin:2px 0 8px}
+.plate{margin:0}.plate img{width:100%;height:150px;object-fit:cover;display:block}.plate figcaption{font-size:9.5px;margin-top:4px}
+.title{padding:10px 0 4px}.title h1{margin:0;font-size:32px;line-height:1}.latin{margin:3px 0 8px;font-size:14px;font-style:italic}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:99px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 4px}.fact{display:flex;flex-direction:column;gap:3px;padding:8px 7px;min-width:0}.fl{font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}.fv{font-size:14px;font-weight:800;line-height:1.1}
+.sec{font-size:13px;margin:12px 0 6px}
+.meter .zones{position:relative;height:10px;border-radius:99px}.meter .zones i{position:absolute;top:0;bottom:0;border-radius:99px}.meter u{position:absolute;top:-4px;width:3px;height:18px;border-radius:2px}
+.scale{display:flex;justify-content:space-between;font-size:9.5px;margin-top:5px}.now{margin:5px 0 0;font-size:11.5px}
+.body{font-size:12px;line-height:1.5;margin:0}.body sup{font-size:9px}.agency{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap}
+.bait{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center;padding:6px 0}.bait img{width:70px;height:44px;object-fit:cover;border-radius:6px}.bait b{font-size:13px}.bait p{margin:2px 0 0;font-size:11px}
+.bar{position:absolute;left:0;right:0;bottom:0;height:58px;display:flex;justify-content:space-around;align-items:center}.bar i{width:22px;height:22px;border-radius:6px;display:block}.bar i.mid{width:30px;height:30px}
+
+/* 1A — Sage & Cream (original) */
+.v1{background:#f7f2e4;color:#1b2b22;font-family:'Nunito',sans-serif}
+.v1 .mark{color:#2f6b4f}.v1 .crumb{color:#6d7d66}.v1 .plate img{border-radius:20px}.v1 .plate figcaption{color:#8a9684}
+.v1 h1{font-weight:800;color:#00332a}.v1 .latin{font-family:'Source Serif 4',serif;color:#5f7a52}
+.v1 .chip{background:#e3ecd0;color:#2c5a2f}.v1 .chip.alt{background:#efe6c9;color:#7a5c14}
+.v1 .fact{background:#fff;border-radius:14px;box-shadow:0 1px 4px rgba(0,51,42,.08)}.v1 .fl{color:#739442}.v1 .fv{color:#00332a}
+.v1 .sec{color:#00332a;font-size:15px;font-weight:800;border-left:4px solid #739442;padding-left:8px}
+.v1 .zones{background:#e8e2cf}.v1 .zones .sp{background:#7aa7d6}.v1 .zones .ac{background:#739442}.v1 .meter u{background:#00332a;box-shadow:0 0 0 2px #f7f2e4}.v1 .scale,.v1 .now{color:#5d6b58}.v1 .now b{color:#00332a}
+.v1 .body{color:#33453a}.v1 .agency{background:#dfe9c9;color:#2c5a2f}.v1 .bait{border-top:1px solid #e3dcc6}.v1 .bait img{border-radius:10px;background:#fff}.v1 .bait p{color:#6d7d66}
+.v1 .bar{background:#fff9ef;border-top:1px solid #e3dcc6}.v1 .bar i{background:#c9d3b4;border-radius:50%}.v1 .bar i.mid{background:#739442}
+
+/* 1B — Night Field Guide */
+.v2{background:#0c1a15;color:#e9efe2;font-family:'Nunito',sans-serif}
+.v2 .mark{color:#a8c97a}.v2 .crumb{color:#7f9a86}.v2 .plate img{border-radius:20px}.v2 .plate figcaption{color:#6f8a76}
+.v2 h1{font-weight:800;color:#f4f1e2}.v2 .latin{font-family:'Source Serif 4',serif;color:#d9c47a}
+.v2 .chip{background:#1e3a2c;color:#b9e08a}.v2 .chip.alt{background:#3a3218;color:#e6cf7c}
+.v2 .fact{background:#132a20;border:1px solid #244635;border-radius:14px}.v2 .fl{color:#8db35a}.v2 .fv{color:#f4f1e2}
+.v2 .sec{color:#f4f1e2;font-size:15px;font-weight:800;border-left:4px solid #8db35a;padding-left:8px}
+.v2 .zones{background:#1c3226}.v2 .zones .sp{background:#5f8fc0}.v2 .zones .ac{background:#8db35a}.v2 .meter u{background:#f4f1e2;box-shadow:0 0 0 2px #0c1a15}.v2 .scale,.v2 .now{color:#8fa896}.v2 .now b{color:#f4f1e2}
+.v2 .body{color:#c9d6c6}.v2 .agency{background:#1e3a2c;color:#b9e08a}.v2 .bait{border-top:1px solid #1e3a2c}.v2 .bait img{border-radius:10px;background:#eef2e6}.v2 .bait p{color:#8fa896}
+.v2 .bar{background:#0a1611;border-top:1px solid #1e3a2c}.v2 .bar i{background:#244635;border-radius:50%}.v2 .bar i.mid{background:#8db35a}
+
+/* 1C — Coastal Guide */
+.v3{background:#eaf5f3;color:#0e3b3a;font-family:'Figtree',sans-serif}
+.v3 .mark{color:#0f7c78}.v3 .crumb{color:#5a8583}.v3 .plate img{border-radius:26px;height:158px}.v3 .plate figcaption{color:#7aa19f}
+.v3 h1{font-weight:800;color:#0a4d4b;letter-spacing:-.01em}.v3 .latin{font-family:'Figtree',sans-serif;color:#2f8f8a;font-weight:500}
+.v3 .chip{background:#cdeae6;color:#0a5c58}.v3 .chip.alt{background:#fbe9c4;color:#8a5b12}
+.v3 .fact{background:#fff;border-radius:18px;box-shadow:0 2px 8px rgba(15,124,120,.12)}.v3 .fl{color:#2fa39a}.v3 .fv{color:#0a4d4b}
+.v3 .sec{color:#0a4d4b;font-size:15px;font-weight:800}.v3 .sec::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#2fa39a;margin-right:8px}
+.v3 .zones{background:#d3e7e4}.v3 .zones .sp{background:#6fb6e0}.v3 .zones .ac{background:#2fa39a}.v3 .meter u{background:#0a4d4b;box-shadow:0 0 0 2px #eaf5f3}.v3 .scale,.v3 .now{color:#5a8583}.v3 .now b{color:#0a4d4b}
+.v3 .body{color:#26504f}.v3 .agency{background:#cdeae6;color:#0a5c58}.v3 .bait{background:#fff;border-radius:16px;padding:8px;margin-bottom:6px;box-shadow:0 2px 8px rgba(15,124,120,.1)}.v3 .bait img{border-radius:10px}.v3 .bait p{color:#5a8583}
+.v3 .bar{background:#fff;box-shadow:0 -6px 20px rgba(15,124,120,.1)}.v3 .bar i{background:#c3dcd9;border-radius:50%}.v3 .bar i.mid{background:#2fa39a}
+
+/* 1D — Serif Naturalist */
+.v4{background:#f3ead3;color:#2a2418;font-family:'Source Serif 4',serif}
+.v4 .mark{color:#4d6b3a}.v4 .topbar{border-bottom:1px solid #b9a97c;margin:0 -16px;padding:12px 0 8px}.v4 .crumb{font-family:Inter;font-variant:small-caps;letter-spacing:.08em;color:#7a6c48}
+.v4 .plate{border:1px solid #b9a97c;padding:6px;background:#fbf5e3;box-shadow:0 1px 0 #d8c99a}.v4 .plate img{height:132px}.v4 .plate figcaption{font-family:Inter;color:#7a6c48;text-align:center}
+.v4 h1{font-family:'Fraunces',serif;font-weight:800;color:#2f4a26;font-size:34px}.v4 .latin{color:#7a6c48}
+.v4 .chip{border-radius:2px;background:transparent;border:1.5px solid #4d6b3a;color:#3f5a2e;font-family:Inter}.v4 .chip.alt{border-color:#a2621a;color:#8a5212}
+.v4 .facts{grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid #2f4a26;border-bottom:1px solid #b9a97c;margin-top:10px}.v4 .fact{border-right:1px solid #d8c99a;padding:8px 6px}.v4 .fact:last-child{border-right:0}.v4 .fl{font-family:Inter;color:#7a6c48}.v4 .fv{font-family:'Fraunces',serif;font-size:16px;color:#2f4a26}
+.v4 .sec{font-family:'Fraunces',serif;font-weight:700;font-size:18px;color:#2f4a26;border-bottom:1px solid #b9a97c;padding-bottom:2px}
+.v4 .zones{background:#e2d6b4;border-radius:0;height:8px}.v4 .zones i{border-radius:0}.v4 .zones .sp{background:#6f8fb0}.v4 .zones .ac{background:#4d6b3a}.v4 .meter u{background:#a2621a;box-shadow:none;border-radius:0;width:2px}.v4 .scale,.v4 .now{font-family:Inter;color:#5a4d2c}
+.v4 .body{font-size:13px;line-height:1.55;color:#3a3220}.v4 sup{color:#a2621a}.v4 .agency{font-family:Inter;background:transparent;border:1px solid #b9a97c;color:#7a6c48;border-radius:2px}
+.v4 .bait{border-bottom:1px dotted #b9a97c}.v4 .bait b{font-family:'Fraunces',serif;color:#2f4a26}.v4 .bait img{border:1px solid #b9a97c;border-radius:0;background:#fbf5e3}.v4 .bait p{font-family:Inter;color:#7a6c48}
+.v4 .bar{background:#eadfc0;border-top:1px solid #b9a97c}.v4 .bar i{background:#b9a97c;border-radius:2px}.v4 .bar i.mid{background:#4d6b3a}
+
+/* 1E — Photo-First */
+.v5{background:#f7f2e4;color:#1b2b22;font-family:'Nunito',sans-serif;padding-top:0}
+.v5 .topbar{position:absolute;left:0;right:0;top:0;z-index:3;color:#fff;padding-top:14px}.v5 .crumb{display:none}
+.v5 .plate{position:relative;margin:0 -16px}.v5 .plate img{height:290px;border-radius:0 0 30px 30px}
+.v5 .plate::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;border-radius:0 0 30px 30px;background:linear-gradient(180deg,transparent,rgba(0,26,20,.82))}
+.v5 .plate figcaption{position:absolute;right:12px;top:52px;z-index:3;color:rgba(255,255,255,.75);font-size:8.5px;text-align:right;max-width:160px}
+.v5 .title{position:relative;z-index:2;margin:-92px 0 0;color:#fff;padding-top:0}.v5 h1{color:#fff;font-weight:900;font-size:36px}.v5 .latin{font-family:'Source Serif 4',serif;color:#e7f1c9;margin-bottom:6px}
+.v5 .chip{background:rgba(255,255,255,.22);color:#fff;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35)}.v5 .chip.alt{background:rgba(242,214,120,.9);color:#3a2f0a;border-color:transparent}
+.v5 .facts{margin-top:12px}.v5 .fact{background:#fff;border-radius:14px;box-shadow:0 1px 4px rgba(0,51,42,.08)}.v5 .fl{color:#739442}.v5 .fv{color:#00332a}
+.v5 .sec{color:#00332a;font-size:15px;font-weight:800;margin-top:10px}
+.v5 .zones{background:#e8e2cf}.v5 .zones .sp{background:#7aa7d6}.v5 .zones .ac{background:#739442}.v5 .meter u{background:#00332a;box-shadow:0 0 0 2px #f7f2e4}.v5 .scale,.v5 .now{color:#5d6b58}.v5 .now b{color:#00332a}
+.v5 .body{color:#33453a}.v5 .agency{background:#dfe9c9;color:#2c5a2f}.v5 .bait{border-top:1px solid #e3dcc6}.v5 .bait img{border-radius:10px;background:#fff}.v5 .bait p{color:#6d7d66}
+.v5 .bar{background:#fff9ef;border-top:1px solid #e3dcc6}.v5 .bar i{background:#c9d3b4;border-radius:50%}.v5 .bar i.mid{background:#739442}
+
+/* 1F — Compact Cards */
+.v6{background:#eef1e6;color:#1c2a20;font-family:'Figtree',sans-serif}
+.v6 .mark{color:#2f6b4f}.v6 .crumb{color:#6d7d66}.v6 .plate{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:end;background:#fff;border-radius:20px;padding:10px;box-shadow:0 2px 8px rgba(28,42,32,.08)}.v6 .plate img{height:84px;border-radius:12px}.v6 .plate figcaption{font-size:8.5px;color:#8a9684;margin:0;align-self:end}
+.v6 .title{padding:8px 0 2px}.v6 h1{font-size:28px;color:#153a2a;font-weight:800}.v6 .latin{color:#5f7a52;font-family:'Source Serif 4',serif;margin-bottom:6px}
+.v6 .chip{background:#dfe9c9;color:#2c5a2f}.v6 .chip.alt{background:#f3e7c0;color:#7a5c14}
+.v6 .facts{grid-template-columns:1fr 1fr;gap:6px}.v6 .fact{flex-direction:row;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:8px 10px;box-shadow:0 1px 4px rgba(28,42,32,.06)}
+.v6 .fact::before{content:"";width:22px;height:22px;border-radius:50%;flex:none;background:#dfe9c9}.v6 .f2::before{background:#cfe0f3}.v6 .f3::before{background:#f3e7c0}.v6 .f4::before{background:#e6dcc9}
+.v6 .fact{display:grid;grid-template-columns:26px 1fr;column-gap:8px}.v6 .fact::before{grid-row:1/3}.v6 .fl{font-size:8.5px;color:#739442}.v6 .fv{font-size:14px;color:#153a2a}
+.v6 .sec{background:#fff;border-radius:14px 14px 0 0;margin:8px 0 0;padding:9px 12px 4px;font-size:14px;color:#153a2a;font-weight:800}
+.v6 .meter,.v6 .body,.v6 .bait{background:#fff;padding-left:12px;padding-right:12px}.v6 .meter{padding-top:6px;padding-bottom:8px;border-radius:0 0 14px 14px}.v6 .body{padding-top:2px;padding-bottom:9px;border-radius:0 0 14px 14px}
+.v6 .zones{background:#e4e8d8;height:12px}.v6 .zones .sp{background:#7aa7d6}.v6 .zones .ac{background:#739442}.v6 .meter u{background:#153a2a;box-shadow:0 0 0 2px #fff;height:22px;top:-5px}.v6 .scale,.v6 .now{color:#5d6b58}.v6 .now b{color:#153a2a}
+.v6 .agency{background:#dfe9c9;color:#2c5a2f}.v6 .bait{margin-top:0;border-top:1px solid #eef1e6}.v6 .bait:last-of-type{border-radius:0 0 14px 14px}.v6 .bait img{border-radius:10px}.v6 .bait p{color:#6d7d66}
+.v6 .bar{background:#fff;border-top:1px solid #dfe5d2}.v6 .bar i{background:#c9d3b4;border-radius:50%}.v6 .bar i.mid{background:#2f6b4f}
+
+/* ---------- NO BUBBLES: flat, square, ruled ---------- */
+.phone *{border-radius:0!important}
+.phone .chip,.phone .tag,.phone .agency{border-radius:2px!important;letter-spacing:.03em}
+.phone .chip{padding:4px 9px}
+.phone .plate img,.phone .bait img{border-radius:0!important}
+.phone .plate::after{border-radius:0!important}
+.phone .zones{height:10px}
+.phone .bar{border-radius:0!important}
+.phone .bar i{width:24px;height:24px}.phone .bar i.mid{width:24px;height:24px;outline:2px solid currentColor;outline-offset:3px}
+.phone .fact{box-shadow:none!important}
+/* label style per variant: rectangular, not capsule */
+.v1 .chip{background:#dfe9c9;color:#2c5a2f;border:1px solid #b9cf94}.v1 .chip.alt{background:#f3e7c0;color:#7a5c14;border:1px solid #dcc98a}
+.v1 .fact{background:#fff;border:1px solid #d9d2b8;border-top:3px solid #739442}
+.v1 .bar i.mid{color:#739442}
+.v2 .chip{border:1px solid #33583f}.v2 .chip.alt{border:1px solid #6b5f2a}.v2 .fact{border-top:3px solid #8db35a}.v2 .bar i.mid{color:#8db35a}
+.v3 .chip{background:transparent;color:#0a5c58;border:1.5px solid #2fa39a}.v3 .chip.alt{background:transparent;color:#8a5b12;border:1.5px solid #d9a441}
+.v3 .fact{box-shadow:none;border:1px solid #bfe0dc;border-left:4px solid #2fa39a}.v3 .bait{box-shadow:none!important;border:1px solid #bfe0dc}.v3 .plate img{height:150px}.v3 .bar i.mid{color:#2fa39a}
+.v4 .fact{border:0}.v4 .bar i.mid{color:#4d6b3a}
+.v5 .chip{background:rgba(0,26,20,.55);border:1px solid rgba(255,255,255,.5);backdrop-filter:none}.v5 .chip.alt{background:#f2d678;color:#3a2f0a;border-color:#f2d678}
+.v5 .fact{border:1px solid #d9d2b8;border-top:3px solid #739442}.v5 .bar i.mid{color:#739442}
+.v6 .plate{border:1px solid #d3d9c3;box-shadow:none!important}
+.v6 .fact{border:1px solid #d3d9c3;border-left:4px solid #739442;box-shadow:none!important}.v6 .fact::before{border-radius:0!important}
+.v6 .sec{border:1px solid #d3d9c3;border-bottom:0;border-top:3px solid #2f6b4f}
+.v6 .meter,.v6 .body,.v6 .bait{border-left:1px solid #d3d9c3;border-right:1px solid #d3d9c3}.v6 .meter,.v6 .body,.v6 .bait:last-of-type{border-bottom:1px solid #d3d9c3}
+.v6 .bar i.mid{color:#2f6b4f}
+
+.sys.spotband .title{margin:6px -16px 0;background:#00332a;padding:16px 16px 14px;border-bottom:3px solid #739442}.spotband .topbar.dark{background:#f7f2e4}
+
+/* ---- photo-first system: the rest of the screens ---- */
+.sys{background:#f7f2e4}
+.sys .topbar{position:absolute;left:0;right:0;top:0;z-index:3;color:#fff;padding-top:14px}.sys .topbar.dark{position:static;color:#2f6b4f}
+.sys .plate{position:relative;margin:0 -16px}.sys .plate img{height:250px;border-radius:0!important}
+.sys .plate::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(180deg,transparent,rgba(0,26,20,.84))}
+.sys .plate figcaption{position:absolute;right:12px;top:52px;z-index:3;color:rgba(255,255,255,.85);font-size:9px;text-align:right;max-width:190px}
+.sys .title{position:relative;z-index:2;margin:-104px 0 0;color:#fff}.sys .kicker{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#cfe6a8}.sys h1{margin:3px 0 0;color:#fff;font-weight:900;font-size:34px;line-height:1}.sys .latin{margin:3px 0 7px;color:#e7f1c9;font-family:'Source Serif 4',serif}
+.glance4{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #d9d2b8;border-top:3px solid #739442;background:#fff;margin-top:12px}.glance4 div{padding:8px 8px;border-right:1px solid #ece6d2;display:flex;flex-direction:column;gap:3px}.glance4 div:last-child{border-right:0}.glance4 b{font-size:14px;color:#00332a}
+.sys .sec{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #d9d2b8;padding-bottom:4px;margin-top:14px}.sys .sec em{font-style:normal;font-size:10.5px;font-weight:700;color:#739442;letter-spacing:.04em}.sys .sec.inact em{color:#a2792a}
+.sr{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #ece6d2;align-items:center}.sr img{width:64px;height:44px;object-fit:cover}.srb .ft{margin-bottom:6px}.srb .ft b{font-size:14px;color:#00332a}
+.sys .win{position:relative;height:6px;background:#e8e2cf}.sys .win i{position:absolute;top:0;bottom:0;background:#739442}.sys .win u{position:absolute;top:-4px;width:2px;height:14px;background:#00332a}
+.sys .tag{font-size:10px;font-weight:700;padding:3px 8px;border:1px solid;letter-spacing:.03em}.sys .tag.ok{background:#dfe9c9;color:#2c5a2f;border-color:#b9cf94}.sys .tag.lk{background:#f3e7c0;color:#7a5c14;border-color:#dcc98a}
+.plain .pagetitle{margin:10px 0 2px;font-size:30px;color:#00332a;font-weight:900}.note{font-size:11px;color:#6d7d66;margin:0 0 10px;line-height:1.4}
+.rc{background:#fff;border:1px solid #d9d2b8;margin-bottom:10px}.strip{position:relative;display:grid;grid-template-columns:repeat(3,1fr);height:96px}.strip img{width:100%;height:96px;object-fit:cover;display:block;border-right:2px solid #fff}.strip img:last-of-type{border-right:0}
+.strip::after{content:"";position:absolute;inset:auto 0 0 0;height:44px;background:linear-gradient(180deg,transparent,rgba(0,26,20,.55))}.dist{position:absolute;right:8px;bottom:6px;z-index:2;color:#fff;font-weight:800;font-size:12px}
+.rcb{padding:8px 10px 10px;border-top:3px solid #739442}.rcb b{font-size:15px;color:#00332a}.sub{margin:2px 0 6px;font-size:11px;color:#6d7d66}.line{margin:0;font-size:11.5px;line-height:1.9;color:#33453a}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid #2f6b4f;margin:8px 0}.seg span{text-align:center;padding:9px;font-weight:800;font-size:12px;color:#2f6b4f}.seg .on{background:#2f6b4f;color:#fff}
+.srch{border:1px solid #d9d2b8;background:#fff;padding:10px;font-size:12px;color:#8a9684;margin-bottom:8px}
+.chiprow{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.fchip{font-size:11px;font-weight:700;padding:5px 9px;border:1px solid #b9cf94;background:#fff;color:#2c5a2f}.fchip.on{background:#2c5a2f;color:#fff;border-color:#2c5a2f}
+.xr{display:grid;grid-template-columns:70px 1fr;gap:10px;background:#fff;border:1px solid #d9d2b8;border-left:3px solid #739442;margin-bottom:6px;align-items:stretch}.xr img{width:70px;height:74px;object-fit:cover}.xr div{padding:6px 8px 6px 0;display:flex;flex-direction:column;gap:3px;justify-content:center}.xr b{font-size:14px;color:#00332a}.xr p{margin:0;font-size:11px;color:#6d7d66}.xr .tag{align-self:flex-start}
+.lab{grid-template-columns:repeat(4,400px)!important}</style><div class=lab><div class="cell">
+<div class="phone v5">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="crumb">Fish &nbsp;›&nbsp; Walleye</div>
+  <figure class="plate"><img src="../../webapp/static/img/species/walleye.jpg"><figcaption>Engbretson / U.S. Fish and Wildlife Service · Public domain</figcaption></figure>
+  <div class="title"><h1>Walleye</h1><p class="latin">Sander vitreus</p>
+    <div class="chips"><span class="chip">Confirmed in 41 waters near you</span><span class="chip alt">Dawn · dusk · night feeder</span></div></div>
+  <div class="facts">
+    <div class="fact f1"><span class="fl">Active range</span><span class="fv">55–75°F</span></div>
+    <div class="fact f2"><span class="fl">Spawning</span><span class="fv">40–52°F</span></div>
+    <div class="fact f3"><span class="fl">Feeds</span><span class="fv">Low light</span></div>
+    <div class="fact f4"><span class="fl">Evidence</span><span class="fv">Agency</span></div>
+  </div>
+  <h2 class="sec">Documented activity</h2>
+  <div class="meter"><div class="zones"><i class="sp" style="left:16.7%;width:20%"></i><i class="ac" style="left:41.7%;width:33.3%"></i><u style="left:58.3%"></u></div>
+    <div class="scale"><span>30°</span><span>50°</span><span>70°</span><span>90°F</span></div>
+    <p class="now"><b>Today 65°F</b> at Canoe Landing: inside the active range.</p></div>
+  <h2 class="sec">Documented habitat</h2>
+  <p class="body drop">Walleye live near or on the lake bottom and travel through open water in loosely formed schools.<sup>1</sup> In clear water they stay deeper by day and move to the shallows at night.<sup>2</sup> <span class="agency">Agency source</span></p>
+  <h2 class="sec">Recommended bait</h2>
+  <div class="bait"><img src="../../webapp/static/img/baits/leeches.svg"><div><b>Leeches</b><p>Bait-cast or still fish from an anchored boat.</p></div></div>
+  <div class="bait"><img src="../../webapp/static/img/baits/nightcrawlers.svg"><div><b>Nightcrawlers</b><p>Keep the bait near the bottom.</p></div></div>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>Fish</b><p>The approved 1E page: photo runs edge to edge under the name; facts in ruled tiles; the documented-activity meter.</p></div></div><div class="cell">
+<div class="phone v5 sys spotband">
+  <div class="topbar dark"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="title"><div class="kicker">Carry-in · Dane County</div><h1>Canoe Landing</h1><p class="latin">Badfish Creek</p>
+    <div class="chips"><span class="chip">Water 65°F · estimated</span><span class="chip alt">Air 64°F · light rain</span></div></div>
+  <div class="glance4"><div><span class="fl">Water</span><b>65°F</b></div><div><span class="fl">Air</span><b>64°F</b></div><div><span class="fl">Wind</span><b>10 mph E</b></div><div><span class="fl">Moon</span><b>1st Qtr</b></div></div>
+  <h2 class="sec">Active fish <em>5 in range</em></h2>
+  <div class="sr"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="srb"><div class="ft"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div><div class="win"><i style="left:37.5%;width:25%"></i><u style="left:62.5%"></u></div></div></div>
+  <div class="sr"><img src="../../webapp/static/img/species/walleye.jpg"><div class="srb"><div class="ft"><b>Walleye</b><span class="tag ok">Confirmed</span></div><div class="win"><i style="left:37.5%;width:50%"></i><u style="left:62.5%"></u></div></div></div>
+  <div class="sr"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="srb"><div class="ft"><b>Brown Trout</b><span class="tag lk">Likely</span></div><div class="win"><i style="left:35%;width:34%"></i><u style="left:62.5%"></u></div></div></div>
+  <h2 class="sec inact">Inactive fish <em>4 outside range</em></h2>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div><div class="cap"><b>Spot</b><p>Same idea: a place is not a fish, so the header is a solid deep-green band (no hero photo that could read as a promise), then the Water / Air / Wind / Moon strip and Active fish rows with a square photo and a range meter.</p></div></div><div class="cell">
+<div class="phone v5 sys plain">
+  <div class="topbar dark"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <h1 class="pagetitle">Recommended</h1>
+  <p class="note">Ranked on your device by how many species are in range now. Not a prediction.</p>
+  <div class="rc"><div class="strip"><img src="../../webapp/static/img/species/walleye.jpg"><img src="../../webapp/static/img/species/northern_pike.jpg"><img src="../../webapp/static/img/species/brown_trout.jpg"><span class="dist">1 mi</span></div>
+    <div class="rcb"><b>Law Park Boat Landing</b><p class="sub">Lake Monona · Dane County · Boat launch</p>
+    <p class="line">In range now: <b>Walleye</b> <span class="tag ok">Confirmed</span> <b>Northern Pike</b> <span class="tag ok">Confirmed</span> and 3 more</p></div></div>
+  <div class="rc"><div class="strip"><img src="../../webapp/static/img/species/sauger.jpg"><img src="../../webapp/static/img/species/white_bass.jpg"><img src="../../webapp/static/img/species/brook_trout.jpg"><span class="dist">3 mi</span></div>
+    <div class="rcb"><b>Olin-Turville Park Boat Ramp</b><p class="sub">Lake Monona · Dane County · Boat launch</p>
+    <p class="line">In range now: <b>Sauger</b> <span class="tag ok">Confirmed</span> <b>White Bass</b> <span class="tag ok">Confirmed</span> and 2 more</p></div></div>
+  <div class="rc"><div class="strip"><img src="../../webapp/static/img/species/yellow_perch.jpg"><img src="../../webapp/static/img/species/bluegill.jpg"><img src="../../webapp/static/img/species/black_crappie.jpg"><span class="dist">5 mi</span></div>
+    <div class="rcb"><b>Tonyawatha Park Boat Ramp</b><p class="sub">Lake Monona · Dane County</p></div></div>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div><div class="cap"><b>Recommended</b><p>Each recommendation opens with a three-photo strip of the species in range there, then the spot, then the in-range names with their evidence labels.</p></div></div><div class="cell">
+<div class="phone v5 sys plain">
+  <div class="topbar dark"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <h1 class="pagetitle">Explore</h1>
+  <div class="seg"><span class="on">Map</span><span>List</span></div>
+  <div class="srch">Search a waterbody, county or fish</div>
+  <div class="chiprow"><span class="fchip on">Boat launch</span><span class="fchip">Carry-in</span><span class="fchip">Shore</span><span class="fchip">Walleye ×</span></div>
+  <p class="note">3,272 access points · sorted by best match · using your preferences</p>
+  <div class="xr"><img src="../../webapp/static/img/species/walleye.jpg"><div><b>Law Park Boat Landing</b><p>Lake Monona · 1 mi</p><span class="tag ok">5 in range</span></div></div>
+  <div class="xr"><img src="../../webapp/static/img/species/sauger.jpg"><div><b>Olin-Turville Boat Ramp</b><p>Lake Monona · 3 mi</p><span class="tag ok">4 in range</span></div></div>
+  <div class="xr"><img src="../../webapp/static/img/species/northern_pike.jpg"><div><b>Canoe Landing</b><p>Badfish Creek · 15 mi</p><span class="tag ok">5 in range</span></div></div>
+  <div class="xr"><img src="../../webapp/static/img/species/brown_trout.jpg"><div><b>Sugar River Access</b><p>Sugar River · 21 mi</p><span class="tag lk">3 in range</span></div></div>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div><div class="cap"><b>Explore</b><p>Square segmented Map | List, square filter labels, and list rows led by a square photo of the best-matching species.</p></div></div></div>

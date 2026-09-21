@@ -16,20 +16,21 @@
 </a>
 {% endif %}
 
-<div class="detail-hero fish-hero">
-  <div class="detail-hero-kicker"><svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Fish</div>
-  <h1>{{ fish.title }}</h1>
+<div class="detail-hero fish-hero{% if fish.image %} has-photo{% endif %}">
   {% if fish.image %}
   <figure class="fish-figure">
-    <img src="{{ url_for('static', filename=fish.image.static_path) }}" alt="{{ fish.title }}" loading="lazy">
-    <figcaption>{{ fish.image.credit }} · <a href="{{ fish.image.page_url }}" target="_blank" rel="noopener">source</a></figcaption>
+    <img src="{{ url_for('static', filename=fish.image.static_path) }}" alt="{{ fish.title }}">
+    <figcaption>{{ fish.image.credit }} &middot; <a href="{{ fish.image.page_url }}" target="_blank" rel="noopener">source</a></figcaption>
   </figure>
-  {% else %}
-  <p class="fish-noimage">No verified public-domain picture yet.</p>
   {% endif %}
-  {% if not fish.angling_target %}
-    <p class="detail-hero-sub">Not an angling target. {{ fish.not_target_reason }}</p>
-  {% endif %}
+  <div class="hero-title">
+    <div class="detail-hero-kicker"><svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg> Fish</div>
+    <h1>{{ fish.title }}</h1>
+    {% if not fish.image %}<p class="fish-noimage">No verified public-domain picture yet.</p>{% endif %}
+    {% if not fish.angling_target %}
+      <p class="detail-hero-sub">Not an angling target. {{ fish.not_target_reason }}</p>
+    {% endif %}
+  </div>
 </div>
 
 {% if fish.current or fish.spawning_now %}

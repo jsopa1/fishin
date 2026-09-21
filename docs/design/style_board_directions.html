@@ -1,0 +1,163 @@
+<!doctype html><meta charset=utf-8><title>fishin style board directions</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600;700&family=Archivo:wght@500;700;800&family=Outfit:wght@400;500;600;700&family=Roboto+Slab:wght@500;700&family=Inter:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box} body{margin:0;background:#0c0e11;font-family:Inter,sans-serif;color:#e8ecf4}
+.lab{display:grid;grid-template-columns:repeat(4,400px);gap:30px 26px;padding:34px 30px;justify-content:center}
+.cell{display:flex;flex-direction:column;align-items:center}
+.cap{margin-top:14px;text-align:center;max-width:380px}.cap b{font-size:17px}.cap p{margin:4px 0 0;color:#93a0b8;font-size:12.5px;line-height:1.4}
+.phone{position:relative;width:380px;height:800px;border-radius:38px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 8px #1a1e26;padding:0 16px 66px}
+.topbar{display:flex;justify-content:center;align-items:center;gap:8px;padding:15px 0 8px}.mark{width:28px;height:28px}.brand{font-weight:700;letter-spacing:.02em;font-size:15px}
+.hero{padding:6px 0 10px}.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}.hero h1{margin:6px 0 0;font-size:31px;line-height:1}.loc{margin:5px 0 0;font-size:13px}
+.glance{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:7px;margin:8px 0 12px}
+.g{display:flex;flex-direction:column;gap:3px;padding:9px 9px;min-width:0;justify-content:space-between}
+.g .lab{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}.g .val{font-size:17px;font-weight:800;display:flex;align-items:center;gap:3px;line-height:1.1;white-space:nowrap}.g small{font-size:10px;font-weight:600}
+.g.water .val{font-size:34px;letter-spacing:-.03em}.g.water small{font-size:14px}.rain{width:17px;height:17px}
+.tag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap;align-self:flex-start}
+.active{padding:12px 13px}.active h3{margin:0 0 6px;font-size:14px;display:flex;justify-content:space-between;align-items:center}.active h3 em{font-style:normal;font-size:11px;font-weight:600}
+.fish{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:9px 0;align-items:center}
+.fish img{width:58px;height:44px;object-fit:cover;border-radius:6px;background:#fff}
+.ft{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}.ft b{font-size:14px}
+.win{position:relative;height:8px;border-radius:99px}.win i{position:absolute;top:0;bottom:0;border-radius:99px}.win u{position:absolute;top:-4px;width:3px;height:16px;border-radius:2px;background:#fff;box-shadow:0 0 0 2px rgba(0,0,0,.35)}
+.wl{display:flex;justify-content:space-between;font-size:10px;margin-top:5px}
+.bar{position:absolute;left:0;right:0;bottom:0;height:60px;display:flex;justify-content:space-around;align-items:center}.bar i{width:22px;height:22px;border-radius:6px;display:block}.bar i.mid{width:30px;height:30px}
+
+/* 1 — Blaze & Charcoal */
+.h{background:repeating-radial-gradient(ellipse at 120% -10%,transparent 0 26px,rgba(255,255,255,.045) 26px 27px),#141618;color:#f2f2ee;font-family:'Barlow',sans-serif}
+.h .mark{color:#ff6a1a}.h .brand{font-family:'Barlow Condensed';text-transform:uppercase;letter-spacing:.14em}
+.h .kicker{color:#ff6a1a;font-family:'Barlow Condensed';font-size:13px}.h h1{font-family:'Barlow Condensed';font-weight:800;text-transform:uppercase;font-size:44px;letter-spacing:.01em}.h .loc{color:#9a9c94}
+.h .g{background:#1e2124;border-left:3px solid #3a3e42}.h .g.water{border-left-color:#ff6a1a;background:#221e1b}.h .lab{color:#9a9c94;font-family:'Barlow Condensed';font-size:11px}.h .val{font-family:'Barlow Condensed';font-weight:700}
+.h .tag.est{background:#3a2a10;color:#ffc46b;border-radius:3px}.h .tag.ok{background:#12351f;color:#5be08e;border-radius:3px}.h .tag.lk{background:#3a2a10;color:#ffc46b;border-radius:3px}
+.h .active{background:#1b1e21;border:1px solid #2c3034;border-top:3px solid #5be08e;border-radius:4px}.h .active h3{font-family:'Barlow Condensed';font-size:18px;text-transform:uppercase;letter-spacing:.08em}.h .active h3 em{color:#5be08e}
+.h .fish{border-top:1px solid #2c3034}.h .fish:first-of-type{border-top:0}.h .fish img{border-radius:3px}.h .ft b{font-family:'Barlow Condensed';font-size:18px;text-transform:uppercase;letter-spacing:.03em}
+.h .win{background:#2c3034}.h .win i{background:linear-gradient(90deg,#3fbf6f,#5be08e)}.h .wl{color:#9a9c94}.h .bar{background:#141618;border-top:1px solid #2c3034}.h .bar i{background:#2c3034;border-radius:3px}.h .bar i.mid{background:#ff6a1a}
+
+/* 2 — Deep Water */
+.w{background:linear-gradient(180deg,#0a5bbf 0,#12a0c4 190px,#eef6fb 190px);color:#0d2a44;font-family:'Archivo',sans-serif}
+.w .topbar{color:#fff}.w .hero{color:#fff}.w .kicker{color:#bfe9f7}.w h1{font-weight:800;font-size:30px}.w .loc{color:#d6f2fb}
+.w .g{background:#fff;border-radius:16px;box-shadow:0 6px 18px rgba(10,60,110,.16)}.w .g.water{background:linear-gradient(160deg,#0a5bbf,#12a0c4);color:#fff}.w .lab{color:#6b86a0}.w .water .lab{color:#cdefff}
+.w .tag.est{background:rgba(255,255,255,.25);color:#fff}.w .tag.ok{background:#d5f5e3;color:#0e7a48}.w .tag.lk{background:#fff0c2;color:#8a5a00}
+.w .active{background:#fff;border-radius:20px;box-shadow:0 8px 24px rgba(10,60,110,.14)}.w .active h3{color:#0e7a48}.w .active h3 em{color:#6b86a0}
+.w .fish{border-top:1px solid #e3eef6}.w .fish:first-of-type{border-top:0}.w .fish img{border-radius:12px}.w .ft b{font-weight:700}
+.w .win{background:linear-gradient(90deg,#f26b6b 0 30%,#ffc94d 30% 45%,#3fbf6f 45% 100%);opacity:.28}.w .win i{background:#22a06b;opacity:1}
+.w .win{background:#dbe8f2;opacity:1}.w .win i{background:linear-gradient(90deg,#22a06b,#5be08e)}.w .win u{background:#0a5bbf;box-shadow:0 0 0 2px #fff}.w .wl{color:#6b86a0}.w .bar{background:#fff;box-shadow:0 -8px 24px rgba(10,60,110,.1)}.w .bar i{background:#c9d8e6;border-radius:50%}.w .bar i.mid{background:#0a5bbf}
+
+/* 3 — Trailhead */
+.t{background:#e6ebe4;color:#151f14;font-family:'Outfit',sans-serif}
+.t .topbar{color:#151f14}.t .mark{color:#151f14}.t .hero{background:#151f14;margin:0 -16px;padding:14px 16px 16px;color:#fff;border-radius:0 0 26px 26px}.t .kicker{color:#8be36b}.t h1{font-weight:600;font-size:30px;letter-spacing:-.01em}.t .loc{color:#b5c2b1}
+.t .glance{margin-top:12px}.t .g{background:#fff;border-radius:16px}.t .g.water{background:#151f14;color:#fff}.t .lab{color:#6b7a68}.t .water .lab{color:#8be36b}
+.t .tag.est{background:#2a3a24;color:#b9f58f}.t .tag.ok{background:#d3f5c2;color:#1f6a12}.t .tag.lk{background:#fbeec2;color:#7a5a00}
+.t .active{background:transparent;padding:6px 0}.t .active h3{font-size:17px;font-weight:600}.t .active h3 em{background:#8be36b;color:#151f14;padding:3px 9px;border-radius:99px;font-weight:700}
+.t .fish{grid-template-columns:96px 1fr;background:#fff;border-radius:18px;padding:8px;margin-bottom:8px;box-shadow:0 2px 8px rgba(21,31,20,.08)}.t .fish img{width:96px;height:66px;border-radius:12px}
+.t .ft b{font-weight:600;font-size:15px}.t .win{background:#dfe6dc}.t .win i{background:#3fbf3f}.t .win u{background:#151f14;box-shadow:0 0 0 2px #fff}.t .wl{color:#6b7a68}.t .bar{background:#fff;border-top:1px solid #d5ddd2}.t .bar i{background:#c8d2c4;border-radius:50%}.t .bar i.mid{background:#8be36b;outline:2px solid #151f14}
+
+/* 4 — Outfitter */
+.o{background:#f4efe6;color:#141414;font-family:'Barlow',sans-serif}
+.o .topbar{border-bottom:2px solid #141414;margin:0 -16px;padding:13px 16px 10px;justify-content:space-between}.o .brand{font-family:'Roboto Slab',serif;font-weight:700;font-size:20px;letter-spacing:0;order:-1}.o .mark{color:#141414}
+.o .kicker{color:#e8621c;font-family:'Barlow Condensed';font-size:13px;letter-spacing:.18em}.o h1{font-family:'Barlow Condensed';font-weight:800;text-transform:uppercase;font-size:48px;letter-spacing:.005em;line-height:.92}.o .loc{font-family:'Roboto Slab',serif;font-style:italic;color:#5a5448}
+.o .glance{border-top:2px solid #141414;border-bottom:1px solid #141414;gap:0;margin:8px 0 12px}.o .g{padding:8px 4px;border-right:1px solid #141414;background:transparent}.o .g:last-child{border-right:0}.o .lab{color:#5a5448;font-family:'Barlow Condensed';font-size:11px}.o .val{font-family:'Barlow Condensed';font-weight:700}
+.o .g.water .val{color:#e8621c}
+.o .tag{border-radius:0;border:1.5px solid #141414;background:transparent;color:#141414;font-family:'Barlow Condensed';letter-spacing:.08em;text-transform:uppercase;font-size:11px}.o .tag.ok{background:#141414;color:#f4efe6}.o .tag.lk{border-style:dashed}
+.o .active{padding:0}.o .active h3{font-family:'Roboto Slab',serif;font-size:17px;border-bottom:2px solid #141414;padding-bottom:6px}.o .active h3 em{font-family:'Barlow Condensed';color:#e8621c;letter-spacing:.1em;text-transform:uppercase}
+.o .fish{grid-template-columns:104px 1fr;border-bottom:1px solid #141414;padding:9px 0}.o .fish img{width:104px;height:70px;border-radius:0;border:1px solid #141414}.o .ft b{font-family:'Barlow Condensed';text-transform:uppercase;font-size:20px;letter-spacing:.02em}
+.o .win{background:#d9d2c3;border-radius:0;height:6px}.o .win i{background:#141414;border-radius:0}.o .win u{background:#e8621c;box-shadow:none;border-radius:0;width:4px}.o .wl{font-family:'Barlow Condensed';letter-spacing:.06em;text-transform:uppercase;color:#5a5448}
+.o .bar{background:#141414}.o .bar i{background:#5a5448;border-radius:0}.o .bar i.mid{background:#e8621c}
+</style><div class=lab><div class="cell">
+<div class="phone h">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg><span class="brand">fishin</span></div>
+  <div class="hero">
+    <div class="kicker">Carry-in · Dane County</div>
+    <h1>Canoe Landing</h1>
+    <p class="loc">Badfish Creek</p>
+  </div>
+  <div class="glance">
+    <div class="g water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="g"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64°</span></div>
+    <div class="g"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="g"><span class="lab">Moon</span><span class="val">◐<small> 1st Qtr</small></span></div>
+  </div>
+  <section class="active">
+    <h3><span>Active fish</span><em>3 in range</em></h3>
+    <div class="fish"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="fb"><div class="ft"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:25%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–65°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/walleye.jpg"><div class="fb"><div class="ft"><b>Walleye</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:50%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–75°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="fb"><div class="ft"><b>Brown Trout</b><span class="tag lk">Likely</span></div>
+      <div class="win"><i style="left:35%;width:34%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 54–67.8°F</span><span>80°</span></div></div></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>1 · Blaze & Charcoal</b><p>Hunting-app lineage (onX, HuntWise, HuntStand): charcoal, blaze orange, condensed caps, topographic lines.</p></div></div><div class="cell">
+<div class="phone w">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg><span class="brand">fishin</span></div>
+  <div class="hero">
+    <div class="kicker">Carry-in · Dane County</div>
+    <h1>Canoe Landing</h1>
+    <p class="loc">Badfish Creek</p>
+  </div>
+  <div class="glance">
+    <div class="g water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="g"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64°</span></div>
+    <div class="g"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="g"><span class="lab">Moon</span><span class="val">◐<small> 1st Qtr</small></span></div>
+  </div>
+  <section class="active">
+    <h3><span>Active fish</span><em>3 in range</em></h3>
+    <div class="fish"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="fb"><div class="ft"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:25%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–65°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/walleye.jpg"><div class="fb"><div class="ft"><b>Walleye</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:50%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–75°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="fb"><div class="ft"><b>Brown Trout</b><span class="tag lk">Likely</span></div>
+      <div class="win"><i style="left:35%;width:34%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 54–67.8°F</span><span>80°</span></div></div></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>2 · Deep Water</b><p>Fishing-app lineage (Fishbrain, Fishing Points, Navionics): aquatic blues, bold sans, gauge-style data.</p></div></div><div class="cell">
+<div class="phone t">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg><span class="brand">fishin</span></div>
+  <div class="hero">
+    <div class="kicker">Carry-in · Dane County</div>
+    <h1>Canoe Landing</h1>
+    <p class="loc">Badfish Creek</p>
+  </div>
+  <div class="glance">
+    <div class="g water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="g"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64°</span></div>
+    <div class="g"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="g"><span class="lab">Moon</span><span class="val">◐<small> 1st Qtr</small></span></div>
+  </div>
+  <section class="active">
+    <h3><span>Active fish</span><em>3 in range</em></h3>
+    <div class="fish"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="fb"><div class="ft"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:25%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–65°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/walleye.jpg"><div class="fb"><div class="ft"><b>Walleye</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:50%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–75°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="fb"><div class="ft"><b>Brown Trout</b><span class="tag lk">Likely</span></div>
+      <div class="win"><i style="left:35%;width:34%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 54–67.8°F</span><span>80°</span></div></div></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>3 · Trailhead</b><p>Outdoor-product lineage (AllTrails, Komoot, Gaia): forest green, lime accent, photo-led cards, pale sage.</p></div></div><div class="cell">
+<div class="phone o">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg><span class="brand">fishin</span></div>
+  <div class="hero">
+    <div class="kicker">Carry-in · Dane County</div>
+    <h1>Canoe Landing</h1>
+    <p class="loc">Badfish Creek</p>
+  </div>
+  <div class="glance">
+    <div class="g water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="g"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64°</span></div>
+    <div class="g"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="g"><span class="lab">Moon</span><span class="val">◐<small> 1st Qtr</small></span></div>
+  </div>
+  <section class="active">
+    <h3><span>Active fish</span><em>3 in range</em></h3>
+    <div class="fish"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="fb"><div class="ft"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:25%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–65°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/walleye.jpg"><div class="fb"><div class="ft"><b>Walleye</b><span class="tag ok">Confirmed</span></div>
+      <div class="win"><i style="left:37.5%;width:50%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 55–75°F</span><span>80°</span></div></div></div>
+    <div class="fish"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="fb"><div class="ft"><b>Brown Trout</b><span class="tag lk">Likely</span></div>
+      <div class="win"><i style="left:35%;width:34%"></i><u style="left:62.5%"></u></div><div class="wl"><span>40°</span><span>Window 54–67.8°F</span><span>80°</span></div></div></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>4 · Outfitter</b><p>Brand-designer lineage (Simms, Filson, Field & Stream, Orvis): black and paper, condensed + slab type, editorial.</p></div></div></div>

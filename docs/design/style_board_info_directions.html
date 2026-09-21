@@ -1,0 +1,164 @@
+<!doctype html><meta charset=utf-8><title>fishin information style directions</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&family=Playfair+Display:wght@600;800;900&display=swap');
+*{box-sizing:border-box} body{margin:0;background:#0d0f12;font-family:Inter,sans-serif;color:#e8ecf4}
+.lab{display:grid;grid-template-columns:repeat(4,400px);gap:30px 26px;padding:34px 30px;justify-content:center}
+.cell{display:flex;flex-direction:column;align-items:center}.cap{margin-top:14px;text-align:center;max-width:380px}.cap b{font-size:17px}.cap p{margin:4px 0 0;color:#93a0b8;font-size:12.5px;line-height:1.4}
+.phone{position:relative;width:380px;height:820px;border-radius:38px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 8px #1a1e26;padding:0 16px 64px}
+.topbar{display:flex;justify-content:center;padding:14px 0 4px}.mark{width:26px;height:26px}
+.crumb{font-size:11px;margin:2px 0 8px}
+.plate{margin:0}.plate img{width:100%;height:150px;object-fit:cover;display:block}.plate figcaption{font-size:9.5px;margin-top:4px}
+.title{padding:10px 0 4px}.title h1{margin:0;font-size:32px;line-height:1}.latin{margin:3px 0 8px;font-size:14px;font-style:italic}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:99px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 4px}.fact{display:flex;flex-direction:column;gap:3px;padding:8px 7px;min-width:0}.fl{font-size:9px;letter-spacing:.08em;text-transform:uppercase;font-weight:700}.fv{font-size:14px;font-weight:800;line-height:1.1}
+.sec{font-size:13px;margin:12px 0 6px}
+.meter .zones{position:relative;height:10px;border-radius:99px}.meter .zones i{position:absolute;top:0;bottom:0;border-radius:99px}.meter u{position:absolute;top:-4px;width:3px;height:18px;border-radius:2px;background:#fff;box-shadow:0 0 0 2px rgba(0,0,0,.4)}
+.scale{display:flex;justify-content:space-between;font-size:9.5px;margin-top:5px}.now{margin:5px 0 0;font-size:11.5px}
+.body{font-size:12px;line-height:1.5;margin:0}.body sup{font-size:9px}.agency{font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:99px;white-space:nowrap}
+.bait{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center;padding:6px 0}.bait img{width:70px;height:44px;object-fit:cover;border-radius:6px}.bait b{font-size:13px}.bait p{margin:2px 0 0;font-size:11px}
+.bar{position:absolute;left:0;right:0;bottom:0;height:58px;display:flex;justify-content:space-around;align-items:center}.bar i{width:22px;height:22px;border-radius:6px;display:block}.bar i.mid{width:30px;height:30px}
+
+/* 1 — Digital Field Guide */
+.a{background:#f7f2e4;color:#1b2b22;font-family:'Nunito',sans-serif}
+.a .mark{color:#2f6b4f}.a .crumb{color:#6d7d66}.a .plate img{border-radius:20px}.a .plate figcaption{color:#8a9684}
+.a h1{font-weight:800;color:#00332a}.a .latin{font-family:'Source Serif 4',serif;color:#5f7a52}
+.a .chip{background:#e3ecd0;color:#2c5a2f}.a .chip.alt{background:#efe6c9;color:#7a5c14}
+.a .fact{background:#fff;border-radius:14px;box-shadow:0 1px 4px rgba(0,51,42,.08)}.a .fl{color:#739442}.a .fv{color:#00332a}
+.a .sec{color:#00332a;font-size:15px;font-weight:800;border-left:4px solid #739442;padding-left:8px}
+.a .meter .zones{background:#e8e2cf}.a .zones .sp{background:#7aa7d6}.a .zones .ac{background:#739442}.a .meter u{background:#00332a;box-shadow:0 0 0 2px #f7f2e4}.a .scale,.a .now{color:#5d6b58}.a .now b{color:#00332a}
+.a .body{color:#33453a}.a .agency{background:#dfe9c9;color:#2c5a2f}.a .bait{border-top:1px solid #e3dcc6}.a .bait img{border-radius:10px;background:#fff}.a .bait p{color:#6d7d66}
+.a .bar{background:#fff9ef;border-top:1px solid #e3dcc6}.a .bar i{background:#c9d3b4;border-radius:50%}.a .bar i.mid{background:#739442}
+
+/* 2 — Reference Plate */
+.b{background:#fff;color:#202122;font-family:'Source Serif 4',serif}
+.b .mark{color:#202122}.b .topbar{border-bottom:1px solid #a2a9b1;margin:0 -16px;padding:12px 0 8px}.b .crumb{font-family:Inter;color:#54595d}.b .crumb{font-variant:small-caps;letter-spacing:.06em}
+.b .plate{border:1px solid #a2a9b1;padding:6px;background:#f8f9fa}.b .plate img{height:130px}.b .plate figcaption{font-family:Inter;color:#54595d}
+.b h1{font-weight:700;font-size:30px;border-bottom:1px solid #a2a9b1;padding-bottom:4px}.b .latin{color:#54595d}
+.b .chip{border-radius:2px;background:#eaf3ff;color:#2a4b8d;border:1px solid #a3c1f5}.b .chip.alt{background:#f8f9fa;color:#54595d;border-color:#c8ccd1}
+.b .facts{grid-template-columns:1fr 1fr;gap:0;border:1px solid #a2a9b1;margin-top:10px}.b .fact{flex-direction:row;justify-content:space-between;align-items:baseline;padding:6px 9px;border-bottom:1px solid #eaecf0}.b .fact:nth-child(odd){border-right:1px solid #eaecf0}.b .fl{font-family:Inter;font-variant:small-caps;letter-spacing:.06em;text-transform:none;color:#54595d;font-size:11px}.b .fv{font-size:13px;font-weight:600}
+.b .sec{font-family:'Source Serif 4',serif;font-size:19px;font-weight:600;border-bottom:1px solid #a2a9b1;padding-bottom:2px}
+.b .meter .zones{background:#eaecf0;border-radius:0;height:8px}.b .zones i{border-radius:0}.b .zones .sp{background:#6b8fd6}.b .zones .ac{background:#3a3a3a}.b .meter u{border-radius:0;background:#d33;box-shadow:none;width:2px}.b .scale{font-family:Inter;color:#54595d}.b .now{font-family:Inter;color:#202122}
+.b .body{font-size:13px;line-height:1.55}.b sup{color:#3366cc}.b .agency{font-family:Inter;background:#f8f9fa;border:1px solid #c8ccd1;color:#54595d;border-radius:2px}
+.b .bait{border-bottom:1px dotted #a2a9b1}.b .bait b{color:#3366cc}.b .bait img{border:1px solid #a2a9b1;border-radius:0}.b .bait p{color:#54595d}
+.b .bar{background:#f8f9fa;border-top:1px solid #a2a9b1}.b .bar i{background:#a2a9b1;border-radius:2px}.b .bar i.mid{background:#3366cc}
+
+/* 3 — Curiosity Colour */
+.c{background:#f3f5f9;color:#14203a;font-family:'Poppins',sans-serif}
+.c .topbar{background:#1b6df5;margin:0 -16px;padding:12px 0 10px;color:#fff}.c .crumb{color:#5a6a8a}.c .plate img{border-radius:22px;height:156px}.c .plate figcaption{color:#7c8aa5}
+.c h1{font-weight:800;font-size:34px}.c .latin{color:#5a6a8a}
+.c .chip{background:#1b6df5;color:#fff}.c .chip.alt{background:#ffbb2a;color:#14203a}
+.c .facts{gap:7px}.c .fact{border-radius:16px;color:#fff}.c .f1{background:#37be60}.c .f2{background:#dd362e}.c .f3{background:#ffbb2a;color:#14203a}.c .f4{background:#1b6df5}.c .fl{opacity:.85}
+.c .sec{font-weight:700;font-size:15px;color:#1b6df5}
+.c .meter .zones{background:#e1e6f0;height:12px}.c .zones .sp{background:#dd362e}.c .zones .ac{background:#37be60}.c .meter u{background:#14203a;box-shadow:0 0 0 2px #fff;height:22px;top:-5px}.c .scale,.c .now{color:#5a6a8a}.c .now b{color:#14203a}
+.c .body{color:#3b4a6b}.c .agency{background:#dfe9ff;color:#1b6df5}
+.c .bait{background:#fff;border-radius:16px;padding:8px;margin-bottom:6px;box-shadow:0 2px 8px rgba(20,32,58,.08)}.c .bait img{border-radius:10px}.c .bait p{color:#5a6a8a}
+.c .bar{background:#fff;box-shadow:0 -6px 20px rgba(20,32,58,.08)}.c .bar i{background:#d5dcec;border-radius:50%}.c .bar i.mid{background:#ffbb2a}
+
+/* 4 — Editorial Explorer */
+.d{background:#f1ede4;color:#111;font-family:'Source Serif 4',serif}
+.d .topbar{border-bottom:3px solid #111;margin:0 -16px;padding:12px 0 8px}.d .mark{color:#111}.d .crumb{font-family:Inter;text-transform:uppercase;letter-spacing:.14em;font-size:10px;color:#666}
+.d .plate{border:4px solid #f2c230;padding:0}.d .plate img{height:150px}.d .plate figcaption{font-family:Inter;color:#666;padding:0 2px}
+.d h1{font-family:'Playfair Display',serif;font-weight:900;font-size:50px;letter-spacing:-.02em;line-height:.95}.d .latin{font-family:'Source Serif 4',serif;color:#555;font-size:15px}
+.d .chip{border-radius:0;background:#111;color:#f1ede4;font-family:Inter;letter-spacing:.06em;text-transform:uppercase;font-size:9.5px}.d .chip.alt{background:#f2c230;color:#111}
+.d .facts{grid-template-columns:repeat(4,1fr);gap:0;border-top:3px solid #111;border-bottom:1px solid #111;margin-top:10px}.d .fact{border-right:1px solid #111;padding:8px 6px}.d .fact:last-child{border-right:0}.d .fl{font-family:Inter;color:#666}.d .fv{font-family:'Playfair Display',serif;font-weight:800;font-size:16px}
+.d .sec{font-family:'Playfair Display',serif;font-weight:800;font-size:20px;border-top:1px solid #111;padding-top:8px}
+.d .meter .zones{background:#d9d3c4;border-radius:0;height:8px}.d .zones i{border-radius:0}.d .zones .sp{background:#7a8fb0}.d .zones .ac{background:#111}.d .meter u{background:#f2c230;box-shadow:0 0 0 2px #111;border-radius:0}.d .scale,.d .now{font-family:Inter;color:#444}
+.d .body{font-size:13px;line-height:1.55}.d .drop::first-letter{float:left;font-family:'Playfair Display',serif;font-weight:900;font-size:46px;line-height:.8;padding:4px 6px 0 0}.d .agency{font-family:Inter;background:#f2c230;color:#111;border-radius:0}
+.d .bait{border-top:1px solid #111}.d .bait b{font-family:'Playfair Display',serif;font-size:15px}.d .bait img{border-radius:0;border:1px solid #111}.d .bait p{font-family:Inter;color:#555}
+.d .bar{background:#111}.d .bar i{background:#777;border-radius:0}.d .bar i.mid{background:#f2c230}
+</style><div class=lab><div class="cell">
+<div class="phone a">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="crumb">Fish &nbsp;›&nbsp; Walleye</div>
+  <figure class="plate"><img src="../../webapp/static/img/species/walleye.jpg"><figcaption>Engbretson / U.S. Fish and Wildlife Service · Public domain</figcaption></figure>
+  <div class="title"><h1>Walleye</h1><p class="latin">Sander vitreus</p>
+    <div class="chips"><span class="chip">Confirmed in 41 waters near you</span><span class="chip alt">Dawn · dusk · night feeder</span></div></div>
+  <div class="facts">
+    <div class="fact f1"><span class="fl">Active range</span><span class="fv">55–75°F</span></div>
+    <div class="fact f2"><span class="fl">Spawning</span><span class="fv">40–52°F</span></div>
+    <div class="fact f3"><span class="fl">Feeds</span><span class="fv">Low light</span></div>
+    <div class="fact f4"><span class="fl">Evidence</span><span class="fv">Agency</span></div>
+  </div>
+  <h2 class="sec">Documented activity</h2>
+  <div class="meter"><div class="zones"><i class="sp" style="left:16.7%;width:20%"></i><i class="ac" style="left:41.7%;width:33.3%"></i><u style="left:58.3%"></u></div>
+    <div class="scale"><span>30°</span><span>50°</span><span>70°</span><span>90°F</span></div>
+    <p class="now"><b>Today 65°F</b> at Canoe Landing: inside the active range.</p></div>
+  <h2 class="sec">Documented habitat</h2>
+  <p class="body drop">Walleye live near or on the lake bottom and travel through open water in loosely formed schools.<sup>1</sup> In clear water they stay deeper by day and move to the shallows at night.<sup>2</sup> <span class="agency">Agency source</span></p>
+  <h2 class="sec">Recommended bait</h2>
+  <div class="bait"><img src="../../webapp/static/img/baits/leeches.svg"><div><b>Leeches</b><p>Bait-cast or still fish from an anchored boat.</p></div></div>
+  <div class="bait"><img src="../../webapp/static/img/baits/nightcrawlers.svg"><div><b>Nightcrawlers</b><p>Keep the bait near the bottom.</p></div></div>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>1 · Digital Field Guide</b><p>Merlin, Audubon, Seek, PictureThis: soft sage and cream, friendly sans, italic Latin names, attribute tiles.</p></div></div><div class="cell">
+<div class="phone b">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="crumb">Fish &nbsp;›&nbsp; Walleye</div>
+  <figure class="plate"><img src="../../webapp/static/img/species/walleye.jpg"><figcaption>Engbretson / U.S. Fish and Wildlife Service · Public domain</figcaption></figure>
+  <div class="title"><h1>Walleye</h1><p class="latin">Sander vitreus</p>
+    <div class="chips"><span class="chip">Confirmed in 41 waters near you</span><span class="chip alt">Dawn · dusk · night feeder</span></div></div>
+  <div class="facts">
+    <div class="fact f1"><span class="fl">Active range</span><span class="fv">55–75°F</span></div>
+    <div class="fact f2"><span class="fl">Spawning</span><span class="fv">40–52°F</span></div>
+    <div class="fact f3"><span class="fl">Feeds</span><span class="fv">Low light</span></div>
+    <div class="fact f4"><span class="fl">Evidence</span><span class="fv">Agency</span></div>
+  </div>
+  <h2 class="sec">Documented activity</h2>
+  <div class="meter"><div class="zones"><i class="sp" style="left:16.7%;width:20%"></i><i class="ac" style="left:41.7%;width:33.3%"></i><u style="left:58.3%"></u></div>
+    <div class="scale"><span>30°</span><span>50°</span><span>70°</span><span>90°F</span></div>
+    <p class="now"><b>Today 65°F</b> at Canoe Landing: inside the active range.</p></div>
+  <h2 class="sec">Documented habitat</h2>
+  <p class="body drop">Walleye live near or on the lake bottom and travel through open water in loosely formed schools.<sup>1</sup> In clear water they stay deeper by day and move to the shallows at night.<sup>2</sup> <span class="agency">Agency source</span></p>
+  <h2 class="sec">Recommended bait</h2>
+  <div class="bait"><img src="../../webapp/static/img/baits/leeches.svg"><div><b>Leeches</b><p>Bait-cast or still fish from an anchored boat.</p></div></div>
+  <div class="bait"><img src="../../webapp/static/img/baits/nightcrawlers.svg"><div><b>Nightcrawlers</b><p>Keep the bait near the bottom.</p></div></div>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>2 · Reference Plate</b><p>Sibley, Peterson, Wikipedia: white paper, hairline rules, small-caps labels, footnote citations.</p></div></div><div class="cell">
+<div class="phone c">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="crumb">Fish &nbsp;›&nbsp; Walleye</div>
+  <figure class="plate"><img src="../../webapp/static/img/species/walleye.jpg"><figcaption>Engbretson / U.S. Fish and Wildlife Service · Public domain</figcaption></figure>
+  <div class="title"><h1>Walleye</h1><p class="latin">Sander vitreus</p>
+    <div class="chips"><span class="chip">Confirmed in 41 waters near you</span><span class="chip alt">Dawn · dusk · night feeder</span></div></div>
+  <div class="facts">
+    <div class="fact f1"><span class="fl">Active range</span><span class="fv">55–75°F</span></div>
+    <div class="fact f2"><span class="fl">Spawning</span><span class="fv">40–52°F</span></div>
+    <div class="fact f3"><span class="fl">Feeds</span><span class="fv">Low light</span></div>
+    <div class="fact f4"><span class="fl">Evidence</span><span class="fv">Agency</span></div>
+  </div>
+  <h2 class="sec">Documented activity</h2>
+  <div class="meter"><div class="zones"><i class="sp" style="left:16.7%;width:20%"></i><i class="ac" style="left:41.7%;width:33.3%"></i><u style="left:58.3%"></u></div>
+    <div class="scale"><span>30°</span><span>50°</span><span>70°</span><span>90°F</span></div>
+    <p class="now"><b>Today 65°F</b> at Canoe Landing: inside the active range.</p></div>
+  <h2 class="sec">Documented habitat</h2>
+  <p class="body drop">Walleye live near or on the lake bottom and travel through open water in loosely formed schools.<sup>1</sup> In clear water they stay deeper by day and move to the shallows at night.<sup>2</sup> <span class="agency">Agency source</span></p>
+  <h2 class="sec">Recommended bait</h2>
+  <div class="bait"><img src="../../webapp/static/img/baits/leeches.svg"><div><b>Leeches</b><p>Bait-cast or still fish from an anchored boat.</p></div></div>
+  <div class="bait"><img src="../../webapp/static/img/baits/nightcrawlers.svg"><div><b>Nightcrawlers</b><p>Keep the bait near the bottom.</p></div></div>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>3 · Curiosity Colour</b><p>Atlas Obscura, Google Arts & Culture: bold colour blocks, rounded chips, big imagery, exploration-first.</p></div></div><div class="cell">
+<div class="phone d">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="crumb">Fish &nbsp;›&nbsp; Walleye</div>
+  <figure class="plate"><img src="../../webapp/static/img/species/walleye.jpg"><figcaption>Engbretson / U.S. Fish and Wildlife Service · Public domain</figcaption></figure>
+  <div class="title"><h1>Walleye</h1><p class="latin">Sander vitreus</p>
+    <div class="chips"><span class="chip">Confirmed in 41 waters near you</span><span class="chip alt">Dawn · dusk · night feeder</span></div></div>
+  <div class="facts">
+    <div class="fact f1"><span class="fl">Active range</span><span class="fv">55–75°F</span></div>
+    <div class="fact f2"><span class="fl">Spawning</span><span class="fv">40–52°F</span></div>
+    <div class="fact f3"><span class="fl">Feeds</span><span class="fv">Low light</span></div>
+    <div class="fact f4"><span class="fl">Evidence</span><span class="fv">Agency</span></div>
+  </div>
+  <h2 class="sec">Documented activity</h2>
+  <div class="meter"><div class="zones"><i class="sp" style="left:16.7%;width:20%"></i><i class="ac" style="left:41.7%;width:33.3%"></i><u style="left:58.3%"></u></div>
+    <div class="scale"><span>30°</span><span>50°</span><span>70°</span><span>90°F</span></div>
+    <p class="now"><b>Today 65°F</b> at Canoe Landing: inside the active range.</p></div>
+  <h2 class="sec">Documented habitat</h2>
+  <p class="body drop">Walleye live near or on the lake bottom and travel through open water in loosely formed schools.<sup>1</sup> In clear water they stay deeper by day and move to the shallows at night.<sup>2</sup> <span class="agency">Agency source</span></p>
+  <h2 class="sec">Recommended bait</h2>
+  <div class="bait"><img src="../../webapp/static/img/baits/leeches.svg"><div><b>Leeches</b><p>Bait-cast or still fish from an anchored boat.</p></div></div>
+  <div class="bait"><img src="../../webapp/static/img/baits/nightcrawlers.svg"><div><b>Nightcrawlers</b><p>Keep the bait near the bottom.</p></div></div>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>4 · Editorial Explorer</b><p>Smithsonian, National Geographic, Our World in Data: black and paper, display serif, gold accent, story-like.</p></div></div></div>

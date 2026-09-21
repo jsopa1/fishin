@@ -2114,3 +2114,19 @@ permanently to Explore so old bookmarks still land somewhere useful.
 a single preferred point) still sit under "No documented temperature window". Giving them a "likely to bite" reading
 from time of year would be a catch prediction, which #005 and the V0 result rule out; that is a decision for the CEO,
 not something to slip in, and options are laid out in the hand-off.
+
+## 057 — Visual style: a flat digital field guide (1E Photo-First)
+
+The owner rejected six invented styles, asked for a style board built from real fishing apps, hunting apps and
+professional designers (docs/design/style_board.md), then for one aimed at an information-and-exploring app
+(style_board_info.md), chose the "Digital Field Guide" direction, asked for no "bubble" shapes, and picked the
+flat photo-first variant. This is now the app's look. Every control has a 2 px corner radius or none (the
+pill and circle tokens all resolve to 2 px), sections are ruled, the palette is cream paper with deep-green ink and
+sage rules, and the type is Nunito. The Fish page runs the species photo edge to edge with the name over it. The Spot
+page uses a solid deep-green header band, not a fish photo, because a place is not a fish and a lead-species photo
+could read as a promise. Confirmed, Likely and every other evidence or reading tag is small highlighted text, not a
+box, so the tags stay quieter than names and data. The dark theme is the same design on deep green. Brand blue is
+retired, including the map clusters. Nothing about the data, the ranking or the wording changed, so #005 is untouched.
+
+The mock-ups that led here are in docs/design/ (wireframe_full.png is the full screen set). The launch film, its
+GIF and poster, and the README screenshots were re-captured from the live app in the new style.

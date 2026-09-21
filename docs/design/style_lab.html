@@ -1,0 +1,210 @@
+<!doctype html><meta charset=utf-8><title>fishin style lab</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Manrope:wght@500;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+*{box-sizing:border-box} body{margin:0;background:#0c0e13;font-family:Inter,sans-serif;color:#e8ecf4}
+.lab{display:grid;grid-template-columns:repeat(3,420px);gap:36px 30px;padding:36px 40px;justify-content:center}
+.cell{display:flex;flex-direction:column;align-items:center}
+.cap{margin-top:14px;text-align:center;max-width:390px}.cap b{font-size:17px}.cap p{margin:4px 0 0;color:#93a0b8;font-size:13px;line-height:1.35}
+.phone{position:relative;width:390px;height:790px;border-radius:38px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 8px #1a1e29;padding:0 16px 70px}
+.phone h1{margin:0;font-size:26px;line-height:1.05}.phone .loc{margin:5px 0 0;font-size:13px}
+.topbar{display:flex;justify-content:center;padding:16px 0 6px}.mark{width:34px;height:34px}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-top:8px}
+.save{font:600 12px Inter;padding:9px 13px;border-radius:12px;cursor:pointer}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:min-content;align-items:start;gap:9px;margin-top:14px}
+.stat{min-width:0;padding:11px 13px;display:flex;flex-direction:column;gap:3px}
+.stat .lab{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.stat .val{font-size:24px;font-weight:800;display:flex;align-items:center;gap:6px;line-height:1.1}.stat small{font-size:12px;font-weight:600}
+.stat .sub{font-size:11px}.rain{width:24px;height:24px}
+.tag{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px;align-self:flex-start;white-space:nowrap}
+.moondot{width:16px;height:16px;border-radius:50%;background:linear-gradient(90deg,#f3c968 50%,#3a3f5c 50%);display:inline-block}
+.active{margin-top:12px;padding:12px 13px}.active h3{margin:0 0 8px;font-size:14px;display:flex;align-items:center;gap:8px}.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.row{display:grid;grid-template-columns:54px 1fr;gap:2px 11px;padding:8px 0;align-items:center}
+.row img{width:54px;height:36px;object-fit:cover;border-radius:6px;background:#fff;grid-row:1/3}
+.row .rt{display:flex;justify-content:space-between;align-items:center}.row b{font-size:14px}.row p{margin:0;font-size:11.5px;line-height:1.3}
+.bar{position:absolute;left:0;right:0;bottom:0;height:64px;display:flex;justify-content:space-around;align-items:center}
+.bar i{width:24px;height:24px;border-radius:6px;display:block}.bar i.mid{width:32px;height:32px}
+
+/* A — Midnight Instrument */
+.a{background:radial-gradient(300px 260px at 85% 8%,rgba(91,134,245,.22),transparent 70%),linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px) 0 0/28px 28px,#0a0d14;color:#eef1f7}
+.a .mark{color:#5b86f5}.a .loc{color:#8b95ad}.a .save{background:#0e1424;border:1px solid #232c45;color:#eef1f7}
+.a .stat{background:#0e1424;border:1px solid #232c45;border-radius:16px}.a .lab{color:#8b95ad;font-family:'JetBrains Mono',monospace}.a .val{font-family:'JetBrains Mono',monospace;letter-spacing:-.03em}.a small{color:#8b95ad}
+.a .tag.est{background:#3a3016;color:#e8c766}.a .tag.ok{background:#153a2a;color:#5fd39a}.a .tag.lk{background:#3a3016;color:#e8c766}
+.a .active{background:#0e1424;border:1.5px solid #4cc38a;border-radius:18px}.a .active h3{color:#4cc38a}.a .dot{background:#4cc38a;box-shadow:0 0 12px #4cc38a}
+.a .row{border-top:1px solid #232c45}.a .row:first-of-type{border-top:0}.a p{color:#8b95ad}.a .bar{background:#0a0d14ee;border-top:1px solid #232c45}.a .bar i{background:#232c45}.a .bar i.mid{background:#5b86f5}
+
+/* B — Glass over Water */
+.b{background:radial-gradient(420px 320px at 20% 5%,#2fb6c9 0%,transparent 60%),radial-gradient(380px 300px at 90% 40%,#1b6fa8 0%,transparent 60%),radial-gradient(500px 400px at 30% 100%,#0b4a5a 0%,transparent 70%),linear-gradient(180deg,#0a4a63,#04202c);color:#f2fbff}
+.b::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.035) 46px 52px);pointer-events:none}
+.b .phone-in{position:relative}.b .mark{color:#9df0ff}.b h1{font-family:Manrope}.b .loc{color:#b7e4ee}
+.b .save{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;backdrop-filter:blur(12px)}
+.b .stat,.b .active{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px);border-radius:24px;box-shadow:0 8px 30px rgba(0,20,40,.25),inset 0 1px 0 rgba(255,255,255,.3)}
+.b .lab{color:#b7e4ee}.b .val{font-family:Manrope}.b small{color:#cfeef5}
+.b .tag.est{background:rgba(255,224,130,.22);color:#ffe6a0}.b .tag.ok{background:rgba(120,255,190,.2);color:#9dffd0}.b .tag.lk{background:rgba(255,224,130,.22);color:#ffe6a0}
+.b .active h3{color:#9dffd0}.b .dot{background:#9dffd0}.b .row{border-top:1px solid rgba(255,255,255,.14)}.b .row:first-of-type{border-top:0}.b p{color:#c5e8f0}
+.b .bar{background:rgba(255,255,255,.12);backdrop-filter:blur(20px);margin:0 16px 12px;left:0;right:0;border-radius:26px;border:1px solid rgba(255,255,255,.25);height:58px}.b .bar i{background:rgba(255,255,255,.55)}.b .bar i.mid{background:#9df0ff}
+
+/* C — Field Guide */
+.c{background:radial-gradient(circle at 1px 1px,rgba(80,60,30,.09) 1px,transparent 1.5px) 0 0/9px 9px,#f2e9d6;color:#2b2a26;font-family:'Fraunces',serif}
+.c::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-radial-gradient(ellipse at 110% -10%,transparent 0 22px,rgba(95,127,90,.13) 22px 23px)}
+.c .mark{color:#5f7f5a}.c h1{font-family:'Fraunces',serif;font-weight:700;letter-spacing:-.01em}.c .loc{color:#6d6350;font-style:italic}
+.c .save{background:transparent;border:1.5px solid #2b2a26;color:#2b2a26;font-family:'Fraunces',serif;border-radius:4px}
+.c .stat{background:#fbf5e6;border:1.5px solid #2b2a26;border-radius:3px;box-shadow:inset 0 0 0 3px #fbf5e6,inset 0 0 0 4px #b8a880}.c .lab{color:#8a4b2e;font-family:'Fraunces',serif;font-variant:small-caps;letter-spacing:.14em;font-size:11px}.c .val{font-family:'Fraunces',serif}
+.c .tag{border-radius:3px;border:1.5px solid currentColor;background:transparent;font-family:'Fraunces',serif;font-variant:small-caps;letter-spacing:.06em;transform:rotate(-2deg)}.c .tag.est{color:#a2622a}.c .tag.ok{color:#3f6a3b}.c .tag.lk{color:#a2622a}
+.c .active{background:#fbf5e6;border:2px solid #3f6a3b;border-radius:3px}.c .active h3{font-family:'Fraunces',serif;color:#3f6a3b;font-variant:small-caps;letter-spacing:.12em}.c .dot{background:#3f6a3b;border-radius:2px;transform:rotate(45deg)}
+.c .row{border-top:1px dashed #b8a880}.c .row:first-of-type{border-top:0}.c .row img{border:1.5px solid #2b2a26;border-radius:2px;padding:2px;background:#fff}.c p{color:#6d6350;font-family:Inter,sans-serif}.c .bar{background:#eadfc6;border-top:2px solid #2b2a26}.c .bar i{background:#2b2a26;border-radius:2px}.c .bar i.mid{background:#a2622a}
+
+/* D — Sonar HUD */
+.d{background:linear-gradient(rgba(125,255,176,.06) 1px,transparent 1px) 0 0/100% 34px,#020c07;color:#7dffb0;font-family:'Space Mono',monospace}
+.d::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 4px);pointer-events:none}
+.d .mark{color:#7dffb0;filter:drop-shadow(0 0 6px #7dffb0)}.d h1{font-family:'Space Mono',monospace;font-size:22px;text-transform:uppercase;letter-spacing:.03em;text-shadow:0 0 10px rgba(125,255,176,.6)}.d .loc{color:#4bbd83}
+.d .save{background:transparent;border:1px solid #7dffb0;color:#7dffb0;font-family:'Space Mono',monospace;border-radius:0}
+.d .stat{background:rgba(125,255,176,.05);border:1px solid #2d7a53;border-radius:0;position:relative}.d .stat::before,.d .stat::after{content:"";position:absolute;width:8px;height:8px;border:2px solid #7dffb0}.d .stat::before{left:-1px;top:-1px;border-right:0;border-bottom:0}.d .stat::after{right:-1px;bottom:-1px;border-left:0;border-top:0}
+.d .lab{color:#4bbd83;font-family:'Space Mono',monospace}.d .val{font-family:'Space Mono',monospace;text-shadow:0 0 8px rgba(125,255,176,.5)}.d small{color:#4bbd83}
+.d .tag{border-radius:0;font-family:'Space Mono',monospace;border:1px solid}.d .tag.est{color:#ffb547;background:rgba(255,181,71,.1)}.d .tag.ok{color:#7dffb0;background:rgba(125,255,176,.1)}.d .tag.lk{color:#ffb547;background:rgba(255,181,71,.1)}
+.d .active{background:rgba(125,255,176,.04);border:1px solid #7dffb0;border-radius:0}.d .active h3{color:#7dffb0;text-transform:uppercase;letter-spacing:.14em;font-size:12px}.d .dot{background:#7dffb0;border-radius:0;box-shadow:0 0 10px #7dffb0}
+.d .row{border-top:1px dashed #2d7a53}.d .row:first-of-type{border-top:0}.d .row img{border-radius:0;filter:grayscale(1) sepia(1) hue-rotate(80deg) saturate(3) brightness(.9);border:1px solid #2d7a53}.d p{color:#4bbd83;font-size:11px}.d .bar{background:#020c07;border-top:1px solid #2d7a53}.d .bar i{background:transparent;border:1.5px solid #7dffb0;border-radius:0}.d .bar i.mid{background:#7dffb0}
+
+/* E — Bento Bright */
+.e{background:#edf1f8;color:#141a2b;font-family:'Plus Jakarta Sans',sans-serif}
+.e .mark{color:#3b6cf6}.e h1{font-weight:800}.e .loc{color:#6b7591}.e .save{background:#141a2b;color:#fff;border:0;border-radius:99px}
+.e .stats{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto auto auto}.e .stat{border-radius:26px;border:0}
+.e .s-water{grid-column:1;grid-row:1/3;align-self:stretch;background:linear-gradient(160deg,#3b82f6,#22d3ee);color:#fff;min-height:170px;justify-content:space-between}.e .s-water .val{font-size:64px;letter-spacing:-.04em}.e .s-water small{font-size:20px;color:#e6fbff}.e .s-water .lab{color:#e6fbff}
+.e .s-air{background:#ffd85e;grid-column:2;grid-row:1}.e .s-wind{background:#c9b8ff;grid-column:2;grid-row:2}.e .s-moon{background:#141a2b;color:#fff;grid-column:1/3;grid-row:3}
+.e .s-moon{padding:14px 16px}.e .lab{opacity:.8}
+.e .tag.est{background:rgba(255,255,255,.28);color:#fff}.e .tag.ok{background:#d6f5e4;color:#0e7a48}.e .tag.lk{background:#ffefc2;color:#8a5a00}
+.e .active{background:#fff;border-radius:26px;box-shadow:0 10px 30px rgba(30,50,110,.10)}.e .active h3{color:#0e7a48}.e .dot{background:#22c55e}
+.e .row{border-top:1px solid #edf1f8}.e .row:first-of-type{border-top:0}.e .row img{border-radius:12px}.e p{color:#6b7591}.e .bar{background:#fff;box-shadow:0 -8px 24px rgba(30,50,110,.08)}.e .bar i{background:#d8deee;border-radius:50%}.e .bar i.mid{background:#3b6cf6}
+
+/* F — Tackle-Box Brutalist */
+.f{background:#fff4dc;color:#000;font-family:'Space Grotesk',sans-serif}
+.f .mark{color:#000}.f h1{font-weight:700;font-size:28px;letter-spacing:-.02em}.f .loc{color:#000;font-weight:500}.f .save{background:#ffd23f;border:3px solid #000;box-shadow:4px 4px 0 #000;border-radius:0;font-family:'Space Grotesk';font-weight:700}
+.f .stat{background:#fff;border:3px solid #000;box-shadow:5px 5px 0 #000;border-radius:0}.f .s-water{background:#3a6cff;color:#fff}.f .s-air{background:#ffd23f}.f .s-wind{background:#ff5a1f;color:#fff}.f .s-moon{background:#c9f26b}.f .lab{font-family:'Space Grotesk';font-weight:700}.f .val{font-family:'Space Grotesk';font-weight:700}
+.f .tag{border:2.5px solid #000;border-radius:0;color:#000}.f .tag.est{background:#fff}.f .tag.ok{background:#c9f26b}.f .tag.lk{background:#ffd23f}
+.f .active{background:#fff;border:3px solid #000;box-shadow:6px 6px 0 #000;border-radius:0}.f .active h3{background:#c9f26b;display:inline-flex;padding:3px 10px;border:2.5px solid #000;font-size:13px;text-transform:uppercase}.f .dot{display:none}
+.f .row{border-top:2.5px solid #000}.f .row:first-of-type{border-top:0}.f .row img{border:2.5px solid #000;border-radius:0}.f p{color:#000;font-weight:500}.f .bar{background:#fff;border-top:3px solid #000}.f .bar i{background:#000;border-radius:0}.f .bar i.mid{background:#ff5a1f;border:3px solid #000}
+</style><div class=lab><div class="cell">
+<div class="phone a">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="head">
+    <div><h1>Canoe Landing</h1><p class="loc">Badfish Creek, Dane</p></div>
+    <button class="save">Save</button>
+  </div>
+  <div class="stats">
+    <div class="stat s-water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="stat s-air"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64<small>°F</small></span><span class="sub">Light rain</span></div>
+    <div class="stat s-wind"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="stat s-moon"><span class="lab">Moon</span><span class="val"><i class="moondot"></i>First Quarter</span></div>
+  </div>
+  <section class="active">
+    <h3><i class="dot"></i>Active fish</h3>
+    <div class="row"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="rt"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div><p>Active range 55–65°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/walleye.jpg"><div class="rt"><b>Walleye</b><span class="tag ok">Confirmed</span></div><p>Active range 55–75°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="rt"><b>Brown Trout</b><span class="tag lk">Likely</span></div><p>Active range 54–67.8°F. Currently 65°F, inside range.</p></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>A · Midnight Instrument</b><p>Ink-black, electric blue, mono numerals. What the launch film already uses.</p></div></div><div class="cell">
+<div class="phone b">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="head">
+    <div><h1>Canoe Landing</h1><p class="loc">Badfish Creek, Dane</p></div>
+    <button class="save">Save</button>
+  </div>
+  <div class="stats">
+    <div class="stat s-water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="stat s-air"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64<small>°F</small></span><span class="sub">Light rain</span></div>
+    <div class="stat s-wind"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="stat s-moon"><span class="lab">Moon</span><span class="val"><i class="moondot"></i>First Quarter</span></div>
+  </div>
+  <section class="active">
+    <h3><i class="dot"></i>Active fish</h3>
+    <div class="row"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="rt"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div><p>Active range 55–65°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/walleye.jpg"><div class="rt"><b>Walleye</b><span class="tag ok">Confirmed</span></div><p>Active range 55–75°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="rt"><b>Brown Trout</b><span class="tag lk">Likely</span></div><p>Active range 54–67.8°F. Currently 65°F, inside range.</p></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>B · Glass over Water</b><p>Frosted glass floating over a lake-blue field. Refined translucency, in the spirit of Apple's Liquid Glass.</p></div></div><div class="cell">
+<div class="phone c">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="head">
+    <div><h1>Canoe Landing</h1><p class="loc">Badfish Creek, Dane</p></div>
+    <button class="save">Save</button>
+  </div>
+  <div class="stats">
+    <div class="stat s-water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="stat s-air"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64<small>°F</small></span><span class="sub">Light rain</span></div>
+    <div class="stat s-wind"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="stat s-moon"><span class="lab">Moon</span><span class="val"><i class="moondot"></i>First Quarter</span></div>
+  </div>
+  <section class="active">
+    <h3><i class="dot"></i>Active fish</h3>
+    <div class="row"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="rt"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div><p>Active range 55–65°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/walleye.jpg"><div class="rt"><b>Walleye</b><span class="tag ok">Confirmed</span></div><p>Active range 55–75°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="rt"><b>Brown Trout</b><span class="tag lk">Likely</span></div><p>Active range 54–67.8°F. Currently 65°F, inside range.</p></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>C · Field Guide</b><p>Warm paper, serif type, naturalist plates and stamped labels. Suits our public-domain fish art.</p></div></div><div class="cell">
+<div class="phone d">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="head">
+    <div><h1>Canoe Landing</h1><p class="loc">Badfish Creek, Dane</p></div>
+    <button class="save">Save</button>
+  </div>
+  <div class="stats">
+    <div class="stat s-water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="stat s-air"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64<small>°F</small></span><span class="sub">Light rain</span></div>
+    <div class="stat s-wind"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="stat s-moon"><span class="lab">Moon</span><span class="val"><i class="moondot"></i>First Quarter</span></div>
+  </div>
+  <section class="active">
+    <h3><i class="dot"></i>Active fish</h3>
+    <div class="row"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="rt"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div><p>Active range 55–65°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/walleye.jpg"><div class="rt"><b>Walleye</b><span class="tag ok">Confirmed</span></div><p>Active range 55–75°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="rt"><b>Brown Trout</b><span class="tag lk">Likely</span></div><p>Active range 54–67.8°F. Currently 65°F, inside range.</p></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>D · Sonar HUD</b><p>Fishfinder display: phosphor green on black, mono type, depth grid. Instantly reads as fishing.</p></div></div><div class="cell">
+<div class="phone e">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="head">
+    <div><h1>Canoe Landing</h1><p class="loc">Badfish Creek, Dane</p></div>
+    <button class="save">Save</button>
+  </div>
+  <div class="stats">
+    <div class="stat s-water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="stat s-air"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64<small>°F</small></span><span class="sub">Light rain</span></div>
+    <div class="stat s-wind"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="stat s-moon"><span class="lab">Moon</span><span class="val"><i class="moondot"></i>First Quarter</span></div>
+  </div>
+  <section class="active">
+    <h3><i class="dot"></i>Active fish</h3>
+    <div class="row"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="rt"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div><p>Active range 55–65°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/walleye.jpg"><div class="rt"><b>Walleye</b><span class="tag ok">Confirmed</span></div><p>Active range 55–75°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="rt"><b>Brown Trout</b><span class="tag lk">Likely</span></div><p>Active range 54–67.8°F. Currently 65°F, inside range.</p></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>E · Bento Bright</b><p>Big colourful tiles, huge numerals, playful and light. The CARROT / dashboard lineage.</p></div></div><div class="cell">
+<div class="phone f">
+  <div class="topbar"><svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/><circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg></div>
+  <div class="head">
+    <div><h1>Canoe Landing</h1><p class="loc">Badfish Creek, Dane</p></div>
+    <button class="save">Save</button>
+  </div>
+  <div class="stats">
+    <div class="stat s-water"><span class="lab">Water</span><span class="val">65<small>°F</small></span><span class="tag est">estimated</span></div>
+    <div class="stat s-air"><span class="lab">Air</span><span class="val"><svg class="rain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-7.95A5.5 5.5 0 0 1 17 6.5a4.25 4.25 0 0 1 .5 8.5z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></svg>64<small>°F</small></span><span class="sub">Light rain</span></div>
+    <div class="stat s-wind"><span class="lab">Wind</span><span class="val">10<small> mph E</small></span></div>
+    <div class="stat s-moon"><span class="lab">Moon</span><span class="val"><i class="moondot"></i>First Quarter</span></div>
+  </div>
+  <section class="active">
+    <h3><i class="dot"></i>Active fish</h3>
+    <div class="row"><img src="../../webapp/static/img/species/northern_pike.jpg"><div class="rt"><b>Northern Pike</b><span class="tag ok">Confirmed</span></div><p>Active range 55–65°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/walleye.jpg"><div class="rt"><b>Walleye</b><span class="tag ok">Confirmed</span></div><p>Active range 55–75°F. Currently 65°F, inside range.</p></div>
+    <div class="row"><img src="../../webapp/static/img/species/brown_trout.jpg"><div class="rt"><b>Brown Trout</b><span class="tag lk">Likely</span></div><p>Active range 54–67.8°F. Currently 65°F, inside range.</p></div>
+  </section>
+  <nav class="bar"><i></i><i class="mid"></i><i></i></nav>
+</div>
+<div class="cap"><b>F · Tackle-Box Brutalist</b><p>Thick black outlines, hard offset shadows, safety orange. Loud and confident.</p></div></div></div>
