@@ -1428,6 +1428,18 @@ h2 { border-bottom: 1px solid var(--border); padding-bottom: 4px; }
 .spot-head h1 { font-size: 1.7rem; line-height: 1.1; }
 .spot-stat .tag, .card-metric .tag { align-self: flex-start; margin-left: 0; }
 
+/* Ranked cards lead with photos of the species in range; Spot fish rows show the documented range as a meter. */
+.list-card.has-strip { padding: 0 0 var(--space-4); overflow: hidden; }
+.list-card.has-strip > :not(.card-strip) { margin-left: var(--space-4); margin-right: var(--space-4); }
+.list-card.has-strip .list-card-title { margin-top: var(--space-3); }
+.card-strip { display: grid; height: 96px; position: relative; border-bottom: 3px solid #739442; background: #00332a; }
+.card-strip-1 { grid-template-columns: 1fr; } .card-strip-2 { grid-template-columns: 1fr 1fr; } .card-strip-3 { grid-template-columns: 1fr 1fr 1fr; }
+.card-strip img { width: 100%; height: 96px; object-fit: cover; display: block; border-right: 2px solid var(--gray-0); }
+.card-strip img:last-child { border-right: 0; }
+.fish-meter { position: relative; height: 6px; margin: var(--space-2) 0 0; background: var(--gray-100); }
+.fish-meter i { position: absolute; top: 0; bottom: 0; background: #739442; }
+.fish-meter u { position: absolute; top: -4px; width: 2px; height: 14px; background: var(--ink); }
+
 /* ---- Desktop (1024px+): full-width layout with the top nav ---- */
 @media (min-width: 1024px) {
   .header-here { display: none; }

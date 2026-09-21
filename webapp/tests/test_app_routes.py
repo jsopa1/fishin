@@ -259,6 +259,19 @@ class WebAppRouteTests(unittest.TestCase):
         # regional record it came from rather than presented as this water's list.
         self.assertIn(b"regional (county) record", resp.data)
         self.assertIn(b"Likely", resp.data)
+    def test_fish_rows_show_the_documented_range_as_a_meter_against_todays_temperature(self):
+        points = self.client.get("/map/data").get_json()["points"]
+        checked = 0
+        for p in points[:80]:
+            body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
+            for row in re.findall(r'<li class="fish-row">.*?</li>', body, re.S):
+                if "fish-meter" in row:
+                    checked += 1
+                    self.assertIn('aria-hidden="true"', row.split("fish-meter", 1)[1][:60])
+                    self.assertRegex(row, r'<i style="left:\d+\.\d%;width:\d+\.\d%"></i><u style="left:\d+\.\d%"></u>')
+                    self.assertIn("Currently", row) if "spawning range" in row else self.assertRegex(row, r"Currently|Optimal|Active range|Feeding")
+        self.assertGreater(checked, 0)
+
     def test_regional_evidence_never_claims_species_are_in_this_water(self):
         # The honesty property that makes the county fallback defensible: every
         # row says HOW it is known, and regional records are tagged "Likely",

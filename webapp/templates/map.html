@@ -409,6 +409,7 @@
       fetch(window.FISHIN_FEED_URL, { headers: { Accept: 'application/json' } })
         .then(function (r) { if (!r.ok) throw new Error('feed'); return r.json(); })
         .then(function (feed) {
+          if (window.FishinRecommend && FishinRecommend.setImages) FishinRecommend.setImages(feed.images);
           feedByName = {};
           (feed.spots || []).forEach(function (row) { (feedByName[row.n] = feedByName[row.n] || []).push(row); });
           renderList(lastPoints);

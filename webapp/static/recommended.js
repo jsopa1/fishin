@@ -99,7 +99,7 @@
 
   fetch(window.FISHIN_FEED_URL, { headers: { Accept: "application/json" } })
     .then(function (r) { if (!r.ok) throw new Error("feed " + r.status); return r.json(); })
-    .then(function (feed) { state.feed = feed.spots || []; render(); })
+    .then(function (feed) { R.setImages(feed.images); state.feed = feed.spots || []; render(); })
     .catch(function () {
       els.loading.textContent = "Current conditions couldn't be loaded. You can still explore the map or your saved spots.";
       var saved = loadSaved();

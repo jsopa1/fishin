@@ -36,6 +36,14 @@ class FeedContentTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.conn.close()
 
+    def test_the_feed_carries_only_verified_species_photos_that_exist_on_disk(self):
+        images = self.feed["images"]
+        self.assertGreaterEqual(len(images), 20)
+        for species, path in images.items():
+            self.assertEqual(species, species.upper())
+            self.assertTrue((STATIC / path).is_file(), path)
+            self.assertTrue(path.startswith("img/species/"), path)
+
     def test_every_access_point_has_a_row(self):
         total = self.conn.execute("SELECT COUNT(*) FROM access_points").fetchone()[0]
         self.assertEqual(len(self.spots), total)

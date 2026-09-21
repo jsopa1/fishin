@@ -72,6 +72,12 @@
       {% if fslug %}</a>{% else %}</div>{% endif %}
       <span class="tag evidence-{{ s.evidence_tier }}" tabindex="0">{{ 'Confirmed' if s.evidence_tier == 'confirmed' else 'Likely' }}</span>
     </div>
+    {% if s.activity and s.activity.window_f and s.current_f is not none %}
+    {% set w0 = s.activity.window_f[0] %}{% set w1 = s.activity.window_f[1] %}
+    {% set lo = [[(w0 - 30) / 60 * 100, 0] | max, 100] | min %}{% set hi = [[(w1 - 30) / 60 * 100, 0] | max, 100] | min %}
+    {% set cur = [[(s.current_f - 30) / 60 * 100, 0] | max, 100] | min %}
+    <div class="fish-meter" aria-hidden="true" title="Documented feeding range against today's temperature (30&ndash;90&deg;F scale)"><i style="left:{{ '%.1f' | format(lo) }}%;width:{{ '%.1f' | format(hi - lo) }}%"></i><u style="left:{{ '%.1f' | format(cur) }}%"></u></div>
+    {% endif %}
     <p class="fish-row-why">
       {% if spawn_only %}
         Currently {{ s.current_f }}°F &mdash; inside its <strong>spawning range</strong> ({{ s.spawning_range_f[0] }}&ndash;{{ s.spawning_range_f[1] }}°F).

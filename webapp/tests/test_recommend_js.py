@@ -177,6 +177,20 @@ const proxyTemp = R.cardHtml(R.rank([spot("air", { a: [["WALLEYE", "c"]], q: "pr
 out.tempChip = /72<small>&deg;F<\/small><\/span><span class="card-metric-label">water temp<\/span>/.test(withTemp) && /1 confirmed/.test(withTemp) && /air-temperature proxy/.test(proxyTemp) && !/>water temp<\//.test(proxyTemp);
 out.locationLine = /<p class="list-card-sub"><svg[^>]*><use href="#icon-map-pin"\/><\/svg> /.test(withTemp);
 out.iceHtml = /Closest to its range/.test(iceHtml) && /3\.2&deg;F outside it/.test(iceHtml);
+// 9. Photo strip: only species with a verified photo, at most three, and none without a map.
+const base = { name: "X", water: "W", county: "C", type: "boat_ramp", quality: "real", tempC: 20, count: 4, confirmed: 1, spawning: [], nearest: null, distanceKm: null, url: "/spot",
+  inRange: ["WALLEYE", "BLUEGILL", "BLACK CRAPPIE", "YELLOW PERCH"].map((s) => ({ species: s, tier: "confirmed" })) };
+const noMap = R.cardHtml(base);
+R.setImages({ WALLEYE: "img/species/walleye.jpg", BLUEGILL: "img/species/bluegill.jpg", "BLACK CRAPPIE": "img/species/black_crappie.jpg", "YELLOW PERCH": "img/species/yellow_perch.jpg" });
+const withMap = R.cardHtml(base);
+R.setImages({ WALLEYE: "img/species/walleye.jpg" });
+const oneMap = R.cardHtml(base);
+out.strip = {
+  noneWithoutImages: !/card-strip/.test(noMap) && !/has-strip/.test(noMap),
+  threeAtMost: (withMap.match(/<img /g) || []).length === 3 && /card-strip-3/.test(withMap),
+  onlyVerifiedOnes: (oneMap.match(/<img /g) || []).length === 1 && /card-strip-1/.test(oneMap),
+  decorative: /card-strip[^>]*aria-hidden="true"/.test(withMap) && /<img [^>]*alt=""/.test(withMap),
+};
 console.log(JSON.stringify(out));
 """
 
@@ -317,6 +331,10 @@ class RecommendJsTests(unittest.TestCase):
 
     def test_the_nothing_in_range_card_says_how_far_outside_the_window(self):
         self.assertTrue(self.out["iceHtml"])
+
+    def test_cards_lead_with_a_photo_strip_only_when_verified_photos_exist(self):
+        for key, value in self.out["strip"].items():
+            self.assertTrue(value, key)
 
 
 if __name__ == "__main__":

@@ -74,6 +74,19 @@ def build_row(conn, point: dict) -> dict:
     }
 
 
+def _species_images() -> dict:
+    """Verified public-domain photo path for each species that has one, so a card can
+    show what is in range. Species without a verified image are simply absent."""
+    import v4_species_detail as detail  # noqa: E402
+
+    out = {}
+    for name in detail._load("physiology_thresholds_v1.json")["species"]:
+        img = detail.image_for("species", name)
+        if img and not img.get("illustration"):
+            out[name] = img["static_path"]
+    return out
+
+
 def build_feed(conn) -> dict:
     points = conn.execute(
         "SELECT * FROM access_points ORDER BY waterbody_name, facility_name, latitude, longitude"
@@ -82,6 +95,7 @@ def build_feed(conn) -> dict:
     refresh = data.get_latest_temperature_refresh(conn)
     return {
         "spots": rows,
+        "images": _species_images(),
         "temperature_observed_at": (refresh or {}).get("refreshed_at") if isinstance(refresh, dict) else None,
     }
 

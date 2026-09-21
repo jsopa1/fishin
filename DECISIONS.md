@@ -2130,3 +2130,11 @@ retired, including the map clusters. Nothing about the data, the ranking or the 
 
 The mock-ups that led here are in docs/design/ (wireframe_full.png is the full screen set). The launch film, its
 GIF and poster, and the README screenshots were re-captured from the live app in the new style.
+
+**Addendum: photo strips and range meters.** Ranked cards (Recommended and Explore's list) now open with a strip of up to
+three verified public-domain photos of the species in range there (spawning-range species if none are in range). The
+feed carries a small species-to-photo map for this; species without a verified photo are left out, never
+substituted, and the strip is decorative (empty alt text) because the names and tags beneath carry the information.
+Spot fish rows gain a thin meter showing the species' documented feeding range on a 30-90 F scale with today's
+temperature marked. It only restates numbers already printed in the row, so it is not a score. Tests pin the strip
+rules, that every photo in the feed exists on disk, and the meter markup.
