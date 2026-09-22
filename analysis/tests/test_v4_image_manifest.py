@@ -45,9 +45,13 @@ class TestImageManifest(unittest.TestCase):
                 self.assertTrue((ROOT / e["file"]).is_file(), f"{group}/{key}: {e['file']} missing")
 
     def test_no_image_ships_without_a_manifest_entry(self):
+        # img/spots/ is a separate namespace with its own manifest (data/v1/spot_photo_manifest_v1.json,
+        # written by analysis/v4_find_spot_photos.py) and its own completeness test
+        # (webapp/tests/test_spot_photos.py); this manifest only covers species and bait images.
         recorded = {(ROOT / e["file"]).resolve() for _, _, e in _entries(self.m) if "file" in e}
         on_disk = {p.resolve() for p in (ROOT / "webapp" / "static" / "img").rglob("*")
-                   if p.suffix.lower() in (".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg")}
+                   if p.suffix.lower() in (".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg")
+                   and "spots" not in p.relative_to(ROOT / "webapp" / "static" / "img").parts}
         self.assertEqual(on_disk - recorded, set())
 
     def test_reuse_entries_point_at_a_real_entry(self):

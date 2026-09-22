@@ -26,6 +26,7 @@ sys.path.insert(0, str(REPO_ROOT / "analysis"))
 import v1_review_data as data  # noqa: E402
 import v4_recommend_feed as recommend_feed_module  # noqa: E402
 import v4_species_detail as species_detail  # noqa: E402
+import v4_spot_photos as spot_photos  # noqa: E402
 import v2_fishing_regulations as fishing_regulations  # noqa: E402
 import v3_current_conditions as current_conditions  # noqa: E402
 import v3_moon_phase as moon_phase  # noqa: E402
@@ -499,6 +500,7 @@ def spot_detail():
         citizen_observed=detail["citizen_observed"], species_categories=detail["species_categories"],
         species_activity=detail["species_activity"],
         regulations=regulations, advisory=advisory, conditions=conditions, moon=moon,
+        spot_photo=spot_photos.lookup(detail["point"]["facility_name"], detail["point"]["latitude"], detail["point"]["longitude"]),
     )
 
 

@@ -36,22 +36,20 @@ class FeedContentTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.conn.close()
 
-    def test_the_feed_carries_only_verified_species_photos_that_exist_on_disk(self):
-        images = self.feed["images"]
-        self.assertGreaterEqual(len(images), 20)
-        for species, path in images.items():
-            self.assertEqual(species, species.upper())
-            self.assertTrue((STATIC / path).is_file(), path)
-            self.assertTrue(path.startswith("img/species/"), path)
-
     def test_every_access_point_has_a_row(self):
         total = self.conn.execute("SELECT COUNT(*) FROM access_points").fetchone()[0]
         self.assertEqual(len(self.spots), total)
 
     def test_rows_use_only_the_documented_keys_and_values(self):
         allowed_types = {"boat_ramp", "boat_carry_in", "shore_fishing"}
+        required = {"n", "w", "c", "t", "lat", "lon", "q", "v", "a", "s", "i"}
+        optional = {"p", "pc"}  # verified spot photo path + credit (analysis/v4_find_spot_photos.py); most rows lack one
         for row in self.spots[::25]:
-            self.assertEqual(set(row), {"n", "w", "c", "t", "lat", "lon", "q", "v", "a", "s", "i"})
+            self.assertEqual(set(row) - optional, required)
+            self.assertTrue(set(row) <= required | optional)
+            if "p" in row:
+                self.assertTrue(row["p"].startswith("img/spots/"), row["p"])
+                self.assertIn("pc", row)
             self.assertIn(row["t"], allowed_types)
             self.assertIn(row["q"], ("real", "estimated", "proxy", None))
             for species, tier in row["a"]:
@@ -108,7 +106,12 @@ class FeedContentTests(unittest.TestCase):
             self.assertTrue(names <= unresearched, (r["n"], names))
 
     def test_the_feed_contains_nothing_about_a_visitor(self):
-        blob = json.dumps(self.feed).lower()
+        # "pc" (photo credit) is free text attributed to a Wikimedia Commons contributor -- e.g. an
+        # author string can legitimately read "...edited slightly by User:Someone" -- so it is
+        # excluded from this scan; it is third-party attribution text we don't control, not data
+        # about this app's own visitors, and its shape is checked separately, above.
+        redacted = {**self.feed, "spots": [{k: v for k, v in row.items() if k != "pc"} for row in self.spots]}
+        blob = json.dumps(redacted).lower()
         for word in ("prefer", "target", "saved", "session", "cookie", "user"):
             self.assertNotIn(word, blob)
 

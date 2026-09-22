@@ -30,6 +30,7 @@ import json
 import threading
 
 import v1_review_data as data
+import v4_spot_photos as spot_photos
 
 _QUALITY = {
     "matched_waterbody_real": "real",
@@ -59,7 +60,8 @@ def build_row(conn, point: dict) -> dict:
     for row in activity["inactive"]:
         outside.append([row["species"], _TIER[row["evidence_tier"]], row["activity"]["distance_f"]])
 
-    return {
+    photo = spot_photos.lookup(point["facility_name"], lat, lon)
+    row = {
         "n": point["facility_name"],
         "w": point["waterbody_name"],
         "c": point["county"],
@@ -72,19 +74,10 @@ def build_row(conn, point: dict) -> dict:
         "s": spawn_only,
         "i": outside,
     }
-
-
-def _species_images() -> dict:
-    """Verified public-domain photo path for each species that has one, so a card can
-    show what is in range. Species without a verified image are simply absent."""
-    import v4_species_detail as detail  # noqa: E402
-
-    out = {}
-    for name in detail._load("physiology_thresholds_v1.json")["species"]:
-        img = detail.image_for("species", name)
-        if img and not img.get("illustration"):
-            out[name] = img["static_path"]
-    return out
+    if photo:  # only ~1 in 10 spots; absent keys keep the feed small
+        row["p"] = photo["static_path"]
+        row["pc"] = photo["credit"]
+    return row
 
 
 def build_feed(conn) -> dict:
@@ -95,7 +88,6 @@ def build_feed(conn) -> dict:
     refresh = data.get_latest_temperature_refresh(conn)
     return {
         "spots": rows,
-        "images": _species_images(),
         "temperature_observed_at": (refresh or {}).get("refreshed_at") if isinstance(refresh, dict) else None,
     }
 

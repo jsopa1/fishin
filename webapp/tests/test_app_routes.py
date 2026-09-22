@@ -259,18 +259,40 @@ class WebAppRouteTests(unittest.TestCase):
         # regional record it came from rather than presented as this water's list.
         self.assertIn(b"regional (county) record", resp.data)
         self.assertIn(b"Likely", resp.data)
-    def test_fish_rows_show_the_documented_range_as_a_meter_against_todays_temperature(self):
+    def test_the_meter_marker_always_agrees_with_the_bucket_the_fish_is_in(self):
+        # Regression: a fish listed Active because it was inside its spawning range showed a meter
+        # with only the feeding window drawn, so the marker sat far from any bar. Every Active row's
+        # marker must land inside a drawn zone (feeding or spawning); every Inactive row's must not
+        # land inside its feeding zone. Sampled across many spots, including the ones where a
+        # whole-degree reading sits half a degree outside a decimal window edge.
         points = self.client.get("/map/data").get_json()["points"]
-        checked = 0
-        for p in points[:80]:
+        zone = re.compile(r'<(?P<k>[bi]) style="left:(?P<l>[\d.]+)%;width:(?P<w>[\d.]+)%"></(?P=k)>')
+        marker = re.compile(r'<u style="left:([\d.]+)%"></u>')
+        seen = {"active": 0, "inactive": 0, "spawn_zone": 0}
+        for p in points[::12][:260]:
             body = self.client.get("/spot?lat={}&lon={}".format(p["lat"], p["lon"])).data.decode()
-            for row in re.findall(r'<li class="fish-row">.*?</li>', body, re.S):
-                if "fish-meter" in row:
-                    checked += 1
-                    self.assertIn('aria-hidden="true"', row.split("fish-meter", 1)[1][:60])
-                    self.assertRegex(row, r'<i style="left:\d+\.\d%;width:\d+\.\d%"></i><u style="left:\d+\.\d%"></u>')
-                    self.assertIn("Currently", row) if "spawning range" in row else self.assertRegex(row, r"Currently|Optimal|Active range|Feeding")
-        self.assertGreater(checked, 0)
+            head, _, rest = body.partition('id="bucket-active-title"')
+            active_html, _, inactive_html = rest.partition('id="bucket-inactive-title"')
+            for name, html in (("active", active_html), ("inactive", inactive_html.split("bucket-nowindow-title")[0])):
+                for row in re.findall(r'<li class="fish-row">.*?</li>', html, re.S):
+                    m = marker.search(row)
+                    if not m:
+                        continue
+                    seen[name] += 1
+                    at = float(m.group(1))
+                    zones = [(z.group("k"), float(z.group("l")), float(z.group("l")) + float(z.group("w"))) for z in zone.finditer(row)]
+                    if any(k == "b" for k, _, _ in zones):
+                        seen["spawn_zone"] += 1
+                    # An inactive fish can sit a fraction of a degree outside its bar, which draws as touching it,
+                    # so only a marker clearly inside the bar counts as a contradiction.
+                    inside_feed = any(k == "i" and lo + 0.4 <= at <= hi - 0.4 for k, lo, hi in zones)
+                    inside_any = any(lo - 0.2 <= at <= hi + 0.2 for _, lo, hi in zones)  # 0.2% is 0.12 F: the markup rounds to one decimal
+                    if name == "active":
+                        self.assertTrue(inside_any, row[:300])
+                    else:
+                        self.assertFalse(inside_feed, row[:300])
+        self.assertGreater(seen["active"], 20)
+        self.assertGreater(seen["spawn_zone"], 0)
 
     def test_regional_evidence_never_claims_species_are_in_this_water(self):
         # The honesty property that makes the county fallback defensible: every

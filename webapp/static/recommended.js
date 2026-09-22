@@ -99,13 +99,13 @@
 
   fetch(window.FISHIN_FEED_URL, { headers: { Accept: "application/json" } })
     .then(function (r) { if (!r.ok) throw new Error("feed " + r.status); return r.json(); })
-    .then(function (feed) { R.setImages(feed.images); state.feed = feed.spots || []; render(); })
+    .then(function (feed) { state.feed = feed.spots || []; render(); })
     .catch(function () {
       els.loading.textContent = "Current conditions couldn't be loaded. You can still explore the map or your saved spots.";
       var saved = loadSaved();
       if (saved.length) {
         els.savedList.innerHTML = saved.slice(0, 8).map(function (s) {
-          return R.cardHtml({ name: s.name, water: s.water, county: s.county, type: null, quality: null, count: 0, inRange: [], spawning: [], nearest: null, distanceKm: null,
+          return R.cardHtml({ name: s.name, water: s.water, county: s.county, type: null, quality: null, count: 0, inRange: [], spawning: [], nearest: null, distanceKm: null, lat: s.lat, lon: s.lon,
             url: "/spot?lat=" + encodeURIComponent(s.lat) + "&lon=" + encodeURIComponent(s.lon) + "&name=" + encodeURIComponent(s.name || "") });
         }).join("");
       }

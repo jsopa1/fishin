@@ -164,6 +164,7 @@
       nearest: item.nearest,
       distanceKm: item.distanceKm,
       url: spotUrl(sp),
+      lat: sp.lat, lon: sp.lon, photo: sp.p || null, photoCredit: sp.pc || null,
     };
   }
 
@@ -265,9 +266,29 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  // Species photos for the card strip: {SPECIES: "img/species/x.jpg"} from the feed.
-  var IMAGES = {};
-  function setImages(map) { IMAGES = map || {}; }
+  // A small map of where the spot is (there are no photographs of individual spots). Four OpenStreetMap
+  // tiles at zoom 13, laid out so the spot sits in the middle of a 96 px square, with the neighbouring
+  // tiles chosen on whichever side the spot is nearer. Decorative: the name and place are beside it.
+  var THUMB = 96, TILE = 256, ZOOM = 13;
+  function mapThumb(lat, lon) {
+    if (!isFinite(lat) || !isFinite(lon) || lat === null || lon === null) return "";
+    var n = Math.pow(2, ZOOM), rad = lat * Math.PI / 180;
+    var x = (lon + 180) / 360 * n;
+    var y = (1 - Math.log(Math.tan(rad) + 1 / Math.cos(rad)) / Math.PI) / 2 * n;
+    var ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
+    var x0 = fx < 0.5 ? ix - 1 : ix, y0 = fy < 0.5 ? iy - 1 : iy;
+    var left = Math.round(THUMB / 2 - ((ix - x0) + fx) * TILE), top = Math.round(THUMB / 2 - ((iy - y0) + fy) * TILE);
+    var tiles = "";
+    for (var dy = 0; dy < 2; dy++) for (var dx = 0; dx < 2; dx++) {
+      tiles += '<img src="https://tile.openstreetmap.org/' + ZOOM + "/" + (x0 + dx) + "/" + (y0 + dy) + '.png" alt="" loading="lazy" width="' + TILE + '" height="' + TILE + '" style="left:' + dx * TILE + "px;top:" + dy * TILE + 'px">';
+    }
+    return '<div class="card-map" aria-hidden="true"><div class="card-map-tiles" style="left:' + left + "px;top:" + top + 'px">' + tiles + '</div><span class="card-map-pin"></span></div>';
+  }
+
+  // A verified photo of the water at the spot, when one exists; its credit is printed under the card text.
+  function photoThumb(file) {
+    return '<div class="card-map card-photo" aria-hidden="true"><img src="/static/' + esc(file) + '" alt="" loading="lazy"></div>';
+  }
 
   function title(s) {
     return String(s).toLowerCase().replace(/(^|[^a-z])([a-z])/g, function (m, pre, c) { return pre + c.toUpperCase(); });
@@ -298,6 +319,8 @@
       metrics.push(metric(Math.round(c.distanceKm / KM_PER_MILE), "mi", "away", "", "metric-away"));
     }
 
+    var map = c.photo ? photoThumb(c.photo) : mapThumb(c.lat, c.lon);
+
     var line;
     if (c.count > 0) {
       line = c.inRange.slice(0, 4).map(function (e) {
@@ -316,20 +339,13 @@
     var note = c.spawning && c.spawning.length
       ? '<p class="rec-note">Also in a spawning range: ' + esc(c.spawning.slice(0, 3).map(title).join(", ")) + " &mdash; check regulations before fishing.</p>" : "";
 
-    // A strip of up to three photos of the species that are in range (or, failing that, in a
-    // spawning range). Decorative: the names and tags below carry the information.
-    var stripNames = (c.count > 0 ? c.inRange.map(function (e) { return e.species; }) : (c.spawning || []));
-    var stripSrc = [];
-    stripNames.forEach(function (n) { if (IMAGES[n] && stripSrc.length < 3) stripSrc.push(IMAGES[n]); });
-    var strip = stripSrc.length
-      ? '<div class="card-strip card-strip-' + stripSrc.length + '" aria-hidden="true">' + stripSrc.map(function (p) {
-          return '<img src="/static/' + esc(p) + '" alt="" loading="lazy">'; }).join("") + "</div>" : "";
-
-    return '<a class="list-card' + (strip ? " has-strip" : "") + '" href="' + esc(c.url) + '">' + strip +
+    return '<a class="list-card' + (map ? " has-map" : "") + '" href="' + esc(c.url) + '">' +
+      '<div class="card-head">' + map + '<div class="card-head-text">' +
       '<p class="list-card-title">' + esc(c.name) + '</p>' +
-      '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + sub + "</p>" +
+      '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + sub + "</p></div></div>" +
       '<div class="card-metrics">' + metrics.join("") + "</div>" +
       line + note +
+      (c.photo && c.photoCredit ? '<p class="card-credit">Photo: ' + esc(c.photoCredit) + "</p>" : "") +
       '<span class="list-card-link">Open spot report &rarr;</span></a>';
   }
 
@@ -345,7 +361,7 @@
   }
 
   return {
-    rank: rank, cardHtml: cardHtml, setImages: setImages, sortAlphabetical: sortAlphabetical, haversineKm: haversineKm,
+    rank: rank, cardHtml: cardHtml, sortAlphabetical: sortAlphabetical, haversineKm: haversineKm,
     KM_PER_MILE: KM_PER_MILE, TYPE_PLURAL: TYPE_PLURAL, MIN_RESULTS: MIN_RESULTS, DISPLAY: DISPLAY, MAX_SAVED: MAX_SAVED,
   };
 });

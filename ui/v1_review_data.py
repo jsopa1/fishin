@@ -1492,6 +1492,9 @@ def bucket_species_by_activity(species_categories: dict, temp_c) -> dict:
             spawning = _spawning_match(entry["species"], temp_c)
             row["spawning_range_f"] = spawning.get("range_f") if spawning else None
             row["current_f"] = round(temp_c * 9 / 5 + 32) if temp_c is not None else None
+            # Unrounded, only for drawing the range meter: the rounded value above can sit half a
+            # degree on the wrong side of a range edge that the bucket logic decided on exactly.
+            row["current_f_exact"] = temp_c * 9 / 5 + 32 if temp_c is not None else None
             rows.append(row)
 
     tier_order = {"confirmed": 0, "likely": 1}

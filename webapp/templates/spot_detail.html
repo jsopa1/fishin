@@ -60,6 +60,13 @@
   </div>
 </header>
 
+{% if spot_photo %}
+<figure class="spot-photo">
+  <img src="{{ url_for('static', filename=spot_photo.static_path) }}" alt="{{ spot_photo.title }}">
+  <figcaption>Photo of the water, {{ spot_photo.distance_m }} m from this spot &middot; {{ spot_photo.credit }} &middot; <a href="{{ spot_photo.page_url }}" target="_blank" rel="noopener">source</a></figcaption>
+</figure>
+{% endif %}
+
 {% macro fish_row(s) %}
   {% set fslug = fish_slug(s.species) %}
   {% set img = species_image(s.species) %}
@@ -75,8 +82,17 @@
     {% if s.activity and s.activity.window_f and s.current_f is not none %}
     {% set w0 = s.activity.window_f[0] %}{% set w1 = s.activity.window_f[1] %}
     {% set lo = [[(w0 - 30) / 60 * 100, 0] | max, 100] | min %}{% set hi = [[(w1 - 30) / 60 * 100, 0] | max, 100] | min %}
-    {% set cur = [[(s.current_f - 30) / 60 * 100, 0] | max, 100] | min %}
-    <div class="fish-meter" aria-hidden="true" title="Documented feeding range against today's temperature (30&ndash;90&deg;F scale)"><i style="left:{{ '%.1f' | format(lo) }}%;width:{{ '%.1f' | format(hi - lo) }}%"></i><u style="left:{{ '%.1f' | format(cur) }}%"></u></div>
+    {# The row prints today's temperature as a whole degree while the range edges are decimals, so a fish that
+       the app has placed inside a range can land a hair outside its bar. Keep the marker inside the range
+       that put the fish in this bucket: feeding window first, then spawning range. #}
+    {% set t = s.current_f_exact if s.current_f_exact is not none else s.current_f %}
+    {% if s.activity.inside_window %}{% set t = [[t, w0] | max, w1] | min %}
+    {% elif s.spawning_range_f %}{% set t = [[t, s.spawning_range_f[0]] | max, s.spawning_range_f[1]] | min %}{% endif %}
+    {% set cur = [[(t - 30) / 60 * 100, 0] | max, 100] | min %}
+    <div class="fish-meter" aria-hidden="true" title="Sage: documented feeding range. Blue: spawning range. Line: today's temperature. Scale 30&ndash;90&deg;F.">
+      {% if s.spawning_range_f %}{% set sl = [[(s.spawning_range_f[0] - 30) / 60 * 100, 0] | max, 100] | min %}{% set sh = [[(s.spawning_range_f[1] - 30) / 60 * 100, 0] | max, 100] | min %}<b style="left:{{ '%.1f' | format(sl) }}%;width:{{ '%.1f' | format(sh - sl) }}%"></b>{% endif %}
+      <i style="left:{{ '%.1f' | format(lo) }}%;width:{{ '%.1f' | format(hi - lo) }}%"></i><u style="left:{{ '%.1f' | format(cur) }}%"></u>
+    </div>
     {% endif %}
     <p class="fish-row-why">
       {% if spawn_only %}
@@ -95,6 +111,7 @@
 {% endmacro %}
 
 {% if species_activity and (species_activity.active or species_activity.inactive or species_activity.no_window) %}
+<p class="meter-key"><span><i class="k-feed"></i>Feeding range</span> <span><i class="k-spawn"></i>Spawning range</span> <span><i class="k-now"></i>Today&rsquo;s temperature</span></p>
 <div class="fish-buckets" id="fish-buckets">
   <section class="fish-bucket fish-bucket-active" aria-labelledby="bucket-active-title">
     <h3 id="bucket-active-title" class="fish-bucket-title"><svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg> Active fish</h3>

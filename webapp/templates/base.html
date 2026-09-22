@@ -39,6 +39,7 @@
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/apple-touch-icon.png') }}">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
 <svg class="icon-sprite" aria-hidden="true">
   <symbol id="icon-fish" viewBox="0 0 24 24">
     <path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/>
@@ -226,7 +227,7 @@
     </div>
   </div>
 
-  <main class="wrap">
+  <main class="wrap" id="main" tabindex="-1">
     {% block content %}{% endblock %}
   </main>
 
