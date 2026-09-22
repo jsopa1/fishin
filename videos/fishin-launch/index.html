@@ -13,7 +13,7 @@
 
     :root {
       --ink: #06140f; --panel: #0d1f1a; --line: #2a4034; --text: #eef3e6; --muted: #8ea596;
-      --blue: #9cc06a; --mint: #4cc38a; --amber: #e8c766;
+      --blue: #94f477; --mint: #4cc38a; --amber: #e8c766;
     }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--ink); font-family: "Inter", sans-serif; color: var(--text); }
@@ -22,7 +22,7 @@
     /* backdrop: soft blue glow + faint grid, shared by every scene */
     .bg { position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(900px 700px at 78% 30%, rgba(156,192,106,.20), transparent 60%),
+        radial-gradient(900px 700px at 78% 30%, rgba(148,244,119,.20), transparent 60%),
         radial-gradient(800px 600px at 12% 90%, rgba(76,195,138,.10), transparent 60%),
         linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 80px 80px,
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px) 0 0 / 80px 80px; }
@@ -42,7 +42,7 @@
 
     /* phone frame */
     .phone { width: 452px; height: 924px; border-radius: 68px; padding: 14px; background: #0a1a14; border: 2px solid #2f4a3c; flex: none;
-      box-shadow: 0 0 0 1px rgba(156,192,106,.25), 0 70px 140px rgba(0,0,0,.65), 0 0 180px rgba(156,192,106,.28); }
+      box-shadow: 0 0 0 1px rgba(148,244,119,.25), 0 70px 140px rgba(0,0,0,.65), 0 0 180px rgba(148,244,119,.28); }
     .screen { position: relative; width: 100%; height: 100%; border-radius: 54px; overflow: hidden; background: #0d1f1a; }
     .shot { position: absolute; left: 0; top: 0; width: 100%; display: block; }
 
@@ -83,10 +83,10 @@
     <!-- 1 HOOK -->
     <section id="s1" class="clip" data-start="0" data-duration="4.6">
       <div class="scene" id="s1-in">
-        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="#9cc06a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="#94f477" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
           <path id="m1a" pathLength="1" style="stroke-dasharray:1" d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/>
           <path id="m1b" pathLength="1" style="stroke-dasharray:1" d="M3 12L1 8M3 12l-2 4M20 9v6"/>
-          <circle id="m1c" cx="15" cy="10.2" r="0.8" fill="#9cc06a" stroke="none"/>
+          <circle id="m1c" cx="15" cy="10.2" r="0.8" fill="#94f477" stroke="none"/>
         </svg>
         <h1 id="hook"><span class="w">Which</span> <span class="w">fish</span> <span class="w">are</span> <span class="w">in</span> <span class="w">their</span> <span class="w accent">range</span> <span class="w">right</span> <span class="w">now?</span></h1>
         <div class="tag" id="hooktag">Wisconsin · 3,272 public access points</div>
@@ -175,10 +175,10 @@
     <!-- 8 CLOSE -->
     <section id="s8" class="clip" data-start="43.2" data-duration="3.8">
       <div class="scene" id="s8-in">
-        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="#9cc06a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="#94f477" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
           <path id="m8a" pathLength="1" style="stroke-dasharray:1" d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/>
           <path id="m8b" pathLength="1" style="stroke-dasharray:1" d="M3 12L1 8M3 12l-2 4M20 9v6"/>
-          <circle cx="15" cy="10.2" r="0.8" fill="#9cc06a" stroke="none"/>
+          <circle cx="15" cy="10.2" r="0.8" fill="#94f477" stroke="none"/>
         </svg>
         <h1 id="s8-h">fishin</h1>
         <div class="sub" id="s8-sub">Wisconsin fishing intelligence</div>

@@ -2136,3 +2136,41 @@ GIF and poster, and the README screenshots were re-captured from the live app in
 **Addendum: spot photos, and an accessibility pass.** The owner asked that a real photo of the spot be used when one exists, with the map (or another picture) otherwise. There are no photographs of individual spots in our data, so analysis/v4_find_spot_photos.py looks on Wikimedia Commons: a raster photo geotagged within 500 m of the access point, not a school, apartment, courthouse, water tower, parking lot, wastewater plant, railway photo or other neighbour that happens to share a name, whose own metadata says public domain, CC0, CC BY or CC BY-SA (never NC/ND), and whose title gives a real reason to believe it shows water: either it names the waterbody together with a water word (river, lake, creek...) within 250 m, or it shares a distinctive word with the facility name within 200 m *and* still carries a water word (a shared name alone was not enough -- a first pass matched a courthouse, a grocery-store sign, a parking lot, a water tower, a wastewater plant, a burial mound and a train to spots that don't show them, all now excluded and pinned as regression tests in webapp/tests/test_spot_photos.py). A bare "Town, Wisconsin.jpg" -- a Commons photographer's town-documentation series that says nothing about water -- is trusted only through the waterbody-name path, never the facility-name path alone. On the full 3,272-point run, 71 spots (about 1 in 46) get a verified photo; the rest keep the map. Photos are captioned as photos of the water near the spot, with distance, author, licence and source link, and the map thumbnail remains the fallback (a drawn water scene if tiles cannot load is drawn in the wireframes but not built). Re-running the script refreshes the manifest, which meets the weekly freshness bar. The first two full runs of the script itself crashed outright on a single flaky download with no partial output; the download step now retries and drops just that one photo instead of losing the run.
 
 The accessibility pass was measured on the live pages in both themes before it was changed: white text on the dark theme's light-green accent was 2.07 : 1 (now near-black at 9.12 : 1 through an --on-accent token), the footer line was 3.78 : 1 (now 5.8 : 1), the spawning bar was 2.26 : 1 as a graphic (now 4.15 : 1), text went down to 11.5 px (now 13 px and up, body 16 px), most tap targets were 19-40 px (now 44 px, with enlarged hit areas on tags), and there was no skip link or reduced-motion support (both added). Not yet built and only drawn in docs/design/wireframe_accessible.png: a Text size setting, marker shapes on the map, and a printed number under each meter beyond the row text that already states it.
+
+## 058 -- Restyled to closely match AllTrails: colors, pills and rounded cards, sampled live
+
+The owner said the flat field-guide colors (cream, deep teal-green) were hard on the eyes and asked
+to look at popular outdoor-information apps like AllTrails and copy their color scheme and style.
+A first mock-up kept the app's then-current flat, square-cornered shapes with AllTrails' colors; the
+owner then said "we can also make bubbles and so forth, it should be very very similar to the style
+of AllTrails for right now" -- explicitly bringing back pill/rounded shapes an earlier pass had
+removed (DECISIONS #057), so the goal became close visual fidelity to AllTrails, not just its palette.
+
+Every color and shape value was sampled live from alltrails.com's computed styles this session, not
+invented: white cards on pale sage (#e6eae6), near-black-green ink (#161f13) for text and dark
+surfaces, their own bright lime accent (#94f477) reserved for primary actions (Save, Search, the
+active Map/List segment), and their actual trail-difficulty colors repurposed for our own meter and
+tags (Easy-green #4da330 for the feeding-range bar and Confirmed chip, Moderate-amber for Likely).
+Corners went from a 2 px flat system back to a pill-radius system (--radius-full: 999px) for buttons,
+chips, tags and the segmented Map/List control, and --radius: 12px for cards. Typeface changed from
+Nunito to Sora, an open substitute for AllTrails' licensed Aeonik-based font.
+
+The Spot page's solid deep-green header band is gone -- an AllTrails trail page is white with a photo
+or map hero and plain text below, not a colored band, so Spot now matches that: white header, near-
+black text, the Save button as a filled lime pill. The Fish page's full-bleed photo hero is kept (it
+already matched AllTrails' own trail-photo convention) with rounded corners and a near-black scrim.
+
+One bug found and fixed before shipping: three "always dark" surfaces (the Fish photo scrim, the
+Spot-photo caption bar, the map pin) were coded as var(--gray-900), which is near-black in the light
+theme but flips to near-white in the dark theme (by design, since gray-900 doubles as body text color)
+-- so in dark mode these surfaces silently went white-on-white. Fixed by giving those three specific
+surfaces a fixed hex instead of a theme-flipping token. A second check (computed contrast ratios, not
+guessed) caught the new medium-green accent at 4.0:1 against white button text, short of the 4.5:1
+text minimum; darkened to #3e7a24 (5.23:1) and re-verified. Neither would have been caught without
+measuring.
+
+Verified live in both themes at phone width (headless Chrome, since the in-app Browser pane was
+intermittently unable to render during this pass); full test suite green except the two pre-existing
+local-database-staleness failures already documented in #057's addendum. Launch film, GIF, poster and
+README screenshots re-rendered from the new theme.
+

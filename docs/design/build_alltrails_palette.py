@@ -1,0 +1,176 @@
+"""Mock-up: the fishin screens re-colored with AllTrails' real, verified palette (sampled live from
+alltrails.com's computed styles today), keeping the app's established flat/square shape language
+(no pills/bubbles - a standing preference) and layout. Run from repo root, screenshot with Chrome.
+
+Sampled AllTrails values (live, this session):
+  #161F13  near-black forest -- nav/dark buttons, ink
+  #2B381F  theme-color green -- deep secondary
+  #94F477  bright lime -- the AllTrails accent, CTAs / highlights
+  #4DA330  "Easy" trail-difficulty green
+  #EDB326  "Moderate" trail-difficulty amber
+  #535B52  muted grey-green -- secondary/meta text
+  #E6EAE6  pale sage -- section backgrounds
+  #FFFFFF  pure white -- page/card background (not cream)
+  font: AllTrailsAeonik (licensed); substituted here with Sora, an open geometric-sans equivalent.
+"""
+import io
+from pathlib import Path
+
+OUT = Path(__file__).with_name("style_alltrails_palette.html")
+SP = "../../webapp/static/img/species/"
+S = "spot_samples/"
+TILE = "https://tile.openstreetmap.org/13/"
+ICON = ('<svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" '
+        'stroke-linejoin="round"><path d="M3 12c2.5-4 7-6 11-6 3 0 6 2 7 6-1 4-4 6-7 6-4 0-8.5-2-11-6z"/><path d="M3 12L1 8M3 12l-2 4M20 9v6"/>'
+        '<circle cx="15" cy="10.2" r=".8" fill="currentColor"/></svg>')
+
+
+def tag(kind):
+    return (f'<span class="tag ok"><b>&#10003;</b> Confirmed</span>' if kind == "c"
+            else '<span class="tag lk"><b>~</b> Likely</span>')
+
+
+def bar(active):
+    items = ["Home", "Explore", "Fish", "Profile"]
+    return '<nav class="bar">' + "".join(f'<a class="{"on" if i == active else ""}">{n}</a>' for i, n in enumerate(items)) + "</nav>"
+
+
+def mapthumb():
+    tiles = "".join(f'<img src="{TILE}{2061+i}/{3007+j}.png" style="left:{i*256-112}px;top:{j*256-174}px" alt="">' for j in range(2) for i in range(2))
+    return f'<div class="cmap">{tiles}<span class="pin"></span></div>'
+
+
+FISH = f"""
+<div class="phone">
+  <header class="top">{ICON}<span>Fish</span></header>
+  <a class="back">&larr; All fish</a>
+  <figure class="hero"><img src="{SP}walleye.jpg" alt="Walleye"><figcaption>Public domain &middot; USFWS &middot; <u>source</u></figcaption></figure>
+  <h1>Walleye</h1><p class="latin">Sander vitreus</p>
+  <p class="tagline">{tag("c")} Confirmed in 41 waters near you</p>
+  <div class="tiles">
+    <div><span>Active range</span><b>55&ndash;75&deg;F</b></div>
+    <div><span>Spawning</span><b>40&ndash;52&deg;F</b></div>
+    <div><span>Feeds</span><b>Low light</b></div>
+  </div>
+  <h2>Documented activity</h2>
+  <p class="lead">Temperature ranges from published research, not a prediction of whether the fish will bite.</p>
+  <div class="meter"><i style="left:41.7%;width:16.7%"></i><u style="left:60%"></u></div>
+  <p class="mtxt">Today 66&deg;F at this spot &mdash; inside the active range.</p>
+  <h2>Recommended bait</h2>
+  <div class="bait"><div class="bi"></div><div><b>Leeches</b><p class="sub">Bait-cast or still fish from an anchored boat.</p></div></div>
+  {bar(2)}
+</div>"""
+
+SPOT = f"""
+<div class="phone">
+  <header class="top">{ICON}<span>Spot report</span></header>
+  <a class="back">&larr; Back to Explore</a>
+  <div class="band"><div class="kicker">Boat launch &middot; Sauk County</div><h1>Glenville Access</h1><p>Baraboo River</p>
+    <a class="btn primary">&#9734; Save this spot</a></div>
+  <figure class="photo"><img src="{S}genesee.jpg" alt="Baraboo River near the access"><figcaption>Photo of the water, 78 m from this spot &middot; Corey Coyle, CC BY 3.0 &middot; <u>source</u></figcaption></figure>
+  <div class="stats">
+    <div><span>Water</span><b>66&deg;F</b><em>estimated</em></div>
+    <div><span>Air</span><b>59&deg;F</b><em>Cloudy</em></div>
+    <div><span>Wind</span><b>9 mph E</b></div>
+    <div><span>Moon</span><b>Waxing Gibbous</b></div>
+  </div>
+  <h2>Active fish <em>5 in range</em></h2>
+  <div class="frow"><div class="fh"><img src="{SP}bluegill.jpg" alt="Bluegill"><b>Bluegill</b>{tag("c")}</div><div class="meter"><b style="left:58%;width:25%"></b><i style="left:91%;width:5%"></i><u style="left:60%"></u></div></div>
+  <div class="frow"><div class="fh"><img src="{SP}brown_trout.jpg" alt="Brown Trout"><b>Brown Trout</b>{tag("c")}</div><div class="meter"><i style="left:40%;width:23%"></i><u style="left:55%"></u></div></div>
+  <p class="key"><span><i class="kf"></i>Feeding range</span><span><i class="ks"></i>Spawning range</span><span><i class="kn"></i>Today</span></p>
+  {bar(1)}
+</div>"""
+
+REC = f"""
+<div class="phone">
+  <header class="top">{ICON}<span>Home</span></header>
+  <h1>Wisconsin fishing conditions</h1>
+  <p class="lead">Live water temperature checked against fish research, at 3,272 public access points.</p>
+  <div class="srch">Search lakes &amp; rivers&hellip;</div>
+  <h2>Recommended Spots</h2>
+  <div class="card"><div class="row">{mapthumb()}<div><h3>Hwy 12 Boat Launch</h3><p class="sub">Lake Menomin &middot; Dunn County</p></div></div>
+    <div class="nums"><div><b>6</b><span>species in range now</span></div><div><b>67<small>&deg;F</small></b><span>estimated water temp</span></div></div>
+    <p class="names">{tag("c")} Walleye &nbsp; {tag("c")} Brown Trout &nbsp; {tag("l")} Musky</p></div>
+  <div class="card"><div class="row">{mapthumb()}<div><h3>Olin-Turville Boat Ramp</h3><p class="sub">Lake Monona &middot; Dane County</p></div></div>
+    <div class="nums"><div><b>4</b><span>species in range now</span></div><div><b>68<small>&deg;F</small></b><span>real reading</span></div></div></div>
+  {bar(0)}
+</div>"""
+
+EXP = f"""
+<div class="phone">
+  <header class="top">{ICON}<span>Explore</span></header>
+  <h1>Explore</h1>
+  <div class="seg"><a class="on">Map</a><a>List</a></div>
+  <div class="fbtn">Filters <em>2 active</em></div>
+  <div class="xr"><img src="{SP}walleye.jpg"><div><b>Law Park Boat Landing</b><p>Lake Monona &middot; 1 mi</p><span class="tag ok">5 in range</span></div></div>
+  <div class="xr"><img src="{SP}sauger.jpg"><div><b>Olin-Turville Boat Ramp</b><p>Lake Monona &middot; 3 mi</p><span class="tag ok">4 in range</span></div></div>
+  <div class="xr"><img src="{SP}brown_trout.jpg"><div><b>Sugar River Access</b><p>Sugar River &middot; 21 mi</p><span class="tag lk">3 in range</span></div></div>
+  {bar(1)}
+</div>"""
+
+CSS = """
+*{box-sizing:border-box}
+body{margin:0;background:#0d120a;font-family:'Sora','Inter',Arial,sans-serif}
+.lab{display:grid;grid-template-columns:repeat(4,380px);gap:44px 30px;justify-content:center;padding:30px}
+.cell .cap{color:#cdd9c4;padding:12px 6px}.cell .cap b{display:block;font-size:16px;margin-bottom:4px;color:#fff}.cell .cap p{margin:0;font-size:13px;line-height:1.4;color:#a9b6a0}
+.phone{width:380px;height:840px;overflow:hidden;background:#fff;border:8px solid #161F13;border-radius:30px;padding:0 16px 78px;font-size:15px;line-height:1.5;color:#161F13}
+.top{display:flex;align-items:center;gap:10px;margin:0 -16px 6px;padding:32px 16px 10px;font-weight:800;color:#2B381F;font-size:16px;border-bottom:1px solid #E6EAE6}
+.top .mark{width:26px;height:26px}
+h1{font-size:26px;font-weight:800;margin:8px 0 2px;line-height:1.1}
+h2{font-size:17px;font-weight:800;border-bottom:1px solid #E6EAE6;padding-bottom:5px;margin:16px 0 8px;display:flex;justify-content:space-between}
+h2 em{font-style:normal;font-size:12.5px;color:#4DA330;font-weight:800}
+.lead,.sub{margin:2px 0 8px;font-size:13.5px;color:#535B52}
+.latin{font-style:italic;color:#535B52;margin:0 0 8px}
+.tagline{margin:0 0 10px}
+.back{color:#2B381F;font-weight:800;font-size:13.5px;display:inline-block;margin:8px 0}
+/* tags: minor highlighted text, per standing preference -- colored with AllTrails' Easy/Moderate hues */
+.tag{padding:0 3px;font-size:12px;font-weight:800;background:linear-gradient(transparent 36%,#DCF3D2 36%,#DCF3D2 92%,transparent 92%);color:#2E6B15;margin-left:4px}
+.tag.lk{background:linear-gradient(transparent 36%,#FBEBC3 36%,#FBEBC3 92%,transparent 92%);color:#8A5E0C}
+.tag b{font-weight:900}
+.srch{border:1px solid #E6EAE6;background:#F3F6F2;padding:11px 12px;font-size:13px;color:#535B52;margin:6px 0 4px}
+.hero{margin:0 -16px 6px;position:relative}.hero img{width:100%;height:220px;object-fit:cover;display:block}
+.hero figcaption{font-size:11.5px;color:#535B52;padding:6px 16px 0}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #E6EAE6;border-top:3px solid #4DA330;margin-top:10px}
+.tiles div{padding:7px 9px;border-right:1px solid #E6EAE6}.tiles div:last-child{border-right:0}
+.tiles span{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#535B52}.tiles b{font-size:15px}
+.meter{position:relative;height:7px;background:#E6EAE6;margin:8px 0 3px}
+.meter i{position:absolute;top:0;bottom:0;background:#4DA330}
+.meter b{position:absolute;top:0;bottom:0;background:#5B9BD6}
+.meter u{position:absolute;top:-4px;width:2px;height:15px;background:#161F13}
+.mtxt{margin:0;font-size:12.5px;color:#535B52}
+.key{display:flex;gap:12px;font-size:11.5px;color:#535B52;margin:8px 0}.key i{display:inline-block;margin-right:4px;vertical-align:middle;width:14px;height:6px}.kf{background:#4DA330}.ks{background:#5B9BD6}.kn{width:2px!important;height:12px!important;background:#161F13}
+.bait{display:flex;gap:10px;align-items:center;padding:8px 0}.bi{width:60px;height:46px;background:#F3F6F2;border:1px solid #E6EAE6}
+.band{background:#161F13;color:#fff;margin:0 -16px;padding:14px 16px;border-bottom:3px solid #94F477}
+.band h1{color:#fff;margin:2px 0 2px}.band p{color:#B9C9AE;margin:0 0 10px;font-size:13px}.band .kicker{color:#94F477;text-transform:uppercase;letter-spacing:.1em;font-size:10.5px;font-weight:800}
+.btn{display:inline-flex;align-items:center;padding:9px 14px;font-weight:800;font-size:13.5px}
+.btn.primary{background:#94F477;color:#161F13}
+.photo{margin:0 -16px 6px}.photo img{width:100%;height:170px;object-fit:cover;display:block}.photo figcaption{font-size:11px;color:#535B52;padding:5px 0}
+.stats{display:grid;grid-template-columns:1fr 1fr;border:1px solid #E6EAE6;border-top:3px solid #94F477;margin-bottom:4px}
+.stats div{padding:8px 10px;border-right:1px solid #E6EAE6;border-bottom:1px solid #E6EAE6}.stats div:nth-child(2n){border-right:0}
+.stats span{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#535B52}.stats b{font-size:17px}.stats em{font-style:normal;font-size:11.5px;color:#535B52}
+.frow{padding:8px 0;border-bottom:1px solid #E6EAE6}.fh{display:flex;align-items:center;gap:9px}.fh img{width:56px;height:38px;object-fit:cover}.fh b{font-size:14px;flex:1}
+.card{background:#fff;border:1px solid #E6EAE6;margin-bottom:10px}
+.row{display:flex;gap:10px;padding:10px;align-items:flex-start}
+.cmap{position:relative;flex:none;width:80px;height:80px;overflow:hidden;border:1px solid #E6EAE6}.cmap img{position:absolute;width:256px;height:256px}.pin{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-6px 0 0 -6px;background:#161F13;border:2px solid #fff}
+.card h3{margin:0;font-size:15px;font-weight:800}
+.nums{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #E6EAE6;padding:8px 10px;gap:6px}.nums b{font-size:20px}.nums span{display:block;font-size:11px;color:#535B52}
+.names{margin:0 10px 10px;font-size:12.5px;line-height:2}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid #161F13;margin:8px 0}.seg a{text-align:center;padding:9px;font-weight:800;font-size:13px;color:#161F13}.seg a.on{background:#161F13;color:#fff}
+.fbtn{display:flex;justify-content:space-between;padding:9px 11px;border:1px solid #E6EAE6;background:#F3F6F2;font-weight:800;font-size:13px;margin-bottom:6px}.fbtn em{font-style:normal;color:#4DA330}
+.xr{display:grid;grid-template-columns:66px 1fr;gap:9px;background:#fff;border:1px solid #E6EAE6;border-left:3px solid #4DA330;margin-bottom:6px}
+.xr img{width:66px;height:58px;object-fit:cover}.xr div{padding:6px 6px 6px 0}.xr b{font-size:13.5px}.xr p{margin:2px 0 4px;font-size:11.5px;color:#535B52}
+.bar{position:absolute;left:0;right:0;bottom:0;height:70px;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid #E6EAE6}
+.bar a{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#535B52}
+.bar a.on{color:#161F13;box-shadow:inset 0 3px #94F477}
+"""
+
+CAPS = [
+    ("Fish", "White/pale-sage instead of cream+deep-teal; near-black ink; lime accent reserved for the primary action; tag highlights recolored to AllTrails' own Easy-green / Moderate-amber."),
+    ("Spot", "Solid band still deep, but AllTrails' near-black #161F13 with a lime rule, not our green-and-sage. Photo caption and stats now sit on white, matching their trail-card convention."),
+    ("Recommended (home)", "Cards on white with a pale-sage hairline, exactly like an AllTrails trail card: photo/map, name, meta line, numbers."),
+    ("Explore", "Square segmented control in AllTrails' near-black, list rows on white with a thin green rule -- same shape language as before, new palette."),
+]
+cells = "".join(f'<div class="cell">{p}<div class="cap"><b>{t}</b><p>{c}</p></div></div>' for p, (t, c) in zip([FISH, SPOT, REC, EXP], CAPS))
+html = f"<!doctype html><meta charset=utf-8><title>AllTrails palette</title><link href='https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap' rel='stylesheet'><style>{CSS}</style><div class=lab>{cells}</div>"
+io.open(OUT, "w", encoding="utf-8").write(html)
+print("wrote", OUT)
