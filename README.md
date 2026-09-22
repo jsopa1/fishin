@@ -10,8 +10,8 @@ Every answer shows its source. It reports conditions. It never predicts a catch.
 [![Tests](https://github.com/jsopa1/fishin/actions/workflows/tests.yml/badge.svg)](https://github.com/jsopa1/fishin/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)](pyproject.toml)
-[![762 tests passing](https://img.shields.io/badge/tests-762%20passing-brightgreen.svg)](#tests)
-[![Decisions](https://img.shields.io/badge/decision%20log-56%20entries-5b86f5.svg)](DECISIONS.md)
+[![758 tests passing](https://img.shields.io/badge/tests-758%20passing-brightgreen.svg)](#tests)
+[![Decisions](https://img.shields.io/badge/decision%20log-57%20entries-5b86f5.svg)](DECISIONS.md)
 
 <a href="videos/fishin-launch/renders/fishin-launch.mp4">
   <img src="docs/marketing/fishin-launch.gif" alt="fishin launch film: Recommended, Spot, Fish, Explore and Profile screens" width="860">
@@ -72,7 +72,7 @@ The fish logo always returns to Recommended; the bottom bar is **My spot · Expl
 | **Honest gaps** | Where a source is missing the page says so. Cisco has no bait listed rather than a guessed one; Lake Sturgeon has no feeding window because only hatchery studies exist |
 | **Private by design** | The server publishes one feed that is identical for everyone; ranking happens in your browser. Your location is never sent |
 | **Verbatim-or-nothing research** | Every habitat, bait and temperature claim carries the exact source sentence, and builders refuse to write a claim they cannot find in the source |
-| **Open decision log** | [56 dated entries](DECISIONS.md), including the ones that reversed course |
+| **Open decision log** | [57 dated entries](DECISIONS.md), including the ones that reversed course |
 
 ## Quickstart
 
@@ -163,7 +163,7 @@ flowchart TD
 | **V1 (considered)** | Pivot to real-time acoustic telemetry (GLATOS) for salmon tracking | Investigated and **deferred** — retrospective-only data, confounded coverage — [`DECISIONS.md` #011](DECISIONS.md) |
 | **V1 (shipped)** | Stop trying to predict catch rate. Report real conditions vs. real biology instead | The app in this repo. Scaled statewide, validated at 2,296-waterbody scale, polished, and deployed. |
 
-Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 56 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
+Every "what happened" cell links to a full write-up with real numbers — **[`DECISIONS.md`](DECISIONS.md) has 57 dated, rationale-backed entries** tracking every pivot from "predict Wisconsin catch rates" through the GLATOS detour to the app that shipped, and on into V2.
 
 ## Methodology this project holds itself to
 
