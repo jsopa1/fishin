@@ -17,7 +17,11 @@
     recHead: document.getElementById("rec-list-heading"),
     recList: document.getElementById("rec-list"),
     disclosure: document.getElementById("rec-disclosure"),
+    where: document.getElementById("rec-where"),
   };
+  var S = window.FishinSaved;
+  var EMPTY_SAVED = '<div class="rec-empty empty-card"><svg class="icon icon-lg" aria-hidden="true"><use href="#icon-heart"/></svg>' +
+    "<p>No saved spots yet. Tap the heart on any spot to keep it here.</p></div>";
   var state = { feed: null, location: null, locating: false };
 
   function esc(s) {
@@ -55,19 +59,22 @@
     els.prefs.innerHTML = prefsSummary(prefs);
     els.disclosure.textContent = result.disclosure;
 
-    els.savedList.innerHTML = result.saved.length
-      ? result.saved.map(R.cardHtml).join("")
-      : '<p class="rec-empty">No saved spots yet. Open any spot and tap &ldquo;Save this spot&rdquo;.</p>';
+    els.savedList.innerHTML = result.saved.length ? result.saved.map(R.cardHtml).join("") : EMPTY_SAVED;
 
     els.recHead.hidden = false;
     var more = document.getElementById("rec-more");
     if (more) more.hidden = false;
     els.recList.innerHTML = result.recommended.length
       ? result.recommended.map(R.cardHtml).join("")
-      : '<p class="rec-empty">No spots match right now. Try widening your travel distance in your <a href="/profile">Profile</a>, or <a href="/map">explore the map</a>.</p>';
+      : '<div class="rec-empty empty-card"><p>No spots match right now. Try widening your travel distance in your <a href="/profile">Profile</a>, or <a href="/map">explore the map</a>.</p></div>';
+    els.recList.removeAttribute("aria-busy");
 
+    var near = state.location && result.meta.radiusMiles !== null;
+    els.where.textContent = near ? "near you" : "in Wisconsin";
     els.status.textContent = state.location ? "Using your location on this device." : "Turn on location to sort by distance.";
+    if (S) S.paint(document.getElementById("recommended"));
     if (window.FishinTags) window.FishinTags.wire(document.getElementById("recommended"));
+    if (window.FishinCarousel) window.FishinCarousel.refresh();
   }
 
   function locate() {
@@ -88,6 +95,16 @@
   }
 
   els.locate.addEventListener("click", locate);
+  // "Spots near me" in the hero and the "Near me" chip ask for the same thing, then bring the
+  // ranked row into view.
+  document.querySelectorAll("[data-locate]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      locate();
+      document.getElementById("recommended").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  // A heart tapped on a card changes the saved list: re-rank so the saved row matches at once.
+  if (S) S.onChange(function () { render(); });
 
   // Location is only read on a tap - or silently if the browser already holds a
   // grant from an earlier visit, which is the visitor's own earlier choice.
@@ -99,15 +116,23 @@
 
   fetch(window.FISHIN_FEED_URL, { headers: { Accept: "application/json" } })
     .then(function (r) { if (!r.ok) throw new Error("feed " + r.status); return r.json(); })
-    .then(function (feed) { state.feed = feed.spots || []; render(); })
+    .then(function (feed) {
+      state.feed = feed.spots || [];
+      render();
+      window.FishinFeed = state.feed;
+      document.dispatchEvent(new CustomEvent("fishin:feed", { detail: state.feed }));
+    })
     .catch(function () {
       els.loading.textContent = "Current conditions couldn't be loaded. You can still explore the map or your saved spots.";
+      els.recList.innerHTML = "";
+      els.recList.removeAttribute("aria-busy");
       var saved = loadSaved();
       if (saved.length) {
         els.savedList.innerHTML = saved.slice(0, 8).map(function (s) {
           return R.cardHtml({ name: s.name, water: s.water, county: s.county, type: null, quality: null, count: 0, inRange: [], spawning: [], nearest: null, distanceKm: null, lat: s.lat, lon: s.lon,
             url: "/spot?lat=" + encodeURIComponent(s.lat) + "&lon=" + encodeURIComponent(s.lon) + "&name=" + encodeURIComponent(s.name || "") });
         }).join("");
+        if (S) S.paint(els.savedList);
       }
     });
 })();

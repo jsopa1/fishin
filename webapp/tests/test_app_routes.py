@@ -202,16 +202,12 @@ class WebAppRouteTests(unittest.TestCase):
         )
         self.assertEqual(wb_resp.status_code, 200)
 
-    def test_map_page_shows_invasive_species_count(self):
-        import v1_review_data as data
-
-        conn = flask_app_module.get_conn()
-        invasive_meta = data.get_invasive_species_meta(conn)
-        conn.close()
-
+    def test_map_page_has_no_invasive_species_clutter(self):
+        # The map page itself no longer surfaces this layer (the owner asked for it removed as
+        # clutter); the endpoint below stays, as a standalone data source other tools can use.
         resp = self.client.get("/map")
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("{:,}".format(invasive_meta["total_sightings"]).encode(), resp.data)
+        self.assertNotIn(b"invasive", resp.data.lower())
 
     def test_invasive_species_data_endpoint_returns_real_sightings(self):
         resp = self.client.get("/map/invasive-species-data")

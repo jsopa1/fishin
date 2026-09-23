@@ -3,36 +3,53 @@
 {% block here %}Spot report{% endblock %}
 {% block content %}
 <a class="back-link" href="{{ url_for('map_view') }}">
-  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to Explore
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-left"/></svg> Explore
 </a>
 {% if not spot %}
 <h1>Not found</h1>
 <p class="empty-state">⚠ {{ not_found_reason or "No stored access point at this location." }}
    Try <a href="{{ url_for('map_view') }}">the map again</a>.</p>
 {% else %}
+{% set spot_name = spot.facility_name or spot.waterbody_name %}
+{% set type_label = {'boat_ramp': 'Boat launch', 'boat_carry_in': 'Carry-in access', 'shore_fishing': 'Shore fishing'}.get(spot.source_type) %}
+{% set active_count = species_activity.active | length if species_activity else 0 %}
+
+{# Like an AllTrails trail page: the picture first -- the verified photo of this water when one
+   exists, otherwise a map of the spot -- then the name, the key numbers and the actions. #}
+{% if spot_photo %}
+<div class="spot-hero">
+<figure class="spot-photo">
+  <img src="{{ url_for('static', filename=spot_photo.static_path) }}"
+       srcset="{{ url_for('static', filename=spot_photo.static_path | small) }} 720w, {{ url_for('static', filename=spot_photo.static_path) }} 2000w"
+       sizes="(max-width: 1180px) 100vw, 1120px" alt="{{ spot_photo.title }}">
+  <figcaption>Photo of the water, {{ spot_photo.distance_m }} m from this spot{% if spot_photo.attribution_required is not defined or spot_photo.attribution_required %} &middot; {{ spot_photo.credit }} &middot; <a href="{{ spot_photo.page_url }}" target="_blank" rel="noopener">source</a>{% endif %}</figcaption>
+</figure>
+</div>
+{% else %}
+<div class="spot-hero spot-hero-map" id="spot-map" data-lat="{{ spot.latitude }}" data-lon="{{ spot.longitude }}"
+     role="img" aria-label="Map of {{ spot_name }} on {{ spot.waterbody_name }}"></div>
+{% endif %}
+
+<div class="spot-layout">
+<div class="spot-main">
 <header class="spot-head">
-  <div class="spot-head-row">
-    <div>
-      <h1>{{ spot.facility_name or spot.waterbody_name }}</h1>
-      <p class="spot-loc"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ spot.waterbody_name }}, {{ spot.county }}</p>
-    </div>
-    <button type="button" class="btn btn-secondary" id="save-spot"
-            data-name="{{ spot.facility_name or spot.waterbody_name }}"
-            data-water="{{ spot.waterbody_name }}"
-            data-county="{{ spot.county }}"
-            data-lat="{{ spot.latitude }}" data-lon="{{ spot.longitude }}"
-            aria-pressed="false">
-      <svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg>
-      <span id="save-spot-label">Save</span>
-    </button>
-  </div>
+  {% if type_label %}<p class="spot-kicker">{{ type_label }}{% if spot.ownership %} &middot; {{ spot.ownership }}{% endif %}</p>{% endif %}
+  <h1>{{ spot_name }}</h1>
+  <p class="spot-loc"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ spot.waterbody_name }}, {{ spot.county }} County</p>
+
   <div class="spot-stats">
+    {% if species_activity %}
+    <div class="spot-stat spot-stat-range">
+      <span class="spot-stat-label">In range now</span>
+      <span class="spot-stat-value">{{ active_count }} <small>species</small></span>
+    </div>
+    {% endif %}
     <div class="spot-stat">
       <span class="spot-stat-label">Water</span>
       {% if temperature is none %}
         <span class="tag no_data">no temperature data</span>
       {% else %}
-        <span class="spot-stat-value"><svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg> {{ "%.0f"|format(temperature.value_c * 9/5 + 32) }}°F</span>
+        <span class="spot-stat-value">{{ "%.0f"|format(temperature.value_c * 9/5 + 32) }}°F</span>
         {% if temperature.resolution == "matched_waterbody_real" %}<span class="tag real">real measurement</span>
         {% elif temperature.resolution == "interpolated_nearby" %}<span class="tag estimated">estimated</span>
         {% elif temperature.resolution in ("matched_waterbody_proxy", "spot_air_proxy") %}<span class="tag proxy">air-temperature proxy</span>{% endif %}
@@ -48,24 +65,35 @@
     {% if conditions and conditions.status == 'ok' and conditions.wind_speed_mph is not none %}
     <div class="spot-stat">
       <span class="spot-stat-label">Wind</span>
-      <span class="spot-stat-value">{{ "%.0f"|format(conditions.wind_speed_mph) }} mph{{ ' ' + conditions.wind_direction_compass if conditions.wind_direction_compass else '' }}</span>
+      <span class="spot-stat-value">{{ "%.0f"|format(conditions.wind_speed_mph) }} <small>mph{{ ' ' + conditions.wind_direction_compass if conditions.wind_direction_compass else '' }}</small></span>
     </div>
     {% endif %}
     {% if moon %}
     <div class="spot-stat">
       <span class="spot-stat-label">Moon</span>
-      <span class="spot-stat-value">{{ moon.emoji }} {{ moon.phase_name }}</span>
+      <span class="spot-stat-value spot-stat-moon">{{ moon.emoji }} {{ moon.phase_name }}</span>
     </div>
     {% endif %}
   </div>
-</header>
 
-{% if spot_photo %}
-<figure class="spot-photo">
-  <img src="{{ url_for('static', filename=spot_photo.static_path) }}" alt="{{ spot_photo.title }}">
-  <figcaption>Photo of the water, {{ spot_photo.distance_m }} m from this spot &middot; {{ spot_photo.credit }} &middot; <a href="{{ spot_photo.page_url }}" target="_blank" rel="noopener">source</a></figcaption>
-</figure>
-{% endif %}
+  <div class="spot-actions">
+    <button type="button" class="btn btn-primary" id="save-spot"
+            data-name="{{ spot_name }}"
+            data-water="{{ spot.waterbody_name }}"
+            data-county="{{ spot.county }}"
+            data-lat="{{ spot.latitude }}" data-lon="{{ spot.longitude }}"
+            aria-pressed="false">
+      <svg class="icon" aria-hidden="true"><use href="#icon-heart"/></svg>
+      <span id="save-spot-label">Save</span>
+    </button>
+    <a class="btn btn-secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination={{ spot.latitude }},{{ spot.longitude }}" target="_blank" rel="noopener">
+      <svg class="icon" aria-hidden="true"><use href="#icon-directions"/></svg> Directions
+    </a>
+    <button type="button" class="btn btn-secondary" id="share-spot">
+      <svg class="icon" aria-hidden="true"><use href="#icon-share"/></svg> Share
+    </button>
+  </div>
+</header>
 
 {% macro fish_row(s) %}
   {% set fslug = fish_slug(s.species) %}
@@ -74,7 +102,7 @@
   <li class="fish-row">
     <div class="fish-row-head">
       {% if fslug %}<a class="fish-row-main" href="{{ url_for('fish_detail', species_slug=fslug, lat=spot.latitude, lon=spot.longitude, name=spot.facility_name or '') }}">{% else %}<div class="fish-row-main">{% endif %}
-        {% if img %}<img class="fish-thumb" src="{{ url_for('static', filename=img.static_path) }}" alt="" loading="lazy">{% else %}<span class="fish-thumb fish-thumb-empty" aria-hidden="true"></span>{% endif %}
+        {% if img %}<img class="fish-thumb{% if img.static_path | on_white %} on-white{% endif %}" src="{{ url_for('static', filename=img.static_path | small) }}" alt="" loading="lazy">{% else %}<span class="fish-thumb fish-thumb-empty" aria-hidden="true"></span>{% endif %}
         <span class="fish-row-name">{{ s.species.title() }}</span>
       {% if fslug %}</a>{% else %}</div>{% endif %}
       <span class="tag evidence-{{ s.evidence_tier }}" tabindex="0">{{ 'Confirmed' if s.evidence_tier == 'confirmed' else 'Likely' }}</span>
@@ -111,6 +139,7 @@
 {% endmacro %}
 
 {% if species_activity and (species_activity.active or species_activity.inactive or species_activity.no_window) %}
+<h2 class="spot-section-title">Fish here right now</h2>
 <p class="meter-key"><span><i class="k-feed"></i>Feeding range</span> <span><i class="k-spawn"></i>Spawning range</span> <span><i class="k-now"></i>Today&rsquo;s temperature</span></p>
 <div class="fish-buckets" id="fish-buckets">
   <section class="fish-bucket fish-bucket-active" aria-labelledby="bucket-active-title">
@@ -138,10 +167,11 @@
 </div>
 {% endif %}
 
+<h2 class="spot-section-title">More about this water</h2>
 <nav class="spot-quicklinks" aria-label="More about this water">
-  <button type="button" class="btn btn-secondary" data-open="panel-stocking" aria-expanded="false">Stocking history</button>
-  <button type="button" class="btn btn-secondary" data-open="panel-regulations" aria-expanded="false">Regulations</button>
-  <button type="button" class="btn btn-secondary" data-open="panel-advisory" aria-expanded="false">Consumption advisory</button>
+  <button type="button" class="spot-tab" data-open="panel-stocking" aria-expanded="false">Stocking history</button>
+  <button type="button" class="spot-tab" data-open="panel-regulations" aria-expanded="false">Regulations</button>
+  <button type="button" class="spot-tab" data-open="panel-advisory" aria-expanded="false">Consumption advisory</button>
 </nav>
 
 <section class="spot-more" id="panel-stocking" hidden>
@@ -249,6 +279,34 @@
   {% endif %}
 </section>
 
+</div>
+{% if spot_photo %}
+<aside class="spot-aside" aria-label="Where it is">
+  <div class="spot-aside-map" id="spot-map" data-lat="{{ spot.latitude }}" data-lon="{{ spot.longitude }}"
+       role="img" aria-label="Map of {{ spot_name }} on {{ spot.waterbody_name }}"></div>
+  <a class="spot-aside-link" href="https://www.google.com/maps/search/?api=1&amp;query={{ spot.latitude }},{{ spot.longitude }}" target="_blank" rel="noopener">
+    {{ "%.5f"|format(spot.latitude) }}, {{ "%.5f"|format(spot.longitude) }} <svg class="icon" aria-hidden="true"><use href="#icon-external-link"/></svg>
+  </a>
+</aside>
+{% endif %}
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+// The map of the spot: a pin on OpenStreetMap, pannable, but the page keeps the scroll wheel.
+(function () {
+  var el = document.getElementById('spot-map');
+  if (!el || !window.L) return;
+  var at = [Number(el.dataset.lat), Number(el.dataset.lon)];
+  var map = L.map(el, { scrollWheelZoom: false, zoomControl: true }).setView(at, 14);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  L.marker(at, { icon: L.divIcon({ className: 'spot-pin', html: '<span></span>', iconSize: [22, 22], iconAnchor: [11, 11] }), keyboard: false }).addTo(map);
+})();
+</script>
+
 <script>
 // Remember the last spot opened so the "My spot" tab can return to it. Same
 // rule as saved spots: this device only, never sent anywhere.
@@ -265,53 +323,35 @@
 </script>
 
 <script>
-// Saved spots. Kept in this browser only -- no account, no server, and
-// nothing about where someone fishes ever leaves their device, which for
-// anglers is the whole point: a spot is not something you want uploaded.
+// Save, via the shared saved-spots list (static/saved.js): this device only, never uploaded.
 (function () {
-  var KEY = 'fishin.saved.v1';
+  var S = window.FishinSaved;
   var btn = document.getElementById('save-spot');
   var label = document.getElementById('save-spot-label');
-  if (!btn) return;
-
-  function read() {
-    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
-    catch (e) { return []; }
-  }
-  function write(list) {
-    try { localStorage.setItem(KEY, JSON.stringify(list.slice(0, 200))); }
-    catch (e) { /* private mode or quota -- saving is a convenience, not a feature to break on */ }
-  }
-  function idOf(d) { return d.lat + ',' + d.lon; }
-
-  var me = {
-    id: idOf(btn.dataset), name: btn.dataset.name, water: btn.dataset.water,
-    county: btn.dataset.county, lat: btn.dataset.lat, lon: btn.dataset.lon
-  };
-
-  function paint(saved) {
+  if (!btn || !S) return;
+  function paint() {
+    var saved = S.isSaved(btn.dataset.lat, btn.dataset.lon);
     btn.setAttribute('aria-pressed', saved ? 'true' : 'false');
-    btn.classList.toggle('btn-primary', saved);
-    btn.classList.toggle('btn-secondary', !saved);
-    label.textContent = saved ? 'Saved' : 'Save this spot';
+    label.textContent = saved ? 'Saved' : 'Save';
   }
-
-  paint(read().some(function (s) { return s.id === me.id; }));
-
+  paint();
   btn.addEventListener('click', function () {
-    var list = read();
-    var at = list.findIndex(function (s) { return s.id === me.id; });
-    if (at >= 0) { list.splice(at, 1); paint(false); }
-    else {
-      list.unshift(me); paint(true);
-      // Anonymous save-rate signal only -- the coordinate itself never
-      // leaves the browser, only the fact that a save happened here.
-      if (navigator.sendBeacon) {
-        var data = new URLSearchParams({ page: window.location.pathname });
-        navigator.sendBeacon('{{ url_for("log_save_event") }}', data);
-      }
-    }
-    write(list);
+    var saved = S.toggle({ name: btn.dataset.name, water: btn.dataset.water, county: btn.dataset.county, lat: btn.dataset.lat, lon: btn.dataset.lon });
+    paint();
+    S.toast(saved ? 'Saved to your spots' : 'Removed from your spots');
+  });
+})();
+
+// Share: the phone's own share sheet where there is one, otherwise copy the link.
+(function () {
+  var btn = document.getElementById('share-spot');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var data = { title: document.title, url: window.location.href };
+    if (navigator.share) { navigator.share(data).catch(function () { /* the visitor closed the sheet */ }); return; }
+    var done = function () { if (window.FishinSaved) window.FishinSaved.toast('Link copied'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(data.url).then(done, function () { window.prompt('Copy this link', data.url); });
+    else window.prompt('Copy this link', data.url);
   });
 })();
 

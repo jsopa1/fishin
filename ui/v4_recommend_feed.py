@@ -76,7 +76,8 @@ def build_row(conn, point: dict) -> dict:
     }
     if photo:  # only ~1 in 10 spots; absent keys keep the feed small
         row["p"] = photo["static_path"]
-        row["pc"] = photo["credit"]
+        if photo.get("attribution_required", True):  # public-domain photos need no credit line
+            row["pc"] = photo["credit"]
     return row
 
 

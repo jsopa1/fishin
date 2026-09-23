@@ -61,6 +61,35 @@ def _fish_link_args(species_name: str):
     return candidate if species_detail.species_from_slug(candidate) else None
 
 
+def _small_image(static_path: str) -> str:
+    """The card-sized copy of a stored photo (analysis/v4_image_quality.py writes both sizes).
+    Drawn SVG illustrations have only the one file, which is sharp at any size."""
+    stem, dot, ext = (static_path or "").rpartition(".")
+    if not dot or ext.lower() not in ("jpg", "jpeg", "png"):
+        return static_path
+    return f"{stem}-sm.{ext}"
+
+
+_FRAMING_FILE = Path(app.static_folder) / "img" / "framing.json"
+_framing = {"mtime": None, "on_white": frozenset()}
+
+
+def _on_white(static_path: str) -> bool:
+    """True when a picture is a drawing or cut-out on a white ground, so cards frame it whole;
+    a photograph with its own background fills the card instead. The list is written by
+    analysis/v4_image_quality.py alongside the images themselves."""
+    try:
+        mtime = _FRAMING_FILE.stat().st_mtime
+    except OSError:
+        return False
+    if _framing["mtime"] != mtime:
+        _framing["on_white"] = frozenset(json.loads(_FRAMING_FILE.read_text(encoding="utf-8")).get("on_white", []))
+        _framing["mtime"] = mtime
+    return static_path in _framing["on_white"]
+
+
+app.jinja_env.filters["small"] = _small_image
+app.jinja_env.filters["on_white"] = _on_white
 app.jinja_env.globals.update(
     fish_slug=_fish_link_args,
     species_image=lambda name: species_detail.image_for("species", (name or "").upper()),
@@ -214,9 +243,17 @@ def home():
     counts = data.get_summary_counts(conn) if conn is not None else None
     meta = data.get_access_points_meta(conn) if conn is not None else None
     highlights = data.get_current_highlights(conn) if conn is not None else []
+    filter_species = set(data.list_combined_species(conn)) if conn is not None else set()
     if conn is not None:
         conn.close()
-    return render_template("home.html", counts=counts, meta=meta, highlights=highlights)
+    # Quick-filter chips under the hero: the most-fished Wisconsin species, each linked only if
+    # Explore can actually filter by it, so a chip never lands on an empty map.
+    chip_species = [s for s in HOME_CHIP_SPECIES if s in filter_species]
+    return render_template("home.html", counts=counts, meta=meta, highlights=highlights,
+                           species=species_detail.list_species(), chip_species=chip_species)
+
+
+HOME_CHIP_SPECIES = ("Walleye", "Largemouth Bass", "Smallmouth Bass", "Northern Pike", "Muskellunge", "Bluegill", "Yellow Perch", "Black Crappie")
 
 
 @app.route("/browse")
@@ -299,15 +336,11 @@ ACCESS_POINT_TYPES = (
 def map_view():
     conn = get_conn()
     meta = data.get_access_points_meta(conn) if conn is not None else None
-    invasive_meta = data.get_invasive_species_meta(conn) if conn is not None else None
-    invasive_species_list = data.list_distinct_invasive_species(conn) if conn is not None else []
     combined_species_list = data.list_combined_species(conn) if conn is not None else []
     if conn is not None:
         conn.close()
     context = dict(
         meta=meta,
-        invasive_meta=invasive_meta,
-        invasive_species_list=invasive_species_list,
         combined_species_list=combined_species_list,
         access_point_types=ACCESS_POINT_TYPES,
         filters={

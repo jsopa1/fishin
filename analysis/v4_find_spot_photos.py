@@ -16,8 +16,8 @@ finds to data/v1/spot_photo_manifest_v1.json. Nothing is guessed:
 
 Everything the page needs to credit the photo is recorded: title, author, licence, source
 page, distance. Re-running the script refreshes the manifest, so it meets the weekly
-freshness bar (data-source-weekly-freshness-bar). Images are downloaded once, scaled to
-640 px wide, and stored under webapp/static/img/spots/.
+freshness bar (data-source-weekly-freshness-bar). Images are downloaded once and stored under
+webapp/static/img/spots/ in two sizes (full and card), by analysis/v4_image_quality.py.
 
 Usage:
     python analysis/v4_find_spot_photos.py            # full run, writes manifest and images
@@ -36,6 +36,9 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import v4_image_quality as image_quality  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data" / "v1" / "v1_full_run_results.db"
@@ -65,7 +68,6 @@ OTHER_PLACES = re.compile(
 # only when the title also carries a water word (the by_water path); a bare facility-name match on
 # it is not accepted.
 BARE_PLACE_PHOTO = re.compile(r"^(file:)?[\w .'-]+,\s*wisconsin(\s*-\s*\d+)?\.(jpe?g|png)$", re.I)
-THUMB_WIDTH = 640
 
 ALLOWED_LICENCES = re.compile(r"^(public domain|pd\b|cc0|cc[ -]by(?![- ](nc|nd))(?:[- ]sa)?\b)", re.I)
 REJECT_TITLE = re.compile(r"(ISS\d|view of earth|\.tiff?$|\.svg$|\.pdf$|\.gif$|satellite|aerial|orthophoto|map\b|plat\b|topo|lidar)", re.I)
@@ -127,12 +129,12 @@ def candidates_for(point):
 
 
 def file_info(titles):
-    """Licence, author and a 640 px thumbnail for each candidate title."""
+    """Licence, author and a full-width rendering for each candidate title."""
     info = {}
     for i in range(0, len(titles), 40):
         batch = titles[i:i + 40]
         d = api({"action": "query", "titles": "|".join(batch), "prop": "imageinfo", "iiprop": "url|extmetadata|mime",
-                 "iiurlwidth": THUMB_WIDTH, "format": "json"})
+                 "iiurlwidth": image_quality.FULL_WIDTH, "format": "json"})
         for page in d.get("query", {}).get("pages", {}).values():
             ii = (page.get("imageinfo") or [None])[0]
             if not ii:
@@ -211,7 +213,7 @@ def main():
             for attempt in range(4):
                 try:
                     with urllib.request.urlopen(req, timeout=60) as r:
-                        target.write_bytes(r.read())
+                        image_quality.write_sizes(r.read(), target)
                     ok = True
                     break
                 except Exception as e:  # flaky connection: retry, then drop this one spot, never crash the run
@@ -225,7 +227,7 @@ def main():
         del s["thumb_url"]
         kept.append(s)
     spots = kept
-    keep = {Path(s["file"]).name for s in spots}
+    keep = {n for s in spots for n in (Path(s["file"]).name, image_quality.small_name(Path(s["file"])).name)}
     for old in IMG_DIR.glob("*.jpg"):
         if old.name not in keep:
             old.unlink()

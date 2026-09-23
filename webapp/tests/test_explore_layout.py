@@ -25,13 +25,22 @@ class ExploreLayoutTests(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         return resp.data.decode()
 
-    def test_map_list_toggle_comes_before_the_filters_which_come_before_the_content(self):
+    def test_filters_come_before_the_content_and_each_toggle_button_lives_in_its_own_panel(self):
+        # The map<->list switch is two buttons, each anchored inside the panel it switches
+        # AWAY from (List floats over the map; Map floats over the list) rather than a single
+        # bar floating fixed to the viewport, which could drift onto Leaflet's own bottom-edge
+        # controls depending on scroll position.
         body = self._body()
-        toggle = body.index('id="toggle-map-btn"')
         filters = body.index('id="explore-filter-panel"')
         content = body.index('id="explore-layout"')
-        self.assertLess(toggle, filters)
+        map_panel = body.index('class="explore-panel map-panel"')
+        list_panel = body.index('class="explore-panel list-panel"')
+        toggle_list_btn = body.index('id="toggle-list-btn"')
+        toggle_map_btn = body.index('id="toggle-map-btn"')
         self.assertLess(filters, content)
+        self.assertLess(map_panel, toggle_list_btn)
+        self.assertLess(toggle_list_btn, list_panel)
+        self.assertLess(list_panel, toggle_map_btn)
 
     def test_every_prior_filter_control_is_still_in_the_form(self):
         body = self._body()

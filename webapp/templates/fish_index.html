@@ -2,18 +2,19 @@
 {% block title %}Fish{% endblock %}
 {% block here %}Fish{% endblock %}
 {% block content %}
-<div class="explore-head">
-  <h1>Fish</h1>
-  <p>{{ species|length }} Wisconsin species. Open one for its documented habitat, temperature ranges and recommended bait.</p>
+<div class="page-head">
+  <h1>Wisconsin fish</h1>
+  <p>{{ species|length }} species. Open one for its documented habitat, temperature ranges and recommended bait.</p>
 </div>
-<ul class="species-pick fish-index">
+<ul class="fish-grid fish-index">
   {% for s in species %}
+  {% set img = species_image(s.name) %}
   <li>
-    <a class="species-pick-item" href="{{ url_for('fish_detail', species_slug=s.slug) }}">
-      {% set img = species_image(s.name) %}
-      {% if img %}<img class="fish-thumb" src="{{ url_for('static', filename=img.static_path) }}" alt="" loading="lazy">{% else %}<span class="fish-thumb fish-thumb-empty" aria-hidden="true"></span>{% endif %}
-      <span>{{ s.title }}</span>
-      <svg class="icon fish-index-chev" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
+    <a class="fish-card" href="{{ url_for('fish_detail', species_slug=s.slug) }}">
+      <div class="card-media fish-media">
+        {% if img %}<img src="{{ url_for('static', filename=img.static_path | small) }}"{% if img.static_path | on_white %} class="on-white"{% endif %} alt="" loading="lazy">{% else %}<svg class="icon fish-media-empty" aria-hidden="true"><use href="#icon-fish"/></svg>{% endif %}
+      </div>
+      <p class="list-card-title">{{ s.title }}</p>
     </a>
   </li>
   {% endfor %}

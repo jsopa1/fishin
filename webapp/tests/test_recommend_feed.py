@@ -166,8 +166,8 @@ class RecommendedScreenTests(unittest.TestCase):
         self.assertLess(self.body.index('role="search"'), self.body.index('id="quick-links"'))
         self.assertEqual(len(re.findall(r"<h1[ >]", self.body)), 1)
 
-    def test_saved_spots_come_first_then_recommended_spots_as_in_the_wireframe(self):
-        self.assertLess(self.body.index("Saved Spots"), self.body.index("Recommended Spots"))
+    def test_best_right_now_comes_first_then_saved_spots_as_in_the_alltrails_wireframe(self):
+        self.assertLess(self.body.index("Best right now"), self.body.index("Your saved spots"))
 
     def test_the_saved_section_is_always_shown_with_an_empty_state(self):
         self.assertNotRegex(self.body, r'id="saved-section"[^>]*hidden')
@@ -216,12 +216,13 @@ class ExploreRankedListTests(unittest.TestCase):
         self.assertNotIn('class="explore-reset"', self.body)
         self.assertIn('class="explore-reset"', self.client.get("/map?county=Dane").data.decode())
 
-    def test_toggle_still_comes_before_filters_before_the_list(self):
-        toggle = self.body.index("explore-view-toggle")
+    def test_filters_still_come_before_the_list_and_each_toggle_button_sits_in_its_own_panel(self):
         filters = self.body.index('id="explore-filter-panel"')
         layout = self.body.index('id="explore-layout"')
-        self.assertLess(toggle, filters)
+        map_panel = self.body.index('class="explore-panel map-panel"')
+        toggle_list_btn = self.body.index('id="toggle-list-btn"')
         self.assertLess(filters, layout)
+        self.assertLess(map_panel, toggle_list_btn)
 
     def test_filters_view_and_sort_survive_the_nav_via_session_storage_only(self):
         self.assertIn("sessionStorage", self.body)

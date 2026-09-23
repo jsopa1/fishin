@@ -266,43 +266,45 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  // A small map of where the spot is (there are no photographs of individual spots). Four OpenStreetMap
-  // tiles at zoom 13, laid out so the spot sits in the middle of a 96 px square, with the neighbouring
-  // tiles chosen on whichever side the spot is nearer. Decorative: the name and place are beside it.
-  var THUMB = 96, TILE = 256, ZOOM = 13;
+  // A map of where the spot is, for spots with no verified photograph. Nine OpenStreetMap tiles at
+  // zoom 13 (a 768 px square) centred on the tile holding the spot, so the spot is always at least one
+  // full tile from every edge; the block is placed with calc(50% - offset) so the pin sits in the
+  // middle of the card image at any card size up to 512 px. Decorative: name and place are beside it.
+  var TILE = 256, ZOOM = 13;
   function mapThumb(lat, lon) {
     if (!isFinite(lat) || !isFinite(lon) || lat === null || lon === null) return "";
     var n = Math.pow(2, ZOOM), rad = lat * Math.PI / 180;
     var x = (lon + 180) / 360 * n;
     var y = (1 - Math.log(Math.tan(rad) + 1 / Math.cos(rad)) / Math.PI) / 2 * n;
-    var ix = Math.floor(x), iy = Math.floor(y), fx = x - ix, fy = y - iy;
-    var x0 = fx < 0.5 ? ix - 1 : ix, y0 = fy < 0.5 ? iy - 1 : iy;
-    var left = Math.round(THUMB / 2 - ((ix - x0) + fx) * TILE), top = Math.round(THUMB / 2 - ((iy - y0) + fy) * TILE);
+    var ix = Math.floor(x), iy = Math.floor(y);
+    var sx = Math.round((x - ix + 1) * TILE), sy = Math.round((y - iy + 1) * TILE);
     var tiles = "";
-    for (var dy = 0; dy < 2; dy++) for (var dx = 0; dx < 2; dx++) {
-      tiles += '<img src="https://tile.openstreetmap.org/' + ZOOM + "/" + (x0 + dx) + "/" + (y0 + dy) + '.png" alt="" loading="lazy" width="' + TILE + '" height="' + TILE + '" style="left:' + dx * TILE + "px;top:" + dy * TILE + 'px">';
+    for (var dy = 0; dy < 3; dy++) for (var dx = 0; dx < 3; dx++) {
+      tiles += '<img src="https://tile.openstreetmap.org/' + ZOOM + "/" + (ix - 1 + dx) + "/" + (iy - 1 + dy) + '.png" alt="" loading="lazy" width="' + TILE + '" height="' + TILE + '" style="left:' + dx * TILE + "px;top:" + dy * TILE + 'px">';
     }
-    return '<div class="card-map" aria-hidden="true"><div class="card-map-tiles" style="left:' + left + "px;top:" + top + 'px">' + tiles + '</div><span class="card-map-pin"></span></div>';
+    return '<div class="card-media card-map" aria-hidden="true"><div class="card-map-tiles" style="left:calc(50% - ' + sx + "px);top:calc(50% - " + sy + 'px)">' + tiles + '</div><span class="card-map-pin"></span></div>';
   }
 
-  // A verified photo of the water at the spot, when one exists; its credit is printed under the card text.
+  // A verified photo of the water at the spot, when one exists: the card-sized copy, with the full
+  // one offered to high-density screens. Its credit is printed under the card text.
   function photoThumb(file) {
-    return '<div class="card-map card-photo" aria-hidden="true"><img src="/static/' + esc(file) + '" alt="" loading="lazy"></div>';
+    var full = "/static/" + esc(file), small = full.replace(/\.(jpe?g|png)$/i, "-sm.$1");
+    return '<div class="card-media card-photo" aria-hidden="true"><img src="' + small + '" srcset="' + small + " 720w, " + full + ' 2000w" sizes="(max-width: 767px) 80vw, 320px" alt="" loading="lazy"></div>';
   }
 
   function title(s) {
     return String(s).toLowerCase().replace(/(^|[^a-z])([a-z])/g, function (m, pre, c) { return pre + c.toUpperCase(); });
   }
 
-  // One card layout for every list that shows ranked spots (Recommended, Explore),
-  // so a spot reads the same wherever it appears. Says only what the feed says:
-  // wording is "in range now", never "likely to bite" (DECISIONS #005).
+  // One card layout for every list that shows ranked spots (Home, Explore), so a spot reads the
+  // same wherever it appears. Laid out like an AllTrails trail card: a large rounded picture with
+  // a save heart, then the name, the place, and one line of the numbers people scan for. Says only
+  // what the feed says: wording is "in range now", never "likely to bite" (DECISIONS #005).
   function cardHtml(c) {
     var sub = [c.water ? esc(c.water) + (c.county ? " (" + esc(c.county) + ")" : "") : "", TYPE_LABEL[c.type] || ""]
       .filter(Boolean).join(" &middot; ");
 
-    // The three numbers people scan for, big and first. How much to trust the
-    // temperature is stated in words under it, not in a coloured badge.
+    // How much to trust the temperature is stated in words beside it, not in a coloured badge.
     function metric(num, unit, label, sub2, cls) {
       return '<div class="card-metric ' + cls + '"><span class="card-metric-num">' + num + (unit ? '<small>' + unit + "</small>" : "") + "</span>" +
         '<span class="card-metric-label">' + label + "</span>" + (sub2 ? '<span class="card-metric-sub">' + sub2 + "</span>" : "") + "</div>";
@@ -319,15 +321,15 @@
       metrics.push(metric(Math.round(c.distanceKm / KM_PER_MILE), "mi", "away", "", "metric-away"));
     }
 
-    var map = c.photo ? photoThumb(c.photo) : mapThumb(c.lat, c.lon);
+    var media = c.photo ? photoThumb(c.photo) : mapThumb(c.lat, c.lon);
 
     var line;
     if (c.count > 0) {
-      line = c.inRange.slice(0, 4).map(function (e) {
+      line = c.inRange.slice(0, 3).map(function (e) {
         var confirmed = e.tier === "confirmed";
         return '<span class="card-sp ' + (confirmed ? "sp-confirmed" : "sp-likely") + '" title="' + (confirmed ? "Confirmed by survey or sighting" : "Likely present (documented, not surveyed)") + '">' +
           esc(title(e.species)) + (confirmed ? '<svg class="icon" aria-hidden="true"><use href="#icon-check-circle"/></svg><span class="sr-only"> (confirmed)</span>' : '<span class="sr-only"> (likely)</span>') + "</span>";
-      }).join("") + (c.inRange.length > 4 ? '<span class="card-sp-more">+' + (c.inRange.length - 4) + " more</span>" : "");
+      }).join("") + (c.inRange.length > 3 ? '<span class="card-sp-more">+' + (c.inRange.length - 3) + " more</span>" : "");
       line = '<p class="rec-line card-species">' + line + "</p>";
     } else if (c.nearest) {
       line = '<p class="rec-line">Nothing is in range right now. Closest to its range: <strong>' + esc(title(c.nearest.species)) + "</strong>, " + c.nearest.distanceF + "&deg;F outside it.</p>";
@@ -339,14 +341,19 @@
     var note = c.spawning && c.spawning.length
       ? '<p class="rec-note">Also in a spawning range: ' + esc(c.spawning.slice(0, 3).map(title).join(", ")) + " &mdash; check regulations before fishing.</p>" : "";
 
-    return '<a class="list-card' + (map ? " has-map" : "") + '" href="' + esc(c.url) + '">' +
-      '<div class="card-head">' + map + '<div class="card-head-text">' +
+    var heart = isFinite(c.lat) && isFinite(c.lon) && c.lat !== null && c.lon !== null
+      ? '<button type="button" class="card-save" aria-pressed="false" aria-label="Save ' + esc(c.name) + '" data-name="' + esc(c.name) + '" data-water="' + esc(c.water) +
+        '" data-county="' + esc(c.county) + '" data-lat="' + esc(c.lat) + '" data-lon="' + esc(c.lon) + '"><svg class="icon" aria-hidden="true"><use href="#icon-heart"/></svg></button>'
+      : "";
+
+    return '<article class="spot-card"><a class="list-card' + (media ? " has-media" : "") + '" href="' + esc(c.url) + '">' + media +
+      '<div class="card-body">' +
       '<p class="list-card-title">' + esc(c.name) + '</p>' +
-      '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + sub + "</p></div></div>" +
+      '<p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> ' + sub + "</p>" +
       '<div class="card-metrics">' + metrics.join("") + "</div>" +
       line + note +
       (c.photo && c.photoCredit ? '<p class="card-credit">Photo: ' + esc(c.photoCredit) + "</p>" : "") +
-      '<span class="list-card-link">Open spot report &rarr;</span></a>';
+      "</div></a>" + heart + "</article>";
   }
 
   // Alphabetical order for Explore's "A-Z" option; the alternative to `rank`.

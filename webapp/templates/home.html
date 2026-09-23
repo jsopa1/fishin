@@ -1,39 +1,60 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block here %}Home{% endblock %}
-{% block content %}
-<section class="home-intro" aria-labelledby="home-heading">
-  <h1 id="home-heading">Wisconsin fishing conditions</h1>
-  <p>Live water temperature checked against fish research, at {% if meta %}{{ "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) }}{% else %}3,272{% endif %} public access points.
-     <a href="{{ url_for('about') }}#how">How it works</a></p>
-  <form class="search-bar" method="get" action="{{ url_for('map_view') }}" role="search">
-    <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
-    <input type="text" name="waterbody" placeholder="Search lakes & rivers…" aria-label="Search a waterbody by name">
-    <button type="submit" class="btn btn-primary btn-sm">Search</button>
-  </form>
-</section>
 
-<nav class="quick-links" id="quick-links" aria-label="What would you like to do?">
-  <a class="quick-link" href="{{ url_for('map_view') }}">
-    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-explore"/></svg>
-    <span class="quick-link-title">Explore the map</span>
-    <span class="quick-link-desc">Browse and filter every access point</span>
-  </a>
-  <a class="quick-link" href="#recommended">
-    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-map-pin"/></svg>
-    <span class="quick-link-title">Spots for you</span>
-    <span class="quick-link-desc">Ranked by what&rsquo;s in range now</span>
-  </a>
-  <a class="quick-link" href="{{ url_for('fish_index') }}">
-    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-fish"/></svg>
-    <span class="quick-link-title">Fish guide</span>
-    <span class="quick-link-desc">Habitat, temperatures and bait</span>
-  </a>
-  <a class="quick-link" href="{{ url_for('profile') }}">
-    <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-user"/></svg>
-    <span class="quick-link-title">My fish &amp; settings</span>
-    <span class="quick-link-desc">Tailor the spots you see</span>
-  </a>
+{% block hero %}
+{% set access_total = "{:,}".format(meta.total_boat_ramp + meta.total_boat_carry_in + meta.total_shore_fishing) if meta else "3,272" %}
+<section class="home-hero" data-hero aria-labelledby="home-heading">
+  {# Richardson Lake, Forest County: the verified photo of Richardson Lake Access, public domain
+     (US Forest Service, Eastern Region). Sizes written by analysis/v4_image_quality.py. #}
+  <img class="home-hero-img"
+       src="{{ url_for('static', filename='img/hero/richardson-lake-1920.jpg') }}"
+       srcset="{{ url_for('static', filename='img/hero/richardson-lake-sm.jpg') }} 720w,
+               {{ url_for('static', filename='img/hero/richardson-lake-1920.jpg') }} 1920w,
+               {{ url_for('static', filename='img/hero/richardson-lake.jpg') }} 3840w"
+       sizes="(max-width: 767px) 1300px, max(100vw, 1600px)"
+       alt="" fetchpriority="high">
+  <div class="home-hero-inner">
+    <h1 id="home-heading">Find your next fishing spot</h1>
+    <p class="home-hero-sub">Live water temperature checked against fish research at {{ access_total }} Wisconsin access points.</p>
+    <form class="hero-search" method="get" action="{{ url_for('map_view') }}" role="search" autocomplete="off">
+      <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
+      <input type="text" name="waterbody" id="hero-search-input" placeholder="Search lakes and rivers" aria-label="Search a lake or river by name"
+             role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="hero-suggest">
+      <button type="submit" class="hero-search-go" aria-label="Search">
+        <svg class="icon" aria-hidden="true"><use href="#icon-search"/></svg>
+      </button>
+      <ul class="hero-suggest" id="hero-suggest" role="listbox" aria-label="Matching lakes and rivers" hidden></ul>
+    </form>
+    <div class="hero-links">
+      <button type="button" class="hero-link" data-locate>
+        <svg class="icon" aria-hidden="true"><use href="#icon-locate"/></svg> Spots near me
+      </button>
+      <a class="hero-link" href="{{ url_for('map_view') }}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> Explore the map
+      </a>
+    </div>
+    {% if run_row is none %}
+    <p class="banner stale hero-stale"><svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg> No completed data run found &mdash; this site has nothing to show yet.</p>
+    {% elif temp_is_stale %}
+    <p class="banner stale hero-stale"><svg class="icon" aria-hidden="true"><use href="#icon-alert-triangle"/></svg> Water temperatures last updated {{ temp_age_text }} &mdash; they may have moved since.</p>
+    {% endif %}
+  </div>
+  <p class="hero-credit">Richardson Lake, Forest County</p>
+</section>
+{% endblock %}
+
+{% block content %}
+<nav class="quick-links chip-scroll" id="quick-links" aria-label="Quick filters">
+  <button type="button" class="chip chip-locate" data-locate>
+    <svg class="icon" aria-hidden="true"><use href="#icon-locate"/></svg> Near me
+  </button>
+  <a class="chip" href="{{ url_for('map_view', source_type='boat_ramp') }}"><svg class="icon" aria-hidden="true"><use href="#icon-anchor"/></svg> Boat launches</a>
+  <a class="chip" href="{{ url_for('map_view', source_type='shore_fishing') }}"><svg class="icon" aria-hidden="true"><use href="#icon-waves"/></svg> Shore fishing</a>
+  <a class="chip" href="{{ url_for('map_view', source_type='boat_carry_in') }}"><svg class="icon" aria-hidden="true"><use href="#icon-route"/></svg> Carry-ins</a>
+  {% for sp in chip_species %}
+  <a class="chip" href="{{ url_for('map_view', species=sp) }}">{{ sp }}</a>
+  {% endfor %}
 </nav>
 
 <a class="continue-card" id="continue-card" href="#" hidden>
@@ -45,79 +66,110 @@
   <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
 </a>
 
-<section class="rec-section" id="recommended" aria-labelledby="rec-heading">
-  <h2 id="rec-heading" class="sr-only">Your spots</h2>
-
-  <div class="rec-controls">
-    <button type="button" class="btn btn-secondary btn-sm" id="rec-locate">
-      <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> Use my location
-    </button>
-    <span class="rec-status" id="rec-status" aria-live="polite"></span>
+<section class="rec-section" id="recommended" aria-labelledby="rec-list-heading">
+  <div class="row-head">
+    <h2 id="rec-list-heading">Best right now <span id="rec-where">in Wisconsin</span></h2>
+    <div class="row-tools">
+      <button type="button" class="btn btn-secondary btn-sm" id="rec-locate">
+        <svg class="icon" aria-hidden="true"><use href="#icon-locate"/></svg> Use my location
+      </button>
+      <span class="row-arrows" data-row="rec-list"></span>
+    </div>
   </div>
-  <p class="rec-prefs" id="rec-prefs"></p>
+  <p class="row-sub"><span class="rec-status" id="rec-status" aria-live="polite"></span> <span class="rec-prefs" id="rec-prefs"></span></p>
+  <p class="card-legend">Species with a &#10003; are confirmed present by survey or sighting; dashed ones are likely present.</p>
 
   <p class="section-note" id="rec-loading">Loading current conditions&hellip;</p>
   <noscript><p class="section-note">Recommendations are ranked on your device, so they need JavaScript. You can still <a href="{{ url_for('map_view') }}">explore the map</a>.</p></noscript>
-
-  <div id="saved-section">
-    <h2 class="highlights-head">Saved Spots</h2>
-    <p class="highlights-sub">Kept in this browser only &mdash; never uploaded anywhere. Ordered by how many species are in range now.</p>
-    <div class="card-list" id="saved-list"><p class="rec-empty" id="saved-empty">No saved spots yet. Open any spot and tap &ldquo;Save this spot&rdquo;.</p></div>
+  <div class="card-row" id="rec-list" aria-busy="true">
+    {% for i in range(4) %}<div class="spot-card is-skeleton" aria-hidden="true"><div class="card-media"></div><div class="card-body"><span></span><span></span><span></span></div></div>{% endfor %}
   </div>
-
-  <h2 class="highlights-head" id="rec-list-heading" hidden>Recommended Spots</h2>
-  <p class="card-legend">Species with a &#10003; are confirmed present by survey or sighting; dashed ones are likely present.</p>
-  <div class="card-list" id="rec-list"></div>
-  <p class="rec-more" id="rec-more" hidden><a href="{{ url_for('map_view') }}">See more spots on the map <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></a></p>
-
-  <p class="section-note">Map thumbnails &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>.</p>
+  <p class="rec-more" id="rec-more" hidden><a href="{{ url_for('map_view') }}">See every spot on the map <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></a></p>
   <p class="section-note rec-disclosure" id="rec-disclosure">Ranked by how many species are inside their documented temperature range right now, then evidence strength, spot-type preference, reading quality and distance. This is not a prediction of catch success.</p>
+
+  <div id="saved-section" class="home-row">
+    <div class="row-head">
+      <h2>Your saved spots</h2>
+      <div class="row-tools"><span class="row-arrows" data-row="saved-list"></span></div>
+    </div>
+    <p class="row-sub">Kept in this browser only &mdash; never uploaded anywhere. Ordered by how many species are in range now.</p>
+    <div class="card-row" id="saved-list">
+      <div class="rec-empty empty-card" id="saved-empty">
+        <svg class="icon icon-lg" aria-hidden="true"><use href="#icon-heart"/></svg>
+        <p>No saved spots yet. Tap the heart on any spot to keep it here.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 {% if highlights %}
-<section class="highlights">
-  <h2 class="highlights-head">Matching right now</h2>
-  <p class="highlights-sub">
-    Real readings from survey-confirmed waters, compared against published physiology this morning.
-  </p>
-  <div class="highlight-grid">
+<section class="home-row highlights" aria-labelledby="highlights-heading">
+  <div class="row-head">
+    <h2 id="highlights-heading">Matching right now</h2>
+    <div class="row-tools"><span class="row-arrows" data-row="highlight-row"></span></div>
+  </div>
+  <p class="row-sub">Real readings from survey-confirmed waters, compared against published physiology.</p>
+  <div class="card-row" id="highlight-row">
     {% for h in highlights %}
+    {% set img = species_image(h.species) %}
     <a class="highlight-card" href="{{ url_for('waterbody_detail', name=h.waterbody_name, county=h.county) }}">
-      <div class="highlight-top">
-        <span class="highlight-species">{{ h.species.title() }}</span>
-        <span class="stat-chip">
-          <svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg>
-          {{ "%.1f"|format(h.temp_value_c * 9/5 + 32) }}°F
-        </span>
+      <div class="card-media fish-media">
+        {% if img %}<img src="{{ url_for('static', filename=img.static_path | small) }}"{% if img.static_path | on_white %} class="on-white"{% endif %} alt="" loading="lazy">{% endif %}
+        <span class="media-chip"><svg class="icon" aria-hidden="true"><use href="#icon-thermometer"/></svg> {{ "%.0f"|format(h.temp_value_c * 9/5 + 32) }}°F</span>
       </div>
-      <p class="highlight-where">
-        <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg>
-        {{ h.waterbody_name|title }}, {{ h.county }}
-      </p>
-      <p class="highlight-why">{{ h.match_description }}</p>
-      {% if h.evidence_quality %}
-        <span class="tag evidence">{{ h.evidence_quality }}</span>
-      {% endif %}
+      <div class="card-body">
+        <p class="list-card-title">{{ h.species.title() }}</p>
+        <p class="list-card-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ h.waterbody_name|title }}, {{ h.county }}</p>
+        <p class="highlight-why">{{ h.match_description }}</p>
+        {% if h.evidence_quality %}<span class="tag evidence">{{ h.evidence_quality }}</span>{% endif %}
+      </div>
     </a>
     {% endfor %}
   </div>
 </section>
 {% endif %}
 
-<a href="{{ url_for('map_view') }}" class="map-preview-link" aria-label="Open Explore — the live statewide map" style="display:block; text-decoration:none; margin-bottom: var(--space-7);">
-  <div id="home-map-preview" class="map-pane" style="height: 280px; pointer-events: none;" aria-hidden="true"></div>
-  <span class="map-preview-cta">Open the live statewide map <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></span>
-</a>
+<section class="home-row" aria-labelledby="fish-row-heading">
+  <div class="row-head">
+    <h2 id="fish-row-heading">Browse by fish</h2>
+    <div class="row-tools"><a class="row-link" href="{{ url_for('fish_index') }}">All {{ species|length }} fish</a><span class="row-arrows" data-row="fish-row"></span></div>
+  </div>
+  <p class="row-sub">Habitat, documented temperature ranges and bait for every Wisconsin species we cover.</p>
+  <div class="card-row fish-row-cards" id="fish-row">
+    {% for s in species %}
+    {% set img = species_image(s.name) %}
+    <a class="fish-card" href="{{ url_for('fish_detail', species_slug=s.slug) }}">
+      <div class="card-media fish-media">
+        {% if img %}<img src="{{ url_for('static', filename=img.static_path | small) }}"{% if img.static_path | on_white %} class="on-white"{% endif %} alt="" loading="lazy">{% else %}<svg class="icon fish-media-empty" aria-hidden="true"><use href="#icon-fish"/></svg>{% endif %}
+      </div>
+      <p class="list-card-title">{{ s.title }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>
 
-<p class="section-note home-scope"><strong>This is NOT a validated catch-rate prediction.</strong> It compares real water temperature with published fish research; it does not tell you whether you will catch anything.</p>
-<p class="home-about-link"><a href="{{ url_for('about') }}#how">See how it works &mdash; a quick picture, what it is and isn&rsquo;t, and where the data comes from <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></a></p>
+<section class="home-row" aria-labelledby="map-row-heading">
+  <div class="row-head"><h2 id="map-row-heading">Explore the statewide map</h2></div>
+  <a href="{{ url_for('map_view') }}" class="map-preview-link" aria-label="Open Explore, the live statewide map">
+    <div id="home-map-preview" class="map-pane map-preview" aria-hidden="true"></div>
+    <span class="map-preview-cta btn btn-primary"><svg class="icon" aria-hidden="true"><use href="#icon-map"/></svg> Open the map</span>
+  </a>
+  <p class="section-note">Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>.</p>
+</section>
+
+<aside class="home-scope">
+  <p><strong>This is NOT a validated catch-rate prediction.</strong> It compares real water temperature with published fish research; it does not tell you whether you will catch anything.</p>
+  <p class="home-about-link"><a href="{{ url_for('about') }}#how">See how it works &mdash; what it is and isn&rsquo;t, and where the data comes from <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right"/></svg></a></p>
+</aside>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>window.FISHIN_FEED_URL = {{ url_for('recommend_feed') | tojson }};</script>
+<script>window.FISHIN_FEED_URL = {{ url_for('recommend_feed') | tojson }}; window.FISHIN_MAP_URL = {{ url_for('map_view') | tojson }};</script>
 <script src="{{ url_for('static', filename='prefs.js') }}"></script>
 <script src="{{ url_for('static', filename='recommend.js') }}"></script>
+<script src="{{ url_for('static', filename='carousel.js') }}"></script>
 <script src="{{ url_for('static', filename='recommended.js') }}"></script>
+<script src="{{ url_for('static', filename='search-suggest.js') }}"></script>
 <script>
 // "Pick up where you left off": the last spot page opened on this device (localStorage only).
 (function () {
@@ -134,8 +186,8 @@
 (function () {
   var el = document.getElementById('home-map-preview');
   if (!el || !window.L) return;
-  var map = L.map(el, { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false }).setView([44.6, -89.9], 6.3);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
+  var map = L.map(el, { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false }).setView([44.8, -89.9], 7);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, detectRetina: true }).addTo(map);
 })();
 </script>
 {% endblock %}

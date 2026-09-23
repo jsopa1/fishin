@@ -123,24 +123,28 @@
       "file": "webapp/static/img/species/northern_pike.jpg"
     },
     "MUSKELLUNGE": {
-      "commons_title": "File:Muskellunge (Duane Raver).png",
-      "page_url": "https://commons.wikimedia.org/wiki/File%3AMuskellunge_%28Duane_Raver%29.png",
-      "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Muskellunge_%28Duane_Raver%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Muskellunge_%28Duane_Raver%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "commons_title": "File:Muskellunge USFWS.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Muskellunge_USFWS.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Muskellunge_USFWS.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Muskellunge_USFWS.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
       "original_size": [
-        738,
-        232
+        2349,
+        824
       ],
-      "mime": "image/png",
+      "mime": "image/jpeg",
       "license_short": "Public domain",
       "license_url": "",
-      "artist": "Raver Duane, U.S. Fish and Wildlife Service",
-      "credit": "[1]",
-      "date": "20??",
+      "artist": "Knepp, Timothy - U.S. Fish and Wildlife Service",
+      "credit": "U.S. Fish and Wildlife Service",
+      "date": "2001",
       "pd_templates_on_page": [
-        "PD-author"
+        "PD-USGov-FWS"
       ],
-      "file": "webapp/static/img/species/muskellunge.png"
+      "file": "webapp/static/img/species/muskellunge.jpg",
+      "replaces": {
+        "commons_title": "File:Muskellunge (Duane Raver).png",
+        "reason": "higher-resolution public-domain side view (the previous file was 738px wide)"
+      }
     },
     "BLUEGILL": {
       "commons_title": "File:Bluegill.jpg",
@@ -263,25 +267,28 @@
       "file": "webapp/static/img/species/white_bass.jpg"
     },
     "CHANNEL CATFISH": {
-      "commons_title": "File:Ictalurus punctatus.jpg",
-      "page_url": "https://commons.wikimedia.org/wiki/File%3AIctalurus_punctatus.jpg",
-      "original_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Ictalurus_punctatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "thumb_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Ictalurus_punctatus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "commons_title": "File:Channel Catfish (Ictalurus punctatus) white background.jpg",
+      "page_url": "https://commons.wikimedia.org/wiki/File:Channel_Catfish_(Ictalurus_punctatus)_white_background.jpg",
+      "original_url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Channel_Catfish_%28Ictalurus_punctatus%29_white_background.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "thumb_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Channel_Catfish_%28Ictalurus_punctatus%29_white_background.jpg/3840px-Channel_Catfish_%28Ictalurus_punctatus%29_white_background.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "original_size": [
-        834,
-        348
+        5040,
+        1680
       ],
       "mime": "image/jpeg",
       "license_short": "Public domain",
       "license_url": "",
-      "artist": "Duane Raver",
-      "credit": "U.S. Fish and Wildlife Service ( https://digitalmedia.fws.gov/digital/collection/natdiglib/id/25296 )",
-      "date": "",
+      "artist": "USFWS Mountain Prairie",
+      "credit": "https://www.flickr.com/photos/51986662@N05/51171356287/",
+      "date": "2021-02-19 14:05:42",
       "pd_templates_on_page": [
-        "PD-USGov-FWS",
-        "PD-USGov-Interior-FWS"
+        "PD-USFWS"
       ],
-      "file": "webapp/static/img/species/channel_catfish.jpg"
+      "file": "webapp/static/img/species/channel_catfish.jpg",
+      "replaces": {
+        "commons_title": "File:Ictalurus punctatus.jpg",
+        "reason": "higher-resolution public-domain side view (the previous file was 834px wide)"
+      }
     },
     "LAKE STURGEON": {
       "commons_title": "File:Lakesturgeon public U.S.Fish&Wildlife.jpg",
@@ -461,7 +468,7 @@
       "pd_templates_on_page": [
         "PD-USGov-FWS"
       ],
-      "file": "webapp/static/img/species/freshwater_drum.png"
+      "file": "webapp/static/img/species/freshwater_drum.jpg"
     },
     "LAKE WHITEFISH": {
       "commons_title": "File:Coregonus clupeaformis illustration.jpg",
@@ -643,7 +650,7 @@
       "pd_templates_on_page": [
         "PD-USFWS"
       ],
-      "file": "webapp/static/img/baits/alewives.png"
+      "file": "webapp/static/img/baits/alewives.jpg"
     },
     "clams": {
       "commons_title": "File:Freshwater mussels 1 October 2015.png",
@@ -663,7 +670,7 @@
       "pd_templates_on_page": [
         "PD-USFWS"
       ],
-      "file": "webapp/static/img/baits/clams.png"
+      "file": "webapp/static/img/baits/clams.jpg"
     },
     "grasshoppers": {
       "commons_title": "File:Oxya yezoensis November 2007 WUXGA.jpg",

@@ -34,11 +34,13 @@ class FishDetailRouteTests(unittest.TestCase):
     def test_unknown_species_is_a_404(self):
         self.assertEqual(self.client.get("/fish/dragon").status_code, 404)
 
-    def test_species_image_is_shown_with_its_credit_and_license(self):
+    def test_species_image_is_shown_without_a_credit_line(self):
+        # Every species/bait picture is public domain or CC0 (data/v1/image_manifest_v1.json) --
+        # legally no attribution is required, so the page does not carry one for these.
         body = self._page("walleye")
         self.assertIn("/static/img/species/walleye.jpg", body)
-        self.assertIn("Public domain", body)
-        self.assertIn("Wikimedia Commons", body)
+        figure = body[body.index('class="fish-figure"') : body.index("</figure>")]
+        self.assertNotIn("figcaption", figure)
 
     def test_a_cited_habitat_claim_shows_its_verbatim_source_quote(self):
         body = self._page("walleye")

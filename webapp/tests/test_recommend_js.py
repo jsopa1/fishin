@@ -177,19 +177,21 @@ const proxyTemp = R.cardHtml(R.rank([spot("air", { a: [["WALLEYE", "c"]], q: "pr
 out.tempChip = /72<small>&deg;F<\/small><\/span><span class="card-metric-label">water temp<\/span>/.test(withTemp) && /1 confirmed/.test(withTemp) && /air-temperature proxy/.test(proxyTemp) && !/>water temp<\//.test(proxyTemp);
 out.locationLine = /<p class="list-card-sub"><svg[^>]*><use href="#icon-map-pin"\/><\/svg> /.test(withTemp);
 out.iceHtml = /Closest to its range/.test(iceHtml) && /3\.2&deg;F outside it/.test(iceHtml);
-// 9. Map thumbnail: four OSM tiles at zoom 13 with the spot inside the 96 px square; none without coordinates.
+// 9. Map thumbnail: nine OSM tiles at zoom 13 around the spot's tile, the spot one full tile or more
+//    from every edge and pinned to the centre of the card image; none without coordinates.
 const base = { name: "X", water: "W", county: "C", type: "boat_ramp", quality: "real", tempC: 20, count: 1, confirmed: 1, spawning: [], nearest: null, distanceKm: null, url: "/spot",
   inRange: [{ species: "WALLEYE", tier: "confirmed" }] };
 const noCoords = R.cardHtml(base);
 const madison = R.cardHtml(Object.assign({}, base, { lat: 43.0731, lon: -89.4012 }));
 const tiles = (madison.match(/tile\.openstreetmap\.org\/13\/\d+\/\d+\.png/g) || []);
-const off = /card-map-tiles" style="left:(-?\d+)px;top:(-?\d+)px"/.exec(madison);
+const off = /card-map-tiles" style="left:calc\(50% - (\d+)px\);top:calc\(50% - (\d+)px\)"/.exec(madison);
 out.thumb = {
   noneWithoutCoordinates: !/card-map/.test(noCoords),
-  fourTiles: tiles.length === 4 && /tile\.openstreetmap\.org\/13\/2061\/3007\.png/.test(madison),
-  spotInsideSquare: !!off && Number(off[1]) <= 0 && Number(off[1]) >= 96 - 512 && Number(off[2]) <= 0 && Number(off[2]) >= 96 - 512,
+  nineTiles: tiles.length === 9 && /tile\.openstreetmap\.org\/13\/2061\/3007\.png/.test(madison),
+  spotCentredWithATileOfMargin: !!off && Number(off[1]) >= 256 && Number(off[1]) <= 512 && Number(off[2]) >= 256 && Number(off[2]) <= 512,
   decorative: /card-map" aria-hidden="true"/.test(madison) && !/<img [^>]*alt="[^"]/.test(madison),
   noFishPhotos: !/img\/species/.test(madison),
+  saveHeart: /class="card-save" aria-pressed="false"/.test(madison) && !/card-save/.test(noCoords),
 };
 console.log(JSON.stringify(out));
 """

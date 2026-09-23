@@ -3,7 +3,7 @@
 {% block here %}Waterbody{% endblock %}
 {% block content %}
 <a class="back-link" href="{{ url_for('map_view') }}">
-  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to Explore
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-left"/></svg> Explore
 </a>
 {% if not wb %}
 <h1>Not found</h1>
@@ -15,8 +15,8 @@
     <svg class="icon" aria-hidden="true"><use href="#icon-fish"/></svg>
     {{ wb.waterbody_type|title }} &middot; <span class="tag {{ wb.presence_tier }}">{{ wb.presence_tier.replace('_', ' ') }}</span>
   </div>
-  <h1>{{ wb.waterbody_name }}</h1>
-  <p class="detail-hero-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ wb.county }}</p>
+  <h1>{{ wb.waterbody_name | title }}</h1>
+  <p class="detail-hero-sub"><svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> {{ wb.county | title }}</p>
   <div class="detail-hero-stats">
     {% if wb.temp_value_c is not none %}
       <span class="stat-chip">

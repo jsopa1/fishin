@@ -6,10 +6,12 @@ means no spot has a photo yet.
 """
 
 import json
+import re
 from pathlib import Path
 
 MANIFEST = Path(__file__).resolve().parents[1] / "data" / "v1" / "spot_photo_manifest_v1.json"
 _cache = {"mtime": None, "index": {}}
+_NO_ATTRIBUTION = re.compile(r"^(public domain|pd|cc0)", re.I)
 
 
 def _index() -> dict:
@@ -40,4 +42,7 @@ def lookup(facility_name, lat, lon):
         "page_url": s["page_url"],
         "distance_m": s["distance_m"],
         "credit": f"{s['author']}, {s['licence']}",
+        # CC BY / CC BY-SA require naming the author and licence wherever the photo is shown;
+        # public-domain and CC0 photos carry no such condition, so pages leave the credit off.
+        "attribution_required": not _NO_ATTRIBUTION.match(s["licence"] or ""),
     }

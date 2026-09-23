@@ -8,11 +8,11 @@
 {% else %}
 {% if back_spot %}
 <a class="back-link" href="{{ back_spot.url }}">
-  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> Back to {{ back_spot.name }}
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-left"/></svg> Back to {{ back_spot.name }}
 </a>
 {% else %}
 <a class="back-link" href="{{ url_for('fish_index') }}">
-  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-right" transform="rotate(180 12 12)"/></svg> All fish
+  <svg class="icon" aria-hidden="true"><use href="#icon-chevron-left"/></svg> All fish
 </a>
 {% endif %}
 
@@ -20,7 +20,6 @@
   {% if fish.image %}
   <figure class="fish-figure">
     <img src="{{ url_for('static', filename=fish.image.static_path) }}" alt="{{ fish.title }}">
-    <figcaption>{{ fish.image.credit }} &middot; <a href="{{ fish.image.page_url }}" target="_blank" rel="noopener">source</a></figcaption>
   </figure>
   {% endif %}
   <div class="hero-title">
@@ -29,6 +28,10 @@
     {% if not fish.image %}<p class="fish-noimage">No verified public-domain picture yet.</p>{% endif %}
     {% if not fish.angling_target %}
       <p class="detail-hero-sub">Not an angling target. {{ fish.not_target_reason }}</p>
+    {% else %}
+      <a class="btn btn-primary fish-find-spots" href="{{ url_for('map_view', species=fish.title) }}">
+        <svg class="icon" aria-hidden="true"><use href="#icon-map-pin"/></svg> Find spots with {{ fish.title }}
+      </a>
     {% endif %}
   </div>
 </div>
@@ -97,8 +100,8 @@
     {% for b in fish.baits %}
     <article class="bait-card">
       {% if b.image %}
-        <figure class="bait-figure"><img src="{{ url_for('static', filename=b.image.static_path) }}" alt="{{ b.name }}" loading="lazy">
-          <figcaption>{{ b.image.credit }}{% if b.image.note %} · {{ b.image.note }}{% endif %}</figcaption></figure>
+        <figure class="bait-figure"><img src="{{ url_for('static', filename=b.image.static_path | small) }}" alt="{{ b.name }}" loading="lazy">
+          {% if b.image.note %}<figcaption>{{ b.image.note }}</figcaption>{% endif %}</figure>
       {% else %}
         <div class="bait-noimage">No picture yet</div>
       {% endif %}

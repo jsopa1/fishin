@@ -130,15 +130,19 @@ class ResponsiveLayouts(unittest.TestCase):
         block = self.tablet()
         self.assertIn("@media (min-width: 768px) and (max-width: 1023px)", block)
         for piece in (".wrap { max-width: 560px; }", ".primary-nav { display: none !important; }", ".bottom-nav {",
-                      "display: flex;", ".explore-view-toggle { display: inline-flex; }", ".explore-layout { display: block; }"):
+                      "display: flex;", ".explore-view-toggle {", ".explore-layout { display: block; }"):
             self.assertIn(piece, block)
+        # AllTrails' own mobile explore floats one pill button ("List" over the map, "Map" over
+        # the list) rather than a segmented Map|List bar.
+        self.assertIn('.explore-view-toggle .view-toggle-btn.active { display: none; }', block)
         self.assertIn("width: 560px", block)
 
     def test_desktop_uses_the_top_nav_and_multi_column_grids_and_no_bottom_bar(self):
         block = self.desktop()
         self.assertIn("@media (min-width: 1024px)", block)
-        self.assertIn(".quick-links { grid-template-columns: repeat(4, 1fr); }", block)
-        self.assertIn("#rec-list, #saved-list { display: grid; grid-template-columns: repeat(2, 1fr)", block)
+        # AllTrails-style rows: four cards across, paged with the round arrows.
+        self.assertIn(".row-arrows { display: inline-flex; }", block)
+        self.assertIn("grid-auto-columns: calc((100% - 3 * var(--space-5)) / 4)", block)
         self.assertNotIn(".primary-nav { display: none", block)
         self.assertNotIn(".bottom-nav {", block)
         # the base rule that hides the bottom bar outside phone/tablet widths is still there
